@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Learnings]]></title>
-  <link href="http://learnwrite.github.io/atom.xml" rel="self"/>
+  <title><![CDATA[Category: gdb | Learnings]]></title>
+  <link href="http://learnwrite.github.io/blog/categories/gdb/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
   <updated>2013-10-06T23:49:06-07:00</updated>
   <id>http://learnwrite.github.io/</id>
@@ -31,8 +31,8 @@ Address 100<br /></p>
 <table><td>v</td><td>a</td><td>i</td><td>b</td><td>h</td><td>a</td><td>v</td><td>\0</td></table>
 <p><br />
 Sometimes char data type is used as a package of 8 bits not as a valid char value.<br />
-Here is a code snippet</p>
-<div><script src="https://gist.github.com/6558935.js"></script>
+Here is a code snippet
+<div><script src='https://gist.github.com/6558935.js'></script>
 <noscript><pre><code>#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
@@ -67,22 +67,23 @@ int main()
     return 0;
 }</code></pre></noscript></div>
 
-<p><br />
-Focusing on following code section</p>
-<div><script src="https://gist.github.com/5718a56f996b77db1d77.js"></script>
+<br />
+Focusing on following code section
+<div><script src='https://gist.github.com/5718a56f996b77db1d77.js'></script>
 <noscript><pre><code>for (i = 0; i &lt;= 2; i++) {
         node = (char *)malloc(10 * sizeof(char));
         memcpy(node, &amp;name, strlen(name) + 1); 
         *container = node;
         container++;
 }  </code></pre></noscript></div>
+</p>
 
 <p>In this section, a memory of 10 chars is being allocated, initialized and finally assigned to container array.
 <br />Lets observer, if we have set the right information in each char bit.</p>
 
-<blockquote><p>Compile code using<br />gcc -g fileName.c</p></blockquote>
+<p><blockquote><p>Compile code using<br/>gcc -g fileName.c</p></blockquote></p>
 
-<div><script src="https://gist.github.com/6559029.js"></script>
+<p><div><script src='https://gist.github.com/6559029.js'></script>
 <noscript><pre><code>(gdb) l
 16      }
 17	
@@ -104,6 +105,7 @@ $1 = 0x1001000e0 &quot;Vaibhav&quot;
 0x1001000e0:	86	97	105	98	104	97	118	0
 (gdb) x/8tb node
 0x1001000e0:	01010110	01100001	01101001	01100010	01101000	01100001	01110110	00000000</code></pre></noscript></div>
+</p>
 
 <div><div class="CodeRay">
   <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span><span style="color:#0a8;font-weight:bold">int</span> main(<span style="color:#088;font-weight:bold">void</span>)
