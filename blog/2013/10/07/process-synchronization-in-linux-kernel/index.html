@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: os - Learnings</title>
+  <title>Process synchronization in Linux Kernel - Learnings</title>
   <meta name="author" content="Vaibhav Gautam">
 
   
-  <meta name="description" content="Category: os">
+  <meta name="description" content="As we have discussed earlier about process synchronization, lets discuss about process synchronization primitives offered in Linux Kernel. This blog &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://learnwrite.github.ioblog/categories/os/">
+  <link rel="canonical" href="http://learnwrite.github.io/blog/2013/10/07/process-synchronization-in-linux-kernel/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
    <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -94,50 +94,114 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Os</h1>
+    
+      <h1 class="entry-title">Process Synchronization in Linux Kernel</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-07T20:56:00-07:00" pubdate data-updated="true">Oct 7<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>As we have discussed earlier about process synchronization, lets discuss about process synchronization primitives offered in Linux Kernel.</p>
 
-  
-  <h2>2013</h2>
+<p>This blog is summary of this <a href="https://docs.google.com/file/d/0BySPJjyZBnC2UVYzWkdSLWNrdEE/edit?usp=sharing" target="_blank">article</a></p>
 
-<article>
-  
-<h1><a href="/blog/2013/10/07/process-synchronization-in-linux-kernel/">Process synchronization in Linux Kernel</a></h1>
-<time datetime="2013-10-07T20:56:00-07:00" pubdate><span class='month'>Oct</span> <span class='day'>07</span> <span class='year'>2013</span></time>
+<p><br /></p>
+<h3>Synchronization Primitives</h3>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/kernel/'>kernel</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/operating-systems/'>operating systems</a>, <a class='category' href='/blog/categories/os/'>os</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2013/10/07/process-synchronization-in-os/">Process synchronization in OS</a></h1>
-<time datetime="2013-10-07T11:54:00-07:00" pubdate><span class='month'>Oct</span> <span class='day'>07</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/operating-systems/'>operating systems</a>, <a class='category' href='/blog/categories/os/'>os</a></span>
-</footer>
-
-
-</article>
-
+<ol>
+  <li>Per-CPU variables</li>
+  <li>Atomic Operation</li>
+  <li>Memory barrier</li>
+  <li>Spin Lock</li>
+  <li>Semaphore</li>
+  <li>SeqLocks</li>
+  <li>Local Interrupt disabling</li>
+  <li>Local softirq disabling</li>
+  <li>Read-Copy-Update</li>
+</ol>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Vaibhav Gautam</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-07T20:56:00-07:00" pubdate data-updated="true">Oct 7<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/kernel/'>kernel</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/operating-systems/'>operating systems</a>, <a class='category' href='/blog/categories/os/'>os</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://learnwrite.github.io/blog/2013/10/07/process-synchronization-in-linux-kernel/" data-via="_vaibhavg" data-counturl="http://learnwrite.github.io/blog/2013/10/07/process-synchronization-in-linux-kernel/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/10/07/process-synchronization-in-os/" title="Previous Post: Process synchronization in OS">&laquo; Process synchronization in OS</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -231,7 +295,10 @@
       var disqus_shortname = 'coolgoose85';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://learnwrite.github.io/blog/2013/10/07/process-synchronization-in-linux-kernel/';
+        var disqus_url = 'http://learnwrite.github.io/blog/2013/10/07/process-synchronization-in-linux-kernel/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

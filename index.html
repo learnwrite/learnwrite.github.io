@@ -9,8 +9,7 @@
   <meta name="author" content="Vaibhav Gautam">
 
   
-  <meta name="description" content="What is a Process?
-OS objective is to keep as many as of the computer resources as busy as possible. It is used to keep track of all the things an OS &hellip;">
+  <meta name="description" content="As we have discussed earlier about process synchronization, lets discuss about process synchronization primitives offered in Linux Kernel. This blog &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -102,6 +101,61 @@ OS objective is to keep as many as of the computer resources as busy as possible
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2013/10/07/process-synchronization-in-linux-kernel/">Process Synchronization in Linux Kernel</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-07T20:56:00-07:00" pubdate data-updated="true">Oct 7<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/10/07/process-synchronization-in-linux-kernel/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>As we have discussed earlier about process synchronization, lets discuss about process synchronization primitives offered in Linux Kernel.</p>
+
+<p>This blog is summary of this <a href="https://docs.google.com/file/d/0BySPJjyZBnC2UVYzWkdSLWNrdEE/edit?usp=sharing" target="_blank">article</a></p>
+
+<p><br /></p>
+<h3>Synchronization Primitives</h3>
+
+<ol>
+  <li>Per-CPU variables</li>
+  <li>Atomic Operation</li>
+  <li>Memory barrier</li>
+  <li>Spin Lock</li>
+  <li>Semaphore</li>
+  <li>SeqLocks</li>
+  <li>Local Interrupt disabling</li>
+  <li>Local softirq disabling</li>
+  <li>Read-Copy-Update</li>
+</ol>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2013/10/07/process-synchronization-in-os/">Process Synchronization in OS</a></h1>
     
     
@@ -127,7 +181,12 @@ OS objective is to keep as many as of the computer resources as busy as possible
   </header>
 
 
-  <div class="entry-content"><h3>What is a Process?</h3>
+  <div class="entry-content"><ul>
+  <li><a href="#section1">abcd</a></li>
+</ul>
+
+<h3>What is a Process?</h3>
+
 <p>OS <code>objective</code> is to keep as many as of the computer resources as busy as possible. It is used to keep track of all the things an OS must remember about the state of user program.</p>
 
 <p>Process = Code + Allocated Resources + Book keeping information</p>
@@ -588,8 +647,8 @@ monitor condition =&gt; needItem;<br /></p>
 </div>
 </div>
 
-<p><br /></p>
-<h3>Recommended reading</h3>
+<p><br />
+&lt;h3 id=&#8221;section1&#8221;&gt;Recommended reading&lt;/h3&gt;</p>
 
 <ul>
   <li><a href="https://docs.google.com/file/d/0BySPJjyZBnC2Q20yU2lHeGdKQ3c/edit?usp=sharing" target="_blank">Implementing CV using semaphore</a></li>
@@ -761,6 +820,10 @@ Focusing on following code section</p>
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/10/07/process-synchronization-in-linux-kernel/">Process synchronization in Linux Kernel</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/10/07/process-synchronization-in-os/">Process synchronization in OS</a>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: linux | Learnings]]></title>
+  <link href="http://learnwrite.github.io/blog/categories/linux/atom.xml" rel="self"/>
+  <link href="http://learnwrite.github.io/"/>
+  <updated>2013-10-07T21:14:25-07:00</updated>
+  <id>http://learnwrite.github.io/</id>
+  <author>
+    <name><![CDATA[Vaibhav Gautam]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Process synchronization in Linux Kernel]]></title>
+    <link href="http://learnwrite.github.io/blog/2013/10/07/process-synchronization-in-linux-kernel/"/>
+    <updated>2013-10-07T20:56:00-07:00</updated>
+    <id>http://learnwrite.github.io/blog/2013/10/07/process-synchronization-in-linux-kernel</id>
+    <content type="html"><![CDATA[<p>As we have discussed earlier about process synchronization, lets discuss about process synchronization primitives offered in Linux Kernel.</p>
+
+<p>This blog is summary of this <a href="https://docs.google.com/file/d/0BySPJjyZBnC2UVYzWkdSLWNrdEE/edit?usp=sharing" target="_blank">article</a></p>
+
+<p><br /></p>
+<h3>Synchronization Primitives</h3>
+
+<ol>
+  <li>Per-CPU variables</li>
+  <li>Atomic Operation</li>
+  <li>Memory barrier</li>
+  <li>Spin Lock</li>
+  <li>Semaphore</li>
+  <li>SeqLocks</li>
+  <li>Local Interrupt disabling</li>
+  <li>Local softirq disabling</li>
+  <li>Read-Copy-Update</li>
+</ol>
+]]></content>
+  </entry>
+  
+</feed>
