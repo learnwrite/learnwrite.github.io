@@ -4,7 +4,7 @@
   <title><![CDATA[Learnings]]></title>
   <link href="http://learnwrite.github.io/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2013-10-07T19:17:00-07:00</updated>
+  <updated>2013-10-08T00:44:28-07:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -14,18 +14,296 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Process synchronization in Linux Kernel]]></title>
+    <link href="http://learnwrite.github.io/blog/2013/10/07/process-synchronization-in-linux-kernel/"/>
+    <updated>2013-10-07T20:56:00-07:00</updated>
+    <id>http://learnwrite.github.io/blog/2013/10/07/process-synchronization-in-linux-kernel</id>
+    <content type="html"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#synchronization-primitives">Synchronization Primitives</a></li>
+  <li><a href="#summary-of-synchronization-primitives">Summary of Synchronization Primitives</a></li>
+  <li><a href="#per-cpu-variables">Per-CPU variables</a></li>
+  <li><a href="#atomic-operations">Atomic Operations</a></li>
+  <li><a href="#optimization-barriers--memory-barriers">Optimization Barriers &amp; Memory Barriers</a></li>
+  <li><a href="#spin-locks">Spin Locks</a>    <ul>
+      <li><a href="#readwrite-spin-locks">Read/Write Spin Locks</a></li>
+    </ul>
+  </li>
+  <li><a href="#seqlocks">SeqLocks</a></li>
+</ul>
+
+<p>As we have discussed earlier about process synchronization, lets discuss about process synchronization primitives offered in Linux Kernel.</p>
+
+<p>This blog is summary of this <a href="https://docs.google.com/file/d/0BySPJjyZBnC2UVYzWkdSLWNrdEE/edit?usp=sharing" target="_blank">article</a></p>
+
+<h3 id="synchronization-primitives">Synchronization Primitives</h3>
+
+<ol>
+  <li>Per-CPU variables</li>
+  <li>Atomic Operation</li>
+  <li>Memory barrier</li>
+  <li>Spin Lock</li>
+  <li>Semaphore</li>
+  <li>SeqLocks</li>
+  <li>Local Interrupt disabling</li>
+  <li>Local softirq disabling</li>
+  <li>Read-Copy-Update</li>
+</ol>
+
+<h3 id="summary-of-synchronization-primitives">Summary of Synchronization Primitives</h3>
+
+<table>
+<tr>
+<td>Technique</td><td>Description</td><td>Scope</td>
+</tr>
+<tr>
+<td>Per-CPU variables</td><td>Duplicate a data structure among the CPUs</td><td><code>All CPUs</code></td>
+</tr>
+<tr>
+<td>Atomic operation</td><td>Atomic read-modify-write instruction to a counter</td><td><code>All CPUs</code></td>
+</tr>
+<tr>
+<td>Memory barrier</td><td>Avoid instruction reordering</td><td><code>Local CPU or All CPUs</code></td>
+</tr>
+<tr>
+<td>Spin lock</td><td>Lock with busy wait</td><td><code>All CPUs</code></td>
+</tr>
+<tr>
+<td>Semaphore</td><td>Lock with blocking wait (sleep)</td><td><code>All CPUs</code></td>
+</tr>
+<tr>
+<td>Seqlocks</td><td>Lock based on an access counter</td><td><code>All CPUs</code></td>
+</tr>
+<tr>
+<td>Local interrupt disabling</td><td>Forbid interrupt handling on a single CPU</td><td>Local CPU</td>
+</tr>
+<tr>
+<td>Local softirq disabling</td><td>Forbid deferrable function handling on a single CPU</td><td>Local CPU</td>
+</tr>
+<tr>
+<td>Read-copy-update (RCU)</td><td>Lock-free access to shared data structures through pointers</td><td><code>All CPUs</code></td>
+</tr>
+</table>
+<p><br /></p>
+
+<h3 id="per-cpu-variables">Per-CPU variables</h3>
+
+<p>The best synchronization technique consists in designing the kernel so as to avoid
+the need for synchronization in the first place.</p>
+
+<p><code>Basically, a per-CPU variable is an array of data structures, one element per each CPU in the system.</code>
+A CPU should not access the elements of the array corresponding to the other CPUs.</p>
+
+<p><code>Pros</code></p>
+
+<ul>
+  <li>Freely read and modify its own element without fear of race conditions.<br /></li>
+  <li>It avoids cache line snooping and invalidations, which are costly operations.</li>
+</ul>
+
+<p><strong>[Snooping and Invalidations]</strong> Snooping is the process where the individual caches monitor address lines,  for accesses to memory locations that they have cached. When a write operation is observed to a location that a cache has a copy of, the cache controller invalidates its own copy of the snooped memory location.</p>
+
+<p><code>Cons</code>
+* It can only be used when it make sense to <code>logically split</code> the data across the CPUs of the system
+* Do not provide <code>protection</code> against access from asynchronous functions such as <code>interrupt handlers and deferrable functions.</code>
+* Per-CPU variables are variables are prone to <code>race conditions</code> caused by kernel preemption, both in uniprocessor and multiprocessor systems.</p>
+
+<p><strong>[Problem]</strong> What would happen if a kernel control path gets the address of its local copy of a per-CPU variable, and then it is preempted and moved to another CPU: the address still refers to the element of the previous CPU.</p>
+
+<p>As a general rule, a kernel control path should access a per-CPU variable with kernel preemption disabled.</p>
+
+<hr style="border-top: 1.5px dotted black" />
+<p><br /></p>
+
+<h3 id="atomic-operations">Atomic Operations</h3>
+
+<p><strong>[Problem]</strong> Several assembly language instructions are of type “read-modify-write” i.e. memory location is accessed twice first to read the old value and second time to write a new value</p>
+
+<p><strong>Detailed explanation</strong><br />
+Suppose that two kernel control paths running on two CPUs try to “read-modify-write” the same memory location at the same time by executing nonatomic operations.<br />
+At first, <code>both CPUs try to read the same location</code>, but the memory arbiter (a hardware circuit that serializes accesses to the RAM chips) steps in to grant access to one of them and delay the other. However, when the first read operation has completed, the delayed CPU reads exactly the same (old) value from the memory location.
+<code>Both CPUs then try to write the same (new) value to the memory location</code>; again, the bus memory access is serialized by the memory arbiter, and eventually both write operations succeed. However, the global result is incorrect because both CPUs write the same (new) value. Thus, the two interleaving “read-modify-write” operations act as a single one.</p>
+
+<p><strong>[Solution]</strong> Reason for problem here is that Both CPU’s try to access memory location at the same time. If operation of “read-modify-write” can be made atomic then problem would be solved i.e. Every such <code>operation must be executed in a single instruction without being interrupted</code> in the middle and avoiding accesses to the same memory location by other CPUs.</p>
+
+<ul>
+  <li>Read-modify-write assembly language instructions are atomic if no other processor has taken the memory bus after the read and before the write. <code>Memory bus stealing never happens in a uniprocessor system.</code></li>
+  <li>For multiprocessor system, Read-modify-write assembly language instructions whose opcode is prefixed by the <strong>Lock byte</strong> (0xf0) are atomic. </li>
+  <li>Other processors cannot access the memory location while the locked instruction is being executed.</li>
+</ul>
+
+<p>Sample functions: atomic_read(v), atomic_set(v,i), atomic_add(i,v), atomic_sub(i,v) etc…</p>
+
+<hr style="border-top: 1.5px dotted black" />
+<p><br /></p>
+
+<h3 id="optimization-barriers--memory-barriers">Optimization Barriers &amp; Memory Barriers</h3>
+
+<p>Compilers optimize the code for efficient usage of CPU time and memory but this optimizations could be disastrous sometimes when dealing with shared data.</p>
+
+<p>It can never be guaranteed that instructions will be performed in the same order in which they appear in source code mainly because reordering by compiler to optimize and CPU executing several instructions in parallel. This might lead to reordering of memory access patterns.</p>
+
+<p>To avoid this behavior we need a synchronization primitive at two levels</p>
+
+<ul>
+  <li>Synchronization primitive at Compiler level - Optimization barrier</li>
+  <li>Synchronization primitive at CPU level      - Memory barrier</li>
+</ul>
+
+<p>In linux <em>barrier()</em> macro acts as an <em>optimization barrier</em>. <code>Optimization barrier primitive ensures that assembly language instructions of C statements mentioned before *barrier()* and assembly language instructions of C statements mentioned after, remains in the same sequence.</code></p>
+
+<p>But, Optimization barrier cannot control in which fashion instructions will be executed by CPU.</p>
+
+<p>A <em>memory barrier</em> primitive ensures that the operations placed before the primitive are finished before starting the operations placed after the primitive. Read <em>memory barrier</em> act only on instructions that read from memory, while Write <em>memory barriers</em> act only on instructions that write to memory.</p>
+
+<h3 id="spin-locks">Spin Locks</h3>
+
+<p>When a kernel control path must access a shared data structure or enter a critical section it need to acquire a lock.<br />
+Spin Locks are a special kind of lock designed to work in a multiprocessor environment. If kernel control path finds Spin Lock <em>Open</em> it acquires the lock and continue execution else it <em>Spin</em> around repeatedly executing tight instruction loop, until the lock is released.</p>
+
+<p>The waiting kernel control path keeps running on the CPU, even if it has nothing to do besides waste time. <code>Kernel preemption is disabled</code> in CR protected by Spin Locks.
+Spin locks are usually convenient, because many kernel resources are locked for a <code>fraction of a millisecond only</code>; therefore, it would be far more time-consuming to release the CPU and reacquire it later.<br />
+Kernel preemption is still enabled during the busy wait phase, thus a process waiting for a spin lock to be released could be replaced by a higher priority process.</p>
+
+<table>
+<tr>
+<td>Macro</td><td>Description</td>
+</tr>
+<tr>
+<td>spin-lock-init()</td><td>Set the spin lock to 1 (unlocked)</td>
+</tr>
+<tr>
+<td>spin-lock()</td><td>Cycle until spin lock becomes 1 (unlocked), then set it to 0 (locked)</td>
+</tr>
+<tr>
+<td>spin-unlock()</td><td>Set the spin lock to 1 (unlocked)</td>
+</tr>
+<tr>
+<td>spin-unlock-wait()</td><td>Wait until the spin lock becomes 1 (unlocked)</td>
+</tr>
+<tr>
+<td>spin-is-locked()</td><td>Return 0 if the spin lock is set to 1 (unlocked); 1 otherwise</td>
+</tr>
+<tr>
+<td>spin-trylock()</td><td>Set the spin lock to 0 (locked), and return 1 if the previous value of the lock was 1; 0 otherwise</td>
+</tr>
+</table>
+<p><br /></p>
+
+<p>Spin Lock with kernel preemption</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Invokes</span> preempt_disable() to disable kernel preemption.
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>; Intel syntax
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span style="color:#606">locked</span>:                      ; <span style="color:#036;font-weight:bold">The</span> lock variable. <span style="color:#F00;background-color:#FAA">1</span> = locked, <span style="color:#00D">0</span> = unlocked.
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>dd      <span style="color:#00D">0</span>
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span style="color:#606">spin_lock</span>:
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>mov     eax(new), <span style="color:#00D">1</span>     ; <span style="color:#036;font-weight:bold">Set</span> the <span style="color:#036;font-weight:bold">EAX</span> register to <span style="color:#00D">1</span>.
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>xchg    eax(new), [locked]
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>; <span style="color:#036;font-weight:bold">Atomically</span> swap the <span style="color:#036;font-weight:bold">EAX</span> register with
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>;  the lock variable.
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>; This will always store <span style="color:#00D">1</span> to the lock, leaving
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>;  previous value <span style="color:#080;font-weight:bold">in</span> the <span style="color:#036;font-weight:bold">EAX</span> register.
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>test    eax(new), eax(prev)
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>; <span style="color:#036;font-weight:bold">Test</span> <span style="color:#036;font-weight:bold">EAX</span> with itself. Among other things, this will
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>;  set the processor<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">s Zero Flag if EAX is 0.</span></span>
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">; If EAX is 0, then the lock was unlocked and</span></span>
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">;  we just locked it.</span></span>
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">; Otherwise, EAX is 1 and we didn</span><span style="color:#710">'</span></span>t acquire the lock.
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span>
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span>//   <span style="color:#036;font-weight:bold">Enable</span> kernel preemption preempt_enable() 
+<span class="line-numbers"><a href="#n25" name="n25">25</a></span>
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span>jnz     spin_lock       ; <span style="color:#036;font-weight:bold">Jump</span> back to the <span style="color:#036;font-weight:bold">MOV</span> instruction <span style="color:#080;font-weight:bold">if</span> the <span style="color:#036;font-weight:bold">Zero</span> <span style="color:#036;font-weight:bold">Flag</span> is
+<span class="line-numbers"><a href="#n27" name="n27">27</a></span>;  <span style="color:#080;font-weight:bold">not</span> set; the lock was previously locked, <span style="color:#080;font-weight:bold">and</span> so
+<span class="line-numbers"><a href="#n28" name="n28">28</a></span>; we need to spin <span style="color:#080;font-weight:bold">until</span> it becomes unlocked.
+<span class="line-numbers"><a href="#n29" name="n29">29</a></span>
+<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>ret                     ; <span style="color:#036;font-weight:bold">The</span> lock has been acquired, <span style="color:#080;font-weight:bold">return</span> to the calling
+<span class="line-numbers"><a href="#n31" name="n31">31</a></span>;  function.
+<span class="line-numbers"><a href="#n32" name="n32">32</a></span>
+<span class="line-numbers"><a href="#n33" name="n33">33</a></span>spin_unlock:
+<span class="line-numbers"><a href="#n34" name="n34">34</a></span>mov     eax, <span style="color:#00D">0</span>          ; <span style="color:#036;font-weight:bold">Set</span> the <span style="color:#036;font-weight:bold">EAX</span> register to <span style="color:#00D">0</span>.
+<span class="line-numbers"><a href="#n35" name="n35">35</a></span>
+<span class="line-numbers"><a href="#n36" name="n36">36</a></span>xchg    eax, [locked]   ; <span style="color:#036;font-weight:bold">Atomically</span> swap the <span style="color:#036;font-weight:bold">EAX</span> register with
+<span class="line-numbers"><a href="#n37" name="n37">37</a></span>;  the lock variable.
+<span class="line-numbers"><a href="#n38" name="n38">38</a></span>
+<span class="line-numbers"><a href="#n39" name="n39">39</a></span>ret                     ; <span style="color:#036;font-weight:bold">The</span> lock has been released.
+</pre></div>
+</div>
+</div>
+
+<p>In case of kernel preemption, the first step is to disable kernel preemption, preempt_disable()
+In the above example <code>Lock is 1 and Unlock is 0</code></p>
+
+<ul>
+  <li>In EAX register we push “1” as we wish to acquire lock.<br /></li>
+  <li>xchg command will exchange value from EAX register to lock variable but not vice versa. So by step 2, EAX register has value of “1” and lock variable also has value of “1”. This is an atomic operation.<br /></li>
+  <li>Step 3, test or validate the current value of lock. If current value of lock(EAX prev) is “1“ i.e. processor zero flag is already set, hence <code>lock is not available.</code> <br /></li>
+  <li>Enable kernel preemption and Jump(Spin) back.<br /></li>
+  <li>In Step 3, if current value of lock (EAX prev) is “0” then set it with “1” i.e. <code>Lock has been acquired.</code></li>
+</ul>
+
+<p>It might happen that process can spin for a long time. If the break_lock field is set then owning process can learn whether there are other processes waiting for the lock. It may decide to release it prematurely to allow other processes.</p>
+
+<h4 id="readwrite-spin-locks">Read/Write Spin Locks</h4>
+
+<p>Read Spin Locks is used to increase the concurrency within kernel. Idea is that allow several kernel control path to access same data structure for “Read” using Read Spin Locks. No kernel control path can modify the data structure using Read Spin Locks. </p>
+
+<p>To modify shared data structure kernel control path needs to acquire Write Spin Locks. Write Spin Lock is granted when no kernel control path have Read Spin Locks.</p>
+
+<p>Reader and Writer Spin Locks have same priority in this case.</p>
+
+<h3 id="seqlocks">SeqLocks</h3>
+
+<p>In Read/Write spin locks reader and write have same priority. Reader must wait until the writer has finished and vice versa.<br />
+SeqLocks are similar to read/write locks except except that they give a much higher priority to writers: in fact a writer is allowed to proceed even when readers are active.</p>
+
+<p>Writer never waits but reader may be forced to read the data several times until it get valid copy. Each reader must read sequence counter twice i.e. before and after reading the data and then check whether sequence counter values are same. If its not equal then it means that writer must has become active and has increased the sequence counter, thus implicitly telling the reader that the data just read is not valid.</p>
+
+<p>Every time writer acquire and release sequence lock it must increment sequence counter. When counter is odd means writer is in progress and when counter is even means writer is done.<br />
+When a reader enters a critical region, it <code>does not need to disable kernel preemption</code>; on the other hand, the <code>writer automatically disables kernel preemption</code> when entering the critical region, because it acquires the spin lock.</p>
+
+<p>SeqLocks must not be used for </p>
+
+<ul>
+  <li>The data structure to be protected does not include pointers that are modified by the writers and dereferenced by the readers (otherwise, a writer could change the pointer under the nose of the readers)</li>
+  <li>The code in the critical regions of the readers does not have side effects (otherwise, multiple reads would have different effects from a single read)</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Process synchronization in OS]]></title>
     <link href="http://learnwrite.github.io/blog/2013/10/07/process-synchronization-in-os/"/>
     <updated>2013-10-07T11:54:00-07:00</updated>
     <id>http://learnwrite.github.io/blog/2013/10/07/process-synchronization-in-os</id>
-    <content type="html"><![CDATA[<h3>What is a Process?</h3>
-<p>OS objective is to keep as many as of the computer resources as busy as possible. It is used to keep track of all the things an OS must remember about the state of user program.</p>
+    <content type="html"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#what-is-a-process">What is a Process?</a></li>
+  <li><a href="#issues-with-sharing">3 Issues with Sharing</a></li>
+  <li><a href="#carls-jr-restaurant">Carl’s Jr. Restaurant</a></li>
+  <li><a href="#algorithmic-approach">Algorithmic approach</a></li>
+  <li><a href="#software-primitives">Software Primitives</a></li>
+  <li><a href="#semaphores">Semaphores</a></li>
+  <li><a href="#locks">Locks</a></li>
+  <li><a href="#concurrent-programming-construct">Concurrent Programming Construct</a></li>
+  <li><a href="#condition-variables">Condition Variables</a></li>
+  <li><a href="#producer-consumer-problem">Producer-Consumer Problem</a></li>
+  <li><a href="#recommended-reading">Recommended reading</a></li>
+</ul>
+
+<h3 id="what-is-a-process">What is a Process?</h3>
+
+<p>OS <code>objective</code> is to keep as many as of the computer resources as busy as possible. It is used to keep track of all the things an OS must remember about the state of user program.</p>
 
 <p>Process = Code + Allocated Resources + Book keeping information</p>
 
 <p>Process is like a box, a complete entity in itself which does a step by step task written in progam. More formally it is called program in execution.</p>
 
-<p>Lets consider a very basic operating system with very least complexity. This operating system can run only one process at a time. Since, only one process is working at a time, it may happen that all the resources occupied by process will not be used at the same time.</p>
+<p>Lets consider a very basic operating system with very least complexity. This operating system can run only <code>one process</code> at a time. Since, only one process is working at a time, it may happen that all the resources occupied by process will not be used at the same time.</p>
 
 <p>To maximize the resource utilization, we need to have entities running at the same time. When its said multiple entities it is logical that either we need to have multiple process running at the same time or light weight multiple entities running inside process.</p>
 
@@ -35,17 +313,16 @@
 
 <p>Once there are multiple threads they are going to ask for same resource at the same time. For example, if two children are in one room then they will always fight for same toy. Same applies to threads.</p>
 
-<p><br /></p>
-<h3>3 Issues with Sharing </h3>
+<h3 id="issues-with-sharing">3 Issues with Sharing</h3>
 <ol>
-  <li>How to Share data?</li>
-  <li>How to ensure threads in a process, executes on at a time?</li>
-  <li>How to ensure proper sequencing of events?</li>
+  <li>How to <code>Share data</code>?</li>
+  <li>How to ensure threads in a process, <code>executes one</code> at a time?</li>
+  <li>How to ensure proper <code>sequencing</code> of events?</li>
 </ol>
 
-<p>To understand it better, lets take a real world example
-<br /><br /></p>
-<h3>Carl’s Jr. Restaurant</h3>
+<p>To understand it better, lets take a real world example</p>
+
+<h3 id="carls-jr-restaurant">Carl’s Jr. Restaurant</h3>
 <p>Process</p>
 
 <ol>
@@ -57,19 +334,19 @@
   <li>Customer gets food and leaves</li>
 </ol>
 
-<p>If a single employee is doing steps from 1-6 then all other customers have to wait in line and its going to be long wait.
-Instead, lets have multiple employees for taking order, cook food, bag food, take money. Each of these ‘employees’ are multiple threads on Process ‘Restaurant’. Each thread is responsible for doing specialized task.</p>
+<p>If a single employee is doing steps from 1-6 then all other customers have to <code>wait</code> in line and its going to be long wait.
+Instead, lets have multiple employees for taking order, cook food, bag food, take money. Each of these ‘employees’ are multiple threads on Process ‘Restaurant’. Each thread is responsible for doing <code>specialized task</code>.</p>
 
-<p>Lets associate 3 issues in current situation</p>
+<p>Lets associate <code>3 issues</code> in current situation</p>
 
 <ol>
   <li>What is shared data? - In step 2-3, Quantity of food. In step 3-4, how much food to bag</li>
   <li>Does sequence matters? -  Cook can’t cook food until order arrives. Employee can’t bag food until it is cooked. So, sequencing matters.</li>
 </ol>
 
-<p>Shared data can be distributed either using message passing or storing that data in global memory of process and each thread read from that memory location.</p>
+<p>Shared data can be passed for sharing either using <code>message passing</code> or storing that data in <code>global memoryi</code> of process and each thread read from that memory location.</p>
 
-<p>The next logical question is, How to ensure threads in a process, executes on at a time?
+<p>The next logical question is how to ensure threads in a process executes one at a time i.e. in <code>exclusion</code>?
 More formally there are three types of solution categories</p>
 
 <ol>
@@ -78,11 +355,411 @@ More formally there are three types of solution categories</p>
   <li>Concurrent programming construct</li>
 </ol>
 
-<h3> </h3>
+<h3 id="algorithmic-approach">Algorithmic approach</h3>
+<p>The algorithmic approach to process synchronization does not use any assistance from the computer architecture or the OS kernel. Instead it uses an arrangement of logical conditions to satisfy the desired synchronization requirements. <a href="http://books.google.com/books/about/Operating_Systems.html?id=kbBn4X9x2mcC" target="_blank">[Dhamdhere]</a></p>
 
-<h3> </h3>
+<ul>
+  <li>Two process algorithms</li>
+  <li><a href="http://en.wikipedia.org/wiki/Dekker's_algorithm" target="_blank">Dekker’s Algorithm</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Peterson's_algorithm" target="_blank">Peterson’s Algorithm</a></li>
+  <li>n process algorithm</li>
+  <li><a href="http://en.wikipedia.org/wiki/Lamport's_bakery_algorithm" target="_blank">Bakery’s Algorithm</a></li>
+</ul>
 
-<h3> </h3>
+<h3 id="software-primitives">Software Primitives</h3>
+<p>A set of software primitives for mutual exclusion e.g Semaphore, Locks etc. were developed to overcome the logical complexity of algorithmic implementations. This is implemented using some special architectural features of computer systems. But, ease of use and correctness still remained the major obstacle in a development of large concurrent systems.</p>
+
+<h3 id="semaphores">Semaphores</h3>
+<p>It is a shared integer variable with <code>non-negative</code> values that have <code>initialization, wait and signal</code> as a indivisible operation.</p>
+
+<p>Semaphore Class</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="color:#080;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">Semaphore</span> {
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>    <span style="color:#606">public</span>:
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>        <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Constructor</span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>        Semaphore(char *debugName, int initialValue);
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>        <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Destructor</span>
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>        ~Semaphore();
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    <span style="color:#606">private</span>:
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>        int value;
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>        <span style="color:#036;font-weight:bold">List</span> *waitQueue;
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>        char *name;
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>};
+</pre></div>
+</div>
+</div>
+
+<p>Semaphore Constructor</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>Semaphore(char * debugName, int initialValue) {
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span>    name      = debugName;
+<span class="line-numbers"><a href="#n3" name="n3">3</a></span>    value     = initialValue;
+<span class="line-numbers"><a href="#n4" name="n4">4</a></span>    waitQueue = newList;
+<span class="line-numbers"><a href="#n5" name="n5">5</a></span>}
+</pre></div>
+</div>
+</div>
+
+<p>Semaphore Destructors</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>~Semaphore() {
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span>    delete waitQueue;
+<span class="line-numbers"><a href="#n3" name="n3">3</a></span>}
+</pre></div>
+</div>
+</div>
+
+<p>Semaphore Wait</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>P() - <span style="color:#036;font-weight:bold">Semaphore</span> <span style="color:#036;font-weight:bold">Wait</span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span style="color:#036;font-weight:bold">Semaphore</span>::P() {
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>    <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Disable</span> interrupts
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    <span style="color:#036;font-weight:bold">IntStatus</span> oldLevel = interrupt-&gt;SetLevel(<span style="color:#036;font-weight:bold">IntOff</span>);
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Semaphore</span> <span style="color:#080;font-weight:bold">not</span> available
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span style="color:#080;font-weight:bold">while</span> (value == <span style="color:#00D">0</span>) {
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>        waitQueue-&gt;Append((void *)currentThread);
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>        currentThread-&gt;Sleep();
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>    }
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Semaphore</span> now availble
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>    value--;
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>    (void)interrupt-&gt;SetLevel(oldLevel);
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>}
+</pre></div>
+</div>
+</div>
+
+<p>Semaphore Signal</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Semaphore</span> <span style="color:#036;font-weight:bold">Signal</span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span style="color:#036;font-weight:bold">Semaphore</span>::V() {
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>    <span style="color:#036;font-weight:bold">Thread</span> *thread;  
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    <span style="color:#036;font-weight:bold">IntStatus</span> oldLevel = interrupt-&gt;SetLevel(<span style="color:#036;font-weight:bold">IntOff</span>);
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Remove</span> first thread from wait queue
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    thread-&gt;(<span style="color:#036;font-weight:bold">Thread</span> *)waitQueue-&gt;Remove();
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>    <span style="color:#080;font-weight:bold">if</span> (thread != <span style="color:#036;font-weight:bold">NULL</span>) {
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>        scheduler-&gt;ReadyToRun(thread);  
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    }
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>    value++;
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>    (void)interrupt-&gt;SetLevel(oldLevel);
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>}
+</pre></div>
+</div>
+</div>
+
+<h3 id="locks">Locks</h3>
+<p>The basic idea is to <code>close/acquire</code> a lock at the start of critical section or an indivisible operation and <code>open/release</code> it at the end of the critical section or the indivisible operation.</p>
+
+<p>Locks solves how to ensure threads in a process executes one at a time but not the <code>sequencing problem.</code></p>
+
+<p>Lock Class</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="color:#080;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">Lock</span> {
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>    <span style="color:#606">public</span>:
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>        <span style="color:#036;font-weight:bold">Lock</span> (char *debugName);
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>        ~Lock();
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>        char* getName() { <span style="color:#080;font-weight:bold">return</span> name; }
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>        void acquire();
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>        void release();
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>        bool isHeldByCurrentThread;
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    <span style="color:#606">private</span>:
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>        char*   name;
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>        <span style="color:#036;font-weight:bold">List</span>*   lockWaitQueue;
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>        bool    lockFree;
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>        <span style="color:#036;font-weight:bold">Thread</span>* currentLockThread;
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>};
+</pre></div>
+</div>
+</div>
+
+<p>Lock Constructor</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Lock</span> <span style="color:#036;font-weight:bold">Constructor</span>
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span><span style="color:#036;font-weight:bold">Lock</span>::Lock(char * debugName) {
+<span class="line-numbers"><a href="#n3" name="n3">3</a></span>    name              = debugName;
+<span class="line-numbers"><a href="#n4" name="n4">4</a></span>    currentLockThread = <span style="color:#036;font-weight:bold">NULL</span>;
+<span class="line-numbers"><a href="#n5" name="n5">5</a></span>    lockFree          = <span style="color:#069">TRUE</span>;
+<span class="line-numbers"><a href="#n6" name="n6">6</a></span>    lockWaitQueue     = new <span style="color:#036;font-weight:bold">List</span>;
+<span class="line-numbers"><a href="#n7" name="n7">7</a></span>}
+</pre></div>
+</div>
+</div>
+
+<p>Lock Destructor</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Lock</span> <span style="color:#036;font-weight:bold">Destructor</span>
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span>~Lock() {
+<span class="line-numbers"><a href="#n3" name="n3">3</a></span>    delete lockWaitQueue;  
+<span class="line-numbers"><a href="#n4" name="n4">4</a></span>}
+</pre></div>
+</div>
+</div>
+
+<p>Lock Acquire</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="color:#036;font-weight:bold">Lock</span>::acquire() {
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>    <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Disable</span> interrupts
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>    <span style="color:#036;font-weight:bold">IntStatus</span> oldLevel = interrupt-&gt;SetLevel(<span style="color:#036;font-weight:bold">IntOff</span>);
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Check</span> <span style="color:#080;font-weight:bold">if</span> current thread is an owner
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    <span style="color:#080;font-weight:bold">if</span> (currentThread == currentLockThread) {
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>        <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Already</span> owner  
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>        (void)interrupt-&gt;SetLevel(oldLevel);
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>        <span style="color:#080;font-weight:bold">return</span>;
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>    }
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    <span style="color:#080;font-weight:bold">if</span>(lockFree == <span style="color:#069">TRUE</span>) {
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>        lockFree = <span style="color:#069">FALSE</span>;
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>        currentLockThread = currentThread;      
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>    } <span style="color:#080;font-weight:bold">else</span> {
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>        lockWaitQueue-&gt;Append((void*) currentThread);
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>        currentThread-&gt;Sleep();
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>    }
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>    (void)interrupt-&gt;SetLevel(oldLevel);
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>}
+</pre></div>
+</div>
+</div>
+
+<p>Lock Release</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="color:#036;font-weight:bold">Lock</span>::release() {
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>    <span style="color:#036;font-weight:bold">Thread</span>* waitingThread;
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>    <span style="color:#036;font-weight:bold">IntStatus</span> oldLevel = interrupt-&gt;SetLevel(<span style="color:#036;font-weight:bold">IntOff</span>);
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    <span style="color:#080;font-weight:bold">if</span> (!isHeldByCurrentThread()) {
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>        <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Thread</span> is <span style="color:#080;font-weight:bold">not</span> valid owner of lock its
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>        <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>trying to release
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>        DEBUG(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Not a lock owner</span><span style="color:#710">&quot;</span></span>);
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>        (void)interrupt-&gt;SetLevel(oldLevel);
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>        <span style="color:#080;font-weight:bold">return</span>;      
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    }
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>    waitingThread = (<span style="color:#036;font-weight:bold">Thread</span>*)lockWaitQueue-&gt;Remove();
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>    <span style="color:#080;font-weight:bold">if</span> (waitingThread != <span style="color:#036;font-weight:bold">NULL</span>) {
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>        scheduler-&gt;ReadyToRun(waitingThread);
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>        currentLockThread = waitingThread;      
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>    } <span style="color:#080;font-weight:bold">else</span> {
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>        lockFree = <span style="color:#069">TRUE</span>;
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>        currentLockThread = <span style="color:#036;font-weight:bold">NULL</span>;
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span>    }
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span>
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span>    (void)interrupt-&gt;SetLevel(oldLevel);
+<span class="line-numbers"><a href="#n25" name="n25">25</a></span>}
+</pre></div>
+</div>
+</div>
+
+<p>Lock Owner</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>bool <span style="color:#036;font-weight:bold">Lock</span>::isHeldByCurrentThread() {
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span>    <span style="color:#080;font-weight:bold">return</span> ((currentThread != currentLockThread) ?  <span style="color:#069">FALSE</span> : <span style="color:#069">TRUE</span>);
+<span class="line-numbers"><a href="#n3" name="n3">3</a></span>}
+</pre></div>
+</div>
+</div>
+
+<h3 id="concurrent-programming-construct">Concurrent Programming Construct</h3>
+<p>Locks can only solve <code>mutual exclusion</code> problem, they can not solve <code>sequencing problem</code>. We need another mechanism <code>Monitors</code></p>
+
+<p>Monitors is a programming language construct that supports both data access synchronization and control synchronization.</p>
+
+<p>Monitors have 3 parts</p>
+
+<ol>
+  <li><code>Lock</code> for mutual exclusion</li>
+  <li>1 or more <code>condition variables</code> for sequencing</li>
+  <li>Monitor variables for make sequencing decisions -&gt; Shared data</li>
+</ol>
+
+<h3 id="condition-variables">Condition Variables</h3>
+<p>Each condition variable is only associated with one lock.</p>
+
+<p>Condition Class</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="color:#080;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">Condition</span> {
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>    <span style="color:#606">public</span>:
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>        Condition(char *debugName);
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>        ~Conditon();
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>        char* getName() { <span style="color:#080;font-weight:bold">return</span> name; }
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>        void wait(<span style="color:#036;font-weight:bold">Lock</span>* conditionLock);
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>        void signal(<span style="color:#036;font-weight:bold">Lock</span>* conditionLock);
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>        void broadcast(<span style="color:#036;font-weight:bold">Lock</span>* conditionLock);
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    <span style="color:#606">private</span>:
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>        char* name;
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>        <span style="color:#036;font-weight:bold">List</span>* cvQueue;
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>        <span style="color:#036;font-weight:bold">Lock</span>* cvLock;  
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>};
+</pre></div>
+</div>
+</div>
+
+<p>CV Constructor</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span><span style="color:#036;font-weight:bold">Condition</span>::Condition(char * debugName) {
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span>    name    = debugName;
+<span class="line-numbers"><a href="#n3" name="n3">3</a></span>    cvQueue = new <span style="color:#036;font-weight:bold">List</span>;
+<span class="line-numbers"><a href="#n4" name="n4">4</a></span>    cvLock  = <span style="color:#036;font-weight:bold">NULL</span>;  
+<span class="line-numbers"><a href="#n5" name="n5">5</a></span>}
+</pre></div>
+</div>
+</div>
+
+<p>CV Destructor</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span><span style="color:#036;font-weight:bold">Condition</span>::~Condition() {
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span>    delete cvQueue;    
+<span class="line-numbers"><a href="#n3" name="n3">3</a></span>}
+</pre></div>
+</div>
+</div>
+
+<p>CV Wait</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>void <span style="color:#036;font-weight:bold">Condition</span>::wait(<span style="color:#036;font-weight:bold">Lock</span>* conditionLock) {
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>    <span style="color:#036;font-weight:bold">IntStatus</span> oldLevel = interrupt-&gt;SetLevel(<span style="color:#036;font-weight:bold">IntOff</span>);
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    <span style="color:#080;font-weight:bold">if</span> (cvQueue-&gt;isEmpty()) {
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>        <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">This</span> lock is now associated with <span style="color:#036;font-weight:bold">CV</span> <span style="color:#080;font-weight:bold">and</span>
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>        <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span><span style="color:#C2C">on</span></span>ly removed <span style="color:#080;font-weight:bold">when</span> last entry is removed
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>        <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>from cvQueue.
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>        cvLock = conditionLock;
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    }
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>    <span style="color:#080;font-weight:bold">if</span> (conditionLock == <span style="color:#036;font-weight:bold">NULL</span>) {
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>        interrupt-&gt;SetLevel(oldLevel);  
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>        <span style="color:#080;font-weight:bold">return</span>;
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>    }
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>    conditionLock-&gt;release();
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>    cvQueue-&gt;Append((void*) currentThread);
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>    currentThread-&gt;Sleep();
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>    <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Acquire</span> lock <span style="color:#080;font-weight:bold">when</span> get up
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>    conditionLock-&gt;acquire();
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span>    interrupt-&gt;SetLevel(oldLevel);    
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span>}
+</pre></div>
+</div>
+</div>
+
+<p>CV Signal</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>void <span style="color:#036;font-weight:bold">Conditon</span>::signal(<span style="color:#036;font-weight:bold">Lock</span> * conditionLock) {
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>    <span style="color:#036;font-weight:bold">IntStatus</span> oldLevel = interrupt-&gt;SetLevel(<span style="color:#036;font-weight:bold">IntOff</span>);
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">If</span> nobody to signal, <span style="color:#080;font-weight:bold">return</span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    <span style="color:#080;font-weight:bold">if</span> (cvQueue-&gt;Empty()) {
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>        interrupt-&gt;SetLevel(oldLevel);
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>        <span style="color:#080;font-weight:bold">return</span>;
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    }
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>    <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Verify</span> right lock is signalled
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>    <span style="color:#080;font-weight:bold">if</span> (cvLock != conditionLock) {
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>        interrupt-&gt;SetLevel(oldLevel);
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>        <span style="color:#080;font-weight:bold">return</span>;
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>    }
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>    thread = cvQueue-&gt;Remove();
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>    <span style="color:#080;font-weight:bold">if</span> (thread != <span style="color:#036;font-weight:bold">NULL</span>) {
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>        scheduler-&gt;ReadyToRun(thread);
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>    }
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>    <span style="color:#080;font-weight:bold">if</span> (cvQueue-&gt;isEmpty()) {
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span>        cvLock = <span style="color:#036;font-weight:bold">NULL</span>;
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span>    }
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span>
+<span class="line-numbers"><a href="#n25" name="n25">25</a></span>    interrupt-&gt;SetLevel(oldLevel);
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span>}
+</pre></div>
+</div>
+</div>
+
+<h3 id="producer-consumer-problem">Producer-Consumer Problem</h3>
+
+<p>Lets consider we have <code>infinite buffer</code></p>
+
+<p>monitor variable  =&gt; int itemCount = 0;<br />
+monitor lock      =&gt; monitorLock;<br />
+monitor condition =&gt; needItem;<br /></p>
+
+<p>Producer</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="color:#080;font-weight:bold">while</span> (<span style="color:#069">true</span>) {
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>    monitorLock.acquire();
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Produce</span> item
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Put</span> <span style="color:#080;font-weight:bold">in</span> a buffer
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    itemCount++;
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    needItem.signal(&amp;monitorLock);
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>    monitorLock.Release();    
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>}
+</pre></div>
+</div>
+</div>
+
+<p>Consumer</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="color:#080;font-weight:bold">while</span> (<span style="color:#069">true</span>) {
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>    monitorLock.acquire();
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    <span style="color:#080;font-weight:bold">while</span>(intemCount == <span style="color:#00D">0</span>) {
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>        needItem.wait(&amp;monitorLock);      
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    }
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Buffer</span> has atleast one item
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    itemCount--;
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>    monitorLock.Relase();
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>}
+</pre></div>
+</div>
+</div>
+
+<h3 id="recommended-reading">Recommended reading</h3>
+
+<ul>
+  <li><a href="https://docs.google.com/file/d/0BySPJjyZBnC2Q20yU2lHeGdKQ3c/edit?usp=sharing" target="_blank">Implementing CV using semaphore</a></li>
+  <li><a href="https://docs.google.com/file/d/0BySPJjyZBnC2ekFOMDlwNmNiQlk/edit?usp=sharing" target="_blank">Monitors by C.A.R Hoare </a></li>
+  <li>Process synchronization in Linux Kernel</li>
+</ul>
 ]]></content>
   </entry>
   
