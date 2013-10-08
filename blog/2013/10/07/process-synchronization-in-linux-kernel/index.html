@@ -9,7 +9,7 @@
   <meta name="author" content="Vaibhav Gautam">
 
   
-  <meta name="description" content="Synchronization Primitives Summary of Synchronization Primitives Per-CPU variables Atomic Operations As we have discussed earlier about process &hellip;">
+  <meta name="description" content="Synchronization Primitives Summary of Synchronization Primitives Per-CPU variables Atomic Operations Optimization Barriers &amp; Memory Barriers &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -128,6 +128,12 @@
   <li><a href="#summary-of-synchronization-primitives">Summary of Synchronization Primitives</a></li>
   <li><a href="#per-cpu-variables">Per-CPU variables</a></li>
   <li><a href="#atomic-operations">Atomic Operations</a></li>
+  <li><a href="#optimization-barriers--memory-barriers">Optimization Barriers &amp; Memory Barriers</a></li>
+  <li><a href="#spin-locks">Spin Locks</a>    <ul>
+      <li><a href="#readwrite-spin-locks">Read/Write Spin Locks</a></li>
+    </ul>
+  </li>
+  <li><a href="#seqlocks">SeqLocks</a></li>
 </ul>
 
 <p>As we have discussed earlier about process synchronization, lets discuss about process synchronization primitives offered in Linux Kernel.</p>
@@ -221,6 +227,157 @@ A CPU should not access the elements of the array corresponding to the other CPU
 Suppose that two kernel control paths running on two CPUs try to “read-modify-write” the same memory location at the same time by executing nonatomic operations.<br />
 At first, <code>both CPUs try to read the same location</code>, but the memory arbiter (a hardware circuit that serializes accesses to the RAM chips) steps in to grant access to one of them and delay the other. However, when the first read operation has completed, the delayed CPU reads exactly the same (old) value from the memory location.
 <code>Both CPUs then try to write the same (new) value to the memory location</code>; again, the bus memory access is serialized by the memory arbiter, and eventually both write operations succeed. However, the global result is incorrect because both CPUs write the same (new) value. Thus, the two interleaving “read-modify-write” operations act as a single one.</p>
+
+<p><strong>[Solution]</strong> Reason for problem here is that Both CPU’s try to access memory location at the same time. If operation of “read-modify-write” can be made atomic then problem would be solved i.e. Every such <code>operation must be executed in a single instruction without being interrupted</code> in the middle and avoiding accesses to the same memory location by other CPUs.</p>
+
+<ul>
+  <li>Read-modify-write assembly language instructions are atomic if no other processor has taken the memory bus after the read and before the write. <code>Memory bus stealing never happens in a uniprocessor system.</code></li>
+  <li>For multiprocessor system, Read-modify-write assembly language instructions whose opcode is prefixed by the <strong>Lock byte</strong> (0xf0) are atomic. </li>
+  <li>Other processors cannot access the memory location while the locked instruction is being executed.</li>
+</ul>
+
+<p>Sample functions: atomic_read(v), atomic_set(v,i), atomic_add(i,v), atomic_sub(i,v) etc…</p>
+
+<hr style="border-top: 1.5px dotted black" />
+<p><br /></p>
+
+<h3 id="optimization-barriers--memory-barriers">Optimization Barriers &amp; Memory Barriers</h3>
+
+<p>Compilers optimize the code for efficient usage of CPU time and memory but this optimizations could be disastrous sometimes when dealing with shared data.</p>
+
+<p>It can never be guaranteed that instructions will be performed in the same order in which they appear in source code mainly because reordering by compiler to optimize and CPU executing several instructions in parallel. This might lead to reordering of memory access patterns.</p>
+
+<p>To avoid this behavior we need a synchronization primitive at two levels</p>
+
+<ul>
+  <li>Synchronization primitive at Compiler level - Optimization barrier</li>
+  <li>Synchronization primitive at CPU level      - Memory barrier</li>
+</ul>
+
+<p>In linux <em>barrier()</em> macro acts as an <em>optimization barrier</em>. <code>Optimization barrier primitive ensures that assembly language instructions of C statements mentioned before *barrier()* and assembly language instructions of C statements mentioned after, remains in the same sequence.</code></p>
+
+<p>But, Optimization barrier cannot control in which fashion instructions will be executed by CPU.</p>
+
+<p>A <em>memory barrier</em> primitive ensures that the operations placed before the primitive are finished before starting the operations placed after the primitive. Read <em>memory barrier</em> act only on instructions that read from memory, while Write <em>memory barriers</em> act only on instructions that write to memory.</p>
+
+<h3 id="spin-locks">Spin Locks</h3>
+
+<p>When a kernel control path must access a shared data structure or enter a critical section it need to acquire a lock.<br />
+Spin Locks are a special kind of lock designed to work in a multiprocessor environment. If kernel control path finds Spin Lock <em>Open</em> it acquires the lock and continue execution else it <em>Spin</em> around repeatedly executing tight instruction loop, until the lock is released.</p>
+
+<p>The waiting kernel control path keeps running on the CPU, even if it has nothing to do besides waste time. <code>Kernel preemption is disabled</code> in CR protected by Spin Locks.
+Spin locks are usually convenient, because many kernel resources are locked for a <code>fraction of a millisecond only</code>; therefore, it would be far more time-consuming to release the CPU and reacquire it later.<br />
+Kernel preemption is still enabled during the busy wait phase, thus a process waiting for a spin lock to be released could be replaced by a higher priority process.</p>
+
+<table>
+<tr>
+<td>Macro</td><td>Description</td>
+</tr>
+<tr>
+<td>spin-lock-init()</td><td>Set the spin lock to 1 (unlocked)</td>
+</tr>
+<tr>
+<td>spin-lock()</td><td>Cycle until spin lock becomes 1 (unlocked), then set it to 0 (locked)</td>
+</tr>
+<tr>
+<td>spin-unlock()</td><td>Set the spin lock to 1 (unlocked)</td>
+</tr>
+<tr>
+<td>spin-unlock-wait()</td><td>Wait until the spin lock becomes 1 (unlocked)</td>
+</tr>
+<tr>
+<td>spin-is-locked()</td><td>Return 0 if the spin lock is set to 1 (unlocked); 1 otherwise</td>
+</tr>
+<tr>
+<td>spin-trylock()</td><td>Set the spin lock to 0 (locked), and return 1 if the previous value of the lock was 1; 0 otherwise</td>
+</tr>
+</table>
+<p><br /></p>
+
+<p>Spin Lock with kernel preemption</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Invokes</span> preempt_disable() to disable kernel preemption.
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>; Intel syntax
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span style="color:#606">locked</span>:                      ; <span style="color:#036;font-weight:bold">The</span> lock variable. <span style="color:#F00;background-color:#FAA">1</span> = locked, <span style="color:#00D">0</span> = unlocked.
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>dd      <span style="color:#00D">0</span>
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span style="color:#606">spin_lock</span>:
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>mov     eax(new), <span style="color:#00D">1</span>     ; <span style="color:#036;font-weight:bold">Set</span> the <span style="color:#036;font-weight:bold">EAX</span> register to <span style="color:#00D">1</span>.
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>xchg    eax(new), [locked]
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>; <span style="color:#036;font-weight:bold">Atomically</span> swap the <span style="color:#036;font-weight:bold">EAX</span> register with
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>;  the lock variable.
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>; This will always store <span style="color:#00D">1</span> to the lock, leaving
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>;  previous value <span style="color:#080;font-weight:bold">in</span> the <span style="color:#036;font-weight:bold">EAX</span> register.
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>test    eax(new), eax(prev)
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>; <span style="color:#036;font-weight:bold">Test</span> <span style="color:#036;font-weight:bold">EAX</span> with itself. Among other things, this will
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>;  set the processor<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">s Zero Flag if EAX is 0.</span></span>
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">; If EAX is 0, then the lock was unlocked and</span></span>
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">;  we just locked it.</span></span>
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">; Otherwise, EAX is 1 and we didn</span><span style="color:#710">'</span></span>t acquire the lock.
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span>
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span>//   <span style="color:#036;font-weight:bold">Enable</span> kernel preemption preempt_enable() 
+<span class="line-numbers"><a href="#n25" name="n25">25</a></span>
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span>jnz     spin_lock       ; <span style="color:#036;font-weight:bold">Jump</span> back to the <span style="color:#036;font-weight:bold">MOV</span> instruction <span style="color:#080;font-weight:bold">if</span> the <span style="color:#036;font-weight:bold">Zero</span> <span style="color:#036;font-weight:bold">Flag</span> is
+<span class="line-numbers"><a href="#n27" name="n27">27</a></span>;  <span style="color:#080;font-weight:bold">not</span> set; the lock was previously locked, <span style="color:#080;font-weight:bold">and</span> so
+<span class="line-numbers"><a href="#n28" name="n28">28</a></span>; we need to spin <span style="color:#080;font-weight:bold">until</span> it becomes unlocked.
+<span class="line-numbers"><a href="#n29" name="n29">29</a></span>
+<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>ret                     ; <span style="color:#036;font-weight:bold">The</span> lock has been acquired, <span style="color:#080;font-weight:bold">return</span> to the calling
+<span class="line-numbers"><a href="#n31" name="n31">31</a></span>;  function.
+<span class="line-numbers"><a href="#n32" name="n32">32</a></span>
+<span class="line-numbers"><a href="#n33" name="n33">33</a></span>spin_unlock:
+<span class="line-numbers"><a href="#n34" name="n34">34</a></span>mov     eax, <span style="color:#00D">0</span>          ; <span style="color:#036;font-weight:bold">Set</span> the <span style="color:#036;font-weight:bold">EAX</span> register to <span style="color:#00D">0</span>.
+<span class="line-numbers"><a href="#n35" name="n35">35</a></span>
+<span class="line-numbers"><a href="#n36" name="n36">36</a></span>xchg    eax, [locked]   ; <span style="color:#036;font-weight:bold">Atomically</span> swap the <span style="color:#036;font-weight:bold">EAX</span> register with
+<span class="line-numbers"><a href="#n37" name="n37">37</a></span>;  the lock variable.
+<span class="line-numbers"><a href="#n38" name="n38">38</a></span>
+<span class="line-numbers"><a href="#n39" name="n39">39</a></span>ret                     ; <span style="color:#036;font-weight:bold">The</span> lock has been released.
+</pre></div>
+</div>
+</div>
+
+<p>In case of kernel preemption, the first step is to disable kernel preemption, preempt_disable()
+In the above example <code>Lock is 1 and Unlock is 0</code></p>
+
+<ul>
+  <li>In EAX register we push “1” as we wish to acquire lock.<br /></li>
+  <li>xchg command will exchange value from EAX register to lock variable but not vice versa. So by step 2, EAX register has value of “1” and lock variable also has value of “1”. This is an atomic operation.<br /></li>
+  <li>Step 3, test or validate the current value of lock. If current value of lock(EAX prev) is “1“ i.e. processor zero flag is already set, hence <code>lock is not available.</code> <br /></li>
+  <li>Enable kernel preemption and Jump(Spin) back.<br /></li>
+  <li>In Step 3, if current value of lock (EAX prev) is “0” then set it with “1” i.e. <code>Lock has been acquired.</code></li>
+</ul>
+
+<p>It might happen that process can spin for a long time. If the break_lock field is set then owning process can learn whether there are other processes waiting for the lock. It may decide to release it prematurely to allow other processes.</p>
+
+<h4 id="readwrite-spin-locks">Read/Write Spin Locks</h4>
+
+<p>Read Spin Locks is used to increase the concurrency within kernel. Idea is that allow several kernel control path to access same data structure for “Read” using Read Spin Locks. No kernel control path can modify the data structure using Read Spin Locks. </p>
+
+<p>To modify shared data structure kernel control path needs to acquire Write Spin Locks. Write Spin Lock is granted when no kernel control path have Read Spin Locks.</p>
+
+<p>Reader and Writer Spin Locks have same priority in this case.</p>
+
+<h3 id="seqlocks">SeqLocks</h3>
+
+<p>In Read/Write spin locks reader and write have same priority. Reader must wait until the writer has finished and vice versa.<br />
+SeqLocks are similar to read/write locks except except that they give a much higher priority to writers: in fact a writer is allowed to proceed even when readers are active.</p>
+
+<p>Writer never waits but reader may be forced to read the data several times until it get valid copy. Each reader must read sequence counter twice i.e. before and after reading the data and then check whether sequence counter values are same. If its not equal then it means that writer must has become active and has increased the sequence counter, thus implicitly telling the reader that the data just read is not valid.</p>
+
+<p>Every time writer acquire and release sequence lock it must increment sequence counter. When counter is odd means writer is in progress and when counter is even means writer is done.<br />
+When a reader enters a critical region, it <code>does not need to disable kernel preemption</code>; on the other hand, the <code>writer automatically disables kernel preemption</code> when entering the critical region, because it acquires the spin lock.</p>
+
+<p>SeqLocks must not be used for </p>
+
+<ul>
+  <li>The data structure to be protected does not include pointers that are modified by the writers and dereferenced by the readers (otherwise, a writer could change the pointer under the nose of the readers)</li>
+  <li>The code in the critical regions of the readers does not have side effects (otherwise, multiple reads would have different effects from a single read)</li>
+</ul>
+
 </div>
 
 
