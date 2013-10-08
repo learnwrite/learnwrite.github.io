@@ -4,7 +4,7 @@
   <title><![CDATA[Category: operating systems | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/operating-systems/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2013-10-07T20:48:08-07:00</updated>
+  <updated>2013-10-07T20:54:04-07:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -93,7 +93,7 @@ More formally there are three types of solution categories</p>
 <p>A set of software primitives for mutual exclusion e.g Semaphore, Locks etc. were developed to overcome the logical complexity of algorithmic implementations. This is implemented using some special architectural features of computer systems. But, ease of use and correctness still remained the major obstacle in a development of large concurrent systems.</p>
 
 <h3>Semaphores</h3>
-<p>It is a shared integer variable with <code>non-negative</code> values that have <code>initialization, wait and signali</code> as a indivisible operation.</p>
+<p>It is a shared integer variable with <code>non-negative</code> values that have <code>initialization, wait and signal</code> as a indivisible operation.</p>
 
 <p>Semaphore Class</p>
 
