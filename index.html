@@ -132,16 +132,18 @@
   <li><a href="#per-cpu-variables">Per-CPU variables</a></li>
   <li><a href="#atomic-operations">Atomic Operations</a></li>
   <li><a href="#optimization-barriers--memory-barriers">Optimization Barriers &amp; Memory Barriers</a></li>
+  <li><a href="#semaphores">Semaphores</a></li>
   <li><a href="#spin-locks">Spin Locks</a>    <ul>
       <li><a href="#readwrite-spin-locks">Read/Write Spin Locks</a></li>
     </ul>
   </li>
   <li><a href="#seqlocks">SeqLocks</a></li>
+  <li><a href="#read-copy-update-rcu">Read Copy Update (RCU)</a></li>
 </ul>
 
 <p>As we have discussed earlier about process synchronization, lets discuss about process synchronization primitives offered in Linux Kernel.</p>
 
-<p>This blog is summary of this <a href="https://docs.google.com/file/d/0BySPJjyZBnC2UVYzWkdSLWNrdEE/edit?usp=sharing" target="_blank">article</a></p>
+<p>This blog is summary of this <a href="https://docs.google.com/file/d/0BySPJjyZBnC2UVYzWkdSLWNrdEE/edit?usp=sharing" target="-blank">article</a></p>
 
 <h3 id="synchronization-primitives">Synchronization Primitives</h3>
 
@@ -239,7 +241,7 @@ At first, <code>both CPUs try to read the same location</code>, but the memory a
   <li>Other processors cannot access the memory location while the locked instruction is being executed.</li>
 </ul>
 
-<p>Sample functions: atomic_read(v), atomic_set(v,i), atomic_add(i,v), atomic_sub(i,v) etc…</p>
+<p>Sample functions: atomic-read(v), atomic-set(v,i), atomic-add(i,v), atomic-sub(i,v) etc…</p>
 
 <hr style="border-top: 1.5px dotted black" />
 <p><br /></p>
@@ -262,6 +264,13 @@ At first, <code>both CPUs try to read the same location</code>, but the memory a
 <p>But, Optimization barrier cannot control in which fashion instructions will be executed by CPU.</p>
 
 <p>A <em>memory barrier</em> primitive ensures that the operations placed before the primitive are finished before starting the operations placed after the primitive. Read <em>memory barrier</em> act only on instructions that read from memory, while Write <em>memory barriers</em> act only on instructions that write to memory.</p>
+
+<hr style="border-top: 1.5px dotted black" />
+<p><br /></p>
+
+<h3 id="semaphores">Semaphores</h3>
+
+<p>Please visit <a href="http://learnwrite.github.io/blog/2013/10/07/process-synchronization-in-os/#semaphores">Semaphore Page</a></p>
 
 <h3 id="spin-locks">Spin Locks</h3>
 
@@ -300,14 +309,14 @@ Kernel preemption is still enabled during the busy wait phase, thus a process wa
 <p>Spin Lock with kernel preemption</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Invokes</span> preempt_disable() to disable kernel preemption.
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Invokes</span> preempt-disable() to disable kernel preemption.
 <span class="line-numbers"> <a href="#n2" name="n2">2</a></span>
 <span class="line-numbers"> <a href="#n3" name="n3">3</a></span>; Intel syntax
 <span class="line-numbers"> <a href="#n4" name="n4">4</a></span>
 <span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span style="color:#606">locked</span>:                      ; <span style="color:#036;font-weight:bold">The</span> lock variable. <span style="color:#F00;background-color:#FAA">1</span> = locked, <span style="color:#00D">0</span> = unlocked.
 <span class="line-numbers"> <a href="#n6" name="n6">6</a></span>dd      <span style="color:#00D">0</span>
 <span class="line-numbers"> <a href="#n7" name="n7">7</a></span>
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span style="color:#606">spin_lock</span>:
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>spin-<span style="color:#606">lock</span>:
 <span class="line-numbers"> <a href="#n9" name="n9">9</a></span>mov     eax(new), <span style="color:#00D">1</span>     ; <span style="color:#036;font-weight:bold">Set</span> the <span style="color:#036;font-weight:bold">EAX</span> register to <span style="color:#00D">1</span>.
 <span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>
 <span class="line-numbers"><a href="#n11" name="n11">11</a></span>xchg    eax(new), [locked]
@@ -323,16 +332,16 @@ Kernel preemption is still enabled during the busy wait phase, thus a process wa
 <span class="line-numbers"><a href="#n21" name="n21">21</a></span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">;  we just locked it.</span></span>
 <span class="line-numbers"><a href="#n22" name="n22">22</a></span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">; Otherwise, EAX is 1 and we didn</span><span style="color:#710">'</span></span>t acquire the lock.
 <span class="line-numbers"><a href="#n23" name="n23">23</a></span>
-<span class="line-numbers"><a href="#n24" name="n24">24</a></span>//   <span style="color:#036;font-weight:bold">Enable</span> kernel preemption preempt_enable() 
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span>//   <span style="color:#036;font-weight:bold">Enable</span> kernel preemption preempt-enable() 
 <span class="line-numbers"><a href="#n25" name="n25">25</a></span>
-<span class="line-numbers"><a href="#n26" name="n26">26</a></span>jnz     spin_lock       ; <span style="color:#036;font-weight:bold">Jump</span> back to the <span style="color:#036;font-weight:bold">MOV</span> instruction <span style="color:#080;font-weight:bold">if</span> the <span style="color:#036;font-weight:bold">Zero</span> <span style="color:#036;font-weight:bold">Flag</span> is
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span>jnz     spin-lock       ; <span style="color:#036;font-weight:bold">Jump</span> back to the <span style="color:#036;font-weight:bold">MOV</span> instruction <span style="color:#080;font-weight:bold">if</span> the <span style="color:#036;font-weight:bold">Zero</span> <span style="color:#036;font-weight:bold">Flag</span> is
 <span class="line-numbers"><a href="#n27" name="n27">27</a></span>;  <span style="color:#080;font-weight:bold">not</span> set; the lock was previously locked, <span style="color:#080;font-weight:bold">and</span> so
 <span class="line-numbers"><a href="#n28" name="n28">28</a></span>; we need to spin <span style="color:#080;font-weight:bold">until</span> it becomes unlocked.
 <span class="line-numbers"><a href="#n29" name="n29">29</a></span>
 <span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>ret                     ; <span style="color:#036;font-weight:bold">The</span> lock has been acquired, <span style="color:#080;font-weight:bold">return</span> to the calling
 <span class="line-numbers"><a href="#n31" name="n31">31</a></span>;  function.
 <span class="line-numbers"><a href="#n32" name="n32">32</a></span>
-<span class="line-numbers"><a href="#n33" name="n33">33</a></span>spin_unlock:
+<span class="line-numbers"><a href="#n33" name="n33">33</a></span>spin-<span style="color:#606">unlock</span>:
 <span class="line-numbers"><a href="#n34" name="n34">34</a></span>mov     eax, <span style="color:#00D">0</span>          ; <span style="color:#036;font-weight:bold">Set</span> the <span style="color:#036;font-weight:bold">EAX</span> register to <span style="color:#00D">0</span>.
 <span class="line-numbers"><a href="#n35" name="n35">35</a></span>
 <span class="line-numbers"><a href="#n36" name="n36">36</a></span>xchg    eax, [locked]   ; <span style="color:#036;font-weight:bold">Atomically</span> swap the <span style="color:#036;font-weight:bold">EAX</span> register with
@@ -343,7 +352,7 @@ Kernel preemption is still enabled during the busy wait phase, thus a process wa
 </div>
 </div>
 
-<p>In case of kernel preemption, the first step is to disable kernel preemption, preempt_disable()
+<p>In case of kernel preemption, the first step is to disable kernel preemption, preempt-disable()
 In the above example <code>Lock is 1 and Unlock is 0</code></p>
 
 <ul>
@@ -354,7 +363,7 @@ In the above example <code>Lock is 1 and Unlock is 0</code></p>
   <li>In Step 3, if current value of lock (EAX prev) is “0” then set it with “1” i.e. <code>Lock has been acquired.</code></li>
 </ul>
 
-<p>It might happen that process can spin for a long time. If the break_lock field is set then owning process can learn whether there are other processes waiting for the lock. It may decide to release it prematurely to allow other processes.</p>
+<p>It might happen that process can spin for a long time. If the break-lock field is set then owning process can learn whether there are other processes waiting for the lock. It may decide to release it prematurely to allow other processes.</p>
 
 <h4 id="readwrite-spin-locks">Read/Write Spin Locks</h4>
 
@@ -363,6 +372,9 @@ In the above example <code>Lock is 1 and Unlock is 0</code></p>
 <p>To modify shared data structure kernel control path needs to acquire Write Spin Locks. Write Spin Lock is granted when no kernel control path have Read Spin Locks.</p>
 
 <p>Reader and Writer Spin Locks have same priority in this case.</p>
+
+<hr style="border-top: 1.5px dotted black" />
+<p><br /></p>
 
 <h3 id="seqlocks">SeqLocks</h3>
 
@@ -381,6 +393,34 @@ When a reader enters a critical region, it <code>does not need to disable kernel
   <li>The code in the critical regions of the readers does not have side effects (otherwise, multiple reads would have different effects from a single read)</li>
 </ul>
 
+<hr style="border-top: 1.5px dotted black" />
+<p><br /></p>
+
+<h3 id="read-copy-update-rcu">Read Copy Update (RCU)</h3>
+
+<p>This technique is designed to <code>protect</code> data structures that are mostly <code>accessed for reading</code> by several CPUs.<br />
+The key idea consists of limiting the scope of RCU as follows:</p>
+
+<ol>
+  <li>Only data structures that are dynamically allocated and referenced by means of pointers can be protected by RCU.</li>
+  <li>No kernel control path can sleep inside a critical region protected by RCU.</li>
+</ol>
+
+<p><strong>Writer</strong></p>
+
+<ul>
+  <li>When a writer wants to update the data structure, it dereferences the pointer and makes a copy of the whole data structure.<br /></li>
+  <li>Next, the writer modifies the copy.<br /></li>
+  <li>Once finished, the writer changes the pointer to the data structure so as to make it point to the updated copy.<br /></li>
+</ul>
+
+<p>Because <code>changing the value of the pointer is an atomic operation</code>, each reader or writer sees either the old copy or the new one: no corruption in the data structure may occur.</p>
+
+<p>Memory barrier is required to ensure that the updated pointer is seen by the other CPUs only after the data structure has been modified. </p>
+
+<p>Spin lock is coupled with RCU to forbid the concurrent execution of writers.</p>
+
+<p><strong>[Problem]</strong> Old copy of the data structure cannot be freed right away when the writer updates the pointer. In fact, the readers that were accessing the data structure when the writer started its update could still be reading the old copy. The old copy can be freed only after all (potential) readers on the CPUs have executed.</p>
 </div>
   
   
