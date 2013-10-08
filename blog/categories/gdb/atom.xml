@@ -4,7 +4,7 @@
   <title><![CDATA[Category: gdb | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/gdb/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2013-10-07T00:13:28-07:00</updated>
+  <updated>2013-10-07T19:10:48-07:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -18,7 +18,8 @@
     <link href="http://learnwrite.github.io/blog/2013/10/06/gdb-print-bit-values-of-bytes/"/>
     <updated>2013-10-06T21:06:00-07:00</updated>
     <id>http://learnwrite.github.io/blog/2013/10/06/gdb-print-bit-values-of-bytes</id>
-    <content type="html"><![CDATA[<h2>Print bit values in a byte</h2>
+    <content type="html"><![CDATA[
+<h2>Print bit values in a byte</h2>
 
 <p>Recently, I have been working on interesting piece of code whose crux is to create a array of pointer addresses.
 Each entry in this array is address pointing to memory location.</p>
@@ -32,7 +33,7 @@ Address 100<br /></p>
 <p><br />
 Sometimes char data type is used as a package of 8 bits not as a valid char value.<br /></p>
 
-<p>Here is a code snippet</p>
+<h3>Code snippet</h3>
 
 <div><div class="CodeRay">
   <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="color:#579">#include</span> <span style="color:#B44;font-weight:bold">&lt;stdio.h&gt;</span>
