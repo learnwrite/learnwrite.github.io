@@ -4,7 +4,7 @@
   <title><![CDATA[Learnings]]></title>
   <link href="http://learnwrite.github.io/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2013-10-07T21:52:48-07:00</updated>
+  <updated>2013-10-07T23:33:00-07:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -18,12 +18,18 @@
     <link href="http://learnwrite.github.io/blog/2013/10/07/process-synchronization-in-linux-kernel/"/>
     <updated>2013-10-07T20:56:00-07:00</updated>
     <id>http://learnwrite.github.io/blog/2013/10/07/process-synchronization-in-linux-kernel</id>
-    <content type="html"><![CDATA[<p>As we have discussed earlier about process synchronization, lets discuss about process synchronization primitives offered in Linux Kernel.</p>
+    <content type="html"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#synchronization-primitives">Synchronization Primitives</a></li>
+  <li><a href="#summary-of-synchronization-primitives">Summary of Synchronization Primitives</a></li>
+  <li><a href="#per-cpu-variables">Per-CPU variables</a></li>
+  <li><a href="#atomic-operations">Atomic Operations</a></li>
+</ul>
+
+<p>As we have discussed earlier about process synchronization, lets discuss about process synchronization primitives offered in Linux Kernel.</p>
 
 <p>This blog is summary of this <a href="https://docs.google.com/file/d/0BySPJjyZBnC2UVYzWkdSLWNrdEE/edit?usp=sharing" target="_blank">article</a></p>
 
-<p><br /></p>
-<h3>Synchronization Primitives</h3>
+<h3 id="synchronization-primitives">Synchronization Primitives</h3>
 
 <ol>
   <li>Per-CPU variables</li>
@@ -36,6 +42,80 @@
   <li>Local softirq disabling</li>
   <li>Read-Copy-Update</li>
 </ol>
+
+<h3 id="summary-of-synchronization-primitives">Summary of Synchronization Primitives</h3>
+
+<table>
+<tr>
+<td>Technique</td><td>Description</td><td>Scope</td>
+</tr>
+<tr>
+<td>Per-CPU variables</td><td>Duplicate a data structure among the CPUs</td><td><code>All CPUs</code></td>
+</tr>
+<tr>
+<td>Atomic operation</td><td>Atomic read-modify-write instruction to a counter</td><td><code>All CPUs</code></td>
+</tr>
+<tr>
+<td>Memory barrier</td><td>Avoid instruction reordering</td><td><code>Local CPU or All CPUs</code></td>
+</tr>
+<tr>
+<td>Spin lock</td><td>Lock with busy wait</td><td><code>All CPUs</code></td>
+</tr>
+<tr>
+<td>Semaphore</td><td>Lock with blocking wait (sleep)</td><td><code>All CPUs</code></td>
+</tr>
+<tr>
+<td>Seqlocks</td><td>Lock based on an access counter</td><td><code>All CPUs</code></td>
+</tr>
+<tr>
+<td>Local interrupt disabling</td><td>Forbid interrupt handling on a single CPU</td><td>Local CPU</td>
+</tr>
+<tr>
+<td>Local softirq disabling</td><td>Forbid deferrable function handling on a single CPU</td><td>Local CPU</td>
+</tr>
+<tr>
+<td>Read-copy-update (RCU)</td><td>Lock-free access to shared data structures through pointers</td><td><code>All CPUs</code></td>
+</tr>
+</table>
+<p><br /></p>
+
+<h3 id="per-cpu-variables">Per-CPU variables</h3>
+
+<p>The best synchronization technique consists in designing the kernel so as to avoid
+the need for synchronization in the first place.</p>
+
+<p><code>Basically, a per-CPU variable is an array of data structures, one element per each CPU in the system.</code>
+A CPU should not access the elements of the array corresponding to the other CPUs.</p>
+
+<p><code>Pros</code></p>
+
+<ul>
+  <li>Freely read and modify its own element without fear of race conditions.<br /></li>
+  <li>It avoids cache line snooping and invalidations, which are costly operations.</li>
+</ul>
+
+<p><strong>[Snooping and Invalidations]</strong> Snooping is the process where the individual caches monitor address lines,  for accesses to memory locations that they have cached. When a write operation is observed to a location that a cache has a copy of, the cache controller invalidates its own copy of the snooped memory location.</p>
+
+<p><code>Cons</code>
+* It can only be used when it make sense to <code>logically split</code> the data across the CPUs of the system
+* Do not provide <code>protection</code> against access from asynchronous functions such as <code>interrupt handlers and deferrable functions.</code>
+* Per-CPU variables are variables are prone to <code>race conditions</code> caused by kernel preemption, both in uniprocessor and multiprocessor systems.</p>
+
+<p><strong>[Problem]</strong> What would happen if a kernel control path gets the address of its local copy of a per-CPU variable, and then it is preempted and moved to another CPU: the address still refers to the element of the previous CPU.</p>
+
+<p>As a general rule, a kernel control path should access a per-CPU variable with kernel preemption disabled.</p>
+
+<hr style="border-top: 1.5px dotted black" />
+<p><br /></p>
+
+<h3 id="atomic-operations">Atomic Operations</h3>
+
+<p><strong>[Problem]</strong> Several assembly language instructions are of type “read-modify-write” i.e. memory location is accessed twice first to read the old value and second time to write a new value</p>
+
+<p><strong>Detailed explanation</strong><br />
+Suppose that two kernel control paths running on two CPUs try to “read-modify-write” the same memory location at the same time by executing nonatomic operations.<br />
+At first, <code>both CPUs try to read the same location</code>, but the memory arbiter (a hardware circuit that serializes accesses to the RAM chips) steps in to grant access to one of them and delay the other. However, when the first read operation has completed, the delayed CPU reads exactly the same (old) value from the memory location.
+<code>Both CPUs then try to write the same (new) value to the memory location</code>; again, the bus memory access is serialized by the memory arbiter, and eventually both write operations succeed. However, the global result is incorrect because both CPUs write the same (new) value. Thus, the two interleaving “read-modify-write” operations act as a single one.</p>
 ]]></content>
   </entry>
   
