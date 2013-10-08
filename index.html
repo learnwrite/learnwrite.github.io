@@ -187,6 +187,111 @@ More formally there are three types of solution categories</p>
   <li>Concurrent programming construct</li>
 </ol>
 
+<h3>Algorithmic approach</h3>
+<p>The algorithmic approach to process synchronization does not use any assistance from the computer architecture or the OS kernel. Instead it uses an arrangement of logical conditions to satisfy the desired synchronization requirements. <a href="http://books.google.com/books/about/Operating_Systems.html?id=kbBn4X9x2mcC" target="_blank">[Dhamdhere]</a></p>
+
+<ul>
+  <li>Two process algorithms</li>
+  <li><a href="http://en.wikipedia.org/wiki/Dekker's_algorithm" target="_blank">Dekker’s Algorithm</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Peterson's_algorithm" target="_blank">Peterson’s Algorithm</a></li>
+  <li>n process algorithm</li>
+  <li><a href="http://en.wikipedia.org/wiki/Lamport's_bakery_algorithm" target="_blank">Bakery’s Algorithm</a></li>
+</ul>
+
+<h3>Software Primitives</h3>
+<p>A set of software primitives for mutual exclusion e.g Semaphore, Locks etc. were developed to overcome the logical complexity of algorithmic implementations. This is implemented using some special architectural features of computer systems. But, ease of use and correctness still remained the major obstacle in a development of large concurrent systems.</p>
+
+<h3>Semaphores</h3>
+<p>It is a shared integer variable with non-negative values that have Initialization, wait and signal as a indivisible operation.</p>
+
+<p>Semaphore Class</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="color:#080;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">Semaphore</span> {
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>    <span style="color:#606">public</span>:
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>        <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Constructor</span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>        Semaphore(char *debugName, int initialValue);
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>        <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Destructor</span>
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>        ~Semaphore();
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    <span style="color:#606">private</span>:
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>        int value;
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>        <span style="color:#036;font-weight:bold">List</span> *waitQueue;
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>        char *name;
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>};
+</pre></div>
+</div>
+</div>
+
+<p>Semaphore Constructor</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>Semaphore(char * debugName, int initialValue) {
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span>    name      = debugName;
+<span class="line-numbers"><a href="#n3" name="n3">3</a></span>    value     = initialValue;
+<span class="line-numbers"><a href="#n4" name="n4">4</a></span>    waitQueue = newList;
+<span class="line-numbers"><a href="#n5" name="n5">5</a></span>}
+</pre></div>
+</div>
+</div>
+
+<p>Semaphore Destructors</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>~Semaphore() {
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span>    delete waitQueue;
+<span class="line-numbers"><a href="#n3" name="n3">3</a></span>}
+</pre></div>
+</div>
+</div>
+
+<p>Semaphore Wait</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>P() - <span style="color:#036;font-weight:bold">Semaphore</span> <span style="color:#036;font-weight:bold">Wait</span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span style="color:#036;font-weight:bold">Semaphore</span>::P() {
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>    <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Disable</span> interrupts
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    <span style="color:#036;font-weight:bold">IntStatus</span> oldLevel = interrupt-&gt;SetLevel(<span style="color:#036;font-weight:bold">IntOff</span>);
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Semaphore</span> <span style="color:#080;font-weight:bold">not</span> available
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span style="color:#080;font-weight:bold">while</span> (value == <span style="color:#00D">0</span>) {
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>        waitQueue-&gt;Append((void *)currentThread);
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>        currentThread-&gt;Sleep();
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>    }
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Semaphore</span> now availble
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>    value--;
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>    (void)interrupt-&gt;SetLevel(oldLevel);
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>}
+</pre></div>
+</div>
+</div>
+
+<p>Semaphore Signal</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Semaphore</span> <span style="color:#036;font-weight:bold">Signal</span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span style="color:#036;font-weight:bold">Semaphore</span>::V() {
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>    <span style="color:#036;font-weight:bold">Thread</span> *thread;  
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    <span style="color:#036;font-weight:bold">IntStatus</span> oldLevel = interrupt-&gt;SetLevel(<span style="color:#036;font-weight:bold">IntOff</span>);
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Remove</span> first thread from wait queue
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    thread-&gt;(<span style="color:#036;font-weight:bold">Thread</span> *)waitQueue-&gt;Remove();
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>    <span style="color:#080;font-weight:bold">if</span> (thread != <span style="color:#036;font-weight:bold">NULL</span>) {
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>        scheduler-&gt;ReadyToRun(thread);  
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    }
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>    value++;
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>    (void)interrupt-&gt;SetLevel(oldLevel);
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>}
+</pre></div>
+</div>
+</div>
+
 <h3> </h3>
 
 <h3> </h3>
