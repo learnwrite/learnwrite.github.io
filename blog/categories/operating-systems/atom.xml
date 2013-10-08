@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: operating systems | Learnings]]></title>
+  <link href="http://learnwrite.github.io/blog/categories/operating-systems/atom.xml" rel="self"/>
+  <link href="http://learnwrite.github.io/"/>
+  <updated>2013-10-07T19:14:07-07:00</updated>
+  <id>http://learnwrite.github.io/</id>
+  <author>
+    <name><![CDATA[Vaibhav Gautam]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Process synchronization in OS]]></title>
+    <link href="http://learnwrite.github.io/blog/2013/10/07/process-synchronization-in-os/"/>
+    <updated>2013-10-07T11:54:00-07:00</updated>
+    <id>http://learnwrite.github.io/blog/2013/10/07/process-synchronization-in-os</id>
+    <content type="html"><![CDATA[<h3>What is a Process?</h3>
+<p>OS objective is to keep as many as of the computer resources as busy as possible. It is used to keep track of all the things an OS must remember about the state of user program.</p>
+
+<p>Process = Code + Allocated Resources + Book keeping information</p>
+
+<p>Process is like a box, a complete entity in itself which does a step by step task written in progam. More formally it is called program in execution.</p>
+
+<p>Lets consider a very basic operating system with very least complexity. This operating system can run only one process at a time. Since, only one process is working at a time, it may happen that all the resources occupied by process will not be used at the same time.</p>
+
+<p>To maximize the resource utilization, we need to have entities running at the same time. When its said multiple entities it is logical that either we need to have multiple process running at the same time or light weight multiple entities running inside process.</p>
+
+<p>Lets explore the second option, now consider process is like a box and it has resources inside the box. We create multiple child of process which is called thread.</p>
+
+<p>Thread is a child of process and hence it will use resource Process have. Theoretically, there is no limit on number of child threads a process can have but it seems logical that process should have enough resource for administrative purpose for these threads. </p>
+
+<p>Once there are multiple threads they are going to ask for same resource at the same time. For example, if two children are in one room then they will always fight for same toy. Same applies to threads.</p>
+
+<p><br /></p>
+<h3>3 Issues with Sharing </h3>
+<ol>
+  <li>How to Share data?</li>
+  <li>How to ensure threads in a process, executes on at a time?</li>
+  <li>How to ensure proper sequencing of events?</li>
+</ol>
+
+<p>To understand it better, lets take a real world example
+<br /><br /></p>
+<h3>Carl’s Jr. Restaurant</h3>
+<p>Process</p>
+
+<ol>
+  <li>Customer arrives</li>
+  <li>Employee takes order</li>
+  <li>Employee cooks food</li>
+  <li>Employee bag food</li>
+  <li>Employee takes money</li>
+  <li>Customer gets food and leaves</li>
+</ol>
+
+<p>If a single employee is doing steps from 1-6 then all other customers have to wait in line and its going to be long wait.
+Instead, lets have multiple employees for taking order, cook food, bag food, take money. Each of these ‘employees’ are multiple threads on Process ‘Restaurant’. Each thread is responsible for doing specialized task.</p>
+
+<p>Lets associate 3 issues in current situation</p>
+
+<ol>
+  <li>What is shared data? - In step 2-3, Quantity of food. In step 3-4, how much food to bag</li>
+  <li>Does sequence matters? -  Cook can’t cook food until order arrives. Employee can’t bag food until it is cooked. So, sequencing matters.</li>
+</ol>
+
+<p>Shared data can be distributed either using message passing or storing that data in global memory of process and each thread read from that memory location.</p>
+
+<p>The next logical question is, How to ensure threads in a process, executes on at a time?
+More formally there are three types of solution categories</p>
+
+<ol>
+  <li>Algorithmic approach</li>
+  <li>Software Primitives</li>
+  <li>Concurrent programming construct</li>
+</ol>
+
+<h3> </h3>
+
+<h3> </h3>
+
+<h3> </h3>
+]]></content>
+  </entry>
+  
+</feed>

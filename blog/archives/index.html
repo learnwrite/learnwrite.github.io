@@ -5,12 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Blog Archive - My Octopress Blog</title>
-  <meta name="author" content="Your Name">
+  <title>Blog Archive - Learnings</title>
+  <meta name="author" content="Vaibhav Gautam">
 
   
-  <meta name="description" content=" Blog Archive 2013 Test Post
-Oct 06 2013 Recent Posts Test Post ">
+  <meta name="description" content="Blog Archive 2013 Process synchronization in OS
+Oct 07 2013 posted in operating systems, os GDB - Print Bit values of bytes
+Oct 06 2013 posted in &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -26,7 +27,7 @@ Oct 06 2013 Recent Posts Test Post ">
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="/javascripts/ender.js"></script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
+  <link href="/atom.xml" rel="alternate" title="Learnings" type="application/atom+xml">
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
@@ -111,8 +112,26 @@ Oct 06 2013 Recent Posts Test Post ">
 
 <article>
   
-<h1><a href="/blog/2013/10/06/test-post/">Test Post</a></h1>
-<time datetime="2013-10-06T02:48:00-07:00" pubdate><span class='month'>Oct</span> <span class='day'>06</span> <span class='year'>2013</span></time>
+<h1><a href="/blog/2013/10/07/process-synchronization-in-os/">Process synchronization in OS</a></h1>
+<time datetime="2013-10-07T11:54:00-07:00" pubdate><span class='month'>Oct</span> <span class='day'>07</span> <span class='year'>2013</span></time>
+
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/operating-systems/'>operating systems</a>, <a class='category' href='/blog/categories/os/'>os</a></span>
+</footer>
+
+
+</article>
+
+
+
+<article>
+  
+<h1><a href="/blog/2013/10/06/gdb-print-bit-values-of-bytes/">GDB - Print Bit values of bytes</a></h1>
+<time datetime="2013-10-06T21:06:00-07:00" pubdate><span class='month'>Oct</span> <span class='day'>06</span> <span class='year'>2013</span></time>
+
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/gdb/'>gdb</a></span>
+</footer>
 
 
 </article>
@@ -127,19 +146,71 @@ Oct 06 2013 Recent Posts Test Post ">
 <aside class="sidebar">
   
     <section>
+  <ul id="recent_posts">
+      <li class="post">
+      <a href="http://learnwrite.github.io" alt="Home"><img src="/images/Home.png"></a>
+      <a href="http://learnwrite.github.io/archives/" alt="Archives"><img src="/images/Calendar.png"></a>
+      
+      <a href="http://learnwrite.github.io/atom.xml" alt="subscribe feed"><img src="/images/rss.png"></a>
+      </li>
+  </ul>
+</section>
+<section>
+  <h1>About Me</h1>
+  <p><img src="/images/linked-in.png"><a href="http://www.linkedin.com/pub/vaibhav-gautam/11/663/163">Vaibhav Gautam</a></p>
+</section>
+<section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2013/10/06/test-post/">Test Post</a>
+        <a href="/blog/2013/10/07/process-synchronization-in-os/">Process synchronization in OS</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/06/gdb-print-bit-values-of-bytes/">GDB - Print Bit values of bytes</a>
       </li>
     
   </ul>
 </section>
 
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/learnwrite">@learnwrite</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'learnwrite',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
 
 
 
+
+<section>
+<h1>Twitter</h1>
+<a class="twitter-timeline" href="https://twitter.com/_vaibhavg" data-widget-id="386954016019587072">Tweets by @_vaibhavg</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</section>
 
   
 </aside>
@@ -148,16 +219,46 @@ Oct 06 2013 Recent Posts Test Post ">
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - Your Name -
+  Copyright &copy; 2013 - <a href="http://www.linkedin.com/pub/vaibhav-gautam/11/663/163">Vaibhav Gautam</a> -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
 </footer>
   
 
+<script type="text/javascript">
+      var disqus_shortname = 'coolgoose85';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
 
 
 
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
 
 
 

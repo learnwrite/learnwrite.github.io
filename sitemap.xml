@@ -1,35 +1,27 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
-        <loc>http://learnwrite.github.io/blog/2013/10/06/test-post/</loc>
-        <lastmod>2013-10-06T05:32:26-07:00</lastmod>
+        <loc>http://learnwrite.github.io/blog/2013/10/06/gdb-print-bit-values-of-bytes/</loc>
+        <lastmod>2013-10-07T00:34:30-07:00</lastmod>
+    </url>
+    <url>
+        <loc>http://learnwrite.github.io/blog/2013/10/07/process-synchronization-in-os/</loc>
+        <lastmod>2013-10-07T12:22:38-07:00</lastmod>
     </url>
     <url>
         <loc>http://learnwrite.github.io/archives/</loc>
-        <lastmod>2013-10-06T05:32:26-07:00</lastmod>
+        <lastmod>2013-10-07T12:22:38-07:00</lastmod>
     </url>
     <url>
         <loc>http://learnwrite.github.io/blog/archives/</loc>
-        <lastmod>2013-10-06T05:32:26-07:00</lastmod>
+        <lastmod>2013-10-07T12:22:38-07:00</lastmod>
     </url>
     <url>
         <loc>http://learnwrite.github.io/</loc>
-        <lastmod>2013-10-06T05:32:26-07:00</lastmod>
-    </url>
-    <url>
-        <loc>http://learnwrite.github.io/my-test-page/</loc>
-        <lastmod>2013-10-06T05:32:26-07:00</lastmod>
-    </url>
-    <url>
-        <loc>http://learnwrite.github.io/page.html</loc>
-        <lastmod>2013-10-06T05:32:26-07:00</lastmod>
+        <lastmod>2013-10-07T12:22:38-07:00</lastmod>
     </url>
     <url>
         <loc>http://learnwrite.github.io/robots.txt</loc>
         <lastmod>2013-10-06T02:38:20-07:00</lastmod>
-    </url>
-    <url>
-        <loc>http://learnwrite.github.io/test-page.html</loc>
-        <lastmod>2013-10-06T05:32:26-07:00</lastmod>
     </url>
 </urlset>
