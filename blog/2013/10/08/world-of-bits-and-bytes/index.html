@@ -1,24 +1,129 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: binary | Learnings]]></title>
-  <link href="http://learnwrite.github.io/blog/categories/binary/atom.xml" rel="self"/>
-  <link href="http://learnwrite.github.io/"/>
-  <updated>2013-10-08T13:44:08-07:00</updated>
-  <id>http://learnwrite.github.io/</id>
-  <author>
-    <name><![CDATA[Vaibhav Gautam]]></name>
-    
-  </author>
-  <generator uri="http://octopress.org/">Octopress</generator>
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>World of Bits and Bytes - Learnings</title>
+  <meta name="author" content="Vaibhav Gautam">
 
   
-  <entry>
-    <title type="html"><![CDATA[World of Bits and Bytes]]></title>
-    <link href="http://learnwrite.github.io/blog/2013/10/08/world-of-bits-and-bytes/"/>
-    <updated>2013-10-08T13:17:00-07:00</updated>
-    <id>http://learnwrite.github.io/blog/2013/10/08/world-of-bits-and-bytes</id>
-    <content type="html"><![CDATA[<ul id="markdown-toc">
+  <meta name="description" content="Basics Bitwise Operators Bit Fields Problems How set a single bit in a byte? How to unset single bit in a byte? One function to set and unset Unset &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://learnwrite.github.io/blog/2013/10/08/world-of-bits-and-bytes/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Learnings" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$$','$$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript"
+   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+</hgroup>
+
+</header>
+  <!-- <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:learnwrite.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav> -->
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">World of Bits and Bytes</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-08T13:17:00-07:00" pubdate data-updated="true">Oct 8<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><ul id="markdown-toc">
   <li><a href="#basics">Basics</a></li>
   <li><a href="#bitwise-operators">Bitwise Operators</a></li>
   <li><a href="#bit-fields">Bit Fields</a></li>
@@ -354,114 +459,216 @@ I started realizing that after all it’s not that easy to actually think and wr
   <li><a href="http://graphics.stanford.edu/~seander/bithacks.html" target="_blank">Stanford</a></li>
   <li><a href="http://stackoverflow.com/questions/1167956/resources-to-learn-bitwise-programming" target="_blank">Stackoverflow</a></li>
 </ul>
-]]></content>
-  </entry>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
   
-  <entry>
-    <title type="html"><![CDATA[Binary number operations]]></title>
-    <link href="http://learnwrite.github.io/blog/2013/10/08/binary-number-operations/"/>
-    <updated>2013-10-08T12:47:00-07:00</updated>
-    <id>http://learnwrite.github.io/blog/2013/10/08/binary-number-operations</id>
-    <content type="html"><![CDATA[<ul id="markdown-toc">
-  <li><a href="#addition">Addition</a></li>
-  <li><a href="#subtraction">Subtraction</a></li>
-  <li><a href="#multiplication">Multiplication</a></li>
-  <li><a href="#negative-binary-numbers">Negative Binary numbers</a></li>
-  <li><a href="#credits">Credits</a></li>
-</ul>
 
-<h3 id="addition">Addition</h3>
+<span class="byline author vcard">Posted by <span class="fn">Vaibhav Gautam</span></span>
 
-<div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="color:#00D">0</span> + <span style="color:#00D">0</span> → <span style="color:#00D">0</span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span style="color:#00D">0</span> + <span style="color:#00D">1</span> → <span style="color:#00D">1</span>
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span style="color:#00D">1</span> + <span style="color:#00D">0</span> → <span style="color:#00D">1</span>
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span style="color:#00D">1</span> + <span style="color:#00D">1</span> → <span style="color:#00D">0</span>, carry <span style="color:#00D">1</span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span> <span style="color:#036;font-weight:bold">For</span> e.g
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span>    (carried digits)
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>      <span style="color:#00D">0</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span>
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>+     <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span>
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>    -------------
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>=   <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> = <span style="color:#00D">36</span>
-</pre></div>
-</div>
-</div>
+      
 
-<p><br /></p>
 
-<h3 id="subtraction">Subtraction</h3>
 
-<div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="color:#00D">0</span> − <span style="color:#00D">0</span> → <span style="color:#00D">0</span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span style="color:#00D">0</span> − <span style="color:#00D">1</span> → <span style="color:#00D">1</span>, borrow <span style="color:#00D">1</span>
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span style="color:#00D">1</span> − <span style="color:#00D">0</span> → <span style="color:#00D">1</span>
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span style="color:#00D">1</span> − <span style="color:#00D">1</span> → <span style="color:#00D">0</span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span style="color:#036;font-weight:bold">Subtracting</span> <span style="color:#00D">1</span> digit from <span style="color:#00D">0</span> digit produces the digit <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">1</span><span style="color:#710">&quot;</span></span>, <span style="color:#080;font-weight:bold">while</span>
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span><span style="color:#00D">1</span> will have to be subtracted from the <span style="color:#080;font-weight:bold">next</span> column. This is known as
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>borrowing.
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>      *   * * *   (starred columns are borrowed from)
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>      <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">0</span>
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>−         <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span>
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span>        ----------------
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span>=     <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span>
-</pre></div>
-</div>
-</div>
 
-<p><br /></p>
 
-<h3 id="multiplication">Multiplication</h3>
 
-<div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>        <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span>   (<span style="color:#036;font-weight:bold">A</span>)
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>      × <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span> <span style="color:#00D">0</span>   (<span style="color:#036;font-weight:bold">B</span>)
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>       ---------
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>        <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span>   ← <span style="color:#036;font-weight:bold">Corresponds</span> to the rightmost <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zero</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">in</span> <span style="color:#036;font-weight:bold">B</span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>+     <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span>     ← <span style="color:#036;font-weight:bold">Corresponds</span> to the <span style="color:#080;font-weight:bold">next</span> <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">one</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">in</span> <span style="color:#036;font-weight:bold">B</span>
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>+   <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span>
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>+ <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span>
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>  ---------------
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>= <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">0</span>
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span><span style="color:#036;font-weight:bold">Binary</span> <span style="color:#036;font-weight:bold">Multiplication</span> <span style="color:#080;font-weight:bold">for</span> binary point
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>                <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span> . <span style="color:#F00;background-color:#FAA">1</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span>       <span style="color:#036;font-weight:bold">A</span> (<span style="color:#60E">5.625</span> <span style="color:#080;font-weight:bold">in</span> decimal)
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span>                × <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">0</span> . <span style="color:#F00;background-color:#FAA">0</span> <span style="color:#00D">1</span>       <span style="color:#036;font-weight:bold">B</span> (<span style="color:#60E">6.25</span>  <span style="color:#080;font-weight:bold">in</span> decimal)
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span>           -------------------
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span>                  <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span>    ← <span style="color:#036;font-weight:bold">Corresponds</span> to a <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">one</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">in</span> <span style="color:#036;font-weight:bold">B</span>
-<span class="line-numbers"><a href="#n16" name="n16">16</a></span>    +           <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span>      ← <span style="color:#036;font-weight:bold">Corresponds</span> to a <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zero</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">in</span> <span style="color:#036;font-weight:bold">B</span>
-<span class="line-numbers"><a href="#n17" name="n17">17</a></span>    +         <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span>
-<span class="line-numbers"><a href="#n18" name="n18">18</a></span>    +       <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span>
-<span class="line-numbers"><a href="#n19" name="n19">19</a></span>    +     <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span>
-<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>    ---------------------------
-<span class="line-numbers"><a href="#n21" name="n21">21</a></span>    = <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> . <span style="color:#F00;background-color:#FAA">0</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span>  (<span style="color:#60E">35.15625</span> <span style="color:#080;font-weight:bold">in</span> decimal)
-</pre></div>
-</div>
-</div>
 
-<p><br /></p>
 
-<h3 id="negative-binary-numbers">Negative Binary numbers</h3>
-
-<p>How can we represent a negative number? We cannot use a ‘-‘ sign because all we can store in the computer is zeros and ones.</p>
-
-<p>There are three methods</p>
-
-<ol>
-  <li>Signed Magnitude</li>
-  <li>1’s Complement</li>
-  <li>2’s complement</li>
-</ol>
-
-<p><a href="https://docs.google.com/file/d/0BySPJjyZBnC2VDhrMkFMX2FYWW8/edit?usp=sharing”%20target=“_blank">Full text</a> about binary number operations.</p>
-
-<h3 id="credits">Credits</h3>
-
-<p><a href="http://turing.cs.camosun.bc.ca/COMP166/resources/binary.html">CS Camosun</a></p>
-]]></content>
-  </entry>
   
-</feed>
+
+
+<time datetime="2013-10-08T13:17:00-07:00" pubdate data-updated="true">Oct 8<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/binary/'>binary</a>, <a class='category' href='/blog/categories/bits/'>bits</a>, <a class='category' href='/blog/categories/bytes/'>bytes</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://learnwrite.github.io/blog/2013/10/08/world-of-bits-and-bytes/" data-via="_vaibhavg" data-counturl="http://learnwrite.github.io/blog/2013/10/08/world-of-bits-and-bytes/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/10/08/binary-number-operations/" title="Previous Post: Binary number operations">&laquo; Binary number operations</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <ul id="recent_posts">
+      <li class="post">
+      <a href="http://learnwrite.github.io" alt="Home"><img src="/images/Home.png"></a>
+      <a href="http://learnwrite.github.io/archives/" alt="Archives"><img src="/images/Calendar.png"></a>
+      
+      </li>
+  </ul>
+</section>
+<section>
+  <h1>About Me</h1>
+  <p><img src="/images/linked-in.png"><a href="http://www.linkedin.com/pub/vaibhav-gautam/11/663/163">Vaibhav Gautam</a></p>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/learnwrite">@learnwrite</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'learnwrite',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/10/08/world-of-bits-and-bytes/">World of Bits and Bytes</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/08/binary-number-operations/">Binary number operations</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/07/process-synchronization-in-linux-kernel/">Process synchronization in Linux Kernel</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/07/process-synchronization-in-os/">Process synchronization in OS</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/06/gdb-print-bit-values-of-bytes/">GDB - Print Bit values of bytes</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+<section>
+<h1>Twitter</h1>
+<a class="twitter-timeline" href="https://twitter.com/_vaibhavg" data-widget-id="386954016019587072">Tweets by @_vaibhavg</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - <a href="http://www.linkedin.com/pub/vaibhav-gautam/11/663/163">Vaibhav Gautam</a> -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'coolgoose85';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://learnwrite.github.io/blog/2013/10/08/world-of-bits-and-bytes/';
+        var disqus_url = 'http://learnwrite.github.io/blog/2013/10/08/world-of-bits-and-bytes/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
