@@ -4,7 +4,7 @@
   <title><![CDATA[Category: kernel | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/kernel/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2013-10-08T23:22:08-07:00</updated>
+  <updated>2013-10-09T16:23:01-07:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -58,31 +58,31 @@
 <td>Technique</td><td>Description</td><td>Scope</td>
 </tr>
 <tr>
-<td>Per-CPU variables</td><td>Duplicate a data structure among the CPUs</td><td><code>All CPUs</code></td>
+<td>Per-CPU variables</td><td>Duplicate a data structure among the CPUs</td><td><code class="mygreen">All CPUs</code></td>
 </tr>
 <tr>
-<td>Atomic operation</td><td>Atomic read-modify-write instruction to a counter</td><td><code>All CPUs</code></td>
+<td>Atomic operation</td><td>Atomic read-modify-write instruction to a counter</td><td><code class="mygreen">All CPUs</code></td>
 </tr>
 <tr>
-<td>Memory barrier</td><td>Avoid instruction reordering</td><td><code>Local CPU or All CPUs</code></td>
+<td>Memory barrier</td><td>Avoid instruction reordering</td><td><code class="myyellow">Local CPU</code><code class="mygreen"> or All CPUs</code></td>
 </tr>
 <tr>
-<td>Spin lock</td><td>Lock with busy wait</td><td><code>All CPUs</code></td>
+<td>Spin lock</td><td>Lock with busy wait</td><td><code class="mygreen">All CPUs</code></td>
 </tr>
 <tr>
-<td>Semaphore</td><td>Lock with blocking wait (sleep)</td><td><code>All CPUs</code></td>
+<td>Semaphore</td><td>Lock with blocking wait (sleep)</td><td><code class="mygreen">All CPUs</code></td>
 </tr>
 <tr>
-<td>Seqlocks</td><td>Lock based on an access counter</td><td><code>All CPUs</code></td>
+<td>Seqlocks</td><td>Lock based on an access counter</td><td><code class="mygreen">All CPUs</code></td>
 </tr>
 <tr>
-<td>Local interrupt disabling</td><td>Forbid interrupt handling on a single CPU</td><td>Local CPU</td>
+<td>Local interrupt disabling</td><td>Forbid interrupt handling on a single CPU</td><td><code class="myyellow">Local CPU</code></td>
 </tr>
 <tr>
-<td>Local softirq disabling</td><td>Forbid deferrable function handling on a single CPU</td><td>Local CPU</td>
+<td>Local softirq disabling</td><td>Forbid deferrable function handling on a single CPU</td><td><code class="myyellow">Local CPU</code></td>
 </tr>
 <tr>
-<td>Read-copy-update (RCU)</td><td>Lock-free access to shared data structures through pointers</td><td><code>All CPUs</code></td>
+<td>Read-copy-update (RCU)</td><td>Lock-free access to shared data structures through pointers</td><td><code class="mygreen">All CPUs</code></td>
 </tr>
 </table>
 <p><br /></p>
