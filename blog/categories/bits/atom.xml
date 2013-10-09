@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: bits | Learnings]]></title>
+  <link href="http://learnwrite.github.io/blog/categories/bits/atom.xml" rel="self"/>
+  <link href="http://learnwrite.github.io/"/>
+  <updated>2013-10-08T13:49:15-07:00</updated>
+  <id>http://learnwrite.github.io/</id>
+  <author>
+    <name><![CDATA[Vaibhav Gautam]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[World of Bits and Bytes]]></title>
+    <link href="http://learnwrite.github.io/blog/2013/10/08/world-of-bits-and-bytes/"/>
+    <updated>2013-10-08T13:17:00-07:00</updated>
+    <id>http://learnwrite.github.io/blog/2013/10/08/world-of-bits-and-bytes</id>
+    <content type="html"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#basics">Basics</a></li>
+  <li><a href="#bitwise-operators">Bitwise Operators</a></li>
+  <li><a href="#bit-fields">Bit Fields</a></li>
+  <li><a href="#problems">Problems</a>    <ul>
+      <li><a href="#how-set-a-single-bit-in-a-byte">How set a single bit in a byte?</a></li>
+      <li><a href="#how-to-unset-single-bit-in-a-byte">How to unset single bit in a byte?</a></li>
+      <li><a href="#one-function-to-set-and-unset">One function to set and unset</a></li>
+      <li><a href="#unset-range-of-bits">Unset range of bits</a></li>
+      <li><a href="#set-range-of-bits">Set range of bits</a></li>
+    </ul>
+  </li>
+  <li><a href="#recomended-readings">Recomended readings</a></li>
+</ul>
+
+<p>Recently, I have realized that no matter how much C, C++ or other high level languages you know it all comes down to bit and bytes view of program.<br />
+I started realizing that after all it’s not that easy to actually think and write in bit/byte manipulation. This is my attempt to learn and be more comfortable about thinking in bit/bytes.</p>
+
+<h3 id="basics">Basics</h3>
+
+<p>Introduction <a href="http://www.codeproject.com/Articles/2247/An-introduction-to-bitwise-operators" target="_blank">here</a>
+<br /><br /></p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span> <span style="color:#00D">0</span> <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>||              |               |               |              ||
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>|+- bit <span style="color:#00D">31</span>      |               |               |       bit <span style="color:#00D">0</span> -+|
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>|               |               |               |               |
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>+-- <span style="color:#036;font-weight:bold">BYTE</span> <span style="color:#00D">3</span> -----+--- <span style="color:#036;font-weight:bold">BYTE</span> <span style="color:#00D">2</span> ----+--- <span style="color:#036;font-weight:bold">BYTE</span> <span style="color:#00D">1</span> ----+-- <span style="color:#036;font-weight:bold">BYTE</span> <span style="color:#00D">0</span> -----+
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>|                               |                               |
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>+----------- <span style="color:#036;font-weight:bold">WORD</span> <span style="color:#00D">1</span> ------------+----------- <span style="color:#036;font-weight:bold">WORD</span> <span style="color:#00D">0</span> ------------+
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>|                                                               |
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>+--------------------------- <span style="color:#036;font-weight:bold">DWORD</span> -----------------------------+
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span><span style="color:#036;font-weight:bold">Hexadecimal</span> <span style="color:#036;font-weight:bold">Numbers</span>
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span><span style="color:#00D">0</span> <span style="color:#00D">1</span> <span style="color:#00D">2</span> <span style="color:#00D">3</span> <span style="color:#00D">4</span> <span style="color:#00D">5</span> <span style="color:#00D">6</span> <span style="color:#00D">7</span> <span style="color:#00D">8</span> <span style="color:#00D">9</span> <span style="color:#036;font-weight:bold">A</span> <span style="color:#036;font-weight:bold">B</span> <span style="color:#036;font-weight:bold">C</span> <span style="color:#036;font-weight:bold">D</span> <span style="color:#036;font-weight:bold">E</span> <span style="color:#036;font-weight:bold">F</span>
+</pre></div>
+</div>
+</div>
+
+<p><br /></p>
+
+<h3 id="bitwise-operators">Bitwise Operators</h3>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="color:#036;font-weight:bold">The</span> &amp; operator (<span style="color:#036;font-weight:bold">AND</span>)
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span style="color:#00D">1</span>   &amp;   <span style="color:#00D">1</span>   ==   <span style="color:#00D">1</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span style="color:#00D">1</span>   &amp;   <span style="color:#00D">0</span>   ==   <span style="color:#00D">0</span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span style="color:#00D">0</span>   &amp;   <span style="color:#00D">1</span>   ==   <span style="color:#00D">0</span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span style="color:#00D">0</span>   &amp;   <span style="color:#00D">0</span>   ==   <span style="color:#00D">0</span>
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span><span style="color:#036;font-weight:bold">The</span> | operator (<span style="color:#036;font-weight:bold">OR</span>)
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span style="color:#00D">1</span>   |   <span style="color:#00D">1</span>   ==   <span style="color:#00D">1</span>
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span><span style="color:#00D">1</span>   |   <span style="color:#00D">0</span>   ==   <span style="color:#00D">1</span>
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span><span style="color:#00D">0</span>   |   <span style="color:#00D">1</span>   ==   <span style="color:#00D">1</span>
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span><span style="color:#00D">0</span>   |   <span style="color:#00D">0</span>   ==   <span style="color:#00D">0</span>
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span><span style="color:#036;font-weight:bold">The</span> ^ operator (<span style="color:#036;font-weight:bold">XOR</span>)
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span><span style="color:#00D">1</span>   ^   <span style="color:#00D">1</span>   ==   <span style="color:#00D">0</span>
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span><span style="color:#00D">1</span>   ^   <span style="color:#00D">0</span>   ==   <span style="color:#00D">1</span>
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span><span style="color:#00D">0</span>   ^   <span style="color:#00D">1</span>   ==   <span style="color:#00D">1</span>
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span><span style="color:#00D">0</span>   ^   <span style="color:#00D">0</span>   ==   <span style="color:#00D">0</span>
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span><span style="color:#036;font-weight:bold">The</span> ~ operator
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span><span style="color:#036;font-weight:bold">The</span> ~ (<span style="color:#036;font-weight:bold">Ones</span> <span style="color:#036;font-weight:bold">Complement</span> <span style="color:#080;font-weight:bold">or</span> inversion) operator acts only on one value
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span><span style="color:#080;font-weight:bold">and</span> it inverts it.
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span>
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span>The &gt;&gt; (<span style="color:#036;font-weight:bold">Right</span> <span style="color:#036;font-weight:bold">Shift</span>)
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span><span style="color:#00D">00001100</span>  - b 
+<span class="line-numbers"><a href="#n25" name="n25">25</a></span><span style="color:#00D">00110000</span>  - b &lt;&lt; <span style="color:#00D">2</span>
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span>
+<span class="line-numbers"><a href="#n27" name="n27">27</a></span><span style="color:#036;font-weight:bold">The</span> &lt;&lt; (<span style="color:#036;font-weight:bold">Left</span> <span style="color:#036;font-weight:bold">Shift</span>)
+<span class="line-numbers"><a href="#n28" name="n28">28</a></span><span style="color:#00D">00001100</span>  - b
+<span class="line-numbers"><a href="#n29" name="n29">29</a></span><span style="color:#00D">00000011</span>  - b &gt;&gt; <span style="color:#00D">2</span>
+<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>
+<span class="line-numbers"><a href="#n31" name="n31">31</a></span><span style="color:#036;font-weight:bold">Another</span> example is
+<span class="line-numbers"><a href="#n32" name="n32">32</a></span><span style="color:#00D">1</span>&lt;&lt;<span style="color:#00D">4</span>; <span style="color:#00D">0001</span> <span style="color:#00D">0000</span>
+</pre></div>
+</div>
+</div>
+
+<p><br /></p>
+
+<h3 id="bit-fields">Bit Fields</h3>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>struct date-struct {
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>    <span style="color:#036;font-weight:bold">BYTE</span> day   : <span style="color:#00D">5</span>,   <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span> <span style="color:#00D">1</span> to <span style="color:#00D">31</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>         month : <span style="color:#00D">4</span>,   <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span> <span style="color:#00D">1</span> to <span style="color:#00D">12</span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>         year  : <span style="color:#00D">14</span>;  <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span> <span style="color:#00D">0</span> to <span style="color:#00D">9999</span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>} date
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>|<span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span>|<span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span>|<span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span>|
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>  |                           |       |         |
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>  +------ year ---------------+ month +-- day --+
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>date.day = <span style="color:#00D">12</span>;
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>dateptr = &amp;date;
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>dateptr-&gt;year = <span style="color:#00D">1852</span>;
+</pre></div>
+</div>
+</div>
+
+<p><a href="http://learnwrite.github.io/blog/2013/10/08/binary-number-operations/">Basics of Binary Arithmetic</a></p>
+
+<p><br /></p>
+
+<h3 id="problems">Problems</h3>
+
+<h4 id="how-set-a-single-bit-in-a-byte">How set a single bit in a byte?</h4>
+
+<p>For e.g In byte 0000 1000 set bit no 6 will produce 0100 1000<br />
+(Remember bit number starts with 0-7)</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">For</span> problems where certain bit values needs to be changed, first we
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span><span style="color:#C2C">nee</span></span>d to create a bit mask.
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>//<span style="color:#036;font-weight:bold">Bit</span> mask is a temporary variable with some value. Using this value
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>we will access <span style="color:#080;font-weight:bold">and</span> change specific bits <span style="color:#080;font-weight:bold">in</span> a byte of data.
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>//<span style="color:#036;font-weight:bold">For</span> e.g.
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>//<span style="color:#036;font-weight:bold">To</span> set <span style="color:#00D">6</span>th bit <span style="color:#080;font-weight:bold">in</span> a byte <span style="color:#00D">0000</span> <span style="color:#00D">1000</span>
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">We</span> have             <span style="color:#036;font-weight:bold">MASK</span> <span style="color:#00D">0100</span> <span style="color:#00D">0000</span>  (<span style="color:#036;font-weight:bold">OR</span>)
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>                    ——————————————
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>                         <span style="color:#00D">0100</span> <span style="color:#00D">1000</span>
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">To</span> turn on certain bit <span style="color:#080;font-weight:bold">in</span> a byte (<span style="color:#036;font-weight:bold">OR</span>) is used.
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>int set-bit(int val, int num, bool bitval)
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>{
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>    <span style="color:#080;font-weight:bold">return</span> (val | (bitval &lt;&lt; num));
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>}
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Here</span>, val    = <span style="color:#00D">0000</span> <span style="color:#00D">1000</span> = <span style="color:#00D">8</span>
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>      num    = <span style="color:#00D">6</span> (set <span style="color:#00D">6</span>th bit)
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>      bitval = <span style="color:#00D">1</span> (set to <span style="color:#00D">1</span>)
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>      <span style="color:#00D">0000</span> <span style="color:#00D">1000</span>
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>(<span style="color:#036;font-weight:bold">OR</span>)  <span style="color:#00D">0100</span> <span style="color:#00D">0000</span>  (<span style="color:#00D">1</span> &lt;&lt; <span style="color:#00D">6</span>)
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>      ————————-
+<span class="line-numbers"><a href="#n25" name="n25">25</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>      <span style="color:#00D">0100</span> <span style="color:#00D">0000</span>
+</pre></div>
+</div>
+</div>
+
+<p><br /></p>
+
+<h4 id="how-to-unset-single-bit-in-a-byte">How to unset single bit in a byte?</h4>
+
+<p>For e.g In byte 0100 1000 unset bit no 6 will produce 0000 1000<br />
+(Remember bit number starts with 0-7)</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">To</span> unset specific bit we will use (<span style="color:#036;font-weight:bold">AND</span>) operation.
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>//<span style="color:#036;font-weight:bold">Mask</span> value need to be ‘0’ <span style="color:#080;font-weight:bold">for</span> the bit to unset but rest of the bits
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span><span style="color:#C2C">nee</span></span>d to ‘1’. The reason <span style="color:#080;font-weight:bold">for</span> rest of the bits to set as ‘1’ is as
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>we are doing (<span style="color:#036;font-weight:bold">AND</span>), we don’t want to unset other bits which are
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>already set.
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>//
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">For</span> e.g.
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>//<span style="color:#036;font-weight:bold">To</span> unset <span style="color:#00D">6</span>th bit <span style="color:#00D">0100</span> <span style="color:#00D">1000</span>
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>            <span style="color:#036;font-weight:bold">MASK</span> <span style="color:#00D">1011</span> <span style="color:#00D">1111</span> (<span style="color:#036;font-weight:bold">AND</span>)
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>                ——————————-
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>                 <span style="color:#00D">0000</span> <span style="color:#00D">1000</span>   (<span style="color:#036;font-weight:bold">Result</span>)
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>int unset-bit(int val, int num, bool bitval)
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>{
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>    <span style="color:#080;font-weight:bold">return</span> (val &amp; ~(bitval &lt;&lt; num));
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>}
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Here</span>, val    = <span style="color:#00D">0100</span> <span style="color:#00D">1000</span>
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>      num    = <span style="color:#00D">6</span>
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>      bitval = <span style="color:#00D">0</span>
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>      (bitval &lt;&lt; num) = <span style="color:#00D">0100</span> <span style="color:#00D">0000</span>
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>     ~(bitval &lt;&lt; num) = <span style="color:#00D">1011</span> <span style="color:#00D">1111</span>
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>      <span style="color:#00D">0100</span> <span style="color:#00D">1000</span>
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>      <span style="color:#00D">1011</span> <span style="color:#00D">1111</span> (<span style="color:#036;font-weight:bold">AND</span>)
+<span class="line-numbers"><a href="#n25" name="n25">25</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>      —————————-
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>      <span style="color:#00D">0000</span> <span style="color:#00D">1000</span>    (<span style="color:#036;font-weight:bold">Result</span>)
+</pre></div>
+</div>
+</div>
+
+<p><br /></p>
+
+<h4 id="one-function-to-set-and-unset">One function to set and unset</h4>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>int change-bit(int val, int num, bool bitval)
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span>{
+<span class="line-numbers"><a href="#n3" name="n3">3</a></span>    <span style="color:#080;font-weight:bold">return</span> (((val &amp; ~(bitval &lt;&lt; num)) | (bitval &lt;&lt; num));
+<span class="line-numbers"><a href="#n4" name="n4">4</a></span>}
+</pre></div>
+</div>
+</div>
+
+<p><br /></p>
+
+<h4 id="unset-range-of-bits">Unset range of bits</h4>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Unset</span> range of bits
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">For</span> e.g. <span style="color:#F00;background-color:#FAA">1001</span> <span style="color:#00D">1001</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Unset</span> bits from <span style="color:#00D">2</span> to <span style="color:#00D">5</span> i.e. <span style="color:#F00;background-color:#FAA">1</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span> =&gt; <span style="color:#00D">10</span> <span style="color:#00D">0000</span> <span style="color:#00D">01</span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>                               |- - - -| 
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>                      <span style="color:#036;font-weight:bold">Bits</span>  <span style="color:#00D">7</span> <span style="color:#00D">6</span> <span style="color:#00D">5</span> <span style="color:#00D">4</span> <span style="color:#00D">3</span> <span style="color:#00D">2</span> <span style="color:#00D">1</span> <span style="color:#00D">0</span>          
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Step1</span>
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>------
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">To</span> unset range of bits we need to create <span style="color:#036;font-weight:bold">MASK</span>
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span> val  = <span style="color:#00D">1001</span> <span style="color:#00D">1001</span>
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span> <span style="color:#036;font-weight:bold">Mask</span> = <span style="color:#00D">1100</span> <span style="color:#00D">0011</span> (<span style="color:#036;font-weight:bold">AND</span>)
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>      _____________
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>        <span style="color:#00D">1000</span> <span style="color:#00D">0001</span>
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Step</span> <span style="color:#00D">2</span>
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>-------
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">We</span> need to construct <span style="color:#036;font-weight:bold">MASK</span>
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">In</span> <span style="color:#036;font-weight:bold">MASK</span>, bits <span style="color:#080;font-weight:bold">in</span> range are <span style="color:#00D">0</span> i.e. bits from <span style="color:#00D">2</span>-<span style="color:#00D">5</span> is <span style="color:#00D">0</span> <span style="color:#080;font-weight:bold">and</span>
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>rest of the bits are <span style="color:#00D">1</span>
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span> <span style="color:#036;font-weight:bold">MASK</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span>
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>         |- - - -|
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span> <span style="color:#036;font-weight:bold">Bits</span> <span style="color:#00D">7</span> <span style="color:#00D">6</span> <span style="color:#00D">5</span> <span style="color:#00D">4</span> <span style="color:#00D">3</span> <span style="color:#00D">2</span> <span style="color:#00D">1</span> <span style="color:#00D">0</span>
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Step</span> <span style="color:#00D">3</span>
+<span class="line-numbers"><a href="#n25" name="n25">25</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>-------
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span>  <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span>  ((<span style="color:#00D">1</span> &lt;&lt; <span style="color:#00D">5</span>) - <span style="color:#00D">1</span>) i.e. (<span style="color:#00D">1</span> &lt;&lt; j) - <span style="color:#00D">1</span>
+<span class="line-numbers"><a href="#n27" name="n27">27</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>
+<span class="line-numbers"><a href="#n28" name="n28">28</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">MAX</span>  <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span>  <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span>
+<span class="line-numbers"><a href="#n29" name="n29">29</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>     <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span>  <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span>  (-)
+<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>    ------------------
+<span class="line-numbers"><a href="#n31" name="n31">31</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>     <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span>  <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span>         =====&gt; (<span style="color:#00D">1</span>)
+<span class="line-numbers"><a href="#n32" name="n32">32</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>
+<span class="line-numbers"><a href="#n33" name="n33">33</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span> (<span style="color:#00D">1</span> &lt;&lt; <span style="color:#00D">2</span>) - <span style="color:#00D">1</span> i.e. (<span style="color:#00D">1</span> &lt;&lt; i) - <span style="color:#00D">1</span>
+<span class="line-numbers"><a href="#n34" name="n34">34</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span>
+<span class="line-numbers"><a href="#n35" name="n35">35</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span> (-)
+<span class="line-numbers"><a href="#n36" name="n36">36</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>------------------
+<span class="line-numbers"><a href="#n37" name="n37">37</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span>                   =======&gt; (<span style="color:#00D">2</span>)
+<span class="line-numbers"><a href="#n38" name="n38">38</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>
+<span class="line-numbers"><a href="#n39" name="n39">39</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span> (<span style="color:#00D">1</span>) <span style="color:#036;font-weight:bold">OR</span> (<span style="color:#00D">2</span>)
+<span class="line-numbers"><strong><a href="#n40" name="n40">40</a></strong></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span>
+<span class="line-numbers"><a href="#n41" name="n41">41</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span>   (<span style="color:#036;font-weight:bold">OR</span>)
+<span class="line-numbers"><a href="#n42" name="n42">42</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>-------------------
+<span class="line-numbers"><a href="#n43" name="n43">43</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> 
+<span class="line-numbers"><a href="#n44" name="n44">44</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>
+<span class="line-numbers"><a href="#n45" name="n45">45</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Final</span> <span style="color:#036;font-weight:bold">Step</span>
+<span class="line-numbers"><a href="#n46" name="n46">46</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span> val  = <span style="color:#00D">1001</span> <span style="color:#00D">1001</span>
+<span class="line-numbers"><a href="#n47" name="n47">47</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span> <span style="color:#036;font-weight:bold">Mask</span> = <span style="color:#00D">1100</span> <span style="color:#00D">0011</span> (<span style="color:#036;font-weight:bold">AND</span>)
+<span class="line-numbers"><a href="#n48" name="n48">48</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>      _____________
+<span class="line-numbers"><a href="#n49" name="n49">49</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>        <span style="color:#00D">1000</span> <span style="color:#00D">0001</span>
+</pre></div>
+</div>
+</div>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span> i is start of range
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span> j is <span style="color:#080;font-weight:bold">end</span> of range
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>int unsetBitsInRange(int val, int i, int j) {
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    int max = ~<span style="color:#00D">0</span>;
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    int left = max - ((<span style="color:#00D">1</span> &lt;&lt; j) - <span style="color:#00D">1</span>);
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    int right = (<span style="color:#00D">1</span> &lt;&lt; i) - <span style="color:#00D">1</span>;
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>    int mask = left | right;
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    <span style="color:#080;font-weight:bold">return</span> (val &amp; mask);
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>}
+</pre></div>
+</div>
+</div>
+
+<p><br /></p>
+
+<h4 id="set-range-of-bits">Set range of bits</h4>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">This</span> mask is similar to <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Range Unset Mask</span><span style="color:#710">&quot;</span></span> created earlier
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span> with an <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">exception</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">in</span> last
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#606">https</span>:<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>gist.github.com/coolgoose85/<span style="color:#00D">458</span>a1f67d61f8def1120
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>***********************************************************
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">In</span> <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Range UNset Mask</span><span style="color:#710">&quot;</span></span> we created following
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">For</span> e.g. <span style="color:#F00;background-color:#FAA">1001</span> <span style="color:#00D">1001</span>
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Unset</span> bits from <span style="color:#00D">2</span> to <span style="color:#00D">5</span> i.e. <span style="color:#F00;background-color:#FAA">1</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span> =&gt; <span style="color:#00D">10</span> <span style="color:#00D">0000</span> <span style="color:#00D">01</span>
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>                               |- - - -| 
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>                      <span style="color:#036;font-weight:bold">Bits</span>  <span style="color:#00D">7</span> <span style="color:#00D">6</span> <span style="color:#00D">5</span> <span style="color:#00D">4</span> <span style="color:#00D">3</span> <span style="color:#00D">2</span> <span style="color:#00D">1</span> <span style="color:#00D">0</span>    
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Step1</span>
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>------
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">To</span> unset range of bits we need to create <span style="color:#036;font-weight:bold">MASK</span>
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span> val  = <span style="color:#00D">1001</span> <span style="color:#00D">1001</span>
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span> <span style="color:#036;font-weight:bold">Mask</span> = <span style="color:#00D">1100</span> <span style="color:#00D">0011</span> (<span style="color:#036;font-weight:bold">AND</span>)
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>      _____________
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>        <span style="color:#00D">1000</span> <span style="color:#00D">0001</span>
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>***********************************************************
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span> 
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">We</span> will be creating the same mask <span style="color:#080;font-weight:bold">in</span> addition we will 
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">TOGGLE</span> the bits of <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">unset mask</span><span style="color:#710">&quot;</span></span>
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span> <span style="color:#036;font-weight:bold">Unset</span> <span style="color:#036;font-weight:bold">MASK</span> = <span style="color:#00D">1100</span> <span style="color:#00D">0011</span>
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span> <span style="color:#036;font-weight:bold">TOGGLE</span>     = <span style="color:#00D">0011</span> <span style="color:#00D">1100</span>    ~(<span style="color:#036;font-weight:bold">Unset</span> <span style="color:#036;font-weight:bold">Mask</span>)
+<span class="line-numbers"><a href="#n25" name="n25">25</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span> <span style="color:#036;font-weight:bold">Now</span> perform <span style="color:#036;font-weight:bold">OR</span> will val
+<span class="line-numbers"><a href="#n27" name="n27">27</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span> val  = <span style="color:#00D">1001</span> <span style="color:#00D">1001</span>
+<span class="line-numbers"><a href="#n28" name="n28">28</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span> <span style="color:#036;font-weight:bold">Mask</span> = <span style="color:#00D">0011</span> <span style="color:#00D">1100</span> (<span style="color:#036;font-weight:bold">OR</span>)
+<span class="line-numbers"><a href="#n29" name="n29">29</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>      _____________
+<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>        <span style="color:#00D">1011</span> <span style="color:#00D">1101</span>
+</pre></div>
+</div>
+</div>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span> i is start of the range
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span> j is <span style="color:#080;font-weight:bold">end</span> of the range
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>int setBitsInRange(int val, int i, int j) {
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    int max = ~<span style="color:#00D">0</span>;
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    int left = max - ((<span style="color:#00D">1</span> &lt;&lt; j) - <span style="color:#00D">1</span>);
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    int right = (<span style="color:#00D">1</span> &lt;&lt; i) - <span style="color:#00D">1</span>;
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    int mask = left | right;
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>    <span style="color:#080;font-weight:bold">return</span> (val | ~mask);  
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>}
+</pre></div>
+</div>
+</div>
+
+<p><br /></p>
+
+<h3 id="recomended-readings">Recomended readings</h3>
+
+<ul>
+  <li><a href="http://www.gamedev.net/page/resources/_/technical/general-programming/bitwise-operations-in-c-r1563" target="_blank">Gamedev</a></li>
+  <li><a href="http://www.vipan.com/htdocs/bitwisehelp.html" target="_blank">Vipan</a></li>
+  <li><a href="http://graphics.stanford.edu/~seander/bithacks.html" target="_blank">Stanford</a></li>
+  <li><a href="http://stackoverflow.com/questions/1167956/resources-to-learn-bitwise-programming" target="_blank">Stackoverflow</a></li>
+</ul>
+]]></content>
+  </entry>
+  
+</feed>
