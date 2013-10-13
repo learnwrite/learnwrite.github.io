@@ -1,0 +1,1034 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>sorting - Learnings</title>
+  <meta name="author" content="Vaibhav Gautam">
+
+  
+  <meta name="description" content="Sorting algorithms Comparisons based sorting Online sorts Stable sorts Time complexity chart This article talks about Sorting, Sorting techniques/ &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://learnwrite.github.io/blog/2013/10/12/sorting/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Learnings" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$$','$$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript"
+   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-44705857-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+</hgroup>
+
+</header>
+  <!-- <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:learnwrite.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav> -->
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Sorting</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-12T13:08:00-07:00" pubdate data-updated="true">Oct 12<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#sorting-algorithms">Sorting algorithms</a></li>
+  <li><a href="#comparisons-based-sorting">Comparisons based sorting</a></li>
+  <li><a href="#online-sorts">Online sorts</a></li>
+  <li><a href="#stable-sorts">Stable sorts</a></li>
+  <li><a href="#time-complexity-chart">Time complexity chart</a></li>
+</ul>
+
+<p>This article talks about Sorting, Sorting techniques/algorithms in computer science</p>
+
+<p>Let’s start with Wikipedia entry about sorting</p>
+
+<div class="wikipedia">
+  
+    <img src="//upload.wikimedia.org/wikipedia/commons/thumb/8/82/Sorting_stability_playing_cards.svg/220px-Sorting_stability_playing_cards.svg.png" />
+  
+  <h2>sorting algorithm</h2>
+  <div>
+    <p>A <strong>sorting algorithm</strong> is an <a href="http://en.wikipedia.org/wiki/Algorithm" title="Algorithm">algorithm</a> that puts elements of a <a href="http://en.wikipedia.org/wiki/List_(computing)" title="List (computing)" class="mw-redirect">list</a> in a certain <a href="http://en.wikipedia.org/wiki/Total_order" title="Total order">order</a>. The most-used orders are numerical order and <a href="http://en.wikipedia.org/wiki/Lexicographical_order" title="Lexicographical order">lexicographical order</a>. Efficient <a href="http://en.wikipedia.org/wiki/Sorting" title="Sorting">sorting</a> is important for optimizing the use of other algorithms (such as <a href="http://en.wikipedia.org/wiki/Search_algorithm" title="Search algorithm">search</a> and <a href="http://en.wikipedia.org/wiki/Merge_algorithm" title="Merge algorithm">merge</a> algorithms) which require input data to be in sorted lists; it is also often useful for <a href="http://en.wikipedia.org/wiki/Canonicalization" title="Canonicalization">canonicalizing</a> data and for producing human-readable output. More formally, the output must satisfy two conditions:
+</p>
+  </div>
+  <a href="http://en.wikipedia.org/wiki/Sorting_algorithm">Read more</a>
+</div>
+
+<p><br /></p>
+
+<p>Sorting algorithms can be divided into categories</p>
+
+<h3 id="sorting-algorithms">Sorting algorithms</h3>
+<ol>
+  <li><strong><em>Comparisons based sorts</em></strong> - 24 algorithms in this category</li>
+  <li><strong><em>Online sorts</em></strong>            - 5 algorithms in this category</li>
+  <li><strong><em>Stable sorts</em></strong>            - 14 algorithms in this category</li>
+</ol>
+
+<p>Donald Knuth pioneer in algorithms and field of Computer Science have divided sorting into</p>
+
+<ol>
+  <li><strong><em>Internal sorting</em></strong> - by insertion, by exchange, by selection, by merging, by distribution<br /></li>
+  <li><strong><em>Optimum sorting</em></strong>  - min-comparison sorting, min-comparison merging, min-comparison selection<br /></li>
+  <li><strong><em>External sorting</em></strong> <br /></li>
+</ol>
+
+<h3 id="comparisons-based-sorting">Comparisons based sorting</h3>
+<p>It is particular type of sorting algorithm which read the list elements through comparison operator that determines which of two elements should occur first int he final sorted list.</p>
+
+<p><strong><em>Algorithms</em></strong></p>
+
+<ul>
+  <li>Adaptive heap sort</li>
+  <li>Bogosort</li>
+  <li>Bubble sort</li>
+  <li>Cascade merge sort</li>
+  <li>Cocktail sort</li>
+  <li>Comb sort</li>
+  <li>Cycle sort</li>
+  <li>Gnome sort</li>
+  <li>Heapsort</li>
+  <li>Insertion sort</li>
+  <li>Introsort</li>
+  <li>Library sort</li>
+  <li>Merge sort</li>
+  <li>Odd–even sort</li>
+  <li>Oscillating merge sort</li>
+  <li>Patience sorting</li>
+  <li>Polyphase merge sort</li>
+  <li>Quicksort</li>
+  <li>Selection sort</li>
+  <li>Shellsort</li>
+  <li>Smoothsort</li>
+  <li>Stooge sort</li>
+  <li>Strand sort</li>
+  <li>Timsort</li>
+</ul>
+
+<p><br /></p>
+
+<h3 id="online-sorts">Online sorts</h3>
+
+<p>These sorts can start sorting their input without having received all of it. It can process its input piece-by-piece in a serial fashion, i.e., in the order that the input is fed to the algorithm, without having the entire input available from the start.</p>
+
+<p><strong><em>Algorithms</em></strong></p>
+
+<ul>
+  <li>Cycle sort</li>
+  <li>Insertion sort</li>
+  <li>Library sort</li>
+  <li>Merge sort</li>
+  <li>Polyphase merge sort</li>
+</ul>
+
+<p><br /></p>
+
+<h3 id="stable-sorts">Stable sorts</h3>
+
+<p>A sorting algorithm is stable if whenever there are two records R and S with the <code>same key</code> and with R appearing before S in the original list, <code>R will appear before S</code> in the sorted list.</p>
+
+<p><strong><em>Algorithms</em></strong></p>
+
+<ul>
+  <li>Bubble sort</li>
+  <li>Bucket sort</li>
+  <li>Cascade merge sort</li>
+  <li>Cocktail sort</li>
+  <li>Counting sort</li>
+  <li>Gnome sort</li>
+  <li>Insertion sort</li>
+  <li>Library sort</li>
+  <li>Merge sort</li>
+  <li>Odd–even sort</li>
+  <li>Oscillating merge sort</li>
+  <li>Pigeonhole sort</li>
+  <li>Proxmap sort</li>
+  <li>Radix sort</li>
+</ul>
+
+<h3 id="time-complexity-chart">Time complexity chart</h3>
+
+<table>
+<thead>
+<tr>
+    <th><code class="mygreen">Good</code></th><th><code class="myyellow">Fair</code></th><th><code class="myred">Poor</code></th>
+</tr>
+</thead>
+</table>
+
+<p><br /></p>
+<table>
+<thead>
+<tr>
+    <th>Algorithm</th><th colspan="3">Time complexity</th><th>Space complexity</th>
+</tr>
+<tr>
+    <th /><th>Best</th><th>Average</th><th>Worst</th><th />
+</tr>
+</thead>
+<tbody>
+<tr>
+    <td>Adaptive heap sort</td>
+    <td />
+    <td />
+    <td />
+    <td />
+</tr>
+<tr>
+    <td>Bogosort</td>
+    <td><code class="mygreen">Ω(n)</code></td>
+    <td>O(n × n!)</td>
+    <td><code class="myred">Unbounded</code></td>
+    <td>O(n)</td>
+</tr>
+<tr>
+    <td>Bubble sort</td>
+    <td>O(n)</td>
+    <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
+    <td><code class="myred">O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</code></td>
+    <td>O(1)</td>
+</tr>
+<tr>
+    <td>Cascade merge sort</td>
+    <td />
+    <td />
+    <td />
+    <td />
+</tr>
+<tr>
+    <td>Cocktail sort</td>
+    <td>O(n)</td>
+    <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
+    <td><code class="myred">O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</code></td>
+    <td>O(1)</td>
+</tr>
+<tr>
+    <td>Comb sort</td>
+    <td>O(n)</td>
+    <td>Ω(<math xmlns="http://www.w3.org/1998/Math/MathML"><mfrac><mrow><msup><mi>n</mi><mn>2</mn></msup></mrow><mrow><msup><mi>2</mi><mn>p</mn></msup></mrow></mfrac></math>)</td>
+    <td>Ω(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
+    <td>O(1)</td>
+</tr>
+<tr>
+    <td>Cycle sort</td>
+    <td>Θ(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
+    <td>Θ(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
+    <td>Θ(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
+    <td>Θ(n)</td>
+</tr>
+<tr>
+    <td>Gnome sort</td>
+    <td>O(n)</td>
+    <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
+    <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
+    <td>O(1)</td>
+</tr>
+<tr>
+    <td>Heapsort</td>
+    <td>Ω(n), O(nlogn)</td>
+    <td>O(nlogn)</td>
+    <td>O(nlogn)</td>
+    <td>O(n)</td>
+</tr>
+<tr>
+    <td>Insertion sort</td>
+    <td>O(n)</td>
+    <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
+    <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
+    <td>O(n)</td>
+</tr>
+<tr>
+    <td>Introsort</td>
+    <td />
+    <td>O(nlogn)</td>
+    <td>O(nlogn)</td>
+    <td />
+</tr>
+<tr>
+    <td>Library sort</td>
+    <td>O(n)</td>
+    <td>O(nlogn)</td>
+    <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
+    <td>O(n)</td>
+</tr>
+<tr>
+    <td>Merge sort</td>
+    <td>O(n), O(nlogn)</td>
+    <td>O(nlogn)</td>
+    <td>O(nlogn)</td>
+    <td>O(n)</td>
+</tr>
+<tr>
+    <td>Odd–even sort</td>
+    <td />
+    <td />
+    <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
+    <td />
+</tr>
+<tr>
+    <td>Oscillating merge sort</td>
+    <td />
+    <td />
+    <td />
+    <td />
+</tr>
+<tr>
+    <td>Patience sorting</td>
+    <td />
+    <td />
+    <td>O(nlogn)</td>
+    <td />
+</tr>
+<tr>
+    <td>Polyphase merge sort</td>
+    <td />
+    <td />
+    <td />
+    <td />
+</tr>
+<tr>
+    <td>Quicksort</td>
+    <td>O(nlogn)</td>
+    <td>O(nlogn)</td>
+    <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
+    <td>O(n)</td>
+</tr>
+<tr>
+    <td>Selection sort</td>
+    <td><code class="myred">O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</code></td>
+    <td><code class="myred">O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</code></td>
+    <td><code class="myred">O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</code></td>
+    <td>O(n)</td>
+</tr>
+<tr>
+    <td>Shellsort</td>
+    <td>Depends on gap seq</td>
+    <td>Depends on gap seq</td>
+    <td>Depends on gap seq</td>
+    <td>O(n)</td>
+</tr>
+<tr>
+    <td>Smoothsort</td>
+    <td>O(n)</td>
+    <td>O(nlogn)</td>
+    <td>O(nlogn)</td>
+    <td>O(n)</td>
+</tr>
+<tr>
+    <td>Stooge sort</td>
+    <td />
+    <td />
+    <td />
+    <td>O(n)</td>
+</tr>
+<tr>
+    <td>Strand sort</td>
+    <td>O(n)</td>
+    <td><code class="myred">O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</code></td>
+    <td><code class="myred">O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</code></td>
+    <td>O(1)</td>
+</tr>
+<tr>
+    <td>Timsort</td>
+    <td>O(n)</td>
+    <td>O(nlogn)</td>
+    <td>O(nlogn)</td>
+    <td>O(n)</td>
+</tr>
+<tr>
+    <td />
+    <td />
+    <td />
+    <td />
+    <td />
+</tr>
+<tr>
+    <th>Online sorting</th>
+    <th />
+    <th />
+    <th />
+    <th />
+</tr>
+<tr>
+    <td>Cycle sort</td>
+    <td>Θ(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
+    <td>Θ(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
+    <td>Θ(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
+    <td>Θ(n)</td>
+</tr>
+<tr>
+    <td>Insertion sort</td>
+    <td>O(n)</td>
+    <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
+    <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
+    <td>O(n)</td>
+</tr>
+<tr>
+    <td>Library sort</td>
+    <td>O(n)</td>
+    <td>O(nlogn)</td>
+    <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
+    <td>O(n)</td>
+</tr>
+<tr>
+    <td>Merge sort</td>
+    <td>O(nlogn)</td>
+    <td>O(nlogn)</td>
+    <td>O(nlogn)</td>
+    <td>O(n)</td>
+</tr>
+<tr>
+    <td>Polyphase merge sort</td>
+    <td />
+    <td />
+    <td />
+    <td />
+</tr>
+<tr>
+    <td />
+    <td />
+    <td />
+    <td />
+    <td />
+</tr>
+<tr>
+    <th>Stable sorting</th>
+    <th />
+    <th />
+    <th />
+    <th />
+</tr>
+<tr>
+    <td>Bubble sort</td>
+    <td>O(n)</td>
+    <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
+    <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
+    <td>O(1)</td>
+</tr>
+<tr>
+    <td>Bucket sort</td>
+    <td />
+    <td>O(n + k)</td>
+    <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
+    <td>O(n.k)</td>
+</tr>
+<tr>
+    <td>Cascade merge sort</td>
+    <td />
+    <td />
+    <td />
+    <td />
+</tr>
+<tr>
+    <td>Cocktail sort</td>
+    <td>O(n)</td>
+    <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
+    <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
+    <td>O(1)</td>
+</tr>
+<tr>
+    <td>Counting sort</td>
+    <td />
+    <td />
+    <td />
+    <td />
+</tr>
+<tr>
+    <td>Gnome sort</td>
+    <td>O(n)</td>
+    <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
+    <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
+    <td>O(1)</td>
+</tr>
+<tr>
+    <td>Insertion sort</td>
+    <td>O(n)</td>
+    <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
+    <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
+    <td>O(n)</td>
+</tr>
+<tr>
+    <td>Library sort</td>
+    <td>O(n)</td>
+    <td>O(nlogn)</td>
+    <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
+    <td>O(n)</td>
+</tr>
+<tr>
+    <td>Merge sort</td>
+    <td>O(nlogn)</td>
+    <td>O(nlogn)</td>
+    <td>O(nlogn)</td>
+    <td>O(n)</td>
+</tr>
+<tr>
+    <td>Odd–even sort</td>
+    <td />
+    <td />
+    <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
+    <td />
+</tr>
+<tr>
+    <td>Oscillating merge sort</td>
+    <td />
+    <td />
+    <td />
+    <td />
+</tr>
+<tr>
+    <td>Pigeonhole sort</td>
+    <td />
+    <td />
+    <td>O(N + n)</td>
+    <td>O(N + n)</td>
+</tr>
+<tr>
+    <td>Proxmap sort</td>
+    <td>O(n)</td>
+    <td />
+    <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
+    <td>O(n)</td>
+</tr>
+<tr>
+    <td>Radix sort</td>
+    <td />
+    <td />
+    <td>O(kN)</td>
+    <td>O(k + N)</td>
+</tr>
+<tr>
+    <td />
+    <td />
+    <td />
+    <td />
+    <td />
+</tr>
+<tr>
+    <th>Non-category Sorts</th>
+    <th />
+    <th />
+    <th />
+    <th />
+</tr>
+<tr>
+    <td>Adaptive sort</td>
+    <td />
+    <td />
+    <td />
+    <td />
+</tr>
+<tr>
+    <td>American flag sort</td>
+    <td />
+    <td />
+    <td />
+    <td />
+</tr>
+<tr>
+    <td>Bead sort</td>
+    <td />
+    <td />
+    <td />
+    <td />
+</tr>
+<tr>
+    <td>Burstsort</td>
+    <td />
+    <td />
+    <td />
+    <td />
+</tr>
+<tr>
+    <td>Cartesian tree</td>
+    <td />
+    <td />
+    <td />
+    <td />
+</tr>
+<tr>
+    <td>Comparison sort</td>
+    <td />
+    <td />
+    <td />
+    <td />
+</tr>
+<tr>
+    <td>Dutch national flag problem</td>
+    <td />
+    <td />
+    <td />
+    <td />
+</tr>
+<tr>
+    <td>Elevator algorithm</td>
+    <td />
+    <td />
+    <td />
+    <td />
+</tr>
+<tr>
+    <td>External sorting</td>
+    <td />
+    <td />
+    <td />
+    <td />
+</tr>
+<tr>
+    <td>Flashsort</td>
+    <td />
+    <td />
+    <td />
+    <td />
+</tr>
+<tr>
+    <td>Integer sorting</td>
+    <td />
+    <td />
+    <td />
+    <td />
+</tr>
+<tr>
+    <td>Internal sort</td>
+    <td />
+    <td />
+    <td />
+    <td />
+</tr>
+<tr>
+    <td>J sort</td>
+    <td />
+    <td />
+    <td />
+    <td />
+</tr>
+<tr>
+    <td>Median cut</td>
+    <td />
+    <td />
+    <td />
+    <td />
+</tr>
+<tr>
+    <td>Ordicate</td>
+    <td />
+    <td />
+    <td />
+    <td />
+</tr>
+<tr>
+    <td>Pairwise sorting network</td>
+    <td />
+    <td />
+    <td />
+    <td />
+</tr>
+<tr>
+    <td>Pancake sorting</td>
+    <td />
+    <td />
+    <td />
+    <td />
+</tr>
+<tr>
+    <td>Partial sorting</td>
+    <td />
+    <td />
+    <td />
+    <td />
+</tr>
+<tr>
+    <td>Proxmap sort</td>
+    <td />
+    <td />
+    <td />
+    <td />
+</tr>
+<tr>
+    <td>Quantum sort</td>
+    <td />
+    <td />
+    <td />
+    <td />
+</tr>
+<tr>
+    <td>Samplesort</td>
+    <td />
+    <td />
+    <td />
+    <td />
+</tr>
+<tr>
+    <td>Sorting network</td>
+    <td />
+    <td />
+    <td />
+    <td />
+</tr>
+<tr>
+    <td>Spaghetti sort</td>
+    <td />
+    <td />
+    <td />
+    <td />
+</tr>
+<tr>
+    <td>Spreadsort</td>
+    <td />
+    <td />
+    <td />
+    <td />
+</tr>
+<tr>
+    <td>Topological sorting</td>
+    <td />
+    <td />
+    <td />
+    <td />
+</tr>
+<tr>
+    <td>Tournament sort</td>
+    <td />
+    <td />
+    <td />
+    <td />
+</tr>
+<tr>
+    <td>Tree sort</td>
+    <td />
+    <td />
+    <td />
+    <td />
+</tr>
+<tr>
+    <td>UnShuffle sort</td>
+    <td />
+    <td />
+    <td />
+    <td />
+</tr>
+</tbody>
+</table>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Vaibhav Gautam</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-12T13:08:00-07:00" pubdate data-updated="true">Oct 12<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/algorithms/'>algorithms</a>, <a class='category' href='/blog/categories/sorting/'>sorting</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+   <div class="rdbWrapper" data-show-read="1" data-show-send-to-kindle="1" data-show-print="1" data-show-email="0" data-orientation="0" data-version="1"></div><script type="text/javascript">(function() {var s = document.getElementsByTagName("script")[0],rdb = document.createElement("script"); rdb.type = "text/javascript"; rdb.async = true; rdb.src = document.location.protocol + "//www.readability.com/embed.js"; s.parentNode.insertBefore(rdb, s); })();</script>
+  
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://learnwrite.github.io/blog/2013/10/12/sorting/" data-via="_vaibhavg" data-counturl="http://learnwrite.github.io/blog/2013/10/12/sorting/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/10/08/world-of-bits-and-bytes/" title="Previous Post: World of Bits and Bytes">&laquo; World of Bits and Bytes</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <ul id="recent_posts">
+      <li class="post">
+      <a href="http://learnwrite.github.io" alt="Home"><img src="/images/Home.png"></a>
+      <a href="http://learnwrite.github.io/archives/" alt="Archives"><img src="/images/Calendar.png"></a>
+      
+      </li>
+  </ul>
+</section>
+<section>
+  <h1>About Me</h1>
+  <p><img src="/images/linked-in.png"><a href="http://www.linkedin.com/pub/vaibhav-gautam/11/663/163">Vaibhav Gautam</a></p>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/learnwrite">@learnwrite</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'learnwrite',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/10/12/sorting/">sorting</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/08/world-of-bits-and-bytes/">World of Bits and Bytes</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/08/binary-number-operations/">Binary number operations</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/07/process-synchronization-in-linux-kernel/">Process synchronization in Linux Kernel</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/07/process-synchronization-in-os/">Process synchronization in OS</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+<section>
+<h1>Twitter</h1>
+<a class="twitter-timeline" href="https://twitter.com/_vaibhavg" data-widget-id="386954016019587072">Tweets by @_vaibhavg</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - <a href="http://www.linkedin.com/pub/vaibhav-gautam/11/663/163">Vaibhav Gautam</a> -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'coolgoose85';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://learnwrite.github.io/blog/2013/10/12/sorting/';
+        var disqus_url = 'http://learnwrite.github.io/blog/2013/10/12/sorting/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<div class="rdbWrapper" data-show-read-now="1" data-show-read-later="1" data-show-send-to-kindle="1" data-show-print="1" data-show-email="1" data-orientation="0" data-version="1" data-bg-color="#f3f3f3"></div><script type="text/javascript">(function() {var s = document.getElementsByTagName("script")[0],rdb = document.createElement("script"); rdb.type = "text/javascript"; rdb.async = true; rdb.src = document.location.protocol + "//www.readability.com/embed.js"; s.parentNode.insertBefore(rdb, s); })();</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
