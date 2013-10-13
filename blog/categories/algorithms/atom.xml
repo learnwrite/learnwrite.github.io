@@ -4,7 +4,7 @@
   <title><![CDATA[Category: algorithms | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/algorithms/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2013-10-12T23:25:25-07:00</updated>
+  <updated>2013-10-13T01:23:52-07:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -68,30 +68,30 @@
 <p><strong><em>Algorithms</em></strong></p>
 
 <ul>
-  <li>Adaptive heap sort</li>
-  <li>Bogosort</li>
-  <li>Bubble sort</li>
-  <li>Cascade merge sort</li>
-  <li>Cocktail sort</li>
-  <li>Comb sort</li>
-  <li>Cycle sort</li>
-  <li>Gnome sort</li>
-  <li>Heapsort</li>
-  <li>Insertion sort</li>
-  <li>Introsort</li>
-  <li>Library sort</li>
-  <li>Merge sort</li>
-  <li>Odd–even sort</li>
-  <li>Oscillating merge sort</li>
-  <li>Patience sorting</li>
-  <li>Polyphase merge sort</li>
-  <li>Quicksort</li>
-  <li>Selection sort</li>
-  <li>Shellsort</li>
-  <li>Smoothsort</li>
-  <li>Stooge sort</li>
-  <li>Strand sort</li>
-  <li>Timsort</li>
+  <li><a href="http://en.wikipedia.org/wiki/Adaptive_heap_sort" target="_blank">Adaptive heap sort</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Bogosort" target="_blank">Bogosort</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Bubble_sort" target="_blank">Bubble sort</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Cascade_merge_sort" target="_blank">Cascade merge sort</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Cocktail_sort" target="_blank">Cocktail sort</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Comb_sort" target="_blank">Comb sort</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Cycle_sort" target="_blank">Cycle sort</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Gnome_sort" target="_blank">Gnome sort</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Heapsort" target="_blank">Heapsort</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Insertion_sort" target="_blank">Insertion sort</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Introsort" target="_blank">Introsort</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Library_sort" target="_blank">Library sort</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Merge_sort" target="_blank">Merge sort</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Odd–even_sort" target="_blank">Odd–even sort</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Oscillating_merge_sort" target="_blank">Oscillating merge sort</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Patience_sorting" target="_blank">Patience sorting</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Polyphase_merge_sort" target="_blank">Polyphase merge sort</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Quicksort" target="_blank">Quicksort</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Selection_sort" target="_blank">Selection sort</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Shellsort" target="_blank">Shellsort</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Smoothsort" target="_blank">Smoothsort</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Stooge_sort" target="_blank">Stooge sort</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Strand_sort" target="_blank">Strand sort</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Timsort" target="_blank">Timsort</a></li>
 </ul>
 
 <p><br /></p>
@@ -103,11 +103,11 @@
 <p><strong><em>Algorithms</em></strong></p>
 
 <ul>
-  <li>Cycle sort</li>
-  <li>Insertion sort</li>
-  <li>Library sort</li>
-  <li>Merge sort</li>
-  <li>Polyphase merge sort</li>
+  <li><a href="http://en.wikipedia.org/wiki/Cycle_sort" target="_blank">Cycle sort</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Insertion_sort" target="_blank">Insertion sort</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Library_sort" target="_blank">Library sort</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Merge_sort" target="_blank">Merge sort</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Polyphase_merge_sort" target="_blank">Polyphase merge sort</a></li>
 </ul>
 
 <p><br /></p>
@@ -119,20 +119,20 @@
 <p><strong><em>Algorithms</em></strong></p>
 
 <ul>
-  <li>Bubble sort</li>
-  <li>Bucket sort</li>
-  <li>Cascade merge sort</li>
-  <li>Cocktail sort</li>
-  <li>Counting sort</li>
-  <li>Gnome sort</li>
-  <li>Insertion sort</li>
-  <li>Library sort</li>
-  <li>Merge sort</li>
-  <li>Odd–even sort</li>
-  <li>Oscillating merge sort</li>
-  <li>Pigeonhole sort</li>
-  <li>Proxmap sort</li>
-  <li>Radix sort</li>
+  <li><a href="http://en.wikipedia.org/wiki/Bubble_sort" target="_blank">Bubble sort</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Bucket_sort" target="_blank">Bucket sort</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Cascade_merge_sort" target="_blank">Cascade merge sort</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Cocktail_sort" target="_blank">Cocktail sort</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Counting_sort" target="_blank">Counting sort</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Gnome_sort" target="_blank">Gnome sort</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Insertion_sort" target="_blank">Insertion sort</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Library_sort" target="_blank">Library sort</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Merge_sort" target="_blank">Merge sort</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Odd–even_sort" target="_blank">Odd–even sort</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Oscillating_merge_sort" target="_blank">Oscillating merge sort</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Pigeonhole_sort" target="_blank">Pigeonhole sort</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Proxmap_sort" target="_blank">Proxmap sort</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Radix_sort" target="_blank">Radix sort</a></li>
 </ul>
 
 <h3 id="time-complexity-chart">Time complexity chart</h3>
@@ -157,168 +157,168 @@
 </thead>
 <tbody>
 <tr>
-    <td>Adaptive heap sort</td>
+    <td><a href="" target="_blank">Adaptive heap sort</a></td>
     <td />
     <td />
     <td />
     <td />
 </tr>
 <tr>
-    <td>Bogosort</td>
+    <td><a href="" target="_blank">Bogosort</a></td>
     <td><code class="mygreen">Ω(n)</code></td>
     <td>O(n × n!)</td>
     <td><code class="myred">Unbounded</code></td>
     <td>O(n)</td>
 </tr>
 <tr>
-    <td>Bubble sort</td>
+    <td><a href="" target="_blank">Bubble sort</a></td>
     <td>O(n)</td>
     <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td><code class="myred">O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</code></td>
     <td>O(1)</td>
 </tr>
 <tr>
-    <td>Cascade merge sort</td>
+    <td><a href="" target="_blank">Cascade merge sort</a></td>
     <td />
     <td />
     <td />
     <td />
 </tr>
 <tr>
-    <td>Cocktail sort</td>
+    <td><a href="" target="_blank">Cocktail sort</a></td>
     <td>O(n)</td>
     <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td><code class="myred">O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</code></td>
     <td>O(1)</td>
 </tr>
 <tr>
-    <td>Comb sort</td>
+    <td><a href="" target="_blank">Comb sort</a></td>
     <td>O(n)</td>
     <td>Ω(<math xmlns="http://www.w3.org/1998/Math/MathML"><mfrac><mrow><msup><mi>n</mi><mn>2</mn></msup></mrow><mrow><msup><mi>2</mi><mn>p</mn></msup></mrow></mfrac></math>)</td>
     <td>Ω(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>O(1)</td>
 </tr>
 <tr>
-    <td>Cycle sort</td>
+    <td><a href="" target="_blank">Cycle sort</a></td>
     <td>Θ(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>Θ(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>Θ(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>Θ(n)</td>
 </tr>
 <tr>
-    <td>Gnome sort</td>
+    <td><a href="" target="_blank">Gnome sort</a></td>
     <td>O(n)</td>
     <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>O(1)</td>
 </tr>
 <tr>
-    <td>Heapsort</td>
+    <td><a href="" target="_blank">Heapsort</a></td>
     <td>Ω(n), O(nlogn)</td>
     <td>O(nlogn)</td>
     <td>O(nlogn)</td>
     <td>O(n)</td>
 </tr>
 <tr>
-    <td>Insertion sort</td>
+    <td><a href="" target="_blank">Insertion sort</a></td>
     <td>O(n)</td>
     <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>O(n)</td>
 </tr>
 <tr>
-    <td>Introsort</td>
+    <td><a href="" target="_blank">Introsort</a></td>
     <td />
     <td>O(nlogn)</td>
     <td>O(nlogn)</td>
     <td />
 </tr>
 <tr>
-    <td>Library sort</td>
+    <td><a href="" target="_blank">Library sort</a></td>
     <td>O(n)</td>
     <td>O(nlogn)</td>
     <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>O(n)</td>
 </tr>
 <tr>
-    <td>Merge sort</td>
+    <td><a href="" target="_blank">Merge sort</a></td>
     <td>O(n), O(nlogn)</td>
     <td>O(nlogn)</td>
     <td>O(nlogn)</td>
     <td>O(n)</td>
 </tr>
 <tr>
-    <td>Odd–even sort</td>
+    <td><a href="" target="_blank">Odd–even sort</a></td>
     <td />
     <td />
     <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td />
 </tr>
 <tr>
-    <td>Oscillating merge sort</td>
+    <td><a href="" target="_blank">Oscillating merge sort</a></td>
     <td />
     <td />
     <td />
     <td />
 </tr>
 <tr>
-    <td>Patience sorting</td>
+    <td><a href="" target="_blank">Patience sorting</a></td>
     <td />
     <td />
     <td>O(nlogn)</td>
     <td />
 </tr>
 <tr>
-    <td>Polyphase merge sort</td>
+    <td><a href="" target="_blank">Polyphase merge sort</a></td>
     <td />
     <td />
     <td />
     <td />
 </tr>
 <tr>
-    <td>Quicksort</td>
+    <td><a href="" target="_blank">Quicksort</a></td>
     <td>O(nlogn)</td>
     <td>O(nlogn)</td>
     <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>O(n)</td>
 </tr>
 <tr>
-    <td>Selection sort</td>
+    <td><a href="" target="_blank">Selection sort</a></td>
     <td><code class="myred">O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</code></td>
     <td><code class="myred">O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</code></td>
     <td><code class="myred">O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</code></td>
     <td>O(n)</td>
 </tr>
 <tr>
-    <td>Shellsort</td>
+    <td><a href="" target="_blank">Shellsort</a></td>
     <td>Depends on gap seq</td>
     <td>Depends on gap seq</td>
     <td>Depends on gap seq</td>
     <td>O(n)</td>
 </tr>
 <tr>
-    <td>Smoothsort</td>
+    <td><a href="" target="_blank">Smoothsort</a></td>
     <td>O(n)</td>
     <td>O(nlogn)</td>
     <td>O(nlogn)</td>
     <td>O(n)</td>
 </tr>
 <tr>
-    <td>Stooge sort</td>
+    <td><a href="" target="_blank">Stooge sort</a></td>
     <td />
     <td />
     <td />
     <td>O(n)</td>
 </tr>
 <tr>
-    <td>Strand sort</td>
+    <td><a href="" target="_blank">Strand sort</a></td>
     <td>O(n)</td>
     <td><code class="myred">O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</code></td>
     <td><code class="myred">O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</code></td>
     <td>O(1)</td>
 </tr>
 <tr>
-    <td>Timsort</td>
+    <td><a href="" target="_blank">Timsort</a></td>
     <td>O(n)</td>
     <td>O(nlogn)</td>
     <td>O(nlogn)</td>
@@ -339,35 +339,35 @@
     <th />
 </tr>
 <tr>
-    <td>Cycle sort</td>
+    <td><a href="" target="_blank">Cycle sort</a></td>
     <td>Θ(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>Θ(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>Θ(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>Θ(n)</td>
 </tr>
 <tr>
-    <td>Insertion sort</td>
+    <td><a href="" target="_blank">Insertion sort</a></td>
     <td>O(n)</td>
     <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>O(n)</td>
 </tr>
 <tr>
-    <td>Library sort</td>
+    <td><a href="" target="_blank">Library sort</a></td>
     <td>O(n)</td>
     <td>O(nlogn)</td>
     <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>O(n)</td>
 </tr>
 <tr>
-    <td>Merge sort</td>
+    <td><a href="" target="_blank">Merge sort</a></td>
     <td>O(nlogn)</td>
     <td>O(nlogn)</td>
     <td>O(nlogn)</td>
     <td>O(n)</td>
 </tr>
 <tr>
-    <td>Polyphase merge sort</td>
+    <td><a href="" target="_blank">Polyphase merge sort</a></td>
     <td />
     <td />
     <td />
@@ -388,98 +388,98 @@
     <th />
 </tr>
 <tr>
-    <td>Bubble sort</td>
+    <td><a href="" target="_blank">Bubble sort</a></td>
     <td>O(n)</td>
     <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>O(1)</td>
 </tr>
 <tr>
-    <td>Bucket sort</td>
+    <td><a href="" target="_blank">Bucket sort</a></td>
     <td />
     <td>O(n + k)</td>
     <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>O(n.k)</td>
 </tr>
 <tr>
-    <td>Cascade merge sort</td>
+    <td><a href="" target="_blank">Cascade merge sort</a></td>
     <td />
     <td />
     <td />
     <td />
 </tr>
 <tr>
-    <td>Cocktail sort</td>
+    <td><a href="" target="_blank">Cocktail sort</a></td>
     <td>O(n)</td>
     <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>O(1)</td>
 </tr>
 <tr>
-    <td>Counting sort</td>
+    <td><a href="" target="_blank">Counting sort</a></td>
     <td />
     <td />
     <td />
     <td />
 </tr>
 <tr>
-    <td>Gnome sort</td>
+    <td><a href="" target="_blank">Gnome sort</a></td>
     <td>O(n)</td>
     <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>O(1)</td>
 </tr>
 <tr>
-    <td>Insertion sort</td>
+    <td><a href="" target="_blank">Insertion sort</a></td>
     <td>O(n)</td>
     <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>O(n)</td>
 </tr>
 <tr>
-    <td>Library sort</td>
+    <td><a href="" target="_blank">Library sort</a></td>
     <td>O(n)</td>
     <td>O(nlogn)</td>
     <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>O(n)</td>
 </tr>
 <tr>
-    <td>Merge sort</td>
+    <td><a href="" target="_blank">Merge sort</a></td>
     <td>O(nlogn)</td>
     <td>O(nlogn)</td>
     <td>O(nlogn)</td>
     <td>O(n)</td>
 </tr>
 <tr>
-    <td>Odd–even sort</td>
+    <td><a href="" target="_blank">Odd–even sort</a></td>
     <td />
     <td />
     <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td />
 </tr>
 <tr>
-    <td>Oscillating merge sort</td>
+    <td><a href="" target="_blank">Oscillating merge sort</a></td>
     <td />
     <td />
     <td />
     <td />
 </tr>
 <tr>
-    <td>Pigeonhole sort</td>
+    <td><a href="" target="_blank">Pigeonhole sort</a></td>
     <td />
     <td />
     <td>O(N + n)</td>
     <td>O(N + n)</td>
 </tr>
 <tr>
-    <td>Proxmap sort</td>
+    <td><a href="" target="_blank">Proxmap sort</a></td>
     <td>O(n)</td>
     <td />
     <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>O(n)</td>
 </tr>
 <tr>
-    <td>Radix sort</td>
+    <td><a href="" target="_blank">Radix sort</a></td>
     <td />
     <td />
     <td>O(kN)</td>
@@ -500,196 +500,196 @@
     <th />
 </tr>
 <tr>
-    <td>Adaptive sort</td>
+    <td><a href="" target="_blank">Adaptive sort</a></td>
     <td />
     <td />
     <td />
     <td />
 </tr>
 <tr>
-    <td>American flag sort</td>
+    <td><a href="" target="_blank">American flag sort</a></td>
     <td />
     <td />
     <td />
     <td />
 </tr>
 <tr>
-    <td>Bead sort</td>
+    <td><a href="" target="_blank">Bead sort</a></td>
     <td />
     <td />
     <td />
     <td />
 </tr>
 <tr>
-    <td>Burstsort</td>
+    <td><a href="" target="_blank">Burstsort</a></td>
     <td />
     <td />
     <td />
     <td />
 </tr>
 <tr>
-    <td>Cartesian tree</td>
+    <td><a href="" target="_blank">Cartesian tree</a></td>
     <td />
     <td />
     <td />
     <td />
 </tr>
 <tr>
-    <td>Comparison sort</td>
+    <td><a href="" target="_blank">Comparison sort</a></td>
     <td />
     <td />
     <td />
     <td />
 </tr>
 <tr>
-    <td>Dutch national flag problem</td>
+    <td><a href="" target="_blank">Dutch national flag problem</a></td>
     <td />
     <td />
     <td />
     <td />
 </tr>
 <tr>
-    <td>Elevator algorithm</td>
+    <td><a href="" target="_blank">Elevator algorithm</a></td>
     <td />
     <td />
     <td />
     <td />
 </tr>
 <tr>
-    <td>External sorting</td>
+    <td><a href="" target="_blank">External sorting</a></td>
     <td />
     <td />
     <td />
     <td />
 </tr>
 <tr>
-    <td>Flashsort</td>
+    <td><a href="" target="_blank">Flashsort</a></td>
     <td />
     <td />
     <td />
     <td />
 </tr>
 <tr>
-    <td>Integer sorting</td>
+    <td><a href="" target="_blank">Integer sorting</a></td>
     <td />
     <td />
     <td />
     <td />
 </tr>
 <tr>
-    <td>Internal sort</td>
+    <td><a href="" target="_blank">Internal sort</a></td>
     <td />
     <td />
     <td />
     <td />
 </tr>
 <tr>
-    <td>J sort</td>
+    <td><a href="" target="_blank">J sort</a></td>
     <td />
     <td />
     <td />
     <td />
 </tr>
 <tr>
-    <td>Median cut</td>
+    <td><a href="" target="_blank">Median cut</a></td>
     <td />
     <td />
     <td />
     <td />
 </tr>
 <tr>
-    <td>Ordicate</td>
+    <td><a href="" target="_blank">Ordicate</a></td>
     <td />
     <td />
     <td />
     <td />
 </tr>
 <tr>
-    <td>Pairwise sorting network</td>
+    <td><a href="" target="_blank">Pairwise sorting network</a></td>
     <td />
     <td />
     <td />
     <td />
 </tr>
 <tr>
-    <td>Pancake sorting</td>
+    <td><a href="" target="_blank">Pancake sorting</a></td>
     <td />
     <td />
     <td />
     <td />
 </tr>
 <tr>
-    <td>Partial sorting</td>
+    <td><a href="" target="_blank">Partial sorting</a></td>
     <td />
     <td />
     <td />
     <td />
 </tr>
 <tr>
-    <td>Proxmap sort</td>
+    <td><a href="" target="_blank">Proxmap sort</a></td>
     <td />
     <td />
     <td />
     <td />
 </tr>
 <tr>
-    <td>Quantum sort</td>
+    <td><a href="" target="_blank">Quantum sort</a></td>
     <td />
     <td />
     <td />
     <td />
 </tr>
 <tr>
-    <td>Samplesort</td>
+    <td><a href="" target="_blank">Samplesort</a></td>
     <td />
     <td />
     <td />
     <td />
 </tr>
 <tr>
-    <td>Sorting network</td>
+    <td><a href="" target="_blank">Sorting network</a></td>
     <td />
     <td />
     <td />
     <td />
 </tr>
 <tr>
-    <td>Spaghetti sort</td>
+    <td><a href="" target="_blank">Spaghetti sort</a></td>
     <td />
     <td />
     <td />
     <td />
 </tr>
 <tr>
-    <td>Spreadsort</td>
+    <td><a href="" target="_blank">Spreadsort</a></td>
     <td />
     <td />
     <td />
     <td />
 </tr>
 <tr>
-    <td>Topological sorting</td>
+    <td><a href="" target="_blank">Topological sorting</a></td>
     <td />
     <td />
     <td />
     <td />
 </tr>
 <tr>
-    <td>Tournament sort</td>
+    <td><a href="" target="_blank">Tournament sort</a></td>
     <td />
     <td />
     <td />
     <td />
 </tr>
 <tr>
-    <td>Tree sort</td>
+    <td><a href="" target="_blank">Tree sort</a></td>
     <td />
     <td />
     <td />
     <td />
 </tr>
 <tr>
-    <td>UnShuffle sort</td>
+    <td><a href="" target="_blank">UnShuffle sort</a></td>
     <td />
     <td />
     <td />
