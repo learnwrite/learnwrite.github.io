@@ -1,0 +1,447 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Comparison based Sorting - Learnings</title>
+  <meta name="author" content="Vaibhav Gautam">
+
+  
+  <meta name="description" content="Merge Sort Points to Note Merge Sort Merge sort follows divide-and-conquer approach. 1MERGE-SORT(A, p, r) // A is array of numbers 2{ // p is &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://learnwrite.github.io/blog/2013/10/13/comparison-based-sorting/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Learnings" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$$','$$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript"
+   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-44705857-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+</hgroup>
+
+</header>
+  <!-- <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:learnwrite.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav> -->
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Comparison Based Sorting</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-13T01:43:00-07:00" pubdate data-updated="true">Oct 13<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#merge-sort">Merge Sort</a></li>
+  <li><a href="#points-to-note">Points to Note</a></li>
+</ul>
+
+<h3 id="merge-sort">Merge Sort</h3>
+
+<p>Merge sort follows <em>divide-and-conquer</em> approach.</p>
+
+<p><br /><br /></p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="color:#036;font-weight:bold">MERGE</span>-SORT(<span style="color:#036;font-weight:bold">A</span>, p, r) /<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808"> A is array of numbers</span></span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#808">{                   </span><span style="color:#404">/</span></span>/ p is starting index of array
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>                    <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span> r is last index of array
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    <span style="color:#080;font-weight:bold">if</span> p &lt; r
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    <span style="color:#080;font-weight:bold">then</span> q &lt;- ⌊(p + r)⌋ / <span style="color:#00D">2</span>;  
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>        <span style="color:#036;font-weight:bold">MERGE</span>-SORT(<span style="color:#036;font-weight:bold">A</span>, p, q)
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>        <span style="color:#036;font-weight:bold">MERGE</span>-SORT(<span style="color:#036;font-weight:bold">A</span>, q + <span style="color:#00D">1</span>, r)
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>        MERGE(<span style="color:#036;font-weight:bold">A</span>, p, q, r)
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>}
+</pre></div>
+</div>
+</div>
+
+<p><br /></p>
+
+<p>Merge Sort</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>MERGE(<span style="color:#036;font-weight:bold">A</span>, p, q, r)
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>n1 &lt;- q - p + <span style="color:#00D">1</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>n2 &lt;- r - q
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>create arrays <span style="color:#036;font-weight:bold">L</span>[<span style="color:#00D">1</span>...n1 + <span style="color:#00D">1</span>] <span style="color:#080;font-weight:bold">and</span> <span style="color:#036;font-weight:bold">R</span>[<span style="color:#00D">1</span>... n2 + <span style="color:#00D">1</span>] /<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808"> It took O(n) space</span></span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#808"></span></span>
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#808"></span><span style="color:#404">/</span></span>/<span style="color:#036;font-weight:bold">Assign</span> elements to new sub arrays
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span><span style="color:#080;font-weight:bold">for</span> i &lt;- <span style="color:#00D">1</span> to n1
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    <span style="color:#080;font-weight:bold">do</span> <span style="color:#036;font-weight:bold">L</span>[i] &lt;- <span style="color:#036;font-weight:bold">A</span>[p + i - <span style="color:#00D">1</span>]
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>     
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span><span style="color:#080;font-weight:bold">for</span> j &lt;- <span style="color:#00D">1</span> to n2
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>    <span style="color:#080;font-weight:bold">do</span> <span style="color:#036;font-weight:bold">R</span>[j] &lt;- <span style="color:#036;font-weight:bold">A</span>[q + j]
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Mark</span> <span style="color:#080;font-weight:bold">end</span> of array
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span><span style="color:#036;font-weight:bold">L</span>[n1 + <span style="color:#00D">1</span>] &lt;- ∞
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span><span style="color:#036;font-weight:bold">R</span>[n2 + <span style="color:#00D">1</span>] &lt;- ∞
+</pre></div>
+</div>
+</div>
+
+<p><br /></p>
+
+<p>Merging two arrays L[] and R[]</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>i &lt;- <span style="color:#00D">1</span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>j &lt;- <span style="color:#00D">1</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span style="color:#080;font-weight:bold">for</span> k &lt;- p to r
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    <span style="color:#080;font-weight:bold">do</span> <span style="color:#080;font-weight:bold">if</span> <span style="color:#036;font-weight:bold">L</span>[i] &lt;= <span style="color:#036;font-weight:bold">R</span>[j]
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>        <span style="color:#080;font-weight:bold">then</span> <span style="color:#036;font-weight:bold">A</span>[k] &lt;- <span style="color:#036;font-weight:bold">L</span>[i]
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>            i &lt;- i + <span style="color:#00D">1</span>
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>        <span style="color:#080;font-weight:bold">else</span> <span style="color:#036;font-weight:bold">A</span>[k] &lt;- <span style="color:#036;font-weight:bold">R</span>[j]
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>            j &lt;- j + <span style="color:#00D">1</span>
+</pre></div>
+</div>
+</div>
+
+<p><br /></p>
+
+<p><strong>Analysis</strong></p>
+
+<p>Time complexity</p>
+
+<p>Fully expanded recursion tree has <code>logn + 1</code> levels.<br />
+Each level contributes to total cost of <code>cn</code></p>
+
+<p>Total cost = <em>cn logn + cn = O(nlogn)</em> </p>
+
+<h3 id="points-to-note">Points to Note</h3>
+
+<ul>
+  <li>Merge sort run in <code>O(n logn)</code> time</li>
+  <li>Merge sort uses extra <code>O(n)</code> space</li>
+  <li>Insertion sort run in O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</li>
+  <li>Insertion sort uses no extra space</li>
+  <li>Heap sort combines better attributes of both Insertion sort (Space) and Merge Sort (Time)</li>
+  <li>Heap sort run in <code>O(nlogn)</code> time and only constant number of array elements are stored outside the input array at a time.</li>
+  <li>Quicksort worst case running time is Θ(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</li>
+  <li>Quicksort sorts in place, it works really well in virtual memory env. </li>
+  <li>Inspite of slow worst-case running time, quicksort is the best practical choice for sorting. It is remarkably efficient on the average case Θ(nlogn)</li>
+</ul>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Vaibhav Gautam</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-13T01:43:00-07:00" pubdate data-updated="true">Oct 13<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/algorithm/'>algorithm</a>, <a class='category' href='/blog/categories/sorting/'>sorting</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+   <div class="rdbWrapper" data-show-read="1" data-show-send-to-kindle="1" data-show-print="1" data-show-email="0" data-orientation="0" data-version="1"></div><script type="text/javascript">(function() {var s = document.getElementsByTagName("script")[0],rdb = document.createElement("script"); rdb.type = "text/javascript"; rdb.async = true; rdb.src = document.location.protocol + "//www.readability.com/embed.js"; s.parentNode.insertBefore(rdb, s); })();</script>
+  
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://learnwrite.github.io/blog/2013/10/13/comparison-based-sorting/" data-via="_vaibhavg" data-counturl="http://learnwrite.github.io/blog/2013/10/13/comparison-based-sorting/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/10/12/sorting/" title="Previous Post: sorting">&laquo; sorting</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <ul id="recent_posts">
+      <li class="post">
+      <a href="http://learnwrite.github.io" alt="Home"><img src="/images/Home.png"></a>
+      <a href="http://learnwrite.github.io/archives/" alt="Archives"><img src="/images/Calendar.png"></a>
+      
+      </li>
+  </ul>
+</section>
+<section>
+  <h1>About Me</h1>
+  <p><img src="/images/linked-in.png"><a href="http://www.linkedin.com/pub/vaibhav-gautam/11/663/163">Vaibhav Gautam</a></p>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/learnwrite">@learnwrite</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'learnwrite',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/10/13/comparison-based-sorting/">Comparison based Sorting</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/12/sorting/">sorting</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/08/world-of-bits-and-bytes/">World of Bits and Bytes</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/08/binary-number-operations/">Binary number operations</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/07/process-synchronization-in-linux-kernel/">Process synchronization in Linux Kernel</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+<section>
+<h1>Twitter</h1>
+<a class="twitter-timeline" href="https://twitter.com/_vaibhavg" data-widget-id="386954016019587072">Tweets by @_vaibhavg</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - <a href="http://www.linkedin.com/pub/vaibhav-gautam/11/663/163">Vaibhav Gautam</a> -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'coolgoose85';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://learnwrite.github.io/blog/2013/10/13/comparison-based-sorting/';
+        var disqus_url = 'http://learnwrite.github.io/blog/2013/10/13/comparison-based-sorting/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<div class="rdbWrapper" data-show-read-now="1" data-show-read-later="1" data-show-send-to-kindle="1" data-show-print="1" data-show-email="1" data-orientation="0" data-version="1" data-bg-color="#f3f3f3"></div><script type="text/javascript">(function() {var s = document.getElementsByTagName("script")[0],rdb = document.createElement("script"); rdb.type = "text/javascript"; rdb.async = true; rdb.src = document.location.protocol + "//www.readability.com/embed.js"; s.parentNode.insertBefore(rdb, s); })();</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -4,7 +4,7 @@
   <title><![CDATA[Learnings]]></title>
   <link href="http://learnwrite.github.io/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2013-10-13T01:23:52-07:00</updated>
+  <updated>2013-10-13T18:18:14-07:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -12,6 +12,105 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Comparison based Sorting]]></title>
+    <link href="http://learnwrite.github.io/blog/2013/10/13/comparison-based-sorting/"/>
+    <updated>2013-10-13T01:43:00-07:00</updated>
+    <id>http://learnwrite.github.io/blog/2013/10/13/comparison-based-sorting</id>
+    <content type="html"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#merge-sort">Merge Sort</a></li>
+  <li><a href="#points-to-note">Points to Note</a></li>
+</ul>
+
+<h3 id="merge-sort">Merge Sort</h3>
+
+<p>Merge sort follows <em>divide-and-conquer</em> approach.</p>
+
+<p><br /><br /></p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="color:#036;font-weight:bold">MERGE</span>-SORT(<span style="color:#036;font-weight:bold">A</span>, p, r) /<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808"> A is array of numbers</span></span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#808">{                   </span><span style="color:#404">/</span></span>/ p is starting index of array
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>                    <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span> r is last index of array
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    <span style="color:#080;font-weight:bold">if</span> p &lt; r
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    <span style="color:#080;font-weight:bold">then</span> q &lt;- ⌊(p + r)⌋ / <span style="color:#00D">2</span>;  
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>        <span style="color:#036;font-weight:bold">MERGE</span>-SORT(<span style="color:#036;font-weight:bold">A</span>, p, q)
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>        <span style="color:#036;font-weight:bold">MERGE</span>-SORT(<span style="color:#036;font-weight:bold">A</span>, q + <span style="color:#00D">1</span>, r)
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>        MERGE(<span style="color:#036;font-weight:bold">A</span>, p, q, r)
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>}
+</pre></div>
+</div>
+</div>
+
+<p><br /></p>
+
+<p>Merge Sort</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>MERGE(<span style="color:#036;font-weight:bold">A</span>, p, q, r)
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>n1 &lt;- q - p + <span style="color:#00D">1</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>n2 &lt;- r - q
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>create arrays <span style="color:#036;font-weight:bold">L</span>[<span style="color:#00D">1</span>...n1 + <span style="color:#00D">1</span>] <span style="color:#080;font-weight:bold">and</span> <span style="color:#036;font-weight:bold">R</span>[<span style="color:#00D">1</span>... n2 + <span style="color:#00D">1</span>] /<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808"> It took O(n) space</span></span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#808"></span></span>
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#808"></span><span style="color:#404">/</span></span>/<span style="color:#036;font-weight:bold">Assign</span> elements to new sub arrays
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span><span style="color:#080;font-weight:bold">for</span> i &lt;- <span style="color:#00D">1</span> to n1
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    <span style="color:#080;font-weight:bold">do</span> <span style="color:#036;font-weight:bold">L</span>[i] &lt;- <span style="color:#036;font-weight:bold">A</span>[p + i - <span style="color:#00D">1</span>]
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>     
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span><span style="color:#080;font-weight:bold">for</span> j &lt;- <span style="color:#00D">1</span> to n2
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>    <span style="color:#080;font-weight:bold">do</span> <span style="color:#036;font-weight:bold">R</span>[j] &lt;- <span style="color:#036;font-weight:bold">A</span>[q + j]
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Mark</span> <span style="color:#080;font-weight:bold">end</span> of array
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span><span style="color:#036;font-weight:bold">L</span>[n1 + <span style="color:#00D">1</span>] &lt;- ∞
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span><span style="color:#036;font-weight:bold">R</span>[n2 + <span style="color:#00D">1</span>] &lt;- ∞
+</pre></div>
+</div>
+</div>
+
+<p><br /></p>
+
+<p>Merging two arrays L[] and R[]</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>i &lt;- <span style="color:#00D">1</span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>j &lt;- <span style="color:#00D">1</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span style="color:#080;font-weight:bold">for</span> k &lt;- p to r
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    <span style="color:#080;font-weight:bold">do</span> <span style="color:#080;font-weight:bold">if</span> <span style="color:#036;font-weight:bold">L</span>[i] &lt;= <span style="color:#036;font-weight:bold">R</span>[j]
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>        <span style="color:#080;font-weight:bold">then</span> <span style="color:#036;font-weight:bold">A</span>[k] &lt;- <span style="color:#036;font-weight:bold">L</span>[i]
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>            i &lt;- i + <span style="color:#00D">1</span>
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>        <span style="color:#080;font-weight:bold">else</span> <span style="color:#036;font-weight:bold">A</span>[k] &lt;- <span style="color:#036;font-weight:bold">R</span>[j]
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>            j &lt;- j + <span style="color:#00D">1</span>
+</pre></div>
+</div>
+</div>
+
+<p><br /></p>
+
+<p><strong>Analysis</strong></p>
+
+<p>Time complexity</p>
+
+<p>Fully expanded recursion tree has <code>logn + 1</code> levels.<br />
+Each level contributes to total cost of <code>cn</code></p>
+
+<p>Total cost = <em>cn logn + cn = O(nlogn)</em> </p>
+
+<h3 id="points-to-note">Points to Note</h3>
+
+<ul>
+  <li>Merge sort run in <code>O(n logn)</code> time</li>
+  <li>Merge sort uses extra <code>O(n)</code> space</li>
+  <li>Insertion sort run in O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</li>
+  <li>Insertion sort uses no extra space</li>
+  <li>Heap sort combines better attributes of both Insertion sort (Space) and Merge Sort (Time)</li>
+  <li>Heap sort run in <code>O(nlogn)</code> time and only constant number of array elements are stored outside the input array at a time.</li>
+  <li>Quicksort worst case running time is Θ(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</li>
+  <li>Quicksort sorts in place, it works really well in virtual memory env. </li>
+  <li>Inspite of slow worst-case running time, quicksort is the best practical choice for sorting. It is remarkably efficient on the average case Θ(nlogn)</li>
+</ul>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[sorting]]></title>
@@ -725,7 +824,7 @@ I started realizing that after all it’s not that easy to actually think and wr
 <h3 id="basics">Basics</h3>
 
 <p>Introduction <a href="http://www.codeproject.com/Articles/2247/An-introduction-to-bitwise-operators" target="_blank">here</a>
-<br /><br /></p>
+<br /><br /><br /><br /></p>
 
 <div><div class="CodeRay">
   <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span> <span style="color:#00D">0</span> <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span>

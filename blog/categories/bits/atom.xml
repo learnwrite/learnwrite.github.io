@@ -4,7 +4,7 @@
   <title><![CDATA[Category: bits | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/bits/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2013-10-13T01:23:52-07:00</updated>
+  <updated>2013-10-13T18:18:14-07:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -39,7 +39,7 @@ I started realizing that after all it’s not that easy to actually think and wr
 <h3 id="basics">Basics</h3>
 
 <p>Introduction <a href="http://www.codeproject.com/Articles/2247/An-introduction-to-bitwise-operators" target="_blank">here</a>
-<br /><br /></p>
+<br /><br /><br /><br /></p>
 
 <div><div class="CodeRay">
   <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span> <span style="color:#00D">0</span> <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span>
