@@ -4,7 +4,7 @@
   <title><![CDATA[Category: algorithm | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2013-10-13T18:18:14-07:00</updated>
+  <updated>2013-10-13T19:56:16-07:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -99,15 +99,15 @@ Each level contributes to total cost of <code>cn</code></p>
 <h3 id="points-to-note">Points to Note</h3>
 
 <ul>
-  <li>Merge sort run in <code>O(n logn)</code> time</li>
-  <li>Merge sort uses extra <code>O(n)</code> space</li>
-  <li>Insertion sort run in O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</li>
-  <li>Insertion sort uses no extra space</li>
-  <li>Heap sort combines better attributes of both Insertion sort (Space) and Merge Sort (Time)</li>
-  <li>Heap sort run in <code>O(nlogn)</code> time and only constant number of array elements are stored outside the input array at a time.</li>
-  <li>Quicksort worst case running time is Θ(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</li>
-  <li>Quicksort sorts in place, it works really well in virtual memory env. </li>
-  <li>Inspite of slow worst-case running time, quicksort is the best practical choice for sorting. It is remarkably efficient on the average case Θ(nlogn)</li>
+  <li><code>Merge sort</code> run in <code>O(n logn)</code> time</li>
+  <li><code>Merge sort</code> uses extra <code>O(n)</code> space</li>
+  <li><code>Insertion sort</code> run in O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</li>
+  <li><code>Insertion sort</code> uses no extra space</li>
+  <li><code>Heap sort</code> combines better attributes of both Insertion sort (Space) and Merge Sort (Time)</li>
+  <li><code>Heap sort</code> run in <code>O(nlogn)</code> time and only constant number of array elements are stored outside the input array at a time.</li>
+  <li><code>Quicksort</code> worst case running time is Θ(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</li>
+  <li><code>Quicksort</code> sorts in place, it works really well in virtual memory env. </li>
+  <li>Inspite of slow worst-case running time, quicksort is the best practical choice for sorting. It is remarkably efficient on the average case Θ(nlogn).</li>
 </ul>
 ]]></content>
   </entry>
