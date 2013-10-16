@@ -4,7 +4,7 @@
   <title><![CDATA[Category: sorting | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/sorting/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2013-10-13T19:56:16-07:00</updated>
+  <updated>2013-10-15T20:50:08-07:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -169,19 +169,19 @@ Each level contributes to total cost of <code>cn</code></p>
 <ul>
   <li><a href="http://en.wikipedia.org/wiki/Adaptive_heap_sort" target="_blank">Adaptive heap sort</a></li>
   <li><a href="http://en.wikipedia.org/wiki/Bogosort" target="_blank">Bogosort</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Bubble_sort" target="_blank">Bubble sort</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Cascade_merge_sort" target="_blank">Cascade merge sort</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Cocktail_sort" target="_blank">Cocktail sort</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Bubble_sort" target="_blank">Bubble sort</a>                       - (S)</li>
+  <li><a href="http://en.wikipedia.org/wiki/Cascade_merge_sort" target="_blank">Cascade merge sort</a>         - (S)</li>
+  <li><a href="http://en.wikipedia.org/wiki/Cocktail_sort" target="_blank">Cocktail sort</a>                   - (S)</li>
   <li><a href="http://en.wikipedia.org/wiki/Comb_sort" target="_blank">Comb sort</a></li>
   <li><a href="http://en.wikipedia.org/wiki/Cycle_sort" target="_blank">Cycle sort</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Gnome_sort" target="_blank">Gnome sort</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Gnome_sort" target="_blank">Gnome sort</a>                         - (S)</li>
   <li><a href="http://en.wikipedia.org/wiki/Heapsort" target="_blank">Heapsort</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Insertion_sort" target="_blank">Insertion sort</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Insertion_sort" target="_blank">Insertion sort</a>                 - (S)</li>
   <li><a href="http://en.wikipedia.org/wiki/Introsort" target="_blank">Introsort</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Library_sort" target="_blank">Library sort</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Merge_sort" target="_blank">Merge sort</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Odd–even_sort" target="_blank">Odd–even sort</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Oscillating_merge_sort" target="_blank">Oscillating merge sort</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Library_sort" target="_blank">Library sort</a>                     - (S)</li>
+  <li><a href="http://en.wikipedia.org/wiki/Merge_sort" target="_blank">Merge sort</a>                         - (S)</li>
+  <li><a href="http://en.wikipedia.org/wiki/Odd–even_sort" target="_blank">Odd–even sort</a>                   - (S)</li>
+  <li><a href="http://en.wikipedia.org/wiki/Oscillating_merge_sort" target="_blank">Oscillating merge sort</a> - (S)</li>
   <li><a href="http://en.wikipedia.org/wiki/Patience_sorting" target="_blank">Patience sorting</a></li>
   <li><a href="http://en.wikipedia.org/wiki/Polyphase_merge_sort" target="_blank">Polyphase merge sort</a></li>
   <li><a href="http://en.wikipedia.org/wiki/Quicksort" target="_blank">Quicksort</a></li>
@@ -193,7 +193,8 @@ Each level contributes to total cost of <code>cn</code></p>
   <li><a href="http://en.wikipedia.org/wiki/Timsort" target="_blank">Timsort</a></li>
 </ul>
 
-<p><br /></p>
+<p>*(S) - Stable sorts
+<br /></p>
 
 <h3 id="online-sorts">Online sorts</h3>
 
@@ -203,13 +204,14 @@ Each level contributes to total cost of <code>cn</code></p>
 
 <ul>
   <li><a href="http://en.wikipedia.org/wiki/Cycle_sort" target="_blank">Cycle sort</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Insertion_sort" target="_blank">Insertion sort</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Library_sort" target="_blank">Library sort</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Merge_sort" target="_blank">Merge sort</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Insertion_sort" target="_blank">Insertion sort</a>                 - (S)</li>
+  <li><a href="http://en.wikipedia.org/wiki/Library_sort" target="_blank">Library sort</a>                     - (S)</li>
+  <li><a href="http://en.wikipedia.org/wiki/Merge_sort" target="_blank">Merge sort</a>                         - (S)</li>
   <li><a href="http://en.wikipedia.org/wiki/Polyphase_merge_sort" target="_blank">Polyphase merge sort</a></li>
 </ul>
 
-<p><br /></p>
+<p>*(S) - Stable sorts
+<br /></p>
 
 <h3 id="stable-sorts">Stable sorts</h3>
 
