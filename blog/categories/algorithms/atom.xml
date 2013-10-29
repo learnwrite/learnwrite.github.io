@@ -4,7 +4,7 @@
   <title><![CDATA[Category: algorithms | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/algorithms/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2013-10-28T21:16:24-07:00</updated>
+  <updated>2013-10-28T22:00:29-07:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -148,18 +148,23 @@
 </table>
 
 <p><br /></p>
+
+<p><sup>*</sup>(V/D) - Variant or derived from</p>
+
+<p><br /></p>
 <table>
 <thead>
 <tr>
-    <th>Algorithm</th><th colspan="3">Time complexity</th><th>Space complexity</th>
+    <th>Algorithm</th><th colspan="3">Time complexity</th><th>Space complexity</th><th>Notes</th>
 </tr>
 <tr>
-    <th /><th>Best</th><th>Average</th><th>Worst</th><th />
+    <th /><th>Best</th><th>Average</th><th>Worst</th><th /><th />
 </tr>
 </thead>
 <tbody>
 <tr>
     <td><a href="http://en.wikipedia.org/wiki/Adaptive_heap_sort" target="_blank">Adaptive heap sort</a></td>
+    <td />
     <td />
     <td />
     <td />
@@ -171,6 +176,7 @@
     <td>O(n × n!)</td>
     <td><code class="myred">Unbounded</code></td>
     <td>O(n)</td>
+    <td />
 </tr>
 <tr>
     <td><code class="myred"><a href="http://en.wikipedia.org/wiki/Bubble_sort" target="_blank">Bubble sort</a></code></td>
@@ -178,6 +184,7 @@
     <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td><code class="myred">O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</code></td>
     <td>O(1)</td>
+    <td />
 </tr>
 <tr>
     <td><a href="http://en.wikipedia.org/wiki/Cascade_merge_sort" target="_blank">Cascade merge sort</a></td>
@@ -185,34 +192,39 @@
     <td />
     <td />
     <td />
+    <td />
 </tr>
 <tr>
-    <td><code class="myred"><a href="http://en.wikipedia.org/wiki/Cocktail_sort" target="_blank">Cocktail sort</a></code></td>
+    <td><code class="myred"><a href="http://en.wikipedia.org/wiki/Cocktail_sort" target="_blank">Cocktail sort</a></code><br />(V/D) - Bubble Sort</td>
     <td>O(n)</td>
     <td><code class="myred">O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</code></td>
     <td><code class="myred">O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</code></td>
     <td>O(1)</td>
+    <td />
 </tr>
 <tr>
-    <td><a href="http://en.wikipedia.org/wiki/Comb_sort" target="_blank">Comb sort</a></td>
+    <td><code class="myred"><a href="http://en.wikipedia.org/wiki/Comb_sort" target="_blank">Comb sort</a></code><br />(V/D) - Bubble Sort</td>
     <td>O(n)</td>
     <td>Ω(<math xmlns="http://www.w3.org/1998/Math/MathML"><mfrac><mrow><msup><mi>n</mi><mn>2</mn></msup></mrow><mrow><msup><mi>2</mi><mn>p</mn></msup></mrow></mfrac></math>)</td>
     <td>Ω(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>O(1)</td>
+    <td />
 </tr>
 <tr>
-    <td><a href="http://en.wikipedia.org/wiki/Cycle_sort" target="_blank">Cycle sort</a></td>
+    <td><code class="myyellow"><a href="http://en.wikipedia.org/wiki/Cycle_sort" target="_blank">Cycle sort</a></code></td>
     <td>Θ(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>Θ(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>Θ(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>Θ(n)</td>
+    <td><code class="mygreen">Write efficient</code></td>
 </tr>
 <tr>
-    <td><a href="http://en.wikipedia.org/wiki/Gnome_sort" target="_blank">Gnome sort</a></td>
+    <td><a href="http://en.wikipedia.org/wiki/Gnome_sort" target="_blank">Gnome sort</a><br />Bubble + Insertion sort</td>
     <td>O(n)</td>
     <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>O(1)</td>
+    <td />
 </tr>
 <tr>
     <td><a href="http://en.wikipedia.org/wiki/Heapsort" target="_blank">Heapsort</a></td>
