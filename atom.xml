@@ -4,7 +4,7 @@
   <title><![CDATA[Learnings]]></title>
   <link href="http://learnwrite.github.io/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2013-10-28T23:30:57-07:00</updated>
+  <updated>2013-10-28T23:34:53-07:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -400,6 +400,7 @@ Each level contributes to total cost of <code>cn</code></p>
     <td>O(nlogn)</td>
     <td>O(nlogn)</td>
     <td>O(n)</td>
+    <td />
 </tr>
 <tr>
     <td><a href="http://en.wikipedia.org/wiki/Odd–even_sort" target="_blank">Odd–even sort</a></td>
@@ -407,9 +408,11 @@ Each level contributes to total cost of <code>cn</code></p>
     <td />
     <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td />
+    <td />
 </tr>
 <tr>
     <td><a href="http://en.wikipedia.org/wiki/Oscillating_merge_sort" target="_blank">Oscillating merge sort</a></td>
+    <td />
     <td />
     <td />
     <td />
@@ -421,9 +424,11 @@ Each level contributes to total cost of <code>cn</code></p>
     <td />
     <td>O(nlogn)</td>
     <td />
+    <td />
 </tr>
 <tr>
     <td><a href="http://en.wikipedia.org/wiki/Polyphase_merge_sort" target="_blank">Polyphase merge sort</a></td>
+    <td />
     <td />
     <td />
     <td />
@@ -435,6 +440,7 @@ Each level contributes to total cost of <code>cn</code></p>
     <td>O(nlogn)</td>
     <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>O(n)</td>
+    <td />
 </tr>
 <tr>
     <td><code class="myred"><a href="http://en.wikipedia.org/wiki/Selection_sort" target="_blank">Selection sort</a></code></td>
@@ -442,6 +448,7 @@ Each level contributes to total cost of <code>cn</code></p>
     <td><code class="myred">O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</code></td>
     <td><code class="myred">O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</code></td>
     <td>O(n)</td>
+    <td />
 </tr>
 <tr>
     <td><a href="http://en.wikipedia.org/wiki/Shellsort" target="_blank">Shellsort</a></td>
@@ -449,6 +456,7 @@ Each level contributes to total cost of <code>cn</code></p>
     <td>Depends on gap seq</td>
     <td>Depends on gap seq</td>
     <td>O(n)</td>
+    <td />
 </tr>
 <tr>
     <td><a href="http://en.wikipedia.org/wiki/Smoothsort" target="_blank">Smoothsort</a></td>
@@ -456,6 +464,7 @@ Each level contributes to total cost of <code>cn</code></p>
     <td>O(nlogn)</td>
     <td>O(nlogn)</td>
     <td>O(n)</td>
+    <td />
 </tr>
 <tr>
     <td><a href="http://en.wikipedia.org/wiki/Stooge_sort" target="_blank">Stooge sort</a></td>
@@ -463,6 +472,7 @@ Each level contributes to total cost of <code>cn</code></p>
     <td />
     <td />
     <td>O(n)</td>
+    <td />
 </tr>
 <tr>
     <td><a href="http://en.wikipedia.org/wiki/Strand_sort" target="_blank">Strand sort</a></td>
@@ -470,6 +480,7 @@ Each level contributes to total cost of <code>cn</code></p>
     <td><code class="myred">O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</code></td>
     <td><code class="myred">O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</code></td>
     <td>O(1)</td>
+    <td />
 </tr>
 <tr>
     <td><a href="http://en.wikipedia.org/wiki/Timsort" target="_blank">Timsort</a></td>
@@ -477,8 +488,10 @@ Each level contributes to total cost of <code>cn</code></p>
     <td>O(nlogn)</td>
     <td>O(nlogn)</td>
     <td>O(n)</td>
+    <td />
 </tr>
 <tr>
+    <td />
     <td />
     <td />
     <td />
@@ -491,6 +504,7 @@ Each level contributes to total cost of <code>cn</code></p>
     <th />
     <th />
     <th />
+    <td />
 </tr>
 <tr>
     <td><a href="http://en.wikipedia.org/wiki/Cycle_sort" target="_blank">Cycle sort</a></td>
@@ -498,6 +512,7 @@ Each level contributes to total cost of <code>cn</code></p>
     <td>Θ(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>Θ(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>Θ(n)</td>
+    <td />
 </tr>
 <tr>
     <td><a href="http://en.wikipedia.org/wiki/Insertion_sort" target="_blank">Insertion sort</a></td>
@@ -505,6 +520,7 @@ Each level contributes to total cost of <code>cn</code></p>
     <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>O(n)</td>
+    <td />
 </tr>
 <tr>
     <td><a href="http://en.wikipedia.org/wiki/Library_sort" target="_blank">Library sort</a></td>
@@ -512,6 +528,7 @@ Each level contributes to total cost of <code>cn</code></p>
     <td>O(nlogn)</td>
     <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>O(n)</td>
+    <td />
 </tr>
 <tr>
     <td><a href="http://en.wikipedia.org/wiki/Merge_sort" target="_blank">Merge sort</a></td>
@@ -519,6 +536,7 @@ Each level contributes to total cost of <code>cn</code></p>
     <td>O(nlogn)</td>
     <td>O(nlogn)</td>
     <td>O(n)</td>
+    <td />
 </tr>
 <tr>
     <td><a href="http://en.wikipedia.org/wiki/Polyphase_merge_sort" target="_blank">Polyphase merge sort</a></td>
@@ -526,8 +544,10 @@ Each level contributes to total cost of <code>cn</code></p>
     <td />
     <td />
     <td />
+    <td />
 </tr>
 <tr>
+    <td />
     <td />
     <td />
     <td />
