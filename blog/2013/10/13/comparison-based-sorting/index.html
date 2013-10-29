@@ -9,7 +9,7 @@
   <meta name="author" content="Vaibhav Gautam">
 
   
-  <meta name="description" content="Merge Sort Points to Note Table based comparison Merge Sort Merge sort follows divide-and-conquer approach. 1MERGE-SORT(A, p, r) // A is array of &hellip;">
+  <meta name="description" content="Merge Sort Table based comparison Merge Sort Merge sort follows divide-and-conquer approach. 1MERGE-SORT(A, p, r) // A is array of numbers 2{ // p &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -137,7 +137,6 @@
 
 <div class="entry-content"><ul id="markdown-toc">
   <li><a href="#merge-sort">Merge Sort</a></li>
-  <li><a href="#points-to-note">Points to Note</a></li>
   <li><a href="#table-based-comparison">Table based comparison</a></li>
 </ul>
 
@@ -214,20 +213,6 @@ Each level contributes to total cost of <code>cn</code></p>
 
 <p>Total cost = <em>cn logn + cn = O(nlogn)</em> </p>
 
-<h3 id="points-to-note">Points to Note</h3>
-
-<ul>
-  <li><code>Merge sort</code> run in <code>O(n logn)</code> time</li>
-  <li><code>Merge sort</code> uses extra <code>O(n)</code> space</li>
-  <li><code>Insertion sort</code> run in O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</li>
-  <li><code>Insertion sort</code> uses no extra space</li>
-  <li><code>Heap sort</code> combines better attributes of both Insertion sort (Space) and Merge Sort (Time)</li>
-  <li><code>Heap sort</code> run in <code>O(nlogn)</code> time and only constant number of array elements are stored outside the input array at a time.</li>
-  <li><code>Quicksort</code> worst case running time is Θ(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</li>
-  <li><code>Quicksort</code> sorts in place, it works really well in virtual memory env. </li>
-  <li>Inspite of slow worst-case running time, quicksort is the best practical choice for sorting. It is remarkably efficient on the average case Θ(nlogn).</li>
-</ul>
-
 <h3 id="table-based-comparison">Table based comparison</h3>
 
 <table>
@@ -248,24 +233,29 @@ Each level contributes to total cost of <code>cn</code></p>
     <td>Best:  O(nlogn)<br />Avg:   O(nlogn)<br />Worst: O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
 </tr>
 <tr>
+    <td>Divide and Conquer</td>
+    <td />
+    <td>Divide and Conquer</td>
+</tr>
+<tr>
     <td>Runs better than heapsort<br /> in data cache if its on array</td>
     <td>Runs faster in small data cache</td>
-    <td />
+    <td>Works really well in<br /> virtual memory env/Caches</td>
 </tr>
 <tr>
     <td>Access frequent contiguous<br /> memory locations</td>
     <td>Spread throughout the heap</td>
-    <td />
+    <td>Access frequent contiguous<br /> memory locations</td>
 </tr>
 <tr>
     <td>Stable</td>
     <td>Not Stable</td>
-    <td />
+    <td>Not Stable</td>
 </tr>
 <tr>
     <td>Parallelize well</td>
     <td>Do not Parallelize well</td>
-    <td />
+    <td>Parallelize well</td>
 </tr>
 <tr>
     <td>Used in external sort</td>
