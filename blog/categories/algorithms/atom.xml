@@ -4,7 +4,7 @@
   <title><![CDATA[Category: algorithms | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/algorithms/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2013-10-28T22:04:35-07:00</updated>
+  <updated>2013-10-28T22:53:38-07:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -231,7 +231,8 @@
     <td>Ω(n), O(nlogn)</td>
     <td>O(nlogn)</td>
     <td>O(nlogn)</td>
-    <td>O(n)</td>
+    <td>O(1)</td>
+    <td />
 </tr>
 <tr>
     <td><a href="http://en.wikipedia.org/wiki/Insertion_sort" target="_blank">Insertion sort</a></td>

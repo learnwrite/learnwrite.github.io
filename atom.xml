@@ -4,7 +4,7 @@
   <title><![CDATA[Learnings]]></title>
   <link href="http://learnwrite.github.io/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2013-10-28T22:04:35-07:00</updated>
+  <updated>2013-10-28T22:53:38-07:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -21,11 +21,12 @@
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#merge-sort">Merge Sort</a></li>
   <li><a href="#points-to-note">Points to Note</a></li>
+  <li><a href="#table-based-comparison">Table based comparison</a></li>
 </ul>
 
 <h3 id="merge-sort">Merge Sort</h3>
 
-<p>Merge sort follows <em>divide-and-conquer</em> approach.</p>
+<p>Merge sort follows <code>divide-and-conquer</code> approach.</p>
 
 <p><br /><br /></p>
 
@@ -109,6 +110,53 @@ Each level contributes to total cost of <code>cn</code></p>
   <li><code>Quicksort</code> sorts in place, it works really well in virtual memory env. </li>
   <li>Inspite of slow worst-case running time, quicksort is the best practical choice for sorting. It is remarkably efficient on the average case Θ(nlogn).</li>
 </ul>
+
+<h3 id="table-based-comparison">Table based comparison</h3>
+
+<table>
+<thead>
+<tr>
+    <th>Merge Sort</th><th>Heap Sort</th><th>Quick Sort</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+    <td>O(n) Space</td>
+    <td><code class="mygreen">In place</code></td>
+    <td><code class="mygreen">In place</code></td>
+</tr>
+<tr>
+    <td>Best:  O(nlogn)<br />Avg:   O(nlogn)<br />Worst: O(nlogn)</td>
+    <td>Best:  O(nlogn)<br />Avg:   O(nlogn)<br />Worst: O(nlogn)</td>
+    <td>Best:  O(nlogn)<br />Avg:   O(nlogn)<br />Worst: O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
+</tr>
+<tr>
+    <td>Runs better than heapsort<br /> in data cache if its on array</td>
+    <td>Runs faster in small data cache</td>
+    <td />
+</tr>
+<tr>
+    <td>Access frequent contiguous<br /> memory locations</td>
+    <td>Spread throughout the heap</td>
+    <td />
+</tr>
+<tr>
+    <td>Stable</td>
+    <td>Not Stable</td>
+    <td />
+</tr>
+<tr>
+    <td>Parallelize well</td>
+    <td>Do not Parallelize well</td>
+    <td />
+</tr>
+<tr>
+    <td>Used in external sort</td>
+    <td>Can not be used in external sort.<br /> <code class="myred">Locality of ref is issue.</code></td>
+    <td />
+</tr>
+</tbody>
+</table>
 ]]></content>
   </entry>
   
@@ -329,7 +377,8 @@ Each level contributes to total cost of <code>cn</code></p>
     <td>Ω(n), O(nlogn)</td>
     <td>O(nlogn)</td>
     <td>O(nlogn)</td>
-    <td>O(n)</td>
+    <td>O(1)</td>
+    <td />
 </tr>
 <tr>
     <td><a href="http://en.wikipedia.org/wiki/Insertion_sort" target="_blank">Insertion sort</a></td>
