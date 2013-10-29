@@ -4,7 +4,7 @@
   <title><![CDATA[Category: sorting | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/sorting/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2013-10-28T21:09:28-07:00</updated>
+  <updated>2013-10-28T21:16:24-07:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -265,14 +265,14 @@ Each level contributes to total cost of <code>cn</code></p>
     <td />
 </tr>
 <tr>
-    <td><a href="http://en.wikipedia.org/wiki/Bogosort" target="_blank">Bogosort</a></td>
-    <td><code class="mygreen">Ω(n)</code></td>
+    <td><code class="myred"><a href="http://en.wikipedia.org/wiki/Bogosort" target="_blank">Bogosort</a></code></td>
+    <td><code class="myyellow">Ω(n)</code></td>
     <td>O(n × n!)</td>
     <td><code class="myred">Unbounded</code></td>
     <td>O(n)</td>
 </tr>
 <tr>
-    <td><a href="http://en.wikipedia.org/wiki/Bubble_sort" target="_blank">Bubble sort</a></td>
+    <td><code class="myred"><a href="http://en.wikipedia.org/wiki/Bubble_sort" target="_blank">Bubble sort</a></code></td>
     <td>O(n)</td>
     <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td><code class="myred">O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</code></td>
@@ -286,7 +286,7 @@ Each level contributes to total cost of <code>cn</code></p>
     <td />
 </tr>
 <tr>
-    <td><a href="http://en.wikipedia.org/wiki/Cocktail_sort" target="_blank">Cocktail sort</a></td>
+    <td><code class="myred"><a href="http://en.wikipedia.org/wiki/Cocktail_sort" target="_blank">Cocktail sort</a></code></td>
     <td>O(n)</td>
     <td><code class="myred">O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</code></td>
     <td><code class="myred">O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</code></td>
