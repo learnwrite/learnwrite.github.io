@@ -4,7 +4,7 @@
   <title><![CDATA[Category: algorithms | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/algorithms/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2013-10-28T23:34:53-07:00</updated>
+  <updated>2013-10-28T23:42:41-07:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -251,19 +251,19 @@
     <td>Quick sort + Heap sort<br /><a href="https://drive.google.com/file/d/0BySPJjyZBnC2cTExSXhidENrR1E/edit?usp=sharing" target="_blank"> IntroSort Paper</a></td>
 </tr>
 <tr>
-    <td><a href="http://en.wikipedia.org/wiki/Library_sort" target="_blank">Library sort</a></td>
+    <td><code class="myyellow"><a href="http://en.wikipedia.org/wiki/Library_sort" target="_blank">Library sort</a></code></td>
     <td>O(n)</td>
     <td>O(nlogn)</td>
     <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
-    <td>O(n)</td>
-    <td />
+    <td><code class="myred">O(n)</code></td>
+    <td>(V/D) - Insertion sort</td>
 </tr>
 <tr>
-    <td><a href="http://en.wikipedia.org/wiki/Merge_sort" target="_blank">Merge sort</a></td>
+    <td>&lt;<code class="mygreen"><a href="http://en.wikipedia.org/wiki/Merge_sort" target="_blank">Merge sort</a></code></td>
     <td>O(n), O(nlogn)</td>
     <td>O(nlogn)</td>
     <td>O(nlogn)</td>
-    <td>O(n)</td>
+    <td><code class="myred">O(n)</code></td>
     <td />
 </tr>
 <tr>
