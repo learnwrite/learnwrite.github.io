@@ -9,7 +9,7 @@
   <meta name="author" content="Vaibhav Gautam">
 
   
-  <meta name="description" content="Merge Sort Points to Note Merge Sort Merge sort follows divide-and-conquer approach. 1MERGE-SORT(A, p, r) // A is array of numbers 2{ // p is &hellip;">
+  <meta name="description" content="Merge Sort Table based comparison References Merge Sort Merge sort follows divide-and-conquer approach. 1MERGE-SORT(A, p, r) // A is array of &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -140,12 +140,13 @@
 
   <div class="entry-content"><ul id="markdown-toc">
   <li><a href="#merge-sort">Merge Sort</a></li>
-  <li><a href="#points-to-note">Points to Note</a></li>
+  <li><a href="#table-based-comparison">Table based comparison</a></li>
+  <li><a href="#references">References</a></li>
 </ul>
 
 <h3 id="merge-sort">Merge Sort</h3>
 
-<p>Merge sort follows <em>divide-and-conquer</em> approach.</p>
+<p>Merge sort follows <code>divide-and-conquer</code> approach.</p>
 
 <p><br /><br /></p>
 
@@ -216,18 +217,68 @@ Each level contributes to total cost of <code>cn</code></p>
 
 <p>Total cost = <em>cn logn + cn = O(nlogn)</em> </p>
 
-<h3 id="points-to-note">Points to Note</h3>
+<h3 id="table-based-comparison">Table based comparison</h3>
 
+<table>
+<thead>
+<tr>
+    <th><a href="http://en.wikipedia.org/wiki/Merge_sort" target="_blank">Merge Sort</a></th><th><a href="http://en.wikipedia.org/wiki/Heapsort" target="_blank">Heap Sort</a></th><th><a href="http://en.wikipedia.org/wiki/Quicksort" target="_blank">Quick Sort</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+    <td>Space O(n)</td>
+    <td><code class="mygreen">In place</code></td>
+    <td><code class="mygreen">In place</code></td>
+</tr>
+<tr>
+    <td>Best:  O(nlogn)<br />Avg:   O(nlogn)<br />Worst: O(nlogn)</td>
+    <td>Best:  O(nlogn)<br />Avg:   O(nlogn)<br />Worst: O(nlogn)</td>
+    <td>Best:  O(nlogn)<br />Avg:   O(nlogn)<br />Worst: O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
+</tr>
+<tr>
+    <td>Divide and Conquer</td>
+    <td />
+    <td>Divide and Conquer</td>
+</tr>
+<tr>
+    <td>Runs better than heapsort<br /> in data cache if its on array</td>
+    <td>Runs faster in small data cache</td>
+    <td>Works really well in<br /> virtual memory env/Caches</td>
+</tr>
+<tr>
+    <td>Access frequent contiguous<br /> memory locations</td>
+    <td>Spread throughout the heap</td>
+    <td>Access frequent contiguous<br /> memory locations</td>
+</tr>
+<tr>
+    <td>Stable</td>
+    <td>Not Stable</td>
+    <td>Not Stable</td>
+</tr>
+<tr>
+    <td>Parallelize well</td>
+    <td>Do not Parallelize well</td>
+    <td>Parallelize well</td>
+</tr>
+<tr>
+    <td>Used in external sort</td>
+    <td>Can not be used in external sort.<br /> <code class="myred">Locality of ref is issue.</code></td>
+    <td>Used in external sort</td>
+</tr>
+</tbody>
+</table>
+
+<p><br /></p>
+
+<h3 id="references">References</h3>
 <ul>
-  <li><code>Merge sort</code> run in <code>O(n logn)</code> time</li>
-  <li><code>Merge sort</code> uses extra <code>O(n)</code> space</li>
-  <li><code>Insertion sort</code> run in O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</li>
-  <li><code>Insertion sort</code> uses no extra space</li>
-  <li><code>Heap sort</code> combines better attributes of both Insertion sort (Space) and Merge Sort (Time)</li>
-  <li><code>Heap sort</code> run in <code>O(nlogn)</code> time and only constant number of array elements are stored outside the input array at a time.</li>
-  <li><code>Quicksort</code> worst case running time is Θ(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</li>
-  <li><code>Quicksort</code> sorts in place, it works really well in virtual memory env. </li>
-  <li>Inspite of slow worst-case running time, quicksort is the best practical choice for sorting. It is remarkably efficient on the average case Θ(nlogn).</li>
+  <li>
+    <p><a href="https://drive.google.com/file/d/0BySPJjyZBnC2RU1BamFUa0RmaDQ/edit?usp=sharing" target="_blank">Article comparing sorting</a></p>
+  </li>
+  <li>
+    <p><a href="http://learnwrite.github.io/blog/2013/10/12/sorting/" target="_blank"> Sorting in detail</a></p>
+  </li>
 </ul>
 </div>
   
@@ -267,6 +318,9 @@ Each level contributes to total cost of <code>cn</code></p>
 
 
   <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#dictionary-of-algorithms">Dictionary of algorithms</a></li>
+  <li><a href="#sorting-visualization">Sorting Visualization</a></li>
+  <li><a href="#sorting-wiki-summary">Sorting Wiki Summary</a></li>
   <li><a href="#sorting-algorithms">Sorting algorithms</a></li>
   <li><a href="#comparisons-based-sorting">Comparisons based sorting</a></li>
   <li><a href="#online-sorts">Online sorts</a></li>
@@ -289,6 +343,24 @@ Each level contributes to total cost of <code>cn</code></p>
   </div>
   <a href="http://en.wikipedia.org/wiki/Sorting_algorithm">Read more</a>
 </div>
+
+<p><br /></p>
+
+<h3 id="dictionary-of-algorithms">Dictionary of algorithms</h3>
+
+<p><a href="http://xlinux.nist.gov/dads//" target="_blank">Dictionary of algorithms</a></p>
+
+<p><br /></p>
+
+<h3 id="sorting-visualization">Sorting Visualization</h3>
+
+<p><a href="http://corte.si/posts/code/visualisingsorting/index.html" target="_blank">Sorting Visualization</a></p>
+
+<p><br /></p>
+
+<h3 id="sorting-wiki-summary">Sorting Wiki Summary</h3>
+
+<p><a href="http://en.wikipedia.org/wiki/Sorting_algorithm" target="_blank">Sorting Wiki Summary</a></p>
 
 <p><br /></p>
 
@@ -395,13 +467,17 @@ Each level contributes to total cost of <code>cn</code></p>
 </table>
 
 <p><br /></p>
+
+<p><sup>*</sup>(V/D) - Variant or derived from</p>
+
+<p><br /></p>
 <table>
 <thead>
 <tr>
-    <th>Algorithm</th><th colspan="3">Time complexity</th><th>Space complexity</th>
+    <th>Algorithm</th><th colspan="3">Time complexity</th><th>Space complexity</th><th>Notes</th>
 </tr>
 <tr>
-    <th /><th>Best</th><th>Average</th><th>Worst</th><th />
+    <th /><th>Best</th><th>Average</th><th>Worst</th><th /><th />
 </tr>
 </thead>
 <tbody>
@@ -411,20 +487,23 @@ Each level contributes to total cost of <code>cn</code></p>
     <td />
     <td />
     <td />
+    <td />
 </tr>
 <tr>
-    <td><a href="http://en.wikipedia.org/wiki/Bogosort" target="_blank">Bogosort</a></td>
-    <td><code class="mygreen">Ω(n)</code></td>
+    <td><code class="myred"><a href="http://en.wikipedia.org/wiki/Bogosort" target="_blank">Bogosort</a></code></td>
+    <td><code class="myyellow">Ω(n)</code></td>
     <td>O(n × n!)</td>
     <td><code class="myred">Unbounded</code></td>
     <td>O(n)</td>
+    <td />
 </tr>
 <tr>
-    <td><a href="http://en.wikipedia.org/wiki/Bubble_sort" target="_blank">Bubble sort</a></td>
+    <td><code class="myred"><a href="http://en.wikipedia.org/wiki/Bubble_sort" target="_blank">Bubble sort</a></code></td>
     <td>O(n)</td>
     <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td><code class="myred">O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</code></td>
     <td>O(1)</td>
+    <td />
 </tr>
 <tr>
     <td><a href="http://en.wikipedia.org/wiki/Cascade_merge_sort" target="_blank">Cascade merge sort</a></td>
@@ -432,27 +511,31 @@ Each level contributes to total cost of <code>cn</code></p>
     <td />
     <td />
     <td />
+    <td />
 </tr>
 <tr>
-    <td><a href="http://en.wikipedia.org/wiki/Cocktail_sort" target="_blank">Cocktail sort</a></td>
+    <td><code class="myred"><a href="http://en.wikipedia.org/wiki/Cocktail_sort" target="_blank">Cocktail sort</a></code></td>
     <td>O(n)</td>
-    <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
+    <td><code class="myred">O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</code></td>
     <td><code class="myred">O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</code></td>
     <td>O(1)</td>
+    <td>(V/D) - Bubble Sort</td>
 </tr>
 <tr>
-    <td><a href="http://en.wikipedia.org/wiki/Comb_sort" target="_blank">Comb sort</a></td>
+    <td><code class="myred"><a href="http://en.wikipedia.org/wiki/Comb_sort" target="_blank">Comb sort</a></code></td>
     <td>O(n)</td>
     <td>Ω(<math xmlns="http://www.w3.org/1998/Math/MathML"><mfrac><mrow><msup><mi>n</mi><mn>2</mn></msup></mrow><mrow><msup><mi>2</mi><mn>p</mn></msup></mrow></mfrac></math>)</td>
     <td>Ω(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>O(1)</td>
+    <td>(V/D) - Bubble Sort</td>
 </tr>
 <tr>
-    <td><a href="http://en.wikipedia.org/wiki/Cycle_sort" target="_blank">Cycle sort</a></td>
+    <td><code class="myyellow"><a href="http://en.wikipedia.org/wiki/Cycle_sort" target="_blank">Cycle sort</a></code></td>
     <td>Θ(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>Θ(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>Θ(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>Θ(n)</td>
+    <td><code class="mygreen">Write efficient</code></td>
 </tr>
 <tr>
     <td><a href="http://en.wikipedia.org/wiki/Gnome_sort" target="_blank">Gnome sort</a></td>
@@ -460,48 +543,55 @@ Each level contributes to total cost of <code>cn</code></p>
     <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>O(1)</td>
+    <td>Bubble + Insertion sort</td>
 </tr>
 <tr>
-    <td><a href="http://en.wikipedia.org/wiki/Heapsort" target="_blank">Heapsort</a></td>
+    <td><code class="mygreen"><a href="http://en.wikipedia.org/wiki/Heapsort" target="_blank">Heapsort</a></code></td>
     <td>Ω(n), O(nlogn)</td>
     <td>O(nlogn)</td>
     <td>O(nlogn)</td>
-    <td>O(n)</td>
+    <td><code class="mygreen">O(1)</code></td>
+    <td><a href="http://learnwrite.github.io/blog/2013/10/13/comparison-based-sorting/#table-based-comparison" target="_blank">Detailed notes</a></td>
 </tr>
 <tr>
-    <td><a href="http://en.wikipedia.org/wiki/Insertion_sort" target="_blank">Insertion sort</a></td>
+    <td><code class="myyellow"><a href="http://en.wikipedia.org/wiki/Insertion_sort" target="_blank">Insertion sort</a></code></td>
     <td>O(n)</td>
     <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>O(n)</td>
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Introsort" target="_blank">Introsort</a></td>
-    <td />
-    <td>O(nlogn)</td>
-    <td>O(nlogn)</td>
     <td />
 </tr>
 <tr>
-    <td><a href="http://en.wikipedia.org/wiki/Library_sort" target="_blank">Library sort</a></td>
+    <td><code class="mygreen"><a href="http://en.wikipedia.org/wiki/Introsort" target="_blank">Introsort</a></code></td>
+    <td>O(nlogn)</td>
+    <td>O(nlogn)</td>
+    <td>O(nlogn)</td>
+    <td />
+    <td>Quick sort + Heap sort<br /><a href="https://drive.google.com/file/d/0BySPJjyZBnC2cTExSXhidENrR1E/edit?usp=sharing" target="_blank"> IntroSort Paper</a></td>
+</tr>
+<tr>
+    <td><code class="myyellow"><a href="http://en.wikipedia.org/wiki/Library_sort" target="_blank">Library sort</a></code></td>
     <td>O(n)</td>
     <td>O(nlogn)</td>
     <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
-    <td>O(n)</td>
+    <td><code class="myred">O(n)</code></td>
+    <td>(V/D) - Insertion sort</td>
 </tr>
 <tr>
-    <td><a href="http://en.wikipedia.org/wiki/Merge_sort" target="_blank">Merge sort</a></td>
+    <td><code class="mygreen"><a href="http://en.wikipedia.org/wiki/Merge_sort" target="_blank">Merge sort</a></code></td>
     <td>O(n), O(nlogn)</td>
     <td>O(nlogn)</td>
     <td>O(nlogn)</td>
-    <td>O(n)</td>
+    <td><code class="myred">O(n)</code></td>
+    <td><a href="http://learnwrite.github.io/blog/2013/10/13/comparison-based-sorting/#table-based-comparison" target="_blank">Detailed notes</a></td>
 </tr>
 <tr>
-    <td><a href="http://en.wikipedia.org/wiki/Odd–even_sort" target="_blank">Odd–even sort</a></td>
-    <td />
+    <td><code class="myred"><a href="http://en.wikipedia.org/wiki/Odd–even_sort" target="_blank">Odd–even sort</a></code></td>
+    <td>O(n)</td>
     <td />
     <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
-    <td />
+    <td>O(1)</td>
+    <td>*(V/D) - Bubble sort</td>
 </tr>
 <tr>
     <td><a href="http://en.wikipedia.org/wiki/Oscillating_merge_sort" target="_blank">Oscillating merge sort</a></td>
@@ -509,13 +599,15 @@ Each level contributes to total cost of <code>cn</code></p>
     <td />
     <td />
     <td />
+    <td />
 </tr>
 <tr>
-    <td><a href="http://en.wikipedia.org/wiki/Patience_sorting" target="_blank">Patience sorting</a></td>
+    <td><code class="mygreen"><a href="http://en.wikipedia.org/wiki/Patience_sorting" target="_blank">Patience sorting</a></code></td>
     <td />
     <td />
     <td>O(nlogn)</td>
-    <td />
+    <td>O(n)</td>
+    <td><a href="http://wordaligned.org/articles/patience-sort" target="_blank">Longest common sequence</a></td>
 </tr>
 <tr>
     <td><a href="http://en.wikipedia.org/wiki/Polyphase_merge_sort" target="_blank">Polyphase merge sort</a></td>
@@ -523,57 +615,66 @@ Each level contributes to total cost of <code>cn</code></p>
     <td />
     <td />
     <td />
+    <td />
 </tr>
 <tr>
-    <td><a href="http://en.wikipedia.org/wiki/Quicksort" target="_blank">Quicksort</a></td>
+    <td><code class="mygreen"><a href="http://en.wikipedia.org/wiki/Quicksort" target="_blank">Quicksort</a></code></td>
     <td>O(nlogn)</td>
     <td>O(nlogn)</td>
     <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>O(n)</td>
+    <td />
 </tr>
 <tr>
-    <td><a href="http://en.wikipedia.org/wiki/Selection_sort" target="_blank">Selection sort</a></td>
+    <td><code class="myred"><a href="http://en.wikipedia.org/wiki/Selection_sort" target="_blank">Selection sort</a></code></td>
     <td><code class="myred">O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</code></td>
     <td><code class="myred">O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</code></td>
     <td><code class="myred">O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</code></td>
     <td>O(n)</td>
+    <td />
 </tr>
 <tr>
-    <td><a href="http://en.wikipedia.org/wiki/Shellsort" target="_blank">Shellsort</a></td>
+    <td><code class="myyellow"><a href="http://en.wikipedia.org/wiki/Shellsort" target="_blank">Shellsort</a></code></td>
     <td>Depends on gap seq</td>
     <td>Depends on gap seq</td>
     <td>Depends on gap seq</td>
     <td>O(n)</td>
+    <td>Faster on partial sorted list</td>
 </tr>
 <tr>
-    <td><a href="http://en.wikipedia.org/wiki/Smoothsort" target="_blank">Smoothsort</a></td>
+    <td><code class="mygreen"><a href="http://en.wikipedia.org/wiki/Smoothsort" target="_blank">Smoothsort</a></code></td>
     <td>O(n)</td>
     <td>O(nlogn)</td>
     <td>O(nlogn)</td>
     <td>O(n)</td>
+    <td>*(V/D) - Heap sort</td>
 </tr>
 <tr>
-    <td><a href="http://en.wikipedia.org/wiki/Stooge_sort" target="_blank">Stooge sort</a></td>
+    <td><code class="myred"><a href="http://en.wikipedia.org/wiki/Stooge_sort" target="_blank">Stooge sort</a></code></td>
     <td />
     <td />
     <td />
     <td>O(n)</td>
+    <td>Slower than bubble sort</td>
 </tr>
 <tr>
-    <td><a href="http://en.wikipedia.org/wiki/Strand_sort" target="_blank">Strand sort</a></td>
+    <td><code class="myred"><a href="http://en.wikipedia.org/wiki/Strand_sort" target="_blank">Strand sort</a></code></td>
     <td>O(n)</td>
     <td><code class="myred">O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</code></td>
     <td><code class="myred">O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</code></td>
     <td>O(1)</td>
+    <td />
 </tr>
 <tr>
-    <td><a href="http://en.wikipedia.org/wiki/Timsort" target="_blank">Timsort</a></td>
+    <td><code class="mygreen"><a href="http://en.wikipedia.org/wiki/Timsort" target="_blank">Timsort</a></code></td>
     <td>O(n)</td>
     <td>O(nlogn)</td>
     <td>O(nlogn)</td>
     <td>O(n)</td>
+    <td>Merge + Insertion sort</td>
 </tr>
 <tr>
+    <td />
     <td />
     <td />
     <td />
@@ -586,6 +687,7 @@ Each level contributes to total cost of <code>cn</code></p>
     <th />
     <th />
     <th />
+    <td />
 </tr>
 <tr>
     <td><a href="http://en.wikipedia.org/wiki/Cycle_sort" target="_blank">Cycle sort</a></td>
@@ -593,6 +695,7 @@ Each level contributes to total cost of <code>cn</code></p>
     <td>Θ(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>Θ(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>Θ(n)</td>
+    <td />
 </tr>
 <tr>
     <td><a href="http://en.wikipedia.org/wiki/Insertion_sort" target="_blank">Insertion sort</a></td>
@@ -600,6 +703,7 @@ Each level contributes to total cost of <code>cn</code></p>
     <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>O(n)</td>
+    <td />
 </tr>
 <tr>
     <td><a href="http://en.wikipedia.org/wiki/Library_sort" target="_blank">Library sort</a></td>
@@ -607,6 +711,7 @@ Each level contributes to total cost of <code>cn</code></p>
     <td>O(nlogn)</td>
     <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
     <td>O(n)</td>
+    <td />
 </tr>
 <tr>
     <td><a href="http://en.wikipedia.org/wiki/Merge_sort" target="_blank">Merge sort</a></td>
@@ -614,6 +719,7 @@ Each level contributes to total cost of <code>cn</code></p>
     <td>O(nlogn)</td>
     <td>O(nlogn)</td>
     <td>O(n)</td>
+    <td />
 </tr>
 <tr>
     <td><a href="http://en.wikipedia.org/wiki/Polyphase_merge_sort" target="_blank">Polyphase merge sort</a></td>
@@ -621,8 +727,10 @@ Each level contributes to total cost of <code>cn</code></p>
     <td />
     <td />
     <td />
+    <td />
 </tr>
 <tr>
+    <td />
     <td />
     <td />
     <td />

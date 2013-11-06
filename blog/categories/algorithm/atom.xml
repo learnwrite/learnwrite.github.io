@@ -4,7 +4,7 @@
   <title><![CDATA[Category: algorithm | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2013-10-15T20:51:57-07:00</updated>
+  <updated>2013-11-05T23:33:56-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -20,12 +20,13 @@
     <id>http://learnwrite.github.io/blog/2013/10/13/comparison-based-sorting</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#merge-sort">Merge Sort</a></li>
-  <li><a href="#points-to-note">Points to Note</a></li>
+  <li><a href="#table-based-comparison">Table based comparison</a></li>
+  <li><a href="#references">References</a></li>
 </ul>
 
 <h3 id="merge-sort">Merge Sort</h3>
 
-<p>Merge sort follows <em>divide-and-conquer</em> approach.</p>
+<p>Merge sort follows <code>divide-and-conquer</code> approach.</p>
 
 <p><br /><br /></p>
 
@@ -96,18 +97,68 @@ Each level contributes to total cost of <code>cn</code></p>
 
 <p>Total cost = <em>cn logn + cn = O(nlogn)</em> </p>
 
-<h3 id="points-to-note">Points to Note</h3>
+<h3 id="table-based-comparison">Table based comparison</h3>
 
+<table>
+<thead>
+<tr>
+    <th><a href="http://en.wikipedia.org/wiki/Merge_sort" target="_blank">Merge Sort</a></th><th><a href="http://en.wikipedia.org/wiki/Heapsort" target="_blank">Heap Sort</a></th><th><a href="http://en.wikipedia.org/wiki/Quicksort" target="_blank">Quick Sort</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+    <td>Space O(n)</td>
+    <td><code class="mygreen">In place</code></td>
+    <td><code class="mygreen">In place</code></td>
+</tr>
+<tr>
+    <td>Best:  O(nlogn)<br />Avg:   O(nlogn)<br />Worst: O(nlogn)</td>
+    <td>Best:  O(nlogn)<br />Avg:   O(nlogn)<br />Worst: O(nlogn)</td>
+    <td>Best:  O(nlogn)<br />Avg:   O(nlogn)<br />Worst: O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
+</tr>
+<tr>
+    <td>Divide and Conquer</td>
+    <td />
+    <td>Divide and Conquer</td>
+</tr>
+<tr>
+    <td>Runs better than heapsort<br /> in data cache if its on array</td>
+    <td>Runs faster in small data cache</td>
+    <td>Works really well in<br /> virtual memory env/Caches</td>
+</tr>
+<tr>
+    <td>Access frequent contiguous<br /> memory locations</td>
+    <td>Spread throughout the heap</td>
+    <td>Access frequent contiguous<br /> memory locations</td>
+</tr>
+<tr>
+    <td>Stable</td>
+    <td>Not Stable</td>
+    <td>Not Stable</td>
+</tr>
+<tr>
+    <td>Parallelize well</td>
+    <td>Do not Parallelize well</td>
+    <td>Parallelize well</td>
+</tr>
+<tr>
+    <td>Used in external sort</td>
+    <td>Can not be used in external sort.<br /> <code class="myred">Locality of ref is issue.</code></td>
+    <td>Used in external sort</td>
+</tr>
+</tbody>
+</table>
+
+<p><br /></p>
+
+<h3 id="references">References</h3>
 <ul>
-  <li><code>Merge sort</code> run in <code>O(n logn)</code> time</li>
-  <li><code>Merge sort</code> uses extra <code>O(n)</code> space</li>
-  <li><code>Insertion sort</code> run in O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</li>
-  <li><code>Insertion sort</code> uses no extra space</li>
-  <li><code>Heap sort</code> combines better attributes of both Insertion sort (Space) and Merge Sort (Time)</li>
-  <li><code>Heap sort</code> run in <code>O(nlogn)</code> time and only constant number of array elements are stored outside the input array at a time.</li>
-  <li><code>Quicksort</code> worst case running time is Θ(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</li>
-  <li><code>Quicksort</code> sorts in place, it works really well in virtual memory env. </li>
-  <li>Inspite of slow worst-case running time, quicksort is the best practical choice for sorting. It is remarkably efficient on the average case Θ(nlogn).</li>
+  <li>
+    <p><a href="https://drive.google.com/file/d/0BySPJjyZBnC2RU1BamFUa0RmaDQ/edit?usp=sharing" target="_blank">Article comparing sorting</a></p>
+  </li>
+  <li>
+    <p><a href="http://learnwrite.github.io/blog/2013/10/12/sorting/" target="_blank"> Sorting in detail</a></p>
+  </li>
 </ul>
 ]]></content>
   </entry>
