@@ -4,7 +4,7 @@
   <title><![CDATA[Category: algorithm | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2013-10-28T23:44:11-07:00</updated>
+  <updated>2013-11-05T19:07:02-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -21,6 +21,7 @@
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#merge-sort">Merge Sort</a></li>
   <li><a href="#table-based-comparison">Table based comparison</a></li>
+  <li><a href="#references">References</a></li>
 </ul>
 
 <h3 id="merge-sort">Merge Sort</h3>
@@ -101,12 +102,12 @@ Each level contributes to total cost of <code>cn</code></p>
 <table>
 <thead>
 <tr>
-    <th>Merge Sort</th><th>Heap Sort</th><th>Quick Sort</th>
+    <th><a href="http://en.wikipedia.org/wiki/Merge_sort" target="_blank">Merge Sort</a></th><th><a href="http://en.wikipedia.org/wiki/Heapsort" target="_blank">Heap Sort</a></th><th><a href="http://en.wikipedia.org/wiki/Quicksort" target="_blank">Quick Sort</a></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-    <td>O(n) Space</td>
+    <td>Space O(n)</td>
     <td><code class="mygreen">In place</code></td>
     <td><code class="mygreen">In place</code></td>
 </tr>
@@ -143,10 +144,22 @@ Each level contributes to total cost of <code>cn</code></p>
 <tr>
     <td>Used in external sort</td>
     <td>Can not be used in external sort.<br /> <code class="myred">Locality of ref is issue.</code></td>
-    <td />
+    <td>Used in external sort</td>
 </tr>
 </tbody>
 </table>
+
+<p><br /></p>
+
+<h3 id="references">References</h3>
+<ul>
+  <li>
+    <p><a href="https://drive.google.com/file/d/0BySPJjyZBnC2RU1BamFUa0RmaDQ/edit?usp=sharing" target="_blank">Article comparing sorting</a></p>
+  </li>
+  <li>
+    <p><a href="http://learnwrite.github.io/blog/2013/10/12/sorting/" target="_blank"> Sorting in detail</a></p>
+  </li>
+</ul>
 ]]></content>
   </entry>
   
