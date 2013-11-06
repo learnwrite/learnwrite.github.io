@@ -4,7 +4,7 @@
   <title><![CDATA[Category: sorting | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/sorting/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2013-11-05T19:07:02-08:00</updated>
+  <updated>2013-11-05T20:01:28-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -394,7 +394,7 @@ Each level contributes to total cost of <code>cn</code></p>
 </tr>
 <tr>
     <td><code class="mygreen"><a href="http://en.wikipedia.org/wiki/Introsort" target="_blank">Introsort</a></code></td>
-    <td />
+    <td>O(nlogn)</td>
     <td>O(nlogn)</td>
     <td>O(nlogn)</td>
     <td />
@@ -417,12 +417,12 @@ Each level contributes to total cost of <code>cn</code></p>
     <td><a href="http://learnwrite.github.io/blog/2013/10/13/comparison-based-sorting/#table-based-comparison" target="_blank">Detailed notes</a></td>
 </tr>
 <tr>
-    <td><a href="http://en.wikipedia.org/wiki/Odd–even_sort" target="_blank">Odd–even sort</a></td>
-    <td />
+    <td><code class="myred"><a href="http://en.wikipedia.org/wiki/Odd–even_sort" target="_blank">Odd–even sort</a></code></td>
+    <td>O(n)</td>
     <td />
     <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
-    <td />
-    <td />
+    <td>O(1)</td>
+    <td>*(V/D) - Bubble sort</td>
 </tr>
 <tr>
     <td><a href="http://en.wikipedia.org/wiki/Oscillating_merge_sort" target="_blank">Oscillating merge sort</a></td>
@@ -433,12 +433,12 @@ Each level contributes to total cost of <code>cn</code></p>
     <td />
 </tr>
 <tr>
-    <td><a href="http://en.wikipedia.org/wiki/Patience_sorting" target="_blank">Patience sorting</a></td>
+    <td><code class="mygreen"><a href="http://en.wikipedia.org/wiki/Patience_sorting" target="_blank">Patience sorting</a></code></td>
     <td />
     <td />
     <td>O(nlogn)</td>
-    <td />
-    <td />
+    <td>O(n)</td>
+    <td><a href="http://wordaligned.org/articles/patience-sort" target="_blank">Longest common sequence</a></td>
 </tr>
 <tr>
     <td><a href="http://en.wikipedia.org/wiki/Polyphase_merge_sort" target="_blank">Polyphase merge sort</a></td>
