@@ -4,7 +4,7 @@
   <title><![CDATA[Learnings]]></title>
   <link href="http://learnwrite.github.io/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2013-11-10T17:17:30-08:00</updated>
+  <updated>2013-11-10T17:34:21-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -169,7 +169,7 @@ Each level contributes to total cost of <code>cn</code></p>
 <h3 id="references">References</h3>
 <ul>
   <li>
-    <p><a href="https://drive.google.com/file/d/0BySPJjyZBnC2RU1BamFUa0RmaDQ/edit?usp=sharing" target="_blank">Article comparing sorting</a></p>
+    <p><a href="https://www.dropbox.com/s/4kcfkbvkwmnmgib/sorting.pdf" target="_blank">Article comparing sorting</a></p>
   </li>
   <li>
     <p><a href="http://learnwrite.github.io/blog/2013/10/12/sorting/" target="_blank">Sorting in detail</a></p>
@@ -436,7 +436,7 @@ Each level contributes to total cost of <code>cn</code></p>
     <td>O(nlogn)</td>
     <td>O(nlogn)</td>
     <td />
-    <td>Quick sort + Heap sort<br /><a href="https://drive.google.com/file/d/0BySPJjyZBnC2cTExSXhidENrR1E/edit?usp=sharing" target="_blank"> IntroSort Paper</a></td>
+    <td>Quick sort + Heap sort<br /><a href="https://www.dropbox.com/s/21q1ymf2y86kqcz/introsort.pdf" target="_blank"> IntroSort Paper</a></td>
 </tr>
 <tr>
     <td><code class="myyellow"><a href="http://en.wikipedia.org/wiki/Library_sort" target="_blank">Library sort</a></code></td>
@@ -1370,7 +1370,7 @@ I started realizing that after all it’s not that easy to actually think and wr
   <li>2’s complement</li>
 </ol>
 
-<p><a href="https://docs.google.com/file/d/0BySPJjyZBnC2VDhrMkFMX2FYWW8/edit?usp=sharing”%20target=“_blank">Full text</a> about binary number operations.</p>
+<p><a href="https://www.dropbox.com/sh/tlcxy806qq6rvde/V3TVVs2vfH/Negative%20Binary%20Numbers.pdf“_blank">Full text</a> about binary number operations.</p>
 
 <h3 id="credits">Credits</h3>
 
@@ -1400,7 +1400,7 @@ I started realizing that after all it’s not that easy to actually think and wr
 
 <p>As we have discussed earlier about process synchronization, lets discuss about process synchronization primitives offered in Linux Kernel.</p>
 
-<p>This blog is summary of this <a href="https://docs.google.com/file/d/0BySPJjyZBnC2UVYzWkdSLWNrdEE/edit?usp=sharing" target="-blank">article</a></p>
+<p>This blog is summary of this <a href="https://www.dropbox.com/s/xvo7qdl9iwjco5x/UnderstandingtheLinuxKernelThirdEditionChapter5KernelSynchronizat.pdf" target="-blank">article</a></p>
 
 <h3 id="synchronization-primitives">Synchronization Primitives</h3>
 
@@ -2161,8 +2161,8 @@ monitor condition =&gt; needItem;<br /></p>
 <h3 id="recommended-reading">Recommended reading</h3>
 
 <ul>
-  <li><a href="https://docs.google.com/file/d/0BySPJjyZBnC2Q20yU2lHeGdKQ3c/edit?usp=sharing" target="_blank">Implementing CV using semaphore</a></li>
-  <li><a href="https://docs.google.com/file/d/0BySPJjyZBnC2ekFOMDlwNmNiQlk/edit?usp=sharing" target="_blank">Monitors by C.A.R Hoare </a></li>
+  <li><a href="https://www.dropbox.com/s/8naej9kd0612gkr/implementingcvs.pdf" target="_blank">Implementing CV using semaphore</a></li>
+  <li><a href="https://www.dropbox.com/s/gaallrwximrm14g/Monitors.pdf" target="_blank">Monitors by C.A.R Hoare </a></li>
   <li>Process synchronization in Linux Kernel</li>
 </ul>
 ]]></content>

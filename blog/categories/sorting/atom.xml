@@ -4,7 +4,7 @@
   <title><![CDATA[Category: sorting | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/sorting/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2013-11-10T17:17:30-08:00</updated>
+  <updated>2013-11-10T17:34:21-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -169,7 +169,7 @@ Each level contributes to total cost of <code>cn</code></p>
 <h3 id="references">References</h3>
 <ul>
   <li>
-    <p><a href="https://drive.google.com/file/d/0BySPJjyZBnC2RU1BamFUa0RmaDQ/edit?usp=sharing" target="_blank">Article comparing sorting</a></p>
+    <p><a href="https://www.dropbox.com/s/4kcfkbvkwmnmgib/sorting.pdf" target="_blank">Article comparing sorting</a></p>
   </li>
   <li>
     <p><a href="http://learnwrite.github.io/blog/2013/10/12/sorting/" target="_blank">Sorting in detail</a></p>
@@ -437,7 +437,7 @@ Each level contributes to total cost of <code>cn</code></p>
     <td>O(nlogn)</td>
     <td>O(nlogn)</td>
     <td />
-    <td>Quick sort + Heap sort<br /><a href="https://drive.google.com/file/d/0BySPJjyZBnC2cTExSXhidENrR1E/edit?usp=sharing" target="_blank"> IntroSort Paper</a></td>
+    <td>Quick sort + Heap sort<br /><a href="https://www.dropbox.com/s/21q1ymf2y86kqcz/introsort.pdf" target="_blank"> IntroSort Paper</a></td>
 </tr>
 <tr>
     <td><code class="myyellow"><a href="http://en.wikipedia.org/wiki/Library_sort" target="_blank">Library sort</a></code></td>
