@@ -4,7 +4,7 @@
   <title><![CDATA[Learnings]]></title>
   <link href="http://learnwrite.github.io/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2013-11-10T17:34:21-08:00</updated>
+  <updated>2013-11-18T23:25:24-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -12,6 +12,209 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Recursion]]></title>
+    <link href="http://learnwrite.github.io/blog/2013/11/18/recursion/"/>
+    <updated>2013-11-18T22:18:00-08:00</updated>
+    <id>http://learnwrite.github.io/blog/2013/11/18/recursion</id>
+    <content type="html"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#recusion-problems">Recusion problems</a>    <ul>
+      <li><a href="#factorial">Factorial</a></li>
+      <li><a href="#total-bunnyears">Total BunnyEars</a></li>
+      <li><a href="#evenodd-bunnyears">Even/Odd BunnyEars</a></li>
+      <li><a href="#triangle">Triangle</a></li>
+      <li><a href="#sum-of-digits">Sum of Digits</a></li>
+      <li><a href="#count-no-7">Count no 7</a></li>
+      <li><a href="#count-x-in-string">Count X in String</a></li>
+      <li><a href="#count-hi">Count Hi</a></li>
+      <li><a href="#change-xy-string">Change XY String</a></li>
+      <li><a href="#change-pi">Change PI</a></li>
+      <li><a href="#no-x-in-string">No X in String</a></li>
+      <li><a href="#no-star-in-string">No Star in String</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p>This article is all about recusion.</p>
+
+<div class="wikipedia">
+  
+    <img src="http://learnwrite.github.io//upload.wikimedia.org/wikipedia/commons/thumb/6/62/Droste.jpg/220px-Droste.jpg" />
+  
+  <h2>Recursion</h2>
+  <div>
+    <p><strong>Recursion</strong> is the process of repeating items in a <a href="http://en.wikipedia.org/wiki/Self-similarity" title="Self-similarity">self-similar</a> way. For instance, when the surfaces of two mirrors are exactly parallel with each other the nested images that occur are a form of infinite recursion. The term has a variety of meanings specific to a variety of disciplines ranging from <a href="http://en.wikipedia.org/wiki/Linguistics" title="Linguistics">linguistics</a> to <a href="http://en.wikipedia.org/wiki/Logic" title="Logic">logic</a>. The most common application of recursion is in <a href="http://en.wikipedia.org/wiki/Mathematics" title="Mathematics">mathematics</a> and <a href="http://en.wikipedia.org/wiki/Computer_science" title="Computer science">computer science</a>, in which it refers to a method of defining <a href="http://en.wikipedia.org/wiki/Function_(mathematics)" title="Function (mathematics)">functions</a> in which the function being defined is applied within its own definition. Specifically this defines an infinite number of instances (function values), using a finite expression that for some instances may refer to other instances, but in such a way that no loop or infinite chain of references can occur. The term is also used more generally to describe a process of repeating objects in a self-similar way.
+</p>
+  </div>
+  <a href="http://en.wikipedia.org/wiki/Recursion">Read more</a>
+</div>
+
+<p><br /></p>
+
+<p>Recursion is basis Dynamic programming, another important area in algorithms.</p>
+
+<p>Best way to learn about recursion is to solve recursion problem.</p>
+
+<p><br /></p>
+
+<h3 id="recusion-problems">Recusion problems</h3>
+
+<h4 id="factorial">Factorial</h4>
+
+<p>Given n of 1 or more, return the factorial of n, which is n * (n-1) * (n-2) … 1
+Compute the result recursively (without loops).</p>
+
+<p>factorial(1) → 1<br />
+factorial(2) → 2<br />
+factorial(3) → 6<br /></p>
+
+<script src="http://ideone.com/e.js/XWZvBI" type="text/javascript"></script>
+
+<p><br /></p>
+
+<h4 id="total-bunnyears">Total BunnyEars</h4>
+
+<p>We have a number of bunnies and each bunny has two big floppy ears. We want to compute the total number of ears across all the bunnies recursively (without loops or multiplication).</p>
+
+<p>bunnyEars(0) → 0<br />
+bunnyEars(1) → 2<br />
+bunnyEars(2) → 4<br /></p>
+
+<script src="http://ideone.com/e.js/vrDEiY" type="text/javascript"></script>
+
+<p><br /></p>
+
+<h4 id="evenodd-bunnyears">Even/Odd BunnyEars</h4>
+
+<p>We have bunnies standing in a line, numbered 1, 2, … The odd bunnies (1, 3, ..) have the normal 2 ears. The even bunnies (2, 4, ..) we’ll say have 3 ears, because they each have a raised foot. Recursively return the number of “ears” in the bunny line 1, 2, … n (without loops or multiplication).</p>
+
+<p>bunnyEars2(0) → 0<br />
+bunnyEars2(1) → 2<br />
+bunnyEars2(2) → 5<br /></p>
+
+<script src="http://ideone.com/e.js/U92tnQ" type="text/javascript"></script>
+
+<p><br /></p>
+
+<h4 id="triangle">Triangle</h4>
+
+<p>We have triangle made of blocks. The topmost row has 1 block, the next row down has 2 blocks, the next row has 3 blocks, and so on. Compute recursively (no loops or multiplication) the total number of blocks in such a triangle with the given number of rows. </p>
+
+<p>triangle(0) → 0<br />
+triangle(1) → 1<br />
+triangle(2) → 3<br /></p>
+
+<script src="http://ideone.com/e.js/3qfqXz" type="text/javascript"></script>
+
+<p><br /></p>
+
+<h4 id="sum-of-digits">Sum of Digits</h4>
+
+<p>Given a non-negative int n, return the sum of its digits recursively (no loops). Note that mod (%) by 10 yields the rightmost digit (126 % 10 is 6), while divide (/) by 10 removes the rightmost digit (126 / 10 is 12).</p>
+
+<p>sumDigits(126) → 9<br />
+sumDigits(49) → 13<br />
+sumDigits(12) → 3<br /></p>
+
+<script src="http://ideone.com/e.js/AmFVVT" type="text/javascript"></script>
+
+<p><br /></p>
+
+<h4 id="count-no-7">Count no 7</h4>
+
+<p>Given a non-negative int n, return the count of the occurrences of 7 as a digit, so for example 717 yields 2. (no loops). Note that mod (%) by 10 yields the rightmost digit (126 % 10 is 6), while divide (/) by 10 removes the rightmost digit (126 / 10 is 12). </p>
+
+<p>count7(717) → 2<br />
+count7(7) → 1<br />
+count7(123) → 0<br /></p>
+
+<script src="http://ideone.com/e.js/QX5h4w" type="text/javascript"></script>
+
+<p><br /></p>
+
+<h4 id="count-x-in-string">Count X in String</h4>
+
+<p>Given a string, compute recursively (no loops) the number of lowercase ‘x’ chars in the string. </p>
+
+<p>countX(“xxhixx”) → 4 <br />
+countX(“xhixhix”) → 3<br />
+countX(“hi”) → 0<br /></p>
+
+<p>public int countX(String str) {</p>
+
+<p>}</p>
+
+<p><br /></p>
+
+<h4 id="count-hi">Count Hi</h4>
+
+<p>Given a string, compute recursively (no loops) the number of times lowercase “hi” appears in the string. </p>
+
+<p>countHi(“xxhixx”) → 1<br />
+countHi(“xhixhix”) → 2<br />
+countHi(“hi”) → 1<br /></p>
+
+<p>public int countHi(String str) {</p>
+
+<p>}
+<br /></p>
+
+<h4 id="change-xy-string">Change XY String</h4>
+
+<p>Given a string, compute recursively (no loops) a new string where all the lowercase ‘x’ chars have been changed to ‘y’ chars.</p>
+
+<p>changeXY(“codex”) → “codey”<br />
+changeXY(“xxhixx”) → “yyhiyy”<br />
+changeXY(“xhixhix”) → “yhiyhiy”<br /></p>
+
+<p>public String changeXY(String str) {</p>
+
+<p>}</p>
+
+<p><br /></p>
+
+<h4 id="change-pi">Change PI</h4>
+
+<p>Given a string, compute recursively (no loops) a new string where all appearances of “pi” have been replaced by “3.14”. </p>
+
+<p>changePi(“xpix”) → “x3.14x”<br />
+changePi(“pipi”) → “3.143.14”<br />
+changePi(“pip”) → “3.14p”<br /></p>
+
+<p>public String changePi(String str) {</p>
+
+<p>}
+<br /></p>
+
+<h4 id="no-x-in-string">No X in String</h4>
+
+<p>Given a string, compute recursively a new string where all the ‘x’ chars have been removed. </p>
+
+<p>noX(“xaxb”) → “ab” <br />
+noX(“abc”) → “abc”<br />
+noX(“xx”) → ““<br /></p>
+
+<p>public String noX(String str) {</p>
+
+<p>}
+<br /></p>
+
+<h4 id="no-star-in-string">No Star in String</h4>
+
+<p>Given a string, compute recursively a new string where all the adjacent chars are now separated by a “*”. </p>
+
+<p>allStar(“hello”) → “h*e*l*l*o”<br />
+allStar(“abc”) → “a*b*c”<br />
+allStar(“ab”) → “a*b”<br /></p>
+
+<p>public String allStar(String str) {</p>
+
+<p>}</p>
+
+<p><br /></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Comparison based Sorting]]></title>

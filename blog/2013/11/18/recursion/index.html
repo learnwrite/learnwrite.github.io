@@ -1,0 +1,551 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Recursion - Learnings</title>
+  <meta name="author" content="Vaibhav Gautam">
+
+  
+  <meta name="description" content="Recusion problems Factorial Total BunnyEars Even/Odd BunnyEars Triangle Sum of Digits Count no 7 Count X in String Count Hi Change XY String Change &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://learnwrite.github.io/blog/2013/11/18/recursion/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Learnings" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$$','$$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript"
+   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-44705857-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+</hgroup>
+
+</header>
+  <!-- <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:learnwrite.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav> -->
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Recursion</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-18T22:18:00-08:00" pubdate data-updated="true">Nov 18<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#recusion-problems">Recusion problems</a>    <ul>
+      <li><a href="#factorial">Factorial</a></li>
+      <li><a href="#total-bunnyears">Total BunnyEars</a></li>
+      <li><a href="#evenodd-bunnyears">Even/Odd BunnyEars</a></li>
+      <li><a href="#triangle">Triangle</a></li>
+      <li><a href="#sum-of-digits">Sum of Digits</a></li>
+      <li><a href="#count-no-7">Count no 7</a></li>
+      <li><a href="#count-x-in-string">Count X in String</a></li>
+      <li><a href="#count-hi">Count Hi</a></li>
+      <li><a href="#change-xy-string">Change XY String</a></li>
+      <li><a href="#change-pi">Change PI</a></li>
+      <li><a href="#no-x-in-string">No X in String</a></li>
+      <li><a href="#no-star-in-string">No Star in String</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p>This article is all about recusion.</p>
+
+<div class="wikipedia">
+  
+    <img src="//upload.wikimedia.org/wikipedia/commons/thumb/6/62/Droste.jpg/220px-Droste.jpg" />
+  
+  <h2>Recursion</h2>
+  <div>
+    <p><strong>Recursion</strong> is the process of repeating items in a <a href="http://en.wikipedia.org/wiki/Self-similarity" title="Self-similarity">self-similar</a> way. For instance, when the surfaces of two mirrors are exactly parallel with each other the nested images that occur are a form of infinite recursion. The term has a variety of meanings specific to a variety of disciplines ranging from <a href="http://en.wikipedia.org/wiki/Linguistics" title="Linguistics">linguistics</a> to <a href="http://en.wikipedia.org/wiki/Logic" title="Logic">logic</a>. The most common application of recursion is in <a href="http://en.wikipedia.org/wiki/Mathematics" title="Mathematics">mathematics</a> and <a href="http://en.wikipedia.org/wiki/Computer_science" title="Computer science">computer science</a>, in which it refers to a method of defining <a href="http://en.wikipedia.org/wiki/Function_(mathematics)" title="Function (mathematics)">functions</a> in which the function being defined is applied within its own definition. Specifically this defines an infinite number of instances (function values), using a finite expression that for some instances may refer to other instances, but in such a way that no loop or infinite chain of references can occur. The term is also used more generally to describe a process of repeating objects in a self-similar way.
+</p>
+  </div>
+  <a href="http://en.wikipedia.org/wiki/Recursion">Read more</a>
+</div>
+
+<p><br /></p>
+
+<p>Recursion is basis Dynamic programming, another important area in algorithms.</p>
+
+<p>Best way to learn about recursion is to solve recursion problem.</p>
+
+<p><br /></p>
+
+<h3 id="recusion-problems">Recusion problems</h3>
+
+<h4 id="factorial">Factorial</h4>
+
+<p>Given n of 1 or more, return the factorial of n, which is n * (n-1) * (n-2) … 1
+Compute the result recursively (without loops).</p>
+
+<p>factorial(1) → 1<br />
+factorial(2) → 2<br />
+factorial(3) → 6<br /></p>
+
+<script src="http://ideone.com/e.js/XWZvBI" type="text/javascript"></script>
+
+<p><br /></p>
+
+<h4 id="total-bunnyears">Total BunnyEars</h4>
+
+<p>We have a number of bunnies and each bunny has two big floppy ears. We want to compute the total number of ears across all the bunnies recursively (without loops or multiplication).</p>
+
+<p>bunnyEars(0) → 0<br />
+bunnyEars(1) → 2<br />
+bunnyEars(2) → 4<br /></p>
+
+<script src="http://ideone.com/e.js/vrDEiY" type="text/javascript"></script>
+
+<p><br /></p>
+
+<h4 id="evenodd-bunnyears">Even/Odd BunnyEars</h4>
+
+<p>We have bunnies standing in a line, numbered 1, 2, … The odd bunnies (1, 3, ..) have the normal 2 ears. The even bunnies (2, 4, ..) we’ll say have 3 ears, because they each have a raised foot. Recursively return the number of “ears” in the bunny line 1, 2, … n (without loops or multiplication).</p>
+
+<p>bunnyEars2(0) → 0<br />
+bunnyEars2(1) → 2<br />
+bunnyEars2(2) → 5<br /></p>
+
+<script src="http://ideone.com/e.js/U92tnQ" type="text/javascript"></script>
+
+<p><br /></p>
+
+<h4 id="triangle">Triangle</h4>
+
+<p>We have triangle made of blocks. The topmost row has 1 block, the next row down has 2 blocks, the next row has 3 blocks, and so on. Compute recursively (no loops or multiplication) the total number of blocks in such a triangle with the given number of rows. </p>
+
+<p>triangle(0) → 0<br />
+triangle(1) → 1<br />
+triangle(2) → 3<br /></p>
+
+<script src="http://ideone.com/e.js/3qfqXz" type="text/javascript"></script>
+
+<p><br /></p>
+
+<h4 id="sum-of-digits">Sum of Digits</h4>
+
+<p>Given a non-negative int n, return the sum of its digits recursively (no loops). Note that mod (%) by 10 yields the rightmost digit (126 % 10 is 6), while divide (/) by 10 removes the rightmost digit (126 / 10 is 12).</p>
+
+<p>sumDigits(126) → 9<br />
+sumDigits(49) → 13<br />
+sumDigits(12) → 3<br /></p>
+
+<script src="http://ideone.com/e.js/AmFVVT" type="text/javascript"></script>
+
+<p><br /></p>
+
+<h4 id="count-no-7">Count no 7</h4>
+
+<p>Given a non-negative int n, return the count of the occurrences of 7 as a digit, so for example 717 yields 2. (no loops). Note that mod (%) by 10 yields the rightmost digit (126 % 10 is 6), while divide (/) by 10 removes the rightmost digit (126 / 10 is 12). </p>
+
+<p>count7(717) → 2<br />
+count7(7) → 1<br />
+count7(123) → 0<br /></p>
+
+<script src="http://ideone.com/e.js/QX5h4w" type="text/javascript"></script>
+
+<p><br /></p>
+
+<h4 id="count-x-in-string">Count X in String</h4>
+
+<p>Given a string, compute recursively (no loops) the number of lowercase ‘x’ chars in the string. </p>
+
+<p>countX(“xxhixx”) → 4 <br />
+countX(“xhixhix”) → 3<br />
+countX(“hi”) → 0<br /></p>
+
+<p>public int countX(String str) {</p>
+
+<p>}</p>
+
+<p><br /></p>
+
+<h4 id="count-hi">Count Hi</h4>
+
+<p>Given a string, compute recursively (no loops) the number of times lowercase “hi” appears in the string. </p>
+
+<p>countHi(“xxhixx”) → 1<br />
+countHi(“xhixhix”) → 2<br />
+countHi(“hi”) → 1<br /></p>
+
+<p>public int countHi(String str) {</p>
+
+<p>}
+<br /></p>
+
+<h4 id="change-xy-string">Change XY String</h4>
+
+<p>Given a string, compute recursively (no loops) a new string where all the lowercase ‘x’ chars have been changed to ‘y’ chars.</p>
+
+<p>changeXY(“codex”) → “codey”<br />
+changeXY(“xxhixx”) → “yyhiyy”<br />
+changeXY(“xhixhix”) → “yhiyhiy”<br /></p>
+
+<p>public String changeXY(String str) {</p>
+
+<p>}</p>
+
+<p><br /></p>
+
+<h4 id="change-pi">Change PI</h4>
+
+<p>Given a string, compute recursively (no loops) a new string where all appearances of “pi” have been replaced by “3.14”. </p>
+
+<p>changePi(“xpix”) → “x3.14x”<br />
+changePi(“pipi”) → “3.143.14”<br />
+changePi(“pip”) → “3.14p”<br /></p>
+
+<p>public String changePi(String str) {</p>
+
+<p>}
+<br /></p>
+
+<h4 id="no-x-in-string">No X in String</h4>
+
+<p>Given a string, compute recursively a new string where all the ‘x’ chars have been removed. </p>
+
+<p>noX(“xaxb”) → “ab” <br />
+noX(“abc”) → “abc”<br />
+noX(“xx”) → ““<br /></p>
+
+<p>public String noX(String str) {</p>
+
+<p>}
+<br /></p>
+
+<h4 id="no-star-in-string">No Star in String</h4>
+
+<p>Given a string, compute recursively a new string where all the adjacent chars are now separated by a “*”. </p>
+
+<p>allStar(“hello”) → “h*e*l*l*o”<br />
+allStar(“abc”) → “a*b*c”<br />
+allStar(“ab”) → “a*b”<br /></p>
+
+<p>public String allStar(String str) {</p>
+
+<p>}</p>
+
+<p><br /></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Vaibhav Gautam</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-18T22:18:00-08:00" pubdate data-updated="true">Nov 18<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/algorithm/'>Algorithm</a>, <a class='category' href='/blog/categories/recursion/'>Recursion</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+   <div class="rdbWrapper" data-show-read="1" data-show-send-to-kindle="1" data-show-print="1" data-show-email="0" data-orientation="0" data-version="1"></div><script type="text/javascript">(function() {var s = document.getElementsByTagName("script")[0],rdb = document.createElement("script"); rdb.type = "text/javascript"; rdb.async = true; rdb.src = document.location.protocol + "//www.readability.com/embed.js"; s.parentNode.insertBefore(rdb, s); })();</script>
+  
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://learnwrite.github.io/blog/2013/11/18/recursion/" data-via="_vaibhavg" data-counturl="http://learnwrite.github.io/blog/2013/11/18/recursion/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/10/13/comparison-based-sorting/" title="Previous Post: Comparison based Sorting">&laquo; Comparison based Sorting</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <ul id="recent_posts">
+      <li class="post">
+      <a href="http://learnwrite.github.io" alt="Home"><img src="/images/Home.png"></a>
+      <a href="http://learnwrite.github.io/archives/" alt="Archives"><img src="/images/Calendar.png"></a>
+      
+      </li>
+  </ul>
+</section>
+<section>
+  <h1>About Me</h1>
+  <p><img src="/images/linked-in.png"><a href="http://www.linkedin.com/pub/vaibhav-gautam/11/663/163">Vaibhav Gautam</a></p>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/learnwrite">@learnwrite</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'learnwrite',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/11/18/recursion/">Recursion</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/13/comparison-based-sorting/">Comparison based Sorting</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/12/sorting/">sorting</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/08/world-of-bits-and-bytes/">World of Bits and Bytes</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/08/binary-number-operations/">Binary number operations</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+<section>
+<h1>Twitter</h1>
+<a class="twitter-timeline" href="https://twitter.com/_vaibhavg" data-widget-id="386954016019587072">Tweets by @_vaibhavg</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - <a href="http://www.linkedin.com/pub/vaibhav-gautam/11/663/163">Vaibhav Gautam</a> -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'coolgoose85';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://learnwrite.github.io/blog/2013/11/18/recursion/';
+        var disqus_url = 'http://learnwrite.github.io/blog/2013/11/18/recursion/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<div class="rdbWrapper" data-show-read-now="1" data-show-read-later="1" data-show-send-to-kindle="1" data-show-print="1" data-show-email="1" data-orientation="0" data-version="1" data-bg-color="#f3f3f3"></div><script type="text/javascript">(function() {var s = document.getElementsByTagName("script")[0],rdb = document.createElement("script"); rdb.type = "text/javascript"; rdb.async = true; rdb.src = document.location.protocol + "//www.readability.com/embed.js"; s.parentNode.insertBefore(rdb, s); })();</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
