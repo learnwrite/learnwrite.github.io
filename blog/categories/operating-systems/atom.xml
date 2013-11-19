@@ -4,7 +4,7 @@
   <title><![CDATA[Category: operating systems | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/operating-systems/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2013-11-06T22:19:34-08:00</updated>
+  <updated>2013-11-10T17:34:21-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -35,7 +35,7 @@
 
 <p>As we have discussed earlier about process synchronization, lets discuss about process synchronization primitives offered in Linux Kernel.</p>
 
-<p>This blog is summary of this <a href="https://docs.google.com/file/d/0BySPJjyZBnC2UVYzWkdSLWNrdEE/edit?usp=sharing" target="-blank">article</a></p>
+<p>This blog is summary of this <a href="https://www.dropbox.com/s/xvo7qdl9iwjco5x/UnderstandingtheLinuxKernelThirdEditionChapter5KernelSynchronizat.pdf" target="-blank">article</a></p>
 
 <h3 id="synchronization-primitives">Synchronization Primitives</h3>
 
@@ -796,8 +796,8 @@ monitor condition =&gt; needItem;<br /></p>
 <h3 id="recommended-reading">Recommended reading</h3>
 
 <ul>
-  <li><a href="https://docs.google.com/file/d/0BySPJjyZBnC2Q20yU2lHeGdKQ3c/edit?usp=sharing" target="_blank">Implementing CV using semaphore</a></li>
-  <li><a href="https://docs.google.com/file/d/0BySPJjyZBnC2ekFOMDlwNmNiQlk/edit?usp=sharing" target="_blank">Monitors by C.A.R Hoare </a></li>
+  <li><a href="https://www.dropbox.com/s/8naej9kd0612gkr/implementingcvs.pdf" target="_blank">Implementing CV using semaphore</a></li>
+  <li><a href="https://www.dropbox.com/s/gaallrwximrm14g/Monitors.pdf" target="_blank">Monitors by C.A.R Hoare </a></li>
   <li>Process synchronization in Linux Kernel</li>
 </ul>
 ]]></content>

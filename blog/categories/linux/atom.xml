@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2013-11-06T22:19:34-08:00</updated>
+  <updated>2013-11-10T17:34:21-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -35,7 +35,7 @@
 
 <p>As we have discussed earlier about process synchronization, lets discuss about process synchronization primitives offered in Linux Kernel.</p>
 
-<p>This blog is summary of this <a href="https://docs.google.com/file/d/0BySPJjyZBnC2UVYzWkdSLWNrdEE/edit?usp=sharing" target="-blank">article</a></p>
+<p>This blog is summary of this <a href="https://www.dropbox.com/s/xvo7qdl9iwjco5x/UnderstandingtheLinuxKernelThirdEditionChapter5KernelSynchronizat.pdf" target="-blank">article</a></p>
 
 <h3 id="synchronization-primitives">Synchronization Primitives</h3>
 

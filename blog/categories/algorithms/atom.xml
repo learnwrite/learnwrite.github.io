@@ -4,7 +4,7 @@
   <title><![CDATA[Category: algorithms | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/algorithms/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2013-11-06T22:19:34-08:00</updated>
+  <updated>2013-11-10T17:34:21-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -269,7 +269,7 @@
     <td>O(nlogn)</td>
     <td>O(nlogn)</td>
     <td />
-    <td>Quick sort + Heap sort<br /><a href="https://drive.google.com/file/d/0BySPJjyZBnC2cTExSXhidENrR1E/edit?usp=sharing" target="_blank"> IntroSort Paper</a></td>
+    <td>Quick sort + Heap sort<br /><a href="https://www.dropbox.com/s/21q1ymf2y86kqcz/introsort.pdf" target="_blank"> IntroSort Paper</a></td>
 </tr>
 <tr>
     <td><code class="myyellow"><a href="http://en.wikipedia.org/wiki/Library_sort" target="_blank">Library sort</a></code></td>
