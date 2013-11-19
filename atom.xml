@@ -4,7 +4,7 @@
   <title><![CDATA[Learnings]]></title>
   <link href="http://learnwrite.github.io/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2013-11-10T17:34:21-08:00</updated>
+  <updated>2013-11-18T22:44:54-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -12,6 +12,57 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Recursion]]></title>
+    <link href="http://learnwrite.github.io/blog/2013/11/18/recursion/"/>
+    <updated>2013-11-18T22:18:00-08:00</updated>
+    <id>http://learnwrite.github.io/blog/2013/11/18/recursion</id>
+    <content type="html"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#recusion-problems">Recusion problems</a>    <ul>
+      <li><a href="#factorial">Factorial</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p>This article is all about recusion.</p>
+
+<div class="wikipedia">
+  
+    <img src="http://learnwrite.github.io//upload.wikimedia.org/wikipedia/commons/thumb/6/62/Droste.jpg/220px-Droste.jpg" />
+  
+  <h2>Recursion</h2>
+  <div>
+    <p><strong>Recursion</strong> is the process of repeating items in a <a href="http://en.wikipedia.org/wiki/Self-similarity" title="Self-similarity">self-similar</a> way. For instance, when the surfaces of two mirrors are exactly parallel with each other the nested images that occur are a form of infinite recursion. The term has a variety of meanings specific to a variety of disciplines ranging from <a href="http://en.wikipedia.org/wiki/Linguistics" title="Linguistics">linguistics</a> to <a href="http://en.wikipedia.org/wiki/Logic" title="Logic">logic</a>. The most common application of recursion is in <a href="http://en.wikipedia.org/wiki/Mathematics" title="Mathematics">mathematics</a> and <a href="http://en.wikipedia.org/wiki/Computer_science" title="Computer science">computer science</a>, in which it refers to a method of defining <a href="http://en.wikipedia.org/wiki/Function_(mathematics)" title="Function (mathematics)">functions</a> in which the function being defined is applied within its own definition. Specifically this defines an infinite number of instances (function values), using a finite expression that for some instances may refer to other instances, but in such a way that no loop or infinite chain of references can occur. The term is also used more generally to describe a process of repeating objects in a self-similar way.
+</p>
+  </div>
+  <a href="http://en.wikipedia.org/wiki/Recursion">Read more</a>
+</div>
+
+<p><br /></p>
+
+<p>Recursion is basis Dynamic programming, another important area in algorithms.</p>
+
+<p>Best way to learn about recursion is to solve recursion problem.</p>
+
+<p><br /></p>
+
+<h3 id="recusion-problems">Recusion problems</h3>
+
+<h4 id="factorial">Factorial</h4>
+
+<p>Given n of 1 or more, return the factorial of n, which is n * (n-1) * (n-2) … 1
+Compute the result recursively (without loops).</p>
+
+<p>factorial(1) → 1<br />
+factorial(2) → 2<br />
+factorial(3) → 6<br /></p>
+
+<script src="http://ideone.com/e.js/XWZvBI" type="text/javascript"></script>
+
+<p><br /></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Comparison based Sorting]]></title>
