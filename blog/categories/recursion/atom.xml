@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Recursion | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/recursion/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2013-11-18T23:25:24-08:00</updated>
+  <updated>2013-11-19T21:37:31-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -142,9 +142,7 @@ count7(123) → 0<br /></p>
 countX(“xhixhix”) → 3<br />
 countX(“hi”) → 0<br /></p>
 
-<p>public int countX(String str) {</p>
-
-<p>}</p>
+<script src="http://ideone.com/e.js/DwK19H" type="text/javascript"></script>
 
 <p><br /></p>
 
@@ -156,10 +154,9 @@ countX(“hi”) → 0<br /></p>
 countHi(“xhixhix”) → 2<br />
 countHi(“hi”) → 1<br /></p>
 
-<p>public int countHi(String str) {</p>
+<script src="http://ideone.com/e.js/vGNoFy" type="text/javascript"></script>
 
-<p>}
-<br /></p>
+<p><br /></p>
 
 <h4 id="change-xy-string">Change XY String</h4>
 
