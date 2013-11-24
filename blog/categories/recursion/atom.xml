@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Recursion | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/recursion/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2013-11-19T21:37:31-08:00</updated>
+  <updated>2013-11-23T17:45:52-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -32,6 +32,7 @@
       <li><a href="#change-pi">Change PI</a></li>
       <li><a href="#no-x-in-string">No X in String</a></li>
       <li><a href="#no-star-in-string">No Star in String</a></li>
+      <li><a href="#substring">Substring</a></li>
     </ul>
   </li>
 </ul>
@@ -209,6 +210,29 @@ allStar(“ab”) → “a*b”<br /></p>
 <p>public String allStar(String str) {</p>
 
 <p>}</p>
+
+<p><br /></p>
+
+<h4 id="substring">Substring</h4>
+
+<p>It’s also convenient to have a function that, given a sentence, selects a small portion
+of a sentence for us. For example, if we had the sentence:<br />
+(russians declare war rington vodka to be excellent)</p>
+
+<p>We could imagine using a hypothetical subsentence function that would let us pull out the first few words
+of that sentence, if we tell it where to start and stop the selection:<br />
+(subsentence ‘(russians declare war rington vodka to be excellent) 1 3)<br />
+(russians declare war)</p>
+
+<p>(subsentence ‘(no shirt no shoes no service) 4 4)<br />
+(shoes)<br /></p>
+
+<p>Write the function subsentence, which takes in three arguments: a sentence, the starting endpoint,
+and the stopping endpoint. It should return back a sentence that includes the words between the start and
+stop endpoints. Assume that the user is nice, and won’t give weird input. In Scheme notation, we mean
+that we can assume (&lt;= 1 start stop (count sent)) is always true.</p>
+
+<script src="http://ideone.com/e.js/Ns9YVx" type="text/javascript"></script>
 
 <p><br /></p>
 ]]></content>
