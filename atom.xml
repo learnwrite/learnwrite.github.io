@@ -4,7 +4,7 @@
   <title><![CDATA[Learnings]]></title>
   <link href="http://learnwrite.github.io/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2013-11-23T17:54:24-08:00</updated>
+  <updated>2013-11-23T18:13:12-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -33,6 +33,7 @@
       <li><a href="#no-x-in-string">No X in String</a></li>
       <li><a href="#no-star-in-string">No Star in String</a></li>
       <li><a href="#substring">Substring</a></li>
+      <li><a href="#string-permutation-non-repeating">String permutation non repeating</a></li>
     </ul>
   </li>
 </ul>
@@ -234,6 +235,22 @@ that we can assume (&lt;= 1 start stop (count sent)) is always true.</p>
 <script src="http://ideone.com/e.js/EsxIJg" type="text/javascript"></script>
 
 <p><br /></p>
+
+<h4 id="string-permutation-non-repeating">String permutation non repeating</h4>
+
+<p>Write all the non repeating permutations of given string i.e.</p>
+
+<p>For string ABC<br />
+ABC, ACB, BAC, BCA, CAB, CBA</p>
+
+<p>Detailed solution with explanation can be found <a href="http://www.geeksforgeeks.org/write-a-c-program-to-print-all-permutations-of-a-given-string/" target="_blank">here</a></p>
+
+<p><br /></p>
+
+<p><img class="left" src="https://www.dropbox.com/s/xifxwgb836f2lmn/stringPermutation.gif" /></p>
+
+<p><br /></p>
+
 ]]></content>
   </entry>
   
