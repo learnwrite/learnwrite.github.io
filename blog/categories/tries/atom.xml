@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Tries | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/tries/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2013-11-27T01:40:11-08:00</updated>
+  <updated>2013-11-27T01:42:54-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -391,6 +391,10 @@
 <p><br /></p>
 
 <h3 id="infix-to-postfix">Infix to Postfix</h3>
+
+<iframe width="420" height="315" src="http://learnwrite.github.io//www.youtube.com/embed/rA0x7b4YiMI" frameborder="0" allowfullscreen=""></iframe>
+
+<p><br /></p>
 
 <h3 id="postfix-to-infix">Postfix to Infix</h3>
 
