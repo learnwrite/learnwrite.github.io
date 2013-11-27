@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Recursion | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/recursion/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2013-11-26T23:41:04-08:00</updated>
+  <updated>2013-11-27T01:40:11-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -22,6 +22,8 @@
   <li><a href="#trie-problems">Trie Problems</a></li>
   <li><a href="#trie-explanation">Trie explanation</a></li>
   <li><a href="#trie-code">Trie Code</a></li>
+  <li><a href="#infix-to-postfix">Infix to Postfix</a></li>
+  <li><a href="#postfix-to-infix">Postfix to Infix</a></li>
 </ul>
 
 <p>This article is about Trie and Trees data structure.</p>
@@ -387,6 +389,12 @@
 </div>
 
 <p><br /></p>
+
+<h3 id="infix-to-postfix">Infix to Postfix</h3>
+
+<h3 id="postfix-to-infix">Postfix to Infix</h3>
+
+<iframe width="420" height="315" src="http://learnwrite.github.io//www.youtube.com/embed/OlRENYiiIiw" frameborder="0" allowfullscreen=""></iframe>
 ]]></content>
   </entry>
   
