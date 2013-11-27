@@ -4,7 +4,7 @@
   <title><![CDATA[Learnings]]></title>
   <link href="http://learnwrite.github.io/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2013-11-27T01:42:54-08:00</updated>
+  <updated>2013-11-27T15:19:56-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -12,6 +12,41 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Scalability in Distributed Systems]]></title>
+    <link href="http://learnwrite.github.io/blog/2013/11/27/scalability/"/>
+    <updated>2013-11-27T15:06:00-08:00</updated>
+    <id>http://learnwrite.github.io/blog/2013/11/27/scalability</id>
+    <content type="html"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#facebook-data-center">Facebook Data Center</a></li>
+</ul>
+
+<p>This article is about Scalability in Distributed Systems and various engineering organizations approaching the problem of Scalability..</p>
+
+<div class="wikipedia">
+  
+  <h2>scalability</h2>
+  <div>
+    <p>In <a href="http://en.wikipedia.org/wiki/Electronics" title="Electronics">electronics</a> (including <a href="http://en.wikipedia.org/wiki/Semiconductor_manufacturing" title="Semiconductor manufacturing" class="mw-redirect">hardware</a>, <a href="http://en.wikipedia.org/wiki/Telecommunications" title="Telecommunications" class="mw-redirect">communication</a> and <a href="http://en.wikipedia.org/wiki/Software_engineering" title="Software engineering">software</a>), <strong>scalability</strong> is the ability of a system, network, or process to handle a growing amount of work in a capable manner or its ability to be enlarged to accommodate that growth.  For example, it can refer to the capability of a system to increase total throughput under an increased load when resources (typically hardware) are added. An analogous meaning is implied when the word is used in an <a href="http://en.wikipedia.org/wiki/Economics" title="Economics">economic</a> context, where scalability of a company implies that the underlying <a href="http://en.wikipedia.org/wiki/Business_model" title="Business model">business model</a> offers the potential for <a href="http://en.wikipedia.org/wiki/Economic_growth" title="Economic growth">economic growth</a> within the company.
+</p>
+  </div>
+  <a href="http://en.wikipedia.org/wiki/Scalability">Read more</a>
+</div>
+
+<p><br /></p>
+
+<h3 id="facebook-data-center">Facebook Data Center</h3>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//connect.facebook.net/en_US/all.js#xfbml=1"; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk'));</script>
+
+<div class="fb-post" data-href="https://www.facebook.com/notes/facebook-engineering/scaling-out/23844338919" data-width="550"><div class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/notes/facebook-engineering/scaling-out/23844338919">Post</a> by <a href="https://www.facebook.com/Engineering">Facebook Engineering</a>.</div></div>
+
+<p><br /></p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Trie and Trees]]></title>
