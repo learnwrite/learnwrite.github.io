@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Architecture | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/architecture/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2013-11-27T15:19:56-08:00</updated>
+  <updated>2013-11-27T16:44:09-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -19,7 +19,21 @@
     <updated>2013-11-27T15:06:00-08:00</updated>
     <id>http://learnwrite.github.io/blog/2013/11/27/scalability</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
-  <li><a href="#facebook-data-center">Facebook Data Center</a></li>
+  <li><a href="#facebook">Facebook</a>    <ul>
+      <li><a href="#data-center">Data Center</a></li>
+      <li><a href="#search-for-people">Search for People</a></li>
+      <li><a href="#petabytes-of-data">Petabytes of Data</a></li>
+      <li><a href="#fb-engineering-notes">FB Engineering Notes</a></li>
+    </ul>
+  </li>
+  <li><a href="#spotify">Spotify</a></li>
+  <li><a href="#cap-theorem">CAP Theorem</a></li>
+  <li><a href="#amazon">Amazon</a>    <ul>
+      <li><a href="#amazon-dynamo">Amazon Dynamo</a></li>
+    </ul>
+  </li>
+  <li><a href="#twitter">Twitter</a></li>
+  <li><a href="#references">References</a></li>
 </ul>
 
 <p>This article is about Scalability in Distributed Systems and various engineering organizations approaching the problem of Scalability..</p>
@@ -37,8 +51,9 @@
 
 <p><br /></p>
 
-<h3 id="facebook-data-center">Facebook Data Center</h3>
+<h3 id="facebook">Facebook</h3>
 
+<h4 id="data-center">Data Center</h4>
 <div id="fb-root"></div>
 <script>(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//connect.facebook.net/en_US/all.js#xfbml=1"; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk'));</script>
 
@@ -46,6 +61,60 @@
 
 <p><br /></p>
 
+<h4 id="search-for-people">Search for People</h4>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//connect.facebook.net/en_US/all.js#xfbml=1"; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk'));</script>
+
+<div class="fb-post" data-href="https://www.facebook.com/notes/facebook-engineering/the-life-of-a-typeahead-query/389105248919" data-width="550"><div class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/notes/facebook-engineering/the-life-of-a-typeahead-query/389105248919">Post</a> by <a href="https://www.facebook.com/Engineering">Facebook Engineering</a>.</div></div>
+
+<p><br /></p>
+
+<h4 id="petabytes-of-data">Petabytes of Data</h4>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//connect.facebook.net/en_US/all.js#xfbml=1"; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk'));</script>
+
+<div class="fb-post" data-href="https://www.facebook.com/notes/facebook-engineering/presto-interacting-with-petabytes-of-data-at-facebook/10151786197628920" data-width="550"><div class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/notes/facebook-engineering/presto-interacting-with-petabytes-of-data-at-facebook/10151786197628920">Post</a> by <a href="https://www.facebook.com/Engineering">Facebook Engineering</a>.</div></div>
+
+<p><br /></p>
+
+<h4 id="fb-engineering-notes">FB Engineering Notes</h4>
+
+<p><a href="https://www.facebook.com/Engineering/notes" target="_blank">FB Engineering</a></p>
+
+<p><br /></p>
+
+<h3 id="spotify">Spotify</h3>
+
+<p><a href="https://www.dropbox.com/s/3wj0adazuwh27ve/spotify-p2p10.pdf" target="_blank"> Spotify P2P</a></p>
+
+<p><br /></p>
+
+<h3 id="cap-theorem">CAP Theorem</h3>
+
+<p><a href="http://henryr.github.io/cap-faq/" target="_blank">CAP FAQ</a></p>
+
+<p><br /></p>
+
+<h3 id="amazon">Amazon</h3>
+
+<h4 id="amazon-dynamo">Amazon Dynamo</h4>
+
+<p><a href="http://www.allthingsdistributed.com/2007/10/amazons_dynamo.html" target="_blank">Dynamo</a></p>
+
+<p><br /></p>
+
+<h3 id="twitter">Twitter</h3>
+
+<p><a href="http://highscalability.com/blog/2013/7/8/the-architecture-twitter-uses-to-deal-with-150m-active-users.html" target="_blank"> Twitter Architecture</a></p>
+
+<h3 id="references">References</h3>
+
+<ul>
+  <li><a href="http://pl.atyp.us/wordpress/index.php/category/tech/cloudfs/" target="_blank">Jeff Darcy</a></li>
+  <li><a href="http://the-paper-trail.org/" target="_blank">Henry Robinson</a></li>
+</ul>
 ]]></content>
   </entry>
   
