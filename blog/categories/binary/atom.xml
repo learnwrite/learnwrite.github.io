@@ -4,7 +4,7 @@
   <title><![CDATA[Category: binary | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/binary/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2013-12-01T13:08:24-08:00</updated>
+  <updated>2013-12-01T13:10:38-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -373,22 +373,22 @@ I started realizing that after all it’s not that easy to actually think and wr
 
 <h3 id="addition">Addition</h3>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Addition </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="integer">0</span> + <span class="integer">0</span> <span class="error">→</span> <span class="integer">0</span>
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span class="integer">0</span> + <span class="integer">1</span> <span class="error">→</span> <span class="integer">1</span>
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span class="integer">1</span> + <span class="integer">0</span> <span class="error">→</span> <span class="integer">1</span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span class="integer">1</span> + <span class="integer">1</span> <span class="error">→</span> <span class="integer">0</span>, carry <span class="integer">1</span>&lt;/p&gt;
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>&lt;p&gt;For e.g&lt;/p&gt;
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>&lt;pre&gt;&lt;code&gt;<span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span>    (carried digits)
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>  <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span> +     <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span>
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>------------- =   <span class="integer">1</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">0</span> <span class="integer">0</span> = <span class="integer">36</span> </pre></div>
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span class="integer">0</span> + <span class="integer">0</span> <span class="error">→</span> <span class="integer">0</span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="integer">0</span> + <span class="integer">1</span> <span class="error">→</span> <span class="integer">1</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span class="integer">1</span> + <span class="integer">0</span> <span class="error">→</span> <span class="integer">1</span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span class="integer">1</span> + <span class="integer">1</span> <span class="error">→</span> <span class="integer">0</span>, carry <span class="integer">1</span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span> For e.g
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span>    (carried digits)
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>      <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span>
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>+     <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span>
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>    -------------
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>=   <span class="integer">1</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">0</span> <span class="integer">0</span> = <span class="integer">36</span>
+</pre></div>
 </div>
- </figure></notextile></div>
-</code></pre>
+</div>
 
 <p><br /></p>
 
