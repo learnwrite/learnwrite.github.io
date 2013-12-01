@@ -4,7 +4,7 @@
   <title><![CDATA[Category: operating systems | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/operating-systems/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2013-11-27T16:44:09-08:00</updated>
+  <updated>2013-11-30T23:42:34-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -201,45 +201,45 @@ Kernel preemption is still enabled during the busy wait phase, thus a process wa
 <p>Spin Lock with kernel preemption</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Invokes</span> preempt-disable() to disable kernel preemption.
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span><span class="constant">Invokes</span> preempt-disable() to disable kernel preemption.
 <span class="line-numbers"> <a href="#n2" name="n2">2</a></span>
 <span class="line-numbers"> <a href="#n3" name="n3">3</a></span>; Intel syntax
 <span class="line-numbers"> <a href="#n4" name="n4">4</a></span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span style="color:#606">locked</span>:                      ; <span style="color:#036;font-weight:bold">The</span> lock variable. <span style="color:#F00;background-color:#FAA">1</span> = locked, <span style="color:#00D">0</span> = unlocked.
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>dd      <span style="color:#00D">0</span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span class="key">locked</span>:                      ; <span class="constant">The</span> lock variable. <span class="error">1</span> = locked, <span class="integer">0</span> = unlocked.
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>dd      <span class="integer">0</span>
 <span class="line-numbers"> <a href="#n7" name="n7">7</a></span>
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>spin-<span style="color:#606">lock</span>:
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>mov     eax(new), <span style="color:#00D">1</span>     ; <span style="color:#036;font-weight:bold">Set</span> the <span style="color:#036;font-weight:bold">EAX</span> register to <span style="color:#00D">1</span>.
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>spin-<span class="key">lock</span>:
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>mov     eax(new), <span class="integer">1</span>     ; <span class="constant">Set</span> the <span class="constant">EAX</span> register to <span class="integer">1</span>.
 <span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>
 <span class="line-numbers"><a href="#n11" name="n11">11</a></span>xchg    eax(new), [locked]
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>; <span style="color:#036;font-weight:bold">Atomically</span> swap the <span style="color:#036;font-weight:bold">EAX</span> register with
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>; <span class="constant">Atomically</span> swap the <span class="constant">EAX</span> register with
 <span class="line-numbers"><a href="#n13" name="n13">13</a></span>;  the lock variable.
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span>; This will always store <span style="color:#00D">1</span> to the lock, leaving
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span>;  previous value <span style="color:#080;font-weight:bold">in</span> the <span style="color:#036;font-weight:bold">EAX</span> register.
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>; This will always store <span class="integer">1</span> to the lock, leaving
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>;  previous value <span class="keyword">in</span> the <span class="constant">EAX</span> register.
 <span class="line-numbers"><a href="#n16" name="n16">16</a></span>
 <span class="line-numbers"><a href="#n17" name="n17">17</a></span>test    eax(new), eax(prev)
-<span class="line-numbers"><a href="#n18" name="n18">18</a></span>; <span style="color:#036;font-weight:bold">Test</span> <span style="color:#036;font-weight:bold">EAX</span> with itself. Among other things, this will
-<span class="line-numbers"><a href="#n19" name="n19">19</a></span>;  set the processor<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">s Zero Flag if EAX is 0.</span></span>
-<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">; If EAX is 0, then the lock was unlocked and</span></span>
-<span class="line-numbers"><a href="#n21" name="n21">21</a></span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">;  we just locked it.</span></span>
-<span class="line-numbers"><a href="#n22" name="n22">22</a></span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">; Otherwise, EAX is 1 and we didn</span><span style="color:#710">'</span></span>t acquire the lock.
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>; <span class="constant">Test</span> <span class="constant">EAX</span> with itself. Among other things, this will
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>;  set the processor<span class="string"><span class="delimiter">'</span><span class="content">s Zero Flag if EAX is 0.</span></span>
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span><span class="string"><span class="content">; If EAX is 0, then the lock was unlocked and</span></span>
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span><span class="string"><span class="content">;  we just locked it.</span></span>
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span><span class="string"><span class="content">; Otherwise, EAX is 1 and we didn</span><span class="delimiter">'</span></span>t acquire the lock.
 <span class="line-numbers"><a href="#n23" name="n23">23</a></span>
-<span class="line-numbers"><a href="#n24" name="n24">24</a></span>//   <span style="color:#036;font-weight:bold">Enable</span> kernel preemption preempt-enable() 
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span>//   <span class="constant">Enable</span> kernel preemption preempt-enable() 
 <span class="line-numbers"><a href="#n25" name="n25">25</a></span>
-<span class="line-numbers"><a href="#n26" name="n26">26</a></span>jnz     spin-lock       ; <span style="color:#036;font-weight:bold">Jump</span> back to the <span style="color:#036;font-weight:bold">MOV</span> instruction <span style="color:#080;font-weight:bold">if</span> the <span style="color:#036;font-weight:bold">Zero</span> <span style="color:#036;font-weight:bold">Flag</span> is
-<span class="line-numbers"><a href="#n27" name="n27">27</a></span>;  <span style="color:#080;font-weight:bold">not</span> set; the lock was previously locked, <span style="color:#080;font-weight:bold">and</span> so
-<span class="line-numbers"><a href="#n28" name="n28">28</a></span>; we need to spin <span style="color:#080;font-weight:bold">until</span> it becomes unlocked.
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span>jnz     spin-lock       ; <span class="constant">Jump</span> back to the <span class="constant">MOV</span> instruction <span class="keyword">if</span> the <span class="constant">Zero</span> <span class="constant">Flag</span> is
+<span class="line-numbers"><a href="#n27" name="n27">27</a></span>;  <span class="keyword">not</span> set; the lock was previously locked, <span class="keyword">and</span> so
+<span class="line-numbers"><a href="#n28" name="n28">28</a></span>; we need to spin <span class="keyword">until</span> it becomes unlocked.
 <span class="line-numbers"><a href="#n29" name="n29">29</a></span>
-<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>ret                     ; <span style="color:#036;font-weight:bold">The</span> lock has been acquired, <span style="color:#080;font-weight:bold">return</span> to the calling
+<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>ret                     ; <span class="constant">The</span> lock has been acquired, <span class="keyword">return</span> to the calling
 <span class="line-numbers"><a href="#n31" name="n31">31</a></span>;  function.
 <span class="line-numbers"><a href="#n32" name="n32">32</a></span>
-<span class="line-numbers"><a href="#n33" name="n33">33</a></span>spin-<span style="color:#606">unlock</span>:
-<span class="line-numbers"><a href="#n34" name="n34">34</a></span>mov     eax, <span style="color:#00D">0</span>          ; <span style="color:#036;font-weight:bold">Set</span> the <span style="color:#036;font-weight:bold">EAX</span> register to <span style="color:#00D">0</span>.
+<span class="line-numbers"><a href="#n33" name="n33">33</a></span>spin-<span class="key">unlock</span>:
+<span class="line-numbers"><a href="#n34" name="n34">34</a></span>mov     eax, <span class="integer">0</span>          ; <span class="constant">Set</span> the <span class="constant">EAX</span> register to <span class="integer">0</span>.
 <span class="line-numbers"><a href="#n35" name="n35">35</a></span>
-<span class="line-numbers"><a href="#n36" name="n36">36</a></span>xchg    eax, [locked]   ; <span style="color:#036;font-weight:bold">Atomically</span> swap the <span style="color:#036;font-weight:bold">EAX</span> register with
+<span class="line-numbers"><a href="#n36" name="n36">36</a></span>xchg    eax, [locked]   ; <span class="constant">Atomically</span> swap the <span class="constant">EAX</span> register with
 <span class="line-numbers"><a href="#n37" name="n37">37</a></span>;  the lock variable.
 <span class="line-numbers"><a href="#n38" name="n38">38</a></span>
-<span class="line-numbers"><a href="#n39" name="n39">39</a></span>ret                     ; <span style="color:#036;font-weight:bold">The</span> lock has been released.
+<span class="line-numbers"><a href="#n39" name="n39">39</a></span>ret                     ; <span class="constant">The</span> lock has been released.
 </pre></div>
 </div>
 </div>
@@ -415,18 +415,18 @@ More formally there are three types of solution categories</p>
 <p>Semaphore Class</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="color:#080;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">Semaphore</span> {
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>    <span style="color:#606">public</span>:
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>        <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Constructor</span>
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>        Semaphore(char *debugName, int initialValue);
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span class="keyword">class</span> <span class="class">Semaphore</span> {
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>    <span class="key">public</span>:
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>    <span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span><span class="constant">Constructor</span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    Semaphore(char *debugName, int initialValue);
 <span class="line-numbers"> <a href="#n5" name="n5">5</a></span>
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>        <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Destructor</span>
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>        ~Semaphore();
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    <span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span><span class="constant">Destructor</span>
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    ~Semaphore();
 <span class="line-numbers"> <a href="#n8" name="n8">8</a></span>
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    <span style="color:#606">private</span>:
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>        int value;
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>        <span style="color:#036;font-weight:bold">List</span> *waitQueue;
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>        char *name;
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    <span class="key">private</span>:
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>    int value;
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>    <span class="constant">List</span> *waitQueue;
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    char *name;
 <span class="line-numbers"><a href="#n13" name="n13">13</a></span>};
 </pre></div>
 </div>
@@ -457,18 +457,18 @@ More formally there are three types of solution categories</p>
 <p>Semaphore Wait</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>P() - <span style="color:#036;font-weight:bold">Semaphore</span> <span style="color:#036;font-weight:bold">Wait</span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span style="color:#036;font-weight:bold">Semaphore</span>::P() {
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>    <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Disable</span> interrupts
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    <span style="color:#036;font-weight:bold">IntStatus</span> oldLevel = interrupt-&gt;SetLevel(<span style="color:#036;font-weight:bold">IntOff</span>);
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span>P() - <span class="constant">Semaphore</span> <span class="constant">Wait</span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="constant">Semaphore</span>::P() {
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>    <span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span><span class="constant">Disable</span> interrupts
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    <span class="constant">IntStatus</span> oldLevel = interrupt-&gt;SetLevel(<span class="constant">IntOff</span>);
 <span class="line-numbers"> <a href="#n5" name="n5">5</a></span>
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Semaphore</span> <span style="color:#080;font-weight:bold">not</span> available
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span style="color:#080;font-weight:bold">while</span> (value == <span style="color:#00D">0</span>) {
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>        waitQueue-&gt;Append((void *)currentThread);
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>        currentThread-&gt;Sleep();
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    <span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span><span class="constant">Semaphore</span> <span class="keyword">not</span> available
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span class="keyword">while</span> (value == <span class="integer">0</span>) {
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    waitQueue-&gt;Append((void *)currentThread);
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    currentThread-&gt;Sleep();
 <span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>    }
 <span class="line-numbers"><a href="#n11" name="n11">11</a></span>
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Semaphore</span> now availble
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    <span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span><span class="constant">Semaphore</span> now availble
 <span class="line-numbers"><a href="#n13" name="n13">13</a></span>    value--;
 <span class="line-numbers"><a href="#n14" name="n14">14</a></span>    (void)interrupt-&gt;SetLevel(oldLevel);
 <span class="line-numbers"><a href="#n15" name="n15">15</a></span>}
@@ -479,17 +479,17 @@ More formally there are three types of solution categories</p>
 <p>Semaphore Signal</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Semaphore</span> <span style="color:#036;font-weight:bold">Signal</span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span style="color:#036;font-weight:bold">Semaphore</span>::V() {
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>    <span style="color:#036;font-weight:bold">Thread</span> *thread;  
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span><span class="constant">Semaphore</span> <span class="constant">Signal</span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="constant">Semaphore</span>::V() {
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>    <span class="constant">Thread</span> *thread;  
 <span class="line-numbers"> <a href="#n4" name="n4">4</a></span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    <span style="color:#036;font-weight:bold">IntStatus</span> oldLevel = interrupt-&gt;SetLevel(<span style="color:#036;font-weight:bold">IntOff</span>);
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    <span class="constant">IntStatus</span> oldLevel = interrupt-&gt;SetLevel(<span class="constant">IntOff</span>);
 <span class="line-numbers"> <a href="#n6" name="n6">6</a></span>
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Remove</span> first thread from wait queue
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    thread-&gt;(<span style="color:#036;font-weight:bold">Thread</span> *)waitQueue-&gt;Remove();
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span><span class="constant">Remove</span> first thread from wait queue
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    thread-&gt;(<span class="constant">Thread</span> *)waitQueue-&gt;Remove();
 <span class="line-numbers"> <a href="#n9" name="n9">9</a></span>
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>    <span style="color:#080;font-weight:bold">if</span> (thread != <span style="color:#036;font-weight:bold">NULL</span>) {
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>        scheduler-&gt;ReadyToRun(thread);  
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>    <span class="keyword">if</span> (thread != <span class="constant">NULL</span>) {
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>    scheduler-&gt;ReadyToRun(thread);  
 <span class="line-numbers"><a href="#n12" name="n12">12</a></span>    }
 <span class="line-numbers"><a href="#n13" name="n13">13</a></span>
 <span class="line-numbers"><a href="#n14" name="n14">14</a></span>    value++;
@@ -508,22 +508,22 @@ More formally there are three types of solution categories</p>
 <p>Lock Class</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="color:#080;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">Lock</span> {
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>    <span style="color:#606">public</span>:
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>        <span style="color:#036;font-weight:bold">Lock</span> (char *debugName);
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>        ~Lock();
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span class="keyword">class</span> <span class="class">Lock</span> {
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>    <span class="key">public</span>:
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>    <span class="constant">Lock</span> (char *debugName);
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    ~Lock();
 <span class="line-numbers"> <a href="#n5" name="n5">5</a></span>
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>        char* getName() { <span style="color:#080;font-weight:bold">return</span> name; }
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    char* getName() { <span class="keyword">return</span> name; }
 <span class="line-numbers"> <a href="#n7" name="n7">7</a></span>
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>        void acquire();
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>        void release();
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>        bool isHeldByCurrentThread;
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    void acquire();
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    void release();
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>    bool isHeldByCurrentThread;
 <span class="line-numbers"><a href="#n11" name="n11">11</a></span>
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    <span style="color:#606">private</span>:
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span>        char*   name;
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span>        <span style="color:#036;font-weight:bold">List</span>*   lockWaitQueue;
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span>        bool    lockFree;
-<span class="line-numbers"><a href="#n16" name="n16">16</a></span>        <span style="color:#036;font-weight:bold">Thread</span>* currentLockThread;
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    <span class="key">private</span>:
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>    char*   name;
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>    <span class="constant">List</span>*   lockWaitQueue;
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>    bool    lockFree;
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>    <span class="constant">Thread</span>* currentLockThread;
 <span class="line-numbers"><a href="#n17" name="n17">17</a></span>};
 </pre></div>
 </div>
@@ -532,12 +532,12 @@ More formally there are three types of solution categories</p>
 <p>Lock Constructor</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Lock</span> <span style="color:#036;font-weight:bold">Constructor</span>
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span><span style="color:#036;font-weight:bold">Lock</span>::Lock(char * debugName) {
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span><span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span><span class="constant">Lock</span> <span class="constant">Constructor</span>
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span><span class="constant">Lock</span>::Lock(char * debugName) {
 <span class="line-numbers"><a href="#n3" name="n3">3</a></span>    name              = debugName;
-<span class="line-numbers"><a href="#n4" name="n4">4</a></span>    currentLockThread = <span style="color:#036;font-weight:bold">NULL</span>;
-<span class="line-numbers"><a href="#n5" name="n5">5</a></span>    lockFree          = <span style="color:#069">TRUE</span>;
-<span class="line-numbers"><a href="#n6" name="n6">6</a></span>    lockWaitQueue     = new <span style="color:#036;font-weight:bold">List</span>;
+<span class="line-numbers"><a href="#n4" name="n4">4</a></span>    currentLockThread = <span class="constant">NULL</span>;
+<span class="line-numbers"><a href="#n5" name="n5">5</a></span>    lockFree          = <span class="predefined-constant">TRUE</span>;
+<span class="line-numbers"><a href="#n6" name="n6">6</a></span>    lockWaitQueue     = new <span class="constant">List</span>;
 <span class="line-numbers"><a href="#n7" name="n7">7</a></span>}
 </pre></div>
 </div>
@@ -546,7 +546,7 @@ More formally there are three types of solution categories</p>
 <p>Lock Destructor</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Lock</span> <span style="color:#036;font-weight:bold">Destructor</span>
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span><span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span><span class="constant">Lock</span> <span class="constant">Destructor</span>
 <span class="line-numbers"><a href="#n2" name="n2">2</a></span>~Lock() {
 <span class="line-numbers"><a href="#n3" name="n3">3</a></span>    delete lockWaitQueue;  
 <span class="line-numbers"><a href="#n4" name="n4">4</a></span>}
@@ -557,23 +557,23 @@ More formally there are three types of solution categories</p>
 <p>Lock Acquire</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="color:#036;font-weight:bold">Lock</span>::acquire() {
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>    <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Disable</span> interrupts
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>    <span style="color:#036;font-weight:bold">IntStatus</span> oldLevel = interrupt-&gt;SetLevel(<span style="color:#036;font-weight:bold">IntOff</span>);
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span class="constant">Lock</span>::acquire() {
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>    <span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span><span class="constant">Disable</span> interrupts
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>    <span class="constant">IntStatus</span> oldLevel = interrupt-&gt;SetLevel(<span class="constant">IntOff</span>);
 <span class="line-numbers"> <a href="#n4" name="n4">4</a></span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Check</span> <span style="color:#080;font-weight:bold">if</span> current thread is an owner
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    <span style="color:#080;font-weight:bold">if</span> (currentThread == currentLockThread) {
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>        <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Already</span> owner  
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>        (void)interrupt-&gt;SetLevel(oldLevel);
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>        <span style="color:#080;font-weight:bold">return</span>;
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    <span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span><span class="constant">Check</span> <span class="keyword">if</span> current thread is an owner
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    <span class="keyword">if</span> (currentThread == currentLockThread) {
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span><span class="constant">Already</span> owner  
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    (void)interrupt-&gt;SetLevel(oldLevel);
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    <span class="keyword">return</span>;
 <span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>    }
 <span class="line-numbers"><a href="#n11" name="n11">11</a></span>
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    <span style="color:#080;font-weight:bold">if</span>(lockFree == <span style="color:#069">TRUE</span>) {
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span>        lockFree = <span style="color:#069">FALSE</span>;
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span>        currentLockThread = currentThread;      
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span>    } <span style="color:#080;font-weight:bold">else</span> {
-<span class="line-numbers"><a href="#n16" name="n16">16</a></span>        lockWaitQueue-&gt;Append((void*) currentThread);
-<span class="line-numbers"><a href="#n17" name="n17">17</a></span>        currentThread-&gt;Sleep();
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    <span class="keyword">if</span>(lockFree == <span class="predefined-constant">TRUE</span>) {
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>    lockFree = <span class="predefined-constant">FALSE</span>;
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>    currentLockThread = currentThread;      
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>    } <span class="keyword">else</span> {
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>    lockWaitQueue-&gt;Append((void*) currentThread);
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>    currentThread-&gt;Sleep();
 <span class="line-numbers"><a href="#n18" name="n18">18</a></span>    }
 <span class="line-numbers"><a href="#n19" name="n19">19</a></span>
 <span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>    (void)interrupt-&gt;SetLevel(oldLevel);
@@ -585,27 +585,27 @@ More formally there are three types of solution categories</p>
 <p>Lock Release</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="color:#036;font-weight:bold">Lock</span>::release() {
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>    <span style="color:#036;font-weight:bold">Thread</span>* waitingThread;
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>    <span style="color:#036;font-weight:bold">IntStatus</span> oldLevel = interrupt-&gt;SetLevel(<span style="color:#036;font-weight:bold">IntOff</span>);
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span class="constant">Lock</span>::release() {
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>    <span class="constant">Thread</span>* waitingThread;
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>    <span class="constant">IntStatus</span> oldLevel = interrupt-&gt;SetLevel(<span class="constant">IntOff</span>);
 <span class="line-numbers"> <a href="#n4" name="n4">4</a></span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    <span style="color:#080;font-weight:bold">if</span> (!isHeldByCurrentThread()) {
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>        <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Thread</span> is <span style="color:#080;font-weight:bold">not</span> valid owner of lock its
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>        <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>trying to release
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>        DEBUG(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Not a lock owner</span><span style="color:#710">&quot;</span></span>);
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    <span class="keyword">if</span> (!isHeldByCurrentThread()) {
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    <span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span><span class="constant">Thread</span> is <span class="keyword">not</span> valid owner of lock its
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span>trying to release
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    DEBUG(<span class="string"><span class="delimiter">&quot;</span><span class="content">Not a lock owner</span><span class="delimiter">&quot;</span></span>);
 <span class="line-numbers"> <a href="#n9" name="n9">9</a></span>
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>        (void)interrupt-&gt;SetLevel(oldLevel);
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>        <span style="color:#080;font-weight:bold">return</span>;      
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>    (void)interrupt-&gt;SetLevel(oldLevel);
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>    <span class="keyword">return</span>;      
 <span class="line-numbers"><a href="#n12" name="n12">12</a></span>    }
 <span class="line-numbers"><a href="#n13" name="n13">13</a></span>
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span>    waitingThread = (<span style="color:#036;font-weight:bold">Thread</span>*)lockWaitQueue-&gt;Remove();
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>    waitingThread = (<span class="constant">Thread</span>*)lockWaitQueue-&gt;Remove();
 <span class="line-numbers"><a href="#n15" name="n15">15</a></span>
-<span class="line-numbers"><a href="#n16" name="n16">16</a></span>    <span style="color:#080;font-weight:bold">if</span> (waitingThread != <span style="color:#036;font-weight:bold">NULL</span>) {
-<span class="line-numbers"><a href="#n17" name="n17">17</a></span>        scheduler-&gt;ReadyToRun(waitingThread);
-<span class="line-numbers"><a href="#n18" name="n18">18</a></span>        currentLockThread = waitingThread;      
-<span class="line-numbers"><a href="#n19" name="n19">19</a></span>    } <span style="color:#080;font-weight:bold">else</span> {
-<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>        lockFree = <span style="color:#069">TRUE</span>;
-<span class="line-numbers"><a href="#n21" name="n21">21</a></span>        currentLockThread = <span style="color:#036;font-weight:bold">NULL</span>;
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>    <span class="keyword">if</span> (waitingThread != <span class="constant">NULL</span>) {
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>    scheduler-&gt;ReadyToRun(waitingThread);
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>    currentLockThread = waitingThread;      
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>    } <span class="keyword">else</span> {
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>    lockFree = <span class="predefined-constant">TRUE</span>;
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>    currentLockThread = <span class="constant">NULL</span>;
 <span class="line-numbers"><a href="#n22" name="n22">22</a></span>    }
 <span class="line-numbers"><a href="#n23" name="n23">23</a></span>
 <span class="line-numbers"><a href="#n24" name="n24">24</a></span>    (void)interrupt-&gt;SetLevel(oldLevel);
@@ -617,8 +617,8 @@ More formally there are three types of solution categories</p>
 <p>Lock Owner</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>bool <span style="color:#036;font-weight:bold">Lock</span>::isHeldByCurrentThread() {
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>    <span style="color:#080;font-weight:bold">return</span> ((currentThread != currentLockThread) ?  <span style="color:#069">FALSE</span> : <span style="color:#069">TRUE</span>);
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>bool <span class="constant">Lock</span>::isHeldByCurrentThread() {
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span>    <span class="keyword">return</span> ((currentThread != currentLockThread) ?  <span class="predefined-constant">FALSE</span> : <span class="predefined-constant">TRUE</span>);
 <span class="line-numbers"><a href="#n3" name="n3">3</a></span>}
 </pre></div>
 </div>
@@ -643,21 +643,21 @@ More formally there are three types of solution categories</p>
 <p>Condition Class</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="color:#080;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">Condition</span> {
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>    <span style="color:#606">public</span>:
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>        Condition(char *debugName);
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>        ~Conditon();
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span class="keyword">class</span> <span class="class">Condition</span> {
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>    <span class="key">public</span>:
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>    Condition(char *debugName);
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    ~Conditon();
 <span class="line-numbers"> <a href="#n5" name="n5">5</a></span>
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>        char* getName() { <span style="color:#080;font-weight:bold">return</span> name; }
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    char* getName() { <span class="keyword">return</span> name; }
 <span class="line-numbers"> <a href="#n7" name="n7">7</a></span>
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>        void wait(<span style="color:#036;font-weight:bold">Lock</span>* conditionLock);
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>        void signal(<span style="color:#036;font-weight:bold">Lock</span>* conditionLock);
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>        void broadcast(<span style="color:#036;font-weight:bold">Lock</span>* conditionLock);
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    void wait(<span class="constant">Lock</span>* conditionLock);
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    void signal(<span class="constant">Lock</span>* conditionLock);
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>    void broadcast(<span class="constant">Lock</span>* conditionLock);
 <span class="line-numbers"><a href="#n11" name="n11">11</a></span>
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    <span style="color:#606">private</span>:
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span>        char* name;
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span>        <span style="color:#036;font-weight:bold">List</span>* cvQueue;
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span>        <span style="color:#036;font-weight:bold">Lock</span>* cvLock;  
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    <span class="key">private</span>:
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>    char* name;
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>    <span class="constant">List</span>* cvQueue;
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>    <span class="constant">Lock</span>* cvLock;  
 <span class="line-numbers"><a href="#n16" name="n16">16</a></span>};
 </pre></div>
 </div>
@@ -666,10 +666,10 @@ More formally there are three types of solution categories</p>
 <p>CV Constructor</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span><span style="color:#036;font-weight:bold">Condition</span>::Condition(char * debugName) {
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span><span class="constant">Condition</span>::Condition(char * debugName) {
 <span class="line-numbers"><a href="#n2" name="n2">2</a></span>    name    = debugName;
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span>    cvQueue = new <span style="color:#036;font-weight:bold">List</span>;
-<span class="line-numbers"><a href="#n4" name="n4">4</a></span>    cvLock  = <span style="color:#036;font-weight:bold">NULL</span>;  
+<span class="line-numbers"><a href="#n3" name="n3">3</a></span>    cvQueue = new <span class="constant">List</span>;
+<span class="line-numbers"><a href="#n4" name="n4">4</a></span>    cvLock  = <span class="constant">NULL</span>;  
 <span class="line-numbers"><a href="#n5" name="n5">5</a></span>}
 </pre></div>
 </div>
@@ -678,7 +678,7 @@ More formally there are three types of solution categories</p>
 <p>CV Destructor</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span><span style="color:#036;font-weight:bold">Condition</span>::~Condition() {
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span><span class="constant">Condition</span>::~Condition() {
 <span class="line-numbers"><a href="#n2" name="n2">2</a></span>    delete cvQueue;    
 <span class="line-numbers"><a href="#n3" name="n3">3</a></span>}
 </pre></div>
@@ -688,26 +688,26 @@ More formally there are three types of solution categories</p>
 <p>CV Wait</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>void <span style="color:#036;font-weight:bold">Condition</span>::wait(<span style="color:#036;font-weight:bold">Lock</span>* conditionLock) {
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>    <span style="color:#036;font-weight:bold">IntStatus</span> oldLevel = interrupt-&gt;SetLevel(<span style="color:#036;font-weight:bold">IntOff</span>);
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>void <span class="constant">Condition</span>::wait(<span class="constant">Lock</span>* conditionLock) {
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>    <span class="constant">IntStatus</span> oldLevel = interrupt-&gt;SetLevel(<span class="constant">IntOff</span>);
 <span class="line-numbers"> <a href="#n3" name="n3">3</a></span>
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    <span style="color:#080;font-weight:bold">if</span> (cvQueue-&gt;isEmpty()) {
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>        <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">This</span> lock is now associated with <span style="color:#036;font-weight:bold">CV</span> <span style="color:#080;font-weight:bold">and</span>
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>        <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span><span style="color:#C2C">on</span></span>ly removed <span style="color:#080;font-weight:bold">when</span> last entry is removed
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>        <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span>from cvQueue.
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>        cvLock = conditionLock;
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    <span class="keyword">if</span> (cvQueue-&gt;isEmpty()) {
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    <span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span><span class="constant">This</span> lock is now associated with <span class="constant">CV</span> <span class="keyword">and</span>
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    <span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span><span class="modifier">on</span></span>ly removed <span class="keyword">when</span> last entry is removed
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span>from cvQueue.
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    cvLock = conditionLock;
 <span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    }
 <span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>    <span style="color:#080;font-weight:bold">if</span> (conditionLock == <span style="color:#036;font-weight:bold">NULL</span>) {
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>        interrupt-&gt;SetLevel(oldLevel);  
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span>        <span style="color:#080;font-weight:bold">return</span>;
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>    <span class="keyword">if</span> (conditionLock == <span class="constant">NULL</span>) {
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    interrupt-&gt;SetLevel(oldLevel);  
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>    <span class="keyword">return</span>;
 <span class="line-numbers"><a href="#n14" name="n14">14</a></span>    }
 <span class="line-numbers"><a href="#n15" name="n15">15</a></span>
 <span class="line-numbers"><a href="#n16" name="n16">16</a></span>    conditionLock-&gt;release();
 <span class="line-numbers"><a href="#n17" name="n17">17</a></span>    cvQueue-&gt;Append((void*) currentThread);
 <span class="line-numbers"><a href="#n18" name="n18">18</a></span>    currentThread-&gt;Sleep();
 <span class="line-numbers"><a href="#n19" name="n19">19</a></span>
-<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>    <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Acquire</span> lock <span style="color:#080;font-weight:bold">when</span> get up
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>    <span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span><span class="constant">Acquire</span> lock <span class="keyword">when</span> get up
 <span class="line-numbers"><a href="#n21" name="n21">21</a></span>    conditionLock-&gt;acquire();
 <span class="line-numbers"><a href="#n22" name="n22">22</a></span>    interrupt-&gt;SetLevel(oldLevel);    
 <span class="line-numbers"><a href="#n23" name="n23">23</a></span>}
@@ -718,28 +718,28 @@ More formally there are three types of solution categories</p>
 <p>CV Signal</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>void <span style="color:#036;font-weight:bold">Conditon</span>::signal(<span style="color:#036;font-weight:bold">Lock</span> * conditionLock) {
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>    <span style="color:#036;font-weight:bold">IntStatus</span> oldLevel = interrupt-&gt;SetLevel(<span style="color:#036;font-weight:bold">IntOff</span>);
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>void <span class="constant">Conditon</span>::signal(<span class="constant">Lock</span> * conditionLock) {
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>    <span class="constant">IntStatus</span> oldLevel = interrupt-&gt;SetLevel(<span class="constant">IntOff</span>);
 <span class="line-numbers"> <a href="#n3" name="n3">3</a></span>
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">If</span> nobody to signal, <span style="color:#080;font-weight:bold">return</span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    <span style="color:#080;font-weight:bold">if</span> (cvQueue-&gt;Empty()) {
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>        interrupt-&gt;SetLevel(oldLevel);
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>        <span style="color:#080;font-weight:bold">return</span>;
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    <span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span><span class="constant">If</span> nobody to signal, <span class="keyword">return</span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    <span class="keyword">if</span> (cvQueue-&gt;Empty()) {
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    interrupt-&gt;SetLevel(oldLevel);
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span class="keyword">return</span>;
 <span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    }
 <span class="line-numbers"> <a href="#n9" name="n9">9</a></span>
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>    <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Verify</span> right lock is signalled
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>    <span style="color:#080;font-weight:bold">if</span> (cvLock != conditionLock) {
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>        interrupt-&gt;SetLevel(oldLevel);
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span>        <span style="color:#080;font-weight:bold">return</span>;
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>    <span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span><span class="constant">Verify</span> right lock is signalled
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>    <span class="keyword">if</span> (cvLock != conditionLock) {
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    interrupt-&gt;SetLevel(oldLevel);
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>    <span class="keyword">return</span>;
 <span class="line-numbers"><a href="#n14" name="n14">14</a></span>    }
 <span class="line-numbers"><a href="#n15" name="n15">15</a></span>
 <span class="line-numbers"><a href="#n16" name="n16">16</a></span>    thread = cvQueue-&gt;Remove();
-<span class="line-numbers"><a href="#n17" name="n17">17</a></span>    <span style="color:#080;font-weight:bold">if</span> (thread != <span style="color:#036;font-weight:bold">NULL</span>) {
-<span class="line-numbers"><a href="#n18" name="n18">18</a></span>        scheduler-&gt;ReadyToRun(thread);
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>    <span class="keyword">if</span> (thread != <span class="constant">NULL</span>) {
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>    scheduler-&gt;ReadyToRun(thread);
 <span class="line-numbers"><a href="#n19" name="n19">19</a></span>    }
 <span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>
-<span class="line-numbers"><a href="#n21" name="n21">21</a></span>    <span style="color:#080;font-weight:bold">if</span> (cvQueue-&gt;isEmpty()) {
-<span class="line-numbers"><a href="#n22" name="n22">22</a></span>        cvLock = <span style="color:#036;font-weight:bold">NULL</span>;
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>    <span class="keyword">if</span> (cvQueue-&gt;isEmpty()) {
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span>    cvLock = <span class="constant">NULL</span>;
 <span class="line-numbers"><a href="#n23" name="n23">23</a></span>    }
 <span class="line-numbers"><a href="#n24" name="n24">24</a></span>
 <span class="line-numbers"><a href="#n25" name="n25">25</a></span>    interrupt-&gt;SetLevel(oldLevel);
@@ -759,11 +759,11 @@ monitor condition =&gt; needItem;<br /></p>
 <p>Producer</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="color:#080;font-weight:bold">while</span> (<span style="color:#069">true</span>) {
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span class="keyword">while</span> (<span class="predefined-constant">true</span>) {
 <span class="line-numbers"> <a href="#n2" name="n2">2</a></span>    monitorLock.acquire();
 <span class="line-numbers"> <a href="#n3" name="n3">3</a></span>
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Produce</span> item
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Put</span> <span style="color:#080;font-weight:bold">in</span> a buffer
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    <span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span><span class="constant">Produce</span> item
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    <span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span><span class="constant">Put</span> <span class="keyword">in</span> a buffer
 <span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    itemCount++;
 <span class="line-numbers"> <a href="#n7" name="n7">7</a></span>
 <span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    needItem.signal(&amp;monitorLock);
@@ -777,14 +777,14 @@ monitor condition =&gt; needItem;<br /></p>
 <p>Consumer</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="color:#080;font-weight:bold">while</span> (<span style="color:#069">true</span>) {
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span class="keyword">while</span> (<span class="predefined-constant">true</span>) {
 <span class="line-numbers"> <a href="#n2" name="n2">2</a></span>    monitorLock.acquire();
 <span class="line-numbers"> <a href="#n3" name="n3">3</a></span>
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    <span style="color:#080;font-weight:bold">while</span>(intemCount == <span style="color:#00D">0</span>) {
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>        needItem.wait(&amp;monitorLock);      
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    <span class="keyword">while</span>(intemCount == <span class="integer">0</span>) {
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    needItem.wait(&amp;monitorLock);      
 <span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    }
 <span class="line-numbers"> <a href="#n7" name="n7">7</a></span>
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Buffer</span> has atleast one item
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    <span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span><span class="constant">Buffer</span> has atleast one item
 <span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    itemCount--;
 <span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>
 <span class="line-numbers"><a href="#n11" name="n11">11</a></span>    monitorLock.Relase();

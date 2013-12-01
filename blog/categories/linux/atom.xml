@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2013-11-27T16:44:09-08:00</updated>
+  <updated>2013-11-30T23:42:34-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -201,45 +201,45 @@ Kernel preemption is still enabled during the busy wait phase, thus a process wa
 <p>Spin Lock with kernel preemption</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Invokes</span> preempt-disable() to disable kernel preemption.
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span><span class="constant">Invokes</span> preempt-disable() to disable kernel preemption.
 <span class="line-numbers"> <a href="#n2" name="n2">2</a></span>
 <span class="line-numbers"> <a href="#n3" name="n3">3</a></span>; Intel syntax
 <span class="line-numbers"> <a href="#n4" name="n4">4</a></span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span style="color:#606">locked</span>:                      ; <span style="color:#036;font-weight:bold">The</span> lock variable. <span style="color:#F00;background-color:#FAA">1</span> = locked, <span style="color:#00D">0</span> = unlocked.
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>dd      <span style="color:#00D">0</span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span class="key">locked</span>:                      ; <span class="constant">The</span> lock variable. <span class="error">1</span> = locked, <span class="integer">0</span> = unlocked.
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>dd      <span class="integer">0</span>
 <span class="line-numbers"> <a href="#n7" name="n7">7</a></span>
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>spin-<span style="color:#606">lock</span>:
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>mov     eax(new), <span style="color:#00D">1</span>     ; <span style="color:#036;font-weight:bold">Set</span> the <span style="color:#036;font-weight:bold">EAX</span> register to <span style="color:#00D">1</span>.
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>spin-<span class="key">lock</span>:
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>mov     eax(new), <span class="integer">1</span>     ; <span class="constant">Set</span> the <span class="constant">EAX</span> register to <span class="integer">1</span>.
 <span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>
 <span class="line-numbers"><a href="#n11" name="n11">11</a></span>xchg    eax(new), [locked]
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>; <span style="color:#036;font-weight:bold">Atomically</span> swap the <span style="color:#036;font-weight:bold">EAX</span> register with
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>; <span class="constant">Atomically</span> swap the <span class="constant">EAX</span> register with
 <span class="line-numbers"><a href="#n13" name="n13">13</a></span>;  the lock variable.
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span>; This will always store <span style="color:#00D">1</span> to the lock, leaving
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span>;  previous value <span style="color:#080;font-weight:bold">in</span> the <span style="color:#036;font-weight:bold">EAX</span> register.
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>; This will always store <span class="integer">1</span> to the lock, leaving
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>;  previous value <span class="keyword">in</span> the <span class="constant">EAX</span> register.
 <span class="line-numbers"><a href="#n16" name="n16">16</a></span>
 <span class="line-numbers"><a href="#n17" name="n17">17</a></span>test    eax(new), eax(prev)
-<span class="line-numbers"><a href="#n18" name="n18">18</a></span>; <span style="color:#036;font-weight:bold">Test</span> <span style="color:#036;font-weight:bold">EAX</span> with itself. Among other things, this will
-<span class="line-numbers"><a href="#n19" name="n19">19</a></span>;  set the processor<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">s Zero Flag if EAX is 0.</span></span>
-<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">; If EAX is 0, then the lock was unlocked and</span></span>
-<span class="line-numbers"><a href="#n21" name="n21">21</a></span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">;  we just locked it.</span></span>
-<span class="line-numbers"><a href="#n22" name="n22">22</a></span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">; Otherwise, EAX is 1 and we didn</span><span style="color:#710">'</span></span>t acquire the lock.
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>; <span class="constant">Test</span> <span class="constant">EAX</span> with itself. Among other things, this will
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>;  set the processor<span class="string"><span class="delimiter">'</span><span class="content">s Zero Flag if EAX is 0.</span></span>
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span><span class="string"><span class="content">; If EAX is 0, then the lock was unlocked and</span></span>
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span><span class="string"><span class="content">;  we just locked it.</span></span>
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span><span class="string"><span class="content">; Otherwise, EAX is 1 and we didn</span><span class="delimiter">'</span></span>t acquire the lock.
 <span class="line-numbers"><a href="#n23" name="n23">23</a></span>
-<span class="line-numbers"><a href="#n24" name="n24">24</a></span>//   <span style="color:#036;font-weight:bold">Enable</span> kernel preemption preempt-enable() 
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span>//   <span class="constant">Enable</span> kernel preemption preempt-enable() 
 <span class="line-numbers"><a href="#n25" name="n25">25</a></span>
-<span class="line-numbers"><a href="#n26" name="n26">26</a></span>jnz     spin-lock       ; <span style="color:#036;font-weight:bold">Jump</span> back to the <span style="color:#036;font-weight:bold">MOV</span> instruction <span style="color:#080;font-weight:bold">if</span> the <span style="color:#036;font-weight:bold">Zero</span> <span style="color:#036;font-weight:bold">Flag</span> is
-<span class="line-numbers"><a href="#n27" name="n27">27</a></span>;  <span style="color:#080;font-weight:bold">not</span> set; the lock was previously locked, <span style="color:#080;font-weight:bold">and</span> so
-<span class="line-numbers"><a href="#n28" name="n28">28</a></span>; we need to spin <span style="color:#080;font-weight:bold">until</span> it becomes unlocked.
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span>jnz     spin-lock       ; <span class="constant">Jump</span> back to the <span class="constant">MOV</span> instruction <span class="keyword">if</span> the <span class="constant">Zero</span> <span class="constant">Flag</span> is
+<span class="line-numbers"><a href="#n27" name="n27">27</a></span>;  <span class="keyword">not</span> set; the lock was previously locked, <span class="keyword">and</span> so
+<span class="line-numbers"><a href="#n28" name="n28">28</a></span>; we need to spin <span class="keyword">until</span> it becomes unlocked.
 <span class="line-numbers"><a href="#n29" name="n29">29</a></span>
-<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>ret                     ; <span style="color:#036;font-weight:bold">The</span> lock has been acquired, <span style="color:#080;font-weight:bold">return</span> to the calling
+<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>ret                     ; <span class="constant">The</span> lock has been acquired, <span class="keyword">return</span> to the calling
 <span class="line-numbers"><a href="#n31" name="n31">31</a></span>;  function.
 <span class="line-numbers"><a href="#n32" name="n32">32</a></span>
-<span class="line-numbers"><a href="#n33" name="n33">33</a></span>spin-<span style="color:#606">unlock</span>:
-<span class="line-numbers"><a href="#n34" name="n34">34</a></span>mov     eax, <span style="color:#00D">0</span>          ; <span style="color:#036;font-weight:bold">Set</span> the <span style="color:#036;font-weight:bold">EAX</span> register to <span style="color:#00D">0</span>.
+<span class="line-numbers"><a href="#n33" name="n33">33</a></span>spin-<span class="key">unlock</span>:
+<span class="line-numbers"><a href="#n34" name="n34">34</a></span>mov     eax, <span class="integer">0</span>          ; <span class="constant">Set</span> the <span class="constant">EAX</span> register to <span class="integer">0</span>.
 <span class="line-numbers"><a href="#n35" name="n35">35</a></span>
-<span class="line-numbers"><a href="#n36" name="n36">36</a></span>xchg    eax, [locked]   ; <span style="color:#036;font-weight:bold">Atomically</span> swap the <span style="color:#036;font-weight:bold">EAX</span> register with
+<span class="line-numbers"><a href="#n36" name="n36">36</a></span>xchg    eax, [locked]   ; <span class="constant">Atomically</span> swap the <span class="constant">EAX</span> register with
 <span class="line-numbers"><a href="#n37" name="n37">37</a></span>;  the lock variable.
 <span class="line-numbers"><a href="#n38" name="n38">38</a></span>
-<span class="line-numbers"><a href="#n39" name="n39">39</a></span>ret                     ; <span style="color:#036;font-weight:bold">The</span> lock has been released.
+<span class="line-numbers"><a href="#n39" name="n39">39</a></span>ret                     ; <span class="constant">The</span> lock has been released.
 </pre></div>
 </div>
 </div>

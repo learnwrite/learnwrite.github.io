@@ -4,7 +4,7 @@
   <title><![CDATA[Category: sorting | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/sorting/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2013-11-27T16:44:09-08:00</updated>
+  <updated>2013-11-30T23:42:34-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -33,14 +33,14 @@
 <p><br /><br /></p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="color:#036;font-weight:bold">MERGE</span>-SORT(<span style="color:#036;font-weight:bold">A</span>, p, r) /<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808"> A is array of numbers</span></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#808">{                   </span><span style="color:#404">/</span></span>/ p is starting index of array
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>                    <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span> r is last index of array
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    <span style="color:#080;font-weight:bold">if</span> p &lt; r
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    <span style="color:#080;font-weight:bold">then</span> q &lt;- ⌊(p + r)⌋ / <span style="color:#00D">2</span>;  
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>        <span style="color:#036;font-weight:bold">MERGE</span>-SORT(<span style="color:#036;font-weight:bold">A</span>, p, q)
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>        <span style="color:#036;font-weight:bold">MERGE</span>-SORT(<span style="color:#036;font-weight:bold">A</span>, q + <span style="color:#00D">1</span>, r)
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>        MERGE(<span style="color:#036;font-weight:bold">A</span>, p, q, r)
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span class="constant">MERGE</span>-SORT(<span class="constant">A</span>, p, r) /<span class="regexp"><span class="delimiter">/</span><span class="content"> A is array of numbers</span></span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="regexp"><span class="content">{                   </span><span class="delimiter">/</span></span>/ p is starting index of array
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>                    <span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span> r is last index of array
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    <span class="keyword">if</span> p &lt; r
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    <span class="keyword">then</span> q &lt;- ⌊(p + r)⌋ / <span class="integer">2</span>;  
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>        <span class="constant">MERGE</span>-SORT(<span class="constant">A</span>, p, q)
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>        <span class="constant">MERGE</span>-SORT(<span class="constant">A</span>, q + <span class="integer">1</span>, r)
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>        MERGE(<span class="constant">A</span>, p, q, r)
 <span class="line-numbers"> <a href="#n9" name="n9">9</a></span>}
 </pre></div>
 </div>
@@ -51,21 +51,21 @@
 <p>Merge Sort</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>MERGE(<span style="color:#036;font-weight:bold">A</span>, p, q, r)
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>n1 &lt;- q - p + <span style="color:#00D">1</span>
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>MERGE(<span class="constant">A</span>, p, q, r)
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>n1 &lt;- q - p + <span class="integer">1</span>
 <span class="line-numbers"> <a href="#n3" name="n3">3</a></span>n2 &lt;- r - q
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>create arrays <span style="color:#036;font-weight:bold">L</span>[<span style="color:#00D">1</span>...n1 + <span style="color:#00D">1</span>] <span style="color:#080;font-weight:bold">and</span> <span style="color:#036;font-weight:bold">R</span>[<span style="color:#00D">1</span>... n2 + <span style="color:#00D">1</span>] /<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808"> It took O(n) space</span></span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#808"></span></span>
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#808"></span><span style="color:#404">/</span></span>/<span style="color:#036;font-weight:bold">Assign</span> elements to new sub arrays
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span><span style="color:#080;font-weight:bold">for</span> i &lt;- <span style="color:#00D">1</span> to n1
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    <span style="color:#080;font-weight:bold">do</span> <span style="color:#036;font-weight:bold">L</span>[i] &lt;- <span style="color:#036;font-weight:bold">A</span>[p + i - <span style="color:#00D">1</span>]
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>create arrays <span class="constant">L</span>[<span class="integer">1</span>...n1 + <span class="integer">1</span>] <span class="keyword">and</span> <span class="constant">R</span>[<span class="integer">1</span>... n2 + <span class="integer">1</span>] /<span class="regexp"><span class="delimiter">/</span><span class="content"> It took O(n) space</span></span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span class="regexp"><span class="content"></span></span>
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span class="regexp"><span class="content"></span><span class="delimiter">/</span></span>/<span class="constant">Assign</span> elements to new sub arrays
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span><span class="keyword">for</span> i &lt;- <span class="integer">1</span> to n1
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    <span class="keyword">do</span> <span class="constant">L</span>[i] &lt;- <span class="constant">A</span>[p + i - <span class="integer">1</span>]
 <span class="line-numbers"> <a href="#n9" name="n9">9</a></span>     
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span><span style="color:#080;font-weight:bold">for</span> j &lt;- <span style="color:#00D">1</span> to n2
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>    <span style="color:#080;font-weight:bold">do</span> <span style="color:#036;font-weight:bold">R</span>[j] &lt;- <span style="color:#036;font-weight:bold">A</span>[q + j]
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span><span class="keyword">for</span> j &lt;- <span class="integer">1</span> to n2
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>    <span class="keyword">do</span> <span class="constant">R</span>[j] &lt;- <span class="constant">A</span>[q + j]
 <span class="line-numbers"><a href="#n12" name="n12">12</a></span>    
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span><span style="color:#036;font-weight:bold">Mark</span> <span style="color:#080;font-weight:bold">end</span> of array
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span><span style="color:#036;font-weight:bold">L</span>[n1 + <span style="color:#00D">1</span>] &lt;- ∞
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span><span style="color:#036;font-weight:bold">R</span>[n2 + <span style="color:#00D">1</span>] &lt;- ∞
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span><span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span><span class="constant">Mark</span> <span class="keyword">end</span> of array
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span><span class="constant">L</span>[n1 + <span class="integer">1</span>] &lt;- ∞
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span><span class="constant">R</span>[n2 + <span class="integer">1</span>] &lt;- ∞
 </pre></div>
 </div>
 </div>
@@ -75,15 +75,15 @@
 <p>Merging two arrays L[] and R[]</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>i &lt;- <span style="color:#00D">1</span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>j &lt;- <span style="color:#00D">1</span>
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>i &lt;- <span class="integer">1</span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>j &lt;- <span class="integer">1</span>
 <span class="line-numbers"> <a href="#n3" name="n3">3</a></span>
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span style="color:#080;font-weight:bold">for</span> k &lt;- p to r
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    <span style="color:#080;font-weight:bold">do</span> <span style="color:#080;font-weight:bold">if</span> <span style="color:#036;font-weight:bold">L</span>[i] &lt;= <span style="color:#036;font-weight:bold">R</span>[j]
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>        <span style="color:#080;font-weight:bold">then</span> <span style="color:#036;font-weight:bold">A</span>[k] &lt;- <span style="color:#036;font-weight:bold">L</span>[i]
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>            i &lt;- i + <span style="color:#00D">1</span>
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>        <span style="color:#080;font-weight:bold">else</span> <span style="color:#036;font-weight:bold">A</span>[k] &lt;- <span style="color:#036;font-weight:bold">R</span>[j]
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>            j &lt;- j + <span style="color:#00D">1</span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span class="keyword">for</span> k &lt;- p to r
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    <span class="keyword">do</span> <span class="keyword">if</span> <span class="constant">L</span>[i] &lt;= <span class="constant">R</span>[j]
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>        <span class="keyword">then</span> <span class="constant">A</span>[k] &lt;- <span class="constant">L</span>[i]
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>            i &lt;- i + <span class="integer">1</span>
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>        <span class="keyword">else</span> <span class="constant">A</span>[k] &lt;- <span class="constant">R</span>[j]
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>            j &lt;- j + <span class="integer">1</span>
 </pre></div>
 </div>
 </div>
