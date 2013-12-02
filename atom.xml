@@ -4,7 +4,7 @@
   <title><![CDATA[Learnings]]></title>
   <link href="http://learnwrite.github.io/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2013-12-01T13:24:39-08:00</updated>
+  <updated>2013-12-01T19:34:27-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -2402,8 +2402,9 @@ I started realizing that after all it’s not that easy to actually think and wr
 <p>The best synchronization technique consists in designing the kernel so as to avoid
 the need for synchronization in the first place.</p>
 
-<p><code>Basically, a per-CPU variable is an array of data structures, one element per each CPU in the system.</code>
-A CPU should not access the elements of the array corresponding to the other CPUs.</p>
+<blockquote><p>Basically, a per-CPU variable is an array of data structures, one element per each CPU in the system.</p></blockquote>
+
+<p>A CPU should not access the elements of the array corresponding to the other CPUs.</p>
 
 <p><code>Pros</code></p>
 
@@ -2461,7 +2462,8 @@ At first, <code>both CPUs try to read the same location</code>, but the memory a
   <li>Synchronization primitive at CPU level      - Memory barrier</li>
 </ul>
 
-<p>In linux <em>barrier()</em> macro acts as an <em>optimization barrier</em>. <code>Optimization barrier primitive ensures that assembly language instructions of C statements mentioned before *barrier()* and assembly language instructions of C statements mentioned after, remains in the same sequence.</code></p>
+<p>In linux <em>barrier()</em> macro acts as an <em>optimization barrier</em>. </p>
+<blockquote><p>Optimization barrier primitive ensures that assembly language instructions of C statements mentioned before *barrier()* and assembly language instructions of C statements mentioned after, remains in the same sequence.</p></blockquote>
 
 <p>But, Optimization barrier cannot control in which fashion instructions will be executed by CPU.</p>
 
