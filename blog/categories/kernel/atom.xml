@@ -4,7 +4,7 @@
   <title><![CDATA[Category: kernel | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/kernel/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2013-12-05T08:07:39-08:00</updated>
+  <updated>2013-12-05T08:40:09-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -276,7 +276,7 @@ In the above example <code>Lock is 1 and Unlock is 0</code></p>
 <h3 id="seqlocks">SeqLocks</h3>
 
 <p>In Read/Write spin locks reader and write have same priority. Reader must wait until the writer has finished and vice versa.<br />
-SeqLocks are similar to read/write locks except except that they give a much higher priority to writers: in fact a writer is allowed to proceed even when readers are active.</p>
+<blockquote><p>SeqLocks are similar to read/write locks except that they give a much higher priority to writers: in fact a writer is allowed to proceed even when readers are active.</p></blockquote></p>
 
 <p>Writer never waits but reader may be forced to read the data several times until it get valid copy. Each reader must read sequence counter twice i.e. before and after reading the data and then check whether sequence counter values are same. If its not equal then it means that writer must has become active and has increased the sequence counter, thus implicitly telling the reader that the data just read is not valid.</p>
 
