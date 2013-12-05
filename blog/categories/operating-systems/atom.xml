@@ -4,7 +4,7 @@
   <title><![CDATA[Category: operating systems | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/operating-systems/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2013-12-04T22:12:15-08:00</updated>
+  <updated>2013-12-05T08:07:39-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -105,10 +105,13 @@ the need for synchronization in the first place.</p>
 
 <p><strong>[Snooping and Invalidations]</strong> Snooping is the process where the individual caches monitor address lines,  for accesses to memory locations that they have cached. When a write operation is observed to a location that a cache has a copy of, the cache controller invalidates its own copy of the snooped memory location.</p>
 
-<p><code>Cons</code>
-* It can only be used when it make sense to <code>logically split</code> the data across the CPUs of the system
-* Do not provide <code>protection</code> against access from asynchronous functions such as <code>interrupt handlers and deferrable functions.</code>
-* Per-CPU variables are variables are prone to <code>race conditions</code> caused by kernel preemption, both in uniprocessor and multiprocessor systems.</p>
+<p><code>Cons</code></p>
+
+<ul>
+  <li>It can only be used when it make sense to <code>logically split</code> the data across the CPUs of the system<br /></li>
+  <li>Do not provide <code>protection</code> against access from asynchronous functions such as <code>interrupt handlers and deferrable functions.</code><br /></li>
+  <li>Per-CPU variables are variables are prone to <code>race conditions</code> caused by kernel preemption, both in uniprocessor and multiprocessor systems.<br /></li>
+</ul>
 
 <p><strong>[Problem]</strong> What would happen if a kernel control path gets the address of its local copy of a per-CPU variable, and then it is preempted and moved to another CPU: the address still refers to the element of the previous CPU.</p>
 
