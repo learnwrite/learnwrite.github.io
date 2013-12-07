@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Trees | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/trees/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2013-12-04T22:12:15-08:00</updated>
+  <updated>2013-12-06T21:26:49-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -27,6 +27,10 @@
       <li><a href="#infix-to-postfix">Infix to Postfix</a></li>
       <li><a href="#postfix-to-infix">Postfix to Infix</a>        <ul>
           <li><a href="#evaluate-postfix-expression">Evaluate Postfix expression</a></li>
+        </ul>
+      </li>
+      <li><a href="#tree-problems">Tree Problems</a>        <ul>
+          <li><a href="#find-bst-is-balanced-or-not">Find BST is balanced or not</a></li>
         </ul>
       </li>
     </ul>
@@ -466,6 +470,195 @@
 <span class="line-numbers"><strong><a href="#n50" name="n50">50</a></strong></span>}
 <span class="line-numbers"><a href="#n51" name="n51">51</a></span>
 <span class="line-numbers"><a href="#n52" name="n52">52</a></span>std::stack&amp;lt;<span class="predefined-type">int</span>&amp;gt; mystack; }; </pre></div>
+</div>
+ </figure></notextile></div>
+</code></pre>
+
+<h3 id="tree-problems">Tree Problems</h3>
+
+<h4 id="find-bst-is-balanced-or-not">Find BST is balanced or not</h4>
+
+<p>Balanced tree is defined to be a tree such that no two leaf nodes differ in distance from the root by more than one.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Balance BST</span>  <a href='http://ideone.com/2rEls9' target='_blank'>Run </a></figcaption> <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers">  <a href="#n1" name="n1">1</a></span>
+<span class="line-numbers">  <a href="#n2" name="n2">2</a></span><span class="preprocessor">#include</span> <span class="include">&lt;stdio.h&gt;</span>
+<span class="line-numbers">  <a href="#n3" name="n3">3</a></span><span class="preprocessor">#include</span> <span class="include">&lt;stdlib.h /&gt;</span>&lt;/stdio.h&gt;&lt;/p&gt;
+<span class="line-numbers">  <a href="#n4" name="n4">4</a></span>
+<span class="line-numbers">  <a href="#n5" name="n5">5</a></span>&lt;p&gt;<span class="predefined-type">int</span> arrLen = <span class="integer">5</span>;
+<span class="line-numbers">  <a href="#n6" name="n6">6</a></span><span class="predefined-type">int</span> maxdepth = <span class="integer">0</span>;
+<span class="line-numbers">  <a href="#n7" name="n7">7</a></span><span class="predefined-type">int</span> mindepth = <span class="integer">10</span>;
+<span class="line-numbers">  <a href="#n8" name="n8">8</a></span><span class="predefined-type">int</span> totalElem = <span class="integer">8</span>;&lt;/p&gt;
+<span class="line-numbers">  <a href="#n9" name="n9">9</a></span>
+<span class="line-numbers"> <strong><a href="#n10" name="n10">10</a></strong></span>&lt;p&gt;<span class="keyword">typedef</span> <span class="keyword">struct</span> BST {
+<span class="line-numbers"> <a href="#n11" name="n11">11</a></span>    <span class="predefined-type">int</span> data;
+<span class="line-numbers"> <a href="#n12" name="n12">12</a></span>    <span class="keyword">struct</span> BST *left;
+<span class="line-numbers"> <a href="#n13" name="n13">13</a></span>    <span class="keyword">struct</span> BST *right;
+<span class="line-numbers"> <a href="#n14" name="n14">14</a></span>} nodeBST;&lt;/p&gt;
+<span class="line-numbers"> <a href="#n15" name="n15">15</a></span>
+<span class="line-numbers"> <a href="#n16" name="n16">16</a></span>&lt;p&gt;<span class="directive">void</span> balanceBST(<span class="predefined-type">int</span> arr[]);
+<span class="line-numbers"> <a href="#n17" name="n17">17</a></span>nodeBST* addNode(<span class="predefined-type">int</span> data);
+<span class="line-numbers"> <a href="#n18" name="n18">18</a></span><span class="directive">void</span> addNodeToBST(nodeBST *root, nodeBST *node);
+<span class="line-numbers"> <a href="#n19" name="n19">19</a></span><span class="directive">void</span> traverse(nodeBST *root);
+<span class="line-numbers"> <strong><a href="#n20" name="n20">20</a></strong></span><span class="directive">void</span> maxDepth(nodeBST *root, <span class="predefined-type">int</span> depth);
+<span class="line-numbers"> <a href="#n21" name="n21">21</a></span><span class="directive">void</span> minDepth(nodeBST *root, <span class="predefined-type">int</span> depth);&lt;/p&gt;
+<span class="line-numbers"> <a href="#n22" name="n22">22</a></span>
+<span class="line-numbers"> <a href="#n23" name="n23">23</a></span>&lt;p&gt;<span class="predefined-type">int</span> maxDepthWithoutGlobalVar(nodeBST *root, <span class="predefined-type">int</span> depth, <span class="predefined-type">int</span> maxDeep);
+<span class="line-numbers"> <a href="#n24" name="n24">24</a></span><span class="predefined-type">int</span> minDepthWithoutGlobalVar(nodeBST *root, <span class="predefined-type">int</span> depth, <span class="predefined-type">int</span> minDeep);&lt;/p&gt;
+<span class="line-numbers"> <a href="#n25" name="n25">25</a></span>
+<span class="line-numbers"> <a href="#n26" name="n26">26</a></span>&lt;p&gt;<span class="predefined-type">int</span> main()
+<span class="line-numbers"> <a href="#n27" name="n27">27</a></span>{
+<span class="line-numbers"> <a href="#n28" name="n28">28</a></span>    <span class="predefined-type">int</span> arr[<span class="integer">10</span>] = {<span class="integer">5</span>,<span class="integer">3</span>,<span class="integer">7</span>,<span class="integer">10</span>,<span class="integer">6</span>,<span class="integer">12</span>,<span class="integer">2</span>,<span class="integer">1</span>};&lt;/p&gt;
+<span class="line-numbers"> <a href="#n29" name="n29">29</a></span>
+<span class="line-numbers"> <strong><a href="#n30" name="n30">30</a></strong></span>&lt;pre&gt;&lt;code&gt;(<span class="directive">void</span>)balanceBST(arr);
+<span class="line-numbers"> <a href="#n31" name="n31">31</a></span>
+<span class="line-numbers"> <a href="#n32" name="n32">32</a></span><span class="keyword">return</span> <span class="integer">0</span>; }
+<span class="line-numbers"> <a href="#n33" name="n33">33</a></span>&lt;/code&gt;&lt;/pre&gt;
+<span class="line-numbers"> <a href="#n34" name="n34">34</a></span>
+<span class="line-numbers"> <a href="#n35" name="n35">35</a></span>&lt;p&gt;<span class="directive">void</span> balanceBST(<span class="predefined-type">int</span> arr[])
+<span class="line-numbers"> <a href="#n36" name="n36">36</a></span>{
+<span class="line-numbers"> <a href="#n37" name="n37">37</a></span>    nodeBST *node;
+<span class="line-numbers"> <a href="#n38" name="n38">38</a></span>    nodeBST *root;
+<span class="line-numbers"> <a href="#n39" name="n39">39</a></span>    <span class="predefined-type">int</span> max = <span class="integer">0</span>;
+<span class="line-numbers"> <strong><a href="#n40" name="n40">40</a></strong></span>    <span class="predefined-type">int</span> min = <span class="integer">100000</span>;&lt;/p&gt;
+<span class="line-numbers"> <a href="#n41" name="n41">41</a></span>
+<span class="line-numbers"> <a href="#n42" name="n42">42</a></span>&lt;pre&gt;&lt;code&gt;<span class="keyword">for</span> (<span class="predefined-type">int</span> i = <span class="integer">0</span>; i &amp;lt; totalElem; i++) {
+<span class="line-numbers"> <a href="#n43" name="n43">43</a></span>node = addNode(arr[i]);
+<span class="line-numbers"> <a href="#n44" name="n44">44</a></span><span class="keyword">if</span> (node == <span class="predefined-constant">NULL</span>) {
+<span class="line-numbers"> <a href="#n45" name="n45">45</a></span>    <span class="keyword">return</span>;
+<span class="line-numbers"> <a href="#n46" name="n46">46</a></span>}
+<span class="line-numbers"> <a href="#n47" name="n47">47</a></span>
+<span class="line-numbers"> <a href="#n48" name="n48">48</a></span><span class="keyword">if</span> (i == <span class="integer">0</span>) {
+<span class="line-numbers"> <a href="#n49" name="n49">49</a></span>    root = node;
+<span class="line-numbers"> <strong><a href="#n50" name="n50">50</a></strong></span>    <span class="keyword">continue</span>;
+<span class="line-numbers"> <a href="#n51" name="n51">51</a></span>}
+<span class="line-numbers"> <a href="#n52" name="n52">52</a></span>
+<span class="line-numbers"> <a href="#n53" name="n53">53</a></span>addNodeToBST(root, node);
+<span class="line-numbers"> <a href="#n54" name="n54">54</a></span>}
+<span class="line-numbers"> <a href="#n55" name="n55">55</a></span>
+<span class="line-numbers"> <a href="#n56" name="n56">56</a></span>printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Nodes created</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>);
+<span class="line-numbers"> <a href="#n57" name="n57">57</a></span>traverse(root);
+<span class="line-numbers"> <a href="#n58" name="n58">58</a></span>maxDepth(root, <span class="integer">0</span>);
+<span class="line-numbers"> <a href="#n59" name="n59">59</a></span>printf(<span class="string"><span class="delimiter">&quot;</span><span class="char">\n</span><span class="content">Max Depth %d</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>, maxdepth);
+<span class="line-numbers"> <strong><a href="#n60" name="n60">60</a></strong></span>minDepth(root, <span class="integer">0</span>);
+<span class="line-numbers"> <a href="#n61" name="n61">61</a></span>printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Min Depth %d</span><span class="char">\n</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>, mindepth);
+<span class="line-numbers"> <a href="#n62" name="n62">62</a></span>
+<span class="line-numbers"> <a href="#n63" name="n63">63</a></span>max = maxDepthWithoutGlobalVar(root, <span class="integer">0</span>, max);
+<span class="line-numbers"> <a href="#n64" name="n64">64</a></span>printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Max Depth %d</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>, max);
+<span class="line-numbers"> <a href="#n65" name="n65">65</a></span>
+<span class="line-numbers"> <a href="#n66" name="n66">66</a></span>min = minDepthWithoutGlobalVar(root, <span class="integer">0</span>, min);
+<span class="line-numbers"> <a href="#n67" name="n67">67</a></span>printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Min Depth %d</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>, min);
+<span class="line-numbers"> <a href="#n68" name="n68">68</a></span>
+<span class="line-numbers"> <a href="#n69" name="n69">69</a></span><span class="keyword">if</span> ((max - min) &amp;gt; <span class="integer">1</span>) {
+<span class="line-numbers"> <strong><a href="#n70" name="n70">70</a></strong></span>printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Binary search tree is not Balanced</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>);
+<span class="line-numbers"> <a href="#n71" name="n71">71</a></span>} <span class="keyword">else</span> {
+<span class="line-numbers"> <a href="#n72" name="n72">72</a></span>printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Binary search tree is Balanced</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>);
+<span class="line-numbers"> <a href="#n73" name="n73">73</a></span>} }
+<span class="line-numbers"> <a href="#n74" name="n74">74</a></span>&lt;/code&gt;&lt;/pre&gt;
+<span class="line-numbers"> <a href="#n75" name="n75">75</a></span>
+<span class="line-numbers"> <a href="#n76" name="n76">76</a></span>&lt;p&gt;nodeBST* addNode(<span class="predefined-type">int</span> data)
+<span class="line-numbers"> <a href="#n77" name="n77">77</a></span>{
+<span class="line-numbers"> <a href="#n78" name="n78">78</a></span>    nodeBST &lt;em&gt;node = (nodeBST&lt;/em&gt;)calloc(<span class="integer">1</span>, <span class="keyword">sizeof</span>(nodeBST));&lt;/p&gt;
+<span class="line-numbers"> <a href="#n79" name="n79">79</a></span>
+<span class="line-numbers"> <strong><a href="#n80" name="n80">80</a></strong></span>&lt;pre&gt;&lt;code&gt;<span class="keyword">if</span> (node == <span class="predefined-constant">NULL</span>) {
+<span class="line-numbers"> <a href="#n81" name="n81">81</a></span><span class="keyword">return</span> <span class="predefined-constant">NULL</span>;
+<span class="line-numbers"> <a href="#n82" name="n82">82</a></span>}
+<span class="line-numbers"> <a href="#n83" name="n83">83</a></span>
+<span class="line-numbers"> <a href="#n84" name="n84">84</a></span>node-&amp;gt;data = data;
+<span class="line-numbers"> <a href="#n85" name="n85">85</a></span>node-&amp;gt;left = <span class="predefined-constant">NULL</span>;
+<span class="line-numbers"> <a href="#n86" name="n86">86</a></span>node-&amp;gt;right = <span class="predefined-constant">NULL</span>;
+<span class="line-numbers"> <a href="#n87" name="n87">87</a></span>
+<span class="line-numbers"> <a href="#n88" name="n88">88</a></span><span class="keyword">return</span> node; }
+<span class="line-numbers"> <a href="#n89" name="n89">89</a></span>&lt;/code&gt;&lt;/pre&gt;
+<span class="line-numbers"> <strong><a href="#n90" name="n90">90</a></strong></span>
+<span class="line-numbers"> <a href="#n91" name="n91">91</a></span>&lt;p&gt;<span class="directive">void</span> addNodeToBST(nodeBST *root, nodeBST *node)
+<span class="line-numbers"> <a href="#n92" name="n92">92</a></span>{
+<span class="line-numbers"> <a href="#n93" name="n93">93</a></span>    <span class="keyword">while</span>(root != <span class="predefined-constant">NULL</span>) {
+<span class="line-numbers"> <a href="#n94" name="n94">94</a></span>    <span class="keyword">if</span> (node-&amp;gt;data &amp;lt; root-&amp;gt;data) {
+<span class="line-numbers"> <a href="#n95" name="n95">95</a></span>        <span class="keyword">if</span> (root-&amp;gt;left != <span class="predefined-constant">NULL</span>) {
+<span class="line-numbers"> <a href="#n96" name="n96">96</a></span>        root = root-&amp;gt;left;
+<span class="line-numbers"> <a href="#n97" name="n97">97</a></span>        } <span class="keyword">else</span> {
+<span class="line-numbers"> <a href="#n98" name="n98">98</a></span>        root-&amp;gt;left = node;
+<span class="line-numbers"> <a href="#n99" name="n99">99</a></span>        <span class="keyword">return</span>;
+<span class="line-numbers"><strong><a href="#n100" name="n100">100</a></strong></span>        }
+<span class="line-numbers"><a href="#n101" name="n101">101</a></span>    } <span class="keyword">else</span> {
+<span class="line-numbers"><a href="#n102" name="n102">102</a></span>        <span class="keyword">if</span> (root-&amp;gt;right != <span class="predefined-constant">NULL</span>) {
+<span class="line-numbers"><a href="#n103" name="n103">103</a></span>        root = root-&amp;gt;right;
+<span class="line-numbers"><a href="#n104" name="n104">104</a></span>        } <span class="keyword">else</span> {
+<span class="line-numbers"><a href="#n105" name="n105">105</a></span>        root-&amp;gt;right = node;
+<span class="line-numbers"><a href="#n106" name="n106">106</a></span>        <span class="keyword">return</span>;
+<span class="line-numbers"><a href="#n107" name="n107">107</a></span>        }
+<span class="line-numbers"><a href="#n108" name="n108">108</a></span>    }
+<span class="line-numbers"><a href="#n109" name="n109">109</a></span>    }&lt;/p&gt;
+<span class="line-numbers"><strong><a href="#n110" name="n110">110</a></strong></span>
+<span class="line-numbers"><a href="#n111" name="n111">111</a></span>&lt;pre&gt;&lt;code&gt;<span class="keyword">return</span>; }
+<span class="line-numbers"><a href="#n112" name="n112">112</a></span>&lt;/code&gt;&lt;/pre&gt;
+<span class="line-numbers"><a href="#n113" name="n113">113</a></span>
+<span class="line-numbers"><a href="#n114" name="n114">114</a></span>&lt;p&gt;<span class="directive">void</span> traverse(nodeBST *root)
+<span class="line-numbers"><a href="#n115" name="n115">115</a></span>{
+<span class="line-numbers"><a href="#n116" name="n116">116</a></span>    <span class="keyword">if</span> (root == <span class="predefined-constant">NULL</span>) {
+<span class="line-numbers"><a href="#n117" name="n117">117</a></span>    <span class="keyword">return</span>;
+<span class="line-numbers"><a href="#n118" name="n118">118</a></span>    } <span class="keyword">else</span> {
+<span class="line-numbers"><a href="#n119" name="n119">119</a></span>    traverse(root-&amp;gt;left);
+<span class="line-numbers"><strong><a href="#n120" name="n120">120</a></strong></span>    printf(<span class="error">“</span>%d <span class="error">“</span>, root-&amp;gt;data);
+<span class="line-numbers"><a href="#n121" name="n121">121</a></span>    traverse(root-&amp;gt;right);
+<span class="line-numbers"><a href="#n122" name="n122">122</a></span>    }&lt;/p&gt;
+<span class="line-numbers"><a href="#n123" name="n123">123</a></span>
+<span class="line-numbers"><a href="#n124" name="n124">124</a></span>&lt;pre&gt;&lt;code&gt;<span class="keyword">return</span>; }
+<span class="line-numbers"><a href="#n125" name="n125">125</a></span>&lt;/code&gt;&lt;/pre&gt;
+<span class="line-numbers"><a href="#n126" name="n126">126</a></span>
+<span class="line-numbers"><a href="#n127" name="n127">127</a></span>&lt;p&gt;<span class="directive">void</span> maxDepth(nodeBST *root, <span class="predefined-type">int</span> depth)
+<span class="line-numbers"><a href="#n128" name="n128">128</a></span>{
+<span class="line-numbers"><a href="#n129" name="n129">129</a></span>    <span class="keyword">if</span> (root == <span class="predefined-constant">NULL</span>) {
+<span class="line-numbers"><strong><a href="#n130" name="n130">130</a></strong></span>    <span class="keyword">if</span> (maxdepth &amp;lt; depth) {
+<span class="line-numbers"><a href="#n131" name="n131">131</a></span>        maxdepth = depth;
+<span class="line-numbers"><a href="#n132" name="n132">132</a></span>    }
+<span class="line-numbers"><a href="#n133" name="n133">133</a></span>    } <span class="keyword">else</span> {
+<span class="line-numbers"><a href="#n134" name="n134">134</a></span>    maxDepth(root-&amp;gt;left, (depth + <span class="integer">1</span>));
+<span class="line-numbers"><a href="#n135" name="n135">135</a></span>    maxDepth(root-&amp;gt;right, (depth + <span class="integer">1</span>));
+<span class="line-numbers"><a href="#n136" name="n136">136</a></span>    }
+<span class="line-numbers"><a href="#n137" name="n137">137</a></span>}&lt;/p&gt;
+<span class="line-numbers"><a href="#n138" name="n138">138</a></span>
+<span class="line-numbers"><a href="#n139" name="n139">139</a></span>&lt;p&gt;<span class="directive">void</span> minDepth(nodeBST *root, <span class="predefined-type">int</span> depth)
+<span class="line-numbers"><strong><a href="#n140" name="n140">140</a></strong></span>{
+<span class="line-numbers"><a href="#n141" name="n141">141</a></span>    <span class="keyword">if</span> (root == <span class="predefined-constant">NULL</span>) {
+<span class="line-numbers"><a href="#n142" name="n142">142</a></span>    <span class="keyword">if</span> (mindepth &amp;gt; depth) {
+<span class="line-numbers"><a href="#n143" name="n143">143</a></span>        mindepth = depth;
+<span class="line-numbers"><a href="#n144" name="n144">144</a></span>    }
+<span class="line-numbers"><a href="#n145" name="n145">145</a></span>    } <span class="keyword">else</span> {
+<span class="line-numbers"><a href="#n146" name="n146">146</a></span>    minDepth(root-&amp;gt;left, (depth + <span class="integer">1</span>));
+<span class="line-numbers"><a href="#n147" name="n147">147</a></span>    minDepth(root-&amp;gt;right, (depth + <span class="integer">1</span>));
+<span class="line-numbers"><a href="#n148" name="n148">148</a></span>    }
+<span class="line-numbers"><a href="#n149" name="n149">149</a></span>}&lt;/p&gt;
+<span class="line-numbers"><strong><a href="#n150" name="n150">150</a></strong></span>
+<span class="line-numbers"><a href="#n151" name="n151">151</a></span>&lt;p&gt;<span class="predefined-type">int</span> maxDepthWithoutGlobalVar(nodeBST *root, <span class="predefined-type">int</span> depth, <span class="predefined-type">int</span> maxDeep)
+<span class="line-numbers"><a href="#n152" name="n152">152</a></span>{
+<span class="line-numbers"><a href="#n153" name="n153">153</a></span>    <span class="keyword">if</span> (root == <span class="predefined-constant">NULL</span>) {
+<span class="line-numbers"><a href="#n154" name="n154">154</a></span>    <span class="keyword">if</span> (maxDeep &amp;lt;= depth) {
+<span class="line-numbers"><a href="#n155" name="n155">155</a></span>        maxDeep = depth;
+<span class="line-numbers"><a href="#n156" name="n156">156</a></span>    }
+<span class="line-numbers"><a href="#n157" name="n157">157</a></span>    <span class="keyword">return</span> maxDeep;
+<span class="line-numbers"><a href="#n158" name="n158">158</a></span>    } <span class="keyword">else</span> {
+<span class="line-numbers"><a href="#n159" name="n159">159</a></span>        maxDeep = maxDepthWithoutGlobalVar(root-&amp;gt;left, (depth + <span class="integer">1</span>), maxDeep);
+<span class="line-numbers"><strong><a href="#n160" name="n160">160</a></strong></span>    maxDeep = maxDepthWithoutGlobalVar(root-&amp;gt;right, (depth + <span class="integer">1</span>), maxDeep);
+<span class="line-numbers"><a href="#n161" name="n161">161</a></span>    }&lt;/p&gt;
+<span class="line-numbers"><a href="#n162" name="n162">162</a></span>
+<span class="line-numbers"><a href="#n163" name="n163">163</a></span>&lt;pre&gt;&lt;code&gt;<span class="keyword">return</span> maxDeep; }
+<span class="line-numbers"><a href="#n164" name="n164">164</a></span>&lt;/code&gt;&lt;/pre&gt;
+<span class="line-numbers"><a href="#n165" name="n165">165</a></span>
+<span class="line-numbers"><a href="#n166" name="n166">166</a></span>&lt;p&gt;<span class="predefined-type">int</span> minDepthWithoutGlobalVar(nodeBST *root, <span class="predefined-type">int</span> depth, <span class="predefined-type">int</span> minDeep)
+<span class="line-numbers"><a href="#n167" name="n167">167</a></span>{
+<span class="line-numbers"><a href="#n168" name="n168">168</a></span>    <span class="keyword">if</span> (root == <span class="predefined-constant">NULL</span>) {
+<span class="line-numbers"><a href="#n169" name="n169">169</a></span>    <span class="keyword">if</span> (minDeep &amp;gt;= depth) {
+<span class="line-numbers"><strong><a href="#n170" name="n170">170</a></strong></span>        minDeep = depth;
+<span class="line-numbers"><a href="#n171" name="n171">171</a></span>    }
+<span class="line-numbers"><a href="#n172" name="n172">172</a></span>    <span class="keyword">return</span> minDeep;
+<span class="line-numbers"><a href="#n173" name="n173">173</a></span>    } <span class="keyword">else</span> {
+<span class="line-numbers"><a href="#n174" name="n174">174</a></span>        minDeep = minDepthWithoutGlobalVar(root-&amp;gt;left, (depth + <span class="integer">1</span>), minDeep);
+<span class="line-numbers"><a href="#n175" name="n175">175</a></span>    minDeep = minDepthWithoutGlobalVar(root-&amp;gt;right, (depth + <span class="integer">1</span>), minDeep);
+<span class="line-numbers"><a href="#n176" name="n176">176</a></span>    }&lt;/p&gt;
+<span class="line-numbers"><a href="#n177" name="n177">177</a></span>
+<span class="line-numbers"><a href="#n178" name="n178">178</a></span>&lt;pre&gt;&lt;code&gt;<span class="keyword">return</span> minDeep; } </pre></div>
 </div>
  </figure></notextile></div>
 </code></pre>
