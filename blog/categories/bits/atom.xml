@@ -4,7 +4,7 @@
   <title><![CDATA[Category: bits | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/bits/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2013-12-09T20:39:48-08:00</updated>
+  <updated>2013-12-09T23:08:43-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -27,10 +27,15 @@
       <li><a href="#how-to-unset-single-bit-in-a-byte">How to unset single bit in a byte?</a></li>
       <li><a href="#one-function-to-set-and-unset">One function to set and unset</a></li>
       <li><a href="#unset-range-of-bits">Unset range of bits</a></li>
-      <li><a href="#set-range-of-bits">Set range of bits</a></li>
     </ul>
   </li>
-  <li><a href="#recomended-readings">Recomended readings</a></li>
+  <li><a href="#step1">Step1</a></li>
+  <li><a href="#step-2">Step 2</a></li>
+  <li><a href="#step-3">Step 3</a>    <ul>
+      <li><a href="#set-range-of-bits">Set range of bits</a></li>
+      <li><a href="#recomended-readings">Recomended readings</a></li>
+    </ul>
+  </li>
 </ul>
 
 <p>Recently, I have realized that no matter how much C, C++ or other high level languages you know it all comes down to bit and bytes view of program.<br />
@@ -128,12 +133,12 @@ I started realizing that after all it’s not that easy to actually think and wr
 
 <div><div class="CodeRay">
   <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>struct date-struct {
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>    <span class="constant">BYTE</span> day   : <span class="integer">5</span>,   <span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span> <span class="integer">1</span> to <span class="integer">31</span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="constant">BYTE</span> day   : <span class="integer">5</span>,   <span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span> <span class="integer">1</span> to <span class="integer">31</span>
 <span class="line-numbers"> <a href="#n3" name="n3">3</a></span>     month : <span class="integer">4</span>,   <span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span> <span class="integer">1</span> to <span class="integer">12</span>
 <span class="line-numbers"> <a href="#n4" name="n4">4</a></span>     year  : <span class="integer">14</span>;  <span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span> <span class="integer">0</span> to <span class="integer">9999</span>
 <span class="line-numbers"> <a href="#n5" name="n5">5</a></span>} date
 <span class="line-numbers"> <a href="#n6" name="n6">6</a></span>
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>|<span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span>|<span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span>|<span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span>|
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>|<span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span>|<span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span>|<span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> |
 <span class="line-numbers"> <a href="#n8" name="n8">8</a></span>  |                           |       |         |
 <span class="line-numbers"> <a href="#n9" name="n9">9</a></span>  +------ year ---------------+ month +-- day --+
 <span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>
@@ -248,56 +253,53 @@ I started realizing that after all it’s not that easy to actually think and wr
 
 <p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Unset range of bits </span></figcaption>
  <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="comment">//Unset range of bits</span>
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span class="comment">//For e.g. 1001 1001</span>
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span class="comment">//Unset bits from 2 to 5 i.e. 1 0 0 1 1 0 0 1 =&amp;gt; 10 0000 01</span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span class="comment">//                               |- - - -| </span>
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span class="comment">//                      Bits  7 6 5 4 3 2 1 0        &lt;br /&gt;</span>
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span><span class="comment">//</span>
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span class="comment">//Step1</span>
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span><span class="comment">//——</span>
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span><span class="comment">//To unset range of bits we need to create MASK</span>
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span><span class="comment">// val  = 1001 1001</span>
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span><span class="comment">// Mask = 1100 0011 (AND)</span>
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span><span class="comment">//      &lt;strong&gt;__&lt;/strong&gt;&lt;strong&gt;__&lt;/strong&gt;_</span>
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span><span class="comment">//        1000 0001</span>
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span><span class="comment">//</span>
-<span class="line-numbers"><a href="#n16" name="n16">16</a></span><span class="comment">//Step 2</span>
-<span class="line-numbers"><a href="#n17" name="n17">17</a></span><span class="comment">//——-</span>
-<span class="line-numbers"><a href="#n18" name="n18">18</a></span><span class="comment">//We need to construct MASK</span>
-<span class="line-numbers"><a href="#n19" name="n19">19</a></span><span class="comment">//In MASK, bits in range are 0 i.e. bits from 2-5 is 0 and</span>
-<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span><span class="comment">//rest of the bits are 1</span>
-<span class="line-numbers"><a href="#n21" name="n21">21</a></span><span class="comment">// MASK 1 1 0 0 0 0 1 1</span>
-<span class="line-numbers"><a href="#n22" name="n22">22</a></span><span class="comment">//         |- - - -|</span>
-<span class="line-numbers"><a href="#n23" name="n23">23</a></span><span class="comment">// Bits 7 6 5 4 3 2 1 0</span>
-<span class="line-numbers"><a href="#n24" name="n24">24</a></span><span class="comment">//</span>
-<span class="line-numbers"><a href="#n25" name="n25">25</a></span><span class="comment">//Step 3</span>
-<span class="line-numbers"><a href="#n26" name="n26">26</a></span><span class="comment">//——-</span>
-<span class="line-numbers"><a href="#n27" name="n27">27</a></span><span class="comment">// 0 0 0 1  1 1 1 1  ((1 « 5) - 1) i.e. (1 « j) - 1</span>
-<span class="line-numbers"><a href="#n28" name="n28">28</a></span><span class="comment">//</span>
-<span class="line-numbers"><a href="#n29" name="n29">29</a></span><span class="comment">//MAX  1 1 1 1  1 1 1 1</span>
-<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span><span class="comment">//     0 0 1 1  1 1 1 1  (-)</span>
-<span class="line-numbers"><a href="#n31" name="n31">31</a></span><span class="comment">//    ——————</span>
-<span class="line-numbers"><a href="#n32" name="n32">32</a></span><span class="comment">//     1 1 0 0  0 0 0 0         =====&amp;gt; (1)</span>
-<span class="line-numbers"><a href="#n33" name="n33">33</a></span><span class="comment">//</span>
-<span class="line-numbers"><a href="#n34" name="n34">34</a></span><span class="comment">// (1 « 2) - 1 i.e. (1 « i) - 1</span>
-<span class="line-numbers"><a href="#n35" name="n35">35</a></span><span class="comment">// 0 0 0 0 0 1 0 0</span>
-<span class="line-numbers"><a href="#n36" name="n36">36</a></span><span class="comment">// 0 0 0 0 0 0 0 1 (-)</span>
-<span class="line-numbers"><a href="#n37" name="n37">37</a></span><span class="comment">//——————</span>
-<span class="line-numbers"><a href="#n38" name="n38">38</a></span><span class="comment">// 0 0 0 0 0 0 1 1                   =======&amp;gt; (2)</span>
-<span class="line-numbers"><a href="#n39" name="n39">39</a></span><span class="comment">//</span>
-<span class="line-numbers"><strong><a href="#n40" name="n40">40</a></strong></span><span class="comment">// (1) OR (2)</span>
-<span class="line-numbers"><a href="#n41" name="n41">41</a></span><span class="comment">// 1 1 0 0 0 0 0 0</span>
-<span class="line-numbers"><a href="#n42" name="n42">42</a></span><span class="comment">// 0 0 0 0 0 0 1 1   (OR)</span>
-<span class="line-numbers"><a href="#n43" name="n43">43</a></span><span class="comment">//——————-</span>
-<span class="line-numbers"><a href="#n44" name="n44">44</a></span><span class="comment">// 1 1 0 0 0 0 1 1 </span>
-<span class="line-numbers"><a href="#n45" name="n45">45</a></span><span class="comment">//</span>
-<span class="line-numbers"><a href="#n46" name="n46">46</a></span><span class="comment">//Final Step</span>
-<span class="line-numbers"><a href="#n47" name="n47">47</a></span><span class="comment">// val  = 1001 1001</span>
-<span class="line-numbers"><a href="#n48" name="n48">48</a></span><span class="comment">// Mask = 1100 0011 (AND)</span>
-<span class="line-numbers"><a href="#n49" name="n49">49</a></span><span class="comment">//      &lt;strong&gt;__&lt;/strong&gt;&lt;strong&gt;__&lt;/strong&gt;_</span>
-<span class="line-numbers"><strong><a href="#n50" name="n50">50</a></strong></span><span class="comment">//        1000 0001</span>
+  <div class="code"><pre>
+Unset range of bits
+For e.g. <span class="integer">1001</span> <span class="integer">1001</span>
+Unset bits from <span class="integer">2</span> to <span class="integer">5</span> i.e. <span class="integer">1</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">1</span> =&amp;gt; <span class="integer">10</span> <span class="octal">0000</span> <span class="octal">01</span>
+                               |- - - -| 
+                      Bits  <span class="integer">7</span> <span class="integer">6</span> <span class="integer">5</span> <span class="integer">4</span> <span class="integer">3</span> <span class="integer">2</span> <span class="integer">1</span> <span class="integer">0</span>          &lt;/p&gt;
+
+&lt;h2 id=<span class="string"><span class="delimiter">&quot;</span><span class="content">step1</span><span class="delimiter">&quot;</span></span>&gt;Step1&lt;/h2&gt;
+&lt;p&gt;To unset range of bits we need to create MASK
+ val  = <span class="integer">1001</span> <span class="integer">1001</span>
+ Mask = <span class="integer">1100</span> <span class="octal">0011</span> (AND)
+      &lt;strong&gt;__&lt;/strong&gt;&lt;strong&gt;__&lt;/strong&gt;_
+        <span class="integer">1000</span> <span class="octal">0001</span>&lt;/p&gt;
+
+&lt;h2 id=<span class="string"><span class="delimiter">&quot;</span><span class="content">step-2</span><span class="delimiter">&quot;</span></span>&gt;Step <span class="integer">2</span>&lt;/h2&gt;
+&lt;p&gt;We need to construct MASK
+In MASK, bits in range are <span class="integer">0</span> i.e. bits from <span class="integer">2</span>-<span class="integer">5</span> is <span class="integer">0</span> <span class="keyword">and</span>
+rest of the bits are <span class="integer">1</span>
+ MASK <span class="integer">1</span> <span class="integer">1</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span>
+         |- - - -|
+ Bits <span class="integer">7</span> <span class="integer">6</span> <span class="integer">5</span> <span class="integer">4</span> <span class="integer">3</span> <span class="integer">2</span> <span class="integer">1</span> <span class="integer">0</span>&lt;/p&gt;
+
+&lt;h2 id=<span class="string"><span class="delimiter">&quot;</span><span class="content">step-3</span><span class="delimiter">&quot;</span></span>&gt;Step <span class="integer">3</span>&lt;/h2&gt;
+&lt;p&gt;<span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">1</span>  <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span>  ((<span class="integer">1</span> <span class="error">«</span><span class="error"> </span><span class="integer">5</span>) - <span class="integer">1</span>) i.e. (<span class="integer">1</span> <span class="error">«</span><span class="error"> </span>j) - <span class="integer">1</span>&lt;/p&gt;
+
+&lt;p&gt;MAX  <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span>  <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span>
+     <span class="integer">0</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span>  <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span>  (-)
+    <span class="error">—</span><span class="error">—</span><span class="error">—</span><span class="error">—</span><span class="error">—</span><span class="error">—</span>
+     <span class="integer">1</span> <span class="integer">1</span> <span class="integer">0</span> <span class="integer">0</span>  <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span>         =====&amp;gt; (<span class="integer">1</span>)&lt;/p&gt;
+
+&lt;p&gt;(<span class="integer">1</span> <span class="error">«</span><span class="error"> </span><span class="integer">2</span>) - <span class="integer">1</span> i.e. (<span class="integer">1</span> <span class="error">«</span><span class="error"> </span>i) - <span class="integer">1</span>
+ <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">0</span> <span class="integer">0</span>
+ <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">1</span> (-)
+<span class="error">—</span><span class="error">—</span><span class="error">—</span><span class="error">—</span><span class="error">—</span><span class="error">—</span>
+ <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span>                   =======&amp;gt; (<span class="integer">2</span>)&lt;/p&gt;
+
+&lt;p&gt;(<span class="integer">1</span>) OR (<span class="integer">2</span>)
+ <span class="integer">1</span> <span class="integer">1</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span>
+ <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span>   (OR)
+<span class="error">—</span><span class="error">—</span><span class="error">—</span><span class="error">—</span><span class="error">—</span><span class="error">—</span>-
+ <span class="integer">1</span> <span class="integer">1</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span> &lt;/p&gt;
+
+&lt;p&gt;Final Step
+ val  = <span class="integer">1001</span> <span class="integer">1001</span>
+ Mask = <span class="integer">1100</span> <span class="octal">0011</span> (AND)
+      &lt;strong&gt;__&lt;/strong&gt;&lt;strong&gt;__&lt;/strong&gt;_
+        <span class="integer">1000</span> <span class="octal">0001</span>
 </pre></div>
 </div>
  </figure></notextile></div></p>
@@ -325,39 +327,37 @@ I started realizing that after all it’s not that easy to actually think and wr
 
 <h4 id="set-range-of-bits">Set range of bits</h4>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Set range </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="comment">//This mask is similar to “Range Unset Mask” created earlier</span>
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span class="comment">// with an ‘exception’ in last</span>
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span class="comment">//https://gist.github.com/coolgoose85/458a1f67d61f8def1120</span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span class="comment">//</span>
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span class="comment">//&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;***</span>
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span><span class="comment">//In “Range UNset Mask” we created following</span>
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span class="comment">//For e.g. 1001 1001</span>
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span><span class="comment">//Unset bits from 2 to 5 i.e. 1 0 0 1 1 0 0 1 =&amp;gt; 10 0000 01</span>
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span><span class="comment">//                               |- - - -| </span>
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span><span class="comment">//                      Bits  7 6 5 4 3 2 1 0  &lt;br /&gt;</span>
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span><span class="comment">//Step1</span>
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span><span class="comment">//——</span>
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span><span class="comment">//To unset range of bits we need to create MASK</span>
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span><span class="comment">// val  = 1001 1001</span>
-<span class="line-numbers"><a href="#n16" name="n16">16</a></span><span class="comment">// Mask = 1100 0011 (AND)</span>
-<span class="line-numbers"><a href="#n17" name="n17">17</a></span><span class="comment">//      _____________</span>
-<span class="line-numbers"><a href="#n18" name="n18">18</a></span><span class="comment">//        1000 0001</span>
-<span class="line-numbers"><a href="#n19" name="n19">19</a></span><span class="comment">//&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;***</span>
-<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span><span class="comment">// </span>
-<span class="line-numbers"><a href="#n21" name="n21">21</a></span><span class="comment">//We will be creating the same mask in addition we will </span>
-<span class="line-numbers"><a href="#n22" name="n22">22</a></span><span class="comment">//TOGGLE the bits of “unset mask”</span>
-<span class="line-numbers"><a href="#n23" name="n23">23</a></span><span class="comment">//</span>
-<span class="line-numbers"><a href="#n24" name="n24">24</a></span><span class="comment">// Unset MASK = 1100 0011</span>
-<span class="line-numbers"><a href="#n25" name="n25">25</a></span><span class="comment">// TOGGLE     = 0011 1100    ~(Unset Mask)</span>
-<span class="line-numbers"><a href="#n26" name="n26">26</a></span><span class="comment">//</span>
-<span class="line-numbers"><a href="#n27" name="n27">27</a></span><span class="comment">// Now perform OR will val</span>
-<span class="line-numbers"><a href="#n28" name="n28">28</a></span><span class="comment">// val  = 1001 1001</span>
-<span class="line-numbers"><a href="#n29" name="n29">29</a></span><span class="comment">// Mask = 0011 1100 (OR)</span>
-<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span><span class="comment">//      &lt;strong&gt;__&lt;/strong&gt;&lt;strong&gt;__&lt;/strong&gt;_</span>
-<span class="line-numbers"><a href="#n31" name="n31">31</a></span><span class="comment">//        1011 1101</span>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Set range</span>  <a href='https://gist.github.com/coolgoose85/458a1f67d61f8def1120' target='_blank'>Range Unset Mask </a></figcaption> <div class="CodeRay">
+  <div class="code"><pre>
+This mask is similar to Range Unset Mask created earlier with an <span class="error">‘</span>exception<span class="error">’</span>
+in last&lt;/p&gt;
+
+&lt;p&gt;/&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;***
+<span class="comment">//In “Range UNset Mask” we created following</span>
+<span class="comment">//For e.g. 1001 1001</span>
+<span class="comment">//Unset bits from 2 to 5 i.e. 1 0 0 1 1 0 0 1 =&amp;gt; 10 0000 01</span>
+<span class="comment">//                               |- - - -| </span>
+<span class="comment">//                      Bits  7 6 5 4 3 2 1 0  &lt;br /&gt;</span>
+<span class="comment">//Step1</span>
+<span class="comment">//——</span>
+<span class="comment">//To unset range of bits we need to create MASK</span>
+<span class="comment">// val  = 1001 1001</span>
+<span class="comment">// Mask = 1100 0011 (AND)</span>
+<span class="comment">//      _____________</span>
+<span class="comment">//        1000 0001</span>
+**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;*/&lt;/p&gt;
+
+&lt;p&gt;We will be creating the same mask in addition we will 
+TOGGLE the bits of <span class="error">“</span>unset mask<span class="error">”</span>&lt;/p&gt;
+
+&lt;p&gt;Unset MASK = <span class="integer">1100</span> <span class="octal">0011</span>
+ TOGGLE     = <span class="octal">0011</span> <span class="integer">1100</span>    ~(Unset Mask)&lt;/p&gt;
+
+&lt;p&gt;Now perform OR will val
+ val  = <span class="integer">1001</span> <span class="integer">1001</span>
+ Mask = <span class="octal">0011</span> <span class="integer">1100</span> (OR)
+      &lt;strong&gt;__&lt;/strong&gt;&lt;strong&gt;__&lt;/strong&gt;_
+        <span class="integer">1011</span> <span class="integer">1101</span>
 </pre></div>
 </div>
  </figure></notextile></div></p>
