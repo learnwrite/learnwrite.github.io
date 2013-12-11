@@ -2449,8 +2449,7 @@ I started realizing that after all it’s not that easy to actually think and wr
 
 <h3 id="bitwise-operators">Bitwise Operators</h3>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Operators </span></figcaption>
- <div class="CodeRay">
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Operators</span>  <a href="http://learnwrite.github.io/blog/2013/10/08/binary-number-operations/" target="_blank">Bitwise Operations </a></figcaption> <div class="CodeRay">
   <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
 <span class="line-numbers"> <a href="#n2" name="n2">2</a></span>The &amp; <span class="directive">operator</span> (AND)
 <span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span class="integer">1</span>   &amp;   <span class="integer">1</span>   ==   <span class="integer">1</span>
@@ -2612,8 +2611,7 @@ I started realizing that after all it’s not that easy to actually think and wr
 
 <h4 id="unset-range-of-bits">Unset range of bits</h4>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Unset range of bits </span></figcaption>
- <div class="CodeRay">
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Unset range of bits</span>  <a href="http://learnwrite.github.io/blog/2013/10/08/binary-number-operations/" target="_blank">Bitwise Operations </a></figcaption> <div class="CodeRay">
   <div class="code"><pre>
 Unset range of bits
 For e.g. <span class="integer">1001</span> <span class="integer">1001</span>
@@ -2668,8 +2666,7 @@ Final Step
 </div>
  </figure></notextile></div>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>unsetBitsInRange </span></figcaption>
- <div class="CodeRay">
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>unsetBitsInRange</span>  <a href="http://learnwrite.github.io/blog/2013/10/08/binary-number-operations/" target="_blank">Bitwise Operations </a></figcaption> <div class="CodeRay">
   <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
 <span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="comment">// i is start of range</span>
 <span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span class="comment">// j is end of range</span>
@@ -3333,7 +3330,7 @@ Instead, lets have multiple employees for taking order, cook food, bag food, tak
   <li>Does sequence matters? -  Cook can’t cook food until order arrives. Employee can’t bag food until it is cooked. So, sequencing matters.</li>
 </ol>
 
-<p>Shared data can be passed for sharing either using <code>message passing</code> or storing that data in <code>global memoryi</code> of process and each thread read from that memory location.</p>
+<p>Shared data can be passed for sharing either using <code>message passing</code> or storing that data in <code>global memory</code> of process and each thread read from that memory location.</p>
 
 <p>The next logical question is how to ensure threads in a process executes one at a time i.e. in <code>exclusion</code>?
 More formally there are three types of solution categories</p>
@@ -3387,7 +3384,7 @@ More formally there are three types of solution categories</p>
 <span class="line-numbers"><a href="#n2" name="n2">2</a></span>Semaphore(<span class="predefined-type">char</span> * debugName, <span class="predefined-type">int</span> initialValue) {
 <span class="line-numbers"><a href="#n3" name="n3">3</a></span>    name      = debugName;
 <span class="line-numbers"><a href="#n4" name="n4">4</a></span>    value     = initialValue;
-<span class="line-numbers"><a href="#n5" name="n5">5</a></span>    waitQueue = newList;
+<span class="line-numbers"><a href="#n5" name="n5">5</a></span>    waitQueue = <span class="keyword">new</span> List;
 <span class="line-numbers"><a href="#n6" name="n6">6</a></span>}
 </pre></div>
 </div>
