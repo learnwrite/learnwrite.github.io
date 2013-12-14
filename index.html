@@ -9,7 +9,7 @@
   <meta name="author" content="Vaibhav Gautam">
 
   
-  <meta name="description" content="Facebook Data Center Search for People Petabytes of Data FB Engineering Notes Spotify CAP Theorem Amazon Amazon Dynamo Twitter References This &hellip;">
+  <meta name="description" content="Graph problems Find neighbour in array Graph problems Find neighbour in array Find all the neighbours of a given element in array Neighbours can be &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -107,6 +107,210 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/12/14/graph-algorithms/">Graph Algorithms</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-14T13:03:00-08:00" pubdate data-updated="true">Dec 14<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/12/14/graph-algorithms/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#graph-problems">Graph problems</a>    <ul>
+      <li><a href="#find-neighbour-in-array">Find neighbour in array</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="graph-problems">Graph problems</h3>
+
+<h4 id="find-neighbour-in-array">Find neighbour in array</h4>
+
+<p>Find all the neighbours of a given element in array<br /></p>
+
+<p>Neighbours can be defined as<br /></p>
+
+<ol>
+  <li>Neighbours are only vertical and horizontal elements next to given element<br /></li>
+  <li>Neighbours are only vertical, horizontal and diagonal elements next to given element<br /></li>
+  <li>Neighbours are all vertical, horizontal and diagonal elements next to given element<br /></li>
+</ol>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Neighbour1</span>  <a href="http://ideone.com/0ddGnZ" target="_blank">Run Code </a></figcaption> <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="comment">/******************************************************</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span class="comment"> * Function: neighbour(int sx, int sy)</span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span class="comment"> * This function returns the neighbour of sx, sy</span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span class="comment"> * For e.g.</span>
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span class="comment"> * 1 2 3</span>
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span><span class="comment"> * 4 5 6</span>
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span class="comment"> * 7 8 9</span>
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span><span class="comment"> *</span>
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span><span class="comment"> * Neighbour for 5 (1,1) = 4, 2, 6, 8</span>
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span><span class="comment"> * Neighbour for 1 (0,0) = 4, 2</span>
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span><span class="comment"> * ****************************************************/</span>
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span><span class="directive">void</span> neighbour(<span class="predefined-type">int</span> sx, <span class="predefined-type">int</span> sy)
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>{
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>    <span class="keyword">if</span> (sy - <span class="integer">1</span> &gt;= startCol &amp;&amp; sy - <span class="integer">1</span> &lt;= col) {
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>        printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d </span><span class="delimiter">&quot;</span></span>, array[sx][sy - <span class="integer">1</span>]);
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>    }
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span> 
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>    <span class="keyword">if</span> (sx - <span class="integer">1</span> &gt;= startRow &amp;&amp; sx - <span class="integer">1</span> &lt;= row) {
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>        printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d </span><span class="delimiter">&quot;</span></span>, array[sx - <span class="integer">1</span>][sy]);
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>    }
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span> 
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span>    <span class="keyword">if</span> (sy + <span class="integer">1</span> &gt;= startCol &amp;&amp; sy + <span class="integer">1</span> &lt;= col) {
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span>        printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d </span><span class="delimiter">&quot;</span></span>, array[sx][sy + <span class="integer">1</span>]);
+<span class="line-numbers"><a href="#n25" name="n25">25</a></span>    }
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span> 
+<span class="line-numbers"><a href="#n27" name="n27">27</a></span>    <span class="keyword">if</span> (sx + <span class="integer">1</span> &gt;= startRow &amp;&amp; sx + <span class="integer">1</span> &lt;= row) {
+<span class="line-numbers"><a href="#n28" name="n28">28</a></span>        printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d </span><span class="delimiter">&quot;</span></span>, array[sx + <span class="integer">1</span>][sy]);
+<span class="line-numbers"><a href="#n29" name="n29">29</a></span>    }
+<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>}
+</pre></div>
+</div>
+ </figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Neighbour2</span>  <a href="http://ideone.com/0ddGnZ" target="_blank">Run Code </a></figcaption> <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="comment">/******************************************************</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span class="comment"> * Function: diagnolNeighbour(int sx, int sy)</span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span class="comment"> * This function returns the neighbour of sx, sy and</span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span class="comment"> * diagonal neighbours too.</span>
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span class="comment"> * For e.g.</span>
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span><span class="comment"> * 1 2 3</span>
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span class="comment"> * 4 5 6</span>
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span><span class="comment"> * 7 8 9</span>
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span><span class="comment"> *</span>
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span><span class="comment"> * Neighbour for 5 (1,1) = 4, 2, 6, 8, 1, 3, 7, 9</span>
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span><span class="comment"> * Neighbour for 1 (0,0) = 4, 2, 5</span>
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span><span class="comment"> * ****************************************************/</span>
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span><span class="directive">void</span> diagnolNeighbour(<span class="predefined-type">int</span> sx, <span class="predefined-type">int</span> sy) {
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>    <span class="keyword">if</span> (sy - <span class="integer">1</span> &gt;= startCol &amp;&amp; sy - <span class="integer">1</span> &lt;= col) {
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>        printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d </span><span class="delimiter">&quot;</span></span>, array[sx][sy - <span class="integer">1</span>]);
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>    }
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span> 
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>    <span class="keyword">if</span> (sx - <span class="integer">1</span> &gt;= startRow &amp;&amp; sx - <span class="integer">1</span> &lt;= row) {
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>        printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d </span><span class="delimiter">&quot;</span></span>, array[sx - <span class="integer">1</span>][sy]);
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span> 
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span>        <span class="comment">//Diagnols</span>
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span>        <span class="keyword">if</span> (sy - <span class="integer">1</span> &gt;= startCol &amp;&amp; sy - <span class="integer">1</span> &lt;= col) {
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span>            printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d </span><span class="delimiter">&quot;</span></span>, array[sx - <span class="integer">1</span>][sy - <span class="integer">1</span>]);
+<span class="line-numbers"><a href="#n25" name="n25">25</a></span>        }
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span>        <span class="keyword">if</span> (sy + <span class="integer">1</span> &gt;= startCol &amp;&amp; sy + <span class="integer">1</span> &lt;= col) {
+<span class="line-numbers"><a href="#n27" name="n27">27</a></span>            printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d </span><span class="delimiter">&quot;</span></span>, array[sx - <span class="integer">1</span>][sy + <span class="integer">1</span>]);
+<span class="line-numbers"><a href="#n28" name="n28">28</a></span>        }
+<span class="line-numbers"><a href="#n29" name="n29">29</a></span>    }
+<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span> 
+<span class="line-numbers"><a href="#n31" name="n31">31</a></span>    <span class="keyword">if</span> (sy + <span class="integer">1</span> &gt;= startCol &amp;&amp; sy + <span class="integer">1</span> &lt;= col) {
+<span class="line-numbers"><a href="#n32" name="n32">32</a></span>        printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d </span><span class="delimiter">&quot;</span></span>, array[sx][sy + <span class="integer">1</span>]);
+<span class="line-numbers"><a href="#n33" name="n33">33</a></span>    }
+<span class="line-numbers"><a href="#n34" name="n34">34</a></span> 
+<span class="line-numbers"><a href="#n35" name="n35">35</a></span>    <span class="keyword">if</span> (sx + <span class="integer">1</span> &gt;= startRow &amp;&amp; sx + <span class="integer">1</span> &lt;= row) {
+<span class="line-numbers"><a href="#n36" name="n36">36</a></span>        printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d </span><span class="delimiter">&quot;</span></span>, array[sx + <span class="integer">1</span>][sy]);
+<span class="line-numbers"><a href="#n37" name="n37">37</a></span> 
+<span class="line-numbers"><a href="#n38" name="n38">38</a></span>        <span class="comment">//Diagnols</span>
+<span class="line-numbers"><a href="#n39" name="n39">39</a></span>        <span class="keyword">if</span> (sy - <span class="integer">1</span> &gt;= startCol &amp;&amp; sy - <span class="integer">1</span> &lt;= col) {
+<span class="line-numbers"><strong><a href="#n40" name="n40">40</a></strong></span>            printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d </span><span class="delimiter">&quot;</span></span>, array[sx + <span class="integer">1</span>][sy - <span class="integer">1</span>]);
+<span class="line-numbers"><a href="#n41" name="n41">41</a></span>        }
+<span class="line-numbers"><a href="#n42" name="n42">42</a></span>        <span class="keyword">if</span> (sy + <span class="integer">1</span> &gt;= startCol &amp;&amp; sy + <span class="integer">1</span> &lt;= col) {
+<span class="line-numbers"><a href="#n43" name="n43">43</a></span>            printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d </span><span class="delimiter">&quot;</span></span>, array[sx + <span class="integer">1</span>][sy + <span class="integer">1</span>]);
+<span class="line-numbers"><a href="#n44" name="n44">44</a></span>        }
+<span class="line-numbers"><a href="#n45" name="n45">45</a></span>    }
+<span class="line-numbers"><a href="#n46" name="n46">46</a></span>}
+</pre></div>
+</div>
+ </figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Neighbour3</span>  <a href="http://ideone.com/0ddGnZ" target="_blank">Run Code </a></figcaption> <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="comment">/**********************************************************</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span class="comment"> * Function: allNeighbour(int sx, int sy)</span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span class="comment"> * This function returns all the neighbour of sx, sy and</span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span class="comment"> * all diagonal neighbours.</span>
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span class="comment"> * For e.g.</span>
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span><span class="comment"> * 1   2   3   4</span>
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span class="comment"> * 5   6   7   8</span>
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span><span class="comment"> * 9   10  11  12</span>
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span><span class="comment"> * 13  14  15  16</span>
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span><span class="comment"> *</span>
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span><span class="comment"> * Neighbour for 5  (1,0) = 1, 9, 13, 6, 7, 8, 10, 15</span>
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span><span class="comment"> * Neighbour for 11 (2,2) = 3, 7, 15, 9, 10, 12, 1, 6, 16</span>
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span><span class="comment"> * ********************************************************/</span>
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span><span class="directive">void</span> allNeighbour(<span class="predefined-type">int</span> sx, <span class="predefined-type">int</span> sy)
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>{
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>    <span class="predefined-type">int</span> done = <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>    <span class="predefined-type">int</span> tempX = sx;
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>    <span class="predefined-type">int</span> tempY = sy;
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>    <span class="predefined-type">int</span> i = <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>    <span class="predefined-type">int</span> j = <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span> 
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span>    <span class="comment">// Get all the elements in row</span>
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span>    <span class="keyword">for</span> (i = <span class="integer">0</span>; i &lt;= row; i++) {
+<span class="line-numbers"><a href="#n25" name="n25">25</a></span>        <span class="keyword">if</span> (array[i][sy] == array[sx][sy]) {
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span>            <span class="keyword">continue</span>;
+<span class="line-numbers"><a href="#n27" name="n27">27</a></span>        }
+<span class="line-numbers"><a href="#n28" name="n28">28</a></span>        printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d </span><span class="delimiter">&quot;</span></span>, array[i][sy]);
+<span class="line-numbers"><a href="#n29" name="n29">29</a></span>    }
+<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span> 
+<span class="line-numbers"><a href="#n31" name="n31">31</a></span>    <span class="comment">// Get all the elements in col</span>
+<span class="line-numbers"><a href="#n32" name="n32">32</a></span>    <span class="keyword">for</span> (j = <span class="integer">0</span>; j &lt;= col; j++) {
+<span class="line-numbers"><a href="#n33" name="n33">33</a></span>        <span class="keyword">if</span> (array[sx][j] == array[sx][sy]) {
+<span class="line-numbers"><a href="#n34" name="n34">34</a></span>            <span class="keyword">continue</span>;
+<span class="line-numbers"><a href="#n35" name="n35">35</a></span>        }
+<span class="line-numbers"><a href="#n36" name="n36">36</a></span>        printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d </span><span class="delimiter">&quot;</span></span>, array[sx][j]);
+<span class="line-numbers"><a href="#n37" name="n37">37</a></span>    }
+<span class="line-numbers"><a href="#n38" name="n38">38</a></span> 
+<span class="line-numbers"><a href="#n39" name="n39">39</a></span>    <span class="comment">// Diagnols</span>
+<span class="line-numbers"><strong><a href="#n40" name="n40">40</a></strong></span>    <span class="keyword">while</span> (<span class="integer">1</span>) {
+<span class="line-numbers"><a href="#n41" name="n41">41</a></span>        tempX--; tempY--;
+<span class="line-numbers"><a href="#n42" name="n42">42</a></span>        <span class="keyword">if</span> (tempX &gt;= startRow  &amp;&amp; tempY &gt;= startCol) {
+<span class="line-numbers"><a href="#n43" name="n43">43</a></span>            printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d </span><span class="delimiter">&quot;</span></span>, array[tempX][tempY]);
+<span class="line-numbers"><a href="#n44" name="n44">44</a></span>        } <span class="keyword">else</span> {
+<span class="line-numbers"><a href="#n45" name="n45">45</a></span>            done = <span class="integer">1</span>;
+<span class="line-numbers"><a href="#n46" name="n46">46</a></span>        }
+<span class="line-numbers"><a href="#n47" name="n47">47</a></span> 
+<span class="line-numbers"><a href="#n48" name="n48">48</a></span>        sx++,sy++;
+<span class="line-numbers"><a href="#n49" name="n49">49</a></span>        <span class="keyword">if</span> (sx &lt;= row &amp;&amp; sy &lt;= col) {
+<span class="line-numbers"><strong><a href="#n50" name="n50">50</a></strong></span>            printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d </span><span class="delimiter">&quot;</span></span>, array[sx][sy]);
+<span class="line-numbers"><a href="#n51" name="n51">51</a></span>        } <span class="keyword">else</span> <span class="keyword">if</span> (done) {
+<span class="line-numbers"><a href="#n52" name="n52">52</a></span>            <span class="keyword">break</span>;
+<span class="line-numbers"><a href="#n53" name="n53">53</a></span>        }
+<span class="line-numbers"><a href="#n54" name="n54">54</a></span>    }
+<span class="line-numbers"><a href="#n55" name="n55">55</a></span>}
+</pre></div>
+</div>
+ </figure></notextile></div>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -3755,149 +3959,9 @@ monitor condition =&gt; needItem;<br /></p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/10/06/gdb-print-bit-values-of-bytes/">GDB - Print Bit Values of Bytes</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-10-06T21:06:00-07:00" pubdate data-updated="true">Oct 6<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/10/06/gdb-print-bit-values-of-bytes/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content">
-<h2>Print bit values in a byte</h2>
-
-<p>Recently, I have been working on interesting piece of code whose crux is to create a array of pointer addresses.
-Each entry in this array is address pointing to memory location.</p>
-
-<p>For example<br />
-Container array contains char addresses. Here, 100 is memory address where char value resides.</p>
-<table><td>100</td><td>1000</td><td>2000</td></table>
-<p><br />
-Address 100<br /></p>
-<table><td>v</td><td>a</td><td>i</td><td>b</td><td>h</td><td>a</td><td>v</td><td>\0</td></table>
-<p><br />
-Sometimes char data type is used as a package of 8 bits not as a valid char value.<br /></p>
-
-<h3>Code snippet</h3>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Print bit values </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="preprocessor">#include</span> <span class="include">&lt;stdio.h&gt;</span>
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span class="preprocessor">#include</span> <span class="include">&lt;stdlib.h&gt;</span>
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span class="preprocessor">#include</span> <span class="include">&lt;string.h&gt;</span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span class="predefined-type">int</span> main()
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>{
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    <span class="predefined-type">char</span> **container = (<span class="predefined-type">char</span> **)malloc(<span class="integer">10</span> * <span class="keyword">sizeof</span>(<span class="predefined-type">char</span>*));
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    <span class="predefined-type">char</span> **start = container;
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>    <span class="predefined-type">char</span> *node;
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    <span class="predefined-type">char</span> name[] = <span class="string"><span class="delimiter">&quot;</span><span class="content">Vaibhav</span><span class="delimiter">&quot;</span></span>;
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span>    <span class="predefined-type">int</span> i = <span class="integer">0</span>;
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span>
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span>    <span class="keyword">if</span> (container == <span class="predefined-constant">NULL</span>) {
-<span class="line-numbers"><a href="#n16" name="n16">16</a></span>    <span class="keyword">return</span> <span class="integer">0</span>;
-<span class="line-numbers"><a href="#n17" name="n17">17</a></span>    }
-<span class="line-numbers"><a href="#n18" name="n18">18</a></span>
-<span class="line-numbers"><a href="#n19" name="n19">19</a></span>    <span class="keyword">for</span> (i = <span class="integer">0</span>; i &lt;= <span class="integer">2</span>; i++) {
-<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>    node = (<span class="predefined-type">char</span> *)malloc(<span class="integer">10</span> * <span class="keyword">sizeof</span>(<span class="predefined-type">char</span>));
-<span class="line-numbers"><a href="#n21" name="n21">21</a></span>    memcpy(node, &amp;name, strlen(name) + <span class="integer">1</span>); 
-<span class="line-numbers"><a href="#n22" name="n22">22</a></span>    *container = node;
-<span class="line-numbers"><a href="#n23" name="n23">23</a></span>    container++;
-<span class="line-numbers"><a href="#n24" name="n24">24</a></span>    }
-<span class="line-numbers"><a href="#n25" name="n25">25</a></span>    *container = <span class="predefined-constant">NULL</span>;
-<span class="line-numbers"><a href="#n26" name="n26">26</a></span>
-<span class="line-numbers"><a href="#n27" name="n27">27</a></span>    <span class="keyword">while</span> (*start != <span class="predefined-constant">NULL</span>) {
-<span class="line-numbers"><a href="#n28" name="n28">28</a></span>    printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">%s</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>, *start);
-<span class="line-numbers"><a href="#n29" name="n29">29</a></span>    start++;
-<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>    }
-<span class="line-numbers"><a href="#n31" name="n31">31</a></span>
-<span class="line-numbers"><a href="#n32" name="n32">32</a></span>    <span class="keyword">return</span> <span class="integer">0</span>;
-<span class="line-numbers"><a href="#n33" name="n33">33</a></span>}
-</pre></div>
-</div>
- </figure></notextile></div>
-
-<p><br />
-Focusing on following code section</p>
-
-<div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span><span class="keyword">for</span> (i = <span class="integer">0</span>; i &lt; = <span class="integer">2</span>; i++) {
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>    node = (<span class="predefined-type">char</span> *)malloc(<span class="integer">10</span> * <span class="keyword">sizeof</span>(<span class="predefined-type">char</span>));
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span>    memcpy(node, &amp;name, strlen(name) + <span class="integer">1</span>); 
-<span class="line-numbers"><a href="#n4" name="n4">4</a></span>    *container = node;
-<span class="line-numbers"><a href="#n5" name="n5">5</a></span>    container++;
-<span class="line-numbers"><a href="#n6" name="n6">6</a></span>}
-</pre></div>
-</div>
-</div>
-
-<p><br />In this section, a memory of 10 chars is being allocated, initialized and finally assigned to container array.
-<br />Lets observer, if we have set the right information in each char bit.</p>
-
-<blockquote><p>Compile code using for GDB<br />gcc -g fileName.c</p></blockquote>
-
-<p><br /></p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>GDB Trace </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>(gdb) l
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span class="integer">16</span>      }
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span class="integer">17</span>    
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span class="integer">18</span>        <span class="keyword">for</span> (i = <span class="integer">0</span>; i &lt; = <span class="integer">2</span>; i++) {
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span class="integer">19</span>            node = (<span class="predefined-type">char</span> *)malloc(<span class="integer">10</span> * <span class="keyword">sizeof</span>(<span class="predefined-type">char</span>));
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span><span class="integer">20</span>            memcpy(node, &amp;name, strlen(name) + <span class="integer">1</span>);
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span class="integer">21</span>            *container = node;
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span><span class="integer">22</span>            container++;
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span><span class="integer">23</span>        }
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span><span class="integer">24</span>        *container = <span class="predefined-constant">NULL</span>;
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span><span class="integer">25</span>    
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span>(gdb) ptype node
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span>type = <span class="predefined-type">char</span> *
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span>(gdb) p node
-<span class="line-numbers"><a href="#n16" name="n16">16</a></span>$<span class="integer">1</span> = <span class="hex">0x1001000e0</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Vaibhav</span><span class="delimiter">&quot;</span></span>
-<span class="line-numbers"><a href="#n17" name="n17">17</a></span>(gdb) x/<span class="integer">8</span>bb node
-<span class="line-numbers"><a href="#n18" name="n18">18</a></span><span class="hex">0x1001000e0</span>:    <span class="hex">0x56</span>    <span class="hex">0x61</span>    <span class="hex">0x69</span>    <span class="hex">0x62</span>    <span class="hex">0x68</span>    <span class="hex">0x61</span>    <span class="hex">0x76</span>    <span class="hex">0x00</span>
-<span class="line-numbers"><a href="#n19" name="n19">19</a></span>(gdb) x/<span class="integer">8</span>ub node
-<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span><span class="hex">0x1001000e0</span>:    <span class="integer">86</span>    <span class="integer">97</span>    <span class="integer">105</span>    <span class="integer">98</span>    <span class="integer">104</span>    <span class="integer">97</span>    <span class="integer">118</span>    <span class="integer">0</span>
-<span class="line-numbers"><a href="#n21" name="n21">21</a></span>(gdb) x/<span class="integer">8</span>tb node
-<span class="line-numbers"><a href="#n22" name="n22">22</a></span><span class="hex">0x1001000e0</span>:    <span class="octal">01010110</span>    <span class="octal">01100001</span>    <span class="octal">01101001</span>    <span class="octal">01100010</span>    <span class="octal">01101000</span>    <span class="octal">01100001</span>    <span class="octal">01110110</span>    <span class="octal">00000000</span>
-</pre></div>
-</div>
- </figure></notextile></div>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
+    
+      <a class="prev" href="/blog/page/2/">&larr; Older</a>
     
     <a href="archives">Blog Archives</a>
     
@@ -3953,6 +4017,10 @@ Focusing on following code section</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/12/14/graph-algorithms/">Graph Algorithms</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/11/27/scalability/">Scalability in Distributed Systems</a>
       </li>
     
@@ -3966,10 +4034,6 @@ Focusing on following code section</p>
     
       <li class="post">
         <a href="/blog/2013/10/13/comparison-based-sorting/">Comparison based Sorting</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/10/12/sorting/">sorting</a>
       </li>
     
   </ul>
