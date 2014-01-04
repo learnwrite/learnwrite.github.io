@@ -4,7 +4,7 @@
   <title><![CDATA[Learnings]]></title>
   <link href="http://learnwrite.github.io/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2014-01-04T11:47:06-08:00</updated>
+  <updated>2014-01-04T11:50:05-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -159,7 +159,7 @@ var vis = d3.select("#body").append("svg:svg")
   .append("svg:g")
     .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
 
-d3.json("../_includes/flare.json", function(json) {
+d3.json("../assets/flare.json", function(json) {
   root = json;
   root.x0 = h / 2;
   root.y0 = 0;
