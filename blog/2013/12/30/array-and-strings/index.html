@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: operating systems - Learnings</title>
+  <title>Array and Strings - Learnings</title>
   <meta name="author" content="Vaibhav Gautam">
 
   
-  <meta name="description" content="Category: operating systems">
+  <meta name="description" content="Array Problems Find 2 repeating elements Sum of 2 numbers Sum of 3 numbers String Problems Reverse a string without extra space Duplicates and Count &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://learnwrite.github.ioblog/categories/operating-systems/">
+  <link rel="canonical" href="http://learnwrite.github.io/blog/2013/12/30/array-and-strings/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
    <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -106,50 +106,184 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Operating Systems</h1>
+    
+      <h1 class="entry-title">Array and Strings</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-30T01:26:00-08:00" pubdate data-updated="true">Dec 30<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#array-problems">Array Problems</a>    <ul>
+      <li><a href="#find-2-repeating-elements">Find 2 repeating elements</a></li>
+      <li><a href="#sum-of-2-numbers">Sum of 2 numbers</a></li>
+      <li><a href="#sum-of-3-numbers">Sum of 3 numbers</a></li>
+    </ul>
+  </li>
+  <li><a href="#string-problems">String Problems</a>    <ul>
+      <li><a href="#reverse-a-string-without-extra-space">Reverse a string without extra space</a></li>
+      <li><a href="#duplicates-and-count">Duplicates and Count</a></li>
+      <li><a href="#remove-duplicate-spaces">Remove duplicate spaces</a></li>
+      <li><a href="#remove-spaces">Remove spaces</a></li>
+      <li><a href="#remove-all-duplicate-elements">Remove all duplicate elements</a></li>
+      <li><a href="#rotate-a-string">Rotate a string</a></li>
+      <li><a href="#permutation-of-a-string">Permutation of a string</a></li>
+      <li><a href="#find-anagram">Find Anagram</a></li>
+    </ul>
+  </li>
+</ul>
 
-  
-  <h2>2013</h2>
+<h3 id="array-problems">Array Problems</h3>
 
-<article>
-  
-<h1><a href="/blog/2013/10/07/process-synchronization-in-linux-kernel/">Process synchronization in Linux Kernel</a></h1>
-<time datetime="2013-10-07T20:56:00-07:00" pubdate><span class='month'>Oct</span> <span class='day'>07</span> <span class='year'>2013</span></time>
+<h4 id="find-2-repeating-elements">Find 2 repeating elements</h4>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/kernel/'>kernel</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/operating-systems/'>operating systems</a>, <a class='category' href='/blog/categories/os/'>os</a></span>
-</footer>
+<h4 id="sum-of-2-numbers">Sum of 2 numbers</h4>
 
+<h4 id="sum-of-3-numbers">Sum of 3 numbers</h4>
 
-</article>
+<p><br />
+<br /></p>
 
+<h3 id="string-problems">String Problems</h3>
 
+<h4 id="reverse-a-string-without-extra-space">Reverse a string without extra space</h4>
 
-<article>
-  
-<h1><a href="/blog/2013/10/07/process-synchronization-in-os/">Process synchronization in OS</a></h1>
-<time datetime="2013-10-07T11:54:00-07:00" pubdate><span class='month'>Oct</span> <span class='day'>07</span> <span class='year'>2013</span></time>
+<p>String could be reversed without using extra space using bitwise operator <a href="http://learnwrite.github.io/blog/2013/10/08/world-of-bits-and-bytes/#bitwise-operators" target="_blank">XOR</a></p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/operating-systems/'>operating systems</a>, <a class='category' href='/blog/categories/os/'>os</a></span>
-</footer>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>String Reverse</span>  <a href="http://ideone.com/vfTxcr" target="_blank">Run Code </a></figcaption> <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="preprocessor">#include</span> <span class="include">&lt;stdio.h&gt;</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span class="preprocessor">#include</span> <span class="include">&lt;string.h&gt;</span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span> 
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span> 
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span class="predefined-type">int</span> main(<span class="directive">void</span>) {
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span class="predefined-type">int</span> i = <span class="integer">0</span>;
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    <span class="predefined-type">char</span> str[] = <span class="string"><span class="delimiter">&quot;</span><span class="content">testString</span><span class="delimiter">&quot;</span></span>;
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    <span class="predefined-type">int</span> len = strlen(str);
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span> 
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>    <span class="keyword">for</span>(i = <span class="integer">0</span>; i &lt; len/<span class="integer">2</span>; i++){
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>        str[len - i - <span class="integer">1</span>] ^= str[i];
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>        str[i] ^= str[len - i - <span class="integer">1</span>];
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>        str[len - i - <span class="integer">1</span>] ^= str[i];
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>    }
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>    printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Reverse String %s </span><span class="char">\n</span><span class="delimiter">&quot;</span></span>, str);
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span> 
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>    <span class="keyword">return</span> <span class="integer">0</span>;
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>}
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>
+</pre></div>
+</div>
+ </figure></notextile></div>
 
+<p><br /></p>
 
-</article>
+<h4 id="duplicates-and-count">Duplicates and Count</h4>
 
+<p>Print all duplicate characters and their count</p>
+
+<h4 id="remove-duplicate-spaces">Remove duplicate spaces</h4>
+
+<h4 id="remove-spaces">Remove spaces</h4>
+
+<h4 id="remove-all-duplicate-elements">Remove all duplicate elements</h4>
+
+<h4 id="rotate-a-string">Rotate a string</h4>
+
+<h4 id="permutation-of-a-string">Permutation of a string</h4>
+
+<p><a href="http://learnwrite.github.io/blog/2013/11/18/recursion/#string-permutation-non-repeating" target="_blank">Permutation</a></p>
+
+<p><br /></p>
+
+<h4 id="find-anagram">Find Anagram</h4>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Vaibhav Gautam</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-30T01:26:00-08:00" pubdate data-updated="true">Dec 30<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/algorithm/'>algorithm</a>, <a class='category' href='/blog/categories/array/'>array</a>, <a class='category' href='/blog/categories/strings/'>strings</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+   <div class="rdbWrapper" data-show-read="1" data-show-send-to-kindle="1" data-show-print="1" data-show-email="0" data-orientation="0" data-version="1"></div><script type="text/javascript">(function() {var s = document.getElementsByTagName("script")[0],rdb = document.createElement("script"); rdb.type = "text/javascript"; rdb.async = true; rdb.src = document.location.protocol + "//www.readability.com/embed.js"; s.parentNode.insertBefore(rdb, s); })();</script>
+  
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://learnwrite.github.io/blog/2013/12/30/array-and-strings/" data-via="_vaibhavg" data-counturl="http://learnwrite.github.io/blog/2013/12/30/array-and-strings/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/12/14/graph-algorithms/" title="Previous Post: Graph Algorithms">&laquo; Graph Algorithms</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -251,7 +385,10 @@
       var disqus_shortname = 'coolgoose85';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://learnwrite.github.io/blog/2013/12/30/array-and-strings/';
+        var disqus_url = 'http://learnwrite.github.io/blog/2013/12/30/array-and-strings/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
