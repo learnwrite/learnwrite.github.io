@@ -163,25 +163,10 @@ path.link {
   </style>
 
 <style>
-body {
-  background: url(texture-noise.png);
-  overflow: hidden;
-  margin: 0;
-  font-size: 14px;
-  font-family: &#8220;Helvetica Neue&#8221;, Helvetica;
-}
 
 #chart, #header, #footer {
   position: absolute;
   top: 0;
-}
-
-#header, #footer {
-  z-index: 1;
-  display: block;
-  font-size: 36px;
-  font-weight: 300;
-  text-shadow: 0 1px 0 #fff;
 }
 
 #header.inverted, #footer.inverted {
@@ -189,17 +174,6 @@ body {
   text-shadow: 0 1px 4px #000;
 }
 
-#header {
-  top: 80px;
-  left: 140px;
-  width: 1000px;
-}
-
-#footer {
-  top: 680px;
-  right: 140px;
-  text-align: right;
-}
 
 rect {
   fill: none;
@@ -255,11 +229,8 @@ a:hover {
   </style>
 
 <body>
-    <div id="body">
-      <div id="footer">
-        d3.layout.tree
-        <div class="hint">click or option-click to expand or collapse</div>
-      </div>
+    <div id="body">              
+        <div class="hint">click or option-click to expand or collapse</div>      
     </div>
     <script type="text/javascript">
 
@@ -281,7 +252,7 @@ var vis = d3.select("#body").append("svg:svg")
   .append("svg:g")
     .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
 
-d3.json("../assets/flare.json", function(json) {
+d3.json("/assets/flare.json", function(json) {
   root = json;
   root.x0 = h / 2;
   root.y0 = 0;
@@ -405,8 +376,9 @@ function toggle(d) {
 }
 
     </script>
-  </body>
+  
 
+</body>
 </div>
   
   
