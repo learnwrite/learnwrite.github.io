@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: array | Learnings]]></title>
+  <link href="http://learnwrite.github.io/blog/categories/array/atom.xml" rel="self"/>
+  <link href="http://learnwrite.github.io/"/>
+  <updated>2014-01-03T19:21:08-08:00</updated>
+  <id>http://learnwrite.github.io/</id>
+  <author>
+    <name><![CDATA[Vaibhav Gautam]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Array and Strings]]></title>
+    <link href="http://learnwrite.github.io/blog/2013/12/30/array-and-strings/"/>
+    <updated>2013-12-30T01:26:00-08:00</updated>
+    <id>http://learnwrite.github.io/blog/2013/12/30/array-and-strings</id>
+    <content type="html"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#array-problems">Array Problems</a>    <ul>
+      <li><a href="#find-2-repeating-elements">Find 2 repeating elements</a></li>
+      <li><a href="#sum-of-2-numbers">Sum of 2 numbers</a></li>
+      <li><a href="#sum-of-3-numbers">Sum of 3 numbers</a></li>
+    </ul>
+  </li>
+  <li><a href="#string-problems">String Problems</a>    <ul>
+      <li><a href="#reverse-a-string-without-extra-space">Reverse a string without extra space</a></li>
+      <li><a href="#duplicates-and-count">Duplicates and Count</a></li>
+      <li><a href="#remove-duplicate-spaces">Remove duplicate spaces</a></li>
+      <li><a href="#remove-spaces">Remove spaces</a></li>
+      <li><a href="#remove-all-duplicate-elements">Remove all duplicate elements</a></li>
+      <li><a href="#rotate-a-string">Rotate a string</a></li>
+      <li><a href="#permutation-of-a-string">Permutation of a string</a></li>
+      <li><a href="#find-anagram">Find Anagram</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="array-problems">Array Problems</h3>
+
+<h4 id="find-2-repeating-elements">Find 2 repeating elements</h4>
+
+<h4 id="sum-of-2-numbers">Sum of 2 numbers</h4>
+
+<h4 id="sum-of-3-numbers">Sum of 3 numbers</h4>
+
+<p><br />
+<br /></p>
+
+<h3 id="string-problems">String Problems</h3>
+
+<h4 id="reverse-a-string-without-extra-space">Reverse a string without extra space</h4>
+
+<p>String could be reversed without using extra space using bitwise operator <a href="http://learnwrite.github.io/blog/2013/10/08/world-of-bits-and-bytes/#bitwise-operators" target="_blank">XOR</a></p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>String Reverse</span>  <a href='http://ideone.com/vfTxcr' target='_blank'>Run Code </a></figcaption> <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="preprocessor">#include</span> <span class="include">&lt;stdio.h&gt;</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span class="preprocessor">#include</span> <span class="include">&lt;string.h /&gt;</span>&lt;/stdio.h&gt;&lt;/p&gt;
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>&lt;p&gt;<span class="predefined-type">int</span> main(<span class="directive">void</span>) {
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    <span class="predefined-type">int</span> i = <span class="integer">0</span>;
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span class="predefined-type">char</span> str[] = <span class="error">“</span>testString<span class="error">”</span>;
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    <span class="predefined-type">int</span> len = strlen(str);&lt;/p&gt;
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>&lt;pre&gt;&lt;code&gt;<span class="keyword">for</span>(i = <span class="integer">0</span>; i &amp;lt; len/<span class="integer">2</span>; i++){
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>    str[len - i - <span class="integer">1</span>] ^= str[i];
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    str[i] ^= str[len - i - <span class="integer">1</span>];
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>    str[len - i - <span class="integer">1</span>] ^= str[i];
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>}
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Reverse String %s </span><span class="char">\n</span><span class="delimiter">&quot;</span></span>, str);
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span> 
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span><span class="keyword">return</span> <span class="integer">0</span>; }
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>&lt;/code&gt;&lt;/pre&gt;
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>&lt;p&gt;</pre></div>
+</div>
+ </figure></notextile></div>
+<br /></p>
+
+<h4 id="duplicates-and-count">Duplicates and Count</h4>
+
+<p>Print all duplicate characters and their count</p>
+
+<h4 id="remove-duplicate-spaces">Remove duplicate spaces</h4>
+
+<h4 id="remove-spaces">Remove spaces</h4>
+
+<h4 id="remove-all-duplicate-elements">Remove all duplicate elements</h4>
+
+<h4 id="rotate-a-string">Rotate a string</h4>
+
+<h4 id="permutation-of-a-string">Permutation of a string</h4>
+
+<p><a href="http://learnwrite.github.io/blog/2013/11/18/recursion/#string-permutation-non-repeating" target="_blank">Permutation</a></p>
+
+<p><br /></p>
+
+<h4 id="find-anagram">Find Anagram</h4>
+]]></content>
+  </entry>
+  
+</feed>
