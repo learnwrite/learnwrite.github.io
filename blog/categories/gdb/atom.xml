@@ -4,7 +4,7 @@
   <title><![CDATA[Category: gdb | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/gdb/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2014-01-05T21:30:10-08:00</updated>
+  <updated>2014-01-06T08:35:43-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -18,9 +18,7 @@
     <link href="http://learnwrite.github.io/blog/2013/10/06/gdb-print-bit-values-of-bytes/"/>
     <updated>2013-10-06T21:06:00-07:00</updated>
     <id>http://learnwrite.github.io/blog/2013/10/06/gdb-print-bit-values-of-bytes</id>
-    <content type="html"><![CDATA[<!-- more -->
-
-
+    <content type="html"><![CDATA[
 <h2>Print bit values in a byte</h2>
 
 <p>Recently, I have been working on interesting piece of code whose crux is to create a array of pointer addresses.
@@ -33,7 +31,8 @@ Container array contains char addresses. Here, 100 is memory address where char 
 Address 100<br /></p>
 <table><td>v</td><td>a</td><td>i</td><td>b</td><td>h</td><td>a</td><td>v</td><td>\0</td></table>
 <p><br />
-Sometimes char data type is used as a package of 8 bits not as a valid char value.<br /></p>
+Sometimes char data type is used as a package of 8 bits not as a valid char value.<br />
+<!-- more --></p>
 
 <h3>Code snippet</h3>
 

@@ -9,7 +9,7 @@
   <meta name="author" content="Vaibhav Gautam">
 
   
-  <meta name="description" content="">
+  <meta name="description" content="Addition Subtraction Multiplication Negative Binary numbers Credits Addition 10 + 0 → 0 20 + 1 → 1 31 + 0 → 1 41 + 1 → 0, carry 1 5 6 For e.g 7 8 1 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -139,7 +139,34 @@
   </header>
 
 
-  <div class="entry-content"></div>
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#addition">Addition</a></li>
+  <li><a href="#subtraction">Subtraction</a></li>
+  <li><a href="#multiplication">Multiplication</a></li>
+  <li><a href="#negative-binary-numbers">Negative Binary numbers</a></li>
+  <li><a href="#credits">Credits</a></li>
+</ul>
+
+<h3 id="addition">Addition</h3>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span class="integer">0</span> + <span class="integer">0</span> <span class="error">→</span> <span class="integer">0</span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="integer">0</span> + <span class="integer">1</span> <span class="error">→</span> <span class="integer">1</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span class="integer">1</span> + <span class="integer">0</span> <span class="error">→</span> <span class="integer">1</span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span class="integer">1</span> + <span class="integer">1</span> <span class="error">→</span> <span class="integer">0</span>, carry <span class="integer">1</span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span> For e.g
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span>    (carried digits)
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>      <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span>
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>+     <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span>
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>    -------------
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>=   <span class="integer">1</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">0</span> <span class="integer">0</span> = <span class="integer">36</span>
+</pre></div>
+</div>
+</div>
+
+</div>
   
   
     <footer>
@@ -180,7 +207,39 @@
   </header>
 
 
-  <div class="entry-content"></div>
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#synchronization-primitives">Synchronization Primitives</a></li>
+  <li><a href="#per-cpu-variables">Per-CPU variables</a></li>
+  <li><a href="#atomic-operations">Atomic Operations</a></li>
+  <li><a href="#optimization-barriers--memory-barriers">Optimization Barriers &amp; Memory Barriers</a></li>
+  <li><a href="#semaphores">Semaphores</a></li>
+  <li><a href="#spin-locks">Spin Locks</a>    <ul>
+      <li><a href="#readwrite-spin-locks">Read/Write Spin Locks</a></li>
+    </ul>
+  </li>
+  <li><a href="#seqlocks">SeqLocks</a></li>
+  <li><a href="#read-copy-update-rcu">Read Copy Update (RCU)</a></li>
+</ul>
+
+<p>As we have discussed earlier about process synchronization, lets discuss about process synchronization primitives offered in Linux Kernel.</p>
+
+<p>This blog is summary of this <a href="https://www.dropbox.com/s/xvo7qdl9iwjco5x/UnderstandingtheLinuxKernelThirdEditionChapter5KernelSynchronizat.pdf" target="-blank">article</a></p>
+
+<h3 id="synchronization-primitives">Synchronization Primitives</h3>
+
+<ol>
+  <li>Per-CPU variables</li>
+  <li>Atomic Operation</li>
+  <li>Memory barrier</li>
+  <li>Spin Lock</li>
+  <li>Semaphore</li>
+  <li>SeqLocks</li>
+  <li>Local Interrupt disabling</li>
+  <li>Local softirq disabling</li>
+  <li>Read-Copy-Update</li>
+</ol>
+
+</div>
   
   
     <footer>
@@ -221,7 +280,31 @@
   </header>
 
 
-  <div class="entry-content"></div>
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#what-is-a-process">What is a Process?</a></li>
+  <li><a href="#issues-with-sharing">3 Issues with Sharing</a></li>
+  <li><a href="#carls-jr-restaurant">Carl’s Jr. Restaurant</a></li>
+  <li><a href="#algorithmic-approach">Algorithmic approach</a></li>
+  <li><a href="#software-primitives">Software Primitives</a></li>
+  <li><a href="#semaphores">Semaphores</a></li>
+  <li><a href="#locks">Locks</a></li>
+  <li><a href="#concurrent-programming-construct">Concurrent Programming Construct</a></li>
+  <li><a href="#condition-variables">Condition Variables</a></li>
+  <li><a href="#producer-consumer-problem">Producer-Consumer Problem</a></li>
+  <li><a href="#recommended-reading">Recommended reading</a></li>
+</ul>
+
+<h3 id="what-is-a-process">What is a Process?</h3>
+
+<p>OS <code>objective</code> is to keep as many as of the computer resources as busy as possible. It is used to keep track of all the things an OS must remember about the state of user program.</p>
+
+<p>Process = Code + Allocated Resources + Book keeping information</p>
+
+<p>Process is like a box, a complete entity in itself which does a step by step task written in progam. More formally it is called program in execution.</p>
+
+<p>Lets consider a very basic operating system with very least complexity. This operating system can run only <code>one process</code> at a time. Since, only one process is working at a time, it may happen that all the resources occupied by process will not be used at the same time.</p>
+
+</div>
   
   
     <footer>
@@ -262,7 +345,21 @@
   </header>
 
 
-  <div class="entry-content"></div>
+  <div class="entry-content">
+<h2>Print bit values in a byte</h2>
+
+<p>Recently, I have been working on interesting piece of code whose crux is to create a array of pointer addresses.
+Each entry in this array is address pointing to memory location.</p>
+
+<p>For example<br />
+Container array contains char addresses. Here, 100 is memory address where char value resides.</p>
+<table><td>100</td><td>1000</td><td>2000</td></table>
+<p><br />
+Address 100<br /></p>
+<table><td>v</td><td>a</td><td>i</td><td>b</td><td>h</td><td>a</td><td>v</td><td>\0</td></table>
+<p><br />
+Sometimes char data type is used as a package of 8 bits not as a valid char value.<br />
+</div>
   
   
     <footer>

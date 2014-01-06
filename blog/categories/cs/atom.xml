@@ -4,7 +4,7 @@
   <title><![CDATA[Category: cs | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/cs/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2014-01-05T21:30:10-08:00</updated>
+  <updated>2014-01-06T08:35:43-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -18,9 +18,7 @@
     <link href="http://learnwrite.github.io/blog/2013/12/14/graph-algorithms/"/>
     <updated>2013-12-14T13:03:00-08:00</updated>
     <id>http://learnwrite.github.io/blog/2013/12/14/graph-algorithms</id>
-    <content type="html"><![CDATA[<!-- more -->
-
-<ul id="markdown-toc">
+    <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#graph-problems">Graph problems</a>    <ul>
       <li><a href="#find-neighbour-in-array">Find neighbour in array</a></li>
     </ul>
@@ -41,6 +39,7 @@
   <li>Neighbours are all vertical, horizontal and diagonal elements next to given element<br /></li>
 </ol>
 
+<!-- more -->
 <p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Neighbour1</span>  <a href='http://ideone.com/0ddGnZ' target='_blank'>Run Code </a></figcaption> <div class="CodeRay">
   <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
 <span class="line-numbers"> <a href="#n2" name="n2">2</a></span>/&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;

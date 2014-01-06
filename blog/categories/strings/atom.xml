@@ -4,7 +4,7 @@
   <title><![CDATA[Category: strings | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/strings/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2014-01-05T21:30:10-08:00</updated>
+  <updated>2014-01-06T08:35:43-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -18,16 +18,11 @@
     <link href="http://learnwrite.github.io/blog/2013/12/30/array-and-strings/"/>
     <updated>2013-12-30T01:26:00-08:00</updated>
     <id>http://learnwrite.github.io/blog/2013/12/30/array-and-strings</id>
-    <content type="html"><![CDATA[<!-- more -->
-
-<ul id="markdown-toc">
+    <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#array-problems">Array Problems</a>    <ul>
       <li><a href="#find-repeatingduplicate-numbers">Find repeating/duplicate numbers</a></li>
       <li><a href="#sum-of-2-numbers">Sum of 2 numbers</a></li>
       <li><a href="#sum-of-3-numbers">Sum of 3 numbers</a></li>
-    </ul>
-  </li>
-  <li><a href="#string-problems">String Problems</a>    <ul>
       <li><a href="#reverse-a-string-without-extra-space">Reverse a string without extra space</a></li>
       <li><a href="#duplicates-and-count">Duplicates and Count</a></li>
       <li><a href="#remove-duplicate-spaces">Remove duplicate spaces</a></li>
@@ -67,7 +62,8 @@ Sum = 10 Then the pairs are  {6,4} , {9,1}</p>
 <p><br />
 <br /></p>
 
-<h3 id="string-problems">String Problems</h3>
+<!-- more -->
+<p>### String Problems</p>
 
 <h4 id="reverse-a-string-without-extra-space">Reverse a string without extra space</h4>
 

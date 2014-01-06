@@ -9,7 +9,8 @@
   <meta name="author" content="Vaibhav Gautam">
 
   
-  <meta name="description" content="">
+  <meta name="description" content="Introduction Systems designed to scale .node circle { cursor: pointer; fill: #fff; stroke: steelblue; stroke-width: 1.5px;
+} .node text { font-size &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -139,7 +140,90 @@
   </header>
 
 
-  <div class="entry-content"></div>
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#introduction">Introduction</a></li>
+  <li><a href="#systems-designed-to-scale">Systems designed to scale</a></li>
+</ul>
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<style type="text/css">
+.node circle {
+  cursor: pointer;
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.node text {
+  font-size: 11px;
+}
+
+path.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 1.5px;
+}
+
+  </style>
+
+<style>
+
+#chart, #header, #footer {
+  position: absolute;
+  top: 0;
+}
+
+#header.inverted, #footer.inverted {
+  color: #fff;
+  text-shadow: 0 1px 4px #000;
+}
+
+
+rect {
+  fill: none;
+  pointer-events: all;
+}
+
+line {
+  stroke: #000;
+  stroke-width: 1.5px;
+}
+
+.string, .regexp {
+  color: #f39;
+}
+
+.keyword {
+  color: #00c;
+}
+
+.comment {
+  color: #777;
+  font-style: oblique;
+}
+
+.number {
+  color: #369;
+}
+
+.class, .special {
+  color: #1181B8;
+}
+
+</style>
+
+<h3 id="introduction">Introduction</h3>
+
+<p>This blog is summary of the research paper Scale in Distributed Systems.</p>
+
+<blockquote><p>A system is Scalable if it can handle addition of users and resources without suffering a noticeable loss of performance or increase in administrative complexity.</p></blockquote>
+
+<p>Paper talks about problem of scale and genral solution. These solution fall into three categories</p>
+
+<blockquote><p>Replication, Distribution and Caching</p></blockquote>
+
+</div>
   
   
     <footer>
@@ -180,7 +264,84 @@
   </header>
 
 
-  <div class="entry-content"></div>
+  <div class="entry-content">
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<style type="text/css">
+.node circle {
+  cursor: pointer;
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.node text {
+  font-size: 11px;
+}
+
+path.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 1.5px;
+}
+
+  </style>
+
+<style>
+
+#chart, #header, #footer {
+  position: absolute;
+  top: 0;
+}
+
+#header.inverted, #footer.inverted {
+  color: #fff;
+  text-shadow: 0 1px 4px #000;
+}
+
+
+rect {
+  fill: none;
+  pointer-events: all;
+}
+
+line {
+  stroke: #000;
+  stroke-width: 1.5px;
+}
+
+.string, .regexp {
+  color: #f39;
+}
+
+.keyword {
+  color: #00c;
+}
+
+.comment {
+  color: #777;
+  font-style: oblique;
+}
+
+.number {
+  color: #369;
+}
+
+.class, .special {
+  color: #1181B8;
+}
+
+</style>
+
+<p>This article is about how to use versatile <a href="http://d3js.org/" target="_blank">D3.js</a> with <a href="http://octopress.org/" target="_blank">Octopress.</a></p>
+
+<p>Recently I was looking for flow chart diagram or tree structure diagram, but I did not want to produce static image diagrams using Microsoft Vizio or similar softwares.</p>
+
+<p>My requirement was to come up with tree structure data representation, which I could change in future unlike static pictures and can not be changed in future.</p>
+
+<p>I found D3.js to be perfect for this scenario. Here, I store data in JSON file and I use D3.js to display that data according to my needs.</p>
+
+</div>
   
   
     <footer>
@@ -221,7 +382,51 @@
   </header>
 
 
-  <div class="entry-content"></div>
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#array-problems">Array Problems</a>    <ul>
+      <li><a href="#find-repeatingduplicate-numbers">Find repeating/duplicate numbers</a></li>
+      <li><a href="#sum-of-2-numbers">Sum of 2 numbers</a></li>
+      <li><a href="#sum-of-3-numbers">Sum of 3 numbers</a></li>
+      <li><a href="#reverse-a-string-without-extra-space">Reverse a string without extra space</a></li>
+      <li><a href="#duplicates-and-count">Duplicates and Count</a></li>
+      <li><a href="#remove-duplicate-spaces">Remove duplicate spaces</a></li>
+      <li><a href="#remove-spaces">Remove spaces</a></li>
+      <li><a href="#remove-all-consequtive-duplicate-elements">Remove all consequtive duplicate elements</a></li>
+      <li><a href="#rotate-a-string">Rotate a string</a></li>
+      <li><a href="#permutation-of-a-string">Permutation of a string</a></li>
+      <li><a href="#find-anagram">Find Anagram</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="array-problems">Array Problems</h3>
+
+<h4 id="find-repeatingduplicate-numbers">Find repeating/duplicate numbers</h4>
+<p>Find all the numbers repeating in a array</p>
+
+<p>Input
+2,1, 3, 2, 3, 1, 4</p>
+
+<p>Output
+2,1,3</p>
+
+<h4 id="sum-of-2-numbers">Sum of 2 numbers</h4>
+
+<p>We are given a sorted array A of length n and a value k. We want to find out if there are indices i, j such that A[i] + A[j] == k. Give a Θ(n) way of solving this problem. Prove its running time and correctness. For full credit, your algorithm should also output one pair of indices i, j such that A[i] + A[j] == k (if at least one pair exists; if multiple exist, you only need to output one of them). </p>
+
+<p>Other variant of the same problem
+When array is not sorted<br />
+We need to find pair of numbers in an array whose sum is equal to a given value.<br />
+A = {6,4,5,7,9,1,2}<br />
+Sum = 10 Then the pairs are  {6,4} , {9,1}</p>
+
+<h4 id="sum-of-3-numbers">Sum of 3 numbers</h4>
+<p>We need to find three numbers in an array whose sum is equal to a given value.</p>
+
+<p><br />
+<br /></p>
+
+</div>
   
   
     <footer>
@@ -262,7 +467,28 @@
   </header>
 
 
-  <div class="entry-content"></div>
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#graph-problems">Graph problems</a>    <ul>
+      <li><a href="#find-neighbour-in-array">Find neighbour in array</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="graph-problems">Graph problems</h3>
+
+<h4 id="find-neighbour-in-array">Find neighbour in array</h4>
+
+<p>Find all the neighbours of a given element in array<br /></p>
+
+<p>Neighbours can be defined as<br /></p>
+
+<ol>
+  <li>Neighbours are only vertical and horizontal elements next to given element<br /></li>
+  <li>Neighbours are only vertical, horizontal and diagonal elements next to given element<br /></li>
+  <li>Neighbours are all vertical, horizontal and diagonal elements next to given element<br /></li>
+</ol>
+
+</div>
   
   
     <footer>
@@ -303,7 +529,37 @@
   </header>
 
 
-  <div class="entry-content"></div>
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#facebook">Facebook</a>    <ul>
+      <li><a href="#data-center">Data Center</a></li>
+      <li><a href="#search-for-people">Search for People</a></li>
+      <li><a href="#petabytes-of-data">Petabytes of Data</a></li>
+      <li><a href="#fb-engineering-notes">FB Engineering Notes</a></li>
+    </ul>
+  </li>
+  <li><a href="#spotify">Spotify</a></li>
+  <li><a href="#cap-theorem">CAP Theorem</a></li>
+  <li><a href="#amazon">Amazon</a>    <ul>
+      <li><a href="#amazon-dynamo">Amazon Dynamo</a></li>
+    </ul>
+  </li>
+  <li><a href="#twitter">Twitter</a></li>
+  <li><a href="#references">References</a></li>
+</ul>
+
+<p>This article is about Scalability in Distributed Systems and various engineering organizations approaching the problem of Scalability..</p>
+
+<div class="wikipedia">
+  
+  <h2>scalability</h2>
+  <div>
+    <p>In <a href="http://en.wikipedia.org/wiki/Electronics" title="Electronics">electronics</a> (including <a href="http://en.wikipedia.org/wiki/Semiconductor_manufacturing" title="Semiconductor manufacturing" class="mw-redirect">hardware</a>, <a href="http://en.wikipedia.org/wiki/Telecommunications" title="Telecommunications" class="mw-redirect">communication</a> and <a href="http://en.wikipedia.org/wiki/Software_engineering" title="Software engineering">software</a>), <strong>scalability</strong> is the ability of a system, network, or process to handle a growing amount of work in a capable manner or its ability to be enlarged to accommodate that growth.  For example, it can refer to the capability of a system to increase total throughput under an increased load when resources (typically hardware) are added. An analogous meaning is implied when the word is used in an <a href="http://en.wikipedia.org/wiki/Economics" title="Economics">economic</a> context, where scalability of a company implies that the underlying <a href="http://en.wikipedia.org/wiki/Business_model" title="Business model">business model</a> offers the potential for <a href="http://en.wikipedia.org/wiki/Economic_growth" title="Economic growth">economic growth</a> within the company.
+</p>
+  </div>
+  <a href="http://en.wikipedia.org/wiki/Scalability">Read more</a>
+</div>
+
+</div>
   
   
     <footer>
@@ -344,7 +600,36 @@
   </header>
 
 
-  <div class="entry-content"></div>
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#trie-problems">Trie Problems</a></li>
+  <li><a href="#trie-explanation">Trie explanation</a></li>
+  <li><a href="#trie-code">Trie Code</a></li>
+  <li><a href="#infix-to-postfix">Infix to Postfix</a></li>
+  <li><a href="#postfix-to-infix">Postfix to Infix</a>    <ul>
+      <li><a href="#evaluate-postfix-expression">Evaluate Postfix expression</a></li>
+    </ul>
+  </li>
+  <li><a href="#tree-problems">Tree Problems</a>    <ul>
+      <li><a href="#find-bst-is-balanced-or-not">Find BST is balanced or not</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p>This article is about Trie and Trees data structure.</p>
+
+<div class="wikipedia">
+  
+    <img src="//upload.wikimedia.org/wikipedia/commons/thumb/b/be/Trie_example.svg/250px-Trie_example.svg.png" />
+  
+  <h2>trie</h2>
+  <div>
+    <p>In <a href="http://en.wikipedia.org/wiki/Computer_science" title="Computer science">computer science</a>, a <strong>trie</strong>, also called <strong>digital tree</strong> and sometimes <strong>radix tree</strong> or <strong>prefix tree</strong> (as they can be searched by prefixes), is an <a href="http://en.wikipedia.org/wiki/Ordered_tree_data_structure" title="Ordered tree data structure" class="mw-redirect">ordered tree</a> <a href="http://en.wikipedia.org/wiki/Data_structure" title="Data structure">data structure</a> that is used to store a <a href="http://en.wikipedia.org/wiki/Set_(abstract_data_type)" title="Set (abstract data type)">dynamic set</a> or <a href="http://en.wikipedia.org/wiki/Associative_array" title="Associative array">associative array</a> where the keys are usually <a href="http://en.wikipedia.org/wiki/String_(computer_science)" title="String (computer science)">strings</a>. Unlike a <a href="http://en.wikipedia.org/wiki/Binary_search_tree" title="Binary search tree">binary search tree</a>, no node in the tree stores the key associated with that node; instead, its position in the tree defines the key with which it is associated. All the descendants of a node have a common <a href="http://en.wikipedia.org/wiki/Prefix" title="Prefix">prefix</a> of the string associated with that node, and the root is associated with the <a href="http://en.wikipedia.org/wiki/String_(computer_science)" title="String (computer science)">empty string</a>. Values are normally not associated with every node, only with leaves and some inner nodes that correspond to keys of interest. For the space-optimized presentation of prefix tree, see <a href="http://en.wikipedia.org/wiki/Compact_prefix_tree" title="Compact prefix tree" class="mw-redirect">compact prefix tree</a>.
+</p>
+  </div>
+  <a href="http://en.wikipedia.org/wiki/Trie">Read more</a>
+</div>
+
+</div>
   
   
     <footer>
@@ -385,7 +670,41 @@
   </header>
 
 
-  <div class="entry-content"></div>
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#recusion-problems">Recusion problems</a>    <ul>
+      <li><a href="#factorial">Factorial</a></li>
+      <li><a href="#total-bunnyears">Total BunnyEars</a></li>
+      <li><a href="#evenodd-bunnyears">Even/Odd BunnyEars</a></li>
+      <li><a href="#triangle">Triangle</a></li>
+      <li><a href="#sum-of-digits">Sum of Digits</a></li>
+      <li><a href="#count-no-7">Count no 7</a></li>
+      <li><a href="#count-x-in-string">Count X in String</a></li>
+      <li><a href="#count-hi">Count Hi</a></li>
+      <li><a href="#change-xy-string">Change XY String</a></li>
+      <li><a href="#change-pi">Change PI</a></li>
+      <li><a href="#no-x-in-string">No X in String</a></li>
+      <li><a href="#no-star-in-string">No Star in String</a></li>
+      <li><a href="#substring">Substring</a></li>
+      <li><a href="#string-permutation-non-repeating">String permutation non repeating</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p>This article is all about recusion.</p>
+
+<div class="wikipedia">
+  
+    <img src="//upload.wikimedia.org/wikipedia/commons/thumb/6/62/Droste.jpg/220px-Droste.jpg" />
+  
+  <h2>Recursion</h2>
+  <div>
+    <p><strong>Recursion</strong> is the process of repeating items in a <a href="http://en.wikipedia.org/wiki/Self-similarity" title="Self-similarity">self-similar</a> way. For instance, when the surfaces of two mirrors are exactly parallel with each other the nested images that occur are a form of infinite recursion. The term has a variety of meanings specific to a variety of disciplines ranging from <a href="http://en.wikipedia.org/wiki/Linguistics" title="Linguistics">linguistics</a> to <a href="http://en.wikipedia.org/wiki/Logic" title="Logic">logic</a>. The most common application of recursion is in <a href="http://en.wikipedia.org/wiki/Mathematics" title="Mathematics">mathematics</a> and <a href="http://en.wikipedia.org/wiki/Computer_science" title="Computer science">computer science</a>, in which it refers to a method of defining <a href="http://en.wikipedia.org/wiki/Function_(mathematics)" title="Function (mathematics)">functions</a> in which the function being defined is applied within its own definition. Specifically this defines an infinite number of instances (function values), using a finite expression that for some instances may refer to other instances, but in such a way that no loop or infinite chain of references can occur. The term is also used more generally to describe a process of repeating objects in a self-similar way.
+</p>
+  </div>
+  <a href="http://en.wikipedia.org/wiki/Recursion">Read more</a>
+</div>
+
+</div>
   
   
     <footer>
@@ -426,7 +745,35 @@
   </header>
 
 
-  <div class="entry-content"></div>
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#merge-sort">Merge Sort</a></li>
+  <li><a href="#table-based-comparison">Table based comparison</a></li>
+  <li><a href="#merge-sort-code">Merge sort code</a></li>
+  <li><a href="#quick-sort-code">Quick sort code</a></li>
+  <li><a href="#references">References</a></li>
+</ul>
+
+<h3 id="merge-sort">Merge Sort</h3>
+
+<p>Merge sort follows <code>divide-and-conquer</code> approach.</p>
+
+<p><br /><br /></p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span class="constant">MERGE</span>-SORT(<span class="constant">A</span>, p, r) /<span class="regexp"><span class="delimiter">/</span><span class="content"> A is array of numbers</span></span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="regexp"><span class="content">{                   </span><span class="delimiter">/</span></span>/ p is starting index of array
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>                    <span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span> r is last index of array
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    <span class="keyword">if</span> p &lt; r
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    <span class="keyword">then</span> q &lt;- ⌊(p + r)⌋ / <span class="integer">2</span>;  
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>        <span class="constant">MERGE</span>-SORT(<span class="constant">A</span>, p, q)
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>        <span class="constant">MERGE</span>-SORT(<span class="constant">A</span>, q + <span class="integer">1</span>, r)
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>        MERGE(<span class="constant">A</span>, p, q, r)
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>}
+</pre></div>
+</div>
+</div>
+
+</div>
   
   
     <footer>
@@ -467,7 +814,34 @@
   </header>
 
 
-  <div class="entry-content"></div>
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#dictionary-of-algorithms">Dictionary of algorithms</a></li>
+  <li><a href="#sorting-visualization">Sorting Visualization</a></li>
+  <li><a href="#sorting-wiki-summary">Sorting Wiki Summary</a></li>
+  <li><a href="#sorting-algorithms">Sorting algorithms</a></li>
+  <li><a href="#comparisons-based-sorting">Comparisons based sorting</a></li>
+  <li><a href="#online-sorts">Online sorts</a></li>
+  <li><a href="#stable-sorts">Stable sorts</a></li>
+  <li><a href="#time-complexity-chart">Time complexity chart</a></li>
+</ul>
+
+<p>This article talks about Sorting, Sorting techniques/algorithms in computer science</p>
+
+<p>Let’s start with Wikipedia entry about sorting</p>
+
+<div class="wikipedia">
+  
+    <img src="//upload.wikimedia.org/wikipedia/commons/thumb/8/82/Sorting_stability_playing_cards.svg/220px-Sorting_stability_playing_cards.svg.png" />
+  
+  <h2>sorting algorithm</h2>
+  <div>
+    <p>A <strong>sorting algorithm</strong> is an <a href="http://en.wikipedia.org/wiki/Algorithm" title="Algorithm">algorithm</a> that puts elements of a <a href="http://en.wikipedia.org/wiki/List_(computing)" title="List (computing)" class="mw-redirect">list</a> in a certain <a href="http://en.wikipedia.org/wiki/Total_order" title="Total order">order</a>. The most-used orders are numerical order and <a href="http://en.wikipedia.org/wiki/Lexicographical_order" title="Lexicographical order">lexicographical order</a>. Efficient <a href="http://en.wikipedia.org/wiki/Sorting" title="Sorting">sorting</a> is important for optimizing the use of other algorithms (such as <a href="http://en.wikipedia.org/wiki/Search_algorithm" title="Search algorithm">search</a> and <a href="http://en.wikipedia.org/wiki/Merge_algorithm" title="Merge algorithm">merge</a> algorithms) which require input data to be in sorted lists; it is also often useful for <a href="http://en.wikipedia.org/wiki/Canonicalization" title="Canonicalization">canonicalizing</a> data and for producing human-readable output. More formally, the output must satisfy two conditions:
+</p>
+  </div>
+  <a href="http://en.wikipedia.org/wiki/Sorting_algorithm">Read more</a>
+</div>
+
+</div>
   
   
     <footer>
@@ -508,7 +882,24 @@
   </header>
 
 
-  <div class="entry-content"></div>
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#bitwise-operators">Bitwise Operators</a></li>
+  <li><a href="#bit-fields">Bit Fields</a></li>
+  <li><a href="#problems">Problems</a>    <ul>
+      <li><a href="#how-set-a-single-bit-in-a-byte">How set a single bit in a byte?</a></li>
+      <li><a href="#how-to-unset-single-bit-in-a-byte">How to unset single bit in a byte?</a></li>
+      <li><a href="#one-function-to-set-and-unset">One function to set and unset</a></li>
+      <li><a href="#unset-range-of-bits">Unset range of bits</a></li>
+      <li><a href="#set-range-of-bits">Set range of bits</a></li>
+    </ul>
+  </li>
+  <li><a href="#recomended-readings">Recomended readings</a></li>
+</ul>
+
+<p>Recently, I have realized that no matter how much C, C++ or other high level languages you know it all comes down to bit and bytes view of program.<br />
+I started realizing that after all it’s not that easy to actually think and write in bit/byte manipulation. This is my attempt to learn and be more comfortable about thinking in bit/bytes.</p>
+
+</div>
   
   
     <footer>

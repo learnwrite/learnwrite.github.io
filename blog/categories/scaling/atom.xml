@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Scaling | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/scaling/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2014-01-05T21:30:10-08:00</updated>
+  <updated>2014-01-06T08:35:43-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -18,9 +18,7 @@
     <link href="http://learnwrite.github.io/blog/2013/11/27/scalability/"/>
     <updated>2013-11-27T15:06:00-08:00</updated>
     <id>http://learnwrite.github.io/blog/2013/11/27/scalability</id>
-    <content type="html"><![CDATA[<!-- more -->
-
-<ul id="markdown-toc">
+    <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#facebook">Facebook</a>    <ul>
       <li><a href="#data-center">Data Center</a></li>
       <li><a href="#search-for-people">Search for People</a></li>
@@ -51,6 +49,7 @@
 </div>
 </p>
 
+<!-- more -->
 <p><br /></p>
 
 <h3 id="facebook">Facebook</h3>
