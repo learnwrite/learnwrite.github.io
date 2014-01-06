@@ -4,7 +4,7 @@
   <title><![CDATA[Category: D3.js | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/d3-dot-js/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2014-01-05T19:57:48-08:00</updated>
+  <updated>2014-01-05T21:30:10-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -18,7 +18,9 @@
     <link href="http://learnwrite.github.io/blog/2014/01/04/D3-and-Octopress/"/>
     <updated>2014-01-04T11:33:00-08:00</updated>
     <id>http://learnwrite.github.io/blog/2014/01/04/D3-and-Octopress</id>
-    <content type="html"><![CDATA[
+    <content type="html"><![CDATA[<!-- more -->
+
+
 <script src="http://d3js.org/d3.v3.min.js"></script>
 
 <style type="text/css">

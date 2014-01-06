@@ -4,7 +4,7 @@
   <title><![CDATA[Category: gdb | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/gdb/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2014-01-05T19:57:48-08:00</updated>
+  <updated>2014-01-05T21:30:10-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -18,7 +18,9 @@
     <link href="http://learnwrite.github.io/blog/2013/10/06/gdb-print-bit-values-of-bytes/"/>
     <updated>2013-10-06T21:06:00-07:00</updated>
     <id>http://learnwrite.github.io/blog/2013/10/06/gdb-print-bit-values-of-bytes</id>
-    <content type="html"><![CDATA[
+    <content type="html"><![CDATA[<!-- more -->
+
+
 <h2>Print bit values in a byte</h2>
 
 <p>Recently, I have been working on interesting piece of code whose crux is to create a array of pointer addresses.
