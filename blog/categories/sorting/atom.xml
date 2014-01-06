@@ -4,7 +4,7 @@
   <title><![CDATA[Category: sorting | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/sorting/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2014-01-05T19:57:48-08:00</updated>
+  <updated>2014-01-05T21:30:10-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -18,7 +18,9 @@
     <link href="http://learnwrite.github.io/blog/2013/10/13/comparison-based-sorting/"/>
     <updated>2013-10-13T01:43:00-07:00</updated>
     <id>http://learnwrite.github.io/blog/2013/10/13/comparison-based-sorting</id>
-    <content type="html"><![CDATA[<ul id="markdown-toc">
+    <content type="html"><![CDATA[<!-- more -->
+
+<ul id="markdown-toc">
   <li><a href="#merge-sort">Merge Sort</a></li>
   <li><a href="#table-based-comparison">Table based comparison</a></li>
   <li><a href="#merge-sort-code">Merge sort code</a></li>
@@ -400,7 +402,9 @@ Each level contributes to total cost of <code>cn</code></p>
     <link href="http://learnwrite.github.io/blog/2013/10/12/sorting/"/>
     <updated>2013-10-12T13:08:00-07:00</updated>
     <id>http://learnwrite.github.io/blog/2013/10/12/sorting</id>
-    <content type="html"><![CDATA[<ul id="markdown-toc">
+    <content type="html"><![CDATA[<!-- more -->
+
+<ul id="markdown-toc">
   <li><a href="#dictionary-of-algorithms">Dictionary of algorithms</a></li>
   <li><a href="#sorting-visualization">Sorting Visualization</a></li>
   <li><a href="#sorting-wiki-summary">Sorting Wiki Summary</a></li>

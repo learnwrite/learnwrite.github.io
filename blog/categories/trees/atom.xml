@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Trees | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/trees/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2014-01-05T19:57:48-08:00</updated>
+  <updated>2014-01-05T21:30:10-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -18,7 +18,9 @@
     <link href="http://learnwrite.github.io/blog/2013/11/26/trie-and-trees/"/>
     <updated>2013-11-26T23:18:00-08:00</updated>
     <id>http://learnwrite.github.io/blog/2013/11/26/trie-and-trees</id>
-    <content type="html"><![CDATA[<ul id="markdown-toc">
+    <content type="html"><![CDATA[<!-- more -->
+
+<ul id="markdown-toc">
   <li><a href="#trie-problems">Trie Problems</a></li>
   <li><a href="#trie-explanation">Trie explanation</a></li>
   <li><a href="#trie-code">Trie Code</a></li>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: graph | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/graph/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2014-01-05T19:57:48-08:00</updated>
+  <updated>2014-01-05T21:30:10-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -18,7 +18,9 @@
     <link href="http://learnwrite.github.io/blog/2013/12/14/graph-algorithms/"/>
     <updated>2013-12-14T13:03:00-08:00</updated>
     <id>http://learnwrite.github.io/blog/2013/12/14/graph-algorithms</id>
-    <content type="html"><![CDATA[<ul id="markdown-toc">
+    <content type="html"><![CDATA[<!-- more -->
+
+<ul id="markdown-toc">
   <li><a href="#graph-problems">Graph problems</a>    <ul>
       <li><a href="#find-neighbour-in-array">Find neighbour in array</a></li>
     </ul>

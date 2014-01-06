@@ -4,7 +4,7 @@
   <title><![CDATA[Category: bytes | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/bytes/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2014-01-05T19:57:48-08:00</updated>
+  <updated>2014-01-05T21:30:10-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -18,7 +18,9 @@
     <link href="http://learnwrite.github.io/blog/2013/10/08/world-of-bits-and-bytes/"/>
     <updated>2013-10-08T13:17:00-07:00</updated>
     <id>http://learnwrite.github.io/blog/2013/10/08/world-of-bits-and-bytes</id>
-    <content type="html"><![CDATA[<ul id="markdown-toc">
+    <content type="html"><![CDATA[<!-- more -->
+
+<ul id="markdown-toc">
   <li><a href="#basics">Basics</a></li>
   <li><a href="#bitwise-operators">Bitwise Operators</a></li>
   <li><a href="#bit-fields">Bit Fields</a></li>

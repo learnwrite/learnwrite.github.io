@@ -4,7 +4,7 @@
   <title><![CDATA[Learnings]]></title>
   <link href="http://learnwrite.github.io/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2014-01-05T19:57:48-08:00</updated>
+  <updated>2014-01-05T21:30:10-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -18,7 +18,9 @@
     <link href="http://learnwrite.github.io/blog/2014/01/05/scale-in-distributed-systems/"/>
     <updated>2014-01-05T09:41:00-08:00</updated>
     <id>http://learnwrite.github.io/blog/2014/01/05/scale-in-distributed-systems</id>
-    <content type="html"><![CDATA[<ul id="markdown-toc">
+    <content type="html"><![CDATA[<!-- more -->
+
+<ul id="markdown-toc">
   <li><a href="#introduction">Introduction</a></li>
   <li><a href="#systems-designed-to-scale">Systems designed to scale</a></li>
 </ul>
@@ -286,7 +288,9 @@ function toggle(d) {
     <link href="http://learnwrite.github.io/blog/2014/01/04/D3-and-Octopress/"/>
     <updated>2014-01-04T11:33:00-08:00</updated>
     <id>http://learnwrite.github.io/blog/2014/01/04/D3-and-Octopress</id>
-    <content type="html"><![CDATA[
+    <content type="html"><![CDATA[<!-- more -->
+
+
 <script src="http://d3js.org/d3.v3.min.js"></script>
 
 <style type="text/css">
@@ -786,7 +790,9 @@ function toggle(d) {
     <link href="http://learnwrite.github.io/blog/2013/12/30/array-and-strings/"/>
     <updated>2013-12-30T01:26:00-08:00</updated>
     <id>http://learnwrite.github.io/blog/2013/12/30/array-and-strings</id>
-    <content type="html"><![CDATA[<ul id="markdown-toc">
+    <content type="html"><![CDATA[<!-- more -->
+
+<ul id="markdown-toc">
   <li><a href="#array-problems">Array Problems</a>    <ul>
       <li><a href="#find-repeatingduplicate-numbers">Find repeating/duplicate numbers</a></li>
       <li><a href="#sum-of-2-numbers">Sum of 2 numbers</a></li>
@@ -930,7 +936,9 @@ Rotate 2 times</p>
     <link href="http://learnwrite.github.io/blog/2013/12/14/graph-algorithms/"/>
     <updated>2013-12-14T13:03:00-08:00</updated>
     <id>http://learnwrite.github.io/blog/2013/12/14/graph-algorithms</id>
-    <content type="html"><![CDATA[<ul id="markdown-toc">
+    <content type="html"><![CDATA[<!-- more -->
+
+<ul id="markdown-toc">
   <li><a href="#graph-problems">Graph problems</a>    <ul>
       <li><a href="#find-neighbour-in-array">Find neighbour in array</a></li>
     </ul>
@@ -1105,7 +1113,9 @@ Rotate 2 times</p>
     <link href="http://learnwrite.github.io/blog/2013/11/27/scalability/"/>
     <updated>2013-11-27T15:06:00-08:00</updated>
     <id>http://learnwrite.github.io/blog/2013/11/27/scalability</id>
-    <content type="html"><![CDATA[<ul id="markdown-toc">
+    <content type="html"><![CDATA[<!-- more -->
+
+<ul id="markdown-toc">
   <li><a href="#facebook">Facebook</a>    <ul>
       <li><a href="#data-center">Data Center</a></li>
       <li><a href="#search-for-people">Search for People</a></li>
@@ -1209,7 +1219,9 @@ Rotate 2 times</p>
     <link href="http://learnwrite.github.io/blog/2013/11/26/trie-and-trees/"/>
     <updated>2013-11-26T23:18:00-08:00</updated>
     <id>http://learnwrite.github.io/blog/2013/11/26/trie-and-trees</id>
-    <content type="html"><![CDATA[<ul id="markdown-toc">
+    <content type="html"><![CDATA[<!-- more -->
+
+<ul id="markdown-toc">
   <li><a href="#trie-problems">Trie Problems</a></li>
   <li><a href="#trie-explanation">Trie explanation</a></li>
   <li><a href="#trie-code">Trie Code</a></li>
@@ -1860,7 +1872,9 @@ Rotate 2 times</p>
     <link href="http://learnwrite.github.io/blog/2013/11/18/recursion/"/>
     <updated>2013-11-18T22:18:00-08:00</updated>
     <id>http://learnwrite.github.io/blog/2013/11/18/recursion</id>
-    <content type="html"><![CDATA[<ul id="markdown-toc">
+    <content type="html"><![CDATA[<!-- more -->
+
+<ul id="markdown-toc">
   <li><a href="#recusion-problems">Recusion problems</a>    <ul>
       <li><a href="#factorial">Factorial</a></li>
       <li><a href="#total-bunnyears">Total BunnyEars</a></li>
@@ -2104,7 +2118,9 @@ To avoid that store all the strings generated in array/hash and compare everytim
     <link href="http://learnwrite.github.io/blog/2013/10/13/comparison-based-sorting/"/>
     <updated>2013-10-13T01:43:00-07:00</updated>
     <id>http://learnwrite.github.io/blog/2013/10/13/comparison-based-sorting</id>
-    <content type="html"><![CDATA[<ul id="markdown-toc">
+    <content type="html"><![CDATA[<!-- more -->
+
+<ul id="markdown-toc">
   <li><a href="#merge-sort">Merge Sort</a></li>
   <li><a href="#table-based-comparison">Table based comparison</a></li>
   <li><a href="#merge-sort-code">Merge sort code</a></li>
@@ -2480,7 +2496,9 @@ Each level contributes to total cost of <code>cn</code></p>
     <link href="http://learnwrite.github.io/blog/2013/10/12/sorting/"/>
     <updated>2013-10-12T13:08:00-07:00</updated>
     <id>http://learnwrite.github.io/blog/2013/10/12/sorting</id>
-    <content type="html"><![CDATA[<ul id="markdown-toc">
+    <content type="html"><![CDATA[<!-- more -->
+
+<ul id="markdown-toc">
   <li><a href="#dictionary-of-algorithms">Dictionary of algorithms</a></li>
   <li><a href="#sorting-visualization">Sorting Visualization</a></li>
   <li><a href="#sorting-wiki-summary">Sorting Wiki Summary</a></li>
@@ -3225,7 +3243,9 @@ Each level contributes to total cost of <code>cn</code></p>
     <link href="http://learnwrite.github.io/blog/2013/10/08/world-of-bits-and-bytes/"/>
     <updated>2013-10-08T13:17:00-07:00</updated>
     <id>http://learnwrite.github.io/blog/2013/10/08/world-of-bits-and-bytes</id>
-    <content type="html"><![CDATA[<ul id="markdown-toc">
+    <content type="html"><![CDATA[<!-- more -->
+
+<ul id="markdown-toc">
   <li><a href="#basics">Basics</a></li>
   <li><a href="#bitwise-operators">Bitwise Operators</a></li>
   <li><a href="#bit-fields">Bit Fields</a></li>
@@ -3583,7 +3603,9 @@ TOGGLE the bits of <span class="string"><span class="delimiter">&quot;</span><sp
     <link href="http://learnwrite.github.io/blog/2013/10/08/binary-number-operations/"/>
     <updated>2013-10-08T12:47:00-07:00</updated>
     <id>http://learnwrite.github.io/blog/2013/10/08/binary-number-operations</id>
-    <content type="html"><![CDATA[<ul id="markdown-toc">
+    <content type="html"><![CDATA[<!-- more -->
+
+<ul id="markdown-toc">
   <li><a href="#addition">Addition</a></li>
   <li><a href="#subtraction">Subtraction</a></li>
   <li><a href="#multiplication">Multiplication</a></li>
@@ -3694,7 +3716,9 @@ TOGGLE the bits of <span class="string"><span class="delimiter">&quot;</span><sp
     <link href="http://learnwrite.github.io/blog/2013/10/07/process-synchronization-in-linux-kernel/"/>
     <updated>2013-10-07T20:56:00-07:00</updated>
     <id>http://learnwrite.github.io/blog/2013/10/07/process-synchronization-in-linux-kernel</id>
-    <content type="html"><![CDATA[<ul id="markdown-toc">
+    <content type="html"><![CDATA[<!-- more -->
+
+<ul id="markdown-toc">
   <li><a href="#synchronization-primitives">Synchronization Primitives</a></li>
   <li><a href="#summary-of-synchronization-primitives">Summary of Synchronization Primitives</a></li>
   <li><a href="#per-cpu-variables">Per-CPU variables</a></li>
@@ -4002,7 +4026,9 @@ The key idea consists of limiting the scope of RCU as follows:</p>
     <link href="http://learnwrite.github.io/blog/2013/10/07/process-synchronization-in-os/"/>
     <updated>2013-10-07T11:54:00-07:00</updated>
     <id>http://learnwrite.github.io/blog/2013/10/07/process-synchronization-in-os</id>
-    <content type="html"><![CDATA[<ul id="markdown-toc">
+    <content type="html"><![CDATA[<!-- more -->
+
+<ul id="markdown-toc">
   <li><a href="#what-is-a-process">What is a Process?</a></li>
   <li><a href="#issues-with-sharing">3 Issues with Sharing</a></li>
   <li><a href="#carls-jr-restaurant">Carl’s Jr. Restaurant</a></li>
@@ -4491,7 +4517,9 @@ monitor condition =&gt; needItem;<br /></p>
     <link href="http://learnwrite.github.io/blog/2013/10/06/gdb-print-bit-values-of-bytes/"/>
     <updated>2013-10-06T21:06:00-07:00</updated>
     <id>http://learnwrite.github.io/blog/2013/10/06/gdb-print-bit-values-of-bytes</id>
-    <content type="html"><![CDATA[
+    <content type="html"><![CDATA[<!-- more -->
+
+
 <h2>Print bit values in a byte</h2>
 
 <p>Recently, I have been working on interesting piece of code whose crux is to create a array of pointer addresses.
