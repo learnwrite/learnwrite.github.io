@@ -4,7 +4,7 @@
   <title><![CDATA[Learnings]]></title>
   <link href="http://learnwrite.github.io/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2014-01-04T20:34:01-08:00</updated>
+  <updated>2014-01-05T19:57:48-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -12,6 +12,274 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Scale in Distributed Systems]]></title>
+    <link href="http://learnwrite.github.io/blog/2014/01/05/scale-in-distributed-systems/"/>
+    <updated>2014-01-05T09:41:00-08:00</updated>
+    <id>http://learnwrite.github.io/blog/2014/01/05/scale-in-distributed-systems</id>
+    <content type="html"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#introduction">Introduction</a></li>
+  <li><a href="#systems-designed-to-scale">Systems designed to scale</a></li>
+</ul>
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<style type="text/css">
+.node circle {
+  cursor: pointer;
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.node text {
+  font-size: 11px;
+}
+
+path.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 1.5px;
+}
+
+  </style>
+
+<style>
+
+#chart, #header, #footer {
+  position: absolute;
+  top: 0;
+}
+
+#header.inverted, #footer.inverted {
+  color: #fff;
+  text-shadow: 0 1px 4px #000;
+}
+
+
+rect {
+  fill: none;
+  pointer-events: all;
+}
+
+line {
+  stroke: #000;
+  stroke-width: 1.5px;
+}
+
+.string, .regexp {
+  color: #f39;
+}
+
+.keyword {
+  color: #00c;
+}
+
+.comment {
+  color: #777;
+  font-style: oblique;
+}
+
+.number {
+  color: #369;
+}
+
+.class, .special {
+  color: #1181B8;
+}
+
+</style>
+
+<h3 id="introduction">Introduction</h3>
+
+<p>This blog is summary of the research paper Scale in Distributed Systems.</p>
+
+<blockquote><p>A system is Scalable if it can handle addition of users and resources without suffering a noticeable loss of performance or increase in administrative complexity.</p></blockquote>
+
+<p>Paper talks about problem of scale and genral solution. These solution fall into three categories</p>
+
+<blockquote><p>Replication, Distribution and Caching</p></blockquote>
+
+<h3 id="systems-designed-to-scale">Systems designed to scale</h3>
+
+<p>Some historic systems desgined to scale</p>
+
+<ul>
+  <li><a href="http://courses.cs.washington.edu/courses/cse451/07au/lectures/pending/p260-birrell.pdf" target="_blank">Grapevine</a>, <a href="http://dl.acm.org/citation.cfm?id=2081&amp;dl=ACM&amp;coll=DL&amp;CFID=395866995&amp;CFTOKEN=19566412" target="_blank">ACM Paper</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Domain_Name_System" target="_blank">DNS</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Kerberos_(protocol)" target="_blank">Kerberos</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Sprite_(operating_system)" target="_blank">Sprite</a></li>
+  <li><a href="http://research.microsoft.com/en-us/um/people/blampson/36-GlobalNames/WebPage.html" target="_blank">Global name services and authentication services</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/LOCUS_(operating_system)" target="_blank">Locus</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Andrew_File_System" target="_blank">Andrew</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Project_Athena" target="_blank">Project Athena</a></li>
+  <li><a href="http://www.cdf.toronto.edu/~csc469h/fall/handouts/nitzberg91.pdf" target="_blank">Dash</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Amoeba_(operating_system)" target="_blank">Amoeba</a></li>
+</ul>
+
+<p>As systems scales and accessible objects grows, locating objects of interest becomes difficult. Systems addressed this aspect of challenges are</p>
+
+<ul>
+  <li><a href="http://en.wikipedia.org/wiki/9P" target="_blank">Plan 9</a></li>
+  <li><a href="" target="_blank">Profile</a></li>
+  <li><a href="http://gost.isi.edu/products/prm/papers/prm-cpe.ps" target="_blank">Prospero</a></li>
+  <li><a href="http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=4798" target="_blank">QuickSilver</a></li>
+  <li><a href="https://www.usenix.org/legacy/publications/compsystems/1990/fall_comer.pdf" target="_blank">Tilde</a></li>
+</ul>
+
+<body>
+    <div id="body">             
+        click or option-click to expand or collapse
+    </div>
+    <script type="text/javascript">
+
+var m = [20, 120, 20, 120],
+    w = 1280 - m[1] - m[3],
+    h = 650 - m[0] - m[2],
+    i = 0,
+    root;
+
+var tree = d3.layout.tree()
+    .size([h, w]);
+
+var diagonal = d3.svg.diagonal()
+    .projection(function(d) { return [d.y, d.x]; });
+
+var vis = d3.select("#body").append("svg:svg")
+    .attr("width", w + m[1] + m[3])
+    .attr("height", h + m[0] + m[2])
+  .append("svg:g")
+    .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
+
+d3.json("/assets/scaleDS.json", function(json) {
+  root = json;
+  root.x0 = h / 2;
+  root.y0 = 0;
+
+  function toggleAll(d) {
+    if (d.children) {
+      d.children.forEach(toggleAll);
+      toggle(d);
+    }
+  }
+
+  // Initialize the display to show a few nodes.
+  root.children.forEach(toggleAll);
+  toggle(root.children[1]);
+  toggle(root.children[1].children[2]);
+  toggle(root.children[5]);
+  toggle(root.children[5].children[0]);
+
+  update(root);
+});
+
+function update(source) {
+  var duration = d3.event && d3.event.altKey ? 5000 : 500;
+
+  // Compute the new tree layout.
+  var nodes = tree.nodes(root).reverse();
+
+  // Normalize for fixed-depth.
+  nodes.forEach(function(d) { d.y = d.depth * 130; });
+
+  // Update the nodes…
+  var node = vis.selectAll("g.node")
+      .data(nodes, function(d) { return d.id || (d.id = ++i); });
+
+  // Enter any new nodes at the parent's previous position.
+  var nodeEnter = node.enter().append("svg:g")
+      .attr("class", "node")
+      .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
+      .on("click", function(d) { toggle(d); update(d); });
+
+  nodeEnter.append("svg:circle")
+      .attr("r", 1e-6)
+      .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+
+  nodeEnter.append("svg:text")
+      .attr("x", function(d) { return d.children || d._children ? -10 : 10; })
+      .attr("dy", ".35em")
+      .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
+      .text(function(d) { return d.name; })
+      .style("fill-opacity", 1e-6);
+
+  // Transition nodes to their new position.
+  var nodeUpdate = node.transition()
+      .duration(duration)
+      .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
+
+  nodeUpdate.select("circle")
+      .attr("r", 4.5)
+      .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+
+  nodeUpdate.select("text")
+      .style("fill-opacity", 1);
+
+  // Transition exiting nodes to the parent's new position.
+  var nodeExit = node.exit().transition()
+      .duration(duration)
+      .attr("transform", function(d) { return "translate(" + source.y + "," + source.x + ")"; })
+      .remove();
+
+  nodeExit.select("circle")
+      .attr("r", 1e-6);
+
+  nodeExit.select("text")
+      .style("fill-opacity", 1e-6);
+
+  // Update the links…
+  var link = vis.selectAll("path.link")
+      .data(tree.links(nodes), function(d) { return d.target.id; });
+
+  // Enter any new links at the parent's previous position.
+  link.enter().insert("svg:path", "g")
+      .attr("class", "link")
+      .attr("d", function(d) {
+        var o = {x: source.x0, y: source.y0};
+        return diagonal({source: o, target: o});
+      })
+    .transition()
+      .duration(duration)
+      .attr("d", diagonal);
+
+  // Transition links to their new position.
+  link.transition()
+      .duration(duration)
+      .attr("d", diagonal);
+
+  // Transition exiting nodes to the parent's new position.
+  link.exit().transition()
+      .duration(duration)
+      .attr("d", function(d) {
+        var o = {x: source.x, y: source.y};
+        return diagonal({source: o, target: o});
+      })
+      .remove();
+
+  // Stash the old positions for transition.
+  nodes.forEach(function(d) {
+    d.x0 = d.x;
+    d.y0 = d.y;
+  });
+}
+
+// Toggle children.
+function toggle(d) {
+  if (d.children) {
+    d._children = d.children;
+    d.children = null;
+  } else {
+    d.children = d._children;
+    d._children = null;
+  }
+}
+
+</script>
+</body>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[D3.js and Octopress]]></title>
@@ -130,6 +398,8 @@ JSON file location to be</p>
 
 <p>In below code snippet confiure following parameters to customize height and width of tree</p>
 <blockquote><p>h = 650 - m[0] - m[2]     (replace 650 with 800 for expanded tree)</p><p>// Normalize for fixed-depth.<br />nodes.forEach(function(d) { d.y = d.depth * 130; });   ===&gt; (Use 180 instead of 130 for wider tree)</p></blockquote>
+
+<blockquote><p>// Initialize the display to show a few nodes.<br />  root.children.forEach(toggleAll);<br />  toggle(root.children[1]);<br />  toggle(root.children[1].children[2]);<br />  toggle(root.children[5]);                   =====&gt; Here is number of 1st level childs<br />  toggle(root.children[5].children[0]);</p></blockquote>
 
 <p>Code for blog post (.markdown file) is as follows</p>
 

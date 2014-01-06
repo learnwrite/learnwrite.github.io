@@ -5,11 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Array and Strings - Learnings</title>
+  <title>Scale in Distributed Systems - Learnings</title>
   <meta name="author" content="Vaibhav Gautam">
 
   
-  <meta name="description" content="Array Problems Find repeating/duplicate numbers Sum of 2 numbers Sum of 3 numbers String Problems Reverse a string without extra space Duplicates &hellip;">
+  <meta name="description" content="Introduction Systems designed to scale .node circle { cursor: pointer; fill: #fff; stroke: steelblue; stroke-width: 1.5px;
+} .node text { font-size &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://learnwrite.github.io/blog/2013/12/30/array-and-strings/">
+  <link rel="canonical" href="http://learnwrite.github.io/blog/2014/01/05/scale-in-distributed-systems/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
    <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -110,7 +111,7 @@
   
   <header>
     
-      <h1 class="entry-title">Array and Strings</h1>
+      <h1 class="entry-title">Scale in Distributed Systems</h1>
     
     
       <p class="meta">
@@ -126,7 +127,7 @@
   
 
 
-<time datetime="2013-12-30T01:26:00-08:00" pubdate data-updated="true">Dec 30<span>th</span>, 2013</time>
+<time datetime="2014-01-05T09:41:00-08:00" pubdate data-updated="true">Jan 5<span>th</span>, 2014</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -136,141 +137,265 @@
 
 
 <div class="entry-content"><ul id="markdown-toc">
-  <li><a href="#array-problems">Array Problems</a>    <ul>
-      <li><a href="#find-repeatingduplicate-numbers">Find repeating/duplicate numbers</a></li>
-      <li><a href="#sum-of-2-numbers">Sum of 2 numbers</a></li>
-      <li><a href="#sum-of-3-numbers">Sum of 3 numbers</a></li>
-    </ul>
-  </li>
-  <li><a href="#string-problems">String Problems</a>    <ul>
-      <li><a href="#reverse-a-string-without-extra-space">Reverse a string without extra space</a></li>
-      <li><a href="#duplicates-and-count">Duplicates and Count</a></li>
-      <li><a href="#remove-duplicate-spaces">Remove duplicate spaces</a></li>
-      <li><a href="#remove-spaces">Remove spaces</a></li>
-      <li><a href="#remove-all-consequtive-duplicate-elements">Remove all consequtive duplicate elements</a></li>
-      <li><a href="#rotate-a-string">Rotate a string</a></li>
-      <li><a href="#permutation-of-a-string">Permutation of a string</a></li>
-      <li><a href="#find-anagram">Find Anagram</a></li>
-    </ul>
-  </li>
+  <li><a href="#introduction">Introduction</a></li>
+  <li><a href="#systems-designed-to-scale">Systems designed to scale</a></li>
 </ul>
 
-<h3 id="array-problems">Array Problems</h3>
+<script src="http://d3js.org/d3.v3.min.js"></script>
 
-<h4 id="find-repeatingduplicate-numbers">Find repeating/duplicate numbers</h4>
-<p>Find all the numbers repeating in a array</p>
+<style type="text/css">
+.node circle {
+  cursor: pointer;
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
 
-<p>Input
-2,1, 3, 2, 3, 1, 4</p>
+.node text {
+  font-size: 11px;
+}
 
-<p>Output
-2,1,3</p>
+path.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 1.5px;
+}
 
-<h4 id="sum-of-2-numbers">Sum of 2 numbers</h4>
+  </style>
 
-<p>We are given a sorted array A of length n and a value k. We want to find out if there are indices i, j such that A[i] + A[j] == k. Give a Θ(n) way of solving this problem. Prove its running time and correctness. For full credit, your algorithm should also output one pair of indices i, j such that A[i] + A[j] == k (if at least one pair exists; if multiple exist, you only need to output one of them). </p>
+<style>
 
-<p>Other variant of the same problem
-When array is not sorted<br />
-We need to find pair of numbers in an array whose sum is equal to a given value.<br />
-A = {6,4,5,7,9,1,2}<br />
-Sum = 10 Then the pairs are  {6,4} , {9,1}</p>
+#chart, #header, #footer {
+  position: absolute;
+  top: 0;
+}
 
-<h4 id="sum-of-3-numbers">Sum of 3 numbers</h4>
-<p>We need to find three numbers in an array whose sum is equal to a given value.</p>
+#header.inverted, #footer.inverted {
+  color: #fff;
+  text-shadow: 0 1px 4px #000;
+}
 
-<p><br />
-<br /></p>
 
-<h3 id="string-problems">String Problems</h3>
+rect {
+  fill: none;
+  pointer-events: all;
+}
 
-<h4 id="reverse-a-string-without-extra-space">Reverse a string without extra space</h4>
+line {
+  stroke: #000;
+  stroke-width: 1.5px;
+}
 
-<p>String could be reversed without using extra space using bitwise operator <a href="http://learnwrite.github.io/blog/2013/10/08/world-of-bits-and-bytes/#bitwise-operators" target="_blank">XOR</a></p>
+.string, .regexp {
+  color: #f39;
+}
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>String Reverse</span>  <a href="http://ideone.com/vfTxcr" target="_blank">Run Code </a></figcaption> <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="preprocessor">#include</span> <span class="include">&lt;stdio.h&gt;</span>
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span class="preprocessor">#include</span> <span class="include">&lt;string.h&gt;</span>
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span> 
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span> 
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span class="predefined-type">int</span> main(<span class="directive">void</span>) {
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span class="predefined-type">int</span> i = <span class="integer">0</span>;
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    <span class="predefined-type">char</span> str[] = <span class="string"><span class="delimiter">&quot;</span><span class="content">testString</span><span class="delimiter">&quot;</span></span>;
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    <span class="predefined-type">int</span> len = strlen(str);
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span> 
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>    <span class="keyword">for</span>(i = <span class="integer">0</span>; i &lt; len/<span class="integer">2</span>; i++){
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>        str[len - i - <span class="integer">1</span>] ^= str[i];
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span>        str[i] ^= str[len - i - <span class="integer">1</span>];
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span>        str[len - i - <span class="integer">1</span>] ^= str[i];
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span>    }
-<span class="line-numbers"><a href="#n16" name="n16">16</a></span>
-<span class="line-numbers"><a href="#n17" name="n17">17</a></span>    printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Reverse String %s </span><span class="char">\n</span><span class="delimiter">&quot;</span></span>, str);
-<span class="line-numbers"><a href="#n18" name="n18">18</a></span> 
-<span class="line-numbers"><a href="#n19" name="n19">19</a></span>    <span class="keyword">return</span> <span class="integer">0</span>;
-<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>}
-<span class="line-numbers"><a href="#n21" name="n21">21</a></span>
-</pre></div>
-</div>
- </figure></notextile></div>
+.keyword {
+  color: #00c;
+}
 
-<p><br /></p>
+.comment {
+  color: #777;
+  font-style: oblique;
+}
 
-<h4 id="duplicates-and-count">Duplicates and Count</h4>
+.number {
+  color: #369;
+}
 
-<p>Print all duplicate characters and their count</p>
+.class, .special {
+  color: #1181B8;
+}
 
-<p>Input string<br />
-Foo Bar</p>
+</style>
 
-<p>Output<br />
-a1B1F1o2r1</p>
+<h3 id="introduction">Introduction</h3>
 
-<h4 id="remove-duplicate-spaces">Remove duplicate spaces</h4>
-<p>Remove all duplicate spaces from the string</p>
+<p>This blog is summary of the research paper Scale in Distributed Systems.</p>
 
-<p>Input string<br />
-Hi^^^There!!!^^Wassup<br />
- ^ - Represents  space</p>
+<blockquote><p>A system is Scalable if it can handle addition of users and resources without suffering a noticeable loss of performance or increase in administrative complexity.</p></blockquote>
 
-<p>Output<br />
-Hi^There!!!^Wassup</p>
+<p>Paper talks about problem of scale and genral solution. These solution fall into three categories</p>
 
-<h4 id="remove-spaces">Remove spaces</h4>
-<p>Remove all the spaces from a string</p>
+<blockquote><p>Replication, Distribution and Caching</p></blockquote>
 
-<p>Input string<br />
-Hi there!!! Wassup</p>
+<h3 id="systems-designed-to-scale">Systems designed to scale</h3>
 
-<p>Output<br />
-Hithere!!!Wassup</p>
+<p>Some historic systems desgined to scale</p>
 
-<h4 id="remove-all-consequtive-duplicate-elements">Remove all consequtive duplicate elements</h4>
-<p>Remove all consequtive duplicate elements from the string</p>
+<ul>
+  <li><a href="http://courses.cs.washington.edu/courses/cse451/07au/lectures/pending/p260-birrell.pdf" target="_blank">Grapevine</a>, <a href="http://dl.acm.org/citation.cfm?id=2081&amp;dl=ACM&amp;coll=DL&amp;CFID=395866995&amp;CFTOKEN=19566412" target="_blank">ACM Paper</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Domain_Name_System" target="_blank">DNS</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Kerberos_(protocol)" target="_blank">Kerberos</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Sprite_(operating_system)" target="_blank">Sprite</a></li>
+  <li><a href="http://research.microsoft.com/en-us/um/people/blampson/36-GlobalNames/WebPage.html" target="_blank">Global name services and authentication services</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/LOCUS_(operating_system)" target="_blank">Locus</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Andrew_File_System" target="_blank">Andrew</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Project_Athena" target="_blank">Project Athena</a></li>
+  <li><a href="http://www.cdf.toronto.edu/~csc469h/fall/handouts/nitzberg91.pdf" target="_blank">Dash</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Amoeba_(operating_system)" target="_blank">Amoeba</a></li>
+</ul>
 
-<p>Input string<br />
-aabbccddd</p>
+<p>As systems scales and accessible objects grows, locating objects of interest becomes difficult. Systems addressed this aspect of challenges are</p>
 
-<p>Output <br />
-abcd</p>
+<ul>
+  <li><a href="http://en.wikipedia.org/wiki/9P" target="_blank">Plan 9</a></li>
+  <li><a href="" target="_blank">Profile</a></li>
+  <li><a href="http://gost.isi.edu/products/prm/papers/prm-cpe.ps" target="_blank">Prospero</a></li>
+  <li><a href="http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=4798" target="_blank">QuickSilver</a></li>
+  <li><a href="https://www.usenix.org/legacy/publications/compsystems/1990/fall_comer.pdf" target="_blank">Tilde</a></li>
+</ul>
 
-<h4 id="rotate-a-string">Rotate a string</h4>
-<p>Rotate a string for a ‘n’ times</p>
+<body>
+    <div id="body">             
+        click or option-click to expand or collapse
+    </div>
+    <script type="text/javascript">
 
-<p>Input string<br />
-1234567 <br />
-Rotate 2 times</p>
+var m = [20, 120, 20, 120],
+    w = 1280 - m[1] - m[3],
+    h = 650 - m[0] - m[2],
+    i = 0,
+    root;
 
-<p>Output <br />
-3456712</p>
+var tree = d3.layout.tree()
+    .size([h, w]);
 
-<h4 id="permutation-of-a-string">Permutation of a string</h4>
+var diagonal = d3.svg.diagonal()
+    .projection(function(d) { return [d.y, d.x]; });
 
-<p><a href="http://learnwrite.github.io/blog/2013/11/18/recursion/#string-permutation-non-repeating" target="_blank">Permutation</a></p>
+var vis = d3.select("#body").append("svg:svg")
+    .attr("width", w + m[1] + m[3])
+    .attr("height", h + m[0] + m[2])
+  .append("svg:g")
+    .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
 
-<p><br /></p>
+d3.json("/assets/scaleDS.json", function(json) {
+  root = json;
+  root.x0 = h / 2;
+  root.y0 = 0;
 
-<h4 id="find-anagram">Find Anagram</h4>
+  function toggleAll(d) {
+    if (d.children) {
+      d.children.forEach(toggleAll);
+      toggle(d);
+    }
+  }
+
+  // Initialize the display to show a few nodes.
+  root.children.forEach(toggleAll);
+  toggle(root.children[1]);
+  toggle(root.children[1].children[2]);
+  toggle(root.children[5]);
+  toggle(root.children[5].children[0]);
+
+  update(root);
+});
+
+function update(source) {
+  var duration = d3.event && d3.event.altKey ? 5000 : 500;
+
+  // Compute the new tree layout.
+  var nodes = tree.nodes(root).reverse();
+
+  // Normalize for fixed-depth.
+  nodes.forEach(function(d) { d.y = d.depth * 130; });
+
+  // Update the nodes…
+  var node = vis.selectAll("g.node")
+      .data(nodes, function(d) { return d.id || (d.id = ++i); });
+
+  // Enter any new nodes at the parent's previous position.
+  var nodeEnter = node.enter().append("svg:g")
+      .attr("class", "node")
+      .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
+      .on("click", function(d) { toggle(d); update(d); });
+
+  nodeEnter.append("svg:circle")
+      .attr("r", 1e-6)
+      .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+
+  nodeEnter.append("svg:text")
+      .attr("x", function(d) { return d.children || d._children ? -10 : 10; })
+      .attr("dy", ".35em")
+      .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
+      .text(function(d) { return d.name; })
+      .style("fill-opacity", 1e-6);
+
+  // Transition nodes to their new position.
+  var nodeUpdate = node.transition()
+      .duration(duration)
+      .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
+
+  nodeUpdate.select("circle")
+      .attr("r", 4.5)
+      .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+
+  nodeUpdate.select("text")
+      .style("fill-opacity", 1);
+
+  // Transition exiting nodes to the parent's new position.
+  var nodeExit = node.exit().transition()
+      .duration(duration)
+      .attr("transform", function(d) { return "translate(" + source.y + "," + source.x + ")"; })
+      .remove();
+
+  nodeExit.select("circle")
+      .attr("r", 1e-6);
+
+  nodeExit.select("text")
+      .style("fill-opacity", 1e-6);
+
+  // Update the links…
+  var link = vis.selectAll("path.link")
+      .data(tree.links(nodes), function(d) { return d.target.id; });
+
+  // Enter any new links at the parent's previous position.
+  link.enter().insert("svg:path", "g")
+      .attr("class", "link")
+      .attr("d", function(d) {
+        var o = {x: source.x0, y: source.y0};
+        return diagonal({source: o, target: o});
+      })
+    .transition()
+      .duration(duration)
+      .attr("d", diagonal);
+
+  // Transition links to their new position.
+  link.transition()
+      .duration(duration)
+      .attr("d", diagonal);
+
+  // Transition exiting nodes to the parent's new position.
+  link.exit().transition()
+      .duration(duration)
+      .attr("d", function(d) {
+        var o = {x: source.x, y: source.y};
+        return diagonal({source: o, target: o});
+      })
+      .remove();
+
+  // Stash the old positions for transition.
+  nodes.forEach(function(d) {
+    d.x0 = d.x;
+    d.y0 = d.y;
+  });
+}
+
+// Toggle children.
+function toggle(d) {
+  if (d.children) {
+    d._children = d.children;
+    d.children = null;
+  } else {
+    d.children = d._children;
+    d._children = null;
+  }
+}
+
+</script>
+</body>
+
 </div>
 
 
@@ -293,12 +418,12 @@ Rotate 2 times</p>
   
 
 
-<time datetime="2013-12-30T01:26:00-08:00" pubdate data-updated="true">Dec 30<span>th</span>, 2013</time>
+<time datetime="2014-01-05T09:41:00-08:00" pubdate data-updated="true">Jan 5<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/algorithm/'>algorithm</a>, <a class='category' href='/blog/categories/array/'>array</a>, <a class='category' href='/blog/categories/strings/'>strings</a>
+    <a class='category' href='/blog/categories/distributed-systems/'>Distributed Systems</a>, <a class='category' href='/blog/categories/os/'>OS</a>, <a class='category' href='/blog/categories/scalability/'>Scalability</a>, <a class='category' href='/blog/categories/scale/'>Scale</a>, <a class='category' href='/blog/categories/systems/'>Systems</a>
   
 </span>
 
@@ -311,7 +436,7 @@ Rotate 2 times</p>
    <div class="rdbWrapper" data-show-read="1" data-show-send-to-kindle="1" data-show-print="1" data-show-email="0" data-orientation="0" data-version="1"></div><script type="text/javascript">(function() {var s = document.getElementsByTagName("script")[0],rdb = document.createElement("script"); rdb.type = "text/javascript"; rdb.async = true; rdb.src = document.location.protocol + "//www.readability.com/embed.js"; s.parentNode.insertBefore(rdb, s); })();</script>
   
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://learnwrite.github.io/blog/2013/12/30/array-and-strings/" data-via="_vaibhavg" data-counturl="http://learnwrite.github.io/blog/2013/12/30/array-and-strings/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://learnwrite.github.io/blog/2014/01/05/scale-in-distributed-systems/" data-via="_vaibhavg" data-counturl="http://learnwrite.github.io/blog/2014/01/05/scale-in-distributed-systems/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -324,10 +449,8 @@ Rotate 2 times</p>
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/12/14/graph-algorithms/" title="Previous Post: Graph Algorithms">&laquo; Graph Algorithms</a>
+        <a class="basic-alignment left" href="/blog/2014/01/04/D3-and-Octopress/" title="Previous Post: D3.js and Octopress">&laquo; D3.js and Octopress</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/01/04/D3-and-Octopress/" title="Next Post: D3.js and Octopress">D3.js and Octopress &raquo;</a>
       
     </p>
   </footer>
@@ -440,8 +563,8 @@ Rotate 2 times</p>
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://learnwrite.github.io/blog/2013/12/30/array-and-strings/';
-        var disqus_url = 'http://learnwrite.github.io/blog/2013/12/30/array-and-strings/';
+        var disqus_identifier = 'http://learnwrite.github.io/blog/2014/01/05/scale-in-distributed-systems/';
+        var disqus_url = 'http://learnwrite.github.io/blog/2014/01/05/scale-in-distributed-systems/';
         var disqus_script = 'embed.js';
       
     (function () {

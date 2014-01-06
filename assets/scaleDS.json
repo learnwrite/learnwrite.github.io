@@ -1,0 +1,58 @@
+{
+ "name": "Scale",
+ "children": [
+  {
+   "name": "Naming & Directory services",
+   "children": [
+    {"name": "Granularity of Naming", "size": 17010},
+    {"name": "Reducing Load", "size": 5842},
+    {"name": "UID based Naming", "size": 5842},
+    {"name": "Directory services", "size": 5842},
+    {"name": "Growth & Reorganization", "size": 5842}
+   ]
+  },
+  {
+   "name": "Security Subsystem",
+   "children": [
+    {
+      "name": "Authentication", 
+      "children": [
+       {"name": "Password-based", "size": 17010},
+       {"name": "Host-based", "size": 5842},
+       {"name": "Encryption-based", "size": 5842}
+      ]
+    },
+    {"name": "Authorization", "size": 5842},
+    {"name": "Accounting", "size": 5842}    
+   ]
+  },
+  {
+   "name": "Remote Resource",
+   "children": [
+    {"name": "Communication", "size": 17010},
+    {"name": "File System", "size": 5842}    
+   ]
+  },
+  {
+   "name": "Replication",
+   "children": [
+    {"name": "Placement of replica", "size": 8833},
+    {"name": "Replica consistency", "size": 1732}    
+   ]
+  },
+  {
+   "name": "Distribution",
+   "children": [
+    {"name": "Placement of Server", "size": 8833},
+    {"name": "Finding right Server", "size": 1732}    
+   ]
+  },
+  {
+   "name": "Caching",
+   "children": [
+    {"name": "Placement of caches", "size": 1082},
+    {"name": "Cache consistency", "size": 1336}    
+   ]
+  }    
+ ]
+}

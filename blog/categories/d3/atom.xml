@@ -4,7 +4,7 @@
   <title><![CDATA[Category: D3 | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/d3/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2014-01-04T20:34:01-08:00</updated>
+  <updated>2014-01-05T19:57:48-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -130,6 +130,8 @@ JSON file location to be</p>
 
 <p>In below code snippet confiure following parameters to customize height and width of tree
 <blockquote><p>h = 650 - m[0] - m[2]     (replace 650 with 800 for expanded tree)</p></p><p><p>// Normalize for fixed-depth.<br/>nodes.forEach(function(d) { d.y = d.depth * 130; });   ===&gt; (Use 180 instead of 130 for wider tree)</p></p><p><p></p></blockquote></p>
+
+<p><blockquote><p>// Initialize the display to show a few nodes.<br/>  root.children.forEach(toggleAll);<br/>  toggle(root.children[1]);<br/>  toggle(root.children[1].children[2]);<br/>  toggle(root.children[5]);                   =====&gt; Here is number of 1st level childs<br/>  toggle(root.children[5].children[0]);</p></blockquote></p>
 
 <p>Code for blog post (.markdown file) is as follows</p>
 
