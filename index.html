@@ -9,9 +9,8 @@
   <meta name="author" content="Vaibhav Gautam">
 
   
-  <meta name="description" content=".node circle { cursor: pointer; fill: #fff; stroke: steelblue; stroke-width: 1.5px;
-} .node text { font-size: 11px;
-} path.link { fill: none; stroke &hellip;">
+  <meta name="description" content="Introduction Systems designed to scale .node circle { cursor: pointer; fill: #fff; stroke: steelblue; stroke-width: 1.5px;
+} .node text { font-size &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,6 +108,303 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/01/05/scale-in-distributed-systems/">Scale in Distributed Systems</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-05T09:41:00-08:00" pubdate data-updated="true">Jan 5<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/01/05/scale-in-distributed-systems/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#introduction">Introduction</a></li>
+  <li><a href="#systems-designed-to-scale">Systems designed to scale</a></li>
+</ul>
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<style type="text/css">
+.node circle {
+  cursor: pointer;
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.node text {
+  font-size: 11px;
+}
+
+path.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 1.5px;
+}
+
+  </style>
+
+<style>
+
+#chart, #header, #footer {
+  position: absolute;
+  top: 0;
+}
+
+#header.inverted, #footer.inverted {
+  color: #fff;
+  text-shadow: 0 1px 4px #000;
+}
+
+
+rect {
+  fill: none;
+  pointer-events: all;
+}
+
+line {
+  stroke: #000;
+  stroke-width: 1.5px;
+}
+
+.string, .regexp {
+  color: #f39;
+}
+
+.keyword {
+  color: #00c;
+}
+
+.comment {
+  color: #777;
+  font-style: oblique;
+}
+
+.number {
+  color: #369;
+}
+
+.class, .special {
+  color: #1181B8;
+}
+
+</style>
+
+<h3 id="introduction">Introduction</h3>
+
+<p>This blog is summary of the research paper Scale in Distributed Systems.</p>
+
+<blockquote><p>A system is Scalable if it can handle addition of users and resources without suffering a noticeable loss of performance or increase in administrative complexity.</p></blockquote>
+
+<p>Paper talks about problem of scale and genral solution. These solution fall into three categories</p>
+
+<blockquote><p>Replication, Distribution and Caching</p></blockquote>
+
+<h3 id="systems-designed-to-scale">Systems designed to scale</h3>
+
+<p>Some historic systems desgined to scale</p>
+
+<ul>
+  <li><a href="http://courses.cs.washington.edu/courses/cse451/07au/lectures/pending/p260-birrell.pdf" target="_blank">Grapevine</a>, <a href="http://dl.acm.org/citation.cfm?id=2081&amp;dl=ACM&amp;coll=DL&amp;CFID=395866995&amp;CFTOKEN=19566412" target="_blank">ACM Paper</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Domain_Name_System" target="_blank">DNS</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Kerberos_(protocol)" target="_blank">Kerberos</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Sprite_(operating_system)" target="_blank">Sprite</a></li>
+  <li><a href="http://research.microsoft.com/en-us/um/people/blampson/36-GlobalNames/WebPage.html" target="_blank">Global name services and authentication services</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/LOCUS_(operating_system)" target="_blank">Locus</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Andrew_File_System" target="_blank">Andrew</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Project_Athena" target="_blank">Project Athena</a></li>
+  <li><a href="http://www.cdf.toronto.edu/~csc469h/fall/handouts/nitzberg91.pdf" target="_blank">Dash</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Amoeba_(operating_system)" target="_blank">Amoeba</a></li>
+</ul>
+
+<p>As systems scales and accessible objects grows, locating objects of interest becomes difficult. Systems addressed this aspect of challenges are</p>
+
+<ul>
+  <li><a href="http://en.wikipedia.org/wiki/9P" target="_blank">Plan 9</a></li>
+  <li><a href="" target="_blank">Profile</a></li>
+  <li><a href="http://gost.isi.edu/products/prm/papers/prm-cpe.ps" target="_blank">Prospero</a></li>
+  <li><a href="http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=4798" target="_blank">QuickSilver</a></li>
+  <li><a href="https://www.usenix.org/legacy/publications/compsystems/1990/fall_comer.pdf" target="_blank">Tilde</a></li>
+</ul>
+
+<body>
+    <div id="body">             
+        click or option-click to expand or collapse
+    </div>
+    <script type="text/javascript">
+
+var m = [20, 120, 20, 120],
+    w = 1280 - m[1] - m[3],
+    h = 650 - m[0] - m[2],
+    i = 0,
+    root;
+
+var tree = d3.layout.tree()
+    .size([h, w]);
+
+var diagonal = d3.svg.diagonal()
+    .projection(function(d) { return [d.y, d.x]; });
+
+var vis = d3.select("#body").append("svg:svg")
+    .attr("width", w + m[1] + m[3])
+    .attr("height", h + m[0] + m[2])
+  .append("svg:g")
+    .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
+
+d3.json("/assets/scaleDS.json", function(json) {
+  root = json;
+  root.x0 = h / 2;
+  root.y0 = 0;
+
+  function toggleAll(d) {
+    if (d.children) {
+      d.children.forEach(toggleAll);
+      toggle(d);
+    }
+  }
+
+  // Initialize the display to show a few nodes.
+  root.children.forEach(toggleAll);
+  toggle(root.children[1]);
+  toggle(root.children[1].children[2]);
+  toggle(root.children[5]);
+  toggle(root.children[5].children[0]);
+
+  update(root);
+});
+
+function update(source) {
+  var duration = d3.event && d3.event.altKey ? 5000 : 500;
+
+  // Compute the new tree layout.
+  var nodes = tree.nodes(root).reverse();
+
+  // Normalize for fixed-depth.
+  nodes.forEach(function(d) { d.y = d.depth * 130; });
+
+  // Update the nodes…
+  var node = vis.selectAll("g.node")
+      .data(nodes, function(d) { return d.id || (d.id = ++i); });
+
+  // Enter any new nodes at the parent's previous position.
+  var nodeEnter = node.enter().append("svg:g")
+      .attr("class", "node")
+      .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
+      .on("click", function(d) { toggle(d); update(d); });
+
+  nodeEnter.append("svg:circle")
+      .attr("r", 1e-6)
+      .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+
+  nodeEnter.append("svg:text")
+      .attr("x", function(d) { return d.children || d._children ? -10 : 10; })
+      .attr("dy", ".35em")
+      .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
+      .text(function(d) { return d.name; })
+      .style("fill-opacity", 1e-6);
+
+  // Transition nodes to their new position.
+  var nodeUpdate = node.transition()
+      .duration(duration)
+      .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
+
+  nodeUpdate.select("circle")
+      .attr("r", 4.5)
+      .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+
+  nodeUpdate.select("text")
+      .style("fill-opacity", 1);
+
+  // Transition exiting nodes to the parent's new position.
+  var nodeExit = node.exit().transition()
+      .duration(duration)
+      .attr("transform", function(d) { return "translate(" + source.y + "," + source.x + ")"; })
+      .remove();
+
+  nodeExit.select("circle")
+      .attr("r", 1e-6);
+
+  nodeExit.select("text")
+      .style("fill-opacity", 1e-6);
+
+  // Update the links…
+  var link = vis.selectAll("path.link")
+      .data(tree.links(nodes), function(d) { return d.target.id; });
+
+  // Enter any new links at the parent's previous position.
+  link.enter().insert("svg:path", "g")
+      .attr("class", "link")
+      .attr("d", function(d) {
+        var o = {x: source.x0, y: source.y0};
+        return diagonal({source: o, target: o});
+      })
+    .transition()
+      .duration(duration)
+      .attr("d", diagonal);
+
+  // Transition links to their new position.
+  link.transition()
+      .duration(duration)
+      .attr("d", diagonal);
+
+  // Transition exiting nodes to the parent's new position.
+  link.exit().transition()
+      .duration(duration)
+      .attr("d", function(d) {
+        var o = {x: source.x, y: source.y};
+        return diagonal({source: o, target: o});
+      })
+      .remove();
+
+  // Stash the old positions for transition.
+  nodes.forEach(function(d) {
+    d.x0 = d.x;
+    d.y0 = d.y;
+  });
+}
+
+// Toggle children.
+function toggle(d) {
+  if (d.children) {
+    d._children = d.children;
+    d.children = null;
+  } else {
+    d.children = d._children;
+    d._children = null;
+  }
+}
+
+</script>
+</body>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -252,6 +548,8 @@ JSON file location to be</p>
 
 <p>In below code snippet confiure following parameters to customize height and width of tree</p>
 <blockquote><p>h = 650 - m[0] - m[2]     (replace 650 with 800 for expanded tree)</p><p>// Normalize for fixed-depth.<br />nodes.forEach(function(d) { d.y = d.depth * 130; });   ===&gt; (Use 180 instead of 130 for wider tree)</p></blockquote>
+
+<blockquote><p>// Initialize the display to show a few nodes.<br />  root.children.forEach(toggleAll);<br />  toggle(root.children[1]);<br />  toggle(root.children[1].children[2]);<br />  toggle(root.children[5]);                   =====&gt; Here is number of 1st level childs<br />  toggle(root.children[5].children[0]);</p></blockquote>
 
 <p>Code for blog post (.markdown file) is as follows</p>
 
@@ -3666,146 +3964,6 @@ TOGGLE the bits of <span class="string"><span class="delimiter">&quot;</span><sp
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/10/08/binary-number-operations/">Binary Number Operations</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-10-08T12:47:00-07:00" pubdate data-updated="true">Oct 8<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/10/08/binary-number-operations/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><ul id="markdown-toc">
-  <li><a href="#addition">Addition</a></li>
-  <li><a href="#subtraction">Subtraction</a></li>
-  <li><a href="#multiplication">Multiplication</a></li>
-  <li><a href="#negative-binary-numbers">Negative Binary numbers</a></li>
-  <li><a href="#credits">Credits</a></li>
-</ul>
-
-<h3 id="addition">Addition</h3>
-
-<div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span class="integer">0</span> + <span class="integer">0</span> <span class="error">→</span> <span class="integer">0</span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="integer">0</span> + <span class="integer">1</span> <span class="error">→</span> <span class="integer">1</span>
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span class="integer">1</span> + <span class="integer">0</span> <span class="error">→</span> <span class="integer">1</span>
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span class="integer">1</span> + <span class="integer">1</span> <span class="error">→</span> <span class="integer">0</span>, carry <span class="integer">1</span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span> For e.g
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span>    (carried digits)
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>      <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span>
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>+     <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span>
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>    -------------
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>=   <span class="integer">1</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">0</span> <span class="integer">0</span> = <span class="integer">36</span>
-</pre></div>
-</div>
-</div>
-
-<p><br /></p>
-
-<h3 id="subtraction">Subtraction</h3>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Subtraction </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="integer">0</span> <span class="error">−</span> <span class="integer">0</span> <span class="error">→</span> <span class="integer">0</span>
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span class="integer">0</span> <span class="error">−</span> <span class="integer">1</span> <span class="error">→</span> <span class="integer">1</span>, borrow <span class="integer">1</span>
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span class="integer">1</span> <span class="error">−</span> <span class="integer">0</span> <span class="error">→</span> <span class="integer">1</span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span class="integer">1</span> <span class="error">−</span> <span class="integer">1</span> <span class="error">→</span> <span class="integer">0</span>
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>Subtracting <span class="integer">1</span> digit from <span class="integer">0</span> digit produces the digit <span class="string"><span class="delimiter">&quot;</span><span class="content">1</span><span class="delimiter">&quot;</span></span>, <span class="keyword">while</span>
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span class="integer">1</span> will have to be subtracted from the next column. This is known as
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>borrowing.
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>      *   * * *   (starred columns are borrowed from)
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>      <span class="integer">1</span> <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">0</span>
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span><span class="error">−</span>         <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span>
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span>    ----------------
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span>=     <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span>
-</pre></div>
-</div>
- </figure></notextile></div>
-
-<p><br /></p>
-
-<h3 id="multiplication">Multiplication</h3>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Multiplication </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>        <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span>   (A)
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>      <span class="error">×</span> <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">0</span>   (B)
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>       ---------
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>        <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span>   <span class="error">←</span> Corresponds to the rightmost <span class="char">'z</span>ero<span class="char">' </span>in B
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>+     <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span>     <span class="error">←</span> Corresponds to the next <span class="char">'o</span>ne<span class="char">' </span>in B
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>+   <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span>
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>+ <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span>
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>  ---------------
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>= <span class="integer">1</span> <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">0</span>
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>Binary Multiplication <span class="keyword">for</span> binary point
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span>                <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span> . <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span>       A (<span class="float">5</span><span class="float">.625</span> in decimal)
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span>                <span class="error">×</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">0</span> . <span class="integer">0</span> <span class="integer">1</span>       B (<span class="float">6</span><span class="float">.25</span>  in decimal)
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span>           -------------------
-<span class="line-numbers"><a href="#n16" name="n16">16</a></span>                  <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span>    <span class="error">←</span> Corresponds to a <span class="char">'o</span>ne<span class="char">' </span>in B
-<span class="line-numbers"><a href="#n17" name="n17">17</a></span>    +           <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span>      <span class="error">←</span> Corresponds to a <span class="char">'z</span>ero<span class="char">' </span>in B
-<span class="line-numbers"><a href="#n18" name="n18">18</a></span>    +         <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span>
-<span class="line-numbers"><a href="#n19" name="n19">19</a></span>    +       <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span>
-<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>    +     <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span>
-<span class="line-numbers"><a href="#n21" name="n21">21</a></span>    ---------------------------
-<span class="line-numbers"><a href="#n22" name="n22">22</a></span>    = <span class="integer">1</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span> . <span class="integer">0</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span>  (<span class="integer">3</span><span class="float">5</span><span class="float">.15625</span> in decimal)
-</pre></div>
-</div>
- </figure></notextile></div>
-
-<p><br /></p>
-
-<h3 id="negative-binary-numbers">Negative Binary numbers</h3>
-
-<p>How can we represent a negative number? We cannot use a ‘-‘ sign because all we can store in the computer is zeros and ones.</p>
-
-<p>There are three methods</p>
-
-<ol>
-  <li>Signed Magnitude</li>
-  <li>1’s Complement</li>
-  <li>2’s complement</li>
-</ol>
-
-<p><a href="https://www.dropbox.com/sh/tlcxy806qq6rvde/V3TVVs2vfH/Negative%20Binary%20Numbers.pdf“_blank">Full text</a> about binary number operations.</p>
-
-<h3 id="credits">Credits</h3>
-
-<p><a href="http://turing.cs.camosun.bc.ca/COMP166/resources/binary.html">CS Camosun</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -3864,6 +4022,10 @@ TOGGLE the bits of <span class="string"><span class="delimiter">&quot;</span><sp
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/01/05/scale-in-distributed-systems/">Scale in Distributed Systems</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/01/04/D3-and-Octopress/">D3.js and Octopress</a>
       </li>
     
@@ -3877,10 +4039,6 @@ TOGGLE the bits of <span class="string"><span class="delimiter">&quot;</span><sp
     
       <li class="post">
         <a href="/blog/2013/11/27/scalability/">Scalability in Distributed Systems</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/11/26/trie-and-trees/">Trie and Trees</a>
       </li>
     
   </ul>

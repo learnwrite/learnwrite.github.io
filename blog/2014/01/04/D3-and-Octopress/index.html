@@ -250,6 +250,8 @@ JSON file location to be</p>
 <p>In below code snippet confiure following parameters to customize height and width of tree</p>
 <blockquote><p>h = 650 - m[0] - m[2]     (replace 650 with 800 for expanded tree)</p><p>// Normalize for fixed-depth.<br />nodes.forEach(function(d) { d.y = d.depth * 130; });   ===&gt; (Use 180 instead of 130 for wider tree)</p></blockquote>
 
+<blockquote><p>// Initialize the display to show a few nodes.<br />  root.children.forEach(toggleAll);<br />  toggle(root.children[1]);<br />  toggle(root.children[1].children[2]);<br />  toggle(root.children[5]);                   =====&gt; Here is number of 1st level childs<br />  toggle(root.children[5].children[0]);</p></blockquote>
+
 <p>Code for blog post (.markdown file) is as follows</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>D3.js and Octopress.markdown  </span></figcaption>
@@ -683,6 +685,8 @@ function toggle(d) {
         <a class="basic-alignment left" href="/blog/2013/12/30/array-and-strings/" title="Previous Post: Array and Strings">&laquo; Array and Strings</a>
       
       
+        <a class="basic-alignment right" href="/blog/2014/01/05/scale-in-distributed-systems/" title="Next Post: Scale in Distributed Systems">Scale in Distributed Systems &raquo;</a>
+      
     </p>
   </footer>
 </article>
@@ -745,6 +749,10 @@ function toggle(d) {
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/01/05/scale-in-distributed-systems/">Scale in Distributed Systems</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/01/04/D3-and-Octopress/">D3.js and Octopress</a>
       </li>
     
@@ -758,10 +766,6 @@ function toggle(d) {
     
       <li class="post">
         <a href="/blog/2013/11/27/scalability/">Scalability in Distributed Systems</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/11/26/trie-and-trees/">Trie and Trees</a>
       </li>
     
   </ul>
