@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Scale | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/scale/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2014-01-05T21:30:10-08:00</updated>
+  <updated>2014-01-06T08:35:43-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -18,9 +18,7 @@
     <link href="http://learnwrite.github.io/blog/2014/01/05/scale-in-distributed-systems/"/>
     <updated>2014-01-05T09:41:00-08:00</updated>
     <id>http://learnwrite.github.io/blog/2014/01/05/scale-in-distributed-systems</id>
-    <content type="html"><![CDATA[<!-- more -->
-
-<ul id="markdown-toc">
+    <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#introduction">Introduction</a></li>
   <li><a href="#systems-designed-to-scale">Systems designed to scale</a></li>
 </ul>
@@ -102,6 +100,8 @@ line {
 <p>Paper talks about problem of scale and genral solution. These solution fall into three categories</p>
 
 <p><blockquote><p>Replication, Distribution and Caching</p></blockquote></p>
+
+<!-- more -->
 
 <h3 id="systems-designed-to-scale">Systems designed to scale</h3>
 

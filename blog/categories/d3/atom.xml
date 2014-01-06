@@ -4,7 +4,7 @@
   <title><![CDATA[Category: D3 | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/d3/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2014-01-05T21:30:10-08:00</updated>
+  <updated>2014-01-06T08:35:43-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -18,9 +18,7 @@
     <link href="http://learnwrite.github.io/blog/2014/01/04/D3-and-Octopress/"/>
     <updated>2014-01-04T11:33:00-08:00</updated>
     <id>http://learnwrite.github.io/blog/2014/01/04/D3-and-Octopress</id>
-    <content type="html"><![CDATA[<!-- more -->
-
-
+    <content type="html"><![CDATA[
 <script src="http://d3js.org/d3.v3.min.js"></script>
 
 <style type="text/css">
@@ -96,6 +94,8 @@ line {
 <p>My requirement was to come up with tree structure data representation, which I could change in future unlike static pictures and can not be changed in future.</p>
 
 <p>I found D3.js to be perfect for this scenario. Here, I store data in JSON file and I use D3.js to display that data according to my needs.</p>
+
+<!-- more -->
 
 <p>Challenge was how to fuse D3.js with Octopress.</p>
 

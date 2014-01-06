@@ -2,61 +2,61 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://learnwrite.github.io/blog/2013/10/06/gdb-print-bit-values-of-bytes/</loc>
-        <lastmod>2014-01-05T21:28:09-08:00</lastmod>
+        <lastmod>2014-01-06T08:34:50-08:00</lastmod>
     </url>
     <url>
         <loc>http://learnwrite.github.io/blog/2013/10/07/process-synchronization-in-os/</loc>
-        <lastmod>2014-01-05T21:29:35-08:00</lastmod>
+        <lastmod>2014-01-06T08:34:29-08:00</lastmod>
     </url>
     <url>
         <loc>
             http://learnwrite.github.io/blog/2013/10/07/process-synchronization-in-linux-kernel/
         </loc>
-        <lastmod>2014-01-05T21:28:22-08:00</lastmod>
+        <lastmod>2014-01-06T08:35:08-08:00</lastmod>
     </url>
     <url>
         <loc>http://learnwrite.github.io/blog/2013/10/08/binary-number-operations/</loc>
-        <lastmod>2014-01-05T21:29:29-08:00</lastmod>
+        <lastmod>2014-01-06T08:34:15-08:00</lastmod>
     </url>
     <url>
         <loc>http://learnwrite.github.io/blog/2013/10/08/world-of-bits-and-bytes/</loc>
-        <lastmod>2014-01-05T21:29:24-08:00</lastmod>
+        <lastmod>2014-01-06T08:33:57-08:00</lastmod>
     </url>
     <url>
         <loc>http://learnwrite.github.io/blog/2013/10/12/sorting/</loc>
-        <lastmod>2014-01-05T21:29:18-08:00</lastmod>
+        <lastmod>2014-01-06T08:33:34-08:00</lastmod>
     </url>
     <url>
         <loc>http://learnwrite.github.io/blog/2013/10/13/comparison-based-sorting/</loc>
-        <lastmod>2014-01-05T21:29:14-08:00</lastmod>
+        <lastmod>2014-01-06T08:33:18-08:00</lastmod>
     </url>
     <url>
         <loc>http://learnwrite.github.io/blog/2013/11/18/recursion/</loc>
-        <lastmod>2014-01-05T21:29:10-08:00</lastmod>
+        <lastmod>2014-01-06T08:31:21-08:00</lastmod>
     </url>
     <url>
         <loc>http://learnwrite.github.io/blog/2013/11/26/trie-and-trees/</loc>
-        <lastmod>2014-01-05T21:29:05-08:00</lastmod>
+        <lastmod>2014-01-06T08:30:55-08:00</lastmod>
     </url>
     <url>
         <loc>http://learnwrite.github.io/blog/2013/11/27/scalability/</loc>
-        <lastmod>2014-01-05T21:29:01-08:00</lastmod>
+        <lastmod>2014-01-06T08:30:37-08:00</lastmod>
     </url>
     <url>
         <loc>http://learnwrite.github.io/blog/2013/12/14/graph-algorithms/</loc>
-        <lastmod>2014-01-05T21:28:54-08:00</lastmod>
+        <lastmod>2014-01-06T08:30:10-08:00</lastmod>
     </url>
     <url>
         <loc>http://learnwrite.github.io/blog/2013/12/30/array-and-strings/</loc>
-        <lastmod>2014-01-05T21:28:49-08:00</lastmod>
+        <lastmod>2014-01-06T08:29:34-08:00</lastmod>
     </url>
     <url>
         <loc>http://learnwrite.github.io/blog/2014/01/04/D3-and-Octopress/</loc>
-        <lastmod>2014-01-05T21:28:43-08:00</lastmod>
+        <lastmod>2014-01-06T08:29:06-08:00</lastmod>
     </url>
     <url>
         <loc>http://learnwrite.github.io/blog/2014/01/05/scale-in-distributed-systems/</loc>
-        <lastmod>2014-01-05T21:26:29-08:00</lastmod>
+        <lastmod>2014-01-06T08:27:05-08:00</lastmod>
     </url>
     <url>
         <loc>http://learnwrite.github.io/about/</loc>
@@ -64,15 +64,15 @@
     </url>
     <url>
         <loc>http://learnwrite.github.io/archives/</loc>
-        <lastmod>2014-01-05T21:29:35-08:00</lastmod>
+        <lastmod>2014-01-06T08:35:08-08:00</lastmod>
     </url>
     <url>
         <loc>http://learnwrite.github.io/blog/archives/</loc>
-        <lastmod>2014-01-05T21:29:35-08:00</lastmod>
+        <lastmod>2014-01-06T08:35:08-08:00</lastmod>
     </url>
     <url>
         <loc>http://learnwrite.github.io/</loc>
-        <lastmod>2014-01-05T21:29:35-08:00</lastmod>
+        <lastmod>2014-01-06T08:35:08-08:00</lastmod>
     </url>
     <url>
         <loc>http://learnwrite.github.io/robots.txt</loc>

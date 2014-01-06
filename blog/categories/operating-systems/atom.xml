@@ -4,7 +4,7 @@
   <title><![CDATA[Category: operating systems | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/operating-systems/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2014-01-05T21:30:10-08:00</updated>
+  <updated>2014-01-06T08:35:43-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -18,11 +18,8 @@
     <link href="http://learnwrite.github.io/blog/2013/10/07/process-synchronization-in-linux-kernel/"/>
     <updated>2013-10-07T20:56:00-07:00</updated>
     <id>http://learnwrite.github.io/blog/2013/10/07/process-synchronization-in-linux-kernel</id>
-    <content type="html"><![CDATA[<!-- more -->
-
-<ul id="markdown-toc">
+    <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#synchronization-primitives">Synchronization Primitives</a></li>
-  <li><a href="#summary-of-synchronization-primitives">Summary of Synchronization Primitives</a></li>
   <li><a href="#per-cpu-variables">Per-CPU variables</a></li>
   <li><a href="#atomic-operations">Atomic Operations</a></li>
   <li><a href="#optimization-barriers--memory-barriers">Optimization Barriers &amp; Memory Barriers</a></li>
@@ -53,7 +50,8 @@
   <li>Read-Copy-Update</li>
 </ol>
 
-<h3 id="summary-of-synchronization-primitives">Summary of Synchronization Primitives</h3>
+<!-- more -->
+<p>### Summary of Synchronization Primitives</p>
 
 <table>
 <tr>
@@ -328,9 +326,7 @@ The key idea consists of limiting the scope of RCU as follows:</p>
     <link href="http://learnwrite.github.io/blog/2013/10/07/process-synchronization-in-os/"/>
     <updated>2013-10-07T11:54:00-07:00</updated>
     <id>http://learnwrite.github.io/blog/2013/10/07/process-synchronization-in-os</id>
-    <content type="html"><![CDATA[<!-- more -->
-
-<ul id="markdown-toc">
+    <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#what-is-a-process">What is a Process?</a></li>
   <li><a href="#issues-with-sharing">3 Issues with Sharing</a></li>
   <li><a href="#carls-jr-restaurant">Carl’s Jr. Restaurant</a></li>
@@ -354,6 +350,7 @@ The key idea consists of limiting the scope of RCU as follows:</p>
 
 <p>Lets consider a very basic operating system with very least complexity. This operating system can run only <code>one process</code> at a time. Since, only one process is working at a time, it may happen that all the resources occupied by process will not be used at the same time.</p>
 
+<!-- more -->
 <p>To maximize the resource utilization, we need to have entities running at the same time. When its said multiple entities it is logical that either we need to have multiple process running at the same time or light weight multiple entities running inside process.</p>
 
 <p>Lets explore the second option, now consider process is like a box and it has resources inside the box. We create multiple child of process which is called thread.</p>
