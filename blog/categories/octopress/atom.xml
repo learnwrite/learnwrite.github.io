@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2014-01-06T08:35:43-08:00</updated>
+  <updated>2014-01-06T20:58:12-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -134,6 +134,10 @@ JSON file location to be</p>
 <blockquote><p>h = 650 - m[0] - m[2]     (replace 650 with 800 for expanded tree)</p></p><p><p>// Normalize for fixed-depth.<br/>nodes.forEach(function(d) { d.y = d.depth * 130; });   ===&gt; (Use 180 instead of 130 for wider tree)</p></p><p><p></p></blockquote></p>
 
 <p><blockquote><p>// Initialize the display to show a few nodes.<br/>  root.children.forEach(toggleAll);<br/>  toggle(root.children[1]);<br/>  toggle(root.children[1].children[2]);<br/>  toggle(root.children[5]);                   =====&gt; Here is number of 1st level childs<br/>  toggle(root.children[5].children[0]);</p></blockquote></p>
+
+<p>[Update] To make each node a hyperlink comment following code and instead insert below code.<br />
+Make sure JSON file have a field name url<br />
+<blockquote><p>//  nodeEnter.append(“svg:text”)<br/>//      .attr(“x”, function(d) { return d.children || d._children ? -10 : 10; })<br/>//      .attr(“dy”, “.35em”)<br/>//      .attr(“text-anchor”, function(d) { return d.children || d._children ? “end” : “start”; <br/>//      .text(function(d) { return d.name; })<br/>//      .style(“fill-opacity”, 1e-6);</p></p><p><p>nodeEnter.append(“svg:a”).attr(“xlink:href”, function(d) { return d.url; }).attr(“target”, “_blank”)<br/>       .append(“svg:text”).text(function(d) { return d.name; })<br/>       .attr(“x”, function(d) { return d.children || d._children ? -10 : 10; })<br/>       .attr(“dy”, “.35em”)<br/>       .attr(“text-anchor”, function(d) { return d.children || d._children ? “end” : “start”; })<br/>       .text(function(d) { return d.name; })<br/>       .style(“fill-opacity”, 1e-6);</p></blockquote></p>
 
 <p>Code for blog post (.markdown file) is as follows</p>
 

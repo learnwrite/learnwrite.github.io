@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Systems | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/systems/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2014-01-06T08:35:43-08:00</updated>
+  <updated>2014-01-06T20:58:12-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -131,7 +131,7 @@ line {
 </ul>
 
 <body>
-    <div id="body">             
+    <div id="body">
         click or option-click to expand or collapse
     </div>
     <script type="text/javascript">
@@ -199,7 +199,15 @@ function update(source) {
       .attr("r", 1e-6)
       .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
 
-  nodeEnter.append("svg:text")
+//  nodeEnter.append("svg:text")
+//      .attr("x", function(d) { return d.children || d._children ? -10 : 10; })
+//      .attr("dy", ".35em")
+//      .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
+//      .text(function(d) { return d.name; })
+//      .style("fill-opacity", 1e-6);
+
+  nodeEnter.append("svg:a").attr("xlink:href", function(d) { return d.url; }).attr("target", "_blank")
+      .append("svg:text").text(function(d) { return d.name; })
       .attr("x", function(d) { return d.children || d._children ? -10 : 10; })
       .attr("dy", ".35em")
       .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })

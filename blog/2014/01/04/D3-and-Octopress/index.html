@@ -255,6 +255,10 @@ JSON file location to be</p>
 
 <blockquote><p>// Initialize the display to show a few nodes.<br />  root.children.forEach(toggleAll);<br />  toggle(root.children[1]);<br />  toggle(root.children[1].children[2]);<br />  toggle(root.children[5]);                   =====&gt; Here is number of 1st level childs<br />  toggle(root.children[5].children[0]);</p></blockquote>
 
+<p>[Update] To make each node a hyperlink comment following code and instead insert below code.<br />
+Make sure JSON file have a field name url<br /></p>
+<blockquote><p>//  nodeEnter.append(&#8220;svg:text&#8221;)<br />//      .attr(&#8220;x&#8221;, function(d) { return d.children || d._children ? -10 : 10; })<br />//      .attr(&#8220;dy&#8221;, &#8220;.35em&#8221;)<br />//      .attr(&#8220;text-anchor&#8221;, function(d) { return d.children || d._children ? &#8220;end&#8221; : &#8220;start&#8221;; <br />//      .text(function(d) { return d.name; })<br />//      .style(&#8220;fill-opacity&#8221;, 1e-6);<br />       <br />   nodeEnter.append(&#8220;svg:a&#8221;).attr(&#8220;xlink:href&#8221;, function(d) { return d.url; }).attr(&#8220;target&#8221;, &#8220;_blank&#8221;)<br />       .append(&#8220;svg:text&#8221;).text(function(d) { return d.name; })<br />       .attr(&#8220;x&#8221;, function(d) { return d.children || d._children ? -10 : 10; })<br />       .attr(&#8220;dy&#8221;, &#8220;.35em&#8221;)<br />       .attr(&#8220;text-anchor&#8221;, function(d) { return d.children || d._children ? &#8220;end&#8221; : &#8220;start&#8221;; })<br />       .text(function(d) { return d.name; })<br />       .style(&#8220;fill-opacity&#8221;, 1e-6);</p></blockquote>
+
 <p>Code for blog post (.markdown file) is as follows</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>D3.js and Octopress.markdown  </span></figcaption>

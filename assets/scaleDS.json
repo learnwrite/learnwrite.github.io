@@ -4,11 +4,11 @@
   {
    "name": "Naming & Directory services",
    "children": [
-    {"name": "Granularity of Naming", "size": 17010},
-    {"name": "Reducing Load", "size": 5842},
-    {"name": "UID based Naming", "size": 5842},
-    {"name": "Directory services", "size": 5842},
-    {"name": "Growth & Reorganization", "size": 5842}
+    {"name": "Granularity of Naming", "url": "http://google.com"},
+    {"name": "Reducing Load", "url": 5842},
+    {"name": "UID based Naming", "url": 5842},
+    {"name": "Directory services", "url": 5842},
+    {"name": "Growth & Reorganization", "url": 5842}
    ]
   },
   {
@@ -17,41 +17,41 @@
     {
       "name": "Authentication", 
       "children": [
-       {"name": "Password-based", "size": 17010},
-       {"name": "Host-based", "size": 5842},
-       {"name": "Encryption-based", "size": 5842}
+       {"name": "Password-based", "url": 17010},
+       {"name": "Host-based", "url": 5842},
+       {"name": "Encryption-based", "url": 5842}
       ]
     },
-    {"name": "Authorization", "size": 5842},
-    {"name": "Accounting", "size": 5842}    
+    {"name": "Authorization", "url": 5842},
+    {"name": "Accounting", "url": 5842}    
    ]
   },
   {
    "name": "Remote Resource",
    "children": [
-    {"name": "Communication", "size": 17010},
-    {"name": "File System", "size": 5842}    
+    {"name": "Communication", "url": 17010},
+    {"name": "File System", "url": 5842}    
    ]
   },
   {
    "name": "Replication",
    "children": [
-    {"name": "Placement of replica", "size": 8833},
-    {"name": "Replica consistency", "size": 1732}    
+    {"name": "Placement of replica", "url": 8833},
+    {"name": "Replica consistency", "url": 1732}    
    ]
   },
   {
    "name": "Distribution",
    "children": [
-    {"name": "Placement of Server", "size": 8833},
-    {"name": "Finding right Server", "size": 1732}    
+    {"name": "Placement of Server", "url": 8833},
+    {"name": "Finding right Server", "url": 1732}    
    ]
   },
   {
    "name": "Caching",
    "children": [
-    {"name": "Placement of caches", "size": 1082},
-    {"name": "Cache consistency", "size": 1336}    
+    {"name": "Placement of caches", "url": 1082},
+    {"name": "Cache consistency", "url": 1336}    
    ]
   }    
  ]
