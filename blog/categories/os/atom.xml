@@ -4,7 +4,7 @@
   <title><![CDATA[Category: OS | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/os/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2014-01-06T21:01:07-08:00</updated>
+  <updated>2014-01-17T22:05:26-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -21,6 +21,11 @@
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#introduction">Introduction</a></li>
   <li><a href="#systems-designed-to-scale">Systems designed to scale</a></li>
+  <li><a href="#naming-and-directory-services">Naming and Directory Services</a>    <ul>
+      <li><a href="#granularity-of-naming">Granularity of Naming</a></li>
+      <li><a href="#reducing-load">Reducing Load</a></li>
+    </ul>
+  </li>
 </ul>
 
 <script src="http://d3js.org/d3.v3.min.js"></script>
@@ -287,6 +292,56 @@ function toggle(d) {
 
 </script>
 </body>
+
+<h3 id="naming-and-directory-services">Naming and Directory Services</h3>
+
+<p>A name refers to an object. An address tells where that object can be found. The binding of a name is the object to which it refers.</p>
+
+<p><blockquote><p>A name server (or directory server) maps a name to information about the name’s binding.</p></blockquote></p>
+
+<h4 id="granularity-of-naming">Granularity of Naming</h4>
+<p><blockquote><p>The granularity of the objects named affects the size of naming the database, the frequency of queries and the read-to-write ratio which affects techniques can be used in naming in large systems.</p></blockquote></p>
+
+<p>In an approach of <code>fine grained naming</code>, files must include name of the host so that object could be located.</p>
+
+<p><blockquote><p>Problem with finer grained naming is that moving objects is difficult since objects are tied to the server in their names.</p></blockquote></p>
+
+<p>Another naming approach is <code>common prefix naming</code>, where group of objects share a common prefix and name service maps the prefix to the server. The remainder of the name is resolved locally by the server on which the object is stored.</p>
+
+<p><b>Advantages</b>
+ <br />
+ 1. Clients can cache the mapping keys as prefix changes less frequently than the rest of the name<br />
+ 2. Since objects does not have to include server name, it is easy to move objects around</p>
+
+<p><b>Disadvantages</b>
+<br />
+* Objects sharing common prefixes should be stored together
+<br /></p>
+
+<h4 id="reducing-load">Reducing Load</h4>
+
+<ul>
+  <li><code class="myyellow">Replication</code> - When multiple name server handle the same queries, different clients are able to send their requests to different servers.</li>
+</ul>
+
+<p><b>Choice of Server</b><br />
+1. Physical Locations<br />
+2.  Relative loads on servers<br />
+3. Random server selction<br /></p>
+
+<p><b>Problem</b>
+Its hard to make <code>replica consistent.</code></p>
+
+<ul>
+  <li><code class="myyellow">Distribution</code> - Spread the name resolution load across servers. </li>
+</ul>
+
+<p>In distribution, namespace is assigned to different servers.</p>
+
+<p><b>Advantages</b><br />
+1.  Since part of the naming database is stored on each server, thus reducing number of queries and updates to be processed.<br />
+2.  As size of each database is reduced, each request can be handled faster.<br />
+3.  The client must be able to determine which server contains the requested information.</p>
 
 ]]></content>
   </entry>
