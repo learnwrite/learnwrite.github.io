@@ -5,7 +5,7 @@
    "name": "Naming & Directory services",
    "children": [
     {"name": "Granularity of Naming", "url": "http://google.com"},
-    {"name": "Reducing Load", "url": 5842},
+    {"name": "Reducing Load", "url": "http://google.com"},
     {"name": "UID based Naming", "url": 5842},
     {"name": "Directory services", "url": 5842},
     {"name": "Growth & Reorganization", "url": 5842}
