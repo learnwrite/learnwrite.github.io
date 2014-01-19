@@ -4,11 +4,11 @@
   {
    "name": "Naming & Directory services",
    "children": [
-    {"name": "Granularity of Naming", "url": "http://google.com"},
-    {"name": "Reducing Load", "url": "http://google.com"},
-    {"name": "UID based Naming", "url": 5842},
-    {"name": "Directory services", "url": 5842},
-    {"name": "Growth & Reorganization", "url": 5842}
+    {"name": "Granularity of Naming", "url": "http://learnwrite.github.io/blog/2014/01/05/scale-in-distributed-systems/#granularity-of-naming"},
+    {"name": "Reducing Load", "url": "http://learnwrite.github.io/blog/2014/01/05/scale-in-distributed-systems/#reducing-load"},
+    {"name": "UID based Naming", "url": "http://learnwrite.github.io/blog/2014/01/05/scale-in-distributed-systems/#unique-identifier-based-naming-uid"},
+    {"name": "Directory services", "url": "http://learnwrite.github.io/blog/2014/01/05/scale-in-distributed-systems/#directory-services"},
+    {"name": "Growth & Reorganization", "url": "http://learnwrite.github.io/blog/2014/01/05/scale-in-distributed-systems/#growth-and-reorganization"}
    ]
   },
   {
