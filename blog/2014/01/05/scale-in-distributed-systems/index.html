@@ -9,7 +9,7 @@
   <meta name="author" content="Vaibhav Gautam">
 
   
-  <meta name="description" content="Introduction Systems designed to scale Naming and Directory Services Granularity of Naming Reducing Load Unique Identifier based naming (UID) &hellip;">
+  <meta name="description" content="Introduction Systems designed to Scale Naming and Directory Services Granularity of Naming Reducing Load Unique Identifier based naming (UID) &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -138,7 +138,7 @@
 
 <div class="entry-content"><ul id="markdown-toc">
   <li><a href="#introduction">Introduction</a></li>
-  <li><a href="#systems-designed-to-scale">Systems designed to scale</a></li>
+  <li><a href="#systems-designed-to-scale">Systems designed to Scale</a></li>
   <li><a href="#naming-and-directory-services">Naming and Directory Services</a>    <ul>
       <li><a href="#granularity-of-naming">Granularity of Naming</a></li>
       <li><a href="#reducing-load">Reducing Load</a></li>
@@ -147,6 +147,45 @@
       <li><a href="#growth-and-reorganization">Growth and reorganization</a></li>
     </ul>
   </li>
+</ul>
+
+<h3 id="introduction">Introduction</h3>
+
+<p>This blog is summary of the research paper Scale in Distributed Systems.</p>
+
+<p>A system is Scalable if it can handle addition of users and resources without suffering a noticeable loss of performance or increase in administrative complexity.</p>
+
+<p>Paper talks about problem of scale and genral solution. These solution fall into three categories</p>
+
+<blockquote><p>Replication, Distribution and Caching</p></blockquote>
+
+<!-- more -->
+
+<h3 id="systems-designed-to-scale">Systems designed to Scale</h3>
+
+<p>Some historic systems desgined to scale</p>
+
+<ul>
+  <li><a href="http://courses.cs.washington.edu/courses/cse451/07au/lectures/pending/p260-birrell.pdf" target="_blank">Grapevine</a>, <a href="http://dl.acm.org/citation.cfm?id=2081&amp;dl=ACM&amp;coll=DL&amp;CFID=395866995&amp;CFTOKEN=19566412" target="_blank">ACM Paper</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Domain_Name_System" target="_blank">DNS</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Kerberos_(protocol)" target="_blank">Kerberos</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Sprite_(operating_system)" target="_blank">Sprite</a></li>
+  <li><a href="http://research.microsoft.com/en-us/um/people/blampson/36-GlobalNames/WebPage.html" target="_blank">Global name services and authentication services</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/LOCUS_(operating_system)" target="_blank">Locus</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Andrew_File_System" target="_blank">Andrew</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Project_Athena" target="_blank">Project Athena</a></li>
+  <li><a href="http://www.cdf.toronto.edu/~csc469h/fall/handouts/nitzberg91.pdf" target="_blank">Dash</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Amoeba_(operating_system)" target="_blank">Amoeba</a></li>
+</ul>
+
+<p>As systems scales and accessible objects grows, locating objects of interest becomes difficult. Systems addressed this aspect of challenges are</p>
+
+<ul>
+  <li><a href="http://en.wikipedia.org/wiki/9P" target="_blank">Plan 9</a></li>
+  <li><a href="" target="_blank">Profile</a></li>
+  <li><a href="http://gost.isi.edu/products/prm/papers/prm-cpe.ps" target="_blank">Prospero</a></li>
+  <li><a href="http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=4798" target="_blank">QuickSilver</a></li>
+  <li><a href="https://www.usenix.org/legacy/publications/compsystems/1990/fall_comer.pdf" target="_blank">Tilde</a></li>
 </ul>
 
 <script src="http://d3js.org/d3.v3.min.js"></script>
@@ -216,45 +255,6 @@ line {
 }
 
 </style>
-
-<h2 id="introduction">Introduction</h2>
-
-<p>This blog is summary of the research paper Scale in Distributed Systems.</p>
-
-<blockquote><p>A system is Scalable if it can handle addition of users and resources without suffering a noticeable loss of performance or increase in administrative complexity.</p></blockquote>
-
-<p>Paper talks about problem of scale and genral solution. These solution fall into three categories</p>
-
-<blockquote><p>Replication, Distribution and Caching</p></blockquote>
-
-<!-- more -->
-
-<h2 id="systems-designed-to-scale">Systems designed to scale</h2>
-
-<p>Some historic systems desgined to scale</p>
-
-<ul>
-  <li><a href="http://courses.cs.washington.edu/courses/cse451/07au/lectures/pending/p260-birrell.pdf" target="_blank">Grapevine</a>, <a href="http://dl.acm.org/citation.cfm?id=2081&amp;dl=ACM&amp;coll=DL&amp;CFID=395866995&amp;CFTOKEN=19566412" target="_blank">ACM Paper</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Domain_Name_System" target="_blank">DNS</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Kerberos_(protocol)" target="_blank">Kerberos</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Sprite_(operating_system)" target="_blank">Sprite</a></li>
-  <li><a href="http://research.microsoft.com/en-us/um/people/blampson/36-GlobalNames/WebPage.html" target="_blank">Global name services and authentication services</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/LOCUS_(operating_system)" target="_blank">Locus</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Andrew_File_System" target="_blank">Andrew</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Project_Athena" target="_blank">Project Athena</a></li>
-  <li><a href="http://www.cdf.toronto.edu/~csc469h/fall/handouts/nitzberg91.pdf" target="_blank">Dash</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Amoeba_(operating_system)" target="_blank">Amoeba</a></li>
-</ul>
-
-<p>As systems scales and accessible objects grows, locating objects of interest becomes difficult. Systems addressed this aspect of challenges are</p>
-
-<ul>
-  <li><a href="http://en.wikipedia.org/wiki/9P" target="_blank">Plan 9</a></li>
-  <li><a href="" target="_blank">Profile</a></li>
-  <li><a href="http://gost.isi.edu/products/prm/papers/prm-cpe.ps" target="_blank">Prospero</a></li>
-  <li><a href="http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=4798" target="_blank">QuickSilver</a></li>
-  <li><a href="https://www.usenix.org/legacy/publications/compsystems/1990/fall_comer.pdf" target="_blank">Tilde</a></li>
-</ul>
 
 <body>
     <div id="body">
@@ -414,13 +414,14 @@ function toggle(d) {
 </script>
 </body>
 
-<h2 id="naming-and-directory-services">Naming and Directory Services</h2>
+<h3 id="naming-and-directory-services">Naming and Directory Services</h3>
 
 <p>A name refers to an object. An address tells where that object can be found. The binding of a name is the object to which it refers.</p>
 
 <blockquote><p>A name server (or directory server) maps a name to information about the name&#8217;s binding.</p></blockquote>
 
-<h3 id="granularity-of-naming">Granularity of Naming</h3>
+<h4 id="granularity-of-naming">Granularity of Naming</h4>
+
 <blockquote><p>The granularity of the objects named affects the size of naming the database, the frequency of queries and the read-to-write ratio which affects techniques can be used in naming in large systems.</p></blockquote>
 
 <p>In an approach of <code>fine grained naming</code>, files must include name of the host so that object could be located.</p>
@@ -429,28 +430,25 @@ function toggle(d) {
 
 <p>Another naming approach is <code>common prefix naming</code>, where group of objects share a common prefix and name service maps the prefix to the server. The remainder of the name is resolved locally by the server on which the object is stored.</p>
 
-<p><strong>Advantages</strong>
+<p>Advantages
  <br />
  1. Clients can cache the mapping keys as prefix changes less frequently than the rest of the name<br />
  2. Since objects does not have to include server name, it is easy to move objects around</p>
 
-<p><strong>Disadvantages</strong>
-<br />
-* Objects sharing common prefixes should be stored together
-<br /><br /></p>
+<p>Disadvantages
+ Objects sharing common prefixes should be stored together</p>
 
-<h3 id="reducing-load">Reducing Load</h3>
+<h4 id="reducing-load">Reducing Load</h4>
 
-<ul>
-  <li><code class="myyellow">Replication</code> - When multiple name server handle the same queries, different clients are able to send their requests to different servers.</li>
-</ul>
+<p>Abcd
+* <code class="myyellow">Replication</code> - When multiple name server handle the same queries, different clients are able to send their requests to different servers.</p>
 
 <p><strong>Choice of Server</strong><br />
 1. Physical Locations<br />
 2.  Relative loads on servers<br />
 3. Random server selction<br /></p>
 
-<p><strong>Problem</strong>
+<p>Problem
 Its hard to make <code>replica consistent.</code></p>
 
 <ul>
@@ -459,7 +457,7 @@ Its hard to make <code>replica consistent.</code></p>
 
 <p>In distribution, namespace is assigned to different servers.</p>
 
-<p><strong>Advantages</strong><br />
+<p>Advantages<br />
 1.  Since part of the naming database is stored on each server, thus reducing number of queries and updates to be processed.<br />
 2.  As size of each database is reduced, each request can be handled faster.<br />
 3.  The client must be able to determine which server contains the requested information.
@@ -470,11 +468,11 @@ Its hard to make <code>replica consistent.</code></p>
 By Caching the mapping from a prefix to the name server handling that prefix, future names sharing the same prefix can be resolved with fewer messages.</li>
 </ul>
 
-<p><strong>Problem</strong></p>
+<p>Problem</p>
 <blockquote><p>Caching is a form of replication and as similar to replication biggest difficulty is the need to for consistency.</p></blockquote>
 <p><br /><br /></p>
 
-<h3 id="unique-identifier-based-naming-uid">Unique Identifier based naming (UID)</h3>
+<h4 id="unique-identifier-based-naming-uid">Unique Identifier based naming (UID)</h4>
 
 <p>UID based naming is based on UID which is used to name and grant access right to the object.</p>
 
@@ -492,9 +490,9 @@ By Caching the mapping from a prefix to the name server handling that prefix, fu
 
 <p><a href="http://gost.isi.edu/products/prm/papers/prm-cpe.ps" target="_blank">Prospero</a> supports UIDs with expiration dates. Its directory service guarantees that the UIDs it maintains are kept up-to-date. The use of expiration dates makes getting rid of forwarding pointers possible, once all possible UIDs with the old address have expired.</p>
 
-<h3 id="directory-services">Directory services</h3>
+<h4 id="directory-services">Directory services</h4>
 
-<h3 id="growth-and-reorganization">Growth and reorganization</h3>
+<h4 id="growth-and-reorganization">Growth and reorganization</h4>
 
 </div>
 
