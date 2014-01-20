@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Scale | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/scale/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2014-01-19T22:02:53-08:00</updated>
+  <updated>2014-01-19T22:06:52-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -479,8 +479,8 @@ When these techniques are applied in the area of security, the following conside
 • The security of the service is that of the weakest of all <code>replicas</code>.<br />
 • When <code>distribution</code> is used, multiple servers may be involved in a particular exchange.<br />
 • It is important that both principals know which servers were involved so that they can correctly decide how much trust to place in the results. <br />
-• The longer credentials are allowed to be <code>cached</code>, the longer it will take to recover when a key is compromised.<br />
-<br /></p>
+• The longer credentials are allowed to be <code>cached</code>, the longer it will take to recover when a key is compromised.
+<br /><br /></p>
 
 <h3 id="remote-resources">Remote resources</h3>
 
@@ -488,7 +488,7 @@ When these techniques are applied in the area of security, the following conside
  for its use.<br /></p>
 
 <p>The services used to access remote resources are very dependent on the underlying communications mechanisms they employ. This section looks at the scaling issues related to network communication in such services.
-<br /></p>
+<br /><br /></p>
 
 <h4 id="communication">Communication</h4>
 
