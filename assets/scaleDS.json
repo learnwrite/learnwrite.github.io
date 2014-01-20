@@ -15,22 +15,22 @@
    "name": "Security Subsystem",
    "children": [
     {
-      "name": "Authentication", 
+      "name": "Authentication",
       "children": [
-       {"name": "Password-based", "url": 17010},
-       {"name": "Host-based", "url": 5842},
-       {"name": "Encryption-based", "url": 5842}
+       {"name": "Password-based", "url": "http://learnwrite.github.io/blog/2014/01/05/scale-in-distributed-systems/#authentication"},
+       {"name": "Host-based", "url": "http://learnwrite.github.io/blog/2014/01/05/scale-in-distributed-systems/#authentication"},
+       {"name": "Encryption-based", "url": "http://learnwrite.github.io/blog/2014/01/05/scale-in-distributed-systems/#authentication"}
       ]
     },
-    {"name": "Authorization", "url": 5842},
-    {"name": "Accounting", "url": 5842}    
+    {"name": "Authorization", "url": "http://learnwrite.github.io/blog/2014/01/05/scale-in-distributed-systems/#authorization"},
+    {"name": "Accounting", "url": "http://learnwrite.github.io/blog/2014/01/05/scale-in-distributed-systems/#accounting"}
    ]
   },
   {
    "name": "Remote Resource",
    "children": [
     {"name": "Communication", "url": 17010},
-    {"name": "File System", "url": 5842}    
+    {"name": "File System", "url": 5842}
    ]
   },
   {
