@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Scale | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/scale/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2014-01-19T21:20:53-08:00</updated>
+  <updated>2014-01-19T21:58:09-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -33,6 +33,10 @@
       <li><a href="#authentication">Authentication</a></li>
       <li><a href="#authorization">Authorization</a></li>
       <li><a href="#accounting">Accounting</a></li>
+    </ul>
+  </li>
+  <li><a href="#remote-resources">Remote resources</a>    <ul>
+      <li><a href="#communication">Communication</a></li>
     </ul>
   </li>
 </ul>
@@ -475,7 +479,25 @@ When these techniques are applied in the area of security, the following conside
 • The security of the service is that of the weakest of all <code>replicas</code>.<br />
 • When <code>distribution</code> is used, multiple servers may be involved in a particular exchange.<br />
 • It is important that both principals know which servers were involved so that they can correctly decide how much trust to place in the results. <br />
-• The longer credentials are allowed to be <code>cached</code>, the longer it will take to recover when a key is compromised.<br /></p>
+• The longer credentials are allowed to be <code>cached</code>, the longer it will take to recover when a key is compromised.<br />
+<br /></p>
+
+<h3 id="remote-resources">Remote resources</h3>
+
+<p>So far, we saw effect of scale in naming and security system. One cannot access a resource without first finding it. This involves both identifying the resource that is needed and determining its location, given its name. Once a resource has been found, authentication and authorization might be required
+ for its use.<br /></p>
+
+<p>The services used to access remote resources are very dependent on the underlying communications mechanisms they employ. This section looks at the scaling issues related to network communication in such services.
+<br /></p>
+
+<h4 id="communication">Communication</h4>
+
+<p>As the medium of communication places limits on the system’s performance, it can greatly affect the usability of a system. The underlying communications
+parameters must not be completely hidden from the application.</p>
+
+<p><blockquote><p>In <a href="http://www.cdf.toronto.edu/~csc469h/fall/handouts/nitzberg91.pdf" target="_blank">The Dash System</a>, when a connection is established, the application can require that the connection meet certain requirements; if the requirements are <code>not met, an error</code> is returned.</p></blockquote></p>
+
+<p>Surround your pullquote like this {" text to be quoted "}</p>
 
 ]]></content>
   </entry>
