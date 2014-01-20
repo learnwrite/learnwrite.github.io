@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Scale | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/scale/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2014-01-19T22:06:52-08:00</updated>
+  <updated>2014-01-20T13:51:48-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -49,9 +49,9 @@
 
 <p>Paper talks about problem of scale and general solution. These solution fall into three categories</p>
 
-<p><blockquote><p>Replication, Distribution and Caching</p></blockquote></p>
-
-<!-- more -->
+<p><strong>Replication, Distribution and Caching</strong>
+<br />
+<!-- more --></p>
 
 <h3 id="systems-designed-to-scale">Systems designed to Scale</h3>
 
@@ -467,20 +467,24 @@ Client is authenticated and then server makes its own decision about whether or 
 
 <p>Most distributed systems handle accounting on a host-by-host basis. A distributed, secure, and scalable accounting mechanism is needed, especially in large systems that cross administrative boundaries.<br /></p>
 
-<p>• <code>Bank server approach</code> - Amoeba uses this approach where bank servers handle accounting by maintaining accounts on behalf of users and servers; users transfer money to servers, which then draw upon the balance as resources are used.<br />
-• <code>Proxy-based accounting</code> - proxy-based accounting is tied
+<ol>
+  <li><code>Bank server approach</code> - Amoeba uses this approach where bank servers handle accounting by maintaining accounts on behalf of users and servers; users transfer money to servers, which then draw upon the balance as resources are used.<br /></li>
+  <li><code>Proxy-based accounting</code> - proxy-based accounting is tied
 much closer to authentication and authorization. The client grants the server a proxy that allows the server to transfer funds from the client’s account.
-<br /></p>
+<br /></li>
+</ol>
 
 <p><strong>Replication, Distribution and Caching in Security</strong><br />
 When these techniques are applied in the area of security, the following considerations must be kept in mind:<br /></p>
 
-<p>• When a server that maintains secret keys is <code>replicated</code>, the compromise of any replica can result in the compromise of important keys.<br />
-• The security of the service is that of the weakest of all <code>replicas</code>.<br />
-• When <code>distribution</code> is used, multiple servers may be involved in a particular exchange.<br />
-• It is important that both principals know which servers were involved so that they can correctly decide how much trust to place in the results. <br />
-• The longer credentials are allowed to be <code>cached</code>, the longer it will take to recover when a key is compromised.
-<br /><br /></p>
+<ol>
+  <li>When a server that maintains secret keys is <code>replicated</code>, the compromise of any replica can result in the compromise of important keys.<br /></li>
+  <li>The security of the service is that of the weakest of all <code>replicas</code>.<br /></li>
+  <li>When <code>distribution</code> is used, multiple servers may be involved in a particular exchange.<br /></li>
+  <li>It is important that both principals know which servers were involved so that they can correctly decide how much trust to place in the results. <br /></li>
+  <li>The longer credentials are allowed to be <code>cached</code>, the longer it will take to recover when a key is compromised.
+<br /><br /></li>
+</ol>
 
 <h3 id="remote-resources">Remote resources</h3>
 
@@ -497,7 +501,20 @@ parameters must not be completely hidden from the application.</p>
 
 <p><blockquote><p>In <a href="http://www.cdf.toronto.edu/~csc469h/fall/handouts/nitzberg91.pdf" target="_blank">The Dash System</a>, when a connection is established, the application can require that the connection meet certain requirements; if the requirements are <code>not met, an error</code> is returned.</p></blockquote></p>
 
-<p>Surround your pullquote like this {" text to be quoted "}</p>
+<p>Surround your pullquote like this {" text to be quoted "}
+<br /></p>
+
+<p><strong>Communication forms</strong><br />
+•  <code class="myyellow">Point-to-point communication</code> - The client sends messages to the particular server that can satisfy the request If the contacted server cannot satisfy the request, it might respond with the identity of a server that can.<br />
+•  <code class="myyellow">Broadcast communication</code> - In broadcast communication, the client sends the message to everyone, and only those servers that can satisfy the request respond. <br />
+     <strong>Advantages</strong><br />
+     Finding a server that can handle a request is easy.<br />
+     <strong>Disadvantages</strong><br />
+     •  Broadcast communication does not scale well. <br />
+     •  Processing is required by all servers, whether or not they can handle a request.<br />
+     •  As the total number of requests grows, the load due to preliminary processing on each server also grows.</p>
+
+<p>•  <code class="myyellow">Multicast communication</code> - In multicast, a single message can be sent to a group of servers. For multicast to scale, the groups to which messages are sent should be kept small.</p>
 
 ]]></content>
   </entry>
