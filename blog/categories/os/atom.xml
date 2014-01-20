@@ -4,7 +4,7 @@
   <title><![CDATA[Category: OS | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/os/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2014-01-19T20:50:53-08:00</updated>
+  <updated>2014-01-19T21:20:53-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -32,6 +32,7 @@
   <li><a href="#security-subsystem">Security Subsystem</a>    <ul>
       <li><a href="#authentication">Authentication</a></li>
       <li><a href="#authorization">Authorization</a></li>
+      <li><a href="#accounting">Accounting</a></li>
     </ul>
   </li>
 </ul>
@@ -455,7 +456,26 @@ Client is authenticated and then server makes its own decision about whether or 
 
 <p><strong>Disadvantages</strong><br />
 1. Capabilities can only be revoked in a group.<br />
-2. Capabilities are revoked by changing the bit pattern, but this causes all outstanding capabilities for that object to be immediately invalidated. The new capability must then be reissued to all legitimate users.<br /></p>
+2. Capabilities are revoked by changing the bit pattern, but this causes all outstanding capabilities for that object to be immediately invalidated. The new capability must then be reissued to all legitimate users.<br />
+<br /><br /></p>
+
+<h4 id="accounting">Accounting</h4>
+
+<p>Most distributed systems handle accounting on a host-by-host basis. A distributed, secure, and scalable accounting mechanism is needed, especially in large systems that cross administrative boundaries.<br /></p>
+
+<p>• <code>Bank server approach</code> - Amoeba uses this approach where bank servers handle accounting by maintaining accounts on behalf of users and servers; users transfer money to servers, which then draw upon the balance as resources are used.<br />
+• <code>Proxy-based accounting</code> - proxy-based accounting is tied
+much closer to authentication and authorization. The client grants the server a proxy that allows the server to transfer funds from the client’s account.
+<br /></p>
+
+<p><strong>Replication, Distribution and Caching in Security</strong><br />
+When these techniques are applied in the area of security, the following considerations must be kept in mind:<br /></p>
+
+<p>• When a server that maintains secret keys is <code>replicated</code>, the compromise of any replica can result in the compromise of important keys.<br />
+• The security of the service is that of the weakest of all <code>replicas</code>.<br />
+• When <code>distribution</code> is used, multiple servers may be involved in a particular exchange.<br />
+• It is important that both principals know which servers were involved so that they can correctly decide how much trust to place in the results. <br />
+• The longer credentials are allowed to be <code>cached</code>, the longer it will take to recover when a key is compromised.<br /></p>
 
 ]]></content>
   </entry>
