@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Distributed Systems | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/distributed-systems/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2014-01-19T13:41:12-08:00</updated>
+  <updated>2014-01-19T20:50:53-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -29,6 +29,11 @@
       <li><a href="#growth-and-reorganization">Growth and reorganization</a></li>
     </ul>
   </li>
+  <li><a href="#security-subsystem">Security Subsystem</a>    <ul>
+      <li><a href="#authentication">Authentication</a></li>
+      <li><a href="#authorization">Authorization</a></li>
+    </ul>
+  </li>
 </ul>
 
 <h3 id="introduction">Introduction</h3>
@@ -37,7 +42,7 @@
 
 <p>A system is Scalable if it can handle addition of users and resources without suffering a noticeable loss of performance or increase in administrative complexity.</p>
 
-<p>Paper talks about problem of scale and genral solution. These solution fall into three categories</p>
+<p>Paper talks about problem of scale and general solution. These solution fall into three categories</p>
 
 <p><blockquote><p>Replication, Distribution and Caching</p></blockquote></p>
 
@@ -331,7 +336,7 @@ function toggle(d) {
 <p><strong>Choice of Server</strong><br />
 1. Physical Locations<br />
 2.  Relative loads on servers<br />
-3. Random server selction<br /></p>
+3. Random server selection<br /></p>
 
 <p><strong>Problem</strong>
 Its hard to make <code>replica consistent.</code></p>
@@ -369,7 +374,7 @@ By Caching the mapping from a prefix to the name server handling that prefix, fu
 
 <p>This problem can be solved using technique called <code>forward pointers</code>. With forward pointers a user attempting to use an old address to access an object is given a new UID containing new address.</p>
 
-<p>Problem with forward chaning is that the chain of links can become lengthy and reduce performance. Also, if one of the node is down then access to link is prevented.</p>
+<p>Problem with forward chaining is that the chain of links can become lengthy and reduce performance. Also, if one of the node is down then access to link is prevented.</p>
 
 <p>This problem can be solved by requiring each object to have a home site with the forward pointer at that site kept up-to-date. </p>
 
@@ -395,7 +400,62 @@ By Caching the mapping from a prefix to the name server handling that prefix, fu
 1. Associating a unique number with the root of every independent name space.<br />
 2.  When a file name is stored, the number for the root of the name space can be stored along with the name. <br />
 3. When name spaces are merged, an entry is made in the new root, pairing the UID of each previous root with the prefix required to find it.<br />
-4.  When a name with an associated root UID is resolved, the UID is checked; if it does not match that for the current root, the corresponding prefix is prepended, allowing the embedded name to work.</p>
+4.  When a name with an associated root UID is resolved, the UID is checked; if it does not match that for the current root, the corresponding prefix is prepended, allowing the embedded name to work.
+<br /><br /></p>
+
+<h3 id="security-subsystem">Security Subsystem</h3>
+
+<p>As system size grows, the number of points from which an intruder can enter the network increases and security becomes increasingly important and difficult to implement.</p>
+
+<h4 id="authentication">Authentication</h4>
+
+<ul>
+  <li><code class="myyellow"> Password based authentication</code><br />
+This technique involves using password on each host.</li>
+</ul>
+
+<p><strong>Problems</strong><br />
+1. Requires maintenance of a password database on multiple nodes.<br />
+2. Its cumbersome, if user have to present password each time a new service is requested.<br />
+3. Letting the workstation remember the user’s password is risky.<br />
+4. Vulnerable to the theft of password by eavesdrop on the network.<br /></p>
+
+<ul>
+  <li>
+    <p><code class="myyellow"> Host based authentication</code><br />
+In this technique, client is authenticated by the local host. Remote servers trust the host to properly identify the client.</p>
+  </li>
+  <li>
+    <p><code class="myyellow"> Encryption based authentication</code><br />
+In this technique, passwords are never sent across the network instead each user is assigned an encryption key. The key is used to prove the user’s identity. 
+<a href="http://en.wikipedia.org/wiki/Kerberos_(protocol)" target="_blank">Kerberos authentication protocol</a> is example of large scale system authentication.
+<br /></p>
+  </li>
+</ul>
+
+<h4 id="authorization">Authorization</h4>
+
+<p><strong>Approach 1</strong><br />
+Client send authorization request to server and server forwards request to authorization service. </p>
+
+<p>Disadvantage of this approach is access control service can become bottleneck.</p>
+
+<p><strong>Approach 2</strong><br />
+Client is authenticated and then server makes its own decision about whether or not the client is authorized to perform an operation. </p>
+
+<p>In <a href="http://en.wikipedia.org/wiki/Andrew_File_System" target="_blank">Andrew File System</a>, each directory has an access control list (ACL) that identifies the users authorized to access the files within the directory. ACL entries in Andrew can contain the names of groups and user can be part of one or more groups.</p>
+
+<p><blockquote><p>A disadvantage ACL model is that the client must first be authenticated, then looked up in a potentially long list; the lookup may involve the recursive expansion of multiple groups and may require interaction with other servers.</p></blockquote></p>
+
+<p>Another authorization model is <code>capability based authorization</code> in which the user maintains the list of the objects for which access is authorized. A client presents its capability when it wishes to access an object. The server then compares the bit pattern of the capability with that stored along with the object; if they match, the access is allowed.</p>
+
+<p><strong>Advantages</strong><br />
+1. The server can make its access control decision without contacting other servers.<br />
+2. The server does not need to maintain a large authorization database that would be difficult to keep up-to-date in a large system.<br /></p>
+
+<p><strong>Disadvantages</strong><br />
+1. Capabilities can only be revoked in a group.<br />
+2. Capabilities are revoked by changing the bit pattern, but this causes all outstanding capabilities for that object to be immediately invalidated. The new capability must then be reissued to all legitimate users.<br /></p>
 
 ]]></content>
   </entry>
