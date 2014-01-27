@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Distributed Systems | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/distributed-systems/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2014-01-20T13:51:48-08:00</updated>
+  <updated>2014-01-26T21:28:02-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -405,8 +405,10 @@ By Caching the mapping from a prefix to the name server handling that prefix, fu
 1. Associating a unique number with the root of every independent name space.<br />
 2.  When a file name is stored, the number for the root of the name space can be stored along with the name. <br />
 3. When name spaces are merged, an entry is made in the new root, pairing the UID of each previous root with the prefix required to find it.<br />
-4.  When a name with an associated root UID is resolved, the UID is checked; if it does not match that for the current root, the corresponding prefix is prepended, allowing the embedded name to work.
-<br /><br /></p>
+4.  When a name with an associated root UID is resolved, the UID is checked; if it does not match that for the current root, the corresponding prefix is prepended, allowing the embedded name to work.</p>
+<hr />
+
+<p><br /></p>
 
 <h3 id="security-subsystem">Security Subsystem</h3>
 
@@ -482,9 +484,11 @@ When these techniques are applied in the area of security, the following conside
   <li>The security of the service is that of the weakest of all <code>replicas</code>.<br /></li>
   <li>When <code>distribution</code> is used, multiple servers may be involved in a particular exchange.<br /></li>
   <li>It is important that both principals know which servers were involved so that they can correctly decide how much trust to place in the results. <br /></li>
-  <li>The longer credentials are allowed to be <code>cached</code>, the longer it will take to recover when a key is compromised.
-<br /><br /></li>
+  <li>The longer credentials are allowed to be <code>cached</code>, the longer it will take to recover when a key is compromised.</li>
 </ol>
+<hr />
+
+<p><br /></p>
 
 <h3 id="remote-resources">Remote resources</h3>
 
@@ -515,6 +519,9 @@ parameters must not be completely hidden from the application.</p>
      •  As the total number of requests grows, the load due to preliminary processing on each server also grows.</p>
 
 <p>•  <code class="myyellow">Multicast communication</code> - In multicast, a single message can be sent to a group of servers. For multicast to scale, the groups to which messages are sent should be kept small.</p>
+<hr />
+
+<p><br /></p>
 
 ]]></content>
   </entry>

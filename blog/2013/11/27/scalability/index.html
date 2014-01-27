@@ -316,38 +316,13 @@
 </section>
 <section>
   <h1>About Me</h1>
-  <p><img src="/images/linked-in.png"><a href="http://www.linkedin.com/pub/vaibhav-gautam/11/663/163">Vaibhav Gautam</a></p>
+  <p><a href="http://www.linkedin.com/pub/vaibhav-gautam/11/663/163" target="_blank"><img src="/images/linked-in.png"></a>
+  <a href="https://twitter.com/_vaibhavg" target="_blank"><img src="/images/twitter.png"></a>
+  <a href="https://github.com/learnwrite" target="_blank"><img src="/images/github.png"></a>
+  <a href="https://www.facebook.com/mailtovaibhav" target="_blank"><img src="/images/facebook.png"></a>
+  <a href="http://www.vaibhavgautam.com" target="_blank"><img src="/images/flickr.png"></a>
+  </p>
 </section>
-
-<section>
-  <h1>GitHub Repos</h1>
-  <ul id="gh_repos">
-    <li class="loading">Status updating...</li>
-  </ul>
-  
-  <a href="https://github.com/learnwrite">@learnwrite</a> on GitHub
-  
-  <script type="text/javascript">
-    $.domReady(function(){
-        if (!window.jXHR){
-            var jxhr = document.createElement('script');
-            jxhr.type = 'text/javascript';
-            jxhr.src = '/javascripts/libs/jXHR.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(jxhr, s);
-        }
-
-        github.showRepos({
-            user: 'learnwrite',
-            count: 0,
-            skip_forks: true,
-            target: '#gh_repos'
-        });
-    });
-  </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
-</section>
-
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
