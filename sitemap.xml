@@ -67,6 +67,10 @@
         <lastmod>2014-01-27T22:00:49-08:00</lastmod>
     </url>
     <url>
+        <loc>http://learnwrite.github.io/atom_search.xml</loc>
+        <lastmod>2014-02-01T08:52:57-08:00</lastmod>
+    </url>
+    <url>
         <loc>http://learnwrite.github.io/blog/archives/</loc>
         <lastmod>2014-01-27T22:00:49-08:00</lastmod>
     </url>
@@ -77,5 +81,9 @@
     <url>
         <loc>http://learnwrite.github.io/robots.txt</loc>
         <lastmod>2013-10-06T02:38:20-07:00</lastmod>
+    </url>
+    <url>
+        <loc>http://learnwrite.github.io/search.html</loc>
+        <lastmod>2014-02-01T08:54:48-08:00</lastmod>
     </url>
 </urlset>
