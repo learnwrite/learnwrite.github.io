@@ -9,7 +9,7 @@
   <meta name="author" content="Vaibhav Gautam">
 
   
-  <meta name="description" content="Search Results $('#search_results').tapir({ 'token': '', 'complete' : function() { document.getElementById('search_loading').style.display="none &hellip;">
+  <meta name="description" content="Search Results $('#search_results').tapir({ 'token': '52ed280e40bf180100000009', 'complete' : function() { document.getElementById('search_loading &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -126,7 +126,7 @@
 </div>
 <script>
     $('#search_results').tapir({
-        'token': '',
+        'token': '52ed280e40bf180100000009',
         'complete' : function() { document.getElementById('search_loading').style.display="none"; }
     });
 </script>
@@ -148,6 +148,12 @@
       </li>
   </ul>
 
+
+<form method="get" action="/search.html">
+<fieldset role="search">
+<input class="search" name="query" type="text" placeholder="Search..." x-webkit-speech />
+</fieldset>
+</form>
 
 
 </section>
