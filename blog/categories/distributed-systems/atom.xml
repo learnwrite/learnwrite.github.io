@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Distributed Systems | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/distributed-systems/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2014-01-26T21:28:02-08:00</updated>
+  <updated>2014-02-01T00:19:06-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -37,6 +37,11 @@
   </li>
   <li><a href="#remote-resources">Remote resources</a>    <ul>
       <li><a href="#communication">Communication</a></li>
+    </ul>
+  </li>
+  <li><a href="#replication">Replication</a>    <ul>
+      <li><a href="#placement-of-replicas">Placement of replicas</a></li>
+      <li><a href="#replica-consistency">Replica Consistency</a></li>
     </ul>
   </li>
 </ul>
@@ -519,6 +524,71 @@ parameters must not be completely hidden from the application.</p>
      •  As the total number of requests grows, the load due to preliminary processing on each server also grows.</p>
 
 <p>•  <code class="myyellow">Multicast communication</code> - In multicast, a single message can be sent to a group of servers. For multicast to scale, the groups to which messages are sent should be kept small.</p>
+<hr />
+
+<p><br /></p>
+
+<h3 id="replication">Replication</h3>
+
+<p>Replication is used to reduce the load on the server and improve the reliability and availability of the service as whole.</p>
+
+<p><blockquote><p>Issue is the Placement of the replicas and replica consistency</p></blockquote>
+<br /></p>
+
+<h4 id="placement-of-replicas">Placement of replicas</h4>
+
+<p>Placement of replicas depends on the purpose of replication</p>
+
+<p><code class="myyellow">Scattered Replicas</code><br /> 
+• Reduces network delays or avoid network partitions.<br /> 
+• Improves availability of the service.</p>
+
+<p><code class="myyellow">Near located Replicas</code><br />
+• Used when majority of users are local.<br />
+• Improves reliability of the service.<br />
+• To spread load across multiple server then replicas may be placed near one another.
+<br /><br /></p>
+
+<h4 id="replica-consistency">Replica Consistency</h4>
+
+<p>At a particular point in time, a set of replicas is said to be consistent if the value of the object is the same for all readers.<br />
+Taking these steps guarantees that the set of replicas read will intersect with the set written during the most recent update</p>
+
+<p>• <code class="myyellow">Replication of read-only information</code><br /> 
+    Replication read-only information like binaries which can not be changed by normal users.<br />
+    [Andrew, Athena]<br /><br />
+• <code class="myyellow">Replication of immutable information</code><br />
+    Changes to files are made by creating new files and then changing the
+directory so that the new version of the file will be found.<br />
+    [Amoeba]<br /><br />
+• <code class="myyellow">Update all replicas</code><br />
+    This approach allows update but require updates to be send to all replicas. <br />
+      <strong>Limitations</strong><br />
+     1. Can update only when all the replicas are available thus reducing the availability of the system for write operations.<br />
+     2. For data consistency, absolute ordering on updates are required.<br />
+     3. Client might fail during an update.<br /> </p>
+
+<p>• <code class="myyellow">Primary-site replication</code><br />
+    All updates are directed to the primary replica which then forwards updates to the other replicas.  Updates may be forwarded individually or whole database may be periodically downloaded by the replicas [Kerberos].<br />
+    <strong>Advantage</strong><br />
+    The ordering of updates is determined by the order in which they are received at the primary site and that updates require only the availability of the primary site.<br /></p>
+
+<p><strong>Disadvantage</strong><br />
+   1. The availability of updates still depends on a single server, although some systems select a new primary site if the existing primary goes down.<br />
+   2. If changes are distributed periodically, the updates are delayed until the next update cycle.<br /></p>
+
+<p>• <code class="myyellow">Loose consistency</code><br />
+With loose consistency, replicas are guaranteed to eventually contain identical data.</p>
+
+<ol>
+  <li>Updates are allowed even when the network is panitioned or servers are down.<br /></li>
+  <li>Updates are sent to any replica, and that replica forwards the update to the other replicas as they become available.<br /></li>
+  <li>If conflicting updates are received by different replicas in different orders, time stamps indicate the order in which they are to be applied.<br />
+<blockquote><p>With loose consistency, there is no guarantee that a query will return the most recent data.</p></blockquote></li>
+</ol>
+
+<p>• <code class="myyellow">Quorum consensus</code><br /></p>
+
 <hr />
 
 <p><br /></p>
