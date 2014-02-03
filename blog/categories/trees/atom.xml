@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Trees | Learnings]]></title>
-  <link href="http://learnwrite.github.io/blog/categories/trees/atom.xml" rel="self"/>
-  <link href="http://learnwrite.github.io/"/>
-  <updated>2014-02-02T17:28:55-08:00</updated>
-  <id>http://learnwrite.github.io/</id>
+  <title><![CDATA[Category: Trees | Distributed Knowledge]]></title>
+  <link href="http://distkeys.com/blog/categories/trees/atom.xml" rel="self"/>
+  <link href="http://distkeys.com/"/>
+  <updated>2014-02-02T21:02:26-08:00</updated>
+  <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Trie and Trees]]></title>
-    <link href="http://learnwrite.github.io/blog/2013/11/26/trie-and-trees/"/>
+    <link href="http://distkeys.com/blog/2013/11/26/trie-and-trees/"/>
     <updated>2013-11-26T23:18:00-08:00</updated>
-    <id>http://learnwrite.github.io/blog/2013/11/26/trie-and-trees</id>
+    <id>http://distkeys.com/blog/2013/11/26/trie-and-trees</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#trie-problems">Trie Problems</a></li>
   <li><a href="#trie-explanation">Trie explanation</a></li>
@@ -399,13 +399,13 @@
 
 <h3 id="infix-to-postfix">Infix to Postfix</h3>
 
-<iframe width="420" height="315" src="http://learnwrite.github.io//www.youtube.com/embed/rA0x7b4YiMI" frameborder="0" allowfullscreen=""></iframe>
+<iframe width="420" height="315" src="http://distkeys.com//www.youtube.com/embed/rA0x7b4YiMI" frameborder="0" allowfullscreen=""></iframe>
 
 <p><br /></p>
 
 <h3 id="postfix-to-infix">Postfix to Infix</h3>
 
-<iframe width="420" height="315" src="http://learnwrite.github.io//www.youtube.com/embed/OlRENYiiIiw" frameborder="0" allowfullscreen=""></iframe>
+<iframe width="420" height="315" src="http://distkeys.com//www.youtube.com/embed/OlRENYiiIiw" frameborder="0" allowfullscreen=""></iframe>
 
 <h4 id="evaluate-postfix-expression">Evaluate Postfix expression</h4>
 

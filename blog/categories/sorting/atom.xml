@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: sorting | Learnings]]></title>
-  <link href="http://learnwrite.github.io/blog/categories/sorting/atom.xml" rel="self"/>
-  <link href="http://learnwrite.github.io/"/>
-  <updated>2014-02-02T17:28:55-08:00</updated>
-  <id>http://learnwrite.github.io/</id>
+  <title><![CDATA[Category: sorting | Distributed Knowledge]]></title>
+  <link href="http://distkeys.com/blog/categories/sorting/atom.xml" rel="self"/>
+  <link href="http://distkeys.com/"/>
+  <updated>2014-02-02T21:02:26-08:00</updated>
+  <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Comparison based Sorting]]></title>
-    <link href="http://learnwrite.github.io/blog/2013/10/13/comparison-based-sorting/"/>
+    <link href="http://distkeys.com/blog/2013/10/13/comparison-based-sorting/"/>
     <updated>2013-10-13T01:43:00-07:00</updated>
-    <id>http://learnwrite.github.io/blog/2013/10/13/comparison-based-sorting</id>
+    <id>http://distkeys.com/blog/2013/10/13/comparison-based-sorting</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#merge-sort">Merge Sort</a></li>
   <li><a href="#table-based-comparison">Table based comparison</a></li>
@@ -398,9 +398,9 @@ Each level contributes to total cost of <code>cn</code></p>
   
   <entry>
     <title type="html"><![CDATA[sorting]]></title>
-    <link href="http://learnwrite.github.io/blog/2013/10/12/sorting/"/>
+    <link href="http://distkeys.com/blog/2013/10/12/sorting/"/>
     <updated>2013-10-12T13:08:00-07:00</updated>
-    <id>http://learnwrite.github.io/blog/2013/10/12/sorting</id>
+    <id>http://distkeys.com/blog/2013/10/12/sorting</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#dictionary-of-algorithms">Dictionary of algorithms</a></li>
   <li><a href="#sorting-visualization">Sorting Visualization</a></li>

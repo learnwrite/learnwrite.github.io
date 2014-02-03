@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: strings | Learnings]]></title>
-  <link href="http://learnwrite.github.io/blog/categories/strings/atom.xml" rel="self"/>
-  <link href="http://learnwrite.github.io/"/>
-  <updated>2014-02-02T17:28:55-08:00</updated>
-  <id>http://learnwrite.github.io/</id>
+  <title><![CDATA[Category: strings | Distributed Knowledge]]></title>
+  <link href="http://distkeys.com/blog/categories/strings/atom.xml" rel="self"/>
+  <link href="http://distkeys.com/"/>
+  <updated>2014-02-02T21:02:26-08:00</updated>
+  <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Array and Strings]]></title>
-    <link href="http://learnwrite.github.io/blog/2013/12/30/array-and-strings/"/>
+    <link href="http://distkeys.com/blog/2013/12/30/array-and-strings/"/>
     <updated>2013-12-30T01:26:00-08:00</updated>
-    <id>http://learnwrite.github.io/blog/2013/12/30/array-and-strings</id>
+    <id>http://distkeys.com/blog/2013/12/30/array-and-strings</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#array-problems">Array Problems</a>    <ul>
       <li><a href="#find-repeatingduplicate-numbers">Find repeating/duplicate numbers</a></li>

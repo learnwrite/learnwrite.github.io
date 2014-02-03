@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: D3 | Learnings]]></title>
-  <link href="http://learnwrite.github.io/blog/categories/d3/atom.xml" rel="self"/>
-  <link href="http://learnwrite.github.io/"/>
-  <updated>2014-02-02T17:28:55-08:00</updated>
-  <id>http://learnwrite.github.io/</id>
+  <title><![CDATA[Category: D3 | Distributed Knowledge]]></title>
+  <link href="http://distkeys.com/blog/categories/d3/atom.xml" rel="self"/>
+  <link href="http://distkeys.com/"/>
+  <updated>2014-02-02T21:02:26-08:00</updated>
+  <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[D3.js and Octopress]]></title>
-    <link href="http://learnwrite.github.io/blog/2014/01/04/D3-and-Octopress/"/>
+    <link href="http://distkeys.com/blog/2014/01/04/D3-and-Octopress/"/>
     <updated>2014-01-04T11:33:00-08:00</updated>
-    <id>http://learnwrite.github.io/blog/2014/01/04/D3-and-Octopress</id>
+    <id>http://distkeys.com/blog/2014/01/04/D3-and-Octopress</id>
     <content type="html"><![CDATA[
 <script src="http://d3js.org/d3.v3.min.js"></script>
 

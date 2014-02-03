@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Scaling | Learnings]]></title>
-  <link href="http://learnwrite.github.io/blog/categories/scaling/atom.xml" rel="self"/>
-  <link href="http://learnwrite.github.io/"/>
-  <updated>2014-02-02T17:28:55-08:00</updated>
-  <id>http://learnwrite.github.io/</id>
+  <title><![CDATA[Category: Scaling | Distributed Knowledge]]></title>
+  <link href="http://distkeys.com/blog/categories/scaling/atom.xml" rel="self"/>
+  <link href="http://distkeys.com/"/>
+  <updated>2014-02-02T21:02:26-08:00</updated>
+  <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Scalability in Distributed Systems]]></title>
-    <link href="http://learnwrite.github.io/blog/2013/11/27/scalability/"/>
+    <link href="http://distkeys.com/blog/2013/11/27/scalability/"/>
     <updated>2013-11-27T15:06:00-08:00</updated>
-    <id>http://learnwrite.github.io/blog/2013/11/27/scalability</id>
+    <id>http://distkeys.com/blog/2013/11/27/scalability</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#facebook">Facebook</a>    <ul>
       <li><a href="#data-center">Data Center</a></li>

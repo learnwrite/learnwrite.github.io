@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: cs | Learnings]]></title>
-  <link href="http://learnwrite.github.io/blog/categories/cs/atom.xml" rel="self"/>
-  <link href="http://learnwrite.github.io/"/>
-  <updated>2014-02-02T17:28:55-08:00</updated>
-  <id>http://learnwrite.github.io/</id>
+  <title><![CDATA[Category: cs | Distributed Knowledge]]></title>
+  <link href="http://distkeys.com/blog/categories/cs/atom.xml" rel="self"/>
+  <link href="http://distkeys.com/"/>
+  <updated>2014-02-02T21:02:26-08:00</updated>
+  <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Graph Algorithms]]></title>
-    <link href="http://learnwrite.github.io/blog/2013/12/14/graph-algorithms/"/>
+    <link href="http://distkeys.com/blog/2013/12/14/graph-algorithms/"/>
     <updated>2013-12-14T13:03:00-08:00</updated>
-    <id>http://learnwrite.github.io/blog/2013/12/14/graph-algorithms</id>
+    <id>http://distkeys.com/blog/2013/12/14/graph-algorithms</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#graph-problems">Graph problems</a>    <ul>
       <li><a href="#find-neighbour-in-array">Find neighbour in array</a></li>
