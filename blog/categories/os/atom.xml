@@ -4,7 +4,7 @@
   <title><![CDATA[Category: OS | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/os/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2014-02-01T09:32:53-08:00</updated>
+  <updated>2014-02-02T17:28:55-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -50,13 +50,8 @@
 
 <p>This blog is summary of the research paper <a href="https://www.dropbox.com/s/s9smkjhyykasllg/Scale%20in%20distributed%20systems.pdf" target="_blank"> Scale in Distributed Systems.</a></p>
 
-<p>A system is Scalable if it can handle addition of users and resources without suffering a noticeable loss of performance or increase in administrative complexity.</p>
-
-<p>Paper talks about problem of scale and general solution. These solution fall into three categories</p>
-
-<p><strong>Replication, Distribution and Caching</strong>
-<br />
-<!-- more --></p>
+<p>A system is Scalable if it can handle addition of users and resources without suffering a noticeable loss of performance or increase in administrative complexity.
+<br /></p>
 
 <h3 id="systems-designed-to-scale">Systems designed to Scale</h3>
 
@@ -72,7 +67,8 @@
   <li><a href="http://en.wikipedia.org/wiki/Andrew_File_System" target="_blank">Andrew</a></li>
   <li><a href="http://en.wikipedia.org/wiki/Project_Athena" target="_blank">Project Athena</a></li>
   <li><a href="http://www.cdf.toronto.edu/~csc469h/fall/handouts/nitzberg91.pdf" target="_blank">Dash</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Amoeba_(operating_system)" target="_blank">Amoeba</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Amoeba_(operating_system)" target="_blank">Amoeba</a>
+<!-- more --></li>
 </ul>
 
 <p>As systems scales and accessible objects grows, locating objects of interest becomes difficult. Systems addressed this aspect of challenges are</p>
@@ -84,6 +80,11 @@
   <li><a href="http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=4798" target="_blank">QuickSilver</a></li>
   <li><a href="https://www.usenix.org/legacy/publications/compsystems/1990/fall_comer.pdf" target="_blank">Tilde</a></li>
 </ul>
+
+<p><br />
+Paper talks about problem of scale and general solution. These solution fall into three categories</p>
+
+<p><blockquote><p>Replication, Distribution and Caching</p></blockquote></p>
 
 <script src="http://d3js.org/d3.v3.min.js"></script>
 
@@ -581,7 +582,7 @@ directory so that the new version of the file will be found.<br />
 With loose consistency, replicas are guaranteed to eventually contain identical data.</p>
 
 <ol>
-  <li>Updates are allowed even when the network is panitioned or servers are down.<br /></li>
+  <li>Updates are allowed even when the network is partitioned or servers are down.<br /></li>
   <li>Updates are sent to any replica, and that replica forwards the update to the other replicas as they become available.<br /></li>
   <li>If conflicting updates are received by different replicas in different orders, time stamps indicate the order in which they are to be applied.<br />
 <blockquote><p>With loose consistency, there is no guarantee that a query will return the most recent data.</p></blockquote></li>

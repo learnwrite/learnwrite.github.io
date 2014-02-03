@@ -4,7 +4,7 @@
   <title><![CDATA[Category: array | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/array/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2014-02-01T09:32:53-08:00</updated>
+  <updated>2014-02-02T17:28:55-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -67,7 +67,7 @@ Sum = 10 Then the pairs are  {6,4} , {9,1}</p>
 
 <h4 id="reverse-a-string-without-extra-space">Reverse a string without extra space</h4>
 
-<p>String could be reversed without using extra space using bitwise operator <a href="http://learnwrite.github.io/blog/2013/10/08/world-of-bits-and-bytes/#bitwise-operators" target="_blank">XOR</a></p>
+<p>String could be reversed without using extra space using bitwise operator <a href="http://distkeys.com/blog/2013/10/08/world-of-bits-and-bytes/#bitwise-operators" target="_blank">XOR</a></p>
 
 <p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>String Reverse</span>  <a href='http://ideone.com/vfTxcr' target='_blank'>Run Code </a></figcaption> <div class="CodeRay">
   <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
@@ -145,7 +145,7 @@ Rotate 2 times</p>
 
 <h4 id="permutation-of-a-string">Permutation of a string</h4>
 
-<p><a href="http://learnwrite.github.io/blog/2013/11/18/recursion/#string-permutation-non-repeating" target="_blank">Permutation</a></p>
+<p><a href="http://distkeys.com/blog/2013/11/18/recursion/#string-permutation-non-repeating" target="_blank">Permutation</a></p>
 
 <p><br /></p>
 
