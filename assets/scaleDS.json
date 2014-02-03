@@ -4,11 +4,11 @@
   {
    "name": "Naming & Directory services",
    "children": [
-    {"name": "Granularity of Naming", "url": "http://learnwrite.github.io/blog/2014/01/05/scale-in-distributed-systems/#granularity-of-naming"},
-    {"name": "Reducing Load", "url": "http://learnwrite.github.io/blog/2014/01/05/scale-in-distributed-systems/#reducing-load"},
-    {"name": "UID based Naming", "url": "http://learnwrite.github.io/blog/2014/01/05/scale-in-distributed-systems/#unique-identifier-based-naming-uid"},
-    {"name": "Directory services", "url": "http://learnwrite.github.io/blog/2014/01/05/scale-in-distributed-systems/#directory-services"},
-    {"name": "Growth & Reorganization", "url": "http://learnwrite.github.io/blog/2014/01/05/scale-in-distributed-systems/#growth-and-reorganization"}
+    {"name": "Granularity of Naming", "url": "http://distkeys.com/blog/2014/01/05/scale-in-distributed-systems/#granularity-of-naming"},
+    {"name": "Reducing Load", "url": "http://distkeys.com/blog/2014/01/05/scale-in-distributed-systems/#reducing-load"},
+    {"name": "UID based Naming", "url": "http://distkeys.com/blog/2014/01/05/scale-in-distributed-systems/#unique-identifier-based-naming-uid"},
+    {"name": "Directory services", "url": "http://distkeys.com/blog/2014/01/05/scale-in-distributed-systems/#directory-services"},
+    {"name": "Growth & Reorganization", "url": "http://distkeys.com/blog/2014/01/05/scale-in-distributed-systems/#growth-and-reorganization"}
    ]
   },
   {
@@ -17,42 +17,42 @@
     {
       "name": "Authentication",
       "children": [
-       {"name": "Password-based", "url": "http://learnwrite.github.io/blog/2014/01/05/scale-in-distributed-systems/#authentication"},
-       {"name": "Host-based", "url": "http://learnwrite.github.io/blog/2014/01/05/scale-in-distributed-systems/#authentication"},
-       {"name": "Encryption-based", "url": "http://learnwrite.github.io/blog/2014/01/05/scale-in-distributed-systems/#authentication"}
+       {"name": "Password-based", "url": "http://distkeys.com/blog/2014/01/05/scale-in-distributed-systems/#authentication"},
+       {"name": "Host-based", "url": "http://distkeys.com/blog/2014/01/05/scale-in-distributed-systems/#authentication"},
+       {"name": "Encryption-based", "url": "http://distkeys.com/blog/2014/01/05/scale-in-distributed-systems/#authentication"}
       ]
     },
-    {"name": "Authorization", "url": "http://learnwrite.github.io/blog/2014/01/05/scale-in-distributed-systems/#authorization"},
-    {"name": "Accounting", "url": "http://learnwrite.github.io/blog/2014/01/05/scale-in-distributed-systems/#accounting"}
+    {"name": "Authorization", "url": "http://distkeys.com/blog/2014/01/05/scale-in-distributed-systems/#authorization"},
+    {"name": "Accounting", "url": "http://distkeys.com/blog/2014/01/05/scale-in-distributed-systems/#accounting"}
    ]
   },
   {
    "name": "Remote Resource",
    "children": [
-    {"name": "Communication", "url": 17010},
-    {"name": "File System", "url": 5842}
+    {"name": "Communication", "url": "http://distkeys.com/blog/2014/01/05/scale-in-distributed-systems/#communication"},
+    {"name": "File System", "url": ""}
    ]
   },
   {
    "name": "Replication",
    "children": [
-    {"name": "Placement of replica", "url": 8833},
-    {"name": "Replica consistency", "url": 1732}    
+    {"name": "Placement of replica", "url": "http://distkeys.com/blog/2014/01/05/scale-in-distributed-systems/#placement-of-replicas"},
+    {"name": "Replica consistency", "url": "http://distkeys.com/blog/2014/01/05/scale-in-distributed-systems/#replica-consistency"}
    ]
   },
   {
    "name": "Distribution",
    "children": [
     {"name": "Placement of Server", "url": 8833},
-    {"name": "Finding right Server", "url": 1732}    
+    {"name": "Finding right Server", "url": 1732}
    ]
   },
   {
    "name": "Caching",
    "children": [
     {"name": "Placement of caches", "url": 1082},
-    {"name": "Cache consistency", "url": 1336}    
+    {"name": "Cache consistency", "url": 1336}
    ]
-  }    
+  }
  ]
 }

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: sorting | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/sorting/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2014-02-01T14:00:58-08:00</updated>
+  <updated>2014-02-02T17:28:55-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -387,7 +387,7 @@ Each level contributes to total cost of <code>cn</code></p>
     <p><a href="https://www.dropbox.com/s/4kcfkbvkwmnmgib/sorting.pdf" target="_blank">Article comparing sorting</a></p>
   </li>
   <li>
-    <p><a href="http://learnwrite.github.io/blog/2013/10/12/sorting/" target="_blank">Sorting in detail</a></p>
+    <p><a href="http://distkeys.com/blog/2013/10/12/sorting/" target="_blank">Sorting in detail</a></p>
   </li>
   <li>
     <p><a href="http://faculty.simpson.edu/lydia.sinapova/www/cmsc250/LN250_Tremblay/L06-QuickSortEX.htm" target="_blank">Median of 3 quicksort</a></p>
@@ -636,7 +636,7 @@ Each level contributes to total cost of <code>cn</code></p>
     <td>O(nlogn)</td>
     <td>O(nlogn)</td>
     <td><code class="mygreen">O(1)</code></td>
-    <td><a href="http://learnwrite.github.io/blog/2013/10/13/comparison-based-sorting/#table-based-comparison" target="_blank">Detailed notes</a></td>
+    <td><a href="http://distkeys.com/blog/2013/10/13/comparison-based-sorting/#table-based-comparison" target="_blank">Detailed notes</a></td>
 </tr>
 <tr>
     <td><code class="myyellow"><a href="http://en.wikipedia.org/wiki/Insertion_sort" target="_blank">Insertion sort</a></code></td>
@@ -668,7 +668,7 @@ Each level contributes to total cost of <code>cn</code></p>
     <td>O(nlogn)</td>
     <td>O(nlogn)</td>
     <td><code class="myred">O(n)</code></td>
-    <td><a href="http://learnwrite.github.io/blog/2013/10/13/comparison-based-sorting/#table-based-comparison" target="_blank">Detailed notes</a></td>
+    <td><a href="http://distkeys.com/blog/2013/10/13/comparison-based-sorting/#table-based-comparison" target="_blank">Detailed notes</a></td>
 </tr>
 <tr>
     <td><code class="myred"><a href="http://en.wikipedia.org/wiki/Odd–even_sort" target="_blank">Odd–even sort</a></code></td>

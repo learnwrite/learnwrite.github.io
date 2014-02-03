@@ -4,7 +4,7 @@
   <title><![CDATA[Learnings]]></title>
   <link href="http://learnwrite.github.io/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2014-02-01T14:00:58-08:00</updated>
+  <updated>2014-02-02T17:28:55-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -51,13 +51,8 @@
 
 <p>This blog is summary of the research paper <a href="https://www.dropbox.com/s/s9smkjhyykasllg/Scale%20in%20distributed%20systems.pdf" target="_blank"> Scale in Distributed Systems.</a></p>
 
-<p>A system is Scalable if it can handle addition of users and resources without suffering a noticeable loss of performance or increase in administrative complexity.</p>
-
-<p>Paper talks about problem of scale and general solution. These solution fall into three categories</p>
-
-<p><strong>Replication, Distribution and Caching</strong>
-<br />
-<!-- more --></p>
+<p>A system is Scalable if it can handle addition of users and resources without suffering a noticeable loss of performance or increase in administrative complexity.
+<br /></p>
 
 <h3 id="systems-designed-to-scale">Systems designed to Scale</h3>
 
@@ -73,7 +68,8 @@
   <li><a href="http://en.wikipedia.org/wiki/Andrew_File_System" target="_blank">Andrew</a></li>
   <li><a href="http://en.wikipedia.org/wiki/Project_Athena" target="_blank">Project Athena</a></li>
   <li><a href="http://www.cdf.toronto.edu/~csc469h/fall/handouts/nitzberg91.pdf" target="_blank">Dash</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Amoeba_(operating_system)" target="_blank">Amoeba</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Amoeba_(operating_system)" target="_blank">Amoeba</a>
+<!-- more --></li>
 </ul>
 
 <p>As systems scales and accessible objects grows, locating objects of interest becomes difficult. Systems addressed this aspect of challenges are</p>
@@ -85,6 +81,11 @@
   <li><a href="http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=4798" target="_blank">QuickSilver</a></li>
   <li><a href="https://www.usenix.org/legacy/publications/compsystems/1990/fall_comer.pdf" target="_blank">Tilde</a></li>
 </ul>
+
+<p><br />
+Paper talks about problem of scale and general solution. These solution fall into three categories</p>
+
+<blockquote><p>Replication, Distribution and Caching</p></blockquote>
 
 <script src="http://d3js.org/d3.v3.min.js"></script>
 
@@ -584,7 +585,7 @@ directory so that the new version of the file will be found.<br />
 With loose consistency, replicas are guaranteed to eventually contain identical data.</p>
 
 <ol>
-  <li>Updates are allowed even when the network is panitioned or servers are down.<br /></li>
+  <li>Updates are allowed even when the network is partitioned or servers are down.<br /></li>
   <li>Updates are sent to any replica, and that replica forwards the update to the other replicas as they become available.<br /></li>
   <li>If conflicting updates are received by different replicas in different orders, time stamps indicate the order in which they are to be applied.<br /></li>
 </ol>
@@ -1161,7 +1162,7 @@ Sum = 10 Then the pairs are  {6,4} , {9,1}</p>
 
 <h4 id="reverse-a-string-without-extra-space">Reverse a string without extra space</h4>
 
-<p>String could be reversed without using extra space using bitwise operator <a href="http://learnwrite.github.io/blog/2013/10/08/world-of-bits-and-bytes/#bitwise-operators" target="_blank">XOR</a></p>
+<p>String could be reversed without using extra space using bitwise operator <a href="http://distkeys.com/blog/2013/10/08/world-of-bits-and-bytes/#bitwise-operators" target="_blank">XOR</a></p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>String Reverse</span>  <a href="http://ideone.com/vfTxcr" target="_blank">Run Code </a></figcaption> <div class="CodeRay">
   <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
@@ -1241,7 +1242,7 @@ Rotate 2 times</p>
 
 <h4 id="permutation-of-a-string">Permutation of a string</h4>
 
-<p><a href="http://learnwrite.github.io/blog/2013/11/18/recursion/#string-permutation-non-repeating" target="_blank">Permutation</a></p>
+<p><a href="http://distkeys.com/blog/2013/11/18/recursion/#string-permutation-non-repeating" target="_blank">Permutation</a></p>
 
 <p><br /></p>
 
@@ -2801,7 +2802,7 @@ Each level contributes to total cost of <code>cn</code></p>
     <p><a href="https://www.dropbox.com/s/4kcfkbvkwmnmgib/sorting.pdf" target="_blank">Article comparing sorting</a></p>
   </li>
   <li>
-    <p><a href="http://learnwrite.github.io/blog/2013/10/12/sorting/" target="_blank">Sorting in detail</a></p>
+    <p><a href="http://distkeys.com/blog/2013/10/12/sorting/" target="_blank">Sorting in detail</a></p>
   </li>
   <li>
     <p><a href="http://faculty.simpson.edu/lydia.sinapova/www/cmsc250/LN250_Tremblay/L06-QuickSortEX.htm" target="_blank">Median of 3 quicksort</a></p>
@@ -3051,7 +3052,7 @@ Each level contributes to total cost of <code>cn</code></p>
     <td>O(nlogn)</td>
     <td>O(nlogn)</td>
     <td><code class="mygreen">O(1)</code></td>
-    <td><a href="http://learnwrite.github.io/blog/2013/10/13/comparison-based-sorting/#table-based-comparison" target="_blank">Detailed notes</a></td>
+    <td><a href="http://distkeys.com/blog/2013/10/13/comparison-based-sorting/#table-based-comparison" target="_blank">Detailed notes</a></td>
 </tr>
 <tr>
     <td><code class="myyellow"><a href="http://en.wikipedia.org/wiki/Insertion_sort" target="_blank">Insertion sort</a></code></td>
@@ -3083,7 +3084,7 @@ Each level contributes to total cost of <code>cn</code></p>
     <td>O(nlogn)</td>
     <td>O(nlogn)</td>
     <td><code class="myred">O(n)</code></td>
-    <td><a href="http://learnwrite.github.io/blog/2013/10/13/comparison-based-sorting/#table-based-comparison" target="_blank">Detailed notes</a></td>
+    <td><a href="http://distkeys.com/blog/2013/10/13/comparison-based-sorting/#table-based-comparison" target="_blank">Detailed notes</a></td>
 </tr>
 <tr>
     <td><code class="myred"><a href="http://en.wikipedia.org/wiki/Odd–even_sort" target="_blank">Odd–even sort</a></code></td>
@@ -3609,7 +3610,7 @@ I started realizing that after all it’s not that easy to actually think and wr
 
 <h3 id="bitwise-operators">Bitwise Operators</h3>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Operators</span>  <a href="http://learnwrite.github.io/blog/2013/10/08/binary-number-operations/" target="_blank">Bitwise Operations </a></figcaption> <div class="CodeRay">
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Operators</span>  <a href="http://distkeys.com/blog/2013/10/08/binary-number-operations/" target="_blank">Bitwise Operations </a></figcaption> <div class="CodeRay">
   <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
 <span class="line-numbers"> <a href="#n2" name="n2">2</a></span>The &amp; <span class="directive">operator</span> (AND)
 <span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span class="integer">1</span>   &amp;   <span class="integer">1</span>   ==   <span class="integer">1</span>
@@ -3669,7 +3670,7 @@ I started realizing that after all it’s not that easy to actually think and wr
 </div>
 </div>
 
-<p><a href="http://learnwrite.github.io/blog/2013/10/08/binary-number-operations/">Basics of Binary Arithmetic</a></p>
+<p><a href="http://distkeys.com/blog/2013/10/08/binary-number-operations/">Basics of Binary Arithmetic</a></p>
 
 <p><br /></p>
 
@@ -3771,7 +3772,7 @@ I started realizing that after all it’s not that easy to actually think and wr
 
 <h4 id="unset-range-of-bits">Unset range of bits</h4>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Unset range of bits</span>  <a href="http://learnwrite.github.io/blog/2013/10/08/binary-number-operations/" target="_blank">Bitwise Operations </a></figcaption> <div class="CodeRay">
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Unset range of bits</span>  <a href="http://distkeys.com/blog/2013/10/08/binary-number-operations/" target="_blank">Bitwise Operations </a></figcaption> <div class="CodeRay">
   <div class="code"><pre>
 Unset range of bits
 For e.g. <span class="integer">1001</span> <span class="integer">1001</span>
@@ -3826,7 +3827,7 @@ Final Step
 </div>
  </figure></notextile></div>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>unsetBitsInRange</span>  <a href="http://learnwrite.github.io/blog/2013/10/08/binary-number-operations/" target="_blank">Bitwise Operations </a></figcaption> <div class="CodeRay">
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>unsetBitsInRange</span>  <a href="http://distkeys.com/blog/2013/10/08/binary-number-operations/" target="_blank">Bitwise Operations </a></figcaption> <div class="CodeRay">
   <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
 <span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="comment">// i is start of range</span>
 <span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span class="comment">// j is end of range</span>
@@ -4184,7 +4185,7 @@ At first, <code>both CPUs try to read the same location</code>, but the memory a
 
 <h3 id="semaphores">Semaphores</h3>
 
-<p>Please visit <a href="http://learnwrite.github.io/blog/2013/10/07/process-synchronization-in-os/#semaphores">Semaphore Page</a></p>
+<p>Please visit <a href="http://distkeys.com/blog/2013/10/07/process-synchronization-in-os/#semaphores">Semaphore Page</a></p>
 
 <h3 id="spin-locks">Spin Locks</h3>
 

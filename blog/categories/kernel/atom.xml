@@ -4,7 +4,7 @@
   <title><![CDATA[Category: kernel | Learnings]]></title>
   <link href="http://learnwrite.github.io/blog/categories/kernel/atom.xml" rel="self"/>
   <link href="http://learnwrite.github.io/"/>
-  <updated>2014-02-01T14:00:58-08:00</updated>
+  <updated>2014-02-02T17:28:55-08:00</updated>
   <id>http://learnwrite.github.io/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -167,7 +167,7 @@ At first, <code>both CPUs try to read the same location</code>, but the memory a
 
 <h3 id="semaphores">Semaphores</h3>
 
-<p>Please visit <a href="http://learnwrite.github.io/blog/2013/10/07/process-synchronization-in-os/#semaphores">Semaphore Page</a></p>
+<p>Please visit <a href="http://distkeys.com/blog/2013/10/07/process-synchronization-in-os/#semaphores">Semaphore Page</a></p>
 
 <h3 id="spin-locks">Spin Locks</h3>
 

@@ -12,7 +12,7 @@
         <loc>
             http://learnwrite.github.io/blog/2013/10/07/process-synchronization-in-linux-kernel/
         </loc>
-        <lastmod>2014-01-06T08:35:08-08:00</lastmod>
+        <lastmod>2014-02-02T17:27:25-08:00</lastmod>
     </url>
     <url>
         <loc>http://learnwrite.github.io/blog/2013/10/08/binary-number-operations/</loc>
@@ -20,15 +20,15 @@
     </url>
     <url>
         <loc>http://learnwrite.github.io/blog/2013/10/08/world-of-bits-and-bytes/</loc>
-        <lastmod>2014-01-06T08:33:57-08:00</lastmod>
+        <lastmod>2014-02-02T17:27:47-08:00</lastmod>
     </url>
     <url>
         <loc>http://learnwrite.github.io/blog/2013/10/12/sorting/</loc>
-        <lastmod>2014-01-06T08:33:34-08:00</lastmod>
+        <lastmod>2014-02-02T17:28:13-08:00</lastmod>
     </url>
     <url>
         <loc>http://learnwrite.github.io/blog/2013/10/13/comparison-based-sorting/</loc>
-        <lastmod>2014-01-06T08:33:18-08:00</lastmod>
+        <lastmod>2014-02-02T17:28:30-08:00</lastmod>
     </url>
     <url>
         <loc>http://learnwrite.github.io/blog/2013/11/18/recursion/</loc>
@@ -48,7 +48,7 @@
     </url>
     <url>
         <loc>http://learnwrite.github.io/blog/2013/12/30/array-and-strings/</loc>
-        <lastmod>2014-01-06T08:29:34-08:00</lastmod>
+        <lastmod>2014-02-02T17:28:44-08:00</lastmod>
     </url>
     <url>
         <loc>http://learnwrite.github.io/blog/2014/01/04/D3-and-Octopress/</loc>
@@ -56,7 +56,7 @@
     </url>
     <url>
         <loc>http://learnwrite.github.io/blog/2014/01/05/scale-in-distributed-systems/</loc>
-        <lastmod>2014-01-27T22:00:49-08:00</lastmod>
+        <lastmod>2014-02-01T14:24:59-08:00</lastmod>
     </url>
     <url>
         <loc>http://learnwrite.github.io/about/</loc>
@@ -64,7 +64,7 @@
     </url>
     <url>
         <loc>http://learnwrite.github.io/archives/</loc>
-        <lastmod>2014-01-27T22:00:49-08:00</lastmod>
+        <lastmod>2014-02-02T17:28:44-08:00</lastmod>
     </url>
     <url>
         <loc>http://learnwrite.github.io/atom_search.xml</loc>
@@ -72,11 +72,11 @@
     </url>
     <url>
         <loc>http://learnwrite.github.io/blog/archives/</loc>
-        <lastmod>2014-01-27T22:00:49-08:00</lastmod>
+        <lastmod>2014-02-02T17:28:44-08:00</lastmod>
     </url>
     <url>
         <loc>http://learnwrite.github.io/</loc>
-        <lastmod>2014-01-27T22:00:49-08:00</lastmod>
+        <lastmod>2014-02-02T17:28:44-08:00</lastmod>
     </url>
     <url>
         <loc>http://learnwrite.github.io/robots.txt</loc>
