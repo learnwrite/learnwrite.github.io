@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | Distributed Knowledge]]></title>
   <link href="http://distkeys.com/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://distkeys.com/"/>
-  <updated>2014-02-02T21:02:26-08:00</updated>
+  <updated>2014-02-08T13:34:22-08:00</updated>
   <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -103,7 +103,7 @@ the need for synchronization in the first place.</p>
   <li>It avoids cache line snooping and invalidations, which are costly operations.</li>
 </ul>
 
-<p><strong>[Snooping and Invalidations]</strong> Snooping is the process where the individual caches monitor address lines,  for accesses to memory locations that they have cached. When a write operation is observed to a location that a cache has a copy of, the cache controller invalidates its own copy of the snooped memory location.</p>
+<p><code class="myyellow">Snooping and Invalidations</code> - Snooping is the process where the individual caches monitor address lines,  for accesses to memory locations that they have cached. When a write operation is observed to a location that a cache has a copy of, the cache controller invalidates its own copy of the snooped memory location.</p>
 
 <p><code>Cons</code></p>
 
@@ -113,7 +113,7 @@ the need for synchronization in the first place.</p>
   <li>Per-CPU variables are variables are prone to <code>race conditions</code> caused by kernel preemption, both in uniprocessor and multiprocessor systems.<br /></li>
 </ul>
 
-<p><strong>[Problem]</strong> What would happen if a kernel control path gets the address of its local copy of a per-CPU variable, and then it is preempted and moved to another CPU: the address still refers to the element of the previous CPU.</p>
+<p><code class="myred">Problem</code> What would happen if a kernel control path gets the address of its local copy of a per-CPU variable, and then it is preempted and moved to another CPU: the address still refers to the element of the previous CPU.</p>
 
 <p>As a general rule, a kernel control path should access a per-CPU variable with kernel preemption disabled.</p>
 
@@ -122,18 +122,18 @@ the need for synchronization in the first place.</p>
 
 <h3 id="atomic-operations">Atomic Operations</h3>
 
-<p><strong>[Problem]</strong> Several assembly language instructions are of type “read-modify-write” i.e. memory location is accessed twice first to read the old value and second time to write a new value</p>
+<p><code class="myred">Problem</code> Several assembly language instructions are of type “read-modify-write” i.e. memory location is accessed twice first to read the old value and second time to write a new value</p>
 
 <p><strong>Detailed explanation</strong><br />
 Suppose that two kernel control paths running on two CPUs try to “read-modify-write” the same memory location at the same time by executing nonatomic operations.<br />
 At first, <code>both CPUs try to read the same location</code>, but the memory arbiter (a hardware circuit that serializes accesses to the RAM chips) steps in to grant access to one of them and delay the other. However, when the first read operation has completed, the delayed CPU reads exactly the same (old) value from the memory location.
 <code>Both CPUs then try to write the same (new) value to the memory location</code>; again, the bus memory access is serialized by the memory arbiter, and eventually both write operations succeed. However, the global result is incorrect because both CPUs write the same (new) value. Thus, the two interleaving “read-modify-write” operations act as a single one.</p>
 
-<p><strong>[Solution]</strong> Reason for problem here is that Both CPU’s try to access memory location at the same time. If operation of “read-modify-write” can be made atomic then problem would be solved i.e. Every such <code>operation must be executed in a single instruction without being interrupted</code> in the middle and avoiding accesses to the same memory location by other CPUs.</p>
+<p><code class="mygreen">Solution</code> Reason for problem here is that Both CPU’s try to access memory location at the same time. If operation of “read-modify-write” can be made atomic then problem would be solved i.e. Every such <code>operation must be executed in a single instruction without being interrupted</code> in the middle and avoiding accesses to the same memory location by other CPUs.</p>
 
 <ul>
   <li>Read-modify-write assembly language instructions are atomic if no other processor has taken the memory bus after the read and before the write. <code>Memory bus stealing never happens in a uniprocessor system.</code></li>
-  <li>For multiprocessor system, Read-modify-write assembly language instructions whose opcode is prefixed by the <strong>Lock byte</strong> (0xf0) are atomic. </li>
+  <li>For multiprocessor system, Read-modify-write assembly language instructions whose opcode is prefixed by the <strong>Lock Byte</strong> (0xf0) are atomic. </li>
   <li>Other processors cannot access the memory location while the locked instruction is being executed.</li>
 </ul>
 
@@ -155,8 +155,9 @@ At first, <code>both CPUs try to read the same location</code>, but the memory a
   <li>Synchronization primitive at CPU level      - Memory barrier</li>
 </ul>
 
-<p>In linux <em>barrier()</em> macro acts as an <em>optimization barrier</em>. 
-<blockquote><p>Optimization barrier primitive ensures that assembly language instructions of C statements mentioned before <em>barrier()</em> and assembly language instructions of C statements mentioned after, remains in the same sequence.</p></blockquote></p>
+<p>In linux <em>barrier()</em> macro acts as an <em>optimization barrier</em>. <br /></p>
+
+<p><blockquote><p>Optimization barrier primitive ensures that assembly language instructions of C statements mentioned before barrier() and assembly language instructions of C statements mentioned after, remains in the same sequence.</p></blockquote></p>
 
 <p>But, Optimization barrier cannot control in which fashion instructions will be executed by CPU.</p>
 
@@ -172,7 +173,8 @@ At first, <code>both CPUs try to read the same location</code>, but the memory a
 <h3 id="spin-locks">Spin Locks</h3>
 
 <p>When a kernel control path must access a shared data structure or enter a critical section it need to acquire a lock.<br />
-Spin Locks are a special kind of lock designed to work in a multiprocessor environment. If kernel control path finds Spin Lock <em>Open</em> it acquires the lock and continue execution else it <em>Spin</em> around repeatedly executing tight instruction loop, until the lock is released.</p>
+Spin Locks are a special kind of lock designed to work in a multiprocessor environment. 
+<blockquote><p>If kernel control path finds Spin Lock Open it acquires the lock and continue execution else it Spin around repeatedly executing tight instruction loop, until the lock is released.</p></blockquote></p>
 
 <p>The waiting kernel control path keeps running on the CPU, even if it has nothing to do besides waste time. <code>Kernel preemption is disabled</code> in CR protected by Spin Locks.
 Spin locks are usually convenient, because many kernel resources are locked for a <code>fraction of a millisecond only</code>; therefore, it would be far more time-consuming to release the CPU and reacquire it later.<br />
@@ -264,7 +266,9 @@ In the above example <code>Lock is 1 and Unlock is 0</code></p>
 
 <h4 id="readwrite-spin-locks">Read/Write Spin Locks</h4>
 
-<p>Read Spin Locks is used to increase the concurrency within kernel. Idea is that allow several kernel control path to access same data structure for “Read” using Read Spin Locks. No kernel control path can modify the data structure using Read Spin Locks. </p>
+<p>Read Spin Locks is used to increase the concurrency within kernel. </p>
+
+<p><blockquote><p>Idea is that allow several kernel control path to access same data structure for “Read” using Read Spin Locks. No kernel control path can modify the data structure using Read Spin Locks.</p></blockquote></p>
 
 <p>To modify shared data structure kernel control path needs to acquire Write Spin Locks. Write Spin Lock is granted when no kernel control path have Read Spin Locks.</p>
 
@@ -283,7 +287,7 @@ In the above example <code>Lock is 1 and Unlock is 0</code></p>
 <p>Every time writer acquire and release sequence lock it must increment sequence counter. When counter is odd means writer is in progress and when counter is even means writer is done.<br />
 When a reader enters a critical region, it <code>does not need to disable kernel preemption</code>; on the other hand, the <code>writer automatically disables kernel preemption</code> when entering the critical region, because it acquires the spin lock.</p>
 
-<p>SeqLocks must not be used for </p>
+<p>SeqLocks must <code class="myred">not</code> be used for </p>
 
 <ul>
   <li>The data structure to be protected does not include pointers that are modified by the writers and dereferenced by the readers (otherwise, a writer could change the pointer under the nose of the readers)</li>
@@ -317,7 +321,7 @@ The key idea consists of limiting the scope of RCU as follows:</p>
 
 <p>Spin lock is coupled with RCU to forbid the concurrent execution of writers.</p>
 
-<p><strong>[Problem]</strong> Old copy of the data structure cannot be freed right away when the writer updates the pointer. In fact, the readers that were accessing the data structure when the writer started its update could still be reading the old copy. The old copy can be freed only after all (potential) readers on the CPUs have executed.</p>
+<p><code class="myred">Problem</code> Old copy of the data structure cannot be freed right away when the writer updates the pointer. In fact, the readers that were accessing the data structure when the writer started its update could still be reading the old copy. The old copy can be freed only after all (potential) readers on the CPUs have executed.</p>
 ]]></content>
   </entry>
   

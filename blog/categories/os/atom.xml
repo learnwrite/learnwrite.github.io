@@ -4,7 +4,7 @@
   <title><![CDATA[Category: OS | Distributed Knowledge]]></title>
   <link href="http://distkeys.com/blog/categories/os/atom.xml" rel="self"/>
   <link href="http://distkeys.com/"/>
-  <updated>2014-02-02T21:02:26-08:00</updated>
+  <updated>2014-02-08T13:34:22-08:00</updated>
   <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -42,6 +42,11 @@
   <li><a href="#replication">Replication</a>    <ul>
       <li><a href="#placement-of-replicas">Placement of replicas</a></li>
       <li><a href="#replica-consistency">Replica Consistency</a></li>
+    </ul>
+  </li>
+  <li><a href="#distribution">Distribution</a>    <ul>
+      <li><a href="#placement-of-servers">Placement of servers</a></li>
+      <li><a href="#finding-the-right-server">Finding the right server</a></li>
     </ul>
   </li>
 </ul>
@@ -349,7 +354,7 @@ function toggle(d) {
 2.  Relative loads on servers<br />
 3. Random server selection<br /></p>
 
-<p><strong>Problem</strong>
+<p><code class="myred">Problem</code>
 Its hard to make <code>replica consistent.</code></p>
 
 <ul>
@@ -369,7 +374,7 @@ Its hard to make <code>replica consistent.</code></p>
 By Caching the mapping from a prefix to the name server handling that prefix, future names sharing the same prefix can be resolved with fewer messages.</li>
 </ul>
 
-<p><strong>Problem</strong>
+<p><code class="myred">Problem</code>
 <blockquote><p>Caching is a form of replication and as similar to replication biggest difficulty is the need to for consistency.</p></blockquote>
 <br /></p>
 
@@ -379,15 +384,16 @@ By Caching the mapping from a prefix to the name server handling that prefix, fu
 
 <p>UID may be thought as addresses. It contain <code>server information</code> identifying the server address and an <code>identifier</code> to be interpreted by the server to locate the object. </p>
 
-<p><strong>Problem</strong> <br /></p>
+<p><code class="myred">Problem</code>
+<br /></p>
 
 <p>UID identify the server on which an object resides. When object moves to other location the UID is no longer valid for the object they reference.<br /></p>
 
-<p>This problem can be solved using technique called <code>forward pointers</code>. With forward pointers a user attempting to use an old address to access an object is given a new UID containing new address.</p>
+<p>This problem can be <code class="mygreen">solved</code> using technique called <code>forward pointers</code>. With forward pointers a user attempting to use an old address to access an object is given a new UID containing new address.</p>
 
-<p>Problem with forward chaining is that the chain of links can become lengthy and reduce performance. Also, if one of the node is down then access to link is prevented.</p>
+<p><code class="myred">Problem</code> with forward chaining is that the chain of links can become lengthy and reduce performance. Also, if one of the node is down then access to link is prevented.</p>
 
-<p>This problem can be solved by requiring each object to have a home site with the forward pointer at that site kept up-to-date. </p>
+<p>This problem can be <code class="mygreen">solved</code> by requiring each object to have a home site with the forward pointer at that site kept up-to-date. </p>
 
 <p><a href="http://gost.isi.edu/products/prm/papers/prm-cpe.ps" target="_blank">Prospero</a> supports UIDs with expiration dates. Its directory service guarantees that the UIDs it maintains are kept up-to-date. The use of expiration dates makes getting rid of forwarding pointers possible, once all possible UIDs with the old address have expired.
 <br /><br /></p>
@@ -403,7 +409,7 @@ By Caching the mapping from a prefix to the name server handling that prefix, fu
 
 <h4 id="growth-and-reorganization">Growth and reorganization</h4>
 
-<p>When two organizations with separate global name spaces merge, reorganize, or otherwise combine their name spaces, a problem arises if the name spaces are not disjoint.</p>
+<p>When two organizations with separate global name spaces merge, reorganize, or otherwise combine their name spaces, a <code class="myred">problem</code> arises if the name spaces are not disjoint.</p>
 
 <p>New names and new prefix is assigned with old name and it is a problem for any names that were embedded in programs or otherwise specified before change.</p>
 
@@ -411,10 +417,9 @@ By Caching the mapping from a prefix to the name server handling that prefix, fu
 1. Associating a unique number with the root of every independent name space.<br />
 2.  When a file name is stored, the number for the root of the name space can be stored along with the name. <br />
 3. When name spaces are merged, an entry is made in the new root, pairing the UID of each previous root with the prefix required to find it.<br />
-4.  When a name with an associated root UID is resolved, the UID is checked; if it does not match that for the current root, the corresponding prefix is prepended, allowing the embedded name to work.</p>
-<hr />
-
-<p><br /></p>
+4.  When a name with an associated root UID is resolved, the UID is checked; if it does not match that for the current root, the corresponding prefix is prepended, allowing the embedded name to work.
+&lt;hr style="border-top: 1.5px dotted black"/&gt;<br />
+<br /></p>
 
 <h3 id="security-subsystem">Security Subsystem</h3>
 
@@ -427,7 +432,7 @@ By Caching the mapping from a prefix to the name server handling that prefix, fu
 This technique involves using password on each host.</li>
 </ul>
 
-<p><strong>Problems</strong><br />
+<p><code class="myred">Problems</code><br />
 1. Requires maintenance of a password database on multiple nodes.<br />
 2. Its cumbersome, if user have to present password each time a new service is requested.<br />
 3. Letting the workstation remember the user’s password is risky.<br />
@@ -490,11 +495,10 @@ When these techniques are applied in the area of security, the following conside
   <li>The security of the service is that of the weakest of all <code>replicas</code>.<br /></li>
   <li>When <code>distribution</code> is used, multiple servers may be involved in a particular exchange.<br /></li>
   <li>It is important that both principals know which servers were involved so that they can correctly decide how much trust to place in the results. <br /></li>
-  <li>The longer credentials are allowed to be <code>cached</code>, the longer it will take to recover when a key is compromised.</li>
+  <li>The longer credentials are allowed to be <code>cached</code>, the longer it will take to recover when a key is compromised.
+&lt;hr style="border-top: 1.5px dotted black"/&gt;<br />
+<br /></li>
 </ol>
-<hr />
-
-<p><br /></p>
 
 <h3 id="remote-resources">Remote resources</h3>
 
@@ -524,10 +528,9 @@ parameters must not be completely hidden from the application.</p>
      •  Processing is required by all servers, whether or not they can handle a request.<br />
      •  As the total number of requests grows, the load due to preliminary processing on each server also grows.</p>
 
-<p>•  <code class="myyellow">Multicast communication</code> - In multicast, a single message can be sent to a group of servers. For multicast to scale, the groups to which messages are sent should be kept small.</p>
-<hr />
-
-<p><br /></p>
+<p>•  <code class="myyellow">Multicast communication</code> - In multicast, a single message can be sent to a group of servers. For multicast to scale, the groups to which messages are sent should be kept small.
+&lt;hr style="border-top: 1.5px dotted black"/&gt;<br />
+<br /></p>
 
 <h3 id="replication">Replication</h3>
 
@@ -588,11 +591,35 @@ With loose consistency, replicas are guaranteed to eventually contain identical 
 <blockquote><p>With loose consistency, there is no guarantee that a query will return the most recent data.</p></blockquote></li>
 </ol>
 
-<p>• <code class="myyellow">Quorum consensus</code><br /></p>
+<p>• <code class="myyellow">Quorum consensus</code><br />
+In Quorum consensus
+1. Assigning votes to each replica<br />
+2. Selecting two numbers-a read-quorum and a write-quorum-such that the read-quorum plus the write-quorum exceeds the total number of votes <br />
+3. Requiring that reads and writes be directed to a sufficient number of replicas to collect enough votes to satisfy the quorum.<br />
+Taking these steps guarantees that the set of replicas read will intersect with the set written during the most recent update. Time stamps or version numbers stored with each replica allow the client to determine which data are most recent.
+&lt;hr style="border-top: 1.5px dotted black"/&gt;<br />
+<br /></p>
 
-<hr />
+<h3 id="distribution">Distribution</h3>
 
-<p><br /></p>
+<p>Distribution allows the information maintained by a distributed service to be spread across multiple servers. Distribution <code>reduces the number of requests</code> to be handled by each server, allows administration of parts of a service to be assigned to different individuals.</p>
+
+<p>Some of the issues of importance in distribution are the placement of the servers and the mechanisms by which the client finds the server with the desired information.
+<br /><br /></p>
+
+<h4 id="placement-of-servers">Placement of servers</h4>
+
+<p>Information should be distributed to servers that are <code>near the users</code> that will most frequently access the information.</p>
+
+<p>• Reduce network traffic. <br />
+• Improves reliability, as it less likely that a network partition will make a
+local server inaccessible.<br />
+• It is desirable to avoid the need to contact a name server across
+the country in order to find a resource in the next room.</p>
+
+<p>By assigning information to servers along administrative lines, an organization can avoid dependence on other organizations.<br /><br /></p>
+
+<h4 id="finding-the-right-server">Finding the right server</h4>
 
 ]]></content>
   </entry>

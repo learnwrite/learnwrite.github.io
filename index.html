@@ -165,6 +165,11 @@
       <li><a href="#replica-consistency">Replica Consistency</a></li>
     </ul>
   </li>
+  <li><a href="#distribution">Distribution</a>    <ul>
+      <li><a href="#placement-of-servers">Placement of servers</a></li>
+      <li><a href="#finding-the-right-server">Finding the right server</a></li>
+    </ul>
+  </li>
 </ul>
 
 <h3 id="introduction">Introduction</h3>
@@ -723,21 +728,23 @@ Sum = 10 Then the pairs are  {6,4} , {9,1}</p>
 
 <p>Merge sort follows <code>divide-and-conquer</code> approach.</p>
 
-<p><br /><br /></p>
+<p><br /><br /><br /><br /></p>
 
-<div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span class="constant">MERGE</span>-SORT(<span class="constant">A</span>, p, r) /<span class="regexp"><span class="delimiter">/</span><span class="content"> A is array of numbers</span></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="regexp"><span class="content">{                   </span><span class="delimiter">/</span></span>/ p is starting index of array
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>                    <span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span> r is last index of array
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    <span class="keyword">if</span> p &lt; r
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    <span class="keyword">then</span> q &lt;- ⌊(p + r)⌋ / <span class="integer">2</span>;  
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>        <span class="constant">MERGE</span>-SORT(<span class="constant">A</span>, p, q)
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>        <span class="constant">MERGE</span>-SORT(<span class="constant">A</span>, q + <span class="integer">1</span>, r)
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>        MERGE(<span class="constant">A</span>, p, q, r)
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>}
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Merge-Sort </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>MERGE-SORT(A, p, r) <span class="comment">// A is array of numbers</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>{                   <span class="comment">// p is starting index of array</span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>                    <span class="comment">// r is last index of array</span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    <span class="keyword">if</span> p &lt; r
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    then q &lt;- <span class="error">⌊</span>(p + r)<span class="error">⌋</span> / <span class="integer">2</span>;  
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>        MERGE-SORT(A, p, q)
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>        MERGE-SORT(A, q + <span class="integer">1</span>, r)
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>        MERGE(A, p, q, r)
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>}
 </pre></div>
 </div>
-</div>
+ </figure></notextile></div>
 
 </div>
   

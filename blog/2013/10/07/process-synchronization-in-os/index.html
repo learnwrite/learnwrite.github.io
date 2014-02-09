@@ -152,20 +152,20 @@
 
 <h3 id="what-is-a-process">What is a Process?</h3>
 
-<p>OS <code>objective</code> is to keep as many as of the computer resources as busy as possible. It is used to keep track of all the things an OS must remember about the state of user program.</p>
+<p>Operating system(OS) <code>objective</code> is to keep as many as of the computer resources as busy as possible. It is used to keep track of all the things an OS must remember about the state of user program.</p>
 
-<p>Process = Code + Allocated Resources + Book keeping information</p>
+<p>Process is like a box, a complete entity in itself which does a step by step task written in program. More formally it is called <code class="myyellow">program in execution.</code></p>
 
-<p>Process is like a box, a complete entity in itself which does a step by step task written in progam. More formally it is called program in execution.</p>
-
-<p>Lets consider a very basic operating system with very least complexity. This operating system can run only <code>one process</code> at a time. Since, only one process is working at a time, it may happen that all the resources occupied by process will not be used at the same time.</p>
-
+<p>Lets consider a very basic operating system with very least complexity. This operating system can run only <code>one process</code> at a time. Since, only one process is working at a time, it may happen that all the resources occupied by process will not be used at the same time. 
 <!-- more -->
-<p>To maximize the resource utilization, we need to have entities running at the same time. When its said multiple entities it is logical that either we need to have multiple process running at the same time or light weight multiple entities running inside process.</p>
+<span class="pullquote-right" data-pullquote="Process = Code + Allocated Resources + Book keeping information">
+To maximize the resource utilization, we need to have entities running at the same time. For multiple entities, it is logical that either we need to have multiple process running at the same time or light weight multiple entities running inside process as a part of process.
+Process = Code + Allocated Resources + Book keeping information
+</span></p>
 
-<p>Lets explore the second option, now consider process is like a box and it has resources inside the box. We create multiple child of process which is called thread.</p>
+<p>Lets explore the second option, now consider process is like a box and it has resources inside the box. We create multiple <code class="myyellow">child of process which is called thread.</code></p>
 
-<p>Thread is a child of process and hence it will use resource Process have. Theoretically, there is no limit on number of child threads a process can have but it seems logical that process should have enough resource for administrative purpose for these threads. </p>
+<p>Thread is a child of process and hence it will use resources of process. Theoretically, there is no limit on number of child threads a process can have but it seems logical that process should have enough resource for administrative purpose for these threads. </p>
 
 <p>Once there are multiple threads they are going to ask for same resource at the same time. For example, if two children are in one room then they will always fight for same toy. Same applies to threads.</p>
 
@@ -616,7 +616,7 @@ monitor condition =&gt; needItem;<br /></p>
 <ul>
   <li><a href="https://www.dropbox.com/s/8naej9kd0612gkr/implementingcvs.pdf" target="_blank">Implementing CV using semaphore</a></li>
   <li><a href="https://www.dropbox.com/s/gaallrwximrm14g/Monitors.pdf" target="_blank">Monitors by C.A.R Hoare </a></li>
-  <li>Process synchronization in Linux Kernel</li>
+  <li><a href="http://distkeys.com/blog/2013/10/07/process-synchronization-in-linux-kernel/" target="_blank">Process synchronization in Linux Kernel</a></li>
 </ul>
 </div>
 
