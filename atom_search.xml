@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Learnings]]></title>
-  <link href="http://learnwrite.github.io/atom.xml" rel="self"/>
-  <link href="http://learnwrite.github.io/"/>
-  <updated>2014-02-02T17:28:55-08:00</updated>
-  <id>http://learnwrite.github.io/</id>
+  <title><![CDATA[Distributed Knowledge]]></title>
+  <link href="http://distkeys.com/atom.xml" rel="self"/>
+  <link href="http://distkeys.com/"/>
+  <updated>2014-02-02T21:02:26-08:00</updated>
+  <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
     
@@ -16,9 +16,9 @@
   <entry>
     <title type="html"><![CDATA[Scale in Distributed Systems]]></title>
     <summary><![CDATA[]]></summary>
-    <link href="http://learnwrite.github.io/blog/2014/01/05/scale-in-distributed-systems/"/>
+    <link href="http://distkeys.com/blog/2014/01/05/scale-in-distributed-systems/"/>
     <updated>2014-01-05T09:41:00-08:00</updated>
-    <id>http://learnwrite.github.io/blog/2014/01/05/scale-in-distributed-systems</id>
+    <id>http://distkeys.com/blog/2014/01/05/scale-in-distributed-systems</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#introduction">Introduction</a></li>
   <li><a href="#systems-designed-to-scale">Systems designed to Scale</a></li>
@@ -603,9 +603,9 @@ With loose consistency, replicas are guaranteed to eventually contain identical 
   <entry>
     <title type="html"><![CDATA[D3.js and Octopress]]></title>
     <summary><![CDATA[]]></summary>
-    <link href="http://learnwrite.github.io/blog/2014/01/04/D3-and-Octopress/"/>
+    <link href="http://distkeys.com/blog/2014/01/04/D3-and-Octopress/"/>
     <updated>2014-01-04T11:33:00-08:00</updated>
-    <id>http://learnwrite.github.io/blog/2014/01/04/D3-and-Octopress</id>
+    <id>http://distkeys.com/blog/2014/01/04/D3-and-Octopress</id>
     <content type="html"><![CDATA[
 <script src="http://d3js.org/d3.v3.min.js"></script>
 
@@ -1110,9 +1110,9 @@ function toggle(d) {
   <entry>
     <title type="html"><![CDATA[Array and Strings]]></title>
     <summary><![CDATA[]]></summary>
-    <link href="http://learnwrite.github.io/blog/2013/12/30/array-and-strings/"/>
+    <link href="http://distkeys.com/blog/2013/12/30/array-and-strings/"/>
     <updated>2013-12-30T01:26:00-08:00</updated>
-    <id>http://learnwrite.github.io/blog/2013/12/30/array-and-strings</id>
+    <id>http://distkeys.com/blog/2013/12/30/array-and-strings</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#array-problems">Array Problems</a>    <ul>
       <li><a href="#find-repeatingduplicate-numbers">Find repeating/duplicate numbers</a></li>
@@ -1253,9 +1253,9 @@ Rotate 2 times</p>
   <entry>
     <title type="html"><![CDATA[Graph Algorithms]]></title>
     <summary><![CDATA[]]></summary>
-    <link href="http://learnwrite.github.io/blog/2013/12/14/graph-algorithms/"/>
+    <link href="http://distkeys.com/blog/2013/12/14/graph-algorithms/"/>
     <updated>2013-12-14T13:03:00-08:00</updated>
-    <id>http://learnwrite.github.io/blog/2013/12/14/graph-algorithms</id>
+    <id>http://distkeys.com/blog/2013/12/14/graph-algorithms</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#graph-problems">Graph problems</a>    <ul>
       <li><a href="#find-neighbour-in-array">Find neighbour in array</a></li>
@@ -1431,9 +1431,9 @@ Rotate 2 times</p>
   <entry>
     <title type="html"><![CDATA[Scalability in Distributed Systems]]></title>
     <summary><![CDATA[]]></summary>
-    <link href="http://learnwrite.github.io/blog/2013/11/27/scalability/"/>
+    <link href="http://distkeys.com/blog/2013/11/27/scalability/"/>
     <updated>2013-11-27T15:06:00-08:00</updated>
-    <id>http://learnwrite.github.io/blog/2013/11/27/scalability</id>
+    <id>http://distkeys.com/blog/2013/11/27/scalability</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#facebook">Facebook</a>    <ul>
       <li><a href="#data-center">Data Center</a></li>
@@ -1537,9 +1537,9 @@ Rotate 2 times</p>
   <entry>
     <title type="html"><![CDATA[Trie and Trees]]></title>
     <summary><![CDATA[]]></summary>
-    <link href="http://learnwrite.github.io/blog/2013/11/26/trie-and-trees/"/>
+    <link href="http://distkeys.com/blog/2013/11/26/trie-and-trees/"/>
     <updated>2013-11-26T23:18:00-08:00</updated>
-    <id>http://learnwrite.github.io/blog/2013/11/26/trie-and-trees</id>
+    <id>http://distkeys.com/blog/2013/11/26/trie-and-trees</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#trie-problems">Trie Problems</a></li>
   <li><a href="#trie-explanation">Trie explanation</a></li>
@@ -1559,7 +1559,7 @@ Rotate 2 times</p>
 
 <div class="wikipedia">
   
-    <img src="http://learnwrite.github.io//upload.wikimedia.org/wikipedia/commons/thumb/b/be/Trie_example.svg/250px-Trie_example.svg.png" />
+    <img src="http://distkeys.com//upload.wikimedia.org/wikipedia/commons/thumb/b/be/Trie_example.svg/250px-Trie_example.svg.png" />
   
   <h2>trie</h2>
   <div>
@@ -1918,13 +1918,13 @@ Rotate 2 times</p>
 
 <h3 id="infix-to-postfix">Infix to Postfix</h3>
 
-<iframe width="420" height="315" src="http://learnwrite.github.io//www.youtube.com/embed/rA0x7b4YiMI" frameborder="0" allowfullscreen=""></iframe>
+<iframe width="420" height="315" src="http://distkeys.com//www.youtube.com/embed/rA0x7b4YiMI" frameborder="0" allowfullscreen=""></iframe>
 
 <p><br /></p>
 
 <h3 id="postfix-to-infix">Postfix to Infix</h3>
 
-<iframe width="420" height="315" src="http://learnwrite.github.io//www.youtube.com/embed/OlRENYiiIiw" frameborder="0" allowfullscreen=""></iframe>
+<iframe width="420" height="315" src="http://distkeys.com//www.youtube.com/embed/OlRENYiiIiw" frameborder="0" allowfullscreen=""></iframe>
 
 <h4 id="evaluate-postfix-expression">Evaluate Postfix expression</h4>
 
@@ -2190,9 +2190,9 @@ Rotate 2 times</p>
   <entry>
     <title type="html"><![CDATA[Recursion]]></title>
     <summary><![CDATA[]]></summary>
-    <link href="http://learnwrite.github.io/blog/2013/11/18/recursion/"/>
+    <link href="http://distkeys.com/blog/2013/11/18/recursion/"/>
     <updated>2013-11-18T22:18:00-08:00</updated>
-    <id>http://learnwrite.github.io/blog/2013/11/18/recursion</id>
+    <id>http://distkeys.com/blog/2013/11/18/recursion</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#recusion-problems">Recusion problems</a>    <ul>
       <li><a href="#factorial">Factorial</a></li>
@@ -2217,7 +2217,7 @@ Rotate 2 times</p>
 
 <div class="wikipedia">
   
-    <img src="http://learnwrite.github.io//upload.wikimedia.org/wikipedia/commons/thumb/6/62/Droste.jpg/220px-Droste.jpg" />
+    <img src="http://distkeys.com//upload.wikimedia.org/wikipedia/commons/thumb/6/62/Droste.jpg/220px-Droste.jpg" />
   
   <h2>Recursion</h2>
   <div>
@@ -2436,9 +2436,9 @@ To avoid that store all the strings generated in array/hash and compare everytim
   <entry>
     <title type="html"><![CDATA[Comparison based Sorting]]></title>
     <summary><![CDATA[]]></summary>
-    <link href="http://learnwrite.github.io/blog/2013/10/13/comparison-based-sorting/"/>
+    <link href="http://distkeys.com/blog/2013/10/13/comparison-based-sorting/"/>
     <updated>2013-10-13T01:43:00-07:00</updated>
-    <id>http://learnwrite.github.io/blog/2013/10/13/comparison-based-sorting</id>
+    <id>http://distkeys.com/blog/2013/10/13/comparison-based-sorting</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#merge-sort">Merge Sort</a></li>
   <li><a href="#table-based-comparison">Table based comparison</a></li>
@@ -2814,9 +2814,9 @@ Each level contributes to total cost of <code>cn</code></p>
   <entry>
     <title type="html"><![CDATA[sorting]]></title>
     <summary><![CDATA[]]></summary>
-    <link href="http://learnwrite.github.io/blog/2013/10/12/sorting/"/>
+    <link href="http://distkeys.com/blog/2013/10/12/sorting/"/>
     <updated>2013-10-12T13:08:00-07:00</updated>
-    <id>http://learnwrite.github.io/blog/2013/10/12/sorting</id>
+    <id>http://distkeys.com/blog/2013/10/12/sorting</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#dictionary-of-algorithms">Dictionary of algorithms</a></li>
   <li><a href="#sorting-visualization">Sorting Visualization</a></li>
@@ -2834,7 +2834,7 @@ Each level contributes to total cost of <code>cn</code></p>
 
 <div class="wikipedia">
   
-    <img src="http://learnwrite.github.io//upload.wikimedia.org/wikipedia/commons/thumb/8/82/Sorting_stability_playing_cards.svg/220px-Sorting_stability_playing_cards.svg.png" />
+    <img src="http://distkeys.com//upload.wikimedia.org/wikipedia/commons/thumb/8/82/Sorting_stability_playing_cards.svg/220px-Sorting_stability_playing_cards.svg.png" />
   
   <h2>sorting algorithm</h2>
   <div>
@@ -3561,9 +3561,9 @@ Each level contributes to total cost of <code>cn</code></p>
   <entry>
     <title type="html"><![CDATA[World of Bits and Bytes]]></title>
     <summary><![CDATA[]]></summary>
-    <link href="http://learnwrite.github.io/blog/2013/10/08/world-of-bits-and-bytes/"/>
+    <link href="http://distkeys.com/blog/2013/10/08/world-of-bits-and-bytes/"/>
     <updated>2013-10-08T13:17:00-07:00</updated>
-    <id>http://learnwrite.github.io/blog/2013/10/08/world-of-bits-and-bytes</id>
+    <id>http://distkeys.com/blog/2013/10/08/world-of-bits-and-bytes</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#bitwise-operators">Bitwise Operators</a></li>
   <li><a href="#bit-fields">Bit Fields</a></li>
@@ -3920,9 +3920,9 @@ TOGGLE the bits of <span class="string"><span class="delimiter">&quot;</span><sp
   <entry>
     <title type="html"><![CDATA[Binary number operations]]></title>
     <summary><![CDATA[]]></summary>
-    <link href="http://learnwrite.github.io/blog/2013/10/08/binary-number-operations/"/>
+    <link href="http://distkeys.com/blog/2013/10/08/binary-number-operations/"/>
     <updated>2013-10-08T12:47:00-07:00</updated>
-    <id>http://learnwrite.github.io/blog/2013/10/08/binary-number-operations</id>
+    <id>http://distkeys.com/blog/2013/10/08/binary-number-operations</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#addition">Addition</a></li>
   <li><a href="#subtraction">Subtraction</a></li>
@@ -4033,9 +4033,9 @@ TOGGLE the bits of <span class="string"><span class="delimiter">&quot;</span><sp
   <entry>
     <title type="html"><![CDATA[Process synchronization in Linux Kernel]]></title>
     <summary><![CDATA[]]></summary>
-    <link href="http://learnwrite.github.io/blog/2013/10/07/process-synchronization-in-linux-kernel/"/>
+    <link href="http://distkeys.com/blog/2013/10/07/process-synchronization-in-linux-kernel/"/>
     <updated>2013-10-07T20:56:00-07:00</updated>
-    <id>http://learnwrite.github.io/blog/2013/10/07/process-synchronization-in-linux-kernel</id>
+    <id>http://distkeys.com/blog/2013/10/07/process-synchronization-in-linux-kernel</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#synchronization-primitives">Synchronization Primitives</a></li>
   <li><a href="#per-cpu-variables">Per-CPU variables</a></li>
@@ -4342,9 +4342,9 @@ The key idea consists of limiting the scope of RCU as follows:</p>
   <entry>
     <title type="html"><![CDATA[Process synchronization in OS]]></title>
     <summary><![CDATA[]]></summary>
-    <link href="http://learnwrite.github.io/blog/2013/10/07/process-synchronization-in-os/"/>
+    <link href="http://distkeys.com/blog/2013/10/07/process-synchronization-in-os/"/>
     <updated>2013-10-07T11:54:00-07:00</updated>
-    <id>http://learnwrite.github.io/blog/2013/10/07/process-synchronization-in-os</id>
+    <id>http://distkeys.com/blog/2013/10/07/process-synchronization-in-os</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#what-is-a-process">What is a Process?</a></li>
   <li><a href="#issues-with-sharing">3 Issues with Sharing</a></li>
@@ -4833,9 +4833,9 @@ monitor condition =&gt; needItem;<br /></p>
   <entry>
     <title type="html"><![CDATA[GDB - Print Bit values of bytes]]></title>
     <summary><![CDATA[]]></summary>
-    <link href="http://learnwrite.github.io/blog/2013/10/06/gdb-print-bit-values-of-bytes/"/>
+    <link href="http://distkeys.com/blog/2013/10/06/gdb-print-bit-values-of-bytes/"/>
     <updated>2013-10-06T21:06:00-07:00</updated>
-    <id>http://learnwrite.github.io/blog/2013/10/06/gdb-print-bit-values-of-bytes</id>
+    <id>http://distkeys.com/blog/2013/10/06/gdb-print-bit-values-of-bytes</id>
     <content type="html"><![CDATA[
 <h2>Print bit values in a byte</h2>
 

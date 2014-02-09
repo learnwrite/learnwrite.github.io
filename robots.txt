@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://learnwrite.github.io/sitemap.xml 
+Sitemap: http://distkeys.com/sitemap.xml 

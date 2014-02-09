@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: numbers | Learnings]]></title>
-  <link href="http://learnwrite.github.io/blog/categories/numbers/atom.xml" rel="self"/>
-  <link href="http://learnwrite.github.io/"/>
-  <updated>2014-02-02T17:28:55-08:00</updated>
-  <id>http://learnwrite.github.io/</id>
+  <title><![CDATA[Category: numbers | Distributed Knowledge]]></title>
+  <link href="http://distkeys.com/blog/categories/numbers/atom.xml" rel="self"/>
+  <link href="http://distkeys.com/"/>
+  <updated>2014-02-02T21:02:26-08:00</updated>
+  <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Binary number operations]]></title>
-    <link href="http://learnwrite.github.io/blog/2013/10/08/binary-number-operations/"/>
+    <link href="http://distkeys.com/blog/2013/10/08/binary-number-operations/"/>
     <updated>2013-10-08T12:47:00-07:00</updated>
-    <id>http://learnwrite.github.io/blog/2013/10/08/binary-number-operations</id>
+    <id>http://distkeys.com/blog/2013/10/08/binary-number-operations</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#addition">Addition</a></li>
   <li><a href="#subtraction">Subtraction</a></li>

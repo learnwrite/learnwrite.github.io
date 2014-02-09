@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: gdb | Learnings]]></title>
-  <link href="http://learnwrite.github.io/blog/categories/gdb/atom.xml" rel="self"/>
-  <link href="http://learnwrite.github.io/"/>
-  <updated>2014-02-02T17:28:55-08:00</updated>
-  <id>http://learnwrite.github.io/</id>
+  <title><![CDATA[Category: gdb | Distributed Knowledge]]></title>
+  <link href="http://distkeys.com/blog/categories/gdb/atom.xml" rel="self"/>
+  <link href="http://distkeys.com/"/>
+  <updated>2014-02-02T21:02:26-08:00</updated>
+  <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[GDB - Print Bit values of bytes]]></title>
-    <link href="http://learnwrite.github.io/blog/2013/10/06/gdb-print-bit-values-of-bytes/"/>
+    <link href="http://distkeys.com/blog/2013/10/06/gdb-print-bit-values-of-bytes/"/>
     <updated>2013-10-06T21:06:00-07:00</updated>
-    <id>http://learnwrite.github.io/blog/2013/10/06/gdb-print-bit-values-of-bytes</id>
+    <id>http://distkeys.com/blog/2013/10/06/gdb-print-bit-values-of-bytes</id>
     <content type="html"><![CDATA[
 <h2>Print bit values in a byte</h2>
 
