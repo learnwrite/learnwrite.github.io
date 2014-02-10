@@ -43,8 +43,8 @@
   {
    "name": "Distribution",
    "children": [
-    {"name": "Placement of Server", "url": 8833},
-    {"name": "Finding right Server", "url": 1732}
+    {"name": "Placement of Server", "url": "http://distkeys.com/blog/2014/01/05/scale-in-distributed-systems/#placement-of-servers"},
+    {"name": "Finding right Server", "url": "http://distkeys.com/blog/2014/01/05/scale-in-distributed-systems/#finding-the-right-server"}
    ]
   },
   {
