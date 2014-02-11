@@ -4,7 +4,7 @@
   <title><![CDATA[Category: operating systems | Distributed Knowledge]]></title>
   <link href="http://distkeys.com/blog/categories/operating-systems/atom.xml" rel="self"/>
   <link href="http://distkeys.com/"/>
-  <updated>2014-02-10T14:50:44-08:00</updated>
+  <updated>2014-02-11T10:59:12-08:00</updated>
   <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -14,789 +14,718 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Process synchronization in Linux Kernel]]></title>
-    <link href="http://distkeys.com/blog/2013/10/07/process-synchronization-in-linux-kernel/"/>
-    <updated>2013-10-07T20:56:00-07:00</updated>
-    <id>http://distkeys.com/blog/2013/10/07/process-synchronization-in-linux-kernel</id>
+    <title type="html"><![CDATA[Scale in Distributed Systems]]></title>
+    <link href="http://distkeys.com/blog/2014/01/05/scale-in-distributed-systems/"/>
+    <updated>2014-01-05T09:41:00-08:00</updated>
+    <id>http://distkeys.com/blog/2014/01/05/scale-in-distributed-systems</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
-  <li><a href="#synchronization-primitives">Synchronization Primitives</a></li>
-  <li><a href="#per-cpu-variables">Per-CPU variables</a></li>
-  <li><a href="#atomic-operations">Atomic Operations</a></li>
-  <li><a href="#optimization-barriers--memory-barriers">Optimization Barriers &amp; Memory Barriers</a></li>
-  <li><a href="#semaphores">Semaphores</a></li>
-  <li><a href="#spin-locks">Spin Locks</a>    <ul>
-      <li><a href="#readwrite-spin-locks">Read/Write Spin Locks</a></li>
+  <li><a href="#introduction">Introduction</a></li>
+  <li><a href="#systems-designed-to-scale">Systems designed to Scale</a></li>
+  <li><a href="#naming-and-directory-services">Naming and Directory Services</a>    <ul>
+      <li><a href="#granularity-of-naming">Granularity of Naming</a></li>
+      <li><a href="#reducing-load">Reducing Load</a></li>
+      <li><a href="#unique-identifier-based-naming-uid">Unique Identifier based naming (UID)</a></li>
+      <li><a href="#directory-services">Directory services</a></li>
+      <li><a href="#growth-and-reorganization">Growth and reorganization</a></li>
     </ul>
   </li>
-  <li><a href="#seqlocks">SeqLocks</a></li>
-  <li><a href="#read-copy-update-rcu">Read Copy Update (RCU)</a></li>
+  <li><a href="#security-subsystem">Security Subsystem</a>    <ul>
+      <li><a href="#authentication">Authentication</a></li>
+      <li><a href="#authorization">Authorization</a></li>
+      <li><a href="#accounting">Accounting</a></li>
+    </ul>
+  </li>
+  <li><a href="#remote-resources">Remote resources</a>    <ul>
+      <li><a href="#communication">Communication</a></li>
+    </ul>
+  </li>
+  <li><a href="#replication">Replication</a>    <ul>
+      <li><a href="#placement-of-replicas">Placement of replicas</a></li>
+      <li><a href="#replica-consistency">Replica Consistency</a></li>
+    </ul>
+  </li>
+  <li><a href="#distribution">Distribution</a>    <ul>
+      <li><a href="#placement-of-servers">Placement of servers</a></li>
+      <li><a href="#finding-the-right-server">Finding the right server</a></li>
+    </ul>
+  </li>
 </ul>
 
-<p>As we have discussed earlier about process synchronization, lets discuss about process synchronization primitives offered in Linux Kernel.</p>
+<h3 id="introduction">Introduction</h3>
 
-<p>This blog is summary of this <a href="https://www.dropbox.com/s/xvo7qdl9iwjco5x/UnderstandingtheLinuxKernelThirdEditionChapter5KernelSynchronizat.pdf" target="-blank">article</a></p>
+<p>This blog is summary of the research paper <a href="https://www.dropbox.com/s/s9smkjhyykasllg/Scale%20in%20distributed%20systems.pdf" target="_blank"> Scale in Distributed Systems.</a></p>
 
-<h3 id="synchronization-primitives">Synchronization Primitives</h3>
+<p>A system is Scalable if it can handle addition of users and resources without suffering a noticeable loss of performance or increase in administrative complexity.
+<br /></p>
+
+<h3 id="systems-designed-to-scale">Systems designed to Scale</h3>
+
+<p>Some historic systems desgined to scale</p>
+
+<ul>
+  <li><a href="http://courses.cs.washington.edu/courses/cse451/07au/lectures/pending/p260-birrell.pdf" target="_blank">Grapevine</a>, <a href="http://dl.acm.org/citation.cfm?id=2081&amp;dl=ACM&amp;coll=DL&amp;CFID=395866995&amp;CFTOKEN=19566412" target="_blank">ACM Paper</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Domain_Name_System" target="_blank">DNS</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Kerberos_(protocol)" target="_blank">Kerberos</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Sprite_(operating_system)" target="_blank">Sprite</a></li>
+  <li><a href="http://research.microsoft.com/en-us/um/people/blampson/36-GlobalNames/WebPage.html" target="_blank">Global name services and authentication services</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/LOCUS_(operating_system)" target="_blank">Locus</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Andrew_File_System" target="_blank">Andrew</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Project_Athena" target="_blank">Project Athena</a></li>
+  <li><a href="http://www.cdf.toronto.edu/~csc469h/fall/handouts/nitzberg91.pdf" target="_blank">Dash</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Amoeba_(operating_system)" target="_blank">Amoeba</a>
+<!-- more --></li>
+</ul>
+
+<p>As systems scales and accessible objects grows, locating objects of interest becomes difficult. Systems addressed this aspect of challenges are</p>
+
+<ul>
+  <li><a href="http://en.wikipedia.org/wiki/9P" target="_blank">Plan 9</a></li>
+  <li><a href="" target="_blank">Profile</a></li>
+  <li><a href="http://gost.isi.edu/products/prm/papers/prm-cpe.ps" target="_blank">Prospero</a></li>
+  <li><a href="http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=4798" target="_blank">QuickSilver</a></li>
+  <li><a href="https://www.usenix.org/legacy/publications/compsystems/1990/fall_comer.pdf" target="_blank">Tilde</a></li>
+</ul>
+
+<p><br />
+Paper talks about problem of scale and general solution. These solution fall into three categories</p>
+
+<p><blockquote><p>Replication, Distribution and Caching</p></blockquote></p>
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<style type="text/css">
+.node circle {
+  cursor: pointer;
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.node text {
+  font-size: 11px;
+}
+
+path.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 1.5px;
+}
+
+  </style>
+
+<style>
+
+#chart, #header, #footer {
+  position: absolute;
+  top: 0;
+}
+
+#header.inverted, #footer.inverted {
+  color: #fff;
+  text-shadow: 0 1px 4px #000;
+}
+
+
+rect {
+  fill: none;
+  pointer-events: all;
+}
+
+line {
+  stroke: #000;
+  stroke-width: 1.5px;
+}
+
+.string, .regexp {
+  color: #f39;
+}
+
+.keyword {
+  color: #00c;
+}
+
+.comment {
+  color: #777;
+  font-style: oblique;
+}
+
+.number {
+  color: #369;
+}
+
+.class, .special {
+  color: #1181B8;
+}
+
+</style>
+
+<body>
+    <div id="body">
+        click or option-click to expand or collapse
+    </div>
+    <script type="text/javascript">
+
+var m = [20, 120, 20, 120],
+    w = 1280 - m[1] - m[3],
+    h = 650 - m[0] - m[2],
+    i = 0,
+    root;
+
+var tree = d3.layout.tree()
+    .size([h, w]);
+
+var diagonal = d3.svg.diagonal()
+    .projection(function(d) { return [d.y, d.x]; });
+
+var vis = d3.select("#body").append("svg:svg")
+    .attr("width", w + m[1] + m[3])
+    .attr("height", h + m[0] + m[2])
+  .append("svg:g")
+    .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
+
+d3.json("/assets/scaleDS.json", function(json) {
+  root = json;
+  root.x0 = h / 2;
+  root.y0 = 0;
+
+  function toggleAll(d) {
+    if (d.children) {
+      d.children.forEach(toggleAll);
+      toggle(d);
+    }
+  }
+
+  // Initialize the display to show a few nodes.
+  root.children.forEach(toggleAll);
+  toggle(root.children[1]);
+  toggle(root.children[1].children[2]);
+  toggle(root.children[5]);
+  toggle(root.children[5].children[0]);
+
+  update(root);
+});
+
+function update(source) {
+  var duration = d3.event && d3.event.altKey ? 5000 : 500;
+
+  // Compute the new tree layout.
+  var nodes = tree.nodes(root).reverse();
+
+  // Normalize for fixed-depth.
+  nodes.forEach(function(d) { d.y = d.depth * 130; });
+
+  // Update the nodes…
+  var node = vis.selectAll("g.node")
+      .data(nodes, function(d) { return d.id || (d.id = ++i); });
+
+  // Enter any new nodes at the parent's previous position.
+  var nodeEnter = node.enter().append("svg:g")
+      .attr("class", "node")
+      .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
+      .on("click", function(d) { toggle(d); update(d); });
+
+  nodeEnter.append("svg:circle")
+      .attr("r", 1e-6)
+      .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+
+//  nodeEnter.append("svg:text")
+//      .attr("x", function(d) { return d.children || d._children ? -10 : 10; })
+//      .attr("dy", ".35em")
+//      .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
+//      .text(function(d) { return d.name; })
+//      .style("fill-opacity", 1e-6);
+
+  nodeEnter.append("svg:a").attr("xlink:href", function(d) { return d.url; }).attr("target", "_blank")
+      .append("svg:text").text(function(d) { return d.name; })
+      .attr("x", function(d) { return d.children || d._children ? -10 : 10; })
+      .attr("dy", ".35em")
+      .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
+      .text(function(d) { return d.name; })
+      .style("fill-opacity", 1e-6);
+
+  // Transition nodes to their new position.
+  var nodeUpdate = node.transition()
+      .duration(duration)
+      .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
+
+  nodeUpdate.select("circle")
+      .attr("r", 4.5)
+      .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+
+  nodeUpdate.select("text")
+      .style("fill-opacity", 1);
+
+  // Transition exiting nodes to the parent's new position.
+  var nodeExit = node.exit().transition()
+      .duration(duration)
+      .attr("transform", function(d) { return "translate(" + source.y + "," + source.x + ")"; })
+      .remove();
+
+  nodeExit.select("circle")
+      .attr("r", 1e-6);
+
+  nodeExit.select("text")
+      .style("fill-opacity", 1e-6);
+
+  // Update the links…
+  var link = vis.selectAll("path.link")
+      .data(tree.links(nodes), function(d) { return d.target.id; });
+
+  // Enter any new links at the parent's previous position.
+  link.enter().insert("svg:path", "g")
+      .attr("class", "link")
+      .attr("d", function(d) {
+        var o = {x: source.x0, y: source.y0};
+        return diagonal({source: o, target: o});
+      })
+    .transition()
+      .duration(duration)
+      .attr("d", diagonal);
+
+  // Transition links to their new position.
+  link.transition()
+      .duration(duration)
+      .attr("d", diagonal);
+
+  // Transition exiting nodes to the parent's new position.
+  link.exit().transition()
+      .duration(duration)
+      .attr("d", function(d) {
+        var o = {x: source.x, y: source.y};
+        return diagonal({source: o, target: o});
+      })
+      .remove();
+
+  // Stash the old positions for transition.
+  nodes.forEach(function(d) {
+    d.x0 = d.x;
+    d.y0 = d.y;
+  });
+}
+
+// Toggle children.
+function toggle(d) {
+  if (d.children) {
+    d._children = d.children;
+    d.children = null;
+  } else {
+    d.children = d._children;
+    d._children = null;
+  }
+}
+
+</script>
+</body>
+
+<h3 id="naming-and-directory-services">Naming and Directory Services</h3>
+
+<p>A name refers to an object. An address tells where that object can be found. The binding of a name is the object to which it refers.</p>
+
+<p><blockquote><p>A name server (or directory server) maps a name to information about the name’s binding.</p></blockquote>
+<br /></p>
+
+<h4 id="granularity-of-naming">Granularity of Naming</h4>
+
+<p><blockquote><p>The granularity of the objects named affects the size of naming the database, the frequency of queries and the read-to-write ratio which affects techniques can be used in naming in large systems.</p></blockquote></p>
+
+<p>In an approach of <code>fine grained naming</code>, files must include name of the host so that object could be located.</p>
+
+<p><blockquote><p>Problem with finer grained naming is that moving objects is difficult since objects are tied to the server in their names.</p></blockquote></p>
+
+<p>Another naming approach is <code>common prefix naming</code>, where group of objects share a common prefix and name service maps the prefix to the server. The remainder of the name is resolved locally by the server on which the object is stored.</p>
+
+<p><strong>Advantages</strong>
+ <br />
+ 1. Clients can cache the mapping keys as prefix changes less frequently than the rest of the name<br />
+ 2. Since objects does not have to include server name, it is easy to move objects around</p>
+
+<p><strong>Disadvantage</strong><br />
+ Objects sharing common prefixes should be stored together
+<br /><br /></p>
+
+<h4 id="reducing-load">Reducing Load</h4>
+
+<ul>
+  <li><code class="myyellow">Replication</code> - When multiple name server handle the same queries, different clients are able to send their requests to different servers.</li>
+</ul>
+
+<p><strong>Choice of Server</strong><br />
+1. Physical Locations<br />
+2.  Relative loads on servers<br />
+3. Random server selection<br /></p>
+
+<p><code class="myred">Problem</code>
+Its hard to make <code>replica consistent.</code></p>
+
+<ul>
+  <li><code class="myyellow">Distribution</code> - Spread the name resolution load across servers. </li>
+</ul>
+
+<p>In distribution, namespace is assigned to different servers.</p>
+
+<p><strong>Advantages</strong><br />
+1.  Since part of the naming database is stored on each server, thus reducing number of queries and updates to be processed.<br />
+2.  As size of each database is reduced, each request can be handled faster.<br />
+3.  The client must be able to determine which server contains the requested information.
+<br /></p>
+
+<ul>
+  <li><code class="myyellow">Caching</code><br />
+By Caching the mapping from a prefix to the name server handling that prefix, future names sharing the same prefix can be resolved with fewer messages.</li>
+</ul>
+
+<p><code class="myred">Problem</code>
+<blockquote><p>Caching is a form of replication and as similar to replication biggest difficulty is the need to for consistency.</p></blockquote>
+<br /></p>
+
+<h4 id="unique-identifier-based-naming-uid">Unique Identifier based naming (UID)</h4>
+
+<p>UID based naming is based on UID which is used to name and grant access right to the object.</p>
+
+<p>UID may be thought as addresses. It contain <code>server information</code> identifying the server address and an <code>identifier</code> to be interpreted by the server to locate the object. </p>
+
+<p><code class="myred">Problem</code>
+<br /></p>
+
+<p>UID identify the server on which an object resides. When object moves to other location the UID is no longer valid for the object they reference.<br /></p>
+
+<p>This problem can be <code class="mygreen">solved</code> using technique called <code>forward pointers</code>. With forward pointers a user attempting to use an old address to access an object is given a new UID containing new address.</p>
+
+<p><code class="myred">Problem</code> with forward chaining is that the chain of links can become lengthy and reduce performance. Also, if one of the node is down then access to link is prevented.</p>
+
+<p>This problem can be <code class="mygreen">solved</code> by requiring each object to have a home site with the forward pointer at that site kept up-to-date. </p>
+
+<p><a href="http://gost.isi.edu/products/prm/papers/prm-cpe.ps" target="_blank">Prospero</a> supports UIDs with expiration dates. Its directory service guarantees that the UIDs it maintains are kept up-to-date. The use of expiration dates makes getting rid of forwarding pointers possible, once all possible UIDs with the old address have expired.
+<br /><br /></p>
+
+<h4 id="directory-services">Directory services</h4>
+
+<p>Directory servers translate symbolic names into the UIDs. A directory can contain UIDs for files, other directories, or- in fact- any object for which a UID exists. The load on directory servers is easily distributed as different parts of a name space can reside on different machines.</p>
+
+<p>The primary difference between a name server and a directory server is that the directory server usually possesses little information about the full name of an object. A directory server can support pieces of independent name spaces.</p>
+
+<p>Prospero and Amoeba use directory servers to translate names to UIDs
+<br /><br /></p>
+
+<h4 id="growth-and-reorganization">Growth and reorganization</h4>
+
+<p>When two organizations with separate global name spaces merge, reorganize, or otherwise combine their name spaces, a <code class="myred">problem</code> arises if the name spaces are not disjoint.</p>
+
+<p>New names and new prefix is assigned with old name and it is a problem for any names that were embedded in programs or otherwise specified before change.</p>
+
+<p>DEC’s <a href="http://research.microsoft.com/en-us/um/people/blampson/36-GlobalNames/WebPage.html" target="_blank">global name service</a> addresses the above problem<br />
+1. Associating a unique number with the root of every independent name space.<br />
+2.  When a file name is stored, the number for the root of the name space can be stored along with the name. <br />
+3. When name spaces are merged, an entry is made in the new root, pairing the UID of each previous root with the prefix required to find it.<br />
+4.  When a name with an associated root UID is resolved, the UID is checked; if it does not match that for the current root, the corresponding prefix is prepended, allowing the embedded name to work.
+&lt;hr style="border-top: 1.5px dotted black"/&gt;<br />
+<br /></p>
+
+<h3 id="security-subsystem">Security Subsystem</h3>
+
+<p>As system size grows, the number of points from which an intruder can enter the network increases and security becomes increasingly important and difficult to implement.</p>
+
+<h4 id="authentication">Authentication</h4>
+
+<ul>
+  <li><code class="myyellow"> Password based authentication</code><br />
+This technique involves using password on each host.</li>
+</ul>
+
+<p><code class="myred">Problems</code><br />
+1. Requires maintenance of a password database on multiple nodes.<br />
+2. Its cumbersome, if user have to present password each time a new service is requested.<br />
+3. Letting the workstation remember the user’s password is risky.<br />
+4. Vulnerable to the theft of password by eavesdrop on the network.<br /></p>
+
+<ul>
+  <li>
+    <p><code class="myyellow"> Host based authentication</code><br />
+In this technique, client is authenticated by the local host. Remote servers trust the host to properly identify the client.</p>
+  </li>
+  <li>
+    <p><code class="myyellow"> Encryption based authentication</code><br />
+In this technique, passwords are never sent across the network instead each user is assigned an encryption key. The key is used to prove the user’s identity. 
+<a href="http://en.wikipedia.org/wiki/Kerberos_(protocol)" target="_blank">Kerberos authentication protocol</a> is example of large scale system authentication.
+<br /></p>
+  </li>
+</ul>
+
+<h4 id="authorization">Authorization</h4>
+
+<p><strong>Approach 1</strong><br />
+Client send authorization request to server and server forwards request to authorization service. </p>
+
+<p>Disadvantage of this approach is access control service can become bottleneck.</p>
+
+<p><strong>Approach 2</strong><br />
+Client is authenticated and then server makes its own decision about whether or not the client is authorized to perform an operation. </p>
+
+<p>In <a href="http://en.wikipedia.org/wiki/Andrew_File_System" target="_blank">Andrew File System</a>, each directory has an access control list (ACL) that identifies the users authorized to access the files within the directory. ACL entries in Andrew can contain the names of groups and user can be part of one or more groups.</p>
+
+<p><blockquote><p>A disadvantage ACL model is that the client must first be authenticated, then looked up in a potentially long list; the lookup may involve the recursive expansion of multiple groups and may require interaction with other servers.</p></blockquote></p>
+
+<p>Another authorization model is <code>capability based authorization</code> in which the user maintains the list of the objects for which access is authorized. A client presents its capability when it wishes to access an object. The server then compares the bit pattern of the capability with that stored along with the object; if they match, the access is allowed.</p>
+
+<p><strong>Advantages</strong><br />
+1. The server can make its access control decision without contacting other servers.<br />
+2. The server does not need to maintain a large authorization database that would be difficult to keep up-to-date in a large system.<br /></p>
+
+<p><strong>Disadvantages</strong><br />
+1. Capabilities can only be revoked in a group.<br />
+2. Capabilities are revoked by changing the bit pattern, but this causes all outstanding capabilities for that object to be immediately invalidated. The new capability must then be reissued to all legitimate users.<br />
+<br /><br /></p>
+
+<h4 id="accounting">Accounting</h4>
+
+<p>Most distributed systems handle accounting on a host-by-host basis. A distributed, secure, and scalable accounting mechanism is needed, especially in large systems that cross administrative boundaries.<br /></p>
 
 <ol>
-  <li>Per-CPU variables</li>
-  <li>Atomic Operation</li>
-  <li>Memory barrier</li>
-  <li>Spin Lock</li>
-  <li>Semaphore</li>
-  <li>SeqLocks</li>
-  <li>Local Interrupt disabling</li>
-  <li>Local softirq disabling</li>
-  <li>Read-Copy-Update</li>
+  <li><code>Bank server approach</code> - Amoeba uses this approach where bank servers handle accounting by maintaining accounts on behalf of users and servers; users transfer money to servers, which then draw upon the balance as resources are used.<br /></li>
+  <li><code>Proxy-based accounting</code> - proxy-based accounting is tied
+much closer to authentication and authorization. The client grants the server a proxy that allows the server to transfer funds from the client’s account.
+<br /></li>
 </ol>
 
-<!-- more -->
-<p>### Summary of Synchronization Primitives</p>
-
-<table>
-<tr>
-<td>Technique</td><td>Description</td><td>Scope</td>
-</tr>
-<tr>
-<td>Per-CPU variables</td><td>Duplicate a data structure among the CPUs</td><td><code class="mygreen">All CPUs</code></td>
-</tr>
-<tr>
-<td>Atomic operation</td><td>Atomic read-modify-write instruction to a counter</td><td><code class="mygreen">All CPUs</code></td>
-</tr>
-<tr>
-<td>Memory barrier</td><td>Avoid instruction reordering</td><td><code class="myyellow">Local CPU</code><code class="mygreen"> or All CPUs</code></td>
-</tr>
-<tr>
-<td>Spin lock</td><td>Lock with busy wait</td><td><code class="mygreen">All CPUs</code></td>
-</tr>
-<tr>
-<td>Semaphore</td><td>Lock with blocking wait (sleep)</td><td><code class="mygreen">All CPUs</code></td>
-</tr>
-<tr>
-<td>Seqlocks</td><td>Lock based on an access counter</td><td><code class="mygreen">All CPUs</code></td>
-</tr>
-<tr>
-<td>Local interrupt disabling</td><td>Forbid interrupt handling on a single CPU</td><td><code class="myyellow">Local CPU</code></td>
-</tr>
-<tr>
-<td>Local softirq disabling</td><td>Forbid deferrable function handling on a single CPU</td><td><code class="myyellow">Local CPU</code></td>
-</tr>
-<tr>
-<td>Read-copy-update (RCU)</td><td>Lock-free access to shared data structures through pointers</td><td><code class="mygreen">All CPUs</code></td>
-</tr>
-</table>
-<p><br /></p>
-
-<h3 id="per-cpu-variables">Per-CPU variables</h3>
-
-<p>The best synchronization technique consists in designing the kernel so as to avoid
-the need for synchronization in the first place.</p>
-
-<p><blockquote><p>Basically, a per-CPU variable is an array of data structures, one element per each CPU in the system.</p></blockquote></p>
-
-<p>A CPU should not access the elements of the array corresponding to the other CPUs.</p>
-
-<p><code>Pros</code></p>
-
-<ul>
-  <li>Freely read and modify its own element without fear of race conditions.<br /></li>
-  <li>It avoids cache line snooping and invalidations, which are costly operations.</li>
-</ul>
-
-<p><code class="myyellow">Snooping and Invalidations</code> - Snooping is the process where the individual caches monitor address lines,  for accesses to memory locations that they have cached. When a write operation is observed to a location that a cache has a copy of, the cache controller invalidates its own copy of the snooped memory location.</p>
-
-<p><code>Cons</code></p>
-
-<ul>
-  <li>It can only be used when it make sense to <code>logically split</code> the data across the CPUs of the system<br /></li>
-  <li>Do not provide <code>protection</code> against access from asynchronous functions such as <code>interrupt handlers and deferrable functions.</code><br /></li>
-  <li>Per-CPU variables are variables are prone to <code>race conditions</code> caused by kernel preemption, both in uniprocessor and multiprocessor systems.<br /></li>
-</ul>
-
-<p><code class="myred">Problem</code> What would happen if a kernel control path gets the address of its local copy of a per-CPU variable, and then it is preempted and moved to another CPU: the address still refers to the element of the previous CPU.</p>
-
-<p>As a general rule, a kernel control path should access a per-CPU variable with kernel preemption disabled.</p>
-
-<hr style="border-top: 1.5px dotted black" />
-<p><br /></p>
-
-<h3 id="atomic-operations">Atomic Operations</h3>
-
-<p><code class="myred">Problem</code> Several assembly language instructions are of type “read-modify-write” i.e. memory location is accessed twice first to read the old value and second time to write a new value</p>
-
-<p><strong>Detailed explanation</strong><br />
-Suppose that two kernel control paths running on two CPUs try to “read-modify-write” the same memory location at the same time by executing nonatomic operations.<br />
-At first, <code>both CPUs try to read the same location</code>, but the memory arbiter (a hardware circuit that serializes accesses to the RAM chips) steps in to grant access to one of them and delay the other. However, when the first read operation has completed, the delayed CPU reads exactly the same (old) value from the memory location.
-<code>Both CPUs then try to write the same (new) value to the memory location</code>; again, the bus memory access is serialized by the memory arbiter, and eventually both write operations succeed. However, the global result is incorrect because both CPUs write the same (new) value. Thus, the two interleaving “read-modify-write” operations act as a single one.</p>
-
-<p><code class="mygreen">Solution</code> Reason for problem here is that Both CPU’s try to access memory location at the same time. If operation of “read-modify-write” can be made atomic then problem would be solved i.e. Every such <code>operation must be executed in a single instruction without being interrupted</code> in the middle and avoiding accesses to the same memory location by other CPUs.</p>
-
-<ul>
-  <li>Read-modify-write assembly language instructions are atomic if no other processor has taken the memory bus after the read and before the write. <code>Memory bus stealing never happens in a uniprocessor system.</code></li>
-  <li>For multiprocessor system, Read-modify-write assembly language instructions whose opcode is prefixed by the <strong>Lock Byte</strong> (0xf0) are atomic. </li>
-  <li>Other processors cannot access the memory location while the locked instruction is being executed.</li>
-</ul>
-
-<p>Sample functions: atomic-read(v), atomic-set(v,i), atomic-add(i,v), atomic-sub(i,v) etc…</p>
-
-<hr style="border-top: 1.5px dotted black" />
-<p><br /></p>
-
-<h3 id="optimization-barriers--memory-barriers">Optimization Barriers &amp; Memory Barriers</h3>
-
-<p>Compilers optimize the code for efficient usage of CPU time and memory but this optimizations could be disastrous sometimes when dealing with shared data.</p>
-
-<p>It can never be guaranteed that instructions will be performed in the same order in which they appear in source code mainly because reordering by compiler to optimize and CPU executing several instructions in parallel. This might lead to reordering of memory access patterns.</p>
-
-<p>To avoid this behavior we need a synchronization primitive at two levels</p>
-
-<ul>
-  <li>Synchronization primitive at Compiler level - Optimization barrier</li>
-  <li>Synchronization primitive at CPU level      - Memory barrier</li>
-</ul>
-
-<p>In linux <em>barrier()</em> macro acts as an <em>optimization barrier</em>. <br /></p>
-
-<p><blockquote><p>Optimization barrier primitive ensures that assembly language instructions of C statements mentioned before barrier() and assembly language instructions of C statements mentioned after, remains in the same sequence.</p></blockquote></p>
-
-<p>But, Optimization barrier cannot control in which fashion instructions will be executed by CPU.</p>
-
-<p>A <em>memory barrier</em> primitive ensures that the operations placed before the primitive are finished before starting the operations placed after the primitive. Read <em>memory barrier</em> act only on instructions that read from memory, while Write <em>memory barriers</em> act only on instructions that write to memory.</p>
-
-<hr style="border-top: 1.5px dotted black" />
-<p><br /></p>
-
-<h3 id="semaphores">Semaphores</h3>
-
-<p>Please visit <a href="http://distkeys.com/blog/2013/10/07/process-synchronization-in-os/#semaphores">Semaphore Page</a></p>
-
-<h3 id="spin-locks">Spin Locks</h3>
-
-<p>When a kernel control path must access a shared data structure or enter a critical section it need to acquire a lock.<br />
-Spin Locks are a special kind of lock designed to work in a multiprocessor environment. 
-<blockquote><p>If kernel control path finds Spin Lock Open it acquires the lock and continue execution else it Spin around repeatedly executing tight instruction loop, until the lock is released.</p></blockquote></p>
-
-<p>The waiting kernel control path keeps running on the CPU, even if it has nothing to do besides waste time. <code>Kernel preemption is disabled</code> in CR protected by Spin Locks.
-Spin locks are usually convenient, because many kernel resources are locked for a <code>fraction of a millisecond only</code>; therefore, it would be far more time-consuming to release the CPU and reacquire it later.<br />
-Kernel preemption is still enabled during the busy wait phase, thus a process waiting for a spin lock to be released could be replaced by a higher priority process.</p>
-
-<table>
-<tr>
-<td>Macro</td><td>Description</td>
-</tr>
-<tr>
-<td>spin-lock-init()</td><td>Set the spin lock to 1 (unlocked)</td>
-</tr>
-<tr>
-<td>spin-lock()</td><td>Cycle until spin lock becomes 1 (unlocked), then set it to 0 (locked)</td>
-</tr>
-<tr>
-<td>spin-unlock()</td><td>Set the spin lock to 1 (unlocked)</td>
-</tr>
-<tr>
-<td>spin-unlock-wait()</td><td>Wait until the spin lock becomes 1 (unlocked)</td>
-</tr>
-<tr>
-<td>spin-is-locked()</td><td>Return 0 if the spin lock is set to 1 (unlocked); 1 otherwise</td>
-</tr>
-<tr>
-<td>spin-trylock()</td><td>Set the spin lock to 0 (locked), and return 1 if the previous value of the lock was 1; 0 otherwise</td>
-</tr>
-</table>
-<p><br /></p>
-
-<p>Spin Lock with kernel preemption</p>
-
-<div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span><span class="constant">Invokes</span> preempt-disable() to disable kernel preemption.
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>; Intel syntax
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span class="key">locked</span>:                      ; <span class="constant">The</span> lock variable. <span class="error">1</span> = locked, <span class="integer">0</span> = unlocked.
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>dd      <span class="integer">0</span>
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>spin-<span class="key">lock</span>:
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>mov     eax(new), <span class="integer">1</span>     ; <span class="constant">Set</span> the <span class="constant">EAX</span> register to <span class="integer">1</span>.
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>xchg    eax(new), [locked]
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>; <span class="constant">Atomically</span> swap the <span class="constant">EAX</span> register with
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span>;  the lock variable.
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span>; This will always store <span class="integer">1</span> to the lock, leaving
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span>;  previous value <span class="keyword">in</span> the <span class="constant">EAX</span> register.
-<span class="line-numbers"><a href="#n16" name="n16">16</a></span>
-<span class="line-numbers"><a href="#n17" name="n17">17</a></span>test    eax(new), eax(prev)
-<span class="line-numbers"><a href="#n18" name="n18">18</a></span>; <span class="constant">Test</span> <span class="constant">EAX</span> with itself. Among other things, this will
-<span class="line-numbers"><a href="#n19" name="n19">19</a></span>;  set the processor<span class="string"><span class="delimiter">'</span><span class="content">s Zero Flag if EAX is 0.</span></span>
-<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span><span class="string"><span class="content">; If EAX is 0, then the lock was unlocked and</span></span>
-<span class="line-numbers"><a href="#n21" name="n21">21</a></span><span class="string"><span class="content">;  we just locked it.</span></span>
-<span class="line-numbers"><a href="#n22" name="n22">22</a></span><span class="string"><span class="content">; Otherwise, EAX is 1 and we didn</span><span class="delimiter">'</span></span>t acquire the lock.
-<span class="line-numbers"><a href="#n23" name="n23">23</a></span>
-<span class="line-numbers"><a href="#n24" name="n24">24</a></span>//   <span class="constant">Enable</span> kernel preemption preempt-enable() 
-<span class="line-numbers"><a href="#n25" name="n25">25</a></span>
-<span class="line-numbers"><a href="#n26" name="n26">26</a></span>jnz     spin-lock       ; <span class="constant">Jump</span> back to the <span class="constant">MOV</span> instruction <span class="keyword">if</span> the <span class="constant">Zero</span> <span class="constant">Flag</span> is
-<span class="line-numbers"><a href="#n27" name="n27">27</a></span>;  <span class="keyword">not</span> set; the lock was previously locked, <span class="keyword">and</span> so
-<span class="line-numbers"><a href="#n28" name="n28">28</a></span>; we need to spin <span class="keyword">until</span> it becomes unlocked.
-<span class="line-numbers"><a href="#n29" name="n29">29</a></span>
-<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>ret                     ; <span class="constant">The</span> lock has been acquired, <span class="keyword">return</span> to the calling
-<span class="line-numbers"><a href="#n31" name="n31">31</a></span>;  function.
-<span class="line-numbers"><a href="#n32" name="n32">32</a></span>
-<span class="line-numbers"><a href="#n33" name="n33">33</a></span>spin-<span class="key">unlock</span>:
-<span class="line-numbers"><a href="#n34" name="n34">34</a></span>mov     eax, <span class="integer">0</span>          ; <span class="constant">Set</span> the <span class="constant">EAX</span> register to <span class="integer">0</span>.
-<span class="line-numbers"><a href="#n35" name="n35">35</a></span>
-<span class="line-numbers"><a href="#n36" name="n36">36</a></span>xchg    eax, [locked]   ; <span class="constant">Atomically</span> swap the <span class="constant">EAX</span> register with
-<span class="line-numbers"><a href="#n37" name="n37">37</a></span>;  the lock variable.
-<span class="line-numbers"><a href="#n38" name="n38">38</a></span>
-<span class="line-numbers"><a href="#n39" name="n39">39</a></span>ret                     ; <span class="constant">The</span> lock has been released.
-</pre></div>
-</div>
-</div>
-
-<p>In case of kernel preemption, the first step is to disable kernel preemption, preempt-disable()
-In the above example <code>Lock is 1 and Unlock is 0</code></p>
-
-<ul>
-  <li>In EAX register we push “1” as we wish to acquire lock.<br /></li>
-  <li>xchg command will exchange value from EAX register to lock variable but not vice versa. So by step 2, EAX register has value of “1” and lock variable also has value of “1”. This is an atomic operation.<br /></li>
-  <li>Step 3, test or validate the current value of lock. If current value of lock(EAX prev) is “1“ i.e. processor zero flag is already set, hence <code>lock is not available.</code> <br /></li>
-  <li>Enable kernel preemption and Jump(Spin) back.<br /></li>
-  <li>In Step 3, if current value of lock (EAX prev) is “0” then set it with “1” i.e. <code>Lock has been acquired.</code></li>
-</ul>
-
-<p>It might happen that process can spin for a long time. If the break-lock field is set then owning process can learn whether there are other processes waiting for the lock. It may decide to release it prematurely to allow other processes.</p>
-
-<h4 id="readwrite-spin-locks">Read/Write Spin Locks</h4>
-
-<p>Read Spin Locks is used to increase the concurrency within kernel. </p>
-
-<p><blockquote><p>Idea is that allow several kernel control path to access same data structure for “Read” using Read Spin Locks. No kernel control path can modify the data structure using Read Spin Locks.</p></blockquote></p>
-
-<p>To modify shared data structure kernel control path needs to acquire Write Spin Locks. Write Spin Lock is granted when no kernel control path have Read Spin Locks.</p>
-
-<p>Reader and Writer Spin Locks have same priority in this case.</p>
-
-<hr style="border-top: 1.5px dotted black" />
-<p><br /></p>
-
-<h3 id="seqlocks">SeqLocks</h3>
-
-<p>In Read/Write spin locks reader and write have same priority. Reader must wait until the writer has finished and vice versa.<br />
-<blockquote><p>SeqLocks are similar to read/write locks except that they give a much higher priority to writers: in fact a writer is allowed to proceed even when readers are active.</p></blockquote></p>
-
-<p>Writer never waits but reader may be forced to read the data several times until it get valid copy. Each reader must read sequence counter twice i.e. before and after reading the data and then check whether sequence counter values are same. If its not equal then it means that writer must has become active and has increased the sequence counter, thus implicitly telling the reader that the data just read is not valid.</p>
-
-<p>Every time writer acquire and release sequence lock it must increment sequence counter. When counter is odd means writer is in progress and when counter is even means writer is done.<br />
-When a reader enters a critical region, it <code>does not need to disable kernel preemption</code>; on the other hand, the <code>writer automatically disables kernel preemption</code> when entering the critical region, because it acquires the spin lock.</p>
-
-<p>SeqLocks must <code class="myred">not</code> be used for </p>
-
-<ul>
-  <li>The data structure to be protected does not include pointers that are modified by the writers and dereferenced by the readers (otherwise, a writer could change the pointer under the nose of the readers)</li>
-  <li>The code in the critical regions of the readers does not have side effects (otherwise, multiple reads would have different effects from a single read)</li>
-</ul>
-
-<hr style="border-top: 1.5px dotted black" />
-<p><br /></p>
-
-<h3 id="read-copy-update-rcu">Read Copy Update (RCU)</h3>
-
-<p>This technique is designed to <code>protect</code> data structures that are mostly <code>accessed for reading</code> by several CPUs.<br />
-The key idea consists of limiting the scope of RCU as follows:</p>
+<p><strong>Replication, Distribution and Caching in Security</strong><br />
+When these techniques are applied in the area of security, the following considerations must be kept in mind:<br /></p>
 
 <ol>
-  <li>Only data structures that are dynamically allocated and referenced by means of pointers can be protected by RCU.</li>
-  <li>No kernel control path can sleep inside a critical region protected by RCU.</li>
+  <li>When a server that maintains secret keys is <code>replicated</code>, the compromise of any replica can result in the compromise of important keys.<br /></li>
+  <li>The security of the service is that of the weakest of all <code>replicas</code>.<br /></li>
+  <li>When <code>distribution</code> is used, multiple servers may be involved in a particular exchange.<br /></li>
+  <li>It is important that both principals know which servers were involved so that they can correctly decide how much trust to place in the results. <br /></li>
+  <li>The longer credentials are allowed to be <code>cached</code>, the longer it will take to recover when a key is compromised.
+&lt;hr style="border-top: 1.5px dotted black"/&gt;<br />
+<br /></li>
 </ol>
 
-<p><strong>Writer</strong></p>
+<h3 id="remote-resources">Remote resources</h3>
 
-<ul>
-  <li>When a writer wants to update the data structure, it dereferences the pointer and makes a copy of the whole data structure.<br /></li>
-  <li>Next, the writer modifies the copy.<br /></li>
-  <li>Once finished, the writer changes the pointer to the data structure so as to make it point to the updated copy.<br /></li>
-</ul>
+<p>So far, we saw effect of scale in naming and security system. One cannot access a resource without first finding it. This involves both identifying the resource that is needed and determining its location, given its name. Once a resource has been found, authentication and authorization might be required
+ for its use.<br /></p>
 
-<p>Because <code>changing the value of the pointer is an atomic operation</code>, each reader or writer sees either the old copy or the new one: no corruption in the data structure may occur.</p>
+<p>The services used to access remote resources are very dependent on the underlying communications mechanisms they employ. This section looks at the scaling issues related to network communication in such services.
+<br /><br /></p>
 
-<p>Memory barrier is required to ensure that the updated pointer is seen by the other CPUs only after the data structure has been modified. </p>
+<h4 id="communication">Communication</h4>
 
-<p>Spin lock is coupled with RCU to forbid the concurrent execution of writers.</p>
+<p>As the medium of communication places limits on the system’s performance, it can greatly affect the usability of a system. The underlying communications
+parameters must not be completely hidden from the application.</p>
 
-<p><code class="myred">Problem</code> Old copy of the data structure cannot be freed right away when the writer updates the pointer. In fact, the readers that were accessing the data structure when the writer started its update could still be reading the old copy. The old copy can be freed only after all (potential) readers on the CPUs have executed.</p>
+<p><blockquote><p>In <a href="http://www.cdf.toronto.edu/~csc469h/fall/handouts/nitzberg91.pdf" target="_blank">The Dash System</a>, when a connection is established, the application can require that the connection meet certain requirements; if the requirements are <code>not met, an error</code> is returned.</p></blockquote></p>
+
+<p>Surround your pullquote like this {" text to be quoted "}
+<br /></p>
+
+<p><strong>Communication forms</strong><br />
+•  <code class="myyellow">Point-to-point communication</code> - The client sends messages to the particular server that can satisfy the request If the contacted server cannot satisfy the request, it might respond with the identity of a server that can.<br />
+•  <code class="myyellow">Broadcast communication</code> - In broadcast communication, the client sends the message to everyone, and only those servers that can satisfy the request respond. <br />
+     <strong>Advantages</strong><br />
+     Finding a server that can handle a request is easy.<br />
+     <strong>Disadvantages</strong><br />
+     •  Broadcast communication does not scale well. <br />
+     •  Processing is required by all servers, whether or not they can handle a request.<br />
+     •  As the total number of requests grows, the load due to preliminary processing on each server also grows.</p>
+
+<p>•  <code class="myyellow">Multicast communication</code> - In multicast, a single message can be sent to a group of servers. For multicast to scale, the groups to which messages are sent should be kept small.
+&lt;hr style="border-top: 1.5px dotted black"/&gt;<br />
+<br /></p>
+
+<h3 id="replication">Replication</h3>
+
+<p>Replication is used to reduce the load on the server and improve the reliability and availability of the service as whole.</p>
+
+<p><blockquote><p>Issue is the Placement of the replicas and replica consistency</p></blockquote>
+<br /></p>
+
+<h4 id="placement-of-replicas">Placement of replicas</h4>
+
+<p>Placement of replicas depends on the purpose of replication</p>
+
+<p><code class="myyellow">Scattered Replicas</code><br /> 
+• Reduces network delays or avoid network partitions.<br /> 
+• Improves availability of the service.</p>
+
+<p><code class="myyellow">Near located Replicas</code><br />
+• Used when majority of users are local.<br />
+• Improves reliability of the service.<br />
+• To spread load across multiple server then replicas may be placed near one another.
+<br /><br /></p>
+
+<h4 id="replica-consistency">Replica Consistency</h4>
+
+<p>At a particular point in time, a set of replicas is said to be consistent if the value of the object is the same for all readers.<br />
+Taking these steps guarantees that the set of replicas read will intersect with the set written during the most recent update</p>
+
+<p>• <code class="myyellow">Replication of read-only information</code><br /> 
+    Replication read-only information like binaries which can not be changed by normal users.<br />
+    [Andrew, Athena]<br /><br />
+• <code class="myyellow">Replication of immutable information</code><br />
+    Changes to files are made by creating new files and then changing the
+directory so that the new version of the file will be found.<br />
+    [Amoeba]<br /><br />
+• <code class="myyellow">Update all replicas</code><br />
+    This approach allows update but require updates to be send to all replicas. <br />
+      <strong>Limitations</strong><br />
+     1. Can update only when all the replicas are available thus reducing the availability of the system for write operations.<br />
+     2. For data consistency, absolute ordering on updates are required.<br />
+     3. Client might fail during an update.<br /> </p>
+
+<p>• <code class="myyellow">Primary-site replication</code><br />
+    All updates are directed to the primary replica which then forwards updates to the other replicas.  Updates may be forwarded individually or whole database may be periodically downloaded by the replicas [Kerberos].<br />
+    <strong>Advantage</strong><br />
+    The ordering of updates is determined by the order in which they are received at the primary site and that updates require only the availability of the primary site.<br /></p>
+
+<p><strong>Disadvantage</strong><br />
+   1. The availability of updates still depends on a single server, although some systems select a new primary site if the existing primary goes down.<br />
+   2. If changes are distributed periodically, the updates are delayed until the next update cycle.<br /></p>
+
+<p>• <code class="myyellow">Loose consistency</code><br />
+With loose consistency, replicas are guaranteed to eventually contain identical data.</p>
+
+<ol>
+  <li>Updates are allowed even when the network is partitioned or servers are down.<br /></li>
+  <li>Updates are sent to any replica, and that replica forwards the update to the other replicas as they become available.<br /></li>
+  <li>If conflicting updates are received by different replicas in different orders, time stamps indicate the order in which they are to be applied.<br />
+<blockquote><p>With loose consistency, there is no guarantee that a query will return the most recent data.</p></blockquote></li>
+</ol>
+
+<p>• <code class="myyellow">Quorum consensus</code><br />
+In Quorum consensus
+1. Assigning votes to each replica<br />
+2. Selecting two numbers-a read-quorum and a write-quorum-such that the read-quorum plus the write-quorum exceeds the total number of votes <br />
+3. Requiring that reads and writes be directed to a sufficient number of replicas to collect enough votes to satisfy the quorum.<br />
+Taking these steps guarantees that the set of replicas read will intersect with the set written during the most recent update. Time stamps or version numbers stored with each replica allow the client to determine which data are most recent.
+&lt;hr style="border-top: 1.5px dotted black"/&gt;<br />
+<br /></p>
+
+<h3 id="distribution">Distribution</h3>
+
+<p>Distribution allows the information maintained by a distributed service to be spread across multiple servers. Distribution <code>reduces the number of requests</code> to be handled by each server, allows administration of parts of a service to be assigned to different individuals.</p>
+
+<p>Some of the issues of importance in distribution are the placement of the servers and the mechanisms by which the client finds the server with the desired information.
+<br /><br /></p>
+
+<h4 id="placement-of-servers">Placement of servers</h4>
+
+<p>Information should be distributed to servers that are <code>near the users</code> that will most frequently access the information.</p>
+
+<p>• Reduce network traffic. <br />
+• Improves reliability, as it less likely that a network partition will make a
+local server inaccessible.<br />
+• It is desirable to avoid the need to contact a name server across
+the country in order to find a resource in the next room.</p>
+
+<p>By assigning information to servers along administrative lines, an organization can avoid dependence on other organizations.<br /><br /></p>
+
+<h4 id="finding-the-right-server">Finding the right server</h4>
+
 ]]></content>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Process synchronization in OS]]></title>
-    <link href="http://distkeys.com/blog/2013/10/07/process-synchronization-in-os/"/>
-    <updated>2013-10-07T11:54:00-07:00</updated>
-    <id>http://distkeys.com/blog/2013/10/07/process-synchronization-in-os</id>
+    <title type="html"><![CDATA[Scalability in Distributed Systems]]></title>
+    <link href="http://distkeys.com/blog/2013/11/27/scalability/"/>
+    <updated>2013-11-27T15:06:00-08:00</updated>
+    <id>http://distkeys.com/blog/2013/11/27/scalability</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
-  <li><a href="#what-is-a-process">What is a Process?</a></li>
-  <li><a href="#issues-with-sharing">3 Issues with Sharing</a></li>
-  <li><a href="#carls-jr-restaurant">Carl’s Jr. Restaurant</a></li>
-  <li><a href="#algorithmic-approach">Algorithmic approach</a></li>
-  <li><a href="#software-primitives">Software Primitives</a></li>
-  <li><a href="#semaphores">Semaphores</a></li>
-  <li><a href="#locks">Locks</a></li>
-  <li><a href="#concurrent-programming-construct">Concurrent Programming Construct</a></li>
-  <li><a href="#condition-variables">Condition Variables</a></li>
-  <li><a href="#producer-consumer-problem">Producer-Consumer Problem</a></li>
-  <li><a href="#recommended-reading">Recommended reading</a></li>
+  <li><a href="#facebook">Facebook</a>    <ul>
+      <li><a href="#data-center">Data Center</a></li>
+      <li><a href="#search-for-people">Search for People</a></li>
+      <li><a href="#petabytes-of-data">Petabytes of Data</a></li>
+      <li><a href="#fb-engineering-notes">FB Engineering Notes</a></li>
+    </ul>
+  </li>
+  <li><a href="#spotify">Spotify</a></li>
+  <li><a href="#cap-theorem">CAP Theorem</a></li>
+  <li><a href="#amazon">Amazon</a>    <ul>
+      <li><a href="#amazon-dynamo">Amazon Dynamo</a></li>
+    </ul>
+  </li>
+  <li><a href="#twitter">Twitter</a></li>
+  <li><a href="#references">References</a></li>
 </ul>
 
-<h3 id="what-is-a-process">What is a Process?</h3>
+<p>This article is about Scalability in Distributed Systems and various engineering organizations approaching the problem of Scalability..</p>
 
-<p>Operating system(OS) <code>objective</code> is to keep as many as of the computer resources as busy as possible. It is used to keep track of all the things an OS must remember about the state of user program.</p>
+<p><div class="wikipedia">
+  
+  <h2>scalability</h2>
+  <div>
+    <p>In <a href="http://en.wikipedia.org/wiki/Electronics" title="Electronics">electronics</a> (including <a href="http://en.wikipedia.org/wiki/Semiconductor_manufacturing" title="Semiconductor manufacturing" class="mw-redirect">hardware</a>, <a href="http://en.wikipedia.org/wiki/Telecommunications" title="Telecommunications" class="mw-redirect">communication</a> and <a href="http://en.wikipedia.org/wiki/Software_engineering" title="Software engineering">software</a>), <strong>scalability</strong> is the ability of a system, network, or process to handle a growing amount of work in a capable manner or its ability to be enlarged to accommodate that growth.  For example, it can refer to the capability of a system to increase total throughput under an increased load when resources (typically hardware) are added. An analogous meaning is implied when the word is used in an <a href="http://en.wikipedia.org/wiki/Economics" title="Economics">economic</a> context, where scalability of a company implies that the underlying <a href="http://en.wikipedia.org/wiki/Business_model" title="Business model">business model</a> offers the potential for <a href="http://en.wikipedia.org/wiki/Economic_growth" title="Economic growth">economic growth</a> within the company.
+</p>
+  </div>
+  <a href="http://en.wikipedia.org/wiki/Scalability">Read more</a>
+</div>
+</p>
 
-<p>Process is like a box, a complete entity in itself which does a step by step task written in program. More formally it is called <code class="myyellow">program in execution.</code></p>
-
-<p>Lets consider a very basic operating system with very least complexity. This operating system can run only <code>one process</code> at a time. Since, only one process is working at a time, it may happen that all the resources occupied by process will not be used at the same time. 
 <!-- more -->
-Surround your pullquote like this {" text to be quoted "}</p>
+<p><br /></p>
 
-<p>Lets explore the second option, now consider process is like a box and it has resources inside the box. We create multiple <code class="myyellow">child of process which is called thread.</code></p>
+<h3 id="facebook">Facebook</h3>
 
-<p>Thread is a child of process and hence it will use resources of process. Theoretically, there is no limit on number of child threads a process can have but it seems logical that process should have enough resource for administrative purpose for these threads. </p>
+<h4 id="data-center">Data Center</h4>
+<div id="fb-root"></div>
+<script>(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//connect.facebook.net/en_US/all.js#xfbml=1"; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk'));</script>
 
-<p>Once there are multiple threads they are going to ask for same resource at the same time. For example, if two children are in one room then they will always fight for same toy. Same applies to threads.</p>
+<div class="fb-post" data-href="https://www.facebook.com/notes/facebook-engineering/scaling-out/23844338919" data-width="550"><div class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/notes/facebook-engineering/scaling-out/23844338919">Post</a> by <a href="https://www.facebook.com/Engineering">Facebook Engineering</a>.</div></div>
 
-<h3 id="issues-with-sharing">3 Issues with Sharing</h3>
-<ol>
-  <li>How to <code>Share data</code>?</li>
-  <li>How to ensure threads in a process, <code>executes one</code> at a time?</li>
-  <li>How to ensure proper <code>sequencing</code> of events?</li>
-</ol>
+<p><br /></p>
 
-<p>To understand it better, lets take a real world example</p>
+<h4 id="search-for-people">Search for People</h4>
 
-<h3 id="carls-jr-restaurant">Carl’s Jr. Restaurant</h3>
-<p>Process</p>
+<div id="fb-root"></div>
+<script>(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//connect.facebook.net/en_US/all.js#xfbml=1"; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk'));</script>
 
-<ol>
-  <li>Customer arrives</li>
-  <li>Employee takes order</li>
-  <li>Employee cooks food</li>
-  <li>Employee bag food</li>
-  <li>Employee takes money</li>
-  <li>Customer gets food and leaves</li>
-</ol>
+<div class="fb-post" data-href="https://www.facebook.com/notes/facebook-engineering/the-life-of-a-typeahead-query/389105248919" data-width="550"><div class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/notes/facebook-engineering/the-life-of-a-typeahead-query/389105248919">Post</a> by <a href="https://www.facebook.com/Engineering">Facebook Engineering</a>.</div></div>
 
-<p>If a single employee is doing steps from 1-6 then all other customers have to <code>wait</code> in line and its going to be long wait.
-Instead, lets have multiple employees for taking order, cook food, bag food, take money. Each of these ‘employees’ are multiple threads on Process ‘Restaurant’. Each thread is responsible for doing <code>specialized task</code>.</p>
+<p><br /></p>
 
-<p>Lets associate <code>3 issues</code> in current situation</p>
+<h4 id="petabytes-of-data">Petabytes of Data</h4>
 
-<ol>
-  <li>What is shared data? - In step 2-3, Quantity of food. In step 3-4, how much food to bag</li>
-  <li>Does sequence matters? -  Cook can’t cook food until order arrives. Employee can’t bag food until it is cooked. So, sequencing matters.</li>
-</ol>
+<div id="fb-root"></div>
+<script>(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//connect.facebook.net/en_US/all.js#xfbml=1"; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk'));</script>
 
-<p>Shared data can be passed for sharing either using <code>message passing</code> or storing that data in <code>global memory</code> of process and each thread read from that memory location.</p>
+<div class="fb-post" data-href="https://www.facebook.com/notes/facebook-engineering/presto-interacting-with-petabytes-of-data-at-facebook/10151786197628920" data-width="550"><div class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/notes/facebook-engineering/presto-interacting-with-petabytes-of-data-at-facebook/10151786197628920">Post</a> by <a href="https://www.facebook.com/Engineering">Facebook Engineering</a>.</div></div>
 
-<p>The next logical question is how to ensure threads in a process executes one at a time i.e. in <code>exclusion</code>?
-More formally there are three types of solution categories</p>
+<p><br /></p>
 
-<ol>
-  <li>Algorithmic approach</li>
-  <li>Software Primitives</li>
-  <li>Concurrent programming construct</li>
-</ol>
+<h4 id="fb-engineering-notes">FB Engineering Notes</h4>
 
-<h3 id="algorithmic-approach">Algorithmic approach</h3>
-<p>The algorithmic approach to process synchronization does not use any assistance from the computer architecture or the OS kernel. Instead it uses an arrangement of logical conditions to satisfy the desired synchronization requirements. <a href="http://books.google.com/books/about/Operating_Systems.html?id=kbBn4X9x2mcC" target="_blank">[Dhamdhere]</a></p>
+<p><a href="https://www.facebook.com/Engineering/notes" target="_blank">FB Engineering</a></p>
 
-<ul>
-  <li>Two process algorithms</li>
-  <li><a href="http://en.wikipedia.org/wiki/Dekker's_algorithm" target="_blank">Dekker’s Algorithm</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Peterson's_algorithm" target="_blank">Peterson’s Algorithm</a></li>
-  <li>n process algorithm</li>
-  <li><a href="http://en.wikipedia.org/wiki/Lamport's_bakery_algorithm" target="_blank">Bakery’s Algorithm</a></li>
-</ul>
+<p><br /></p>
 
-<h3 id="software-primitives">Software Primitives</h3>
-<p>A set of software primitives for mutual exclusion e.g Semaphore, Locks etc. were developed to overcome the logical complexity of algorithmic implementations. This is implemented using some special architectural features of computer systems. But, ease of use and correctness still remained the major obstacle in a development of large concurrent systems.</p>
+<h3 id="spotify">Spotify</h3>
 
-<h3 id="semaphores">Semaphores</h3>
-<p>It is a shared integer variable with <code>non-negative</code> values that have <code>initialization, wait and signal</code> as a indivisible operation.</p>
+<p><a href="https://www.dropbox.com/s/3wj0adazuwh27ve/spotify-p2p10.pdf" target="_blank"> Spotify P2P</a></p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Semaphore Class </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="keyword">class</span> <span class="class">Semaphore</span> {
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>    <span class="directive">public</span>:
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    <span class="comment">//Constructor</span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    Semaphore(<span class="predefined-type">char</span> *debugName, <span class="predefined-type">int</span> initialValue);&lt;/p&gt;
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>&lt;pre&gt;&lt;code&gt;<span class="comment">//Destructor</span>
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>~Semaphore();
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span><span class="directive">private</span>:
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span><span class="predefined-type">int</span> value;
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>List *waitQueue;
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span><span class="predefined-type">char</span> *name; }; </pre></div>
-</div>
- </figure></notextile></div>
-</code></pre>
+<p><br /></p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Semaphore Constructor </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>Semaphore(<span class="predefined-type">char</span> * debugName, <span class="predefined-type">int</span> initialValue) {
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span>    name      = debugName;
-<span class="line-numbers"><a href="#n4" name="n4">4</a></span>    value     = initialValue;
-<span class="line-numbers"><a href="#n5" name="n5">5</a></span>    waitQueue = <span class="keyword">new</span> List;
-<span class="line-numbers"><a href="#n6" name="n6">6</a></span>}
-</pre></div>
-</div>
- </figure></notextile></div></p>
+<h3 id="cap-theorem">CAP Theorem</h3>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Semaphore Destructor </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>~Semaphore() {
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span>    <span class="keyword">delete</span> waitQueue;
-<span class="line-numbers"><a href="#n4" name="n4">4</a></span>}
-</pre></div>
-</div>
- </figure></notextile></div></p>
+<p><a href="http://henryr.github.io/cap-faq/" target="_blank">CAP FAQ</a></p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Semaphore Wait </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="comment">//P() - Semaphore Wait</span>
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>Semaphore::P() {
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    <span class="comment">//Disable interrupts</span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    IntStatus oldLevel = interrupt-&amp;gt;SetLevel(IntOff);&lt;/p&gt;
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>&lt;pre&gt;&lt;code&gt;<span class="comment">//Semaphore not available</span>
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span class="keyword">while</span> (value == <span class="integer">0</span>) {
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>waitQueue-&amp;gt;Append((<span class="directive">void</span> *)currentThread);
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>currentThread-&amp;gt;Sleep();
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>}
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span><span class="comment">//Semaphore now availble</span>
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span>value--;
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span>(<span class="directive">void</span>)interrupt-&amp;gt;SetLevel(oldLevel); } </pre></div>
-</div>
- </figure></notextile></div>
-</code></pre>
+<p><br /></p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Semaphore Signal </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="comment">//Semaphore Signal</span>
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>Semaphore::V() {
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    Thread *thread;  &lt;/p&gt;
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>&lt;pre&gt;&lt;code&gt;IntStatus oldLevel = interrupt-&amp;gt;SetLevel(IntOff);
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span class="comment">//Remove first thread from wait queue</span>
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>thread-&amp;gt;(Thread *)waitQueue-&amp;gt;Remove();
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span><span class="keyword">if</span> (thread != <span class="predefined-constant">NULL</span>) {
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>scheduler-&amp;gt;ReadyToRun(thread);  
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span>}
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span>
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span>value++;
-<span class="line-numbers"><a href="#n16" name="n16">16</a></span>
-<span class="line-numbers"><a href="#n17" name="n17">17</a></span>(<span class="directive">void</span>)interrupt-&amp;gt;SetLevel(oldLevel); } </pre></div>
-</div>
- </figure></notextile></div>
-</code></pre>
+<h3 id="amazon">Amazon</h3>
 
-<h3 id="locks">Locks</h3>
-<p>The basic idea is to <code>close/acquire</code> a lock at the start of critical section or an indivisible operation and <code>open/release</code> it at the end of the critical section or the indivisible operation.</p>
+<h4 id="amazon-dynamo">Amazon Dynamo</h4>
 
-<p>Locks solves how to ensure threads in a process executes one at a time but not the <code>sequencing problem.</code></p>
+<p><a href="http://www.allthingsdistributed.com/2007/10/amazons_dynamo.html" target="_blank">Dynamo</a></p>
 
-<p>Lock Class</p>
+<p><br /></p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Lock Class </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="keyword">class</span> <span class="class">Lock</span> {
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>    <span class="directive">public</span>:
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    Lock (<span class="predefined-type">char</span> *debugName);
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    ~Lock();&lt;/p&gt;
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>&lt;pre&gt;&lt;code&gt;<span class="predefined-type">char</span>* getName() { <span class="keyword">return</span> name; }
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span><span class="directive">void</span> acquire();
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span><span class="directive">void</span> release();
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span><span class="predefined-type">bool</span> isHeldByCurrentThread;
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span><span class="directive">private</span>:
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span><span class="predefined-type">char</span>*   name;
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span>List*   lockWaitQueue;
-<span class="line-numbers"><a href="#n16" name="n16">16</a></span><span class="predefined-type">bool</span>    lockFree;
-<span class="line-numbers"><a href="#n17" name="n17">17</a></span>Thread* currentLockThread; }; </pre></div>
-</div>
- </figure></notextile></div>
-</code></pre>
+<h3 id="twitter">Twitter</h3>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Lock Constructor </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span><span class="comment">//Lock Constructor</span>
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span>Lock::Lock(<span class="predefined-type">char</span> * debugName) {
-<span class="line-numbers"><a href="#n4" name="n4">4</a></span>    name              = debugName;
-<span class="line-numbers"><a href="#n5" name="n5">5</a></span>    currentLockThread = <span class="predefined-constant">NULL</span>;
-<span class="line-numbers"><a href="#n6" name="n6">6</a></span>    lockFree          = TRUE;
-<span class="line-numbers"><a href="#n7" name="n7">7</a></span>    lockWaitQueue     = <span class="keyword">new</span> List;
-<span class="line-numbers"><a href="#n8" name="n8">8</a></span>}
-</pre></div>
-</div>
- </figure></notextile></div></p>
+<p><a href="http://highscalability.com/blog/2013/7/8/the-architecture-twitter-uses-to-deal-with-150m-active-users.html" target="_blank"> Twitter Architecture</a></p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Lock Destructor </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span><span class="comment">//Lock Destructor</span>
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span>~Lock() {
-<span class="line-numbers"><a href="#n4" name="n4">4</a></span>    <span class="keyword">delete</span> lockWaitQueue;&lt;br /&gt;
-<span class="line-numbers"><a href="#n5" name="n5">5</a></span>}
-</pre></div>
-</div>
- </figure></notextile></div></p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Lock Acquire </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>Lock::acquire() {
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>    <span class="comment">//Disable interrupts</span>
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    IntStatus oldLevel = interrupt-&amp;gt;SetLevel(IntOff);&lt;/p&gt;
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>&lt;pre&gt;&lt;code&gt;<span class="comment">//Check if current thread is an owner</span>
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span><span class="keyword">if</span> (currentThread == currentLockThread) {
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span class="comment">//Already owner  </span>
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>(<span class="directive">void</span>)interrupt-&amp;gt;SetLevel(oldLevel);
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span><span class="keyword">return</span>;
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>}
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span><span class="keyword">if</span>(lockFree == TRUE) {
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span>lockFree = FALSE;
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span>currentLockThread = currentThread;      
-<span class="line-numbers"><a href="#n16" name="n16">16</a></span>} <span class="keyword">else</span> {
-<span class="line-numbers"><a href="#n17" name="n17">17</a></span>lockWaitQueue-&amp;gt;Append((<span class="directive">void</span>*) currentThread);
-<span class="line-numbers"><a href="#n18" name="n18">18</a></span>currentThread-&amp;gt;Sleep();
-<span class="line-numbers"><a href="#n19" name="n19">19</a></span>}
-<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>
-<span class="line-numbers"><a href="#n21" name="n21">21</a></span>(<span class="directive">void</span>)interrupt-&amp;gt;SetLevel(oldLevel); } </pre></div>
-</div>
- </figure></notextile></div>
-</code></pre>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Lock Release </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>Lock::release() {
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>    Thread* waitingThread;
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    IntStatus oldLevel = interrupt-&amp;gt;SetLevel(IntOff);&lt;/p&gt;
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>&lt;pre&gt;&lt;code&gt;<span class="keyword">if</span> (!isHeldByCurrentThread()) {
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span><span class="comment">//Thread is not valid owner of lock its</span>
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span class="comment">//trying to release</span>
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>DEBUG(<span class="string"><span class="delimiter">&quot;</span><span class="content">Not a lock owner</span><span class="delimiter">&quot;</span></span>);
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>(<span class="directive">void</span>)interrupt-&amp;gt;SetLevel(oldLevel);
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span><span class="keyword">return</span>;      
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span>}
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span>
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span>waitingThread = (Thread*)lockWaitQueue-&amp;gt;Remove();
-<span class="line-numbers"><a href="#n16" name="n16">16</a></span>
-<span class="line-numbers"><a href="#n17" name="n17">17</a></span><span class="keyword">if</span> (waitingThread != <span class="predefined-constant">NULL</span>) {
-<span class="line-numbers"><a href="#n18" name="n18">18</a></span>scheduler-&amp;gt;ReadyToRun(waitingThread);
-<span class="line-numbers"><a href="#n19" name="n19">19</a></span>currentLockThread = waitingThread;      
-<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>} <span class="keyword">else</span> {
-<span class="line-numbers"><a href="#n21" name="n21">21</a></span>lockFree = TRUE;
-<span class="line-numbers"><a href="#n22" name="n22">22</a></span>currentLockThread = <span class="predefined-constant">NULL</span>;
-<span class="line-numbers"><a href="#n23" name="n23">23</a></span>}
-<span class="line-numbers"><a href="#n24" name="n24">24</a></span>
-<span class="line-numbers"><a href="#n25" name="n25">25</a></span>(<span class="directive">void</span>)interrupt-&amp;gt;SetLevel(oldLevel); } </pre></div>
-</div>
- </figure></notextile></div>
-</code></pre>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Lock Owner </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span><span class="predefined-type">bool</span> Lock::isHeldByCurrentThread() {
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span>    <span class="keyword">return</span> ((currentThread != currentLockThread) ?  FALSE : TRUE);
-<span class="line-numbers"><a href="#n4" name="n4">4</a></span>}
-</pre></div>
-</div>
- </figure></notextile></div></p>
-
-<h3 id="concurrent-programming-construct">Concurrent Programming Construct</h3>
-<p>Locks can only solve <code>mutual exclusion</code> problem, they can not solve <code>sequencing problem</code>. We need another mechanism <code>Monitors</code></p>
-
-<p>Monitors is a programming language construct that supports both data access synchronization and control synchronization.</p>
-
-<p>Monitors have 3 parts</p>
-
-<ol>
-  <li><code>Lock</code> for mutual exclusion</li>
-  <li>1 or more <code>condition variables</code> for sequencing</li>
-  <li>Monitor variables for make sequencing decisions -&gt; Shared data</li>
-</ol>
-
-<h3 id="condition-variables">Condition Variables</h3>
-<p>Each condition variable is only associated with one lock.</p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Condition Class </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="keyword">class</span> <span class="class">Condition</span> {
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>    <span class="directive">public</span>:
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    Condition(<span class="predefined-type">char</span> *debugName);
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    ~Conditon();&lt;/p&gt;
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>&lt;pre&gt;&lt;code&gt;<span class="predefined-type">char</span>* getName() { <span class="keyword">return</span> name; }
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span><span class="directive">void</span> wait(Lock* conditionLock);
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span><span class="directive">void</span> signal(Lock* conditionLock);
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span><span class="directive">void</span> broadcast(Lock* conditionLock);
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span><span class="directive">private</span>:
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span><span class="predefined-type">char</span>* name;
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span>List* cvQueue;
-<span class="line-numbers"><a href="#n16" name="n16">16</a></span>Lock* cvLock;   }; </pre></div>
-</div>
- </figure></notextile></div>
-</code></pre>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>CV Constructor </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>Condition::Condition(<span class="predefined-type">char</span> * debugName) {
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span>    name    = debugName;
-<span class="line-numbers"><a href="#n4" name="n4">4</a></span>    cvQueue = <span class="keyword">new</span> List;
-<span class="line-numbers"><a href="#n5" name="n5">5</a></span>    cvLock  = <span class="predefined-constant">NULL</span>;&lt;br /&gt;
-<span class="line-numbers"><a href="#n6" name="n6">6</a></span>}
-</pre></div>
-</div>
- </figure></notextile></div></p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>CV Destructor </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>Condition::~Condition() {
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span>    <span class="keyword">delete</span> cvQueue;  &lt;br /&gt;
-<span class="line-numbers"><a href="#n4" name="n4">4</a></span>}
-</pre></div>
-</div>
- </figure></notextile></div></p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>CV Wait </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="directive">void</span> Condition::wait(Lock* conditionLock) {
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>    IntStatus oldLevel = interrupt-&amp;gt;SetLevel(IntOff);&lt;/p&gt;
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>&lt;pre&gt;&lt;code&gt;<span class="keyword">if</span> (cvQueue-&amp;gt;isEmpty()) {
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span class="comment">//This lock is now associated with CV and</span>
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span><span class="comment">//only removed when last entry is removed</span>
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span class="comment">//from cvQueue.</span>
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>cvLock = conditionLock;
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>}
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span><span class="keyword">if</span> (conditionLock == <span class="predefined-constant">NULL</span>) {
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span>interrupt-&amp;gt;SetLevel(oldLevel);  
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span><span class="keyword">return</span>;
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span>}
-<span class="line-numbers"><a href="#n16" name="n16">16</a></span>
-<span class="line-numbers"><a href="#n17" name="n17">17</a></span>conditionLock-&amp;gt;release();
-<span class="line-numbers"><a href="#n18" name="n18">18</a></span>cvQueue-&amp;gt;Append((<span class="directive">void</span>*) currentThread);
-<span class="line-numbers"><a href="#n19" name="n19">19</a></span>currentThread-&amp;gt;Sleep();
-<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>
-<span class="line-numbers"><a href="#n21" name="n21">21</a></span><span class="comment">//Acquire lock when get up</span>
-<span class="line-numbers"><a href="#n22" name="n22">22</a></span>conditionLock-&amp;gt;acquire();
-<span class="line-numbers"><a href="#n23" name="n23">23</a></span>interrupt-&amp;gt;SetLevel(oldLevel);     } </pre></div>
-</div>
- </figure></notextile></div>
-</code></pre>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>CV Signal </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="directive">void</span> Conditon::signal(Lock * conditionLock) {
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>    IntStatus oldLevel = interrupt-&amp;gt;SetLevel(IntOff);&lt;/p&gt;
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>&lt;pre&gt;&lt;code&gt;<span class="comment">//If nobody to signal, return</span>
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span class="keyword">if</span> (cvQueue-&amp;gt;Empty()) {
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>interrupt-&amp;gt;SetLevel(oldLevel);
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span class="keyword">return</span>;
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>}
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span><span class="comment">//Verify right lock is signalled</span>
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span><span class="keyword">if</span> (cvLock != conditionLock) {
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span>interrupt-&amp;gt;SetLevel(oldLevel);
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span><span class="keyword">return</span>;
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span>}
-<span class="line-numbers"><a href="#n16" name="n16">16</a></span>
-<span class="line-numbers"><a href="#n17" name="n17">17</a></span>thread = cvQueue-&amp;gt;Remove();
-<span class="line-numbers"><a href="#n18" name="n18">18</a></span><span class="keyword">if</span> (thread != <span class="predefined-constant">NULL</span>) {
-<span class="line-numbers"><a href="#n19" name="n19">19</a></span>scheduler-&amp;gt;ReadyToRun(thread);
-<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>}
-<span class="line-numbers"><a href="#n21" name="n21">21</a></span>
-<span class="line-numbers"><a href="#n22" name="n22">22</a></span><span class="keyword">if</span> (cvQueue-&amp;gt;isEmpty()) {
-<span class="line-numbers"><a href="#n23" name="n23">23</a></span>cvLock = <span class="predefined-constant">NULL</span>;
-<span class="line-numbers"><a href="#n24" name="n24">24</a></span>}
-<span class="line-numbers"><a href="#n25" name="n25">25</a></span>
-<span class="line-numbers"><a href="#n26" name="n26">26</a></span>interrupt-&amp;gt;SetLevel(oldLevel); } </pre></div>
-</div>
- </figure></notextile></div>
-</code></pre>
-
-<h3 id="producer-consumer-problem">Producer-Consumer Problem</h3>
-
-<p>Lets consider we have <code>infinite buffer</code></p>
-
-<p>monitor variable  =&gt; int itemCount = 0;<br />
-monitor lock      =&gt; monitorLock;<br />
-monitor condition =&gt; needItem;<br /></p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Producer </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="keyword">while</span> (<span class="predefined-constant">true</span>) {
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>    monitorLock.acquire();&lt;/p&gt;
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>&lt;pre&gt;&lt;code&gt;<span class="comment">//Produce item</span>
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span class="comment">//Put in a buffer</span>
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>itemCount++;
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>needItem.signal(&amp;amp;monitorLock);
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>monitorLock.Release();     } </pre></div>
-</div>
- </figure></notextile></div>
-</code></pre>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Consumer </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="keyword">while</span> (<span class="predefined-constant">true</span>) {
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>    monitorLock.acquire();&lt;/p&gt;
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>&lt;pre&gt;&lt;code&gt;<span class="keyword">while</span>(intemCount == <span class="integer">0</span>) {
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>needItem.wait(&amp;amp;monitorLock);      
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>}
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span><span class="comment">//Buffer has atleast one item</span>
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>itemCount--;
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>monitorLock.Relase(); } </pre></div>
-</div>
- </figure></notextile></div>
-</code></pre>
-
-<h3 id="recommended-reading">Recommended reading</h3>
+<h3 id="references">References</h3>
 
 <ul>
-  <li><a href="https://www.dropbox.com/s/8naej9kd0612gkr/implementingcvs.pdf" target="_blank">Implementing CV using semaphore</a></li>
-  <li><a href="https://www.dropbox.com/s/gaallrwximrm14g/Monitors.pdf" target="_blank">Monitors by C.A.R Hoare </a></li>
-  <li><a href="http://distkeys.com/blog/2013/10/07/process-synchronization-in-linux-kernel/" target="_blank">Process synchronization in Linux Kernel</a></li>
+  <li><a href="http://pl.atyp.us/wordpress/index.php/category/tech/cloudfs/" target="_blank">Jeff Darcy</a></li>
+  <li><a href="http://the-paper-trail.org/" target="_blank">Henry Robinson</a></li>
 </ul>
 ]]></content>
   </entry>
