@@ -9,7 +9,7 @@
   <meta name="author" content="Vaibhav Gautam">
 
   
-  <meta name="description" content="Introduction Systems designed to Scale Naming and Directory Services Granularity of Naming Reducing Load Unique Identifier based naming (UID) &hellip;">
+  <meta name="description" content="Message Passing Remote Procedure Calls (RPC) Lightweight Remote Procedure Call Distributed Shared Memory – IVY Further reading The scope of this &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +110,62 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/02/16/context-switch/">Context Switch</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-16T14:53:00-08:00" pubdate data-updated="true">Feb 16<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/02/16/context-switch/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#message-passing">Message Passing</a></li>
+  <li><a href="#remote-procedure-calls-rpc">Remote Procedure Calls (RPC)</a></li>
+  <li><a href="#lightweight-remote-procedure-call">Lightweight Remote Procedure Call</a></li>
+  <li><a href="#distributed-shared-memory--ivy">Distributed Shared Memory – IVY</a></li>
+  <li><a href="#further-reading">Further reading</a></li>
+</ul>
+
+<p>The scope of this post is limited to the study of context switches in various communication and synchronization primitives in distributed systems mainly focus on following:</p>
+
+<p>•	Message Passing<br />
+•	Remote Procedure Calls (RPC) <br />
+•	Light weight Procedure Calls (LRPC)<br />
+•	Distributed Shared Memory (DSM)<br /></p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/02/16/context-switch/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -827,64 +883,6 @@ Sum = 10 Then the pairs are  {6,4} , {9,1}</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/10/08/world-of-bits-and-bytes/">World of Bits and Bytes</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-10-08T13:17:00-07:00" pubdate data-updated="true">Oct 8<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/10/08/world-of-bits-and-bytes/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><ul id="markdown-toc">
-  <li><a href="#bitwise-operators">Bitwise Operators</a></li>
-  <li><a href="#bit-fields">Bit Fields</a></li>
-  <li><a href="#problems">Problems</a>    <ul>
-      <li><a href="#how-set-a-single-bit-in-a-byte">How set a single bit in a byte?</a></li>
-      <li><a href="#how-to-unset-single-bit-in-a-byte">How to unset single bit in a byte?</a></li>
-      <li><a href="#one-function-to-set-and-unset">One function to set and unset</a></li>
-      <li><a href="#unset-range-of-bits">Unset range of bits</a></li>
-      <li><a href="#set-range-of-bits">Set range of bits</a></li>
-    </ul>
-  </li>
-  <li><a href="#recomended-readings">Recomended readings</a></li>
-</ul>
-
-<p>Recently, I have realized that no matter how much C, C++ or other high level languages you know it all comes down to bit and bytes view of program.<br />
-I started realizing that after all it’s not that easy to actually think and write in bit/byte manipulation. This is my attempt to learn and be more comfortable about thinking in bit/bytes.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/10/08/world-of-bits-and-bytes/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -937,6 +935,10 @@ I started realizing that after all it’s not that easy to actually think and wr
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/02/16/context-switch/">Context Switch</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/01/05/scale-in-distributed-systems/">Scale in Distributed Systems</a>
       </li>
     
@@ -952,10 +954,6 @@ I started realizing that after all it’s not that easy to actually think and wr
         <a href="/blog/2013/12/14/graph-algorithms/">Graph Algorithms</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/11/27/scalability/">Scalability in Distributed Systems</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -968,9 +966,9 @@ I started realizing that after all it’s not that easy to actually think and wr
 <li class='category'><a href='/blog/categories/linux/'>Linux (1)</a></li>
 <li class='category'><a href='/blog/categories/octopress/'>Octopress (1)</a></li>
 <li class='category'><a href='/blog/categories/operating/'>Operating (1)</a></li>
-<li class='category'><a href='/blog/categories/operating-systems/'>Operating Systems (1)</a></li>
+<li class='category'><a href='/blog/categories/operating-systems/'>Operating Systems (2)</a></li>
 <li class='category'><a href='/blog/categories/scale/'>Scale (1)</a></li>
-<li class='category'><a href='/blog/categories/systems/'>Systems (1)</a></li>
+<li class='category'><a href='/blog/categories/systems/'>Systems (2)</a></li>
 <li class='category'><a href='/blog/categories/algorithm/'>algorithm (3)</a></li>
 <li class='category'><a href='/blog/categories/algorithms/'>algorithms (3)</a></li>
 <li class='category'><a href='/blog/categories/architecture/'>architecture (1)</a></li>
@@ -978,7 +976,7 @@ I started realizing that after all it’s not that easy to actually think and wr
 <li class='category'><a href='/blog/categories/binary/'>binary (1)</a></li>
 <li class='category'><a href='/blog/categories/binary-numbers/'>binary numbers (1)</a></li>
 <li class='category'><a href='/blog/categories/debug/'>debug (1)</a></li>
-<li class='category'><a href='/blog/categories/distributed-systems/'>distributed systems (2)</a></li>
+<li class='category'><a href='/blog/categories/distributed-systems/'>distributed systems (3)</a></li>
 <li class='category'><a href='/blog/categories/graph/'>graph (1)</a></li>
 <li class='category'><a href='/blog/categories/interview/'>interview (1)</a></li>
 <li class='category'><a href='/blog/categories/numbers/'>numbers (1)</a></li>
