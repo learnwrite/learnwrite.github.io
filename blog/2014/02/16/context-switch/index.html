@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>about - Distributed Knowledge</title>
+  <title>Context Switch - Distributed Knowledge</title>
   <meta name="author" content="Vaibhav Gautam">
 
   
-  <meta name="description" content="About Jan 5th, 2014 Jan 5th, 2014 Tweet Comments Please enable JavaScript to view the comments powered by Disqus. (function() { var cx = ' &hellip;">
+  <meta name="description" content="Message Passing Remote Procedure Calls (RPC) Lightweight Remote Procedure Call Distributed Shared Memory – IVY Further reading The scope of this &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://distkeys.com/about/">
+  <link rel="canonical" href="http://distkeys.com/blog/2014/02/16/context-switch/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
    <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -109,32 +109,15 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">About</h1>
-    <p class="meta">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-01-05T21:18:00-08:00" pubdate data-updated="true">Jan 5<span>th</span>, 2014</time></p>
-  </header>
-  
-  
-
-  
-    <footer>
+    
+      <h1 class="entry-title">Context Switch</h1>
+    
+    
       <p class="meta">
         
-        
 
 
 
@@ -146,17 +129,124 @@
   
 
 
-<time datetime="2014-01-05T21:18:00-08:00" pubdate data-updated="true">Jan 5<span>th</span>, 2014</time>
+<time datetime="2014-02-16T14:53:00-08:00" pubdate data-updated="true">Feb 16<span>th</span>, 2014</time>
+        
+         | <a href="#disqus_thread">Comments</a>
         
       </p>
+    
+  </header>
+
+
+<div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#message-passing">Message Passing</a></li>
+  <li><a href="#remote-procedure-calls-rpc">Remote Procedure Calls (RPC)</a></li>
+  <li><a href="#lightweight-remote-procedure-call">Lightweight Remote Procedure Call</a></li>
+  <li><a href="#distributed-shared-memory--ivy">Distributed Shared Memory – IVY</a></li>
+  <li><a href="#further-reading">Further reading</a></li>
+</ul>
+
+<p>The scope of this post is limited to the study of context switches in various communication and synchronization primitives in distributed systems mainly focus on following:</p>
+
+<p>•	Message Passing<br />
+•	Remote Procedure Calls (RPC) <br />
+•	Light weight Procedure Calls (LRPC)<br />
+•	Distributed Shared Memory (DSM)<br /></p>
+
+<!-- more -->
+<p><br /></p>
+
+<h3 id="message-passing">Message Passing</h3>
+
+<p>Message passing is the communication primitive based on the <code class="myyellow">Client – Server architecture</code> involving communication only through a message passing. In message passing architecture the user process generates the datagram and interrupts the kernel for sending datagram to receiver. This process needs a context switch. <br /><br />
+At receiving end, after receiving a datagram by the service the data is sent to application in User Space from Kernel module, which involves the context switch. Same process is done back and forth to send and receive data with respective context switching in Message passing scheme of communication.<br /><br />
+Synchronization is achieved by blocking send and receives which may result in blocking the process in execution, while it receives a response from receiver, and volunteering giving up the CPU which might be argued as a context switch but in this post this mechanism is not treated as a context switch. 
+<br /><br /></p>
+
+<h3 id="remote-procedure-calls-rpc">Remote Procedure Calls (RPC)</h3>
+
+<p>RPC communication models aims to achieve the results of normal procedure call but in distributed environment. RPC is a level of abstraction on top of message passing and since, the nature of procedure call is continuous RPC follows a synchronous communication methodology. Four components in RPC are:<br /></p>
+
+<p>•	User – In user space<br />
+•	User Stub and RPC Communication Package – In Kernel Space<br />
+•	Server Stub and RPC Communication Package – In Kernel Space<br />
+•	Server – In user space on remote machine<br /></p>
+
+<p>User makes an RPC call like a normal procedure call which result in calling User stub and later the RPC communication package which is called the RPC runtime often. This process involves the context switching and the kernel takes care of RPC request using user stub and RPC runtime for marshaling data and sending to receiver.</p>
+
+<p>At the receiving end, the receiving and unmarshal of data packet is done by RPC runtime and server stub. The data is sent to the required user process for execution. This is point of context switch at the receiving side. Same procedure happens while sending result back to sender for the RPC request. The whole process involves the <code class="myyellow">four context switches.</code> Four context switches is because the interrupt handler receives the incoming packets and delivers to the correct process. It can be reduced to even two context switches if incoming message can be delivered directly to correct process without the intervention of interrupt handler.</p>
+
+<p><code class="myyellow">Binding</code> is the process of knowing the machine names and location which sender machine can connect for RPC operation. It can lead to increase in context switch as it is itself implemented as a separate module. In <code class="myyellow">RPC paper Grapevine</code> is used as a database for binding.  Sending and receiving communication can lead to two additional context switches on the sender side. Same is for the receiver side. 
+<br /><br /></p>
+
+<h3 id="lightweight-remote-procedure-call">Lightweight Remote Procedure Call</h3>
+
+<p>This communication model focuses on communication between protection domains on the same machine. In a high level view, LRPC client makes a procedure call to server procedure by kernel trap which leads to a context switch. Kernel processes the request and when the called procedure completes result is returned back to the client from kernel which again leads to the context switch.<br /></p>
+
+<p>Moving to fine granularity of LRPC, during the binding process, client makes import interface request via kernel. Kernel sends the request to server’s waiting clerk and in response waiting clerk sends response to kernel with information. Kernel then return the binding Object to client back and the whole process requires four context switches.<br /></p>
+
+<p>LRPC minimize the use of shared data structures which internally implements its own locks so no explicit lock is required for synchronization. LRPC implements the optimization by reducing the number of context switches by caching domains on idle processors. Kernel looks for the idle processor for the client request and if found one the request is routed to the processor without any context switch. Same is done when returning the result back to client. Kernel looks for any idle client process and uses it without any context switch. If no idle domain can be found then a single processor context switching is done.
+<br /><br /></p>
+
+<h3 id="distributed-shared-memory--ivy">Distributed Shared Memory – IVY</h3>
+
+<p>Distributed shared memory is the mode of communication in which a single address space is shared by all the processor. Processor can access any memory location at any time. In this process page size plays an important factor in performance. If the page size is big the two processes are accessing different section of same page, it reduces the performance by generating page fault. <br />
+The <code class="myyellow">false sharing</code> increases the context switch.  Context switching and synchronization varies in various methodologies to handle Memory Coherent problem. <br />
+<code class="myyellow">Page invalidation</code> approach for Page Synchronization invalidates all the copies of page. Next time when other process requires this page it generates the page fault hence increase the number of context switches. <br />
+In <code class="myyellow">write broadcast</code> approach fault handler updates each copy. Next time process don’t generate the page fault because it has an updated copy hence reduces the context switch. In various page ownership approaches like <em>fixed, dynamic with combination of invalidate and write broadcast</em> context switches are required just from passing control from user space to kernel space and vice versa. Then the execution for <em>centralize and distributed</em> approaches can be carried away in kernel mode with different strategies for message passing.</p>
+
+<p><br /><br /></p>
+
+<h3 id="further-reading">Further reading</h3>
+
+<ol>
+  <li>Message Passing</li>
+  <li>Distributed Shared Memory in <a href="https://www.dropbox.com/s/ukj7np5c78161at/shared%20virtual%20memory%20system.pdf" target="_blank">Ivy</a> (Integrated shared Virtual memory at
+Yale) </li>
+  <li><a href="https://www.dropbox.com/s/1ktdgouptq41fve/2.ImplementingRPC.pdf" target="_blank">Birrel and Nelson Remote Procedure Call</a></li>
+  <li><a href="https://www.dropbox.com/s/7i4kvjg741r5idz/LRPC.pdf" target="_blank">Lightweight Remote Procedure Call</a></li>
+</ol>
+</div>
+
+
+  <footer>
+    <p class="meta">
       
-        <div class="sharing">
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Vaibhav Gautam</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-16T14:53:00-08:00" pubdate data-updated="true">Feb 16<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/operating-systems/'>Operating Systems</a>, <a class='category' href='/blog/categories/systems/'>Systems</a>, <a class='category' href='/blog/categories/distributed-systems/'>distributed systems</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
   
   
    <div class="rdbWrapper" data-show-read="1" data-show-send-to-kindle="1" data-show-print="1" data-show-email="0" data-orientation="0" data-version="1"></div><script type="text/javascript">(function() {var s = document.getElementsByTagName("script")[0],rdb = document.createElement("script"); rdb.type = "text/javascript"; rdb.async = true; rdb.src = document.location.protocol + "//www.readability.com/embed.js"; s.parentNode.insertBefore(rdb, s); })();</script>
   
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://distkeys.com/about/index.html" data-via="_vaibhavg" data-counturl="http://distkeys.com/about/index.html" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://distkeys.com/blog/2014/02/16/context-switch/" data-via="_vaibhavg" data-counturl="http://distkeys.com/blog/2014/02/16/context-switch/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -166,9 +256,14 @@
   
 </div>
 
+    
+    <p class="meta">
       
-    </footer>
-  
+        <a class="basic-alignment left" href="/blog/2014/01/05/scale-in-distributed-systems/" title="Previous Post: Scale in Distributed Systems">&laquo; Scale in Distributed Systems</a>
+      
+      
+    </p>
+  </footer>
 </article>
 
   <section>
@@ -303,8 +398,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://distkeys.com/about/index.html';
-        var disqus_url = 'http://distkeys.com/about/index.html';
+        var disqus_identifier = 'http://distkeys.com/blog/2014/02/16/context-switch/';
+        var disqus_url = 'http://distkeys.com/blog/2014/02/16/context-switch/';
         var disqus_script = 'embed.js';
       
     (function () {
