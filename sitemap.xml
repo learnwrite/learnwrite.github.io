@@ -10,7 +10,7 @@
     </url>
     <url>
         <loc>http://distkeys.com/blog/2013/10/07/process-synchronization-in-linux-kernel/</loc>
-        <lastmod>2014-02-11T10:45:16-08:00</lastmod>
+        <lastmod>2014-02-16T23:17:52-08:00</lastmod>
     </url>
     <url>
         <loc>http://distkeys.com/blog/2013/10/08/binary-number-operations/</loc>
@@ -61,12 +61,16 @@
         <lastmod>2014-02-16T15:41:20-08:00</lastmod>
     </url>
     <url>
+        <loc>http://distkeys.com/blog/2014/02/16/naming-in-distributed-systems/</loc>
+        <lastmod>2014-02-16T23:30:31-08:00</lastmod>
+    </url>
+    <url>
         <loc>http://distkeys.com/about/</loc>
         <lastmod>2014-01-05T21:18:58-08:00</lastmod>
     </url>
     <url>
         <loc>http://distkeys.com/archives/</loc>
-        <lastmod>2014-02-16T15:41:20-08:00</lastmod>
+        <lastmod>2014-02-16T23:30:31-08:00</lastmod>
     </url>
     <url>
         <loc>http://distkeys.com/atom_search.xml</loc>
@@ -74,11 +78,11 @@
     </url>
     <url>
         <loc>http://distkeys.com/blog/archives/</loc>
-        <lastmod>2014-02-16T15:41:20-08:00</lastmod>
+        <lastmod>2014-02-16T23:30:31-08:00</lastmod>
     </url>
     <url>
         <loc>http://distkeys.com/</loc>
-        <lastmod>2014-02-16T15:41:20-08:00</lastmod>
+        <lastmod>2014-02-16T23:30:31-08:00</lastmod>
     </url>
     <url>
         <loc>http://distkeys.com/robots.txt</loc>

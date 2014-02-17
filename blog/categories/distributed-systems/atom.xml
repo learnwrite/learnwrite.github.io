@@ -4,7 +4,7 @@
   <title><![CDATA[Category: distributed systems | Distributed Knowledge]]></title>
   <link href="http://distkeys.com/blog/categories/distributed-systems/atom.xml" rel="self"/>
   <link href="http://distkeys.com/"/>
-  <updated>2014-02-16T15:41:28-08:00</updated>
+  <updated>2014-02-16T23:30:38-08:00</updated>
   <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -12,6 +12,123 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Naming in Distributed Systems]]></title>
+    <link href="http://distkeys.com/blog/2014/02/16/naming-in-distributed-systems/"/>
+    <updated>2014-02-16T22:47:00-08:00</updated>
+    <id>http://distkeys.com/blog/2014/02/16/naming-in-distributed-systems</id>
+    <content type="html"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#introduction">Introduction</a></li>
+  <li><a href="#directory-service-for-wan--dns">Directory Service for WAN – DNS	†</a>    <ul>
+      <li><a href="#granularity-of-names">Granularity of Names</a></li>
+      <li><a href="#caching-of-namesplacement-of-caches">Caching of Names/Placement of Caches</a></li>
+      <li><a href="#use-of-replication">Use of Replication</a></li>
+      <li><a href="#use-of-distribution">Use of Distribution</a></li>
+      <li><a href="#consistencysynchronization-requirement">Consistency/Synchronization Requirement</a></li>
+    </ul>
+  </li>
+  <li><a href="#file-systemcontent-management-system-cms">File system/Content management system (CMS)</a>    <ul>
+      <li><a href="#granularity-of-names-1">Granularity of Names</a></li>
+      <li><a href="#caching-of-namesplacement-of-caches-1">Caching of Names/Placement of Caches</a></li>
+      <li><a href="#use-of-replication-1">Use of Replication</a></li>
+      <li><a href="#use-of-distribution-1">Use of Distribution</a></li>
+      <li><a href="#consistencysynchronization-requirement-1">Consistency/Synchronization Requirement</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="introduction">Introduction</h3>
+
+<p>The scope of this post is limited to the study of naming systems for following system<br />
+•	Directory Service for Wide Area<br />
+•	File system or Content manage system for collaborative work<br /></p>
+
+<p>Naming can be categorized into four kinds<br />
+1. Host based naming<br />
+2. Global naming<br />
+3. User/Objet centered naming <br />
+4. Attribute based naming<br />
+<!-- more --></p>
+
+<p>The system we are going post will be falling into one of these category or hybrid of it. On the broad level, naming is associated with <strong>users, hosts, services, files, objects and groups</strong>. The requirements for directory for wide area and for Filesystem/CMS can be broadly categorize into following components:<br />
+•	Scalability<br />
+•	Availability<br />
+•	Consistency<br />
+•	Reliability<br />
+•	Fault isolation<br />
+•	Performance and Efficiency<br /><br /></p>
+
+<h3 id="directory-service-for-wan--dns">Directory Service for WAN – DNS	†</h3>
+
+<p>DNS is the case study of directory service for wide area network. The various requirements of DS†† for WAN††† has been summarized and presented in form of DNS as follows:</p>
+
+<h4 id="granularity-of-names">Granularity of Names</h4>
+
+<p>In DNS, domain names are represented by a <strong>character strings</strong> and machine oriented <strong>binary identifier</strong> is called Internet Address. Domain name changes rarely than the host more down the <strong>hierarchy</strong> so, on the course of granularity the <strong>less</strong> frequent to change lead to <strong>less</strong> number of messages and less number of objects to deal. In DNS mechanism of name to machine address lookup, finer the level of granularity more it is prone to change hence leads to <strong>more</strong> number of messages and query flow in network. So higher the hierarchy is lower the name granularity and lower the hierarchy is higher the name granularity.<br /><br /></p>
+
+<h4 id="caching-of-namesplacement-of-caches">Caching of Names/Placement of Caches</h4>
+
+<p>All names are cached which the name server heard about from other name servers while handling the request of name resolution.<br /></p>
+
+<p>• <strong>Iterative query</strong> – Name query goes to local name server where server matches query to the longest name prefix in its local cache. It caches the request and response for future reference.<br />
+• <strong>Recursive query</strong> – Every level of name server maintains the cache, in other words the multilevel caching, which tries to resolves longest sequence of name query.  In recursive query look up the server caches the query request and as well as query response.<br />
+• <strong>Negative Caching</strong> – Negative caching is used for bad names or absence of a resource record in order to answer future queries as quickly.<br /><br /></p>
+
+<h4 id="use-of-replication">Use of Replication</h4>
+
+<p>To ensure <strong>high availability</strong> and enhance <strong>performance</strong> of name service name servers are replicated and the frequency of <strong>replication</strong> depends upon the frequency of its use and the degree off its <strong>importance</strong> in the network. For example, root name server is highly replicated to ensure its high availability and avoiding frequent name queries.<br /><br /></p>
+
+<h4 id="use-of-distribution">Use of Distribution</h4>
+
+<p>The hierarchical model of DNS distributes the job of managing the handing out of names by <strong>distributing the responsibility</strong> of operating name servers. Distribution is maintained in terms of different domain name servers for different top levels domains, so there is a natural separation in terms of sending particular kind of name queries to one name server and other kind of name queries to other name servers.<br /></p>
+
+<p>More formally, Namespace is delegated at every domain and the whole space is partitioned into number of area called <strong>zones</strong>, which starts a domain and extends till leaf nodes, which is individual computer, or to other domain where other zone starts.<br /><br /></p>
+
+<h4 id="consistencysynchronization-requirement">Consistency/Synchronization Requirement</h4>
+
+<p>DNS cache manager synchronizes the cache records when expired. For consistency caches maintains the <strong>time to live</strong> for every entry. </p>
+
+<p>For any update operation the primary server of a zone is contacted. Each secondary server periodically establishes a communication connection with primary server and gets the update.<br /></p>
+
+<hr style="border-top: 1.5px dotted black" />
+<p><br /></p>
+
+<h3 id="file-systemcontent-management-system-cms">File system/Content management system (CMS)</h3>
+
+<p>File System or CMS for collaborative work is smaller environment as compared to directory service for wide area. Hence, the priority of requirement we discussed earlier changes. The scalability for small scale is not the top priority but it remains requirement for future. But, other requirements like Availability, consistency etc remains a major requirements.<br /></p>
+
+<p>CMS/File System for University can have Global naming, User centric naming system, attribute type naming scheme. <br /></p>
+
+<h4 id="granularity-of-names-1">Granularity of Names</h4>
+
+<p>Granularity of names in CMS systems is large in nature. Since, the system is not huge and not distributed of highest degree, large granularity works. Moreover, in system like this more details can be accommodated in to naming increasing the performance of naming system.<br /></p>
+
+<p>For instance, Tilde naming system is a relative naming system based on collection of small, disjoint, hierarchical namespace. The level of will be very less as compared to wide area hence lower the granularity. <br />
+In Prospero File System, Virtual System Model implements the concept of closure, which reduces the granularity.<br /><br /></p>
+
+<h4 id="caching-of-namesplacement-of-caches-1">Caching of Names/Placement of Caches</h4>
+
+<p>In CMS/File Systems environment caching of names provide enormous performance boost because the effect of locality of reference or caching the alias plays a significant role. Cache can be most efficiently used for most frequent access file names, which is limited and manageable in case of small environment like university. Cache can be managed on centralized server or the primary name server based on system naming architecture and boosts the overall availability.<br /><br /></p>
+
+<h4 id="use-of-replication-1">Use of Replication</h4>
+
+<p>Replication is of required for high availability of naming service.  Replication enhances the performance in University environment when using Global naming system and act as a load balancing to serve request quickly. It provides the fault tolerance by maintaining the replication of progressive collaborative work.<br /><br /></p>
+
+<h4 id="use-of-distribution-1">Use of Distribution</h4>
+
+<p>Distribution in global naming system if designed hierarchy, in the case of Prospero, local name server associated serves each requests. Next component is resolved by directory server in response of local name server. So, the naming service is distributed in the context of processing of user name query in <strong>distributed fashion</strong> rather than query served by dedicated <strong>one name server</strong>. Maintaining a non-distributed global name service irrespective of <strong>distributed file content</strong> can be a <strong>bottleneck</strong> and global name server <strong>performance issue</strong>, when files across the server is moved and renamed frequently.<br /><br /></p>
+
+<h4 id="consistencysynchronization-requirement-1">Consistency/Synchronization Requirement</h4>
+
+<p>Consistency is achieved by synchronization and in collaborative environment like university synchronization is high priority. Stale name values in cache or time to live values in cache can lead to poor performance in dynamic collaborative environment.  Although frequent synchronization leads to degrade the system performance but in order to provide consistency and reliability it can be compromised.</p>
+
+<p><br /><br /><br /><br />
+† Domain name service<br />
+†† Directory Service<br />
+††† Wide Area Network<br /></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Context Switch]]></title>
