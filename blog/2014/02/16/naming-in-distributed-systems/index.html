@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Array and Strings - Distributed Knowledge</title>
+  <title>Naming in Distributed Systems - Distributed Knowledge</title>
   <meta name="author" content="Vaibhav Gautam">
 
   
-  <meta name="description" content="Array Problems Find repeating/duplicate numbers Sum of 2 numbers Sum of 3 numbers Reverse a string without extra space Duplicates and Count Remove &hellip;">
+  <meta name="description" content="Introduction Directory Service for WAN – DNS	† Granularity of Names Caching of Names/Placement of Caches Use of Replication Use of Distribution &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://distkeys.com/blog/2013/12/30/array-and-strings/">
+  <link rel="canonical" href="http://distkeys.com/blog/2014/02/16/naming-in-distributed-systems/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
    <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -113,7 +113,7 @@
   
   <header>
     
-      <h1 class="entry-title">Array and Strings</h1>
+      <h1 class="entry-title">Naming in Distributed Systems</h1>
     
     
       <p class="meta">
@@ -129,7 +129,7 @@
   
 
 
-<time datetime="2013-12-30T01:26:00-08:00" pubdate data-updated="true">Dec 30<span>th</span>, 2013</time>
+<time datetime="2014-02-16T22:47:00-08:00" pubdate data-updated="true">Feb 16<span>th</span>, 2014</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -139,139 +139,114 @@
 
 
 <div class="entry-content"><ul id="markdown-toc">
-  <li><a href="#array-problems">Array Problems</a>    <ul>
-      <li><a href="#find-repeatingduplicate-numbers">Find repeating/duplicate numbers</a></li>
-      <li><a href="#sum-of-2-numbers">Sum of 2 numbers</a></li>
-      <li><a href="#sum-of-3-numbers">Sum of 3 numbers</a></li>
-      <li><a href="#reverse-a-string-without-extra-space">Reverse a string without extra space</a></li>
-      <li><a href="#duplicates-and-count">Duplicates and Count</a></li>
-      <li><a href="#remove-duplicate-spaces">Remove duplicate spaces</a></li>
-      <li><a href="#remove-spaces">Remove spaces</a></li>
-      <li><a href="#remove-all-consequtive-duplicate-elements">Remove all consequtive duplicate elements</a></li>
-      <li><a href="#rotate-a-string">Rotate a string</a></li>
-      <li><a href="#permutation-of-a-string">Permutation of a string</a></li>
-      <li><a href="#find-anagram">Find Anagram</a></li>
+  <li><a href="#introduction">Introduction</a></li>
+  <li><a href="#directory-service-for-wan--dns">Directory Service for WAN – DNS	†</a>    <ul>
+      <li><a href="#granularity-of-names">Granularity of Names</a></li>
+      <li><a href="#caching-of-namesplacement-of-caches">Caching of Names/Placement of Caches</a></li>
+      <li><a href="#use-of-replication">Use of Replication</a></li>
+      <li><a href="#use-of-distribution">Use of Distribution</a></li>
+      <li><a href="#consistencysynchronization-requirement">Consistency/Synchronization Requirement</a></li>
+    </ul>
+  </li>
+  <li><a href="#file-systemcontent-management-system-cms">File system/Content management system (CMS)</a>    <ul>
+      <li><a href="#granularity-of-names-1">Granularity of Names</a></li>
+      <li><a href="#caching-of-namesplacement-of-caches-1">Caching of Names/Placement of Caches</a></li>
+      <li><a href="#use-of-replication-1">Use of Replication</a></li>
+      <li><a href="#use-of-distribution-1">Use of Distribution</a></li>
+      <li><a href="#consistencysynchronization-requirement-1">Consistency/Synchronization Requirement</a></li>
     </ul>
   </li>
 </ul>
 
-<h3 id="array-problems">Array Problems</h3>
+<h3 id="introduction">Introduction</h3>
 
-<h4 id="find-repeatingduplicate-numbers">Find repeating/duplicate numbers</h4>
-<p>Find all the numbers repeating in a array</p>
+<p>The scope of this post is limited to the study of naming systems for following system<br />
+•	Directory Service for Wide Area<br />
+•	File system or Content manage system for collaborative work<br /></p>
 
-<p>Input
-2,1, 3, 2, 3, 1, 4</p>
+<p>Naming can be categorized into four kinds<br />
+1. Host based naming<br />
+2. Global naming<br />
+3. User/Objet centered naming <br />
+4. Attribute based naming<br />
+<!-- more --></p>
 
-<p>Output
-2,1,3</p>
+<p>The system we are going post will be falling into one of these category or hybrid of it. On the broad level, naming is associated with <strong>users, hosts, services, files, objects and groups</strong>. The requirements for directory for wide area and for Filesystem/CMS can be broadly categorize into following components:<br />
+•	Scalability<br />
+•	Availability<br />
+•	Consistency<br />
+•	Reliability<br />
+•	Fault isolation<br />
+•	Performance and Efficiency<br /><br /></p>
 
-<h4 id="sum-of-2-numbers">Sum of 2 numbers</h4>
+<h3 id="directory-service-for-wan--dns">Directory Service for WAN – DNS	†</h3>
 
-<p>We are given a sorted array A of length n and a value k. We want to find out if there are indices i, j such that A[i] + A[j] == k. Give a Θ(n) way of solving this problem. Prove its running time and correctness. For full credit, your algorithm should also output one pair of indices i, j such that A[i] + A[j] == k (if at least one pair exists; if multiple exist, you only need to output one of them). </p>
+<p>DNS is the case study of directory service for wide area network. The various requirements of DS†† for WAN††† has been summarized and presented in form of DNS as follows:</p>
 
-<p>Other variant of the same problem
-When array is not sorted<br />
-We need to find pair of numbers in an array whose sum is equal to a given value.<br />
-A = {6,4,5,7,9,1,2}<br />
-Sum = 10 Then the pairs are  {6,4} , {9,1}</p>
+<h4 id="granularity-of-names">Granularity of Names</h4>
 
-<h4 id="sum-of-3-numbers">Sum of 3 numbers</h4>
-<p>We need to find three numbers in an array whose sum is equal to a given value.</p>
+<p>In DNS, domain names are represented by a <strong>character strings</strong> and machine oriented <strong>binary identifier</strong> is called Internet Address. Domain name changes rarely than the host more down the <strong>hierarchy</strong> so, on the course of granularity the <strong>less</strong> frequent to change lead to <strong>less</strong> number of messages and less number of objects to deal. In DNS mechanism of name to machine address lookup, finer the level of granularity more it is prone to change hence leads to <strong>more</strong> number of messages and query flow in network. So higher the hierarchy is lower the name granularity and lower the hierarchy is higher the name granularity.<br /><br /></p>
 
-<p><br />
-<br /></p>
+<h4 id="caching-of-namesplacement-of-caches">Caching of Names/Placement of Caches</h4>
 
-<!-- more -->
-<p>### String Problems</p>
+<p>All names are cached which the name server heard about from other name servers while handling the request of name resolution.<br /></p>
 
-<h4 id="reverse-a-string-without-extra-space">Reverse a string without extra space</h4>
+<p>• <strong>Iterative query</strong> – Name query goes to local name server where server matches query to the longest name prefix in its local cache. It caches the request and response for future reference.<br />
+• <strong>Recursive query</strong> – Every level of name server maintains the cache, in other words the multilevel caching, which tries to resolves longest sequence of name query.  In recursive query look up the server caches the query request and as well as query response.<br />
+• <strong>Negative Caching</strong> – Negative caching is used for bad names or absence of a resource record in order to answer future queries as quickly.<br /><br /></p>
 
-<p>String could be reversed without using extra space using bitwise operator <a href="http://distkeys.com/blog/2013/10/08/world-of-bits-and-bytes/#bitwise-operators" target="_blank">XOR</a></p>
+<h4 id="use-of-replication">Use of Replication</h4>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>String Reverse</span>  <a href="http://ideone.com/vfTxcr" target="_blank">Run Code </a></figcaption> <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="preprocessor">#include</span> <span class="include">&lt;stdio.h&gt;</span>
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span class="preprocessor">#include</span> <span class="include">&lt;string.h&gt;</span>
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span> 
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span> 
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span class="predefined-type">int</span> main(<span class="directive">void</span>) {
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span class="predefined-type">int</span> i = <span class="integer">0</span>;
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    <span class="predefined-type">char</span> str[] = <span class="string"><span class="delimiter">&quot;</span><span class="content">testString</span><span class="delimiter">&quot;</span></span>;
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    <span class="predefined-type">int</span> len = strlen(str);
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span> 
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>    <span class="keyword">for</span>(i = <span class="integer">0</span>; i &lt; len/<span class="integer">2</span>; i++){
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>        str[len - i - <span class="integer">1</span>] ^= str[i];
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span>        str[i] ^= str[len - i - <span class="integer">1</span>];
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span>        str[len - i - <span class="integer">1</span>] ^= str[i];
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span>    }
-<span class="line-numbers"><a href="#n16" name="n16">16</a></span>
-<span class="line-numbers"><a href="#n17" name="n17">17</a></span>    printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Reverse String %s </span><span class="char">\n</span><span class="delimiter">&quot;</span></span>, str);
-<span class="line-numbers"><a href="#n18" name="n18">18</a></span> 
-<span class="line-numbers"><a href="#n19" name="n19">19</a></span>    <span class="keyword">return</span> <span class="integer">0</span>;
-<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>}
-<span class="line-numbers"><a href="#n21" name="n21">21</a></span>
-</pre></div>
-</div>
- </figure></notextile></div>
+<p>To ensure <strong>high availability</strong> and enhance <strong>performance</strong> of name service name servers are replicated and the frequency of <strong>replication</strong> depends upon the frequency of its use and the degree off its <strong>importance</strong> in the network. For example, root name server is highly replicated to ensure its high availability and avoiding frequent name queries.<br /><br /></p>
 
+<h4 id="use-of-distribution">Use of Distribution</h4>
+
+<p>The hierarchical model of DNS distributes the job of managing the handing out of names by <strong>distributing the responsibility</strong> of operating name servers. Distribution is maintained in terms of different domain name servers for different top levels domains, so there is a natural separation in terms of sending particular kind of name queries to one name server and other kind of name queries to other name servers.<br /></p>
+
+<p>More formally, Namespace is delegated at every domain and the whole space is partitioned into number of area called <strong>zones</strong>, which starts a domain and extends till leaf nodes, which is individual computer, or to other domain where other zone starts.<br /><br /></p>
+
+<h4 id="consistencysynchronization-requirement">Consistency/Synchronization Requirement</h4>
+
+<p>DNS cache manager synchronizes the cache records when expired. For consistency caches maintains the <strong>time to live</strong> for every entry. </p>
+
+<p>For any update operation the primary server of a zone is contacted. Each secondary server periodically establishes a communication connection with primary server and gets the update.<br /></p>
+
+<hr style="border-top: 1.5px dotted black" />
 <p><br /></p>
 
-<h4 id="duplicates-and-count">Duplicates and Count</h4>
+<h3 id="file-systemcontent-management-system-cms">File system/Content management system (CMS)</h3>
 
-<p>Print all duplicate characters and their count</p>
+<p>File System or CMS for collaborative work is smaller environment as compared to directory service for wide area. Hence, the priority of requirement we discussed earlier changes. The scalability for small scale is not the top priority but it remains requirement for future. But, other requirements like Availability, consistency etc remains a major requirements.<br /></p>
 
-<p>Input string<br />
-Foo Bar</p>
+<p>CMS/File System for University can have Global naming, User centric naming system, attribute type naming scheme. <br /></p>
 
-<p>Output<br />
-a1B1F1o2r1</p>
+<h4 id="granularity-of-names-1">Granularity of Names</h4>
 
-<h4 id="remove-duplicate-spaces">Remove duplicate spaces</h4>
-<p>Remove all duplicate spaces from the string</p>
+<p>Granularity of names in CMS systems is large in nature. Since, the system is not huge and not distributed of highest degree, large granularity works. Moreover, in system like this more details can be accommodated in to naming increasing the performance of naming system.<br /></p>
 
-<p>Input string<br />
-Hi^^^There!!!^^Wassup<br />
- ^ - Represents  space</p>
+<p>For instance, Tilde naming system is a relative naming system based on collection of small, disjoint, hierarchical namespace. The level of will be very less as compared to wide area hence lower the granularity. <br />
+In Prospero File System, Virtual System Model implements the concept of closure, which reduces the granularity.<br /><br /></p>
 
-<p>Output<br />
-Hi^There!!!^Wassup</p>
+<h4 id="caching-of-namesplacement-of-caches-1">Caching of Names/Placement of Caches</h4>
 
-<h4 id="remove-spaces">Remove spaces</h4>
-<p>Remove all the spaces from a string</p>
+<p>In CMS/File Systems environment caching of names provide enormous performance boost because the effect of locality of reference or caching the alias plays a significant role. Cache can be most efficiently used for most frequent access file names, which is limited and manageable in case of small environment like university. Cache can be managed on centralized server or the primary name server based on system naming architecture and boosts the overall availability.<br /><br /></p>
 
-<p>Input string<br />
-Hi there!!! Wassup</p>
+<h4 id="use-of-replication-1">Use of Replication</h4>
 
-<p>Output<br />
-Hithere!!!Wassup</p>
+<p>Replication is of required for high availability of naming service.  Replication enhances the performance in University environment when using Global naming system and act as a load balancing to serve request quickly. It provides the fault tolerance by maintaining the replication of progressive collaborative work.<br /><br /></p>
 
-<h4 id="remove-all-consequtive-duplicate-elements">Remove all consequtive duplicate elements</h4>
-<p>Remove all consequtive duplicate elements from the string</p>
+<h4 id="use-of-distribution-1">Use of Distribution</h4>
 
-<p>Input string<br />
-aabbccddd</p>
+<p>Distribution in global naming system if designed hierarchy, in the case of Prospero, local name server associated serves each requests. Next component is resolved by directory server in response of local name server. So, the naming service is distributed in the context of processing of user name query in <strong>distributed fashion</strong> rather than query served by dedicated <strong>one name server</strong>. Maintaining a non-distributed global name service irrespective of <strong>distributed file content</strong> can be a <strong>bottleneck</strong> and global name server <strong>performance issue</strong>, when files across the server is moved and renamed frequently.<br /><br /></p>
 
-<p>Output <br />
-abcd</p>
+<h4 id="consistencysynchronization-requirement-1">Consistency/Synchronization Requirement</h4>
 
-<h4 id="rotate-a-string">Rotate a string</h4>
-<p>Rotate a string for a ‘n’ times</p>
+<p>Consistency is achieved by synchronization and in collaborative environment like university synchronization is high priority. Stale name values in cache or time to live values in cache can lead to poor performance in dynamic collaborative environment.  Although frequent synchronization leads to degrade the system performance but in order to provide consistency and reliability it can be compromised.</p>
 
-<p>Input string<br />
-1234567 <br />
-Rotate 2 times</p>
-
-<p>Output <br />
-3456712</p>
-
-<h4 id="permutation-of-a-string">Permutation of a string</h4>
-
-<p><a href="http://distkeys.com/blog/2013/11/18/recursion/#string-permutation-non-repeating" target="_blank">Permutation</a></p>
-
-<p><br /></p>
-
-<h4 id="find-anagram">Find Anagram</h4>
+<p><br /><br /><br /><br />
+† Domain name service<br />
+†† Directory Service<br />
+††† Wide Area Network<br /></p>
 </div>
 
 
@@ -294,12 +269,12 @@ Rotate 2 times</p>
   
 
 
-<time datetime="2013-12-30T01:26:00-08:00" pubdate data-updated="true">Dec 30<span>th</span>, 2013</time>
+<time datetime="2014-02-16T22:47:00-08:00" pubdate data-updated="true">Feb 16<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/algorithms/'>algorithms</a>, <a class='category' href='/blog/categories/array/'>array</a>, <a class='category' href='/blog/categories/strings/'>strings</a>
+    <a class='category' href='/blog/categories/operating-systems/'>Operating Systems</a>, <a class='category' href='/blog/categories/systems/'>Systems</a>, <a class='category' href='/blog/categories/distributed-systems/'>distributed systems</a>
   
 </span>
 
@@ -312,7 +287,7 @@ Rotate 2 times</p>
    <div class="rdbWrapper" data-show-read="1" data-show-send-to-kindle="1" data-show-print="1" data-show-email="0" data-orientation="0" data-version="1"></div><script type="text/javascript">(function() {var s = document.getElementsByTagName("script")[0],rdb = document.createElement("script"); rdb.type = "text/javascript"; rdb.async = true; rdb.src = document.location.protocol + "//www.readability.com/embed.js"; s.parentNode.insertBefore(rdb, s); })();</script>
   
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://distkeys.com/blog/2013/12/30/array-and-strings/" data-via="_vaibhavg" data-counturl="http://distkeys.com/blog/2013/12/30/array-and-strings/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://distkeys.com/blog/2014/02/16/naming-in-distributed-systems/" data-via="_vaibhavg" data-counturl="http://distkeys.com/blog/2014/02/16/naming-in-distributed-systems/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -325,10 +300,8 @@ Rotate 2 times</p>
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/12/14/graph-algorithms/" title="Previous Post: Graph Algorithms">&laquo; Graph Algorithms</a>
+        <a class="basic-alignment left" href="/blog/2014/02/16/context-switch/" title="Previous Post: Context Switch">&laquo; Context Switch</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/01/04/D3-and-Octopress/" title="Next Post: D3.js and Octopress">D3.js and Octopress &raquo;</a>
       
     </p>
   </footer>
@@ -466,8 +439,8 @@ Rotate 2 times</p>
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://distkeys.com/blog/2013/12/30/array-and-strings/';
-        var disqus_url = 'http://distkeys.com/blog/2013/12/30/array-and-strings/';
+        var disqus_identifier = 'http://distkeys.com/blog/2014/02/16/naming-in-distributed-systems/';
+        var disqus_url = 'http://distkeys.com/blog/2014/02/16/naming-in-distributed-systems/';
         var disqus_script = 'embed.js';
       
     (function () {
