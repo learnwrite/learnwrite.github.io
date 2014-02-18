@@ -4,7 +4,7 @@
   <title><![CDATA[Category: graph | Distributed Knowledge]]></title>
   <link href="http://distkeys.com/blog/categories/graph/atom.xml" rel="self"/>
   <link href="http://distkeys.com/"/>
-  <updated>2014-02-16T23:30:38-08:00</updated>
+  <updated>2014-02-17T22:17:14-08:00</updated>
   <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -21,6 +21,7 @@
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#graph-problems">Graph problems</a>    <ul>
       <li><a href="#find-neighbour-in-array">Find neighbour in array</a></li>
+      <li><a href="#find-all-the-ascending-paths-in-graph">Find all the ascending paths in graph</a></li>
     </ul>
   </li>
 </ul>
@@ -180,8 +181,32 @@
 <span class="line-numbers"><a href="#n53" name="n53">53</a></span>    }
 <span class="line-numbers"><a href="#n54" name="n54">54</a></span>} } </pre></div>
 </div>
- </figure></notextile></div>
+ </figure></notextile></div> &lt;hr style="border-top: 1.5px dotted black"/&gt; &lt;br&gt;&lt;br&gt;
 </code></pre>
+
+<h4 id="find-all-the-ascending-paths-in-graph">Find all the ascending paths in graph</h4>
+
+<p>Given array as
+<br /></p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+
+\left[\begin{array}{cc} 1 & 6 & 8\\ 4 & 7 & 9\\ 5 & 2 & 3
+\end{array}\right]
+ %]]&gt;</script>
+
+<p>Find all the paths from 1 to 3.
+The possible ascending path are</p>
+
+<p><code class="numberCircle">1</code> -&gt;6-&gt;8-&gt;9-&gt; <code class="numberCircle">3</code><br /></p>
+
+<p><code class="numberCircle">1</code> -&gt;4-&gt;7-&gt;9-&gt;<code class="numberCircle">3</code></p>
+
+<p><br />
+<code class="numberCircle">1</code> -&gt;6-&gt;7-&gt;2-&gt;<code class="numberCircle">3</code> is not the right solution as 7 &gt; 2</p>
+
+<p><br /><br /></p>
+
 ]]></content>
   </entry>
   

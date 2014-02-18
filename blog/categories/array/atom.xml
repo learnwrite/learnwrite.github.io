@@ -4,7 +4,7 @@
   <title><![CDATA[Category: array | Distributed Knowledge]]></title>
   <link href="http://distkeys.com/blog/categories/array/atom.xml" rel="self"/>
   <link href="http://distkeys.com/"/>
-  <updated>2014-02-16T23:30:38-08:00</updated>
+  <updated>2014-02-17T22:17:14-08:00</updated>
   <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -23,6 +23,10 @@
       <li><a href="#find-repeatingduplicate-numbers">Find repeating/duplicate numbers</a></li>
       <li><a href="#sum-of-2-numbers">Sum of 2 numbers</a></li>
       <li><a href="#sum-of-3-numbers">Sum of 3 numbers</a></li>
+      <li><a href="#find-the-number-when-size-of-array-is-unknown">Find the number when size of array is unknown</a></li>
+    </ul>
+  </li>
+  <li><a href="#string-problems">String Problems</a>    <ul>
       <li><a href="#reverse-a-string-without-extra-space">Reverse a string without extra space</a></li>
       <li><a href="#duplicates-and-count">Duplicates and Count</a></li>
       <li><a href="#remove-duplicate-spaces">Remove duplicate spaces</a></li>
@@ -63,7 +67,17 @@ Sum = 10 Then the pairs are  {6,4} , {9,1}</p>
 <br /></p>
 
 <!-- more -->
-<p>### String Problems</p>
+
+<h4 id="find-the-number-when-size-of-array-is-unknown">Find the number when size of array is unknown</h4>
+
+<p>Given an array of integers find the given element is present when size of array is not given</p>
+
+<p>Input array
+2,1, 3, 2, 3, 1, 4</p>
+
+<p>Element to find 3. Find solution in less than O(n) time.</p>
+
+<h3 id="string-problems">String Problems</h3>
 
 <h4 id="reverse-a-string-without-extra-space">Reverse a string without extra space</h4>
 
