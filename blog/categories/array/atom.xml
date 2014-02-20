@@ -4,7 +4,7 @@
   <title><![CDATA[Category: array | Distributed Knowledge]]></title>
   <link href="http://distkeys.com/blog/categories/array/atom.xml" rel="self"/>
   <link href="http://distkeys.com/"/>
-  <updated>2014-02-17T22:17:14-08:00</updated>
+  <updated>2014-02-19T21:33:35-08:00</updated>
   <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -83,30 +83,27 @@ Sum = 10 Then the pairs are  {6,4} , {9,1}</p>
 
 <p>String could be reversed without using extra space using bitwise operator <a href="http://distkeys.com/blog/2013/10/08/world-of-bits-and-bytes/#bitwise-operators" target="_blank">XOR</a></p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>String Reverse</span>  <a href='http://ideone.com/vfTxcr' target='_blank'>Run Code </a></figcaption> <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="preprocessor">#include</span> <span class="include">&lt;stdio.h&gt;</span>
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span class="preprocessor">#include</span> <span class="include">&lt;string.h /&gt;</span>&lt;/stdio.h&gt;&lt;/p&gt;
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>&lt;p&gt;<span class="predefined-type">int</span> main(<span class="directive">void</span>) {
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    <span class="predefined-type">int</span> i = <span class="integer">0</span>;
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span class="predefined-type">char</span> str[] = <span class="error">“</span>testString<span class="error">”</span>;
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    <span class="predefined-type">int</span> len = strlen(str);&lt;/p&gt;
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>&lt;pre&gt;&lt;code&gt;<span class="keyword">for</span>(i = <span class="integer">0</span>; i &amp;lt; len/<span class="integer">2</span>; i++){
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>    str[len - i - <span class="integer">1</span>] ^= str[i];
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    str[i] ^= str[len - i - <span class="integer">1</span>];
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span>    str[len - i - <span class="integer">1</span>] ^= str[i];
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span>}
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span>
-<span class="line-numbers"><a href="#n16" name="n16">16</a></span>printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Reverse String %s </span><span class="char">\n</span><span class="delimiter">&quot;</span></span>, str);
-<span class="line-numbers"><a href="#n17" name="n17">17</a></span> 
-<span class="line-numbers"><a href="#n18" name="n18">18</a></span><span class="keyword">return</span> <span class="integer">0</span>; }
-<span class="line-numbers"><a href="#n19" name="n19">19</a></span>&lt;/code&gt;&lt;/pre&gt;
-<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>
-<span class="line-numbers"><a href="#n21" name="n21">21</a></span>&lt;p&gt;</pre></div>
-</div>
- </figure></notextile></div>
+<p>{% coderay lang:c linenos:true String Reverse http://ideone.com/vfTxcr Run Code %}
+#include <stdio.h>
+#include <string.h /></stdio.h></p>
+
+<p>int main(void) {
+    int i = 0;
+    char str[] = “testString”;
+    int len = strlen(str);</p>
+
+<pre><code>for(i = 0; i &lt; len/2; i++){
+	str[len - i - 1] ^= str[i];
+	str[i] ^= str[len - i - 1];
+	str[len - i - 1] ^= str[i];
+}
+
+printf("Reverse String %s \n", str);
+ 
+return 0; }
+</code></pre>
+
+<p>{% endcoderay %}
 <br /></p>
 
 <h4 id="duplicates-and-count">Duplicates and Count</h4>

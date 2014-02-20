@@ -4,7 +4,7 @@
   <title><![CDATA[Category: binary numbers | Distributed Knowledge]]></title>
   <link href="http://distkeys.com/blog/categories/binary-numbers/atom.xml" rel="self"/>
   <link href="http://distkeys.com/"/>
-  <updated>2014-02-17T22:17:14-08:00</updated>
+  <updated>2014-02-19T21:33:35-08:00</updated>
   <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -46,85 +46,78 @@ I started realizing that after all it’s not that easy to actually think and wr
 <p>Introduction <a href="http://www.codeproject.com/Articles/2247/An-introduction-to-bitwise-operators" target="_blank">here</a>
 <br /><br /><br /><br /></p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Bit &amp; Byte </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span>
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>||              |               |               |              ||
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>|+- bit <span class="integer">31</span>      |               |               |       bit <span class="integer">0</span> -+|
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>|               |               |               |               |
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>+<span class="error">–</span> BYTE <span class="integer">3</span> <span class="error">—</span><span class="error">–</span>+<span class="error">—</span> BYTE <span class="integer">2</span> <span class="error">—</span>-+<span class="error">—</span> BYTE <span class="integer">1</span> <span class="error">—</span>-+<span class="error">–</span> BYTE <span class="integer">0</span> <span class="error">—</span><span class="error">–</span>+
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>|                               |                               |
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>+<span class="error">—</span><span class="error">—</span><span class="error">—</span><span class="error">–</span> WORD <span class="integer">1</span> <span class="error">—</span><span class="error">—</span><span class="error">—</span><span class="error">—</span>+<span class="error">—</span><span class="error">—</span><span class="error">—</span><span class="error">–</span> WORD <span class="integer">0</span> <span class="error">—</span><span class="error">—</span><span class="error">—</span><span class="error">—</span>+
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>|                                                               |
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>+<span class="error">—</span><span class="error">—</span><span class="error">—</span><span class="error">—</span><span class="error">—</span><span class="error">—</span><span class="error">—</span><span class="error">—</span><span class="error">—</span> DWORD <span class="error">—</span><span class="error">—</span><span class="error">—</span><span class="error">—</span><span class="error">—</span><span class="error">—</span><span class="error">—</span><span class="error">—</span><span class="error">—</span><span class="error">–</span>+&lt;/p&gt;
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>&lt;p&gt;Hexadecimal Numbers
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span><span class="integer">0</span> <span class="integer">1</span> <span class="integer">2</span> <span class="integer">3</span> <span class="integer">4</span> <span class="integer">5</span> <span class="integer">6</span> <span class="integer">7</span> <span class="integer">8</span> <span class="integer">9</span> A B C D E F
-</pre></div>
-</div>
- </figure></notextile></div></p>
+<p>{% coderay lang:cplusplus linenos:true Bit &amp; Byte %}
+ 0 1 0 0 0 1 1 1 1 0 0 0 0 1 1 1 0 1 1 1 0 1 0 0 0 1 1 1 1 0 0 0
+||              |               |               |              ||
+|+- bit 31      |               |               |       bit 0 -+|
+|               |               |               |               |
++– BYTE 3 —–+— BYTE 2 —-+— BYTE 1 —-+– BYTE 0 —–+
+|                               |                               |
++———– WORD 1 ————+———– WORD 0 ————+
+|                                                               |
++————————— DWORD —————————–+</p>
+
+<p>Hexadecimal Numbers
+0 1 2 3 4 5 6 7 8 9 A B C D E F
+{% endcoderay %}</p>
 
 <p><br /></p>
 
 <h3 id="bitwise-operators">Bitwise Operators</h3>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Operators</span>  <a href='http://distkeys.com/blog/2013/10/08/binary-number-operations/' target='_blank'>Bitwise Operations </a></figcaption> <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>The &amp;amp; <span class="directive">operator</span> (AND)
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span class="integer">1</span>   &amp;amp;   <span class="integer">1</span>   ==   <span class="integer">1</span>
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span class="integer">1</span>   &amp;amp;   <span class="integer">0</span>   ==   <span class="integer">0</span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span class="integer">0</span>   &amp;amp;   <span class="integer">1</span>   ==   <span class="integer">0</span>
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span class="integer">0</span>   &amp;amp;   <span class="integer">0</span>   ==   <span class="integer">0</span>&lt;/p&gt;
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>&lt;table&gt;
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>  &lt;tbody&gt;
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>    &lt;tr&gt;
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>      &lt;td&gt;The&lt;/td&gt;
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>      &lt;td&gt;<span class="directive">operator</span> (OR)&lt;/td&gt;
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span>    &lt;/tr&gt;
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span>    &lt;tr&gt;
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span>      &lt;td&gt;<span class="integer">1</span>&lt;/td&gt;
-<span class="line-numbers"><a href="#n16" name="n16">16</a></span>      &lt;td&gt;<span class="integer">1</span>   ==   <span class="integer">1</span>&lt;/td&gt;
-<span class="line-numbers"><a href="#n17" name="n17">17</a></span>    &lt;/tr&gt;
-<span class="line-numbers"><a href="#n18" name="n18">18</a></span>    &lt;tr&gt;
-<span class="line-numbers"><a href="#n19" name="n19">19</a></span>      &lt;td&gt;<span class="integer">1</span>&lt;/td&gt;
-<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>      &lt;td&gt;<span class="integer">0</span>   ==   <span class="integer">1</span>&lt;/td&gt;
-<span class="line-numbers"><a href="#n21" name="n21">21</a></span>    &lt;/tr&gt;
-<span class="line-numbers"><a href="#n22" name="n22">22</a></span>    &lt;tr&gt;
-<span class="line-numbers"><a href="#n23" name="n23">23</a></span>      &lt;td&gt;<span class="integer">0</span>&lt;/td&gt;
-<span class="line-numbers"><a href="#n24" name="n24">24</a></span>      &lt;td&gt;<span class="integer">1</span>   ==   <span class="integer">1</span>&lt;/td&gt;
-<span class="line-numbers"><a href="#n25" name="n25">25</a></span>    &lt;/tr&gt;
-<span class="line-numbers"><a href="#n26" name="n26">26</a></span>    &lt;tr&gt;
-<span class="line-numbers"><a href="#n27" name="n27">27</a></span>      &lt;td&gt;<span class="integer">0</span>&lt;/td&gt;
-<span class="line-numbers"><a href="#n28" name="n28">28</a></span>      &lt;td&gt;<span class="integer">0</span>   ==   <span class="integer">0</span>&lt;/td&gt;
-<span class="line-numbers"><a href="#n29" name="n29">29</a></span>    &lt;/tr&gt;
-<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>  &lt;/tbody&gt;
-<span class="line-numbers"><a href="#n31" name="n31">31</a></span>&lt;/table&gt;
-<span class="line-numbers"><a href="#n32" name="n32">32</a></span>
-<span class="line-numbers"><a href="#n33" name="n33">33</a></span>&lt;p&gt;The ^ <span class="directive">operator</span> (XOR)
-<span class="line-numbers"><a href="#n34" name="n34">34</a></span><span class="integer">1</span>   ^   <span class="integer">1</span>   ==   <span class="integer">0</span>
-<span class="line-numbers"><a href="#n35" name="n35">35</a></span><span class="integer">1</span>   ^   <span class="integer">0</span>   ==   <span class="integer">1</span>
-<span class="line-numbers"><a href="#n36" name="n36">36</a></span><span class="integer">0</span>   ^   <span class="integer">1</span>   ==   <span class="integer">1</span>
-<span class="line-numbers"><a href="#n37" name="n37">37</a></span><span class="integer">0</span>   ^   <span class="integer">0</span>   ==   <span class="integer">0</span>&lt;/p&gt;
-<span class="line-numbers"><a href="#n38" name="n38">38</a></span>
-<span class="line-numbers"><a href="#n39" name="n39">39</a></span>&lt;p&gt;The ~ <span class="directive">operator</span>
-<span class="line-numbers"><strong><a href="#n40" name="n40">40</a></strong></span>The ~ (Ones Complement <span class="keyword">or</span> inversion) <span class="directive">operator</span> acts only on one value
-<span class="line-numbers"><a href="#n41" name="n41">41</a></span><span class="keyword">and</span> it inverts it.&lt;/p&gt;
-<span class="line-numbers"><a href="#n42" name="n42">42</a></span>
-<span class="line-numbers"><a href="#n43" name="n43">43</a></span>&lt;p&gt;The <span class="error">«</span><span class="error"> </span>(Left Shift)
-<span class="line-numbers"><a href="#n44" name="n44">44</a></span><span class="octal">00001100</span>  - b 
-<span class="line-numbers"><a href="#n45" name="n45">45</a></span><span class="octal">00110000</span>  - b <span class="error">«</span><span class="error"> </span><span class="integer">2</span>&lt;/p&gt;
-<span class="line-numbers"><a href="#n46" name="n46">46</a></span>
-<span class="line-numbers"><a href="#n47" name="n47">47</a></span>&lt;p&gt;The<span class="error"> </span><span class="error">»</span> (Right Shift)
-<span class="line-numbers"><a href="#n48" name="n48">48</a></span><span class="octal">00001100</span>  - b
-<span class="line-numbers"><a href="#n49" name="n49">49</a></span><span class="octal">00000011</span>  - b<span class="error"> </span><span class="error">»</span> <span class="integer">2</span>&lt;/p&gt;
-<span class="line-numbers"><strong><a href="#n50" name="n50">50</a></strong></span>
-<span class="line-numbers"><a href="#n51" name="n51">51</a></span>&lt;p&gt;Another example is
-<span class="line-numbers"><a href="#n52" name="n52">52</a></span><span class="integer">1</span><span class="error">«</span><span class="integer">4</span>; <span class="octal">0001</span> <span class="octal">0000</span>
-</pre></div>
-</div>
- </figure></notextile></div></p>
+<p>{% coderay lang:cplusplus linenos:true Operators http://distkeys.com/blog/2013/10/08/binary-number-operations/ Bitwise Operations %}
+The &amp; operator (AND)
+1   &amp;   1   ==   1
+1   &amp;   0   ==   0
+0   &amp;   1   ==   0
+0   &amp;   0   ==   0</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>The</td>
+      <td>operator (OR)</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>1   ==   1</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>0   ==   1</td>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td>1   ==   1</td>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td>0   ==   0</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The ^ operator (XOR)
+1   ^   1   ==   0
+1   ^   0   ==   1
+0   ^   1   ==   1
+0   ^   0   ==   0</p>
+
+<p>The ~ operator
+The ~ (Ones Complement or inversion) operator acts only on one value
+and it inverts it.</p>
+
+<p>The « (Left Shift)
+00001100  - b 
+00110000  - b « 2</p>
+
+<p>The » (Right Shift)
+00001100  - b
+00000011  - b » 2</p>
+
+<p>Another example is
+1«4; 0001 0000
+{% endcoderay %}</p>
 
 <p><br /></p>
 
@@ -159,37 +152,33 @@ I started realizing that after all it’s not that easy to actually think and wr
 <p>For e.g In byte 0000 1000 set bit no 6 will produce 0100 1000<br />
 (Remember bit number starts with 0-7)</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Set Bit </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="comment">//For problems where certain bit values needs to be changed, first we</span>
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span class="comment">//need to create a bit mask.</span>
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span class="comment">//Bit mask is a temporary variable with some value. Using this value</span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span class="comment">//we will access and change specific bits in a byte of data.&lt;/p&gt;</span>
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>&lt;p&gt;<span class="comment">//For e.g.</span>
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span class="comment">//To set 6th bit in a byte 0000 1000</span>
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span><span class="comment">//We have             MASK 0100 0000  (OR)</span>
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span><span class="comment">//                    ——————————————</span>
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span><span class="comment">//                         0100 1000&lt;/p&gt;</span>
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span>&lt;p&gt;<span class="comment">//To turn on certain bit in a byte (OR) is used.&lt;/p&gt;</span>
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span>
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span>&lt;p&gt;<span class="predefined-type">int</span> set-bit(<span class="predefined-type">int</span> val, <span class="predefined-type">int</span> num, <span class="predefined-type">bool</span> bitval)
-<span class="line-numbers"><a href="#n16" name="n16">16</a></span>{
-<span class="line-numbers"><a href="#n17" name="n17">17</a></span>    <span class="keyword">return</span> (val | (bitval <span class="error">«</span><span class="error"> </span>num));
-<span class="line-numbers"><a href="#n18" name="n18">18</a></span>}
-<span class="line-numbers"><a href="#n19" name="n19">19</a></span><span class="comment">//Here, val    = 0000 1000 = 8</span>
-<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span><span class="comment">//      num    = 6 (set 6th bit)</span>
-<span class="line-numbers"><a href="#n21" name="n21">21</a></span><span class="comment">//      bitval = 1 (set to 1)&lt;/p&gt;</span>
-<span class="line-numbers"><a href="#n22" name="n22">22</a></span>
-<span class="line-numbers"><a href="#n23" name="n23">23</a></span>&lt;p&gt;<span class="comment">//      0000 1000</span>
-<span class="line-numbers"><a href="#n24" name="n24">24</a></span><span class="comment">//(OR)  0100 0000  (1 « 6)</span>
-<span class="line-numbers"><a href="#n25" name="n25">25</a></span><span class="comment">//      ————————-</span>
-<span class="line-numbers"><a href="#n26" name="n26">26</a></span><span class="comment">//      0100 0000</span>
-</pre></div>
-</div>
- </figure></notextile></div></p>
+<p>{% coderay lang:cplusplus linenos:true Set Bit %}
+//For problems where certain bit values needs to be changed, first we
+//need to create a bit mask.
+//Bit mask is a temporary variable with some value. Using this value
+//we will access and change specific bits in a byte of data.</p>
+
+<p>//For e.g.
+//To set 6th bit in a byte 0000 1000
+//We have             MASK 0100 0000  (OR)
+//                    ——————————————
+//                         0100 1000</p>
+
+<p>//To turn on certain bit in a byte (OR) is used.</p>
+
+<p>int set-bit(int val, int num, bool bitval)
+{
+    return (val | (bitval « num));
+}
+//Here, val    = 0000 1000 = 8
+//      num    = 6 (set 6th bit)
+//      bitval = 1 (set to 1)</p>
+
+<p>//      0000 1000
+//(OR)  0100 0000  (1 « 6)
+//      ————————-
+//      0100 0000
+{% endcoderay %}</p>
 
 <p><br /></p>
 
@@ -198,183 +187,162 @@ I started realizing that after all it’s not that easy to actually think and wr
 <p>For e.g In byte 0100 1000 unset bit no 6 will produce 0000 1000<br />
 (Remember bit number starts with 0-7)</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Unset Bit </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="comment">//To unset specific bit we will use (AND) operation.</span>
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span class="comment">//Mask value need to be ‘0’ for the bit to unset but rest of the bits</span>
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span class="comment">//need to ‘1’. The reason for rest of the bits to set as ‘1’ is as</span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span class="comment">//we are doing (AND), we don’t want to unset other bits which are</span>
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span class="comment">//already set.</span>
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span><span class="comment">//</span>
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span class="comment">//For e.g.</span>
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span><span class="comment">//To unset 6th bit 0100 1000</span>
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span><span class="comment">//            MASK 1011 1111 (AND)</span>
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span><span class="comment">//                ——————————-</span>
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span><span class="comment">//                 0000 1000   (Result)</span>
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span><span class="predefined-type">int</span> unset-bit(<span class="predefined-type">int</span> val, <span class="predefined-type">int</span> num, <span class="predefined-type">bool</span> bitval)
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span>{
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span>    <span class="keyword">return</span> (val &amp;amp; ~(bitval <span class="error">«</span><span class="error"> </span>num));
-<span class="line-numbers"><a href="#n16" name="n16">16</a></span>}&lt;/p&gt;
-<span class="line-numbers"><a href="#n17" name="n17">17</a></span>
-<span class="line-numbers"><a href="#n18" name="n18">18</a></span>&lt;p&gt;<span class="comment">//Here, val    = 0100 1000</span>
-<span class="line-numbers"><a href="#n19" name="n19">19</a></span><span class="comment">//      num    = 6</span>
-<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span><span class="comment">//      bitval = 0</span>
-<span class="line-numbers"><a href="#n21" name="n21">21</a></span><span class="comment">//      (bitval « num) = 0100 0000</span>
-<span class="line-numbers"><a href="#n22" name="n22">22</a></span><span class="comment">//     ~(bitval « num) = 1011 1111</span>
-<span class="line-numbers"><a href="#n23" name="n23">23</a></span><span class="comment">//</span>
-<span class="line-numbers"><a href="#n24" name="n24">24</a></span><span class="comment">//      0100 1000</span>
-<span class="line-numbers"><a href="#n25" name="n25">25</a></span><span class="comment">//      1011 1111 (AND)</span>
-<span class="line-numbers"><a href="#n26" name="n26">26</a></span><span class="comment">//      —————————-</span>
-<span class="line-numbers"><a href="#n27" name="n27">27</a></span><span class="comment">//      0000 1000    (Result)</span>
-</pre></div>
-</div>
- </figure></notextile></div></p>
+<p>{% coderay lang:cplusplus linenos:true Unset Bit %}
+//To unset specific bit we will use (AND) operation.
+//Mask value need to be ‘0’ for the bit to unset but rest of the bits
+//need to ‘1’. The reason for rest of the bits to set as ‘1’ is as
+//we are doing (AND), we don’t want to unset other bits which are
+//already set.
+//
+//For e.g.
+//To unset 6th bit 0100 1000
+//            MASK 1011 1111 (AND)
+//                ——————————-
+//                 0000 1000   (Result)
+int unset-bit(int val, int num, bool bitval)
+{
+    return (val &amp; ~(bitval « num));
+}</p>
+
+<p>//Here, val    = 0100 1000
+//      num    = 6
+//      bitval = 0
+//      (bitval « num) = 0100 0000
+//     ~(bitval « num) = 1011 1111
+//
+//      0100 1000
+//      1011 1111 (AND)
+//      —————————-
+//      0000 1000    (Result)
+{% endcoderay %}</p>
 
 <p><br /></p>
 
 <h4 id="one-function-to-set-and-unset">One function to set and unset</h4>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Set &amp; Unset Bit </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span><span class="predefined-type">int</span> change-bit(<span class="predefined-type">int</span> val, <span class="predefined-type">int</span> num, <span class="predefined-type">bool</span> bitval)
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span>{
-<span class="line-numbers"><a href="#n4" name="n4">4</a></span>    <span class="keyword">return</span> (((val &amp;amp; ~(bitval <span class="error">«</span><span class="error"> </span>num)) | (bitval <span class="error">«</span><span class="error"> </span>num));
-<span class="line-numbers"><a href="#n5" name="n5">5</a></span>}
-</pre></div>
-</div>
- </figure></notextile></div></p>
+<p>{% coderay lang:cplusplus linenos:true Set &amp; Unset Bit %}
+int change-bit(int val, int num, bool bitval)
+{
+    return (((val &amp; ~(bitval « num)) | (bitval « num));
+}
+{% endcoderay %}</p>
 
 <p><br /></p>
 
 <h4 id="unset-range-of-bits">Unset range of bits</h4>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Unset range of bits</span>  <a href='http://distkeys.com/blog/2013/10/08/binary-number-operations/' target='_blank'>Bitwise Operations </a></figcaption> <div class="CodeRay">
-  <div class="code"><pre>
+<p>{% coderay lang:cplusplus linenos:false Unset range of bits http://distkeys.com/blog/2013/10/08/binary-number-operations/ Bitwise Operations %}
 Unset range of bits
-For e.g. <span class="integer">1001</span> <span class="integer">1001</span>
-Unset bits from <span class="integer">2</span> to <span class="integer">5</span> i.e. <span class="integer">1</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">1</span> =&amp;gt; <span class="integer">10</span> <span class="octal">0000</span> <span class="octal">01</span>
+For e.g. 1001 1001
+Unset bits from 2 to 5 i.e. 1 0 0 1 1 0 0 1 =&gt; 10 0000 01
                                |- - - -| 
-                      Bits  <span class="integer">7</span> <span class="integer">6</span> <span class="integer">5</span> <span class="integer">4</span> <span class="integer">3</span> <span class="integer">2</span> <span class="integer">1</span> <span class="integer">0</span>          &lt;/p&gt;
+                      Bits  7 6 5 4 3 2 1 0          </p>
 
-&lt;h2 id=<span class="string"><span class="delimiter">&quot;</span><span class="content">step1</span><span class="delimiter">&quot;</span></span>&gt;Step1&lt;/h2&gt;
-&lt;p&gt;To unset range of bits we need to create MASK
- val  = <span class="integer">1001</span> <span class="integer">1001</span>
- Mask = <span class="integer">1100</span> <span class="octal">0011</span> (AND)
-      &lt;strong&gt;__&lt;/strong&gt;&lt;strong&gt;__&lt;/strong&gt;_
-        <span class="integer">1000</span> <span class="octal">0001</span>&lt;/p&gt;
+<h2 id="step1">Step1</h2>
+<p>To unset range of bits we need to create MASK
+ val  = 1001 1001
+ Mask = 1100 0011 (AND)
+      <strong>__</strong><strong>__</strong>_
+        1000 0001</p>
 
-&lt;h2 id=<span class="string"><span class="delimiter">&quot;</span><span class="content">step-2</span><span class="delimiter">&quot;</span></span>&gt;Step <span class="integer">2</span>&lt;/h2&gt;
-&lt;p&gt;We need to construct MASK
-In MASK, bits in range are <span class="integer">0</span> i.e. bits from <span class="integer">2</span>-<span class="integer">5</span> is <span class="integer">0</span> <span class="keyword">and</span>
-rest of the bits are <span class="integer">1</span>
- MASK <span class="integer">1</span> <span class="integer">1</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span>
+<h2 id="step-2">Step 2</h2>
+<p>We need to construct MASK
+In MASK, bits in range are 0 i.e. bits from 2-5 is 0 and
+rest of the bits are 1
+ MASK 1 1 0 0 0 0 1 1
          |- - - -|
- Bits <span class="integer">7</span> <span class="integer">6</span> <span class="integer">5</span> <span class="integer">4</span> <span class="integer">3</span> <span class="integer">2</span> <span class="integer">1</span> <span class="integer">0</span>&lt;/p&gt;
+ Bits 7 6 5 4 3 2 1 0</p>
 
-&lt;h2 id=<span class="string"><span class="delimiter">&quot;</span><span class="content">step-3</span><span class="delimiter">&quot;</span></span>&gt;Step <span class="integer">3</span>&lt;/h2&gt;
-&lt;p&gt;<span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">1</span>  <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span>  ((<span class="integer">1</span> <span class="error">«</span><span class="error"> </span><span class="integer">5</span>) - <span class="integer">1</span>) i.e. (<span class="integer">1</span> <span class="error">«</span><span class="error"> </span>j) - <span class="integer">1</span>&lt;/p&gt;
+<h2 id="step-3">Step 3</h2>
+<p>0 0 0 1  1 1 1 1  ((1 « 5) - 1) i.e. (1 « j) - 1</p>
 
-&lt;p&gt;MAX  <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span>  <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span>
-     <span class="integer">0</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span>  <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span>  (-)
-    <span class="error">—</span><span class="error">—</span><span class="error">—</span><span class="error">—</span><span class="error">—</span><span class="error">—</span>
-     <span class="integer">1</span> <span class="integer">1</span> <span class="integer">0</span> <span class="integer">0</span>  <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span>         =====&amp;gt; (<span class="integer">1</span>)&lt;/p&gt;
+<p>MAX  1 1 1 1  1 1 1 1
+     0 0 1 1  1 1 1 1  (-)
+    ——————
+     1 1 0 0  0 0 0 0         =====&gt; (1)</p>
 
-&lt;p&gt;(<span class="integer">1</span> <span class="error">«</span><span class="error"> </span><span class="integer">2</span>) - <span class="integer">1</span> i.e. (<span class="integer">1</span> <span class="error">«</span><span class="error"> </span>i) - <span class="integer">1</span>
- <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">0</span> <span class="integer">0</span>
- <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">1</span> (-)
-<span class="error">—</span><span class="error">—</span><span class="error">—</span><span class="error">—</span><span class="error">—</span><span class="error">—</span>
- <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span>                   =======&amp;gt; (<span class="integer">2</span>)&lt;/p&gt;
+<p>(1 « 2) - 1 i.e. (1 « i) - 1
+ 0 0 0 0 0 1 0 0
+ 0 0 0 0 0 0 0 1 (-)
+——————
+ 0 0 0 0 0 0 1 1                   =======&gt; (2)</p>
 
-&lt;p&gt;(<span class="integer">1</span>) OR (<span class="integer">2</span>)
- <span class="integer">1</span> <span class="integer">1</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span>
- <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span>   (OR)
-<span class="error">—</span><span class="error">—</span><span class="error">—</span><span class="error">—</span><span class="error">—</span><span class="error">—</span>-
- <span class="integer">1</span> <span class="integer">1</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span> &lt;/p&gt;
+<p>(1) OR (2)
+ 1 1 0 0 0 0 0 0
+ 0 0 0 0 0 0 1 1   (OR)
+——————-
+ 1 1 0 0 0 0 1 1 </p>
 
-&lt;p&gt;Final Step
- val  = <span class="integer">1001</span> <span class="integer">1001</span>
- Mask = <span class="integer">1100</span> <span class="octal">0011</span> (AND)
-      &lt;strong&gt;__&lt;/strong&gt;&lt;strong&gt;__&lt;/strong&gt;_
-        <span class="integer">1000</span> <span class="octal">0001</span>
-</pre></div>
-</div>
- </figure></notextile></div></p>
+<p>Final Step
+ val  = 1001 1001
+ Mask = 1100 0011 (AND)
+      <strong>__</strong><strong>__</strong>_
+        1000 0001
+{% endcoderay %}</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>unsetBitsInRange</span>  <a href='http://distkeys.com/blog/2013/10/08/binary-number-operations/' target='_blank'>Bitwise Operations </a></figcaption> <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="comment">// i is start of range</span>
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span class="comment">// j is end of range</span>
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span class="predefined-type">int</span> unsetBitsInRange(<span class="predefined-type">int</span> val, <span class="predefined-type">int</span> i, <span class="predefined-type">int</span> j) {
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    <span class="predefined-type">int</span> max = ~<span class="integer">0</span>;&lt;/p&gt;
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>&lt;pre&gt;&lt;code&gt;<span class="predefined-type">int</span> left = max - ((<span class="integer">1</span> &amp;lt;&amp;lt; j) - <span class="integer">1</span>);
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span><span class="predefined-type">int</span> right = (<span class="integer">1</span> &amp;lt;&amp;lt; i) - <span class="integer">1</span>;
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span><span class="predefined-type">int</span> mask = left | right;
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span><span class="keyword">return</span> (val &amp;amp; mask); } </pre></div>
-</div>
- </figure></notextile></div>
+<p>{% coderay lang:cplusplus linenos:true unsetBitsInRange http://distkeys.com/blog/2013/10/08/binary-number-operations/ Bitwise Operations %}
+// i is start of range
+// j is end of range
+int unsetBitsInRange(int val, int i, int j) {
+    int max = ~0;</p>
+
+<pre><code>int left = max - ((1 &lt;&lt; j) - 1);
+
+int right = (1 &lt;&lt; i) - 1;
+
+int mask = left | right;
+
+return (val &amp; mask); } {% endcoderay %}
 </code></pre>
 
 <p><br /></p>
 
 <h4 id="set-range-of-bits">Set range of bits</h4>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Set range</span>  <a href='https://gist.github.com/coolgoose85/458a1f67d61f8def1120' target='_blank'>Range Unset Mask </a></figcaption> <div class="CodeRay">
-  <div class="code"><pre>
-This mask is similar to Range Unset Mask created earlier with an <span class="error">‘</span>exception<span class="error">’</span>
-in last&lt;/p&gt;
+<p>{% coderay lang:cplusplus linenos:false Set range https://gist.github.com/coolgoose85/458a1f67d61f8def1120 Range Unset Mask %}
+This mask is similar to Range Unset Mask created earlier with an ‘exception’
+in last</p>
 
-&lt;p&gt;/&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;***
-<span class="comment">//In “Range UNset Mask” we created following</span>
-<span class="comment">//For e.g. 1001 1001</span>
-<span class="comment">//Unset bits from 2 to 5 i.e. 1 0 0 1 1 0 0 1 =&amp;gt; 10 0000 01</span>
-<span class="comment">//                               |- - - -| </span>
-<span class="comment">//                      Bits  7 6 5 4 3 2 1 0  &lt;br /&gt;</span>
-<span class="comment">//Step1</span>
-<span class="comment">//——</span>
-<span class="comment">//To unset range of bits we need to create MASK</span>
-<span class="comment">// val  = 1001 1001</span>
-<span class="comment">// Mask = 1100 0011 (AND)</span>
-<span class="comment">//      _____________</span>
-<span class="comment">//        1000 0001</span>
-**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**&lt;/strong&gt;*/&lt;/p&gt;
+<p>/<strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>***
+//In “Range UNset Mask” we created following
+//For e.g. 1001 1001
+//Unset bits from 2 to 5 i.e. 1 0 0 1 1 0 0 1 =&gt; 10 0000 01
+//                               |- - - -| 
+//                      Bits  7 6 5 4 3 2 1 0  <br />
+//Step1
+//——
+//To unset range of bits we need to create MASK
+// val  = 1001 1001
+// Mask = 1100 0011 (AND)
+//      _____________
+//        1000 0001
+**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong>*/</p>
 
-&lt;p&gt;We will be creating the same mask in addition we will 
-TOGGLE the bits of <span class="error">“</span>unset mask<span class="error">”</span>&lt;/p&gt;
+<p>We will be creating the same mask in addition we will 
+TOGGLE the bits of “unset mask”</p>
 
-&lt;p&gt;Unset MASK = <span class="integer">1100</span> <span class="octal">0011</span>
- TOGGLE     = <span class="octal">0011</span> <span class="integer">1100</span>    ~(Unset Mask)&lt;/p&gt;
+<p>Unset MASK = 1100 0011
+ TOGGLE     = 0011 1100    ~(Unset Mask)</p>
 
-&lt;p&gt;Now perform OR will val
- val  = <span class="integer">1001</span> <span class="integer">1001</span>
- Mask = <span class="octal">0011</span> <span class="integer">1100</span> (OR)
-      &lt;strong&gt;__&lt;/strong&gt;&lt;strong&gt;__&lt;/strong&gt;_
-        <span class="integer">1011</span> <span class="integer">1101</span>
-</pre></div>
-</div>
- </figure></notextile></div></p>
+<p>Now perform OR will val
+ val  = 1001 1001
+ Mask = 0011 1100 (OR)
+      <strong>__</strong><strong>__</strong>_
+        1011 1101
+{% endcoderay %}</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>setBitsInRange </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="comment">// i is start of the range</span>
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span class="comment">// j is end of the range</span>
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span class="predefined-type">int</span> setBitsInRange(<span class="predefined-type">int</span> val, <span class="predefined-type">int</span> i, <span class="predefined-type">int</span> j) {
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    <span class="predefined-type">int</span> max = ~<span class="integer">0</span>;&lt;/p&gt;
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>&lt;pre&gt;&lt;code&gt;<span class="predefined-type">int</span> left = max - ((<span class="integer">1</span> &amp;lt;&amp;lt; j) - <span class="integer">1</span>);
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span class="predefined-type">int</span> right = (<span class="integer">1</span> &amp;lt;&amp;lt; i) - <span class="integer">1</span>;
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span><span class="predefined-type">int</span> mask = left | right;
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span><span class="keyword">return</span> (val | ~mask);   } </pre></div>
-</div>
- </figure></notextile></div>
+<p>{% coderay lang:cplusplus linenos:true setBitsInRange %}
+// i is start of the range
+// j is end of the range
+int setBitsInRange(int val, int i, int j) {
+    int max = ~0;</p>
+
+<pre><code>int left = max - ((1 &lt;&lt; j) - 1);
+int right = (1 &lt;&lt; i) - 1;
+
+int mask = left | right;
+
+return (val | ~mask);   } {% endcoderay %}
 </code></pre>
 
 <p><br /></p>

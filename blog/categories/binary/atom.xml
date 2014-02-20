@@ -4,7 +4,7 @@
   <title><![CDATA[Category: binary | Distributed Knowledge]]></title>
   <link href="http://distkeys.com/blog/categories/binary/atom.xml" rel="self"/>
   <link href="http://distkeys.com/"/>
-  <updated>2014-02-17T22:17:14-08:00</updated>
+  <updated>2014-02-19T21:33:35-08:00</updated>
   <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -50,56 +50,48 @@
 
 <h3 id="subtraction">Subtraction</h3>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Subtraction </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="integer">0</span> <span class="error">−</span> <span class="integer">0</span> <span class="error">→</span> <span class="integer">0</span>
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span class="integer">0</span> <span class="error">−</span> <span class="integer">1</span> <span class="error">→</span> <span class="integer">1</span>, borrow <span class="integer">1</span>
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span class="integer">1</span> <span class="error">−</span> <span class="integer">0</span> <span class="error">→</span> <span class="integer">1</span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span class="integer">1</span> <span class="error">−</span> <span class="integer">1</span> <span class="error">→</span> <span class="integer">0</span>&lt;/p&gt;
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>&lt;p&gt;Subtracting <span class="integer">1</span> digit from <span class="integer">0</span> digit produces the digit <span class="error">“</span><span class="integer">1</span><span class="error">”</span>, <span class="keyword">while</span>
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span class="integer">1</span> will have to be subtracted from the next column. This is known as
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>borrowing.&lt;/p&gt;
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>&lt;pre&gt;&lt;code&gt;  *   * * *   (starred columns are borrowed from)
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>  <span class="integer">1</span> <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">0</span> <span class="error">−</span>         <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span>
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span>---------------- =     <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span> </pre></div>
-</div>
- </figure></notextile></div>
+<p>{% coderay lang:cplusplus linenos:true Subtraction %}
+0 − 0 → 0
+0 − 1 → 1, borrow 1
+1 − 0 → 1
+1 − 1 → 0</p>
+
+<p>Subtracting 1 digit from 0 digit produces the digit “1”, while
+1 will have to be subtracted from the next column. This is known as
+borrowing.</p>
+
+<pre><code>  *   * * *   (starred columns are borrowed from)
+  1 1 0 1 1 1 0 −         1 0 1 1 1
+---------------- =     1 0 1 0 1 1 1 {% endcoderay %}
 </code></pre>
 
 <p><br /></p>
 
 <h3 id="multiplication">Multiplication</h3>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Multiplication </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>        <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span>   (A)
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>      <span class="error">×</span> <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">0</span>   (B)
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>       <span class="error">—</span><span class="error">—</span><span class="error">—</span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>        <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span>   <span class="error">←</span> Corresponds to the rightmost <span class="error">‘</span>zero<span class="error">’</span> in B
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>+     <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span>     <span class="error">←</span> Corresponds to the next <span class="error">‘</span>one<span class="error">’</span> in B
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>+   <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span>
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>+ <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span>
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>  <span class="error">—</span><span class="error">—</span><span class="error">—</span><span class="error">—</span><span class="error">—</span>
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>= <span class="integer">1</span> <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">0</span>&lt;/p&gt;
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>&lt;p&gt;Binary Multiplication <span class="keyword">for</span> binary point
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span>                <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span> . <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span>       A (<span class="float">5</span><span class="float">.625</span> in decimal)
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span>                <span class="error">×</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">0</span> . <span class="integer">0</span> <span class="integer">1</span>       B (<span class="float">6</span><span class="float">.25</span>  in decimal)
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span>           <span class="error">—</span><span class="error">—</span><span class="error">—</span><span class="error">—</span><span class="error">—</span><span class="error">—</span>-
-<span class="line-numbers"><a href="#n16" name="n16">16</a></span>                  <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span>    <span class="error">←</span> Corresponds to a <span class="error">‘</span>one<span class="error">’</span> in B
-<span class="line-numbers"><a href="#n17" name="n17">17</a></span>    +           <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span>      <span class="error">←</span> Corresponds to a <span class="error">‘</span>zero<span class="error">’</span> in B
-<span class="line-numbers"><a href="#n18" name="n18">18</a></span>    +         <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span>
-<span class="line-numbers"><a href="#n19" name="n19">19</a></span>    +       <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span>
-<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>    +     <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span>
-<span class="line-numbers"><a href="#n21" name="n21">21</a></span>    <span class="error">—</span><span class="error">—</span><span class="error">—</span><span class="error">—</span><span class="error">—</span><span class="error">—</span><span class="error">—</span><span class="error">—</span><span class="error">—</span>
-<span class="line-numbers"><a href="#n22" name="n22">22</a></span>    = <span class="integer">1</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span> . <span class="integer">0</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span>  (<span class="integer">3</span><span class="float">5</span><span class="float">.15625</span> in decimal)
-</pre></div>
-</div>
- </figure></notextile></div></p>
+<p>{% coderay lang:cplusplus linenos:true Multiplication %}
+        1 0 1 1   (A)
+      × 1 0 1 0   (B)
+       ———
+        0 0 0 0   ← Corresponds to the rightmost ‘zero’ in B
++     1 0 1 1     ← Corresponds to the next ‘one’ in B
++   0 0 0 0
++ 1 0 1 1
+  —————
+= 1 1 0 1 1 1 0</p>
+
+<p>Binary Multiplication for binary point
+                1 0 1 . 1 0 1       A (5.625 in decimal)
+                × 1 1 0 . 0 1       B (6.25  in decimal)
+           ——————-
+                  1 0 1 1 0 1    ← Corresponds to a ‘one’ in B
+    +           0 0 0 0 0 0      ← Corresponds to a ‘zero’ in B
+    +         0 0 0 0 0 0
+    +       1 0 1 1 0 1
+    +     1 0 1 1 0 1
+    —————————
+    = 1 0 0 0 1 1 . 0 0 1 0 1  (35.15625 in decimal)
+{% endcoderay %}</p>
 
 <p><br /></p>
 
