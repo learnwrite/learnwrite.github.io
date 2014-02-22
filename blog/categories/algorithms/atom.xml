@@ -4,7 +4,7 @@
   <title><![CDATA[Category: algorithms | Distributed Knowledge]]></title>
   <link href="http://distkeys.com/blog/categories/algorithms/atom.xml" rel="self"/>
   <link href="http://distkeys.com/"/>
-  <updated>2014-02-22T00:46:51-08:00</updated>
+  <updated>2014-02-22T00:56:38-08:00</updated>
   <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -34,7 +34,6 @@
       <li><a href="#remove-all-consequtive-duplicate-elements">Remove all consequtive duplicate elements</a></li>
       <li><a href="#rotate-a-string">Rotate a string</a></li>
       <li><a href="#permutation-of-a-string">Permutation of a string</a></li>
-      <li><a href="#find-anagram">Find Anagram</a></li>
     </ul>
   </li>
 </ul>
@@ -58,15 +57,19 @@
 When array is not sorted<br />
 We need to find pair of numbers in an array whose sum is equal to a given value.<br />
 A = {6,4,5,7,9,1,2}<br />
-Sum = 10 Then the pairs are  {6,4} , {9,1}</p>
+Sum = 10 Then the pairs are  {6,4} , {9,1}
+<!-- more --></p>
+
+<hr style="border-top: 1.5px dotted black" />
+<p><br /></p>
 
 <h4 id="sum-of-3-numbers">Sum of 3 numbers</h4>
 <p>We need to find three numbers in an array whose sum is equal to a given value.</p>
 
-<p><br />
-<br /></p>
+<p><br /></p>
 
-<!-- more -->
+<hr style="border-top: 1.5px dotted black" />
+<p><br /></p>
 
 <h4 id="find-the-number-when-size-of-array-is-unknown">Find the number when size of array is unknown</h4>
 
@@ -76,6 +79,9 @@ Sum = 10 Then the pairs are  {6,4} , {9,1}</p>
 2,1, 3, 2, 3, 1, 4</p>
 
 <p>Element to find 3. Find solution in less than O(n) time.</p>
+
+<hr style="border-top: 1.5px dotted black" />
+<p><br /></p>
 
 <h3 id="string-problems">String Problems</h3>
 
@@ -109,6 +115,9 @@ Sum = 10 Then the pairs are  {6,4} , {9,1}</p>
  </figure></notextile></div>
 <br /></p>
 
+<hr style="border-top: 1.5px dotted black" />
+<p><br /></p>
+
 <h4 id="duplicates-and-count">Duplicates and Count</h4>
 
 <p>Print all duplicate characters and their count</p>
@@ -118,6 +127,9 @@ Foo Bar</p>
 
 <p>Output<br />
 a1B1F1o2r1</p>
+
+<hr style="border-top: 1.5px dotted black" />
+<p><br /></p>
 
 <h4 id="remove-duplicate-spaces">Remove duplicate spaces</h4>
 <p>Remove all duplicate spaces from the string</p>
@@ -129,6 +141,9 @@ Hi^^^There!!!^^Wassup<br />
 <p>Output<br />
 Hi^There!!!^Wassup</p>
 
+<hr style="border-top: 1.5px dotted black" />
+<p><br /></p>
+
 <h4 id="remove-spaces">Remove spaces</h4>
 <p>Remove all the spaces from a string</p>
 
@@ -138,6 +153,9 @@ Hi there!!! Wassup</p>
 <p>Output<br />
 Hithere!!!Wassup</p>
 
+<hr style="border-top: 1.5px dotted black" />
+<p><br /></p>
+
 <h4 id="remove-all-consequtive-duplicate-elements">Remove all consequtive duplicate elements</h4>
 <p>Remove all consequtive duplicate elements from the string</p>
 
@@ -146,6 +164,9 @@ aabbccddd</p>
 
 <p>Output <br />
 abcd</p>
+
+<hr style="border-top: 1.5px dotted black" />
+<p><br /></p>
 
 <h4 id="rotate-a-string">Rotate a string</h4>
 <p>Rotate a string for a ‘n’ times</p>
@@ -157,13 +178,16 @@ Rotate 2 times</p>
 <p>Output <br />
 3456712</p>
 
+<hr style="border-top: 1.5px dotted black" />
+<p><br /></p>
+
 <h4 id="permutation-of-a-string">Permutation of a string</h4>
 
 <p><a href="http://distkeys.com/blog/2013/11/18/recursion/#string-permutation-non-repeating" target="_blank">Permutation</a></p>
 
+<hr style="border-top: 1.5px dotted black" />
 <p><br /></p>
 
-<h4 id="find-anagram">Find Anagram</h4>
 ]]></content>
   </entry>
   
