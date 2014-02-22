@@ -4,7 +4,7 @@
   <title><![CDATA[Distributed Knowledge]]></title>
   <link href="http://distkeys.com/atom.xml" rel="self"/>
   <link href="http://distkeys.com/"/>
-  <updated>2014-02-21T11:34:11-08:00</updated>
+  <updated>2014-02-21T21:34:02-08:00</updated>
   <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -12,6 +12,65 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Reading List]]></title>
+    <summary><![CDATA[]]></summary>
+    <link href="http://distkeys.com/blog/2014/02/21/reading-list/"/>
+    <updated>2014-02-21T21:22:00-08:00</updated>
+    <id>http://distkeys.com/blog/2014/02/21/reading-list</id>
+    <content type="html"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#now-readinglistening">Now Reading/Listening</a></li>
+  <li><a href="#wish-list">Wish List</a></li>
+  <li><a href="#tech-reading">Tech Reading</a></li>
+  <li><a href="#fun-reading">Fun Reading</a></li>
+  <li><a href="#interesting-videos">Interesting Videos</a></li>
+</ul>
+
+<h3 id="now-readinglistening">Now Reading/Listening</h3>
+
+<p><a data-pin-do="embedBoard" href="http://www.pinterest.com/gautamusc/now-readinglistening/">Follow vaibhav gautam’s board Now Reading/Listening on Pinterest.</a>
+<!-- Please call pinit.js only once per page -->
+<script type="text/javascript" async="" src="http://distkeys.com//assets.pinterest.com/js/pinit.js"></script></p>
+
+<!-- more -->
+
+<p><br /></p>
+
+<h3 id="wish-list">Wish List</h3>
+
+<p><a data-pin-do="embedBoard" href="http://www.pinterest.com/gautamusc/wish-list/">Follow vaibhav gautam’s board Wish List on Pinterest.</a>
+<!-- Please call pinit.js only once per page -->
+<script type="text/javascript" async="" src="http://distkeys.com//assets.pinterest.com/js/pinit.js"></script></p>
+
+<p><br /></p>
+
+<h3 id="tech-reading">Tech Reading</h3>
+
+<p><a data-pin-do="embedBoard" href="http://www.pinterest.com/gautamusc/tech-reading/">Follow vaibhav gautam’s board Tech Reading on Pinterest.</a>
+<!-- Please call pinit.js only once per page -->
+<script type="text/javascript" async="" src="http://distkeys.com//assets.pinterest.com/js/pinit.js"></script></p>
+
+<p><br /></p>
+
+<h3 id="fun-reading">Fun Reading</h3>
+
+<p><a data-pin-do="embedBoard" href="http://www.pinterest.com/gautamusc/fun-reading/">Follow vaibhav gautam’s board Fun Reading on Pinterest.</a>
+<!-- Please call pinit.js only once per page -->
+<script type="text/javascript" async="" src="http://distkeys.com//assets.pinterest.com/js/pinit.js"></script></p>
+
+<p><br /></p>
+
+<h3 id="interesting-videos">Interesting Videos</h3>
+
+<p><a data-pin-do="embedBoard" href="http://www.pinterest.com/gautamusc/interesting-learning-videos/">Follow vaibhav gautam’s board Interesting Learning Videos on Pinterest.</a>
+<!-- Please call pinit.js only once per page -->
+<script type="text/javascript" async="" src="http://distkeys.com//assets.pinterest.com/js/pinit.js"></script></p>
+
+<p><br /></p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Naming in Distributed Systems]]></title>
