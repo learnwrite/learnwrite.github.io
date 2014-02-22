@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Reading List | Distributed Knowledge]]></title>
   <link href="http://distkeys.com/blog/categories/reading-list/atom.xml" rel="self"/>
   <link href="http://distkeys.com/"/>
-  <updated>2014-02-21T21:55:07-08:00</updated>
+  <updated>2014-02-22T00:46:51-08:00</updated>
   <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -18,17 +18,9 @@
     <link href="http://distkeys.com/blog/2014/02/21/reading-list/"/>
     <updated>2014-02-21T21:22:00-08:00</updated>
     <id>http://distkeys.com/blog/2014/02/21/reading-list</id>
-    <content type="html"><![CDATA[<ul id="markdown-toc">
-  <li><a href="#now-readinglistening">Now Reading/Listening</a></li>
-  <li><a href="#wish-list">Wish List</a></li>
-  <li><a href="#tech-reading">Tech Reading</a></li>
-  <li><a href="#fun-reading">Fun Reading</a></li>
-  <li><a href="#interesting-videos">Interesting Videos</a></li>
-</ul>
+    <content type="html"><![CDATA[<h3 id="now-readinglistening">Now Reading/Listening</h3>
 
-<h3 id="now-readinglistening">Now Reading/Listening</h3>
-
-<p><a data-pin-do="embedBoard" href="http://www.pinterest.com/gautamusc/now-readinglistening/">Follow vaibhav gautam’s board Now Reading/Listening on Pinterest.</a>
+<p><a data-pin-do="embedBoard" href="http://www.pinterest.com/gautamusc/now-readinglistening/" data-pin-scale-width="115" data-pin-scale-height="150" data-pin-board-width="900">Follow Vaibhav Gautam’s board Now Reading/Listening on Pinterest.</a>
 <!-- Please call pinit.js only once per page -->
 <script type="text/javascript" async="" src="http://distkeys.com//assets.pinterest.com/js/pinit.js"></script></p>
 
@@ -36,33 +28,7 @@
 
 <p><br /></p>
 
-<h3 id="wish-list">Wish List</h3>
-
-<p><a data-pin-do="embedBoard" href="http://www.pinterest.com/gautamusc/wish-list/">Follow vaibhav gautam’s board Wish List on Pinterest.</a>
-<!-- Please call pinit.js only once per page -->
-<script type="text/javascript" async="" src="http://distkeys.com//assets.pinterest.com/js/pinit.js"></script></p>
-
-<p><br /></p>
-
-<h3 id="tech-reading">Tech Reading</h3>
-
-<p><a data-pin-do="embedBoard" href="http://www.pinterest.com/gautamusc/tech-reading/">Follow vaibhav gautam’s board Tech Reading on Pinterest.</a>
-<!-- Please call pinit.js only once per page -->
-<script type="text/javascript" async="" src="http://distkeys.com//assets.pinterest.com/js/pinit.js"></script></p>
-
-<p><br /></p>
-
-<h3 id="fun-reading">Fun Reading</h3>
-
-<p><a data-pin-do="embedBoard" href="http://www.pinterest.com/gautamusc/fun-reading/">Follow vaibhav gautam’s board Fun Reading on Pinterest.</a>
-<!-- Please call pinit.js only once per page -->
-<script type="text/javascript" async="" src="http://distkeys.com//assets.pinterest.com/js/pinit.js"></script></p>
-
-<p><br /></p>
-
-<h3 id="interesting-videos">Interesting Videos</h3>
-
-<p><a data-pin-do="embedBoard" href="http://www.pinterest.com/gautamusc/interesting-learning-videos/">Follow vaibhav gautam’s board Interesting Learning Videos on Pinterest.</a>
+<p><a data-pin-do="embedUser" href="http://www.pinterest.com/gautamusc/" data-pin-scale-width="115" data-pin-scale-height="520" data-pin-board-width="900">Visit Vaibhav Gautam’s profile on Pinterest.</a>
 <!-- Please call pinit.js only once per page -->
 <script type="text/javascript" async="" src="http://distkeys.com//assets.pinterest.com/js/pinit.js"></script></p>
 
