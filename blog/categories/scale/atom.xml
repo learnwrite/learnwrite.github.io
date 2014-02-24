@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Scale | Distributed Knowledge]]></title>
   <link href="http://distkeys.com/blog/categories/scale/atom.xml" rel="self"/>
   <link href="http://distkeys.com/"/>
-  <updated>2014-02-22T19:05:25-08:00</updated>
+  <updated>2014-02-23T23:00:17-08:00</updated>
   <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -89,9 +89,7 @@
 <p><br />
 Paper talks about problem of scale and general solution. These solution fall into three categories</p>
 
-<p>{% blockquote %}
-Replication, Distribution and Caching
-{% endblockquote %}</p>
+<p><blockquote><p>Replication, Distribution and Caching</p></blockquote></p>
 
 <script src="http://d3js.org/d3.v3.min.js"></script>
 
@@ -323,22 +321,16 @@ function toggle(d) {
 
 <p>A name refers to an object. An address tells where that object can be found. The binding of a name is the object to which it refers.</p>
 
-<p>{% blockquote %}
- A name server (or directory server) maps a name to information about the name’s binding.
- {% endblockquote %}
+<p><blockquote><p>A name server (or directory server) maps a name to information about the name’s binding.</p></blockquote>
 <br /></p>
 
 <h4 id="granularity-of-naming">Granularity of Naming</h4>
 
-<p>{% blockquote %}
-The granularity of the objects named affects the size of naming the database, the frequency of queries and the read-to-write ratio which affects techniques can be used in naming in large systems.
- {% endblockquote %}</p>
+<p><blockquote><p>The granularity of the objects named affects the size of naming the database, the frequency of queries and the read-to-write ratio which affects techniques can be used in naming in large systems.</p></blockquote></p>
 
 <p>In an approach of <code>fine grained naming</code>, files must include name of the host so that object could be located.</p>
 
-<p>{% blockquote %}
-Problem with finer grained naming is that moving objects is difficult since objects are tied to the server in their names.
- {% endblockquote %}</p>
+<p><blockquote><p>Problem with finer grained naming is that moving objects is difficult since objects are tied to the server in their names.</p></blockquote></p>
 
 <p>Another naming approach is <code>common prefix naming</code>, where group of objects share a common prefix and name service maps the prefix to the server. The remainder of the name is resolved locally by the server on which the object is stored.</p>
 
@@ -383,9 +375,7 @@ By Caching the mapping from a prefix to the name server handling that prefix, fu
 </ul>
 
 <p><code class="myred">Problem</code>
-{% blockquote %}
-Caching is a form of replication and as similar to replication biggest difficulty is the need to for consistency.
-{% endblockquote %}
+<blockquote><p>Caching is a form of replication and as similar to replication biggest difficulty is the need to for consistency.</p></blockquote>
 <br /></p>
 
 <h4 id="unique-identifier-based-naming-uid">Unique Identifier based naming (UID)</h4>
@@ -427,8 +417,10 @@ Caching is a form of replication and as similar to replication biggest difficult
 1. Associating a unique number with the root of every independent name space.<br />
 2.  When a file name is stored, the number for the root of the name space can be stored along with the name. <br />
 3. When name spaces are merged, an entry is made in the new root, pairing the UID of each previous root with the prefix required to find it.<br />
-4.  When a name with an associated root UID is resolved, the UID is checked; if it does not match that for the current root, the corresponding prefix is prepended, allowing the embedded name to work.
-&lt;hr style="border-top: 1.5px dotted black"/&gt;<br />
+4.  When a name with an associated root UID is resolved, the UID is checked; if it does not match that for the current root, the corresponding prefix is prepended, allowing the embedded name to work.</p>
+
+<hr style="border-top: 1.5px dotted black" />
+<p><br />
 <br /></p>
 
 <h3 id="security-subsystem">Security Subsystem</h3>
@@ -473,9 +465,7 @@ Client is authenticated and then server makes its own decision about whether or 
 
 <p>In <a href="http://en.wikipedia.org/wiki/Andrew_File_System" target="_blank">Andrew File System</a>, each directory has an access control list (ACL) that identifies the users authorized to access the files within the directory. ACL entries in Andrew can contain the names of groups and user can be part of one or more groups.</p>
 
-<p>{% blockquote %}
- A disadvantage ACL model is that the client must first be authenticated, then looked up in a potentially long list; the lookup may involve the recursive expansion of multiple groups and may require interaction with other servers.
-{% endblockquote %}</p>
+<p><blockquote><p>A disadvantage ACL model is that the client must first be authenticated, then looked up in a potentially long list; the lookup may involve the recursive expansion of multiple groups and may require interaction with other servers.</p></blockquote></p>
 
 <p>Another authorization model is <code>capability based authorization</code> in which the user maintains the list of the objects for which access is authorized. A client presents its capability when it wishes to access an object. The server then compares the bit pattern of the capability with that stored along with the object; if they match, the access is allowed.</p>
 
@@ -507,10 +497,12 @@ When these techniques are applied in the area of security, the following conside
   <li>The security of the service is that of the weakest of all <code>replicas</code>.<br /></li>
   <li>When <code>distribution</code> is used, multiple servers may be involved in a particular exchange.<br /></li>
   <li>It is important that both principals know which servers were involved so that they can correctly decide how much trust to place in the results. <br /></li>
-  <li>The longer credentials are allowed to be <code>cached</code>, the longer it will take to recover when a key is compromised.
-&lt;hr style="border-top: 1.5px dotted black"/&gt;<br />
-<br /></li>
+  <li>The longer credentials are allowed to be <code>cached</code>, the longer it will take to recover when a key is compromised.</li>
 </ol>
+
+<hr style="border-top: 1.5px dotted black" />
+<p><br />
+<br /></p>
 
 <h3 id="remote-resources">Remote resources</h3>
 
@@ -525,13 +517,9 @@ When these techniques are applied in the area of security, the following conside
 <p>As the medium of communication places limits on the system’s performance, it can greatly affect the usability of a system. The underlying communications
 parameters must not be completely hidden from the application.</p>
 
-<p>{% blockquote %}
-In <a href="http://www.cdf.toronto.edu/~csc469h/fall/handouts/nitzberg91.pdf" target="_blank">The Dash System</a>, when a connection is established, the application can require that the connection meet certain requirements; if the requirements are <code>not met, an error</code> is returned. 
-{% endblockquote %}</p>
+<p><blockquote><p>In <a href="http://www.cdf.toronto.edu/~csc469h/fall/handouts/nitzberg91.pdf" target="_blank">The Dash System</a>, when a connection is established, the application can require that the connection meet certain requirements; if the requirements are <code>not met, an error</code> is returned.</p></blockquote></p>
 
-<p>{% pullquote %}
-When one set of required communication parameters cannot be met (generally in low-latency connection), the application still might be able to access the resource via an alternate mechanism  {“ Whole-file caching instead of remote reads and writes “}
-{% endpullquote %}
+<p>Surround your pullquote like this {" text to be quoted "}
 <br /></p>
 
 <p><strong>Communication forms</strong><br />
@@ -544,17 +532,17 @@ When one set of required communication parameters cannot be met (generally in lo
      •  Processing is required by all servers, whether or not they can handle a request.<br />
      •  As the total number of requests grows, the load due to preliminary processing on each server also grows.</p>
 
-<p>•  <code class="myyellow">Multicast communication</code> - In multicast, a single message can be sent to a group of servers. For multicast to scale, the groups to which messages are sent should be kept small.
-&lt;hr style="border-top: 1.5px dotted black"/&gt;<br />
+<p>•  <code class="myyellow">Multicast communication</code> - In multicast, a single message can be sent to a group of servers. For multicast to scale, the groups to which messages are sent should be kept small.</p>
+
+<hr style="border-top: 1.5px dotted black" />
+<p><br />
 <br /></p>
 
 <h3 id="replication">Replication</h3>
 
 <p>Replication is used to reduce the load on the server and improve the reliability and availability of the service as whole.</p>
 
-<p>{% blockquote %}
-Issue is the Placement of the replicas and replica consistency
-{% endblockquote %}
+<p><blockquote><p>Issue is the Placement of the replicas and replica consistency</p></blockquote>
 <br /></p>
 
 <h4 id="placement-of-replicas">Placement of replicas</h4>
@@ -606,9 +594,7 @@ With loose consistency, replicas are guaranteed to eventually contain identical 
   <li>Updates are allowed even when the network is partitioned or servers are down.<br /></li>
   <li>Updates are sent to any replica, and that replica forwards the update to the other replicas as they become available.<br /></li>
   <li>If conflicting updates are received by different replicas in different orders, time stamps indicate the order in which they are to be applied.<br />
-{% blockquote %}
-With loose consistency, there is no guarantee that a query will return the most recent data.
-{% endblockquote %}</li>
+<blockquote><p>With loose consistency, there is no guarantee that a query will return the most recent data.</p></blockquote></li>
 </ol>
 
 <p>• <code class="myyellow">Quorum consensus</code><br />
@@ -616,8 +602,10 @@ In Quorum consensus
 1. Assigning votes to each replica<br />
 2. Selecting two numbers-a read-quorum and a write-quorum-such that the read-quorum plus the write-quorum exceeds the total number of votes <br />
 3. Requiring that reads and writes be directed to a sufficient number of replicas to collect enough votes to satisfy the quorum.<br />
-Taking these steps guarantees that the set of replicas read will intersect with the set written during the most recent update. Time stamps or version numbers stored with each replica allow the client to determine which data are most recent.
-&lt;hr style="border-top: 1.5px dotted black"/&gt;<br />
+Taking these steps guarantees that the set of replicas read will intersect with the set written during the most recent update. Time stamps or version numbers stored with each replica allow the client to determine which data are most recent.</p>
+
+<hr style="border-top: 1.5px dotted black" />
+<p><br />
 <br /></p>
 
 <h3 id="distribution">Distribution</h3>

@@ -4,7 +4,7 @@
   <title><![CDATA[Distributed Knowledge]]></title>
   <link href="http://distkeys.com/atom.xml" rel="self"/>
   <link href="http://distkeys.com/"/>
-  <updated>2014-02-22T19:05:04-08:00</updated>
+  <updated>2014-02-23T23:00:17-08:00</updated>
   <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -634,8 +634,10 @@ By Caching the mapping from a prefix to the name server handling that prefix, fu
 1. Associating a unique number with the root of every independent name space.<br />
 2.  When a file name is stored, the number for the root of the name space can be stored along with the name. <br />
 3. When name spaces are merged, an entry is made in the new root, pairing the UID of each previous root with the prefix required to find it.<br />
-4.  When a name with an associated root UID is resolved, the UID is checked; if it does not match that for the current root, the corresponding prefix is prepended, allowing the embedded name to work.
-&lt;hr style=&#8221;border-top: 1.5px dotted black&#8221;/&gt;<br />
+4.  When a name with an associated root UID is resolved, the UID is checked; if it does not match that for the current root, the corresponding prefix is prepended, allowing the embedded name to work.</p>
+
+<hr style="border-top: 1.5px dotted black" />
+<p><br />
 <br /></p>
 
 <h3 id="security-subsystem">Security Subsystem</h3>
@@ -712,10 +714,12 @@ When these techniques are applied in the area of security, the following conside
   <li>The security of the service is that of the weakest of all <code>replicas</code>.<br /></li>
   <li>When <code>distribution</code> is used, multiple servers may be involved in a particular exchange.<br /></li>
   <li>It is important that both principals know which servers were involved so that they can correctly decide how much trust to place in the results. <br /></li>
-  <li>The longer credentials are allowed to be <code>cached</code>, the longer it will take to recover when a key is compromised.
-&lt;hr style=&#8221;border-top: 1.5px dotted black&#8221;/&gt;<br />
-<br /></li>
+  <li>The longer credentials are allowed to be <code>cached</code>, the longer it will take to recover when a key is compromised.</li>
 </ol>
+
+<hr style="border-top: 1.5px dotted black" />
+<p><br />
+<br /></p>
 
 <h3 id="remote-resources">Remote resources</h3>
 
@@ -747,8 +751,10 @@ When one set of required communication parameters cannot be met (generally in lo
      •  Processing is required by all servers, whether or not they can handle a request.<br />
      •  As the total number of requests grows, the load due to preliminary processing on each server also grows.</p>
 
-<p>•  <code class="myyellow">Multicast communication</code> - In multicast, a single message can be sent to a group of servers. For multicast to scale, the groups to which messages are sent should be kept small.
-&lt;hr style=&#8221;border-top: 1.5px dotted black&#8221;/&gt;<br />
+<p>•  <code class="myyellow">Multicast communication</code> - In multicast, a single message can be sent to a group of servers. For multicast to scale, the groups to which messages are sent should be kept small.</p>
+
+<hr style="border-top: 1.5px dotted black" />
+<p><br />
 <br /></p>
 
 <h3 id="replication">Replication</h3>
@@ -815,8 +821,10 @@ In Quorum consensus
 1. Assigning votes to each replica<br />
 2. Selecting two numbers-a read-quorum and a write-quorum-such that the read-quorum plus the write-quorum exceeds the total number of votes <br />
 3. Requiring that reads and writes be directed to a sufficient number of replicas to collect enough votes to satisfy the quorum.<br />
-Taking these steps guarantees that the set of replicas read will intersect with the set written during the most recent update. Time stamps or version numbers stored with each replica allow the client to determine which data are most recent.
-&lt;hr style=&#8221;border-top: 1.5px dotted black&#8221;/&gt;<br />
+Taking these steps guarantees that the set of replicas read will intersect with the set written during the most recent update. Time stamps or version numbers stored with each replica allow the client to determine which data are most recent.</p>
+
+<hr style="border-top: 1.5px dotted black" />
+<p><br />
 <br /></p>
 
 <h3 id="distribution">Distribution</h3>
