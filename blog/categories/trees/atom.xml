@@ -4,7 +4,7 @@
   <title><![CDATA[Category: trees | Distributed Knowledge]]></title>
   <link href="http://distkeys.com/blog/categories/trees/atom.xml" rel="self"/>
   <link href="http://distkeys.com/"/>
-  <updated>2014-02-22T19:05:25-08:00</updated>
+  <updated>2014-02-23T23:00:17-08:00</updated>
   <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -39,7 +39,18 @@
 
 <p>This article is about Trie and Trees data structure.</p>
 
-<p>{% wikipedia Trie %}</p>
+<p><div class="wikipedia">
+  
+    <img src="//upload.wikimedia.org/wikipedia/commons/thumb/b/be/Trie_example.svg/250px-Trie_example.svg.png"/>
+  
+  <h2>trie</h2>
+  <div>
+    <p>In <a href="http://en.wikipedia.org/wiki/Computer_science" title="Computer science">computer science</a>, a <strong>trie</strong>, also called <strong>digital tree</strong> and sometimes <strong>radix tree</strong> or <strong>prefix tree</strong> (as they can be searched by prefixes), is an <a href="http://en.wikipedia.org/wiki/Ordered_tree_data_structure" title="Ordered tree data structure" class="mw-redirect">ordered tree</a> <a href="http://en.wikipedia.org/wiki/Data_structure" title="Data structure">data structure</a> that is used to store a <a href="http://en.wikipedia.org/wiki/Set_(abstract_data_type)" title="Set (abstract data type)">dynamic set</a> or <a href="http://en.wikipedia.org/wiki/Associative_array" title="Associative array">associative array</a> where the keys are usually <a href="http://en.wikipedia.org/wiki/String_(computer_science)" title="String (computer science)">strings</a>. Unlike a <a href="http://en.wikipedia.org/wiki/Binary_search_tree" title="Binary search tree">binary search tree</a>, no node in the tree stores the key associated with that node; instead, its position in the tree defines the key with which it is associated. All the descendants of a node have a common <a href="http://en.wikipedia.org/wiki/Prefix" title="Prefix">prefix</a> of the string associated with that node, and the root is associated with the <a href="http://en.wikipedia.org/wiki/String_(computer_science)" title="String (computer science)">empty string</a>. Values are normally not associated with every node, only with leaves and some inner nodes that correspond to keys of interest. For the space-optimized presentation of prefix tree, see <a href="http://en.wikipedia.org/wiki/Compact_prefix_tree" title="Compact prefix tree" class="mw-redirect">compact prefix tree</a>.
+</p>
+  </div>
+  <a href="http://en.wikipedia.org/wiki/Trie">Read more</a>
+</div>
+</p>
 
 <!-- more -->
 <p><br /></p>
@@ -56,325 +67,332 @@
 
 <h3 id="trie-code">Trie Code</h3>
 
-<p>{% coderay lang:c linenos:true Trie.h %}
-typedef int trieValueT;</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Trie.h </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="keyword">typedef</span> <span class="predefined-type">int</span> trieValueT;&lt;/p&gt;
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>&lt;p&gt;<span class="keyword">typedef</span> <span class="keyword">struct</span> trieNodeTag {
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    <span class="predefined-type">char</span> key;
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    <span class="predefined-type">int</span> words;
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span class="predefined-type">int</span> prefix;
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    trieValueT value;
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    <span class="keyword">struct</span> trieNodeTag *next, *children;
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>} trieNodeT;&lt;/p&gt;
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>&lt;p&gt;<span class="keyword">typedef</span> <span class="keyword">struct</span> trieCDT {
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>    trieNodeT *root;
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>} trieCDT;&lt;/p&gt;
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>&lt;p&gt;<span class="keyword">typedef</span> <span class="keyword">struct</span> trieCDT *trieADT;&lt;/p&gt;
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>&lt;p&gt;<span class="comment">// Functions</span>
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span><span class="directive">void</span> trieCreate(trieCDT &lt;em&gt;trie);
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span><span class="directive">void</span> trieAdd(trieNodeT *trie, <span class="predefined-type">char</span> *key, <span class="predefined-type">int</span> value);
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>trieNodeT&lt;/em&gt; addChild(<span class="predefined-type">char</span> key);
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span><span class="predefined-type">int</span> trieIsMember(trieCDT trie, <span class="predefined-type">char</span> keys[]);
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span><span class="predefined-type">int</span> totalStringsWithPrefix(trieCDT trie, <span class="predefined-type">char</span> keys[]);
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span><span class="directive">void</span> trieDestroy(trieNodeT *root);
+<span class="line-numbers"><a href="#n25" name="n25">25</a></span><span class="directive">void</span> test1();
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span><span class="directive">void</span> startTesting();
+<span class="line-numbers"><a href="#n27" name="n27">27</a></span><span class="directive">void</span> startTestingFromFile(<span class="predefined-type">char</span>** stdip_v);
+</pre></div>
+</div>
+ </figure></notextile></div></p>
 
-<p>typedef struct trieNodeTag {
-    char key;
-    int words;
-    int prefix;
-    trieValueT value;
-    struct trieNodeTag *next, *children;
-} trieNodeT;</p>
-
-<p>typedef struct trieCDT {
-    trieNodeT *root;
-} trieCDT;</p>
-
-<p>typedef struct trieCDT *trieADT;</p>
-
-<p>// Functions
-void trieCreate(trieCDT <em>trie);
-void trieAdd(trieNodeT *trie, char *key, int value);
-trieNodeT</em> addChild(char key);
-int trieIsMember(trieCDT trie, char keys[]);
-int totalStringsWithPrefix(trieCDT trie, char keys[]);
-void trieDestroy(trieNodeT *root);
-void test1();
-void startTesting();
-void startTestingFromFile(char** stdip_v);
-{% endcoderay %}</p>
-
-<p>{% coderay lang:cplusplus linenos:true Trie.c http://ideone.com/AV5jKS Run Trie.c %}
-#include <stdio.h>
-#include <stdlib.h>
-#include "trie.h"</stdlib.h></stdio.h></p>
-
-<p>// To enable debug messages uncomment #define
-#define TEST 1
-// To test trie by providing input from file, uncomment ‘TESTFROMFILE’
-// Compile code and while executing provide file name at command line
-// For e.g. &gt; ./a.out ipFile.txt
-//
-//#define TESTFROMFILE 1
-//
-// To enable debug messages uncomment ‘DEBUG’
-//#define DEBUG 1</p>
-
-<h1 id="ifdef-debug">ifdef DEBUG</h1>
-<p>#  define D(x) x
-#else
-#  define D(x)
-#endif</p>
-
-<p>int main(int argc, char* argv[])
-{
-    #ifdef TEST
-        startTesting();
-    #endif</p>
-
-<pre><code>#ifdef TESTFROMFILE
-    startTestingFromFile(argv);
-#endif
-
-return 0; }
-</code></pre>
-
-<p>// Create root node of trie
-void trieCreate(trieCDT <em>trie)
-{
-    trie-&gt;root = (trieNodeT</em>)calloc(1,sizeof(trieNodeT));</p>
-
-<pre><code>if (trie-&gt;root == NULL) {
-printf("Can not alloc memory\n");
-return;
-}
-
-trie-&gt;root-&gt;key = '\0';
-trie-&gt;root-&gt;value = -1;
-trie-&gt;root-&gt;next = NULL;
-trie-&gt;root-&gt;children = NULL; }
-</code></pre>
-
-<p>// This is recursive function for adding node in trie
-// It covers 3 cases
-// Case 1: When only root node is present in a trie. In this
-//         case keep on adding node one level after another.
-//
-//         If input given is “Good” and if ‘G’ is not found then
-//         insert ‘G’ and return ‘G’ node from where next insertion
-//         has to be done as we have already found there is no
-//         other ‘G’ exist.
-//
-// Case 2: When matching key node is already found return the matching
-//         node and increment key
-//
-// Case 3: When key does not match to existing children i.e. for
-//         “abcd”, “abef” and “abgh”
-//         .  —-&gt; root
-//         |
-//         a
-//         |
-//         b
-//         |
-//         c ===&gt; e ===&gt; g        (LL, children of b)
-//         |      |      |
-//         d      f      h</p>
-
-<p>void trieAdd(trieNodeT* trie, char *key, int value) {</p>
-
-<pre><code>// Get root of children
-if (key == NULL) {
-return;
-} else if (trie-&gt;children == NULL &amp;&amp; trie-&gt;next == NULL) {
-
-    // Case 1
-trieNodeT* child = addChild(*key);
-trie-&gt;children = child;
-
-if (*key == '\0') {
-    child-&gt;value = value;
-    child-&gt;words++;
-    return;
-}
-
-return trieAdd(child, ++key, value);
-}
-
-trieNodeT* level = trie-&gt;children;
-trieNodeT* current;
-for (current = level; current != NULL; current = current-&gt;next) {
-
-// Case 2
-if (current-&gt;key == *key) {
-    current-&gt;prefix++;
-
-    if (*key == '\0') {
-	current-&gt;words++;
-	return;
-    }
-    return trieAdd(current, ++key, value);
-}
-
-// This is last element in LL and key is not found
-// For e.g. for "abc" and "abd", c and d should be
-// child of b.
-// Since, c != d, Append d to c in LL signifying they
-// are both child of 'b' and are on same level
-//
-// Case 3
-if (current-&gt;next == NULL) {
-    //Add key
-    trieNodeT* child = addChild(*key);
-    current-&gt;next = child;
-
-    if (*key == '\0') {
-        child-&gt;words++;
-	child-&gt;value = value;
-	return;
-    }
-
-    return trieAdd(child, ++key, value);
-}
-} }
-</code></pre>
-
-<p>trieNodeT* addChild(char key)
-{
-    trieNodeT* child = (trieNodeT*)calloc(1,sizeof(trieNodeT));</p>
-
-<pre><code>if (child == NULL) {
-printf("Can not alloc memory\n");
-return NULL;
-}
-child-&gt;key = key;
-child-&gt;value = -1;
-child-&gt;next = NULL;
-child-&gt;children = NULL;
-child-&gt;prefix = 1;
-child-&gt;words = 0;
-
-return child; }
-</code></pre>
-
-<p>int totalStringsWithPrefix(trieCDT trie, char keys[])
-{
-    trieNodeT *level = trie.root-&gt;children;</p>
-
-<pre><code>while (keys != NULL) {
-trieNodeT *found = NULL;
-trieNodeT *current;
-
-for (current = level; current != NULL; current = current-&gt;next) {
-    if (current-&gt;key == *keys) {
-	found = current;
-	break;
-    }
-}
-
-if (found == NULL) {
-    return 0;
-} else if (*(keys + 1)  == '\0') {
-    return found-&gt;prefix;
-}
-level = found -&gt; children;
-keys++;
-}
-
-return 0; }
-</code></pre>
-
-<p>int trieIsMember(trieCDT trie, char keys[])
-{
-    trieNodeT *level = trie.root-&gt;children;</p>
-
-<pre><code>while (keys != NULL) {
-trieNodeT *found = NULL;
-trieNodeT *current;
-
-for (current = level; current != NULL; current = current-&gt;next) {
-    if (current-&gt;key == *keys) {
-	found = current;
-	break;
-    }
-}
-
-if (found == NULL) {
-    return 0;
-} else if (*keys == '\0') {
-    return 1;
-}
-level = found -&gt; children;
-keys++;
-}
-
-return 0; }
-</code></pre>
-
-<p>void trieDestroy(trieNodeT * root)
-{
-    if (root-&gt;children == NULL &amp;&amp; root-&gt;next == NULL) {
-        D(printf(“Destroying %d\n”, root-&gt;value));
-	free (root);
-	return;
-    }</p>
-
-<pre><code>// If root have next and children free them first
-if (root-&gt;next != NULL) {
-trieDestroy(root-&gt;next);
-}
-
-if (root-&gt;children != NULL) {
-trieDestroy(root-&gt;children);
-}
-</code></pre>
-
-<h1 id="ifdef-debug-1">ifdef DEBUG</h1>
-<pre><code>if (root-&gt;key != '\0') {
-printf("Destroying %c\n", root-&gt;key);
-} else {
-printf("Destroying Root %d\n", root-&gt;value);
-} #endif
-
-free (root); }
-</code></pre>
-
-<p>void test1()
-{
-    char s[] = “ABCD”;
-    char s1[] = “ABCDE”;
-    int i = 0;
-    trieCDT trie;
-    trieCreate(&amp;trie);
-    trieAdd(trie.root, “ABCD”, 20);
-    trieAdd(trie.root, “ABCDE”, 30);</p>
-
-<pre><code>if (trieIsMember(trie, s)) {
-printf("Found member 'ABCD'\n");
-}
-
-i = totalStringsWithPrefix(trie, "ABC");
-printf("Total words with prefix 'ABC' %d\n", i);
-
-trieDestroy(trie.root); }
-</code></pre>
-
-<p>void startTesting()
-{
-    test1();
-}</p>
-
-<p>void startTestingFromFile(char** stdip_v)
-{
-    FILE *fp = NULL;
-    char key[50];
-    trieCDT trie;
-    int i = 0;</p>
-
-<pre><code>fp = fopen(stdip_v[1], "r");
-if(fp == NULL) {
-fprintf(stderr, "Can not read file!!\n");
-return;
-}
-
-trieCreate(&amp;trie);
-
-while(fscanf(fp, "%s", key) != EOF) {
-trieAdd(trie.root, key, i);
-i++;
-
-if(!trieIsMember(trie, key)) {
-    printf("Key '%s' NOT found in trie\n", key);
-}
-}
-
-printf("Total words inserted in trie %d\n", i);
-
-i = totalStringsWithPrefix(trie, "Abe");
-
-printf("Total prefixs with 'Abe' %d\n", i);
-
-trieDestroy(trie.root); } {% endcoderay %}
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Trie.c</span>  <a href='http://ideone.com/AV5jKS' target='_blank'>Run Trie.c </a></figcaption> <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers">  <a href="#n1" name="n1">1</a></span>
+<span class="line-numbers">  <a href="#n2" name="n2">2</a></span><span class="preprocessor">#include</span> <span class="include">&lt;stdio.h&gt;</span>
+<span class="line-numbers">  <a href="#n3" name="n3">3</a></span><span class="preprocessor">#include</span> <span class="include">&lt;stdlib.h&gt;</span>
+<span class="line-numbers">  <a href="#n4" name="n4">4</a></span><span class="preprocessor">#include</span> <span class="include">&quot;trie.h&quot;</span>&lt;/stdlib.h&gt;&lt;/stdio.h&gt;&lt;/p&gt;
+<span class="line-numbers">  <a href="#n5" name="n5">5</a></span>
+<span class="line-numbers">  <a href="#n6" name="n6">6</a></span>&lt;p&gt;<span class="comment">// To enable debug messages uncomment #define</span>
+<span class="line-numbers">  <a href="#n7" name="n7">7</a></span><span class="preprocessor">#define</span> TEST <span class="integer">1</span>
+<span class="line-numbers">  <a href="#n8" name="n8">8</a></span><span class="comment">// To test trie by providing input from file, uncomment ‘TESTFROMFILE’</span>
+<span class="line-numbers">  <a href="#n9" name="n9">9</a></span><span class="comment">// Compile code and while executing provide file name at command line</span>
+<span class="line-numbers"> <strong><a href="#n10" name="n10">10</a></strong></span><span class="comment">// For e.g. &amp;gt; ./a.out ipFile.txt</span>
+<span class="line-numbers"> <a href="#n11" name="n11">11</a></span><span class="comment">//</span>
+<span class="line-numbers"> <a href="#n12" name="n12">12</a></span><span class="comment">//#define TESTFROMFILE 1</span>
+<span class="line-numbers"> <a href="#n13" name="n13">13</a></span><span class="comment">//</span>
+<span class="line-numbers"> <a href="#n14" name="n14">14</a></span><span class="comment">// To enable debug messages uncomment ‘DEBUG’</span>
+<span class="line-numbers"> <a href="#n15" name="n15">15</a></span><span class="comment">//#define DEBUG 1&lt;/p&gt;</span>
+<span class="line-numbers"> <a href="#n16" name="n16">16</a></span>
+<span class="line-numbers"> <a href="#n17" name="n17">17</a></span>&lt;h1 id=<span class="string"><span class="delimiter">&quot;</span><span class="content">ifdef-debug</span><span class="delimiter">&quot;</span></span>&gt;ifdef DEBUG&lt;/h1&gt;
+<span class="line-numbers"> <a href="#n18" name="n18">18</a></span>&lt;p&gt;<span class="preprocessor">#  define</span> D(x) x
+<span class="line-numbers"> <a href="#n19" name="n19">19</a></span><span class="preprocessor">#else</span>
+<span class="line-numbers"> <strong><a href="#n20" name="n20">20</a></strong></span><span class="preprocessor">#  define</span> D(x)
+<span class="line-numbers"> <a href="#n21" name="n21">21</a></span><span class="preprocessor">#endif</span>&lt;/p&gt;
+<span class="line-numbers"> <a href="#n22" name="n22">22</a></span>
+<span class="line-numbers"> <a href="#n23" name="n23">23</a></span>&lt;p&gt;<span class="predefined-type">int</span> main(<span class="predefined-type">int</span> argc, <span class="predefined-type">char</span>* argv[])
+<span class="line-numbers"> <a href="#n24" name="n24">24</a></span>{
+<span class="line-numbers"> <a href="#n25" name="n25">25</a></span>    <span class="preprocessor">#ifdef</span> TEST
+<span class="line-numbers"> <a href="#n26" name="n26">26</a></span>        startTesting();
+<span class="line-numbers"> <a href="#n27" name="n27">27</a></span>    <span class="preprocessor">#endif</span>&lt;/p&gt;
+<span class="line-numbers"> <a href="#n28" name="n28">28</a></span>
+<span class="line-numbers"> <a href="#n29" name="n29">29</a></span>&lt;pre&gt;&lt;code&gt;<span class="preprocessor">#ifdef</span> TESTFROMFILE
+<span class="line-numbers"> <strong><a href="#n30" name="n30">30</a></strong></span>    startTestingFromFile(argv);
+<span class="line-numbers"> <a href="#n31" name="n31">31</a></span><span class="preprocessor">#endif</span>
+<span class="line-numbers"> <a href="#n32" name="n32">32</a></span>
+<span class="line-numbers"> <a href="#n33" name="n33">33</a></span><span class="keyword">return</span> <span class="integer">0</span>; }
+<span class="line-numbers"> <a href="#n34" name="n34">34</a></span>&lt;/code&gt;&lt;/pre&gt;
+<span class="line-numbers"> <a href="#n35" name="n35">35</a></span>
+<span class="line-numbers"> <a href="#n36" name="n36">36</a></span>&lt;p&gt;<span class="comment">// Create root node of trie</span>
+<span class="line-numbers"> <a href="#n37" name="n37">37</a></span><span class="directive">void</span> trieCreate(trieCDT &lt;em&gt;trie)
+<span class="line-numbers"> <a href="#n38" name="n38">38</a></span>{
+<span class="line-numbers"> <a href="#n39" name="n39">39</a></span>    trie-&amp;gt;root = (trieNodeT&lt;/em&gt;)calloc(<span class="integer">1</span>,<span class="keyword">sizeof</span>(trieNodeT));&lt;/p&gt;
+<span class="line-numbers"> <strong><a href="#n40" name="n40">40</a></strong></span>
+<span class="line-numbers"> <a href="#n41" name="n41">41</a></span>&lt;pre&gt;&lt;code&gt;<span class="keyword">if</span> (trie-&amp;gt;root == <span class="predefined-constant">NULL</span>) {
+<span class="line-numbers"> <a href="#n42" name="n42">42</a></span>printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Can not alloc memory</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>);
+<span class="line-numbers"> <a href="#n43" name="n43">43</a></span><span class="keyword">return</span>;
+<span class="line-numbers"> <a href="#n44" name="n44">44</a></span>}
+<span class="line-numbers"> <a href="#n45" name="n45">45</a></span>
+<span class="line-numbers"> <a href="#n46" name="n46">46</a></span>trie-&amp;gt;root-&amp;gt;key = <span class="char">'\0'</span>;
+<span class="line-numbers"> <a href="#n47" name="n47">47</a></span>trie-&amp;gt;root-&amp;gt;value = -<span class="integer">1</span>;
+<span class="line-numbers"> <a href="#n48" name="n48">48</a></span>trie-&amp;gt;root-&amp;gt;next = <span class="predefined-constant">NULL</span>;
+<span class="line-numbers"> <a href="#n49" name="n49">49</a></span>trie-&amp;gt;root-&amp;gt;children = <span class="predefined-constant">NULL</span>; }
+<span class="line-numbers"> <strong><a href="#n50" name="n50">50</a></strong></span>&lt;/code&gt;&lt;/pre&gt;
+<span class="line-numbers"> <a href="#n51" name="n51">51</a></span>
+<span class="line-numbers"> <a href="#n52" name="n52">52</a></span>&lt;p&gt;<span class="comment">// This is recursive function for adding node in trie</span>
+<span class="line-numbers"> <a href="#n53" name="n53">53</a></span><span class="comment">// It covers 3 cases</span>
+<span class="line-numbers"> <a href="#n54" name="n54">54</a></span><span class="comment">// Case 1: When only root node is present in a trie. In this</span>
+<span class="line-numbers"> <a href="#n55" name="n55">55</a></span><span class="comment">//         case keep on adding node one level after another.</span>
+<span class="line-numbers"> <a href="#n56" name="n56">56</a></span><span class="comment">//</span>
+<span class="line-numbers"> <a href="#n57" name="n57">57</a></span><span class="comment">//         If input given is “Good” and if ‘G’ is not found then</span>
+<span class="line-numbers"> <a href="#n58" name="n58">58</a></span><span class="comment">//         insert ‘G’ and return ‘G’ node from where next insertion</span>
+<span class="line-numbers"> <a href="#n59" name="n59">59</a></span><span class="comment">//         has to be done as we have already found there is no</span>
+<span class="line-numbers"> <strong><a href="#n60" name="n60">60</a></strong></span><span class="comment">//         other ‘G’ exist.</span>
+<span class="line-numbers"> <a href="#n61" name="n61">61</a></span><span class="comment">//</span>
+<span class="line-numbers"> <a href="#n62" name="n62">62</a></span><span class="comment">// Case 2: When matching key node is already found return the matching</span>
+<span class="line-numbers"> <a href="#n63" name="n63">63</a></span><span class="comment">//         node and increment key</span>
+<span class="line-numbers"> <a href="#n64" name="n64">64</a></span><span class="comment">//</span>
+<span class="line-numbers"> <a href="#n65" name="n65">65</a></span><span class="comment">// Case 3: When key does not match to existing children i.e. for</span>
+<span class="line-numbers"> <a href="#n66" name="n66">66</a></span><span class="comment">//         “abcd”, “abef” and “abgh”</span>
+<span class="line-numbers"> <a href="#n67" name="n67">67</a></span><span class="comment">//         .  —-&amp;gt; root</span>
+<span class="line-numbers"> <a href="#n68" name="n68">68</a></span><span class="comment">//         |</span>
+<span class="line-numbers"> <a href="#n69" name="n69">69</a></span><span class="comment">//         a</span>
+<span class="line-numbers"> <strong><a href="#n70" name="n70">70</a></strong></span><span class="comment">//         |</span>
+<span class="line-numbers"> <a href="#n71" name="n71">71</a></span><span class="comment">//         b</span>
+<span class="line-numbers"> <a href="#n72" name="n72">72</a></span><span class="comment">//         |</span>
+<span class="line-numbers"> <a href="#n73" name="n73">73</a></span><span class="comment">//         c ===&amp;gt; e ===&amp;gt; g        (LL, children of b)</span>
+<span class="line-numbers"> <a href="#n74" name="n74">74</a></span><span class="comment">//         |      |      |</span>
+<span class="line-numbers"> <a href="#n75" name="n75">75</a></span><span class="comment">//         d      f      h&lt;/p&gt;</span>
+<span class="line-numbers"> <a href="#n76" name="n76">76</a></span>
+<span class="line-numbers"> <a href="#n77" name="n77">77</a></span>&lt;p&gt;<span class="directive">void</span> trieAdd(trieNodeT* trie, <span class="predefined-type">char</span> *key, <span class="predefined-type">int</span> value) {&lt;/p&gt;
+<span class="line-numbers"> <a href="#n78" name="n78">78</a></span>
+<span class="line-numbers"> <a href="#n79" name="n79">79</a></span>&lt;pre&gt;&lt;code&gt;<span class="comment">// Get root of children</span>
+<span class="line-numbers"> <strong><a href="#n80" name="n80">80</a></strong></span><span class="keyword">if</span> (key == <span class="predefined-constant">NULL</span>) {
+<span class="line-numbers"> <a href="#n81" name="n81">81</a></span><span class="keyword">return</span>;
+<span class="line-numbers"> <a href="#n82" name="n82">82</a></span>} <span class="keyword">else</span> <span class="keyword">if</span> (trie-&amp;gt;children == <span class="predefined-constant">NULL</span> &amp;amp;&amp;amp; trie-&amp;gt;next == <span class="predefined-constant">NULL</span>) {
+<span class="line-numbers"> <a href="#n83" name="n83">83</a></span>
+<span class="line-numbers"> <a href="#n84" name="n84">84</a></span>    <span class="comment">// Case 1</span>
+<span class="line-numbers"> <a href="#n85" name="n85">85</a></span>trieNodeT* child = addChild(*key);
+<span class="line-numbers"> <a href="#n86" name="n86">86</a></span>trie-&amp;gt;children = child;
+<span class="line-numbers"> <a href="#n87" name="n87">87</a></span>
+<span class="line-numbers"> <a href="#n88" name="n88">88</a></span><span class="keyword">if</span> (*key == <span class="char">'\0'</span>) {
+<span class="line-numbers"> <a href="#n89" name="n89">89</a></span>    child-&amp;gt;value = value;
+<span class="line-numbers"> <strong><a href="#n90" name="n90">90</a></strong></span>    child-&amp;gt;words++;
+<span class="line-numbers"> <a href="#n91" name="n91">91</a></span>    <span class="keyword">return</span>;
+<span class="line-numbers"> <a href="#n92" name="n92">92</a></span>}
+<span class="line-numbers"> <a href="#n93" name="n93">93</a></span>
+<span class="line-numbers"> <a href="#n94" name="n94">94</a></span><span class="keyword">return</span> trieAdd(child, ++key, value);
+<span class="line-numbers"> <a href="#n95" name="n95">95</a></span>}
+<span class="line-numbers"> <a href="#n96" name="n96">96</a></span>
+<span class="line-numbers"> <a href="#n97" name="n97">97</a></span>trieNodeT* level = trie-&amp;gt;children;
+<span class="line-numbers"> <a href="#n98" name="n98">98</a></span>trieNodeT* current;
+<span class="line-numbers"> <a href="#n99" name="n99">99</a></span><span class="keyword">for</span> (current = level; current != <span class="predefined-constant">NULL</span>; current = current-&amp;gt;next) {
+<span class="line-numbers"><strong><a href="#n100" name="n100">100</a></strong></span>
+<span class="line-numbers"><a href="#n101" name="n101">101</a></span><span class="comment">// Case 2</span>
+<span class="line-numbers"><a href="#n102" name="n102">102</a></span><span class="keyword">if</span> (current-&amp;gt;key == *key) {
+<span class="line-numbers"><a href="#n103" name="n103">103</a></span>    current-&amp;gt;prefix++;
+<span class="line-numbers"><a href="#n104" name="n104">104</a></span>
+<span class="line-numbers"><a href="#n105" name="n105">105</a></span>    <span class="keyword">if</span> (*key == <span class="char">'\0'</span>) {
+<span class="line-numbers"><a href="#n106" name="n106">106</a></span>    current-&amp;gt;words++;
+<span class="line-numbers"><a href="#n107" name="n107">107</a></span>    <span class="keyword">return</span>;
+<span class="line-numbers"><a href="#n108" name="n108">108</a></span>    }
+<span class="line-numbers"><a href="#n109" name="n109">109</a></span>    <span class="keyword">return</span> trieAdd(current, ++key, value);
+<span class="line-numbers"><strong><a href="#n110" name="n110">110</a></strong></span>}
+<span class="line-numbers"><a href="#n111" name="n111">111</a></span>
+<span class="line-numbers"><a href="#n112" name="n112">112</a></span><span class="comment">// This is last element in LL and key is not found</span>
+<span class="line-numbers"><a href="#n113" name="n113">113</a></span><span class="comment">// For e.g. for &quot;abc&quot; and &quot;abd&quot;, c and d should be</span>
+<span class="line-numbers"><a href="#n114" name="n114">114</a></span><span class="comment">// child of b.</span>
+<span class="line-numbers"><a href="#n115" name="n115">115</a></span><span class="comment">// Since, c != d, Append d to c in LL signifying they</span>
+<span class="line-numbers"><a href="#n116" name="n116">116</a></span><span class="comment">// are both child of 'b' and are on same level</span>
+<span class="line-numbers"><a href="#n117" name="n117">117</a></span><span class="comment">//</span>
+<span class="line-numbers"><a href="#n118" name="n118">118</a></span><span class="comment">// Case 3</span>
+<span class="line-numbers"><a href="#n119" name="n119">119</a></span><span class="keyword">if</span> (current-&amp;gt;next == <span class="predefined-constant">NULL</span>) {
+<span class="line-numbers"><strong><a href="#n120" name="n120">120</a></strong></span>    <span class="comment">//Add key</span>
+<span class="line-numbers"><a href="#n121" name="n121">121</a></span>    trieNodeT* child = addChild(*key);
+<span class="line-numbers"><a href="#n122" name="n122">122</a></span>    current-&amp;gt;next = child;
+<span class="line-numbers"><a href="#n123" name="n123">123</a></span>
+<span class="line-numbers"><a href="#n124" name="n124">124</a></span>    <span class="keyword">if</span> (*key == <span class="char">'\0'</span>) {
+<span class="line-numbers"><a href="#n125" name="n125">125</a></span>        child-&amp;gt;words++;
+<span class="line-numbers"><a href="#n126" name="n126">126</a></span>    child-&amp;gt;value = value;
+<span class="line-numbers"><a href="#n127" name="n127">127</a></span>    <span class="keyword">return</span>;
+<span class="line-numbers"><a href="#n128" name="n128">128</a></span>    }
+<span class="line-numbers"><a href="#n129" name="n129">129</a></span>
+<span class="line-numbers"><strong><a href="#n130" name="n130">130</a></strong></span>    <span class="keyword">return</span> trieAdd(child, ++key, value);
+<span class="line-numbers"><a href="#n131" name="n131">131</a></span>}
+<span class="line-numbers"><a href="#n132" name="n132">132</a></span>} }
+<span class="line-numbers"><a href="#n133" name="n133">133</a></span>&lt;/code&gt;&lt;/pre&gt;
+<span class="line-numbers"><a href="#n134" name="n134">134</a></span>
+<span class="line-numbers"><a href="#n135" name="n135">135</a></span>&lt;p&gt;trieNodeT* addChild(<span class="predefined-type">char</span> key)
+<span class="line-numbers"><a href="#n136" name="n136">136</a></span>{
+<span class="line-numbers"><a href="#n137" name="n137">137</a></span>    trieNodeT* child = (trieNodeT*)calloc(<span class="integer">1</span>,<span class="keyword">sizeof</span>(trieNodeT));&lt;/p&gt;
+<span class="line-numbers"><a href="#n138" name="n138">138</a></span>
+<span class="line-numbers"><a href="#n139" name="n139">139</a></span>&lt;pre&gt;&lt;code&gt;<span class="keyword">if</span> (child == <span class="predefined-constant">NULL</span>) {
+<span class="line-numbers"><strong><a href="#n140" name="n140">140</a></strong></span>printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Can not alloc memory</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>);
+<span class="line-numbers"><a href="#n141" name="n141">141</a></span><span class="keyword">return</span> <span class="predefined-constant">NULL</span>;
+<span class="line-numbers"><a href="#n142" name="n142">142</a></span>}
+<span class="line-numbers"><a href="#n143" name="n143">143</a></span>child-&amp;gt;key = key;
+<span class="line-numbers"><a href="#n144" name="n144">144</a></span>child-&amp;gt;value = -<span class="integer">1</span>;
+<span class="line-numbers"><a href="#n145" name="n145">145</a></span>child-&amp;gt;next = <span class="predefined-constant">NULL</span>;
+<span class="line-numbers"><a href="#n146" name="n146">146</a></span>child-&amp;gt;children = <span class="predefined-constant">NULL</span>;
+<span class="line-numbers"><a href="#n147" name="n147">147</a></span>child-&amp;gt;prefix = <span class="integer">1</span>;
+<span class="line-numbers"><a href="#n148" name="n148">148</a></span>child-&amp;gt;words = <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n149" name="n149">149</a></span>
+<span class="line-numbers"><strong><a href="#n150" name="n150">150</a></strong></span><span class="keyword">return</span> child; }
+<span class="line-numbers"><a href="#n151" name="n151">151</a></span>&lt;/code&gt;&lt;/pre&gt;
+<span class="line-numbers"><a href="#n152" name="n152">152</a></span>
+<span class="line-numbers"><a href="#n153" name="n153">153</a></span>&lt;p&gt;<span class="predefined-type">int</span> totalStringsWithPrefix(trieCDT trie, <span class="predefined-type">char</span> keys[])
+<span class="line-numbers"><a href="#n154" name="n154">154</a></span>{
+<span class="line-numbers"><a href="#n155" name="n155">155</a></span>    trieNodeT *level = trie.root-&amp;gt;children;&lt;/p&gt;
+<span class="line-numbers"><a href="#n156" name="n156">156</a></span>
+<span class="line-numbers"><a href="#n157" name="n157">157</a></span>&lt;pre&gt;&lt;code&gt;<span class="keyword">while</span> (keys != <span class="predefined-constant">NULL</span>) {
+<span class="line-numbers"><a href="#n158" name="n158">158</a></span>trieNodeT *found = <span class="predefined-constant">NULL</span>;
+<span class="line-numbers"><a href="#n159" name="n159">159</a></span>trieNodeT *current;
+<span class="line-numbers"><strong><a href="#n160" name="n160">160</a></strong></span>
+<span class="line-numbers"><a href="#n161" name="n161">161</a></span><span class="keyword">for</span> (current = level; current != <span class="predefined-constant">NULL</span>; current = current-&amp;gt;next) {
+<span class="line-numbers"><a href="#n162" name="n162">162</a></span>    <span class="keyword">if</span> (current-&amp;gt;key == *keys) {
+<span class="line-numbers"><a href="#n163" name="n163">163</a></span>    found = current;
+<span class="line-numbers"><a href="#n164" name="n164">164</a></span>    <span class="keyword">break</span>;
+<span class="line-numbers"><a href="#n165" name="n165">165</a></span>    }
+<span class="line-numbers"><a href="#n166" name="n166">166</a></span>}
+<span class="line-numbers"><a href="#n167" name="n167">167</a></span>
+<span class="line-numbers"><a href="#n168" name="n168">168</a></span><span class="keyword">if</span> (found == <span class="predefined-constant">NULL</span>) {
+<span class="line-numbers"><a href="#n169" name="n169">169</a></span>    <span class="keyword">return</span> <span class="integer">0</span>;
+<span class="line-numbers"><strong><a href="#n170" name="n170">170</a></strong></span>} <span class="keyword">else</span> <span class="keyword">if</span> (*(keys + <span class="integer">1</span>)  == <span class="char">'\0'</span>) {
+<span class="line-numbers"><a href="#n171" name="n171">171</a></span>    <span class="keyword">return</span> found-&amp;gt;prefix;
+<span class="line-numbers"><a href="#n172" name="n172">172</a></span>}
+<span class="line-numbers"><a href="#n173" name="n173">173</a></span>level = found -&amp;gt; children;
+<span class="line-numbers"><a href="#n174" name="n174">174</a></span>keys++;
+<span class="line-numbers"><a href="#n175" name="n175">175</a></span>}
+<span class="line-numbers"><a href="#n176" name="n176">176</a></span>
+<span class="line-numbers"><a href="#n177" name="n177">177</a></span><span class="keyword">return</span> <span class="integer">0</span>; }
+<span class="line-numbers"><a href="#n178" name="n178">178</a></span>&lt;/code&gt;&lt;/pre&gt;
+<span class="line-numbers"><a href="#n179" name="n179">179</a></span>
+<span class="line-numbers"><strong><a href="#n180" name="n180">180</a></strong></span>&lt;p&gt;<span class="predefined-type">int</span> trieIsMember(trieCDT trie, <span class="predefined-type">char</span> keys[])
+<span class="line-numbers"><a href="#n181" name="n181">181</a></span>{
+<span class="line-numbers"><a href="#n182" name="n182">182</a></span>    trieNodeT *level = trie.root-&amp;gt;children;&lt;/p&gt;
+<span class="line-numbers"><a href="#n183" name="n183">183</a></span>
+<span class="line-numbers"><a href="#n184" name="n184">184</a></span>&lt;pre&gt;&lt;code&gt;<span class="keyword">while</span> (keys != <span class="predefined-constant">NULL</span>) {
+<span class="line-numbers"><a href="#n185" name="n185">185</a></span>trieNodeT *found = <span class="predefined-constant">NULL</span>;
+<span class="line-numbers"><a href="#n186" name="n186">186</a></span>trieNodeT *current;
+<span class="line-numbers"><a href="#n187" name="n187">187</a></span>
+<span class="line-numbers"><a href="#n188" name="n188">188</a></span><span class="keyword">for</span> (current = level; current != <span class="predefined-constant">NULL</span>; current = current-&amp;gt;next) {
+<span class="line-numbers"><a href="#n189" name="n189">189</a></span>    <span class="keyword">if</span> (current-&amp;gt;key == *keys) {
+<span class="line-numbers"><strong><a href="#n190" name="n190">190</a></strong></span>    found = current;
+<span class="line-numbers"><a href="#n191" name="n191">191</a></span>    <span class="keyword">break</span>;
+<span class="line-numbers"><a href="#n192" name="n192">192</a></span>    }
+<span class="line-numbers"><a href="#n193" name="n193">193</a></span>}
+<span class="line-numbers"><a href="#n194" name="n194">194</a></span>
+<span class="line-numbers"><a href="#n195" name="n195">195</a></span><span class="keyword">if</span> (found == <span class="predefined-constant">NULL</span>) {
+<span class="line-numbers"><a href="#n196" name="n196">196</a></span>    <span class="keyword">return</span> <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n197" name="n197">197</a></span>} <span class="keyword">else</span> <span class="keyword">if</span> (*keys == <span class="char">'\0'</span>) {
+<span class="line-numbers"><a href="#n198" name="n198">198</a></span>    <span class="keyword">return</span> <span class="integer">1</span>;
+<span class="line-numbers"><a href="#n199" name="n199">199</a></span>}
+<span class="line-numbers"><strong><a href="#n200" name="n200">200</a></strong></span>level = found -&amp;gt; children;
+<span class="line-numbers"><a href="#n201" name="n201">201</a></span>keys++;
+<span class="line-numbers"><a href="#n202" name="n202">202</a></span>}
+<span class="line-numbers"><a href="#n203" name="n203">203</a></span>
+<span class="line-numbers"><a href="#n204" name="n204">204</a></span><span class="keyword">return</span> <span class="integer">0</span>; }
+<span class="line-numbers"><a href="#n205" name="n205">205</a></span>&lt;/code&gt;&lt;/pre&gt;
+<span class="line-numbers"><a href="#n206" name="n206">206</a></span>
+<span class="line-numbers"><a href="#n207" name="n207">207</a></span>&lt;p&gt;<span class="directive">void</span> trieDestroy(trieNodeT * root)
+<span class="line-numbers"><a href="#n208" name="n208">208</a></span>{
+<span class="line-numbers"><a href="#n209" name="n209">209</a></span>    <span class="keyword">if</span> (root-&amp;gt;children == <span class="predefined-constant">NULL</span> &amp;amp;&amp;amp; root-&amp;gt;next == <span class="predefined-constant">NULL</span>) {
+<span class="line-numbers"><strong><a href="#n210" name="n210">210</a></strong></span>        D(printf(<span class="error">“</span>Destroying %d<span class="error">\</span>n<span class="error">”</span>, root-&amp;gt;value));
+<span class="line-numbers"><a href="#n211" name="n211">211</a></span>    free (root);
+<span class="line-numbers"><a href="#n212" name="n212">212</a></span>    <span class="keyword">return</span>;
+<span class="line-numbers"><a href="#n213" name="n213">213</a></span>    }&lt;/p&gt;
+<span class="line-numbers"><a href="#n214" name="n214">214</a></span>
+<span class="line-numbers"><a href="#n215" name="n215">215</a></span>&lt;pre&gt;&lt;code&gt;<span class="comment">// If root have next and children free them first</span>
+<span class="line-numbers"><a href="#n216" name="n216">216</a></span><span class="keyword">if</span> (root-&amp;gt;next != <span class="predefined-constant">NULL</span>) {
+<span class="line-numbers"><a href="#n217" name="n217">217</a></span>trieDestroy(root-&amp;gt;next);
+<span class="line-numbers"><a href="#n218" name="n218">218</a></span>}
+<span class="line-numbers"><a href="#n219" name="n219">219</a></span>
+<span class="line-numbers"><strong><a href="#n220" name="n220">220</a></strong></span><span class="keyword">if</span> (root-&amp;gt;children != <span class="predefined-constant">NULL</span>) {
+<span class="line-numbers"><a href="#n221" name="n221">221</a></span>trieDestroy(root-&amp;gt;children);
+<span class="line-numbers"><a href="#n222" name="n222">222</a></span>}
+<span class="line-numbers"><a href="#n223" name="n223">223</a></span>&lt;/code&gt;&lt;/pre&gt;
+<span class="line-numbers"><a href="#n224" name="n224">224</a></span>
+<span class="line-numbers"><a href="#n225" name="n225">225</a></span>&lt;h1 id=<span class="string"><span class="delimiter">&quot;</span><span class="content">ifdef-debug-1</span><span class="delimiter">&quot;</span></span>&gt;ifdef DEBUG&lt;/h1&gt;
+<span class="line-numbers"><a href="#n226" name="n226">226</a></span>&lt;pre&gt;&lt;code&gt;<span class="keyword">if</span> (root-&amp;gt;key != <span class="char">'\0'</span>) {
+<span class="line-numbers"><a href="#n227" name="n227">227</a></span>printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Destroying %c</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>, root-&amp;gt;key);
+<span class="line-numbers"><a href="#n228" name="n228">228</a></span>} <span class="keyword">else</span> {
+<span class="line-numbers"><a href="#n229" name="n229">229</a></span>printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Destroying Root %d</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>, root-&amp;gt;value);
+<span class="line-numbers"><strong><a href="#n230" name="n230">230</a></strong></span>} <span class="preprocessor">#endif</span>
+<span class="line-numbers"><a href="#n231" name="n231">231</a></span>
+<span class="line-numbers"><a href="#n232" name="n232">232</a></span>free (root); }
+<span class="line-numbers"><a href="#n233" name="n233">233</a></span>&lt;/code&gt;&lt;/pre&gt;
+<span class="line-numbers"><a href="#n234" name="n234">234</a></span>
+<span class="line-numbers"><a href="#n235" name="n235">235</a></span>&lt;p&gt;<span class="directive">void</span> test1()
+<span class="line-numbers"><a href="#n236" name="n236">236</a></span>{
+<span class="line-numbers"><a href="#n237" name="n237">237</a></span>    <span class="predefined-type">char</span> s[] = <span class="error">“</span>ABCD<span class="error">”</span>;
+<span class="line-numbers"><a href="#n238" name="n238">238</a></span>    <span class="predefined-type">char</span> s1[] = <span class="error">“</span>ABCDE<span class="error">”</span>;
+<span class="line-numbers"><a href="#n239" name="n239">239</a></span>    <span class="predefined-type">int</span> i = <span class="integer">0</span>;
+<span class="line-numbers"><strong><a href="#n240" name="n240">240</a></strong></span>    trieCDT trie;
+<span class="line-numbers"><a href="#n241" name="n241">241</a></span>    trieCreate(&amp;amp;trie);
+<span class="line-numbers"><a href="#n242" name="n242">242</a></span>    trieAdd(trie.root, <span class="error">“</span>ABCD<span class="error">”</span>, <span class="integer">20</span>);
+<span class="line-numbers"><a href="#n243" name="n243">243</a></span>    trieAdd(trie.root, <span class="error">“</span>ABCDE<span class="error">”</span>, <span class="integer">30</span>);&lt;/p&gt;
+<span class="line-numbers"><a href="#n244" name="n244">244</a></span>
+<span class="line-numbers"><a href="#n245" name="n245">245</a></span>&lt;pre&gt;&lt;code&gt;<span class="keyword">if</span> (trieIsMember(trie, s)) {
+<span class="line-numbers"><a href="#n246" name="n246">246</a></span>printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Found member 'ABCD'</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>);
+<span class="line-numbers"><a href="#n247" name="n247">247</a></span>}
+<span class="line-numbers"><a href="#n248" name="n248">248</a></span>
+<span class="line-numbers"><a href="#n249" name="n249">249</a></span>i = totalStringsWithPrefix(trie, <span class="string"><span class="delimiter">&quot;</span><span class="content">ABC</span><span class="delimiter">&quot;</span></span>);
+<span class="line-numbers"><strong><a href="#n250" name="n250">250</a></strong></span>printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Total words with prefix 'ABC' %d</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>, i);
+<span class="line-numbers"><a href="#n251" name="n251">251</a></span>
+<span class="line-numbers"><a href="#n252" name="n252">252</a></span>trieDestroy(trie.root); }
+<span class="line-numbers"><a href="#n253" name="n253">253</a></span>&lt;/code&gt;&lt;/pre&gt;
+<span class="line-numbers"><a href="#n254" name="n254">254</a></span>
+<span class="line-numbers"><a href="#n255" name="n255">255</a></span>&lt;p&gt;<span class="directive">void</span> startTesting()
+<span class="line-numbers"><a href="#n256" name="n256">256</a></span>{
+<span class="line-numbers"><a href="#n257" name="n257">257</a></span>    test1();
+<span class="line-numbers"><a href="#n258" name="n258">258</a></span>}&lt;/p&gt;
+<span class="line-numbers"><a href="#n259" name="n259">259</a></span>
+<span class="line-numbers"><strong><a href="#n260" name="n260">260</a></strong></span>&lt;p&gt;<span class="directive">void</span> startTestingFromFile(<span class="predefined-type">char</span>** stdip_v)
+<span class="line-numbers"><a href="#n261" name="n261">261</a></span>{
+<span class="line-numbers"><a href="#n262" name="n262">262</a></span>    FILE *fp = <span class="predefined-constant">NULL</span>;
+<span class="line-numbers"><a href="#n263" name="n263">263</a></span>    <span class="predefined-type">char</span> key[<span class="integer">50</span>];
+<span class="line-numbers"><a href="#n264" name="n264">264</a></span>    trieCDT trie;
+<span class="line-numbers"><a href="#n265" name="n265">265</a></span>    <span class="predefined-type">int</span> i = <span class="integer">0</span>;&lt;/p&gt;
+<span class="line-numbers"><a href="#n266" name="n266">266</a></span>
+<span class="line-numbers"><a href="#n267" name="n267">267</a></span>&lt;pre&gt;&lt;code&gt;fp = fopen(stdip_v[<span class="integer">1</span>], <span class="string"><span class="delimiter">&quot;</span><span class="content">r</span><span class="delimiter">&quot;</span></span>);
+<span class="line-numbers"><a href="#n268" name="n268">268</a></span><span class="keyword">if</span>(fp == <span class="predefined-constant">NULL</span>) {
+<span class="line-numbers"><a href="#n269" name="n269">269</a></span>fprintf(stderr, <span class="string"><span class="delimiter">&quot;</span><span class="content">Can not read file!!</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>);
+<span class="line-numbers"><strong><a href="#n270" name="n270">270</a></strong></span><span class="keyword">return</span>;
+<span class="line-numbers"><a href="#n271" name="n271">271</a></span>}
+<span class="line-numbers"><a href="#n272" name="n272">272</a></span>
+<span class="line-numbers"><a href="#n273" name="n273">273</a></span>trieCreate(&amp;amp;trie);
+<span class="line-numbers"><a href="#n274" name="n274">274</a></span>
+<span class="line-numbers"><a href="#n275" name="n275">275</a></span><span class="keyword">while</span>(fscanf(fp, <span class="string"><span class="delimiter">&quot;</span><span class="content">%s</span><span class="delimiter">&quot;</span></span>, key) != <span class="predefined-constant">EOF</span>) {
+<span class="line-numbers"><a href="#n276" name="n276">276</a></span>trieAdd(trie.root, key, i);
+<span class="line-numbers"><a href="#n277" name="n277">277</a></span>i++;
+<span class="line-numbers"><a href="#n278" name="n278">278</a></span>
+<span class="line-numbers"><a href="#n279" name="n279">279</a></span><span class="keyword">if</span>(!trieIsMember(trie, key)) {
+<span class="line-numbers"><strong><a href="#n280" name="n280">280</a></strong></span>    printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Key '%s' NOT found in trie</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>, key);
+<span class="line-numbers"><a href="#n281" name="n281">281</a></span>}
+<span class="line-numbers"><a href="#n282" name="n282">282</a></span>}
+<span class="line-numbers"><a href="#n283" name="n283">283</a></span>
+<span class="line-numbers"><a href="#n284" name="n284">284</a></span>printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Total words inserted in trie %d</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>, i);
+<span class="line-numbers"><a href="#n285" name="n285">285</a></span>
+<span class="line-numbers"><a href="#n286" name="n286">286</a></span>i = totalStringsWithPrefix(trie, <span class="string"><span class="delimiter">&quot;</span><span class="content">Abe</span><span class="delimiter">&quot;</span></span>);
+<span class="line-numbers"><a href="#n287" name="n287">287</a></span>
+<span class="line-numbers"><a href="#n288" name="n288">288</a></span>printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Total prefixs with 'Abe' %d</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>, i);
+<span class="line-numbers"><a href="#n289" name="n289">289</a></span>
+<span class="line-numbers"><strong><a href="#n290" name="n290">290</a></strong></span>trieDestroy(trie.root); } </pre></div>
+</div>
+ </figure></notextile></div>
 </code></pre>
 
 <p><br /></p>
@@ -399,58 +417,62 @@ trieDestroy(trie.root); } {% endcoderay %}
 ["4", "13", "5", "/", "+"] -&gt; (4 + (13 / 5)) -&gt; 6
 </code></p>
 
-<p>{% coderay lang:c linenos:true Postfix  %}
-class Solution {
-    public:
-	Solution(){};
-	~Solution() {};</p>
-
-<pre><code>int evalRPN(vector&lt;string&gt; &amp;tokens) {
-    int num = 0;
-    vector&lt;string&gt;::const_iterator cii;
-
-    for(int ii=0; ii &lt; tokens.size(); ii++)
-    {
-	num = atoi(tokens.at(ii).c_str());
-	if (!((tokens[ii] == "+") || (tokens[ii] == "-") ||
-		    (tokens[ii] == "*") || (tokens[ii] == "/"))) {
-	    mystack.push(num);
-	} else {
-	    if (mystack.empty()) {
-		return 0;
-	    }
-
-	    num = mystack.top();
-	    mystack.pop();
-
-	    if (mystack.empty()) {
-		return 0;
-	    }
-
-	    if (tokens[ii] == "+") {
-		num += mystack.top();
-	    } else if (tokens[ii] == "-") {
-		num = mystack.top() - num;
-	    } else if (tokens[ii] == "*") {
-		num *= mystack.top();
-	    } else if (tokens[ii] == "/") {
-		if (num == 0)  {
-		    return 0;
-		}
-		num = mystack.top() / num;
-	    } else {
-		return 0;
-	    }
-
-	    mystack.pop();
-	    mystack.push(num);
-	}
-    }
-
-    return mystack.top();
-}
-
-std::stack&lt;int&gt; mystack; }; {% endcoderay %}
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Postfix  </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>class Solution {
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>    <span class="label">public:</span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    Solution(){};
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    ~Solution() {};&lt;/p&gt;
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>&lt;pre&gt;&lt;code&gt;<span class="predefined-type">int</span> evalRPN(vector&amp;lt;string&amp;gt; &amp;amp;tokens) {
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    <span class="predefined-type">int</span> num = <span class="integer">0</span>;
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    vector&amp;lt;string&amp;gt;::const_iterator cii;
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>    <span class="keyword">for</span>(<span class="predefined-type">int</span> ii=<span class="integer">0</span>; ii &amp;lt; tokens.size(); ii++)
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    {
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>    num = atoi(tokens.at(ii).c_str());
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>    <span class="keyword">if</span> (!((tokens[ii] == <span class="string"><span class="delimiter">&quot;</span><span class="content">+</span><span class="delimiter">&quot;</span></span>) || (tokens[ii] == <span class="string"><span class="delimiter">&quot;</span><span class="content">-</span><span class="delimiter">&quot;</span></span>) ||
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>            (tokens[ii] == <span class="string"><span class="delimiter">&quot;</span><span class="content">*</span><span class="delimiter">&quot;</span></span>) || (tokens[ii] == <span class="string"><span class="delimiter">&quot;</span><span class="content">/</span><span class="delimiter">&quot;</span></span>))) {
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>        mystack.push(num);
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>    } <span class="keyword">else</span> {
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>        <span class="keyword">if</span> (mystack.empty()) {
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>        <span class="keyword">return</span> <span class="integer">0</span>;
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>        }
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span>        num = mystack.top();
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span>        mystack.pop();
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span>
+<span class="line-numbers"><a href="#n25" name="n25">25</a></span>        <span class="keyword">if</span> (mystack.empty()) {
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span>        <span class="keyword">return</span> <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n27" name="n27">27</a></span>        }
+<span class="line-numbers"><a href="#n28" name="n28">28</a></span>
+<span class="line-numbers"><a href="#n29" name="n29">29</a></span>        <span class="keyword">if</span> (tokens[ii] == <span class="string"><span class="delimiter">&quot;</span><span class="content">+</span><span class="delimiter">&quot;</span></span>) {
+<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>        num += mystack.top();
+<span class="line-numbers"><a href="#n31" name="n31">31</a></span>        } <span class="keyword">else</span> <span class="keyword">if</span> (tokens[ii] == <span class="string"><span class="delimiter">&quot;</span><span class="content">-</span><span class="delimiter">&quot;</span></span>) {
+<span class="line-numbers"><a href="#n32" name="n32">32</a></span>        num = mystack.top() - num;
+<span class="line-numbers"><a href="#n33" name="n33">33</a></span>        } <span class="keyword">else</span> <span class="keyword">if</span> (tokens[ii] == <span class="string"><span class="delimiter">&quot;</span><span class="content">*</span><span class="delimiter">&quot;</span></span>) {
+<span class="line-numbers"><a href="#n34" name="n34">34</a></span>        num *= mystack.top();
+<span class="line-numbers"><a href="#n35" name="n35">35</a></span>        } <span class="keyword">else</span> <span class="keyword">if</span> (tokens[ii] == <span class="string"><span class="delimiter">&quot;</span><span class="content">/</span><span class="delimiter">&quot;</span></span>) {
+<span class="line-numbers"><a href="#n36" name="n36">36</a></span>        <span class="keyword">if</span> (num == <span class="integer">0</span>)  {
+<span class="line-numbers"><a href="#n37" name="n37">37</a></span>            <span class="keyword">return</span> <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n38" name="n38">38</a></span>        }
+<span class="line-numbers"><a href="#n39" name="n39">39</a></span>        num = mystack.top() / num;
+<span class="line-numbers"><strong><a href="#n40" name="n40">40</a></strong></span>        } <span class="keyword">else</span> {
+<span class="line-numbers"><a href="#n41" name="n41">41</a></span>        <span class="keyword">return</span> <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n42" name="n42">42</a></span>        }
+<span class="line-numbers"><a href="#n43" name="n43">43</a></span>
+<span class="line-numbers"><a href="#n44" name="n44">44</a></span>        mystack.pop();
+<span class="line-numbers"><a href="#n45" name="n45">45</a></span>        mystack.push(num);
+<span class="line-numbers"><a href="#n46" name="n46">46</a></span>    }
+<span class="line-numbers"><a href="#n47" name="n47">47</a></span>    }
+<span class="line-numbers"><a href="#n48" name="n48">48</a></span>
+<span class="line-numbers"><a href="#n49" name="n49">49</a></span>    <span class="keyword">return</span> mystack.top();
+<span class="line-numbers"><strong><a href="#n50" name="n50">50</a></strong></span>}
+<span class="line-numbers"><a href="#n51" name="n51">51</a></span>
+<span class="line-numbers"><a href="#n52" name="n52">52</a></span>std::stack&amp;lt;<span class="predefined-type">int</span>&amp;gt; mystack; }; </pre></div>
+</div>
+ </figure></notextile></div>
 </code></pre>
 
 <h3 id="tree-problems">Tree Problems</h3>
@@ -459,184 +481,187 @@ std::stack&lt;int&gt; mystack; }; {% endcoderay %}
 
 <p>Balanced tree is defined to be a tree such that no two leaf nodes differ in distance from the root by more than one.</p>
 
-<p>{% coderay lang:cplusplus linenos:true Balance BST http://ideone.com/2rEls9 Run %}
-#include <stdio.h>
-#include <stdlib.h /></stdio.h></p>
-
-<p>int arrLen = 5;
-int maxdepth = 0;
-int mindepth = 10;
-int totalElem = 8;</p>
-
-<p>typedef struct BST {
-    int data;
-    struct BST *left;
-    struct BST *right;
-} nodeBST;</p>
-
-<p>void balanceBST(int arr[]);
-nodeBST* addNode(int data);
-void addNodeToBST(nodeBST *root, nodeBST *node);
-void traverse(nodeBST *root);
-void maxDepth(nodeBST *root, int depth);
-void minDepth(nodeBST *root, int depth);</p>
-
-<p>int maxDepthWithoutGlobalVar(nodeBST *root, int depth, int maxDeep);
-int minDepthWithoutGlobalVar(nodeBST *root, int depth, int minDeep);</p>
-
-<p>int main()
-{
-    int arr[10] = {5,3,7,10,6,12,2,1};</p>
-
-<pre><code>(void)balanceBST(arr);
-
-return 0; }
-</code></pre>
-
-<p>void balanceBST(int arr[])
-{
-    nodeBST *node;
-    nodeBST *root;
-    int max = 0;
-    int min = 100000;</p>
-
-<pre><code>for (int i = 0; i &lt; totalElem; i++) {
-node = addNode(arr[i]);
-if (node == NULL) {
-    return;
-}
-
-if (i == 0) {
-    root = node;
-    continue;
-}
-
-addNodeToBST(root, node);
-}
-
-printf("Nodes created\n");
-traverse(root);
-maxDepth(root, 0);
-printf("\nMax Depth %d\n", maxdepth);
-minDepth(root, 0);
-printf("Min Depth %d\n\n", mindepth);
-
-max = maxDepthWithoutGlobalVar(root, 0, max);
-printf("Max Depth %d\n", max);
-
-min = minDepthWithoutGlobalVar(root, 0, min);
-printf("Min Depth %d\n", min);
-
-if ((max - min) &gt; 1) {
-printf("Binary search tree is not Balanced\n");
-} else {
-printf("Binary search tree is Balanced\n");
-} }
-</code></pre>
-
-<p>nodeBST* addNode(int data)
-{
-    nodeBST <em>node = (nodeBST</em>)calloc(1, sizeof(nodeBST));</p>
-
-<pre><code>if (node == NULL) {
-return NULL;
-}
-
-node-&gt;data = data;
-node-&gt;left = NULL;
-node-&gt;right = NULL;
-
-return node; }
-</code></pre>
-
-<p>void addNodeToBST(nodeBST *root, nodeBST *node)
-{
-    while(root != NULL) {
-	if (node-&gt;data &lt; root-&gt;data) {
-	    if (root-&gt;left != NULL) {
-		root = root-&gt;left;
-	    } else {
-		root-&gt;left = node;
-		return;
-	    }
-	} else {
-	    if (root-&gt;right != NULL) {
-		root = root-&gt;right;
-	    } else {
-		root-&gt;right = node;
-		return;
-	    }
-	}
-    }</p>
-
-<pre><code>return; }
-</code></pre>
-
-<p>void traverse(nodeBST *root)
-{
-    if (root == NULL) {
-	return;
-    } else {
-	traverse(root-&gt;left);
-	printf(“%d “, root-&gt;data);
-	traverse(root-&gt;right);
-    }</p>
-
-<pre><code>return; }
-</code></pre>
-
-<p>void maxDepth(nodeBST *root, int depth)
-{
-    if (root == NULL) {
-	if (maxdepth &lt; depth) {
-	    maxdepth = depth;
-	}
-    } else {
-	maxDepth(root-&gt;left, (depth + 1));
-	maxDepth(root-&gt;right, (depth + 1));
-    }
-}</p>
-
-<p>void minDepth(nodeBST *root, int depth)
-{
-    if (root == NULL) {
-	if (mindepth &gt; depth) {
-	    mindepth = depth;
-	}
-    } else {
-	minDepth(root-&gt;left, (depth + 1));
-	minDepth(root-&gt;right, (depth + 1));
-    }
-}</p>
-
-<p>int maxDepthWithoutGlobalVar(nodeBST *root, int depth, int maxDeep)
-{
-    if (root == NULL) {
-	if (maxDeep &lt;= depth) {
-	    maxDeep = depth;
-	}
-	return maxDeep;
-    } else {
-        maxDeep = maxDepthWithoutGlobalVar(root-&gt;left, (depth + 1), maxDeep);
-	maxDeep = maxDepthWithoutGlobalVar(root-&gt;right, (depth + 1), maxDeep);
-    }</p>
-
-<pre><code>return maxDeep; }
-</code></pre>
-
-<p>int minDepthWithoutGlobalVar(nodeBST *root, int depth, int minDeep)
-{
-    if (root == NULL) {
-	if (minDeep &gt;= depth) {
-	    minDeep = depth;
-	}
-	return minDeep;
-    } else {
-        minDeep = minDepthWithoutGlobalVar(root-&gt;left, (depth + 1), minDeep);
-	minDeep = minDepthWithoutGlobalVar(root-&gt;right, (depth + 1), minDeep);
-    }</p>
-
-<pre><code>return minDeep; } {% endcoderay %}
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Balance BST</span>  <a href='http://ideone.com/2rEls9' target='_blank'>Run </a></figcaption> <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers">  <a href="#n1" name="n1">1</a></span>
+<span class="line-numbers">  <a href="#n2" name="n2">2</a></span><span class="preprocessor">#include</span> <span class="include">&lt;stdio.h&gt;</span>
+<span class="line-numbers">  <a href="#n3" name="n3">3</a></span><span class="preprocessor">#include</span> <span class="include">&lt;stdlib.h /&gt;</span>&lt;/stdio.h&gt;&lt;/p&gt;
+<span class="line-numbers">  <a href="#n4" name="n4">4</a></span>
+<span class="line-numbers">  <a href="#n5" name="n5">5</a></span>&lt;p&gt;<span class="predefined-type">int</span> arrLen = <span class="integer">5</span>;
+<span class="line-numbers">  <a href="#n6" name="n6">6</a></span><span class="predefined-type">int</span> maxdepth = <span class="integer">0</span>;
+<span class="line-numbers">  <a href="#n7" name="n7">7</a></span><span class="predefined-type">int</span> mindepth = <span class="integer">10</span>;
+<span class="line-numbers">  <a href="#n8" name="n8">8</a></span><span class="predefined-type">int</span> totalElem = <span class="integer">8</span>;&lt;/p&gt;
+<span class="line-numbers">  <a href="#n9" name="n9">9</a></span>
+<span class="line-numbers"> <strong><a href="#n10" name="n10">10</a></strong></span>&lt;p&gt;<span class="keyword">typedef</span> <span class="keyword">struct</span> BST {
+<span class="line-numbers"> <a href="#n11" name="n11">11</a></span>    <span class="predefined-type">int</span> data;
+<span class="line-numbers"> <a href="#n12" name="n12">12</a></span>    <span class="keyword">struct</span> BST *left;
+<span class="line-numbers"> <a href="#n13" name="n13">13</a></span>    <span class="keyword">struct</span> BST *right;
+<span class="line-numbers"> <a href="#n14" name="n14">14</a></span>} nodeBST;&lt;/p&gt;
+<span class="line-numbers"> <a href="#n15" name="n15">15</a></span>
+<span class="line-numbers"> <a href="#n16" name="n16">16</a></span>&lt;p&gt;<span class="directive">void</span> balanceBST(<span class="predefined-type">int</span> arr[]);
+<span class="line-numbers"> <a href="#n17" name="n17">17</a></span>nodeBST* addNode(<span class="predefined-type">int</span> data);
+<span class="line-numbers"> <a href="#n18" name="n18">18</a></span><span class="directive">void</span> addNodeToBST(nodeBST *root, nodeBST *node);
+<span class="line-numbers"> <a href="#n19" name="n19">19</a></span><span class="directive">void</span> traverse(nodeBST *root);
+<span class="line-numbers"> <strong><a href="#n20" name="n20">20</a></strong></span><span class="directive">void</span> maxDepth(nodeBST *root, <span class="predefined-type">int</span> depth);
+<span class="line-numbers"> <a href="#n21" name="n21">21</a></span><span class="directive">void</span> minDepth(nodeBST *root, <span class="predefined-type">int</span> depth);&lt;/p&gt;
+<span class="line-numbers"> <a href="#n22" name="n22">22</a></span>
+<span class="line-numbers"> <a href="#n23" name="n23">23</a></span>&lt;p&gt;<span class="predefined-type">int</span> maxDepthWithoutGlobalVar(nodeBST *root, <span class="predefined-type">int</span> depth, <span class="predefined-type">int</span> maxDeep);
+<span class="line-numbers"> <a href="#n24" name="n24">24</a></span><span class="predefined-type">int</span> minDepthWithoutGlobalVar(nodeBST *root, <span class="predefined-type">int</span> depth, <span class="predefined-type">int</span> minDeep);&lt;/p&gt;
+<span class="line-numbers"> <a href="#n25" name="n25">25</a></span>
+<span class="line-numbers"> <a href="#n26" name="n26">26</a></span>&lt;p&gt;<span class="predefined-type">int</span> main()
+<span class="line-numbers"> <a href="#n27" name="n27">27</a></span>{
+<span class="line-numbers"> <a href="#n28" name="n28">28</a></span>    <span class="predefined-type">int</span> arr[<span class="integer">10</span>] = {<span class="integer">5</span>,<span class="integer">3</span>,<span class="integer">7</span>,<span class="integer">10</span>,<span class="integer">6</span>,<span class="integer">12</span>,<span class="integer">2</span>,<span class="integer">1</span>};&lt;/p&gt;
+<span class="line-numbers"> <a href="#n29" name="n29">29</a></span>
+<span class="line-numbers"> <strong><a href="#n30" name="n30">30</a></strong></span>&lt;pre&gt;&lt;code&gt;(<span class="directive">void</span>)balanceBST(arr);
+<span class="line-numbers"> <a href="#n31" name="n31">31</a></span>
+<span class="line-numbers"> <a href="#n32" name="n32">32</a></span><span class="keyword">return</span> <span class="integer">0</span>; }
+<span class="line-numbers"> <a href="#n33" name="n33">33</a></span>&lt;/code&gt;&lt;/pre&gt;
+<span class="line-numbers"> <a href="#n34" name="n34">34</a></span>
+<span class="line-numbers"> <a href="#n35" name="n35">35</a></span>&lt;p&gt;<span class="directive">void</span> balanceBST(<span class="predefined-type">int</span> arr[])
+<span class="line-numbers"> <a href="#n36" name="n36">36</a></span>{
+<span class="line-numbers"> <a href="#n37" name="n37">37</a></span>    nodeBST *node;
+<span class="line-numbers"> <a href="#n38" name="n38">38</a></span>    nodeBST *root;
+<span class="line-numbers"> <a href="#n39" name="n39">39</a></span>    <span class="predefined-type">int</span> max = <span class="integer">0</span>;
+<span class="line-numbers"> <strong><a href="#n40" name="n40">40</a></strong></span>    <span class="predefined-type">int</span> min = <span class="integer">100000</span>;&lt;/p&gt;
+<span class="line-numbers"> <a href="#n41" name="n41">41</a></span>
+<span class="line-numbers"> <a href="#n42" name="n42">42</a></span>&lt;pre&gt;&lt;code&gt;<span class="keyword">for</span> (<span class="predefined-type">int</span> i = <span class="integer">0</span>; i &amp;lt; totalElem; i++) {
+<span class="line-numbers"> <a href="#n43" name="n43">43</a></span>node = addNode(arr[i]);
+<span class="line-numbers"> <a href="#n44" name="n44">44</a></span><span class="keyword">if</span> (node == <span class="predefined-constant">NULL</span>) {
+<span class="line-numbers"> <a href="#n45" name="n45">45</a></span>    <span class="keyword">return</span>;
+<span class="line-numbers"> <a href="#n46" name="n46">46</a></span>}
+<span class="line-numbers"> <a href="#n47" name="n47">47</a></span>
+<span class="line-numbers"> <a href="#n48" name="n48">48</a></span><span class="keyword">if</span> (i == <span class="integer">0</span>) {
+<span class="line-numbers"> <a href="#n49" name="n49">49</a></span>    root = node;
+<span class="line-numbers"> <strong><a href="#n50" name="n50">50</a></strong></span>    <span class="keyword">continue</span>;
+<span class="line-numbers"> <a href="#n51" name="n51">51</a></span>}
+<span class="line-numbers"> <a href="#n52" name="n52">52</a></span>
+<span class="line-numbers"> <a href="#n53" name="n53">53</a></span>addNodeToBST(root, node);
+<span class="line-numbers"> <a href="#n54" name="n54">54</a></span>}
+<span class="line-numbers"> <a href="#n55" name="n55">55</a></span>
+<span class="line-numbers"> <a href="#n56" name="n56">56</a></span>printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Nodes created</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>);
+<span class="line-numbers"> <a href="#n57" name="n57">57</a></span>traverse(root);
+<span class="line-numbers"> <a href="#n58" name="n58">58</a></span>maxDepth(root, <span class="integer">0</span>);
+<span class="line-numbers"> <a href="#n59" name="n59">59</a></span>printf(<span class="string"><span class="delimiter">&quot;</span><span class="char">\n</span><span class="content">Max Depth %d</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>, maxdepth);
+<span class="line-numbers"> <strong><a href="#n60" name="n60">60</a></strong></span>minDepth(root, <span class="integer">0</span>);
+<span class="line-numbers"> <a href="#n61" name="n61">61</a></span>printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Min Depth %d</span><span class="char">\n</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>, mindepth);
+<span class="line-numbers"> <a href="#n62" name="n62">62</a></span>
+<span class="line-numbers"> <a href="#n63" name="n63">63</a></span>max = maxDepthWithoutGlobalVar(root, <span class="integer">0</span>, max);
+<span class="line-numbers"> <a href="#n64" name="n64">64</a></span>printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Max Depth %d</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>, max);
+<span class="line-numbers"> <a href="#n65" name="n65">65</a></span>
+<span class="line-numbers"> <a href="#n66" name="n66">66</a></span>min = minDepthWithoutGlobalVar(root, <span class="integer">0</span>, min);
+<span class="line-numbers"> <a href="#n67" name="n67">67</a></span>printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Min Depth %d</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>, min);
+<span class="line-numbers"> <a href="#n68" name="n68">68</a></span>
+<span class="line-numbers"> <a href="#n69" name="n69">69</a></span><span class="keyword">if</span> ((max - min) &amp;gt; <span class="integer">1</span>) {
+<span class="line-numbers"> <strong><a href="#n70" name="n70">70</a></strong></span>printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Binary search tree is not Balanced</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>);
+<span class="line-numbers"> <a href="#n71" name="n71">71</a></span>} <span class="keyword">else</span> {
+<span class="line-numbers"> <a href="#n72" name="n72">72</a></span>printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Binary search tree is Balanced</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>);
+<span class="line-numbers"> <a href="#n73" name="n73">73</a></span>} }
+<span class="line-numbers"> <a href="#n74" name="n74">74</a></span>&lt;/code&gt;&lt;/pre&gt;
+<span class="line-numbers"> <a href="#n75" name="n75">75</a></span>
+<span class="line-numbers"> <a href="#n76" name="n76">76</a></span>&lt;p&gt;nodeBST* addNode(<span class="predefined-type">int</span> data)
+<span class="line-numbers"> <a href="#n77" name="n77">77</a></span>{
+<span class="line-numbers"> <a href="#n78" name="n78">78</a></span>    nodeBST &lt;em&gt;node = (nodeBST&lt;/em&gt;)calloc(<span class="integer">1</span>, <span class="keyword">sizeof</span>(nodeBST));&lt;/p&gt;
+<span class="line-numbers"> <a href="#n79" name="n79">79</a></span>
+<span class="line-numbers"> <strong><a href="#n80" name="n80">80</a></strong></span>&lt;pre&gt;&lt;code&gt;<span class="keyword">if</span> (node == <span class="predefined-constant">NULL</span>) {
+<span class="line-numbers"> <a href="#n81" name="n81">81</a></span><span class="keyword">return</span> <span class="predefined-constant">NULL</span>;
+<span class="line-numbers"> <a href="#n82" name="n82">82</a></span>}
+<span class="line-numbers"> <a href="#n83" name="n83">83</a></span>
+<span class="line-numbers"> <a href="#n84" name="n84">84</a></span>node-&amp;gt;data = data;
+<span class="line-numbers"> <a href="#n85" name="n85">85</a></span>node-&amp;gt;left = <span class="predefined-constant">NULL</span>;
+<span class="line-numbers"> <a href="#n86" name="n86">86</a></span>node-&amp;gt;right = <span class="predefined-constant">NULL</span>;
+<span class="line-numbers"> <a href="#n87" name="n87">87</a></span>
+<span class="line-numbers"> <a href="#n88" name="n88">88</a></span><span class="keyword">return</span> node; }
+<span class="line-numbers"> <a href="#n89" name="n89">89</a></span>&lt;/code&gt;&lt;/pre&gt;
+<span class="line-numbers"> <strong><a href="#n90" name="n90">90</a></strong></span>
+<span class="line-numbers"> <a href="#n91" name="n91">91</a></span>&lt;p&gt;<span class="directive">void</span> addNodeToBST(nodeBST *root, nodeBST *node)
+<span class="line-numbers"> <a href="#n92" name="n92">92</a></span>{
+<span class="line-numbers"> <a href="#n93" name="n93">93</a></span>    <span class="keyword">while</span>(root != <span class="predefined-constant">NULL</span>) {
+<span class="line-numbers"> <a href="#n94" name="n94">94</a></span>    <span class="keyword">if</span> (node-&amp;gt;data &amp;lt; root-&amp;gt;data) {
+<span class="line-numbers"> <a href="#n95" name="n95">95</a></span>        <span class="keyword">if</span> (root-&amp;gt;left != <span class="predefined-constant">NULL</span>) {
+<span class="line-numbers"> <a href="#n96" name="n96">96</a></span>        root = root-&amp;gt;left;
+<span class="line-numbers"> <a href="#n97" name="n97">97</a></span>        } <span class="keyword">else</span> {
+<span class="line-numbers"> <a href="#n98" name="n98">98</a></span>        root-&amp;gt;left = node;
+<span class="line-numbers"> <a href="#n99" name="n99">99</a></span>        <span class="keyword">return</span>;
+<span class="line-numbers"><strong><a href="#n100" name="n100">100</a></strong></span>        }
+<span class="line-numbers"><a href="#n101" name="n101">101</a></span>    } <span class="keyword">else</span> {
+<span class="line-numbers"><a href="#n102" name="n102">102</a></span>        <span class="keyword">if</span> (root-&amp;gt;right != <span class="predefined-constant">NULL</span>) {
+<span class="line-numbers"><a href="#n103" name="n103">103</a></span>        root = root-&amp;gt;right;
+<span class="line-numbers"><a href="#n104" name="n104">104</a></span>        } <span class="keyword">else</span> {
+<span class="line-numbers"><a href="#n105" name="n105">105</a></span>        root-&amp;gt;right = node;
+<span class="line-numbers"><a href="#n106" name="n106">106</a></span>        <span class="keyword">return</span>;
+<span class="line-numbers"><a href="#n107" name="n107">107</a></span>        }
+<span class="line-numbers"><a href="#n108" name="n108">108</a></span>    }
+<span class="line-numbers"><a href="#n109" name="n109">109</a></span>    }&lt;/p&gt;
+<span class="line-numbers"><strong><a href="#n110" name="n110">110</a></strong></span>
+<span class="line-numbers"><a href="#n111" name="n111">111</a></span>&lt;pre&gt;&lt;code&gt;<span class="keyword">return</span>; }
+<span class="line-numbers"><a href="#n112" name="n112">112</a></span>&lt;/code&gt;&lt;/pre&gt;
+<span class="line-numbers"><a href="#n113" name="n113">113</a></span>
+<span class="line-numbers"><a href="#n114" name="n114">114</a></span>&lt;p&gt;<span class="directive">void</span> traverse(nodeBST *root)
+<span class="line-numbers"><a href="#n115" name="n115">115</a></span>{
+<span class="line-numbers"><a href="#n116" name="n116">116</a></span>    <span class="keyword">if</span> (root == <span class="predefined-constant">NULL</span>) {
+<span class="line-numbers"><a href="#n117" name="n117">117</a></span>    <span class="keyword">return</span>;
+<span class="line-numbers"><a href="#n118" name="n118">118</a></span>    } <span class="keyword">else</span> {
+<span class="line-numbers"><a href="#n119" name="n119">119</a></span>    traverse(root-&amp;gt;left);
+<span class="line-numbers"><strong><a href="#n120" name="n120">120</a></strong></span>    printf(<span class="error">“</span>%d <span class="error">“</span>, root-&amp;gt;data);
+<span class="line-numbers"><a href="#n121" name="n121">121</a></span>    traverse(root-&amp;gt;right);
+<span class="line-numbers"><a href="#n122" name="n122">122</a></span>    }&lt;/p&gt;
+<span class="line-numbers"><a href="#n123" name="n123">123</a></span>
+<span class="line-numbers"><a href="#n124" name="n124">124</a></span>&lt;pre&gt;&lt;code&gt;<span class="keyword">return</span>; }
+<span class="line-numbers"><a href="#n125" name="n125">125</a></span>&lt;/code&gt;&lt;/pre&gt;
+<span class="line-numbers"><a href="#n126" name="n126">126</a></span>
+<span class="line-numbers"><a href="#n127" name="n127">127</a></span>&lt;p&gt;<span class="directive">void</span> maxDepth(nodeBST *root, <span class="predefined-type">int</span> depth)
+<span class="line-numbers"><a href="#n128" name="n128">128</a></span>{
+<span class="line-numbers"><a href="#n129" name="n129">129</a></span>    <span class="keyword">if</span> (root == <span class="predefined-constant">NULL</span>) {
+<span class="line-numbers"><strong><a href="#n130" name="n130">130</a></strong></span>    <span class="keyword">if</span> (maxdepth &amp;lt; depth) {
+<span class="line-numbers"><a href="#n131" name="n131">131</a></span>        maxdepth = depth;
+<span class="line-numbers"><a href="#n132" name="n132">132</a></span>    }
+<span class="line-numbers"><a href="#n133" name="n133">133</a></span>    } <span class="keyword">else</span> {
+<span class="line-numbers"><a href="#n134" name="n134">134</a></span>    maxDepth(root-&amp;gt;left, (depth + <span class="integer">1</span>));
+<span class="line-numbers"><a href="#n135" name="n135">135</a></span>    maxDepth(root-&amp;gt;right, (depth + <span class="integer">1</span>));
+<span class="line-numbers"><a href="#n136" name="n136">136</a></span>    }
+<span class="line-numbers"><a href="#n137" name="n137">137</a></span>}&lt;/p&gt;
+<span class="line-numbers"><a href="#n138" name="n138">138</a></span>
+<span class="line-numbers"><a href="#n139" name="n139">139</a></span>&lt;p&gt;<span class="directive">void</span> minDepth(nodeBST *root, <span class="predefined-type">int</span> depth)
+<span class="line-numbers"><strong><a href="#n140" name="n140">140</a></strong></span>{
+<span class="line-numbers"><a href="#n141" name="n141">141</a></span>    <span class="keyword">if</span> (root == <span class="predefined-constant">NULL</span>) {
+<span class="line-numbers"><a href="#n142" name="n142">142</a></span>    <span class="keyword">if</span> (mindepth &amp;gt; depth) {
+<span class="line-numbers"><a href="#n143" name="n143">143</a></span>        mindepth = depth;
+<span class="line-numbers"><a href="#n144" name="n144">144</a></span>    }
+<span class="line-numbers"><a href="#n145" name="n145">145</a></span>    } <span class="keyword">else</span> {
+<span class="line-numbers"><a href="#n146" name="n146">146</a></span>    minDepth(root-&amp;gt;left, (depth + <span class="integer">1</span>));
+<span class="line-numbers"><a href="#n147" name="n147">147</a></span>    minDepth(root-&amp;gt;right, (depth + <span class="integer">1</span>));
+<span class="line-numbers"><a href="#n148" name="n148">148</a></span>    }
+<span class="line-numbers"><a href="#n149" name="n149">149</a></span>}&lt;/p&gt;
+<span class="line-numbers"><strong><a href="#n150" name="n150">150</a></strong></span>
+<span class="line-numbers"><a href="#n151" name="n151">151</a></span>&lt;p&gt;<span class="predefined-type">int</span> maxDepthWithoutGlobalVar(nodeBST *root, <span class="predefined-type">int</span> depth, <span class="predefined-type">int</span> maxDeep)
+<span class="line-numbers"><a href="#n152" name="n152">152</a></span>{
+<span class="line-numbers"><a href="#n153" name="n153">153</a></span>    <span class="keyword">if</span> (root == <span class="predefined-constant">NULL</span>) {
+<span class="line-numbers"><a href="#n154" name="n154">154</a></span>    <span class="keyword">if</span> (maxDeep &amp;lt;= depth) {
+<span class="line-numbers"><a href="#n155" name="n155">155</a></span>        maxDeep = depth;
+<span class="line-numbers"><a href="#n156" name="n156">156</a></span>    }
+<span class="line-numbers"><a href="#n157" name="n157">157</a></span>    <span class="keyword">return</span> maxDeep;
+<span class="line-numbers"><a href="#n158" name="n158">158</a></span>    } <span class="keyword">else</span> {
+<span class="line-numbers"><a href="#n159" name="n159">159</a></span>        maxDeep = maxDepthWithoutGlobalVar(root-&amp;gt;left, (depth + <span class="integer">1</span>), maxDeep);
+<span class="line-numbers"><strong><a href="#n160" name="n160">160</a></strong></span>    maxDeep = maxDepthWithoutGlobalVar(root-&amp;gt;right, (depth + <span class="integer">1</span>), maxDeep);
+<span class="line-numbers"><a href="#n161" name="n161">161</a></span>    }&lt;/p&gt;
+<span class="line-numbers"><a href="#n162" name="n162">162</a></span>
+<span class="line-numbers"><a href="#n163" name="n163">163</a></span>&lt;pre&gt;&lt;code&gt;<span class="keyword">return</span> maxDeep; }
+<span class="line-numbers"><a href="#n164" name="n164">164</a></span>&lt;/code&gt;&lt;/pre&gt;
+<span class="line-numbers"><a href="#n165" name="n165">165</a></span>
+<span class="line-numbers"><a href="#n166" name="n166">166</a></span>&lt;p&gt;<span class="predefined-type">int</span> minDepthWithoutGlobalVar(nodeBST *root, <span class="predefined-type">int</span> depth, <span class="predefined-type">int</span> minDeep)
+<span class="line-numbers"><a href="#n167" name="n167">167</a></span>{
+<span class="line-numbers"><a href="#n168" name="n168">168</a></span>    <span class="keyword">if</span> (root == <span class="predefined-constant">NULL</span>) {
+<span class="line-numbers"><a href="#n169" name="n169">169</a></span>    <span class="keyword">if</span> (minDeep &amp;gt;= depth) {
+<span class="line-numbers"><strong><a href="#n170" name="n170">170</a></strong></span>        minDeep = depth;
+<span class="line-numbers"><a href="#n171" name="n171">171</a></span>    }
+<span class="line-numbers"><a href="#n172" name="n172">172</a></span>    <span class="keyword">return</span> minDeep;
+<span class="line-numbers"><a href="#n173" name="n173">173</a></span>    } <span class="keyword">else</span> {
+<span class="line-numbers"><a href="#n174" name="n174">174</a></span>        minDeep = minDepthWithoutGlobalVar(root-&amp;gt;left, (depth + <span class="integer">1</span>), minDeep);
+<span class="line-numbers"><a href="#n175" name="n175">175</a></span>    minDeep = minDepthWithoutGlobalVar(root-&amp;gt;right, (depth + <span class="integer">1</span>), minDeep);
+<span class="line-numbers"><a href="#n176" name="n176">176</a></span>    }&lt;/p&gt;
+<span class="line-numbers"><a href="#n177" name="n177">177</a></span>
+<span class="line-numbers"><a href="#n178" name="n178">178</a></span>&lt;pre&gt;&lt;code&gt;<span class="keyword">return</span> minDeep; } </pre></div>
+</div>
+ </figure></notextile></div>
 </code></pre>
 ]]></content>
   </entry>
