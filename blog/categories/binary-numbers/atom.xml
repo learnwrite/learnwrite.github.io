@@ -4,7 +4,7 @@
   <title><![CDATA[Category: binary numbers | Distributed Knowledge]]></title>
   <link href="http://distkeys.com/blog/categories/binary-numbers/atom.xml" rel="self"/>
   <link href="http://distkeys.com/"/>
-  <updated>2014-02-23T23:00:17-08:00</updated>
+  <updated>2014-02-25T13:39:34-08:00</updated>
   <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -19,6 +19,7 @@
     <updated>2013-10-08T13:17:00-07:00</updated>
     <id>http://distkeys.com/blog/2013/10/08/world-of-bits-and-bytes</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#basics">Basics</a></li>
   <li><a href="#bitwise-operators">Bitwise Operators</a></li>
   <li><a href="#bit-fields">Bit Fields</a></li>
   <li><a href="#problems">Problems</a>    <ul>
@@ -41,7 +42,8 @@
 I started realizing that after all it’s not that easy to actually think and write in bit/byte manipulation. This is my attempt to learn and be more comfortable about thinking in bit/bytes.</p>
 
 <!-- more -->
-<p>### Basics</p>
+
+<h3 id="basics">Basics</h3>
 
 <p>Introduction <a href="http://www.codeproject.com/Articles/2247/An-introduction-to-bitwise-operators" target="_blank">here</a>
 <br /><br /><br /><br /></p>
