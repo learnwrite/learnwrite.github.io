@@ -9,7 +9,7 @@
   <meta name="author" content="Vaibhav Gautam">
 
   
-  <meta name="description" content="Array Problems Find repeating/duplicate numbers Sum of 2 numbers Sum of 2 numbers greater or equal to sum Sum of 3 numbers Find the number when size &hellip;">
+  <meta name="description" content="Array Problems Find repeating/duplicate numbers Sum of 2 numbers Sum of 2 numbers greater or equal to given sum Sum of 3 numbers Find the number &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -140,7 +140,7 @@
   <li><a href="#array-problems">Array Problems</a>    <ul>
       <li><a href="#find-repeatingduplicate-numbers">Find repeating/duplicate numbers</a></li>
       <li><a href="#sum-of-2-numbers">Sum of 2 numbers</a></li>
-      <li><a href="#sum-of-2-numbers-greater-or-equal-to-sum">Sum of 2 numbers greater or equal to sum</a></li>
+      <li><a href="#sum-of-2-numbers-greater-or-equal-to-given-sum">Sum of 2 numbers greater or equal to given sum</a></li>
       <li><a href="#sum-of-3-numbers">Sum of 3 numbers</a></li>
       <li><a href="#find-the-number-when-size-of-array-is-unknown">Find the number when size of array is unknown</a></li>
       <li><a href="#merge-two-sorted-array">Merge two sorted array</a></li>
@@ -225,19 +225,19 @@ In this approach we not actually using the hash function fundamental idea is to 
 <span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>
 <span class="line-numbers"><a href="#n11" name="n11">11</a></span>    <span class="keyword">for</span>(i = <span class="integer">0</span>; i &lt; arr_size; i++)
 <span class="line-numbers"><a href="#n12" name="n12">12</a></span>    {
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span>    temp = sum - arr[i];
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span>    <span class="keyword">if</span>(temp &gt;= <span class="integer">0</span> &amp;&amp; binMap[temp] == <span class="integer">1</span>)
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span>    {
-<span class="line-numbers"><a href="#n16" name="n16">16</a></span>        printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Pair with given sum %d is (%d, %d) </span><span class="char">\n</span><span class="delimiter">&quot;</span></span>, sum, arr[i], temp);
-<span class="line-numbers"><a href="#n17" name="n17">17</a></span>    }
-<span class="line-numbers"><a href="#n18" name="n18">18</a></span>    binMap[arr[i]] = <span class="integer">1</span>;
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>        temp = sum - arr[i];
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>        <span class="keyword">if</span>(temp &gt;= <span class="integer">0</span> &amp;&amp; binMap[temp] == <span class="integer">1</span>)
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>        {
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>            printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Pair with given sum %d is (%d, %d) </span><span class="char">\n</span><span class="delimiter">&quot;</span></span>, sum, arr[i], temp);
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>        }
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>        binMap[arr[i]] = <span class="integer">1</span>;
 <span class="line-numbers"><a href="#n19" name="n19">19</a></span>    }
 <span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>}
 <span class="line-numbers"><a href="#n21" name="n21">21</a></span>
 <span class="line-numbers"><a href="#n22" name="n22">22</a></span><span class="comment">/* Driver program to test above function */</span>
 <span class="line-numbers"><a href="#n23" name="n23">23</a></span><span class="predefined-type">int</span> main()
 <span class="line-numbers"><a href="#n24" name="n24">24</a></span>{
-<span class="line-numbers"><a href="#n25" name="n25">25</a></span>    <span class="predefined-type">int</span> A[] = {<span class="integer">12</span>, <span class="integer">4</span>, <span class="integer">45</span>, <span class="integer">6</span>, <span class="integer">10</span>, <span class="integer">8</span>};
+<span class="line-numbers"><a href="#n25" name="n25">25</a></span>    <span class="predefined-type">int</span> A[] = {<span class="integer">12</span>, <span class="integer">4</span>, <span class="integer">45</span>, <span class="integer">6</span>, <span class="integer">10</span>, <span class="integer">12</span>};
 <span class="line-numbers"><a href="#n26" name="n26">26</a></span>    <span class="predefined-type">int</span> sum = <span class="integer">16</span>;
 <span class="line-numbers"><a href="#n27" name="n27">27</a></span>    <span class="predefined-type">int</span> arr_size = <span class="integer">6</span>;
 <span class="line-numbers"><a href="#n28" name="n28">28</a></span>
@@ -252,7 +252,7 @@ In this approach we not actually using the hash function fundamental idea is to 
 <hr style="border-top: 1.5px dotted black" />
 <p><br /></p>
 
-<h4 id="sum-of-2-numbers-greater-or-equal-to-sum">Sum of 2 numbers greater or equal to sum</h4>
+<h4 id="sum-of-2-numbers-greater-or-equal-to-given-sum">Sum of 2 numbers greater or equal to given sum</h4>
 
 <p>We are given a sorted array A of length n and a value k. We want to find out if there are indices i, j such that A[i] + A[j] &gt;= k. <br /></p>
 
