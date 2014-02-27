@@ -4,7 +4,7 @@
   <title><![CDATA[Distributed Knowledge]]></title>
   <link href="http://distkeys.com/atom.xml" rel="self"/>
   <link href="http://distkeys.com/"/>
-  <updated>2014-02-26T21:59:23-08:00</updated>
+  <updated>2014-02-26T22:02:45-08:00</updated>
   <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -1366,7 +1366,7 @@ function toggle(d) {
   <li><a href="#array-problems">Array Problems</a>    <ul>
       <li><a href="#find-repeatingduplicate-numbers">Find repeating/duplicate numbers</a></li>
       <li><a href="#sum-of-2-numbers">Sum of 2 numbers</a></li>
-      <li><a href="#sum-of-2-numbers-1">Sum of 2 numbers</a></li>
+      <li><a href="#sum-of-2-numbers-greater-or-equal-to-sum">Sum of 2 numbers greater or equal to sum</a></li>
       <li><a href="#sum-of-3-numbers">Sum of 3 numbers</a></li>
       <li><a href="#find-the-number-when-size-of-array-is-unknown">Find the number when size of array is unknown</a></li>
       <li><a href="#merge-two-sorted-array">Merge two sorted array</a></li>
@@ -1410,7 +1410,8 @@ Sum = 10 <br />
 Then the pairs are  [6,4] , [9,1]
 <!-- more --></p>
 
-<p><strong>Solution</strong></p>
+<p><br />
+<strong>Solution</strong></p>
 
 <p>There are two solutions<br /></p>
 
@@ -1477,7 +1478,7 @@ In this approach we not actually using the hash function fundamental idea is to 
 <hr style="border-top: 1.5px dotted black" />
 <p><br /></p>
 
-<h4 id="sum-of-2-numbers-1">Sum of 2 numbers</h4>
+<h4 id="sum-of-2-numbers-greater-or-equal-to-sum">Sum of 2 numbers greater or equal to sum</h4>
 
 <p>We are given a sorted array A of length n and a value k. We want to find out if there are indices i, j such that A[i] + A[j] &gt;= k. <br /></p>
 
