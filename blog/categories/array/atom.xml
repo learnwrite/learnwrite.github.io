@@ -4,7 +4,7 @@
   <title><![CDATA[Category: array | Distributed Knowledge]]></title>
   <link href="http://distkeys.com/blog/categories/array/atom.xml" rel="self"/>
   <link href="http://distkeys.com/"/>
-  <updated>2014-02-26T23:22:07-08:00</updated>
+  <updated>2014-02-26T23:53:04-08:00</updated>
   <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -170,6 +170,10 @@ In this approach we not actually using the hash function fundamental idea is to 
 
 <p>This approach is similar to Binary map except using array for extra space we use bit vector to save some of extra space.</p>
 
+<blockquote>
+  <p>This program works for max for 31 as bit map is <em>int</em> which is 32 bits. For numbers more than 31 more memory could be allocated.</p>
+</blockquote>
+
 <p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Bit Vector</span>  <a href='http://ideone.com/iFDimZ' target='_blank'>Run Code </a></figcaption> <div class="CodeRay">
   <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
 <span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="preprocessor">#include</span> <span class="include">&lt;stdio.h /&gt;</span>&lt;/p&gt;
@@ -190,22 +194,23 @@ In this approach we not actually using the hash function fundamental idea is to 
 <span class="line-numbers"><a href="#n17" name="n17">17</a></span>
 <span class="line-numbers"><a href="#n18" name="n18">18</a></span>    <span class="keyword">if</span>(temp &amp;gt;= <span class="integer">0</span> &amp;amp;&amp;amp; (bitmap &amp;amp; bitmask))
 <span class="line-numbers"><a href="#n19" name="n19">19</a></span>    {
-<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>        printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Pair with given sum %d is (%d, %d) </span><span class="char">\n</span><span class="delimiter">&quot;</span></span>, sum, arr[i], temp);
-<span class="line-numbers"><a href="#n21" name="n21">21</a></span>    }
-<span class="line-numbers"><a href="#n22" name="n22">22</a></span>    bitmap |= <span class="integer">1</span> &amp;lt;&amp;lt; arr[i];
-<span class="line-numbers"><a href="#n23" name="n23">23</a></span>} }
-<span class="line-numbers"><a href="#n24" name="n24">24</a></span>&lt;/code&gt;&lt;/pre&gt;
-<span class="line-numbers"><a href="#n25" name="n25">25</a></span>
-<span class="line-numbers"><a href="#n26" name="n26">26</a></span>&lt;p&gt;<span class="comment">/* Driver program to test above function */</span>
-<span class="line-numbers"><a href="#n27" name="n27">27</a></span><span class="predefined-type">int</span> main()
-<span class="line-numbers"><a href="#n28" name="n28">28</a></span>{
-<span class="line-numbers"><a href="#n29" name="n29">29</a></span>    <span class="predefined-type">int</span> A[] = {<span class="integer">12</span>, <span class="integer">4</span>, <span class="integer">13</span>, <span class="integer">6</span>, <span class="integer">10</span>, <span class="integer">3</span>};
-<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>    <span class="predefined-type">int</span> sum = <span class="integer">16</span>;
-<span class="line-numbers"><a href="#n31" name="n31">31</a></span>    <span class="predefined-type">int</span> arr_size = <span class="integer">6</span>;&lt;/p&gt;
-<span class="line-numbers"><a href="#n32" name="n32">32</a></span>
-<span class="line-numbers"><a href="#n33" name="n33">33</a></span>&lt;pre&gt;&lt;code&gt;printPairs(A, arr_size, sum);
-<span class="line-numbers"><a href="#n34" name="n34">34</a></span>
-<span class="line-numbers"><a href="#n35" name="n35">35</a></span><span class="keyword">return</span> <span class="integer">0</span>; } </pre></div>
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>        printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Pair with given sum %d is (%d, %d) </span><span class="char">\n</span><span class="delimiter">&quot;</span></span>,
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>               sum, arr[i], temp);
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span>    }
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span>    bitmap |= <span class="integer">1</span> &amp;lt;&amp;lt; arr[i];
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span>} }
+<span class="line-numbers"><a href="#n25" name="n25">25</a></span>&lt;/code&gt;&lt;/pre&gt;
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span>
+<span class="line-numbers"><a href="#n27" name="n27">27</a></span>&lt;p&gt;<span class="comment">/* Driver program to test above function */</span>
+<span class="line-numbers"><a href="#n28" name="n28">28</a></span><span class="predefined-type">int</span> main()
+<span class="line-numbers"><a href="#n29" name="n29">29</a></span>{
+<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>    <span class="predefined-type">int</span> A[] = {<span class="integer">12</span>, <span class="integer">4</span>, <span class="integer">13</span>, <span class="integer">6</span>, <span class="integer">10</span>, <span class="integer">3</span>};
+<span class="line-numbers"><a href="#n31" name="n31">31</a></span>    <span class="predefined-type">int</span> sum = <span class="integer">16</span>;
+<span class="line-numbers"><a href="#n32" name="n32">32</a></span>    <span class="predefined-type">int</span> arr_size = <span class="integer">6</span>;&lt;/p&gt;
+<span class="line-numbers"><a href="#n33" name="n33">33</a></span>
+<span class="line-numbers"><a href="#n34" name="n34">34</a></span>&lt;pre&gt;&lt;code&gt;printPairs(A, arr_size, sum);
+<span class="line-numbers"><a href="#n35" name="n35">35</a></span>
+<span class="line-numbers"><a href="#n36" name="n36">36</a></span><span class="keyword">return</span> <span class="integer">0</span>; } </pre></div>
 </div>
  </figure></notextile></div>
 </code></pre>
