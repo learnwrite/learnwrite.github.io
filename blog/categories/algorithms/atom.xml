@@ -4,7 +4,7 @@
   <title><![CDATA[Category: algorithms | Distributed Knowledge]]></title>
   <link href="http://distkeys.com/blog/categories/algorithms/atom.xml" rel="self"/>
   <link href="http://distkeys.com/"/>
-  <updated>2014-02-26T19:48:28-08:00</updated>
+  <updated>2014-02-26T21:59:23-08:00</updated>
   <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -65,6 +65,69 @@ Input [6,4,5,7,9,1,2]<br />
 Sum = 10 <br />
 Then the pairs are  [6,4] , [9,1]
 <!-- more --></p>
+
+<p><strong>Solution</strong></p>
+
+<p>There are two solutions<br /></p>
+
+<p><strong>Sorted array</strong> <br />
+1. When array is sorted, take two index variable. Indx1 point to fisrt index and Indx2 points to the last index<br />
+2. If Indx1 + Indx2 &lt; sum then increment the Indx1<br />
+3. Else if Indx1 + Indx2 &gt; sum then decrement Indx 2<br />
+4. If Indx 1 &gt; Indx 2 then halt -&gt; No pairs found<br /></p>
+
+<p>If pair found then keep doing the same to find next pair.</p>
+
+<p><strong>Hashing/Binary Map</strong><br />
+Another solution works for both <em>sorted</em> and <em>unsorted</em> array. 
+In this approach we not actually using the hash function fundamental idea is to maintain the occurrence of number i.e. Binary Map</p>
+
+<blockquote>
+  <p>The caveat is that we need extra memory.</p>
+</blockquote>
+
+<ol>
+  <li>Get the number from input array<br /></li>
+  <li>Num2 = Sum - arr[i]<br /></li>
+  <li>If we have encountered Num2 already in input array then we found a pair i.e. if(binMap[Num2] == 1)<br /></li>
+  <li>Else record input element in Binary map i.e. binMap[arr[i]] = 1;<br /></li>
+</ol>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Binary Map</span>  <a href='http://ideone.com/S0CNlO' target='_blank'>Run Code </a></figcaption> <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="preprocessor">#include</span> <span class="include">&lt;stdio.h&gt;</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span class="preprocessor">#define</span> MAX <span class="integer">100000</span>&lt;/stdio.h&gt;&lt;/p&gt;
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>&lt;p&gt;<span class="directive">void</span> printPairs(<span class="predefined-type">int</span> arr[], <span class="predefined-type">int</span> arr_size, <span class="predefined-type">int</span> sum)
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>{
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span class="predefined-type">int</span> i = <span class="integer">0</span>;
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    <span class="predefined-type">int</span> temp = <span class="integer">0</span>;
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    <span class="predefined-type">int</span> binMap[MAX] = {<span class="integer">0</span>}; /&lt;em&gt;initialize hash map as <span class="integer">0</span>&lt;/em&gt;/&lt;/p&gt;
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>&lt;pre&gt;&lt;code&gt;<span class="keyword">for</span>(i = <span class="integer">0</span>; i &amp;lt; arr_size; i++)
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>{
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>temp = sum - arr[i];
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span><span class="keyword">if</span>(temp &amp;gt;= <span class="integer">0</span> &amp;amp;&amp;amp; binMap[temp] == <span class="integer">1</span>)
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>{
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>    printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Pair with given sum %d is (%d, %d) </span><span class="char">\n</span><span class="delimiter">&quot;</span></span>, sum, arr[i], temp);
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>}
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>binMap[arr[i]] = <span class="integer">1</span>;
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>} }
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>&lt;/code&gt;&lt;/pre&gt;
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span>&lt;p&gt;<span class="comment">/* Driver program to test above function */</span>
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span><span class="predefined-type">int</span> main()
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span>{
+<span class="line-numbers"><a href="#n25" name="n25">25</a></span>    <span class="predefined-type">int</span> A[] = {<span class="integer">12</span>, <span class="integer">4</span>, <span class="integer">45</span>, <span class="integer">6</span>, <span class="integer">10</span>, <span class="integer">8</span>};
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span>    <span class="predefined-type">int</span> sum = <span class="integer">16</span>;
+<span class="line-numbers"><a href="#n27" name="n27">27</a></span>    <span class="predefined-type">int</span> arr_size = <span class="integer">6</span>;&lt;/p&gt;
+<span class="line-numbers"><a href="#n28" name="n28">28</a></span>
+<span class="line-numbers"><a href="#n29" name="n29">29</a></span>&lt;pre&gt;&lt;code&gt;printPairs(A, arr_size, sum);
+<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>
+<span class="line-numbers"><a href="#n31" name="n31">31</a></span><span class="keyword">return</span> <span class="integer">0</span>; } </pre></div>
+</div>
+ </figure></notextile></div>
+</code></pre>
 
 <hr style="border-top: 1.5px dotted black" />
 <p><br /></p>
