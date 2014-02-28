@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: distributed systems - Distributed Knowledge</title>
+  <title>System Design Problems - Distributed Knowledge</title>
   <meta name="author" content="Vaibhav Gautam">
 
   
-  <meta name="description" content="Category: distributed systems">
+  <meta name="description" content="Unique User ID Mean and Median How ls works? File descriptor Unique User ID Design a system to generate unique id for 1 billion user in distributed &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://distkeys.comblog/categories/distributed-systems/">
+  <link rel="canonical" href="http://distkeys.com/blog/2014/02/27/system-design-problems/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
    <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -107,81 +107,141 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Distributed Systems</h1>
+    
+      <h1 class="entry-title">System Design Problems</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-27T22:51:00-08:00" pubdate data-updated="true">Feb 27<span>th</span>, 2014</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#unique-user-id">Unique User ID</a></li>
+  <li><a href="#mean-and-median">Mean and Median</a></li>
+  <li><a href="#how-ls-works">How ls works?</a></li>
+  <li><a href="#file-descriptor">File descriptor</a></li>
+</ul>
 
-  
-  <h2>2014</h2>
+<h3 id="unique-user-id">Unique User ID</h3>
 
-<article>
-  
-<h1><a href="/blog/2014/02/16/naming-in-distributed-systems/">Naming in Distributed Systems</a></h1>
-<time datetime="2014-02-16T22:47:00-08:00" pubdate><span class='month'>Feb</span> <span class='day'>16</span> <span class='year'>2014</span></time>
+<p>Design a system to generate unique id for 1 billion user in distributed system
+<br /><br /></p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/operating-systems/'>Operating Systems</a>, <a class='category' href='/blog/categories/systems/'>Systems</a>, <a class='category' href='/blog/categories/distributed-systems/'>distributed systems</a></span>
-</footer>
+<h3 id="mean-and-median">Mean and Median</h3>
 
+<p>You are given say 20 nodes in a distributed system and each node have 1 billion numbers. Find mean and median. You can have some other nodes for co-ordination.</p>
 
-</article>
+<p>Mean = (sum of all the numbers) / total numbers<br />
+Median = Mid element in sorted sequence</p>
 
+<p>For example<br />
+Input = [2, 3, 4, 1]<br /></p>
 
+<p>Mean = (2+3+4+1) / 4 =2.5<br />
+For median sorted sequence is [1, 2, 3, 4]. Median is 2 or 3.
+<!-- more --></p>
 
-<article>
-  
-<h1><a href="/blog/2014/02/16/context-switch/">Context Switch</a></h1>
-<time datetime="2014-02-16T14:53:00-08:00" pubdate><span class='month'>Feb</span> <span class='day'>16</span> <span class='year'>2014</span></time>
+<p><br /><br /></p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/operating-systems/'>Operating Systems</a>, <a class='category' href='/blog/categories/systems/'>Systems</a>, <a class='category' href='/blog/categories/distributed-systems/'>distributed systems</a></span>
-</footer>
+<h3 id="how-ls-works">How ls works?</h3>
 
+<ul>
+  <li>Distributed systems people talk about NFS<br /></li>
+  <li>Typical low-level systems folks get into the copy-on-write implementation of fork<br /></li>
+  <li>Filesystem folks get into finding the blocks that constitute the directory
+<br /><br /></li>
+</ul>
 
-</article>
+<h3 id="file-descriptor">File descriptor</h3>
 
-
-
-<article>
-  
-<h1><a href="/blog/2014/01/05/scale-in-distributed-systems/">Scale in Distributed Systems</a></h1>
-<time datetime="2014-01-05T09:41:00-08:00" pubdate><span class='month'>Jan</span> <span class='day'>05</span> <span class='year'>2014</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/scale/'>Scale</a>, <a class='category' href='/blog/categories/distributed-systems/'>distributed systems</a>, <a class='category' href='/blog/categories/operating-systems/'>operating systems</a></span>
-</footer>
-
-
-</article>
-
-
-
-  
-  <h2>2013</h2>
-
-<article>
-  
-<h1><a href="/blog/2013/11/27/scalability/">Scalability in Distributed Systems</a></h1>
-<time datetime="2013-11-27T15:06:00-08:00" pubdate><span class='month'>Nov</span> <span class='day'>27</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/architecture/'>architecture</a>, <a class='category' href='/blog/categories/distributed-systems/'>distributed systems</a>, <a class='category' href='/blog/categories/operating-systems/'>operating systems</a>, <a class='category' href='/blog/categories/scale/'>scale</a></span>
-</footer>
-
-
-</article>
+<p>How file descriptor is generated?</p>
 
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Vaibhav Gautam</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-27T22:51:00-08:00" pubdate data-updated="true">Feb 27<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/system-design/'>system design</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+   <div class="rdbWrapper" data-show-read="1" data-show-send-to-kindle="1" data-show-print="1" data-show-email="0" data-orientation="0" data-version="1"></div><script type="text/javascript">(function() {var s = document.getElementsByTagName("script")[0],rdb = document.createElement("script"); rdb.type = "text/javascript"; rdb.async = true; rdb.src = document.location.protocol + "//www.readability.com/embed.js"; s.parentNode.insertBefore(rdb, s); })();</script>
+  
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://distkeys.com/blog/2014/02/27/system-design-problems/" data-via="_vaibhavg" data-counturl="http://distkeys.com/blog/2014/02/27/system-design-problems/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/02/21/reading-list/" title="Previous Post: Reading List">&laquo; Reading List</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -313,7 +373,10 @@
       var disqus_shortname = 'coolgoose85';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://distkeys.com/blog/2014/02/27/system-design-problems/';
+        var disqus_url = 'http://distkeys.com/blog/2014/02/27/system-design-problems/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
