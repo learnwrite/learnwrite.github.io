@@ -2,83 +2,83 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://distkeys.com/blog/2013/10/06/gdb-print-bit-values-of-bytes/</loc>
-        <lastmod>2014-02-11T10:44:42-08:00</lastmod>
+        <lastmod>2014-03-01T11:37:28-08:00</lastmod>
     </url>
     <url>
         <loc>http://distkeys.com/blog/2013/10/07/process-synchronization-in-os/</loc>
-        <lastmod>2014-02-11T10:45:52-08:00</lastmod>
+        <lastmod>2014-03-01T11:37:28-08:00</lastmod>
     </url>
     <url>
         <loc>http://distkeys.com/blog/2013/10/07/process-synchronization-in-linux-kernel/</loc>
-        <lastmod>2014-02-24T14:13:19-08:00</lastmod>
+        <lastmod>2014-03-01T11:37:28-08:00</lastmod>
     </url>
     <url>
         <loc>http://distkeys.com/blog/2013/10/08/binary-number-operations/</loc>
-        <lastmod>2014-01-06T08:34:15-08:00</lastmod>
+        <lastmod>2014-03-01T11:37:28-08:00</lastmod>
     </url>
     <url>
         <loc>http://distkeys.com/blog/2013/10/08/world-of-bits-and-bytes/</loc>
-        <lastmod>2014-02-24T14:14:14-08:00</lastmod>
+        <lastmod>2014-03-01T11:37:28-08:00</lastmod>
     </url>
     <url>
         <loc>http://distkeys.com/blog/2013/10/12/sorting/</loc>
-        <lastmod>2014-02-11T10:46:39-08:00</lastmod>
+        <lastmod>2014-03-01T11:37:28-08:00</lastmod>
     </url>
     <url>
         <loc>http://distkeys.com/blog/2013/10/13/comparison-based-sorting/</loc>
-        <lastmod>2014-02-08T12:43:34-08:00</lastmod>
+        <lastmod>2014-03-01T11:37:28-08:00</lastmod>
     </url>
     <url>
         <loc>http://distkeys.com/blog/2013/11/18/recursion/</loc>
-        <lastmod>2014-02-11T10:54:34-08:00</lastmod>
+        <lastmod>2014-03-01T11:37:28-08:00</lastmod>
     </url>
     <url>
         <loc>http://distkeys.com/blog/2013/11/26/trie-and-trees/</loc>
-        <lastmod>2014-02-11T10:55:03-08:00</lastmod>
+        <lastmod>2014-03-01T11:37:28-08:00</lastmod>
     </url>
     <url>
         <loc>http://distkeys.com/blog/2013/11/27/scalability/</loc>
-        <lastmod>2014-02-11T10:56:10-08:00</lastmod>
+        <lastmod>2014-03-01T11:37:28-08:00</lastmod>
     </url>
     <url>
         <loc>http://distkeys.com/blog/2013/12/14/graph-algorithms/</loc>
-        <lastmod>2014-02-25T13:43:08-08:00</lastmod>
+        <lastmod>2014-03-01T11:37:28-08:00</lastmod>
     </url>
     <url>
         <loc>http://distkeys.com/blog/2013/12/30/array-and-strings/</loc>
-        <lastmod>2014-02-27T22:34:36-08:00</lastmod>
+        <lastmod>2014-03-01T12:25:24-08:00</lastmod>
     </url>
     <url>
         <loc>http://distkeys.com/blog/2014/01/04/D3-and-Octopress/</loc>
-        <lastmod>2014-02-11T10:59:06-08:00</lastmod>
+        <lastmod>2014-03-01T11:37:28-08:00</lastmod>
     </url>
     <url>
         <loc>http://distkeys.com/blog/2014/01/05/scale-in-distributed-systems/</loc>
-        <lastmod>2014-02-23T22:59:28-08:00</lastmod>
+        <lastmod>2014-03-01T11:37:28-08:00</lastmod>
     </url>
     <url>
         <loc>http://distkeys.com/blog/2014/02/16/context-switch/</loc>
-        <lastmod>2014-02-16T15:41:20-08:00</lastmod>
+        <lastmod>2014-03-01T11:37:28-08:00</lastmod>
     </url>
     <url>
         <loc>http://distkeys.com/blog/2014/02/16/naming-in-distributed-systems/</loc>
-        <lastmod>2014-02-16T23:32:28-08:00</lastmod>
+        <lastmod>2014-03-01T11:37:28-08:00</lastmod>
     </url>
     <url>
         <loc>http://distkeys.com/blog/2014/02/21/reading-list/</loc>
-        <lastmod>2014-02-22T00:46:26-08:00</lastmod>
+        <lastmod>2014-03-01T11:37:28-08:00</lastmod>
     </url>
     <url>
         <loc>http://distkeys.com/blog/2014/02/27/system-design-problems/</loc>
-        <lastmod>2014-02-27T23:04:55-08:00</lastmod>
+        <lastmod>2014-03-01T11:37:28-08:00</lastmod>
     </url>
     <url>
         <loc>http://distkeys.com/about/</loc>
-        <lastmod>2014-01-05T21:18:58-08:00</lastmod>
+        <lastmod>2014-03-01T11:37:28-08:00</lastmod>
     </url>
     <url>
         <loc>http://distkeys.com/archives/</loc>
-        <lastmod>2014-02-27T23:04:55-08:00</lastmod>
+        <lastmod>2014-03-01T12:25:24-08:00</lastmod>
     </url>
     <url>
         <loc>http://distkeys.com/atom_search.xml</loc>
@@ -86,11 +86,11 @@
     </url>
     <url>
         <loc>http://distkeys.com/blog/archives/</loc>
-        <lastmod>2014-02-27T23:04:55-08:00</lastmod>
+        <lastmod>2014-03-01T12:25:24-08:00</lastmod>
     </url>
     <url>
         <loc>http://distkeys.com/</loc>
-        <lastmod>2014-02-27T23:04:55-08:00</lastmod>
+        <lastmod>2014-03-01T12:25:24-08:00</lastmod>
     </url>
     <url>
         <loc>http://distkeys.com/robots.txt</loc>
