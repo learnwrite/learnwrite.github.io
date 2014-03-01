@@ -4,7 +4,7 @@
   <title><![CDATA[Distributed Knowledge]]></title>
   <link href="http://distkeys.com/atom.xml" rel="self"/>
   <link href="http://distkeys.com/"/>
-  <updated>2014-02-27T00:00:22-08:00</updated>
+  <updated>2014-02-27T23:05:06-08:00</updated>
   <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -12,6 +12,55 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[System Design Problems]]></title>
+    <link href="http://distkeys.com/blog/2014/02/27/system-design-problems/"/>
+    <updated>2014-02-27T22:51:00-08:00</updated>
+    <id>http://distkeys.com/blog/2014/02/27/system-design-problems</id>
+    <content type="html"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#unique-user-id">Unique User ID</a></li>
+  <li><a href="#mean-and-median">Mean and Median</a></li>
+  <li><a href="#how-ls-works">How ls works?</a></li>
+  <li><a href="#file-descriptor">File descriptor</a></li>
+</ul>
+
+<h3 id="unique-user-id">Unique User ID</h3>
+
+<p>Design a system to generate unique id for 1 billion user in distributed system
+<br /><br /></p>
+
+<h3 id="mean-and-median">Mean and Median</h3>
+
+<p>You are given say 20 nodes in a distributed system and each node have 1 billion numbers. Find mean and median. You can have some other nodes for co-ordination.</p>
+
+<p>Mean = (sum of all the numbers) / total numbers<br />
+Median = Mid element in sorted sequence</p>
+
+<p>For example<br />
+Input = [2, 3, 4, 1]<br /></p>
+
+<p>Mean = (2+3+4+1) / 4 =2.5<br />
+For median sorted sequence is [1, 2, 3, 4]. Median is 2 or 3.
+<!-- more --></p>
+
+<p><br /><br /></p>
+
+<h3 id="how-ls-works">How ls works?</h3>
+
+<ul>
+  <li>Distributed systems people talk about NFS<br /></li>
+  <li>Typical low-level systems folks get into the copy-on-write implementation of fork<br /></li>
+  <li>Filesystem folks get into finding the blocks that constitute the directory
+<br /><br /></li>
+</ul>
+
+<h3 id="file-descriptor">File descriptor</h3>
+
+<p>How file descriptor is generated?</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Reading List]]></title>
@@ -1364,10 +1413,10 @@ function toggle(d) {
     <id>http://distkeys.com/blog/2013/12/30/array-and-strings</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#array-problems">Array Problems</a>    <ul>
-      <li><a href="#find-repeatingduplicate-numbers">Find repeating/duplicate numbers</a></li>
       <li><a href="#sum-of-2-numbers">Sum of 2 numbers</a></li>
       <li><a href="#sum-of-2-numbers-greater-or-equal-to-given-sum">Sum of 2 numbers greater or equal to given sum</a></li>
       <li><a href="#sum-of-3-numbers">Sum of 3 numbers</a></li>
+      <li><a href="#find-repeatingduplicate-numbers">Find repeating/duplicate numbers</a></li>
       <li><a href="#find-the-number-when-size-of-array-is-unknown">Find the number when size of array is unknown</a></li>
       <li><a href="#merge-two-sorted-array">Merge two sorted array</a></li>
       <li><a href="#merge-2-non-sorted-array-and-remove-duplicates">Merge 2 non sorted array and remove duplicates</a></li>
@@ -1387,15 +1436,6 @@ function toggle(d) {
 </ul>
 
 <h3 id="array-problems">Array Problems</h3>
-
-<h4 id="find-repeatingduplicate-numbers">Find repeating/duplicate numbers</h4>
-<p>Find all the numbers repeating in a array</p>
-
-<p>Input [2,1, 3, 2, 3, 1, 4]</p>
-
-<p>Output  [2,1,3] </p>
-
-<p><br /></p>
 
 <h4 id="sum-of-2-numbers">Sum of 2 numbers</h4>
 
@@ -1579,6 +1619,15 @@ In this approach we not actually using the hash function fundamental idea is to 
 <p>We need to find three numbers in an array whose sum is equal to a given value.</p>
 
 <hr style="border-top: 1.5px dotted black" />
+<p><br /></p>
+
+<h4 id="find-repeatingduplicate-numbers">Find repeating/duplicate numbers</h4>
+<p>Find all the numbers repeating in a array</p>
+
+<p>Input [2,1, 3, 2, 3, 1, 4]</p>
+
+<p>Output  [2,1,3] </p>
+
 <p><br /></p>
 
 <h4 id="find-the-number-when-size-of-array-is-unknown">Find the number when size of array is unknown</h4>

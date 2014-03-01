@@ -4,7 +4,7 @@
   <title><![CDATA[Category: array | Distributed Knowledge]]></title>
   <link href="http://distkeys.com/blog/categories/array/atom.xml" rel="self"/>
   <link href="http://distkeys.com/"/>
-  <updated>2014-02-27T00:00:22-08:00</updated>
+  <updated>2014-02-27T23:05:06-08:00</updated>
   <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -20,10 +20,10 @@
     <id>http://distkeys.com/blog/2013/12/30/array-and-strings</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#array-problems">Array Problems</a>    <ul>
-      <li><a href="#find-repeatingduplicate-numbers">Find repeating/duplicate numbers</a></li>
       <li><a href="#sum-of-2-numbers">Sum of 2 numbers</a></li>
       <li><a href="#sum-of-2-numbers-greater-or-equal-to-given-sum">Sum of 2 numbers greater or equal to given sum</a></li>
       <li><a href="#sum-of-3-numbers">Sum of 3 numbers</a></li>
+      <li><a href="#find-repeatingduplicate-numbers">Find repeating/duplicate numbers</a></li>
       <li><a href="#find-the-number-when-size-of-array-is-unknown">Find the number when size of array is unknown</a></li>
       <li><a href="#merge-two-sorted-array">Merge two sorted array</a></li>
       <li><a href="#merge-2-non-sorted-array-and-remove-duplicates">Merge 2 non sorted array and remove duplicates</a></li>
@@ -43,15 +43,6 @@
 </ul>
 
 <h3 id="array-problems">Array Problems</h3>
-
-<h4 id="find-repeatingduplicate-numbers">Find repeating/duplicate numbers</h4>
-<p>Find all the numbers repeating in a array</p>
-
-<p>Input [2,1, 3, 2, 3, 1, 4]</p>
-
-<p>Output  [2,1,3] </p>
-
-<p><br /></p>
 
 <h4 id="sum-of-2-numbers">Sum of 2 numbers</h4>
 
@@ -231,6 +222,15 @@ In this approach we not actually using the hash function fundamental idea is to 
 <p>We need to find three numbers in an array whose sum is equal to a given value.</p>
 
 <hr style="border-top: 1.5px dotted black" />
+<p><br /></p>
+
+<h4 id="find-repeatingduplicate-numbers">Find repeating/duplicate numbers</h4>
+<p>Find all the numbers repeating in a array</p>
+
+<p>Input [2,1, 3, 2, 3, 1, 4]</p>
+
+<p>Output  [2,1,3] </p>
+
 <p><br /></p>
 
 <h4 id="find-the-number-when-size-of-array-is-unknown">Find the number when size of array is unknown</h4>
