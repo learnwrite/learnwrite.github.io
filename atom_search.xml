@@ -4,7 +4,7 @@
   <title><![CDATA[Distributed Knowledge]]></title>
   <link href="http://distkeys.com/atom.xml" rel="self"/>
   <link href="http://distkeys.com/"/>
-  <updated>2014-03-01T12:26:01-08:00</updated>
+  <updated>2014-03-01T13:00:31-08:00</updated>
   <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -1428,6 +1428,7 @@ function toggle(d) {
       <li><a href="#merge-two-sorted-array">Merge two sorted array</a></li>
       <li><a href="#merge-2-non-sorted-array-and-remove-duplicates">Merge 2 non sorted array and remove duplicates</a></li>
       <li><a href="#sort-array-based-on-count">Sort array based on count</a></li>
+      <li><a href="#find-odd-number-of-occurrence">Find odd number of occurrence</a></li>
     </ul>
   </li>
   <li><a href="#string-problems">String Problems</a>    <ul>
@@ -1880,6 +1881,40 @@ Input array2 [5, 1, 2, 4, 6]</p>
 <span class="line-numbers"><a href="#n35" name="n35">35</a></span>
 <span class="line-numbers"><a href="#n36" name="n36">36</a></span>    <span class="keyword">return</span> <span class="integer">0</span>;
 <span class="line-numbers"><a href="#n37" name="n37">37</a></span>}
+</pre></div>
+</div>
+ </figure></notextile></div>
+
+<hr style="border-top: 1.5px dotted black" />
+<p><br /></p>
+
+<h4 id="find-odd-number-of-occurrence">Find odd number of occurrence</h4>
+
+<p>Given an array of positive integers. All numbers occur even number of times except one number which occurs odd number of times. Find the number in O(n) time &amp; constant space.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Odd occurence  </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="preprocessor">#include</span> <span class="include">&lt;stdio.h&gt;</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span> 
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span class="predefined-type">int</span> getOddOccurrence(<span class="predefined-type">int</span> ar[], <span class="predefined-type">int</span> ar_size)
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>{
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>     <span class="predefined-type">int</span> i;
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>     <span class="predefined-type">int</span> res = <span class="integer">0</span>; 
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>     <span class="keyword">for</span> (i=<span class="integer">0</span>; i &lt; ar_size; i++)     
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>        res = res ^ ar[i];
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>      
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>     <span class="keyword">return</span> res;
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>}
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span> 
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span><span class="comment">/* Diver function to test above function */</span>
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span><span class="predefined-type">int</span> main()
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>{
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>     <span class="predefined-type">int</span> ar[] = {<span class="integer">2</span>, <span class="integer">3</span>, <span class="integer">5</span>, <span class="integer">4</span>, <span class="integer">5</span>, <span class="integer">2</span>, <span class="integer">4</span>, <span class="integer">3</span>, <span class="integer">5</span>, <span class="integer">2</span>, <span class="integer">4</span>, <span class="integer">4</span>, <span class="integer">2</span>};
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>     <span class="predefined-type">int</span> n = <span class="keyword">sizeof</span>(ar)/<span class="keyword">sizeof</span>(ar[<span class="integer">0</span>]);
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>     printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d</span><span class="delimiter">&quot;</span></span>, getOddOccurrence(ar, n));
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>     <span class="keyword">return</span> <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>}
 </pre></div>
 </div>
  </figure></notextile></div>
