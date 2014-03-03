@@ -4,7 +4,7 @@
   <title><![CDATA[Category: algorithm | Distributed Knowledge]]></title>
   <link href="http://distkeys.com/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://distkeys.com/"/>
-  <updated>2014-03-01T13:00:31-08:00</updated>
+  <updated>2014-03-03T01:16:20-08:00</updated>
   <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -32,6 +32,9 @@
       <li><a href="#tree-problems">Tree Problems</a>        <ul>
           <li><a href="#find-bst-is-balanced-or-not">Find BST is balanced or not</a></li>
           <li><a href="#find-binary-tree-is-bst-or-not">Find Binary Tree is BST or not</a></li>
+          <li><a href="#bst---recursive-inorder-traversal">BST - Recursive Inorder Traversal</a></li>
+          <li><a href="#bst---iterative-inorder-traversal">BST - Iterative Inorder Traversal</a></li>
+          <li><a href="#bst---morris-inorder-traversal">BST - Morris Inorder Traversal</a></li>
         </ul>
       </li>
     </ul>
@@ -757,6 +760,122 @@
 </pre></div>
 </div>
  </figure></notextile></div></p>
+
+<hr style="border-top: 1.5px dotted black" />
+<p><br />
+<br /></p>
+
+<h4 id="bst---recursive-inorder-traversal">BST - Recursive Inorder Traversal</h4>
+
+<blockquote>
+  <p>Time complexity O(n) and space complexity is size of stack for function calls</p>
+</blockquote>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Recursive Inorder</span>  <a href='http://ideone.com/Bo2ZpL' target='_blank'>Run Code</a></figcaption> <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span> <span class="comment">// Recursive inorder traverse</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span> <span class="directive">void</span> traverse(nodeBST *root)
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span> {
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>     <span class="keyword">if</span> (root == <span class="predefined-constant">NULL</span>) {
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>         <span class="keyword">return</span>;
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>     } <span class="keyword">else</span> {
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>         traverse(root-&amp;gt;left);
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>         printf(<span class="error">“</span>%d <span class="error">“</span>, root-&amp;gt;data);
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>         traverse(root-&amp;gt;right);
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>     }&lt;/p&gt;
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>&lt;pre&gt;&lt;code&gt; <span class="keyword">return</span>;  } </pre></div>
+</div>
+ </figure></notextile></div>
+</code></pre>
+
+<hr style="border-top: 1.5px dotted black" />
+<p><br />
+<br /></p>
+
+<h4 id="bst---iterative-inorder-traversal">BST - Iterative Inorder Traversal</h4>
+
+<blockquote>
+  <p>Time complexity O(n) and space complexity is size of stack </p>
+</blockquote>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Iterative Inorder</span>  <a href='http://ideone.com/Bo2ZpL' target='_blank'>Run Code </a></figcaption> <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span> <span class="comment">// Iterative</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span> <span class="comment">// 1) Create an empty stack S.</span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span> <span class="comment">// 2) Initialize current node as root</span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span> <span class="comment">// 3) Push the current node to S and set current = current-&amp;gt;left until curt is NULL</span>
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span> <span class="comment">// 4) If current is NULL and stack is not empty then$</span>
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span> <span class="comment">//      a) Pop the top item from stack.</span>
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span> <span class="comment">//      b) Print the popped item, set current = current-&amp;gt;right</span>
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span> <span class="comment">//      c) Go to step 3.</span>
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span> <span class="comment">// 5) If current is NULL and stack is empty then we are done.&lt;/p&gt;</span>
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>&lt;p&gt;<span class="directive">void</span> iterativeInorder(nodeBST *root)
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span> {
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>     createStack();&lt;/p&gt;
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>&lt;pre&gt;&lt;code&gt; <span class="keyword">while</span>(<span class="integer">1</span>) {
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>     <span class="keyword">if</span> (root != <span class="predefined-constant">NULL</span>) {
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>         <span class="comment">// Keep pushing in the stack</span>
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>         push(root);
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>         root = root-&amp;gt;left;
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>     } <span class="keyword">else</span> {
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span>         <span class="keyword">if</span> (isStackEmpty()) {
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span>             <span class="keyword">break</span>;
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span>         }
+<span class="line-numbers"><a href="#n25" name="n25">25</a></span> 
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span>         root = pop();
+<span class="line-numbers"><a href="#n27" name="n27">27</a></span>         printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d </span><span class="delimiter">&quot;</span></span>, root-&amp;gt;data);
+<span class="line-numbers"><a href="#n28" name="n28">28</a></span> 
+<span class="line-numbers"><a href="#n29" name="n29">29</a></span>         root = root-&amp;gt;right;
+<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>     }
+<span class="line-numbers"><a href="#n31" name="n31">31</a></span> }  } </pre></div>
+</div>
+ </figure></notextile></div> &lt;hr style="border-top: 1.5px dotted black"/&gt;&lt;br&gt; &lt;br&gt;
+</code></pre>
+
+<h4 id="bst---morris-inorder-traversal">BST - Morris Inorder Traversal</h4>
+
+<p>Morris Inorder Traversal run without using recursion and without extra stack space.</p>
+
+<blockquote>
+  <p>Morris Inorder runs in O(NlogN) time and O(1) space</p>
+</blockquote>
+
+<p><img src="/assets/morris.png" title="[morris.png]" ></p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Morris Inorder</span>  <a href='http://ideone.com/Bo2ZpL' target='_blank'>Run Code </a></figcaption> <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>  <span class="directive">void</span> MorrisInorder(nodeBST &lt;em&gt;root) {
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>      nodeBST&lt;/em&gt; current,*pre;
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>      current=root;
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>      <span class="keyword">while</span>(current!=<span class="predefined-constant">NULL</span>) {
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>          <span class="keyword">if</span>(current-&amp;gt;left==<span class="predefined-constant">NULL</span>) {
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>              printf(<span class="error">“</span>%d <span class="error">“</span>,current-&amp;gt;data);
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>              current=current-&amp;gt;right;
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>          }
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>          <span class="keyword">else</span> {
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>              pre=current-&amp;gt;left;
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>              <span class="keyword">while</span>(pre-&amp;gt;right != <span class="predefined-constant">NULL</span> &amp;amp;&amp;amp; pre-&amp;gt;right !=current)
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>                  pre=pre-&amp;gt;right;
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>              <span class="keyword">if</span>(pre-&amp;gt;right==<span class="predefined-constant">NULL</span>) {
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>                  printf(<span class="error">“</span>Link %d, %d<span class="error">\</span>n<span class="error">”</span>, pre-&amp;gt;data, current-&amp;gt;data);
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>                  pre-&amp;gt;right=current;
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>                  current=current-&amp;gt;left;
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>              }
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>              <span class="keyword">else</span> {
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>                  pre-&amp;gt;right=<span class="predefined-constant">NULL</span>;
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>                  printf(<span class="error">“</span>%d <span class="error">“</span>,current-&amp;gt;data);
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span>                  current=current-&amp;gt;right;
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span>              }
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span>          }
+<span class="line-numbers"><a href="#n25" name="n25">25</a></span>      }
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span>  }
+</pre></div>
+</div>
+ </figure></notextile></div>
+&lt;hr style="border-top: 1.5px dotted black"/&gt;<br /></p>
 ]]></content>
   </entry>
   

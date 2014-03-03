@@ -4,7 +4,7 @@
   <title><![CDATA[Distributed Knowledge]]></title>
   <link href="http://distkeys.com/atom.xml" rel="self"/>
   <link href="http://distkeys.com/"/>
-  <updated>2014-03-01T13:00:31-08:00</updated>
+  <updated>2014-03-03T01:16:20-08:00</updated>
   <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -1414,23 +1414,24 @@ function toggle(d) {
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#array-problems">Array Problems</a>    <ul>
       <li><a href="#sum-of-2-numbers">Sum of 2 numbers</a></li>
-      <li><a href="#sum-of-2-numbers-greater-or-equal-to-given-sum">Sum of 2 numbers greater or equal to given sum</a></li>
-      <li><a href="#sum-of-3-numbers">Sum of 3 numbers</a></li>
-      <li><a href="#find-repeatingduplicate-numbers">Find repeating/duplicate numbers</a></li>
-      <li><a href="#find-the-number-when-size-of-array-is-unknown">Find the number when size of array is unknown</a></li>
+      <li><a href="#sum-of-2-numbers-greater-or-equal-to-given-sum">Sum of 2 numbers greater or equal to given sum*</a></li>
+      <li><a href="#sum-of-3-numbers">Sum of 3 numbers*</a></li>
+      <li><a href="#find-repeatingduplicate-numbers">Find repeating/duplicate numbers*</a></li>
+      <li><a href="#find-the-number-when-size-of-array-is-unknown">Find the number when size of array is unknown*</a></li>
       <li><a href="#merge-two-sorted-array">Merge two sorted array</a></li>
       <li><a href="#merge-2-non-sorted-array-and-remove-duplicates">Merge 2 non sorted array and remove duplicates</a></li>
       <li><a href="#sort-array-based-on-count">Sort array based on count</a></li>
       <li><a href="#find-odd-number-of-occurrence">Find odd number of occurrence</a></li>
+      <li><a href="#find-2-numbers-with-odd-occurence">Find 2 numbers with odd occurence</a></li>
     </ul>
   </li>
   <li><a href="#string-problems">String Problems</a>    <ul>
       <li><a href="#reverse-a-string-without-extra-space">Reverse a string without extra space</a></li>
-      <li><a href="#duplicates-and-count">Duplicates and Count</a></li>
-      <li><a href="#remove-duplicate-spaces">Remove duplicate spaces</a></li>
-      <li><a href="#remove-spaces">Remove spaces</a></li>
-      <li><a href="#remove-all-consequtive-duplicate-elements">Remove all consequtive duplicate elements</a></li>
-      <li><a href="#rotate-a-string">Rotate a string</a></li>
+      <li><a href="#duplicates-and-count">Duplicates and Count*</a></li>
+      <li><a href="#remove-duplicate-spaces">Remove duplicate spaces*</a></li>
+      <li><a href="#remove-spaces">Remove spaces*</a></li>
+      <li><a href="#remove-all-consequtive-duplicate-elements">Remove all consequtive duplicate elements*</a></li>
+      <li><a href="#rotate-a-string">Rotate a string*</a></li>
       <li><a href="#permutation-of-a-string">Permutation of a string</a></li>
     </ul>
   </li>
@@ -1607,7 +1608,7 @@ In this approach we not actually using the hash function fundamental idea is to 
 <hr style="border-top: 1.5px dotted black" />
 <p><br /></p>
 
-<h4 id="sum-of-2-numbers-greater-or-equal-to-given-sum">Sum of 2 numbers greater or equal to given sum</h4>
+<h4 id="sum-of-2-numbers-greater-or-equal-to-given-sum">Sum of 2 numbers greater or equal to given sum*</h4>
 
 <p>We are given a sorted array A of length n and a value k. We want to find out if there are indices i, j such that A[i] + A[j] &gt;= k. <br /></p>
 
@@ -1616,13 +1617,13 @@ In this approach we not actually using the hash function fundamental idea is to 
 <hr style="border-top: 1.5px dotted black" />
 <p><br /></p>
 
-<h4 id="sum-of-3-numbers">Sum of 3 numbers</h4>
+<h4 id="sum-of-3-numbers">Sum of 3 numbers*</h4>
 <p>We need to find three numbers in an array whose sum is equal to a given value.</p>
 
 <hr style="border-top: 1.5px dotted black" />
 <p><br /></p>
 
-<h4 id="find-repeatingduplicate-numbers">Find repeating/duplicate numbers</h4>
+<h4 id="find-repeatingduplicate-numbers">Find repeating/duplicate numbers*</h4>
 <p>Find all the numbers repeating in a array</p>
 
 <p>Input [2,1, 3, 2, 3, 1, 4]</p>
@@ -1632,7 +1633,7 @@ In this approach we not actually using the hash function fundamental idea is to 
 <hr style="border-top: 1.5px dotted black" />
 <p><br /></p>
 
-<h4 id="find-the-number-when-size-of-array-is-unknown">Find the number when size of array is unknown</h4>
+<h4 id="find-the-number-when-size-of-array-is-unknown">Find the number when size of array is unknown*</h4>
 
 <p>Given an array of integers find the given element is present when size of array is not given</p>
 
@@ -1915,6 +1916,79 @@ Input array2 [5, 1, 2, 4, 6]</p>
 <hr style="border-top: 1.5px dotted black" />
 <p><br /><br /></p>
 
+<h4 id="find-2-numbers-with-odd-occurence">Find 2 numbers with odd occurence</h4>
+
+<p>Given an unsorted array that contains even number of occurrences for all numbers except two numbers. Find the two numbers which have odd occurrences in O(n) time complexity and O(1) extra space.</p>
+
+<p>Input: [12, 23, 34, 12, 12, 23, 12, 45]<br />
+Output: 34 and 45</p>
+
+<p>Input: [4, 4, 100, 5000, 4, 4, 4, 4, 100, 100]<br />
+Output: 100 and 5000</p>
+
+<p>Input: [10, 20]<br />
+Output: 10 and 20</p>
+
+<p><a href="http://www.geeksforgeeks.org/find-the-two-numbers-with-odd-occurences-in-an-unsorted-array/" target="_blank">Solution Explanation</a></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>2 Odd Num  </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="comment">// Program to find the two odd occurring elements</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span class="preprocessor">#include</span><span class="include">&lt;stdio.h&gt;</span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span> 
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span class="comment">/* Prints two numbers that occur odd number of times. The</span>
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span class="comment">   function assumes that the array size is at least 2 and</span>
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span><span class="comment">   there are exactly two numbers occurring odd number of times. */</span>
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span class="directive">void</span> printTwoOdd(<span class="predefined-type">int</span> arr[], <span class="predefined-type">int</span> size)
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>{
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>  <span class="predefined-type">int</span> xor2 = arr[<span class="integer">0</span>]; <span class="comment">/* Will hold XOR of two odd occurring elements */</span>
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>  <span class="predefined-type">int</span> set_bit_no;  <span class="comment">/* Will have only single set bit of xor2 */</span>
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>  <span class="predefined-type">int</span> i;
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>  <span class="predefined-type">int</span> n = size - <span class="integer">2</span>;
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>  <span class="predefined-type">int</span> x = <span class="integer">0</span>, y = <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span> 
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>  <span class="comment">/* Get the xor of all elements in arr[]. The xor will basically</span>
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span><span class="comment">     be xor of two odd occurring elements */</span>
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>  <span class="keyword">for</span>(i = <span class="integer">1</span>; i &lt; size; i++)
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>    xor2 = xor2 ^ arr[i];
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span> 
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>  <span class="comment">/* Get one set bit in the xor2. We get rightmost set bit</span>
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span><span class="comment">     in the following line as it is easy to get */</span>
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span>  set_bit_no = xor2 &amp; ~(xor2-<span class="integer">1</span>);
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span> 
+<span class="line-numbers"><a href="#n25" name="n25">25</a></span>  <span class="comment">/* Now divide elements in two sets: </span>
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span><span class="comment">    1) The elements having the corresponding bit as 1. </span>
+<span class="line-numbers"><a href="#n27" name="n27">27</a></span><span class="comment">    2) The elements having the corresponding bit as 0.  */</span>
+<span class="line-numbers"><a href="#n28" name="n28">28</a></span>  <span class="keyword">for</span>(i = <span class="integer">0</span>; i &lt; size; i++)
+<span class="line-numbers"><a href="#n29" name="n29">29</a></span>  {
+<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>     <span class="comment">/* XOR of first set is finally going to hold one odd </span>
+<span class="line-numbers"><a href="#n31" name="n31">31</a></span><span class="comment">       occurring number x */</span>
+<span class="line-numbers"><a href="#n32" name="n32">32</a></span>    <span class="keyword">if</span>(arr[i] &amp; set_bit_no)
+<span class="line-numbers"><a href="#n33" name="n33">33</a></span>      x = x ^ arr[i];
+<span class="line-numbers"><a href="#n34" name="n34">34</a></span> 
+<span class="line-numbers"><a href="#n35" name="n35">35</a></span>     <span class="comment">/* XOR of second set is finally going to hold the other </span>
+<span class="line-numbers"><a href="#n36" name="n36">36</a></span><span class="comment">       odd occurring number y */</span>
+<span class="line-numbers"><a href="#n37" name="n37">37</a></span>    <span class="keyword">else</span>
+<span class="line-numbers"><a href="#n38" name="n38">38</a></span>      y = y ^ arr[i]; 
+<span class="line-numbers"><a href="#n39" name="n39">39</a></span>  }
+<span class="line-numbers"><strong><a href="#n40" name="n40">40</a></strong></span> 
+<span class="line-numbers"><a href="#n41" name="n41">41</a></span>  printf(<span class="string"><span class="delimiter">&quot;</span><span class="char">\n</span><span class="content"> The two ODD elements are %d &amp; %d </span><span class="delimiter">&quot;</span></span>, x, y);
+<span class="line-numbers"><a href="#n42" name="n42">42</a></span>}
+<span class="line-numbers"><a href="#n43" name="n43">43</a></span>
+<span class="line-numbers"><a href="#n44" name="n44">44</a></span><span class="comment">/* Driver program to test above function */</span>
+<span class="line-numbers"><a href="#n45" name="n45">45</a></span><span class="predefined-type">int</span> main()
+<span class="line-numbers"><a href="#n46" name="n46">46</a></span>{
+<span class="line-numbers"><a href="#n47" name="n47">47</a></span>  <span class="predefined-type">int</span> arr[] = {<span class="integer">4</span>, <span class="integer">2</span>, <span class="integer">4</span>, <span class="integer">5</span>, <span class="integer">2</span>, <span class="integer">3</span>, <span class="integer">3</span>, <span class="integer">1</span>};
+<span class="line-numbers"><a href="#n48" name="n48">48</a></span>  <span class="predefined-type">int</span> arr_size = <span class="keyword">sizeof</span>(arr)/<span class="keyword">sizeof</span>(arr[<span class="integer">0</span>]);
+<span class="line-numbers"><a href="#n49" name="n49">49</a></span>  printTwoOdd(arr, arr_size);
+<span class="line-numbers"><strong><a href="#n50" name="n50">50</a></strong></span>
+<span class="line-numbers"><a href="#n51" name="n51">51</a></span>  <span class="keyword">return</span> <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n52" name="n52">52</a></span>}
+</pre></div>
+</div>
+ </figure></notextile></div>
+
 <h3 id="string-problems">String Problems</h3>
 
 <h4 id="reverse-a-string-without-extra-space">Reverse a string without extra space</h4>
@@ -1952,7 +2026,7 @@ Input array2 [5, 1, 2, 4, 6]</p>
 <hr style="border-top: 1.5px dotted black" />
 <p><br /></p>
 
-<h4 id="duplicates-and-count">Duplicates and Count</h4>
+<h4 id="duplicates-and-count">Duplicates and Count*</h4>
 
 <p>Print all duplicate characters and their count</p>
 
@@ -1965,7 +2039,7 @@ a1B1F1o2r1</p>
 <hr style="border-top: 1.5px dotted black" />
 <p><br /></p>
 
-<h4 id="remove-duplicate-spaces">Remove duplicate spaces</h4>
+<h4 id="remove-duplicate-spaces">Remove duplicate spaces*</h4>
 <p>Remove all duplicate spaces from the string</p>
 
 <p>Input string<br />
@@ -1978,7 +2052,7 @@ Hi^There!!!^Wassup</p>
 <hr style="border-top: 1.5px dotted black" />
 <p><br /></p>
 
-<h4 id="remove-spaces">Remove spaces</h4>
+<h4 id="remove-spaces">Remove spaces*</h4>
 <p>Remove all the spaces from a string</p>
 
 <p>Input string<br />
@@ -1990,7 +2064,7 @@ Hithere!!!Wassup</p>
 <hr style="border-top: 1.5px dotted black" />
 <p><br /></p>
 
-<h4 id="remove-all-consequtive-duplicate-elements">Remove all consequtive duplicate elements</h4>
+<h4 id="remove-all-consequtive-duplicate-elements">Remove all consequtive duplicate elements*</h4>
 <p>Remove all consequtive duplicate elements from the string</p>
 
 <p>Input string<br />
@@ -2002,7 +2076,7 @@ abcd</p>
 <hr style="border-top: 1.5px dotted black" />
 <p><br /></p>
 
-<h4 id="rotate-a-string">Rotate a string</h4>
+<h4 id="rotate-a-string">Rotate a string*</h4>
 <p>Rotate a string for a ‘n’ times</p>
 
 <p>Input string<br />
@@ -2664,6 +2738,9 @@ The possible ascending path are</p>
   <li><a href="#tree-problems">Tree Problems</a>    <ul>
       <li><a href="#find-bst-is-balanced-or-not">Find BST is balanced or not</a></li>
       <li><a href="#find-binary-tree-is-bst-or-not">Find Binary Tree is BST or not</a></li>
+      <li><a href="#bst---recursive-inorder-traversal">BST - Recursive Inorder Traversal</a></li>
+      <li><a href="#bst---iterative-inorder-traversal">BST - Iterative Inorder Traversal</a></li>
+      <li><a href="#bst---morris-inorder-traversal">BST - Morris Inorder Traversal</a></li>
     </ul>
   </li>
 </ul>
@@ -3390,6 +3467,130 @@ The possible ascending path are</p>
 </pre></div>
 </div>
  </figure></notextile></div>
+
+<hr style="border-top: 1.5px dotted black" />
+<p><br />
+<br /></p>
+
+<h4 id="bst---recursive-inorder-traversal">BST - Recursive Inorder Traversal</h4>
+
+<blockquote>
+  <p>Time complexity O(n) and space complexity is size of stack for function calls</p>
+</blockquote>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Recursive Inorder</span>  <a href="http://ideone.com/Bo2ZpL" target="_blank">Run Code</a></figcaption> <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span> <span class="comment">// Recursive inorder traverse</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span> <span class="directive">void</span> traverse(nodeBST *root)
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span> {
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>     <span class="keyword">if</span> (root == <span class="predefined-constant">NULL</span>) {
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>         <span class="keyword">return</span>;
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>     } <span class="keyword">else</span> {
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>         traverse(root-&gt;left);
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>         printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d </span><span class="delimiter">&quot;</span></span>, root-&gt;data);
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>         traverse(root-&gt;right);
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>     }
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span> 
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>     <span class="keyword">return</span>;
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span> }
+</pre></div>
+</div>
+ </figure></notextile></div>
+
+<hr style="border-top: 1.5px dotted black" />
+<p><br />
+<br /></p>
+
+<h4 id="bst---iterative-inorder-traversal">BST - Iterative Inorder Traversal</h4>
+
+<blockquote>
+  <p>Time complexity O(n) and space complexity is size of stack </p>
+</blockquote>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Iterative Inorder</span>  <a href="http://ideone.com/Bo2ZpL" target="_blank">Run Code </a></figcaption> <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span> <span class="comment">// Iterative</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span> <span class="comment">// 1) Create an empty stack S.</span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span> <span class="comment">// 2) Initialize current node as root</span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span> <span class="comment">// 3) Push the current node to S and set current = current-&gt;left until curt is NULL</span>
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span> <span class="comment">// 4) If current is NULL and stack is not empty then$</span>
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span> <span class="comment">//      a) Pop the top item from stack.</span>
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span> <span class="comment">//      b) Print the popped item, set current = current-&gt;right</span>
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span> <span class="comment">//      c) Go to step 3.</span>
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span> <span class="comment">// 5) If current is NULL and stack is empty then we are done.</span>
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span> 
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span> <span class="directive">void</span> iterativeInorder(nodeBST *root)
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span> {
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>     createStack();
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span> 
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>     <span class="keyword">while</span>(<span class="integer">1</span>) {
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>         <span class="keyword">if</span> (root != <span class="predefined-constant">NULL</span>) {
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>             <span class="comment">// Keep pushing in the stack</span>
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>             push(root);
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>             root = root-&gt;left;
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>         } <span class="keyword">else</span> {
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span>             <span class="keyword">if</span> (isStackEmpty()) {
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span>                 <span class="keyword">break</span>;
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span>             }
+<span class="line-numbers"><a href="#n25" name="n25">25</a></span> 
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span>             root = pop();
+<span class="line-numbers"><a href="#n27" name="n27">27</a></span>             printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d </span><span class="delimiter">&quot;</span></span>, root-&gt;data);
+<span class="line-numbers"><a href="#n28" name="n28">28</a></span> 
+<span class="line-numbers"><a href="#n29" name="n29">29</a></span>             root = root-&gt;right;
+<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>         }
+<span class="line-numbers"><a href="#n31" name="n31">31</a></span>     }
+<span class="line-numbers"><a href="#n32" name="n32">32</a></span> }
+</pre></div>
+</div>
+ </figure></notextile></div>
+
+<hr style="border-top: 1.5px dotted black" />
+<p><br />
+<br /></p>
+
+<h4 id="bst---morris-inorder-traversal">BST - Morris Inorder Traversal</h4>
+
+<p>Morris Inorder Traversal run without using recursion and without extra stack space.</p>
+
+<blockquote>
+  <p>Morris Inorder runs in O(NlogN) time and O(1) space</p>
+</blockquote>
+
+<p><img src="http://distkeys.com/assets/morris.png" title="[morris.png]" /></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Morris Inorder</span>  <a href="http://ideone.com/Bo2ZpL" target="_blank">Run Code </a></figcaption> <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>  <span class="directive">void</span> MorrisInorder(nodeBST *root) {
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>      nodeBST* current,*pre;
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>      current=root;
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>      <span class="keyword">while</span>(current!=<span class="predefined-constant">NULL</span>) {
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>          <span class="keyword">if</span>(current-&gt;left==<span class="predefined-constant">NULL</span>) {
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>              printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d </span><span class="delimiter">&quot;</span></span>,current-&gt;data);
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>              current=current-&gt;right;
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>          }
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>          <span class="keyword">else</span> {
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>              pre=current-&gt;left;
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>              <span class="keyword">while</span>(pre-&gt;right != <span class="predefined-constant">NULL</span> &amp;&amp; pre-&gt;right !=current)
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>                  pre=pre-&gt;right;
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>              <span class="keyword">if</span>(pre-&gt;right==<span class="predefined-constant">NULL</span>) {
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>                  printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Link %d, %d</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>, pre-&gt;data, current-&gt;data);
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>                  pre-&gt;right=current;
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>                  current=current-&gt;left;
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>              }
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>              <span class="keyword">else</span> {
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>                  pre-&gt;right=<span class="predefined-constant">NULL</span>;
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>                  printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d </span><span class="delimiter">&quot;</span></span>,current-&gt;data);
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span>                  current=current-&gt;right;
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span>              }
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span>          }
+<span class="line-numbers"><a href="#n25" name="n25">25</a></span>      }
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span>  }
+</pre></div>
+</div>
+ </figure></notextile></div>
+
+<hr style="border-top: 1.5px dotted black" />
+<p><br /></p>
 ]]></content>
   </entry>
   
