@@ -4,7 +4,7 @@
   <title><![CDATA[Distributed Knowledge]]></title>
   <link href="http://distkeys.com/atom.xml" rel="self"/>
   <link href="http://distkeys.com/"/>
-  <updated>2014-03-03T01:16:20-08:00</updated>
+  <updated>2014-03-04T00:07:04-08:00</updated>
   <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -59,6 +59,146 @@ For median sorted sequence is [1, 2, 3, 4]. Median is 2 or 3.
 
 <p>How file descriptor is generated?</p>
 
+<p>Before I start talking about <em>File Descriptor</em> lets first understand the Library functions and System calls.</p>
+
+<blockquote>
+  <p>System calls are functions that transfer control from the user process to the
+operating system kernel.</p>
+</blockquote>
+
+<p>Functions such as <em>read()</em>, <em>write()</em> etc are system calls.</p>
+
+<blockquote>
+  <p>Library functions typically provide a richer set of features. Library functions are implemented on top of system calls.</p>
+</blockquote>
+
+<p>The first step is the <em>open()</em> system call which either open an existing file or create a new file. 
+Multiple parameters can be provided for the requirement. For details of these parameters visit <a href="http://unixhelp.ed.ac.uk/CGI/man-cgi?open+2" target="_blank">here.</a></p>
+
+<p>In C program, we use <em>fopen()</em> rather than <em>open()</em> and this is the difference between Library function and System Call. Library function <em>fopen()</em> will internally call <em>open()</em> and configure parameter based on input provided to <em>fopen()</em></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>fopen() </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre>
+<span class="preprocessor">#include</span> <span class="include">&lt;stdio.h&gt;</span>
+
+<span class="predefined-type">int</span> main()
+{
+   FILE *fp;
+
+    <span class="comment">//Open file test.txt in read mode</span>
+   fp = fopen(<span class="string"><span class="delimiter">&quot;</span><span class="content">/tmp/test.txt</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">r</span><span class="delimiter">&quot;</span></span>);
+   fclose(fp);
+
+   <span class="keyword">return</span> <span class="integer">0</span>;
+}
+</pre></div>
+</div>
+ </figure></notextile></div>
+
+<p>Executing this code under <em>dtruss</em></p>
+
+<blockquote><p>$ sudo dtruss ./file 2&gt;&amp;1 | grep open<br />open_nocancel(&#8220;/tmp/test.txt\0&#8221;, 0x0, 0x1B6)		 = -1 Err#2<br />open(&#8220;/dev/dtracehelper\0&#8221;, 0x2, 0x7FFF5CE62180)		 = 3 0<br />open(&#8220;.\0&#8221;, 0x0, 0x1)		 = 3 0<br />open(&#8220;/usr/lib/dtrace/libdtrace_dyld.dylib\0&#8221;, 0x0, 0x0)		 = 3 0</p></blockquote>
+
+<p>Lets deep dive now into the File descriptor. In above C code we created a FILE* which is <em>file pointer or *file descriptor</em> at Library function level. In reality library function <em>fopen()</em> will call system call <em>open()</em> which will get the <em>file descriptor</em> information from filesystem. </p>
+
+<p><em>fopen()</em> library call want to embed the file descriptor information with some additional information. For this purpose a struct is created called FILE and in this structure file descriptor information returned by <em>open()</em> system call is stored with other information.</p>
+
+<blockquote>
+  <p>FILE structure fields may vary depending on OS</p>
+</blockquote>
+
+<p>In MAC OS its as follows</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>FILE - stdio.h </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre>
+ <span class="comment">/*
+  * stdio state variables.
+  *
+  * The following always hold:
+  *
+  *        if (_flags&amp;(__SLBF|__SWR)) == (__SLBF|__SWR),
+  *                _lbfsize is -_bf._size, else _lbfsize is 0
+  *        if _flags&amp;__SRD, _w is 0
+  *        if _flags&amp;__SWR, _r is 0
+  *
+  * This ensures that the getc and putc macros (or inline functions) never
+  * try to write or read from a file that is in `read' or `write' mode.
+  * (Moreover, they can, and do, automatically switch from read mode to
+  * write mode, and back, on &quot;r+&quot; and &quot;w+&quot; files.)
+  *
+  * _lbfsize is used only to make the inline line-buffered output stream
+  * code as compact as possible.
+  *
+  * _ub, _up, and _ur are used when ungetc() pushes back more characters
+  * than fit in the current _bf, or when ungetc() pushes back a character
+  * that does not match the previous one in _bf.  When this happens,
+  * _ub._base becomes non-nil (i.e., a stream has ungetc() data iff
+  * _ub._base!=NULL) and _up and _ur save the current values of _p and _r.
+  *
+  * NB: see WARNING above before changing the layout of this structure!
+  */</span>
+
+ <span class="keyword">typedef</span> <span class="keyword">struct</span> __sFILE {
+         <span class="predefined-type">unsigned</span> <span class="predefined-type">char</span> *_p;        <span class="comment">/* current position in (some) buffer */</span>
+         <span class="predefined-type">int</span>     _r;               <span class="comment">/* read space left for getc() */</span>
+         <span class="predefined-type">int</span>     _w;               <span class="comment">/* write space left for putc() */</span>
+         <span class="predefined-type">short</span>   _flags;           <span class="comment">/* flags, below; this FILE is free if 0 */</span>
+         <span class="predefined-type">short</span>   _file;            <span class="comment">/* fileno, if Unix descriptor, else -1 */</span>
+         <span class="keyword">struct</span>  __sbuf _bf;       <span class="comment">/* the buffer (at least 1 byte, if !NULL) */</span>
+         <span class="predefined-type">int</span>     _lbfsize;         <span class="comment">/* 0 or -_bf._size, for inline putc */</span>
+ 
+         <span class="comment">/* operations */</span>
+         <span class="directive">void</span>    *_cookie;        <span class="comment">/* cookie passed to io functions */</span>
+         <span class="predefined-type">int</span>     (*_close)(<span class="directive">void</span> *);
+         <span class="predefined-type">int</span>     (*_read) (<span class="directive">void</span> *, <span class="predefined-type">char</span> *, <span class="predefined-type">int</span>);
+         fpos_t  (*_seek) (<span class="directive">void</span> *, fpos_t, <span class="predefined-type">int</span>);
+         <span class="predefined-type">int</span>     (*_write)(<span class="directive">void</span> *, <span class="directive">const</span> <span class="predefined-type">char</span> *, <span class="predefined-type">int</span>);
+ 
+         <span class="comment">/* separate buffer for long sequences of ungetc() */</span>
+         <span class="keyword">struct</span>  __sbuf _ub;     <span class="comment">/* ungetc buffer */</span>
+         <span class="keyword">struct</span> __sFILEX *_extra; <span class="comment">/* additions to FILE to not break ABI */</span>
+         <span class="predefined-type">int</span>     _ur;            <span class="comment">/* saved _r when _r is counting ungetc data */</span>
+ 
+         <span class="comment">/* tricks to meet minimum requirements even when malloc() fails */</span>
+         <span class="predefined-type">unsigned</span> <span class="predefined-type">char</span> _ubuf[<span class="integer">3</span>]; <span class="comment">/* guarantee an ungetc() buffer */</span>
+         <span class="predefined-type">unsigned</span> <span class="predefined-type">char</span> _nbuf[<span class="integer">1</span>]; <span class="comment">/* guarantee a getc() buffer */</span>
+ 
+         <span class="comment">/* separate buffer for fgetln() when line crosses buffer boundary */</span>
+         <span class="keyword">struct</span>  __sbuf _lb;     <span class="comment">/* buffer for fgetln() */</span>
+ 
+         <span class="comment">/* Unix stdio files get aligned to block boundaries on fseek() */</span>
+         <span class="predefined-type">int</span>     _blksize;        <span class="comment">/* stat.st_blksize (may be != _bf._size) */</span>
+         fpos_t  _offset;        <span class="comment">/* current lseek offset (see WARNING) */</span>
+ } FILE;
+</pre></div>
+</div>
+ </figure></notextile></div>
+
+<p>In above snippet</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>FILE - stdio.h </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre>
+  &lt;code&gt;<span class="comment">// File descriptor from open()&lt;/code&gt;</span>
+  <span class="predefined-type">short</span>   _file;            <span class="comment">/* fileno, if Unix descriptor, else -1 */</span>
+  
+  <span class="comment">// The buffer through which the data will pass to system calls.</span>
+  <span class="keyword">struct</span>  __sbuf _bf;       <span class="comment">/* the buffer (at least 1 byte, if !NULL) */</span>
+  <span class="predefined-type">int</span>     _lbfsize;         <span class="comment">/* 0 or -_bf._size, for inline putc */</span>
+
+  <span class="predefined-type">unsigned</span> <span class="predefined-type">char</span> _ubuf[<span class="integer">3</span>]; <span class="comment">/* guarantee an ungetc() buffer */</span>
+  <span class="predefined-type">unsigned</span> <span class="predefined-type">char</span> _nbuf[<span class="integer">1</span>]; <span class="comment">/* guarantee a getc() buffer */</span>
+</pre></div>
+</div>
+ </figure></notextile></div>
+
+<p><img src="http://distkeys.com/assets/fopen.png" title="[fopen.png]" /></p>
+
+<p>To be continued…</p>
+
+<p><br /><br /></p>
 ]]></content>
   </entry>
   
