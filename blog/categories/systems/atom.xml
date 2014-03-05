@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Systems | Distributed Knowledge]]></title>
   <link href="http://distkeys.com/blog/categories/systems/atom.xml" rel="self"/>
   <link href="http://distkeys.com/"/>
-  <updated>2014-03-03T01:16:20-08:00</updated>
+  <updated>2014-03-04T00:07:42-08:00</updated>
   <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -233,7 +233,10 @@ Yale) </li>
 
 <p>Lets consider a very basic operating system with very least complexity. This operating system can run only <code>one process</code> at a time. Since, only one process is working at a time, it may happen that all the resources occupied by process will not be used at the same time. 
 <!-- more -->
-Surround your pullquote like this {" text to be quoted "}</p>
+{% pullquote %}
+To maximize the resource utilization, we need to have entities running at the same time. For multiple entities, it is logical that either we need to have multiple process running at the same time or light weight multiple entities running inside process as a part of process.
+{“Process = Code + Allocated Resources + Book keeping information”}
+{% endpullquote %}</p>
 
 <p>Lets explore the second option, now consider process is like a box and it has resources inside the box. We create multiple <code class="myyellow">child of process which is called thread.</code></p>
 
@@ -300,89 +303,69 @@ More formally there are three types of solution categories</p>
 <h3 id="semaphores">Semaphores</h3>
 <p>It is a shared integer variable with <code>non-negative</code> values that have <code>initialization, wait and signal</code> as a indivisible operation.</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Semaphore Class </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="keyword">class</span> <span class="class">Semaphore</span> {
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>    <span class="directive">public</span>:
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    <span class="comment">//Constructor</span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    Semaphore(<span class="predefined-type">char</span> *debugName, <span class="predefined-type">int</span> initialValue);&lt;/p&gt;
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>&lt;pre&gt;&lt;code&gt;<span class="comment">//Destructor</span>
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>~Semaphore();
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span><span class="directive">private</span>:
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span><span class="predefined-type">int</span> value;
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>List *waitQueue;
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span><span class="predefined-type">char</span> *name; }; </pre></div>
-</div>
- </figure></notextile></div>
+<p>{% coderay lang:cplusplus linenos:true Semaphore Class %}
+class Semaphore {
+    public:
+	//Constructor
+	Semaphore(char *debugName, int initialValue);</p>
+
+<pre><code>//Destructor
+~Semaphore();
+
+private:
+int value;
+List *waitQueue;
+char *name; }; {% endcoderay %}
 </code></pre>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Semaphore Constructor </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>Semaphore(<span class="predefined-type">char</span> * debugName, <span class="predefined-type">int</span> initialValue) {
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span>    name      = debugName;
-<span class="line-numbers"><a href="#n4" name="n4">4</a></span>    value     = initialValue;
-<span class="line-numbers"><a href="#n5" name="n5">5</a></span>    waitQueue = <span class="keyword">new</span> List;
-<span class="line-numbers"><a href="#n6" name="n6">6</a></span>}
-</pre></div>
-</div>
- </figure></notextile></div></p>
+<p>{% coderay lang:cplusplus linenos:true Semaphore Constructor %}
+Semaphore(char * debugName, int initialValue) {
+    name      = debugName;
+    value     = initialValue;
+    waitQueue = new List;
+}
+{% endcoderay %}</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Semaphore Destructor </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>~Semaphore() {
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span>    <span class="keyword">delete</span> waitQueue;
-<span class="line-numbers"><a href="#n4" name="n4">4</a></span>}
-</pre></div>
-</div>
- </figure></notextile></div></p>
+<p>{% coderay lang:cplusplus linenos:true Semaphore Destructor %}
+~Semaphore() {
+    delete waitQueue;
+}
+{% endcoderay %}</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Semaphore Wait </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="comment">//P() - Semaphore Wait</span>
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>Semaphore::P() {
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    <span class="comment">//Disable interrupts</span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    IntStatus oldLevel = interrupt-&amp;gt;SetLevel(IntOff);&lt;/p&gt;
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>&lt;pre&gt;&lt;code&gt;<span class="comment">//Semaphore not available</span>
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span class="keyword">while</span> (value == <span class="integer">0</span>) {
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>waitQueue-&amp;gt;Append((<span class="directive">void</span> *)currentThread);
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>currentThread-&amp;gt;Sleep();
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>}
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span><span class="comment">//Semaphore now availble</span>
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span>value--;
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span>(<span class="directive">void</span>)interrupt-&amp;gt;SetLevel(oldLevel); } </pre></div>
-</div>
- </figure></notextile></div>
+<p>{% coderay lang:cplusplus linenos:true Semaphore Wait %}
+//P() - Semaphore Wait
+Semaphore::P() {
+    //Disable interrupts
+    IntStatus oldLevel = interrupt-&gt;SetLevel(IntOff);</p>
+
+<pre><code>//Semaphore not available
+while (value == 0) {
+waitQueue-&gt;Append((void *)currentThread);
+currentThread-&gt;Sleep();
+}
+
+//Semaphore now availble
+value--;
+(void)interrupt-&gt;SetLevel(oldLevel); } {% endcoderay %}
 </code></pre>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Semaphore Signal </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="comment">//Semaphore Signal</span>
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>Semaphore::V() {
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    Thread *thread;  &lt;/p&gt;
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>&lt;pre&gt;&lt;code&gt;IntStatus oldLevel = interrupt-&amp;gt;SetLevel(IntOff);
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span class="comment">//Remove first thread from wait queue</span>
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>thread-&amp;gt;(Thread *)waitQueue-&amp;gt;Remove();
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span><span class="keyword">if</span> (thread != <span class="predefined-constant">NULL</span>) {
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>scheduler-&amp;gt;ReadyToRun(thread);  
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span>}
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span>
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span>value++;
-<span class="line-numbers"><a href="#n16" name="n16">16</a></span>
-<span class="line-numbers"><a href="#n17" name="n17">17</a></span>(<span class="directive">void</span>)interrupt-&amp;gt;SetLevel(oldLevel); } </pre></div>
-</div>
- </figure></notextile></div>
+<p>{% coderay lang:cplusplus linenos:true Semaphore Signal %}
+//Semaphore Signal
+Semaphore::V() {
+    Thread *thread;  </p>
+
+<pre><code>IntStatus oldLevel = interrupt-&gt;SetLevel(IntOff);
+
+//Remove first thread from wait queue
+thread-&gt;(Thread *)waitQueue-&gt;Remove();
+
+if (thread != NULL) {
+scheduler-&gt;ReadyToRun(thread);  
+}
+
+value++;
+
+(void)interrupt-&gt;SetLevel(oldLevel); } {% endcoderay %}
 </code></pre>
 
 <h3 id="locks">Locks</h3>
@@ -392,121 +375,97 @@ More formally there are three types of solution categories</p>
 
 <p>Lock Class</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Lock Class </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="keyword">class</span> <span class="class">Lock</span> {
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>    <span class="directive">public</span>:
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    Lock (<span class="predefined-type">char</span> *debugName);
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    ~Lock();&lt;/p&gt;
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>&lt;pre&gt;&lt;code&gt;<span class="predefined-type">char</span>* getName() { <span class="keyword">return</span> name; }
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span><span class="directive">void</span> acquire();
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span><span class="directive">void</span> release();
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span><span class="predefined-type">bool</span> isHeldByCurrentThread;
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span><span class="directive">private</span>:
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span><span class="predefined-type">char</span>*   name;
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span>List*   lockWaitQueue;
-<span class="line-numbers"><a href="#n16" name="n16">16</a></span><span class="predefined-type">bool</span>    lockFree;
-<span class="line-numbers"><a href="#n17" name="n17">17</a></span>Thread* currentLockThread; }; </pre></div>
-</div>
- </figure></notextile></div>
+<p>{% coderay lang:cplusplus linenos:true Lock Class %}
+class Lock {
+    public:
+	Lock (char *debugName);
+	~Lock();</p>
+
+<pre><code>char* getName() { return name; }
+
+void acquire();
+void release();
+bool isHeldByCurrentThread;
+
+private:
+char*   name;
+List*   lockWaitQueue;
+bool    lockFree;
+Thread* currentLockThread; }; {% endcoderay %}
 </code></pre>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Lock Constructor </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span><span class="comment">//Lock Constructor</span>
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span>Lock::Lock(<span class="predefined-type">char</span> * debugName) {
-<span class="line-numbers"><a href="#n4" name="n4">4</a></span>    name              = debugName;
-<span class="line-numbers"><a href="#n5" name="n5">5</a></span>    currentLockThread = <span class="predefined-constant">NULL</span>;
-<span class="line-numbers"><a href="#n6" name="n6">6</a></span>    lockFree          = TRUE;
-<span class="line-numbers"><a href="#n7" name="n7">7</a></span>    lockWaitQueue     = <span class="keyword">new</span> List;
-<span class="line-numbers"><a href="#n8" name="n8">8</a></span>}
-</pre></div>
-</div>
- </figure></notextile></div></p>
+<p>{% coderay lang:cplusplus linenos:true Lock Constructor %}
+//Lock Constructor
+Lock::Lock(char * debugName) {
+    name              = debugName;
+    currentLockThread = NULL;
+    lockFree          = TRUE;
+    lockWaitQueue     = new List;
+}
+{% endcoderay %}</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Lock Destructor </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span><span class="comment">//Lock Destructor</span>
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span>~Lock() {
-<span class="line-numbers"><a href="#n4" name="n4">4</a></span>    <span class="keyword">delete</span> lockWaitQueue;&lt;br /&gt;
-<span class="line-numbers"><a href="#n5" name="n5">5</a></span>}
-</pre></div>
-</div>
- </figure></notextile></div></p>
+<p>{% coderay lang:cplusplus linenos:true Lock Destructor %}
+//Lock Destructor
+~Lock() {
+    delete lockWaitQueue;<br />
+}
+{% endcoderay %}</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Lock Acquire </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>Lock::acquire() {
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>    <span class="comment">//Disable interrupts</span>
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    IntStatus oldLevel = interrupt-&amp;gt;SetLevel(IntOff);&lt;/p&gt;
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>&lt;pre&gt;&lt;code&gt;<span class="comment">//Check if current thread is an owner</span>
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span><span class="keyword">if</span> (currentThread == currentLockThread) {
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span class="comment">//Already owner  </span>
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>(<span class="directive">void</span>)interrupt-&amp;gt;SetLevel(oldLevel);
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span><span class="keyword">return</span>;
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>}
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span><span class="keyword">if</span>(lockFree == TRUE) {
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span>lockFree = FALSE;
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span>currentLockThread = currentThread;      
-<span class="line-numbers"><a href="#n16" name="n16">16</a></span>} <span class="keyword">else</span> {
-<span class="line-numbers"><a href="#n17" name="n17">17</a></span>lockWaitQueue-&amp;gt;Append((<span class="directive">void</span>*) currentThread);
-<span class="line-numbers"><a href="#n18" name="n18">18</a></span>currentThread-&amp;gt;Sleep();
-<span class="line-numbers"><a href="#n19" name="n19">19</a></span>}
-<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>
-<span class="line-numbers"><a href="#n21" name="n21">21</a></span>(<span class="directive">void</span>)interrupt-&amp;gt;SetLevel(oldLevel); } </pre></div>
-</div>
- </figure></notextile></div>
+<p>{% coderay lang:cplusplus linenos:true Lock Acquire %}
+Lock::acquire() {
+    //Disable interrupts
+    IntStatus oldLevel = interrupt-&gt;SetLevel(IntOff);</p>
+
+<pre><code>//Check if current thread is an owner
+if (currentThread == currentLockThread) {
+//Already owner  
+(void)interrupt-&gt;SetLevel(oldLevel);
+return;
+}
+
+if(lockFree == TRUE) {
+lockFree = FALSE;
+currentLockThread = currentThread;      
+} else {
+lockWaitQueue-&gt;Append((void*) currentThread);
+currentThread-&gt;Sleep();
+}
+
+(void)interrupt-&gt;SetLevel(oldLevel); } {% endcoderay %}
 </code></pre>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Lock Release </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>Lock::release() {
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>    Thread* waitingThread;
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    IntStatus oldLevel = interrupt-&amp;gt;SetLevel(IntOff);&lt;/p&gt;
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>&lt;pre&gt;&lt;code&gt;<span class="keyword">if</span> (!isHeldByCurrentThread()) {
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span><span class="comment">//Thread is not valid owner of lock its</span>
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span class="comment">//trying to release</span>
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>DEBUG(<span class="string"><span class="delimiter">&quot;</span><span class="content">Not a lock owner</span><span class="delimiter">&quot;</span></span>);
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>(<span class="directive">void</span>)interrupt-&amp;gt;SetLevel(oldLevel);
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span><span class="keyword">return</span>;      
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span>}
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span>
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span>waitingThread = (Thread*)lockWaitQueue-&amp;gt;Remove();
-<span class="line-numbers"><a href="#n16" name="n16">16</a></span>
-<span class="line-numbers"><a href="#n17" name="n17">17</a></span><span class="keyword">if</span> (waitingThread != <span class="predefined-constant">NULL</span>) {
-<span class="line-numbers"><a href="#n18" name="n18">18</a></span>scheduler-&amp;gt;ReadyToRun(waitingThread);
-<span class="line-numbers"><a href="#n19" name="n19">19</a></span>currentLockThread = waitingThread;      
-<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>} <span class="keyword">else</span> {
-<span class="line-numbers"><a href="#n21" name="n21">21</a></span>lockFree = TRUE;
-<span class="line-numbers"><a href="#n22" name="n22">22</a></span>currentLockThread = <span class="predefined-constant">NULL</span>;
-<span class="line-numbers"><a href="#n23" name="n23">23</a></span>}
-<span class="line-numbers"><a href="#n24" name="n24">24</a></span>
-<span class="line-numbers"><a href="#n25" name="n25">25</a></span>(<span class="directive">void</span>)interrupt-&amp;gt;SetLevel(oldLevel); } </pre></div>
-</div>
- </figure></notextile></div>
+<p>{% coderay lang:cplusplus linenos:true Lock Release %}
+Lock::release() {
+    Thread* waitingThread;
+    IntStatus oldLevel = interrupt-&gt;SetLevel(IntOff);</p>
+
+<pre><code>if (!isHeldByCurrentThread()) {
+//Thread is not valid owner of lock its
+//trying to release
+DEBUG("Not a lock owner");
+
+(void)interrupt-&gt;SetLevel(oldLevel);
+return;      
+}
+
+waitingThread = (Thread*)lockWaitQueue-&gt;Remove();
+
+if (waitingThread != NULL) {
+scheduler-&gt;ReadyToRun(waitingThread);
+currentLockThread = waitingThread;      
+} else {
+lockFree = TRUE;
+currentLockThread = NULL;
+}
+
+(void)interrupt-&gt;SetLevel(oldLevel); } {% endcoderay %}
 </code></pre>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Lock Owner </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span><span class="predefined-type">bool</span> Lock::isHeldByCurrentThread() {
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span>    <span class="keyword">return</span> ((currentThread != currentLockThread) ?  FALSE : TRUE);
-<span class="line-numbers"><a href="#n4" name="n4">4</a></span>}
-</pre></div>
-</div>
- </figure></notextile></div></p>
+<p>{% coderay lang:cplusplus linenos:true  Lock Owner %}
+bool Lock::isHeldByCurrentThread() {
+    return ((currentThread != currentLockThread) ?  FALSE : TRUE);
+}
+{% endcoderay %}</p>
 
 <h3 id="concurrent-programming-construct">Concurrent Programming Construct</h3>
 <p>Locks can only solve <code>mutual exclusion</code> problem, they can not solve <code>sequencing problem</code>. We need another mechanism <code>Monitors</code></p>
@@ -524,109 +483,89 @@ More formally there are three types of solution categories</p>
 <h3 id="condition-variables">Condition Variables</h3>
 <p>Each condition variable is only associated with one lock.</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Condition Class </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="keyword">class</span> <span class="class">Condition</span> {
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>    <span class="directive">public</span>:
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    Condition(<span class="predefined-type">char</span> *debugName);
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    ~Conditon();&lt;/p&gt;
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>&lt;pre&gt;&lt;code&gt;<span class="predefined-type">char</span>* getName() { <span class="keyword">return</span> name; }
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span><span class="directive">void</span> wait(Lock* conditionLock);
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span><span class="directive">void</span> signal(Lock* conditionLock);
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span><span class="directive">void</span> broadcast(Lock* conditionLock);
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span><span class="directive">private</span>:
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span><span class="predefined-type">char</span>* name;
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span>List* cvQueue;
-<span class="line-numbers"><a href="#n16" name="n16">16</a></span>Lock* cvLock;   }; </pre></div>
-</div>
- </figure></notextile></div>
+<p>{% coderay lang:cplusplus linenos:true Condition Class %}
+class Condition {
+    public:
+	Condition(char *debugName);
+	~Conditon();</p>
+
+<pre><code>char* getName() { return name; }
+
+void wait(Lock* conditionLock);
+void signal(Lock* conditionLock);
+void broadcast(Lock* conditionLock);
+
+private:
+char* name;
+List* cvQueue;
+Lock* cvLock;   }; {% endcoderay %}
 </code></pre>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>CV Constructor </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>Condition::Condition(<span class="predefined-type">char</span> * debugName) {
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span>    name    = debugName;
-<span class="line-numbers"><a href="#n4" name="n4">4</a></span>    cvQueue = <span class="keyword">new</span> List;
-<span class="line-numbers"><a href="#n5" name="n5">5</a></span>    cvLock  = <span class="predefined-constant">NULL</span>;&lt;br /&gt;
-<span class="line-numbers"><a href="#n6" name="n6">6</a></span>}
-</pre></div>
-</div>
- </figure></notextile></div></p>
+<p>{% coderay lang:cplusplus linenos:true CV Constructor %}
+Condition::Condition(char * debugName) {
+    name    = debugName;
+    cvQueue = new List;
+    cvLock  = NULL;<br />
+}
+{% endcoderay %}</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>CV Destructor </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>Condition::~Condition() {
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span>    <span class="keyword">delete</span> cvQueue;  &lt;br /&gt;
-<span class="line-numbers"><a href="#n4" name="n4">4</a></span>}
-</pre></div>
-</div>
- </figure></notextile></div></p>
+<p>{% coderay lang:cplusplus linenos:true CV Destructor %}
+Condition::~Condition() {
+    delete cvQueue;  <br />
+}
+{% endcoderay %}</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>CV Wait </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="directive">void</span> Condition::wait(Lock* conditionLock) {
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>    IntStatus oldLevel = interrupt-&amp;gt;SetLevel(IntOff);&lt;/p&gt;
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>&lt;pre&gt;&lt;code&gt;<span class="keyword">if</span> (cvQueue-&amp;gt;isEmpty()) {
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span class="comment">//This lock is now associated with CV and</span>
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span><span class="comment">//only removed when last entry is removed</span>
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span class="comment">//from cvQueue.</span>
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>cvLock = conditionLock;
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>}
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span><span class="keyword">if</span> (conditionLock == <span class="predefined-constant">NULL</span>) {
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span>interrupt-&amp;gt;SetLevel(oldLevel);  
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span><span class="keyword">return</span>;
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span>}
-<span class="line-numbers"><a href="#n16" name="n16">16</a></span>
-<span class="line-numbers"><a href="#n17" name="n17">17</a></span>conditionLock-&amp;gt;release();
-<span class="line-numbers"><a href="#n18" name="n18">18</a></span>cvQueue-&amp;gt;Append((<span class="directive">void</span>*) currentThread);
-<span class="line-numbers"><a href="#n19" name="n19">19</a></span>currentThread-&amp;gt;Sleep();
-<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>
-<span class="line-numbers"><a href="#n21" name="n21">21</a></span><span class="comment">//Acquire lock when get up</span>
-<span class="line-numbers"><a href="#n22" name="n22">22</a></span>conditionLock-&amp;gt;acquire();
-<span class="line-numbers"><a href="#n23" name="n23">23</a></span>interrupt-&amp;gt;SetLevel(oldLevel);     } </pre></div>
-</div>
- </figure></notextile></div>
+<p>{% coderay lang:cplusplus linenos:true CV Wait %}
+void Condition::wait(Lock* conditionLock) {
+    IntStatus oldLevel = interrupt-&gt;SetLevel(IntOff);</p>
+
+<pre><code>if (cvQueue-&gt;isEmpty()) {
+//This lock is now associated with CV and
+//only removed when last entry is removed
+//from cvQueue.
+cvLock = conditionLock;
+}
+
+if (conditionLock == NULL) {
+interrupt-&gt;SetLevel(oldLevel);  
+return;
+}
+
+conditionLock-&gt;release();
+cvQueue-&gt;Append((void*) currentThread);
+currentThread-&gt;Sleep();
+
+//Acquire lock when get up
+conditionLock-&gt;acquire();
+interrupt-&gt;SetLevel(oldLevel);     } {% endcoderay %}
 </code></pre>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>CV Signal </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="directive">void</span> Conditon::signal(Lock * conditionLock) {
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>    IntStatus oldLevel = interrupt-&amp;gt;SetLevel(IntOff);&lt;/p&gt;
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>&lt;pre&gt;&lt;code&gt;<span class="comment">//If nobody to signal, return</span>
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span class="keyword">if</span> (cvQueue-&amp;gt;Empty()) {
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>interrupt-&amp;gt;SetLevel(oldLevel);
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span class="keyword">return</span>;
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>}
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span><span class="comment">//Verify right lock is signalled</span>
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span><span class="keyword">if</span> (cvLock != conditionLock) {
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span>interrupt-&amp;gt;SetLevel(oldLevel);
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span><span class="keyword">return</span>;
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span>}
-<span class="line-numbers"><a href="#n16" name="n16">16</a></span>
-<span class="line-numbers"><a href="#n17" name="n17">17</a></span>thread = cvQueue-&amp;gt;Remove();
-<span class="line-numbers"><a href="#n18" name="n18">18</a></span><span class="keyword">if</span> (thread != <span class="predefined-constant">NULL</span>) {
-<span class="line-numbers"><a href="#n19" name="n19">19</a></span>scheduler-&amp;gt;ReadyToRun(thread);
-<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>}
-<span class="line-numbers"><a href="#n21" name="n21">21</a></span>
-<span class="line-numbers"><a href="#n22" name="n22">22</a></span><span class="keyword">if</span> (cvQueue-&amp;gt;isEmpty()) {
-<span class="line-numbers"><a href="#n23" name="n23">23</a></span>cvLock = <span class="predefined-constant">NULL</span>;
-<span class="line-numbers"><a href="#n24" name="n24">24</a></span>}
-<span class="line-numbers"><a href="#n25" name="n25">25</a></span>
-<span class="line-numbers"><a href="#n26" name="n26">26</a></span>interrupt-&amp;gt;SetLevel(oldLevel); } </pre></div>
-</div>
- </figure></notextile></div>
+<p>{% coderay lang:cplusplus linenos:true CV Signal %}
+void Conditon::signal(Lock * conditionLock) {
+    IntStatus oldLevel = interrupt-&gt;SetLevel(IntOff);</p>
+
+<pre><code>//If nobody to signal, return
+if (cvQueue-&gt;Empty()) {
+interrupt-&gt;SetLevel(oldLevel);
+return;
+}
+
+//Verify right lock is signalled
+if (cvLock != conditionLock) {
+interrupt-&gt;SetLevel(oldLevel);
+return;
+}
+
+thread = cvQueue-&gt;Remove();
+if (thread != NULL) {
+scheduler-&gt;ReadyToRun(thread);
+}
+
+if (cvQueue-&gt;isEmpty()) {
+cvLock = NULL;
+}
+
+interrupt-&gt;SetLevel(oldLevel); } {% endcoderay %}
 </code></pre>
 
 <h3 id="producer-consumer-problem">Producer-Consumer Problem</h3>
@@ -637,39 +576,31 @@ More formally there are three types of solution categories</p>
 monitor lock      =&gt; monitorLock;<br />
 monitor condition =&gt; needItem;<br /></p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Producer </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="keyword">while</span> (<span class="predefined-constant">true</span>) {
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>    monitorLock.acquire();&lt;/p&gt;
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>&lt;pre&gt;&lt;code&gt;<span class="comment">//Produce item</span>
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span class="comment">//Put in a buffer</span>
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>itemCount++;
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>needItem.signal(&amp;amp;monitorLock);
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>monitorLock.Release();     } </pre></div>
-</div>
- </figure></notextile></div>
+<p>{% coderay lang:cplusplus linenos:true Producer %}
+while (true) {
+    monitorLock.acquire();</p>
+
+<pre><code>//Produce item
+//Put in a buffer
+itemCount++;
+
+needItem.signal(&amp;monitorLock);
+
+monitorLock.Release();     } {% endcoderay %}
 </code></pre>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Consumer </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="keyword">while</span> (<span class="predefined-constant">true</span>) {
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>    monitorLock.acquire();&lt;/p&gt;
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>&lt;pre&gt;&lt;code&gt;<span class="keyword">while</span>(intemCount == <span class="integer">0</span>) {
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>needItem.wait(&amp;amp;monitorLock);      
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>}
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span><span class="comment">//Buffer has atleast one item</span>
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>itemCount--;
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>monitorLock.Relase(); } </pre></div>
-</div>
- </figure></notextile></div>
+<p>{% coderay lang:cplusplus linenos:true Consumer %}
+while (true) {
+    monitorLock.acquire();</p>
+
+<pre><code>while(intemCount == 0) {
+needItem.wait(&amp;monitorLock);      
+}
+
+//Buffer has atleast one item
+itemCount--;
+
+monitorLock.Relase(); } {% endcoderay %}
 </code></pre>
 
 <h3 id="recommended-reading">Recommended reading</h3>
