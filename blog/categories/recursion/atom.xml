@@ -4,7 +4,7 @@
   <title><![CDATA[Category: recursion | Distributed Knowledge]]></title>
   <link href="http://distkeys.com/blog/categories/recursion/atom.xml" rel="self"/>
   <link href="http://distkeys.com/"/>
-  <updated>2014-03-04T00:07:42-08:00</updated>
+  <updated>2014-03-11T23:20:17-07:00</updated>
   <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -858,6 +858,7 @@ int isBSTUtil(nodeBST</em> node, int min, int max)
       <li><a href="#no-star-in-string">No Star in String</a></li>
       <li><a href="#substring">Substring</a></li>
       <li><a href="#string-permutation-non-repeating">String permutation non repeating</a></li>
+      <li><a href="#power-x-n">Power (x, n)</a></li>
     </ul>
   </li>
 </ul>
@@ -1069,6 +1070,80 @@ ABC, ACB, BAC, BCA, CAB, CBA</p>
 <p>This code will output reapeated string if input string given is say ‘ABA’.<br />
 To avoid that store all the strings generated in array/hash and compare everytime for uniquesness.
 <br /></p>
+
+<h4 id="power-x-n">Power (x, n)</h4>
+
+<p>Write a C program to calculate pow(x, n)</p>
+
+<p>For e.g <br /></p>
+
+<script type="math/tex; mode=display">\begin{align}
+  2^4 = 16
+\end{align}</script>
+
+<script type="math/tex; mode=display">\begin{align}
+2^3 = 8
+\end{align}</script>
+
+<script type="math/tex; mode=display">\begin{align}
+       2^{-2} = 0.25
+\end{align}</script>
+
+<script type="math/tex; mode=display">\begin{align}
+       2^{-4} = 0.0625
+\end{align}</script>
+
+<script type="math/tex; mode=display">\begin{align}
+      -2^{-3} = -0.125
+\end{align}</script>
+
+<p><strong>Solution</strong>
+Idea is that if power is even then multiply evenly i.e. </p>
+
+<p>For <math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>2</mi><mn>4</mn></msup></math> will be (2 * 2) * (2 * 2)</p>
+
+<p>For <math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>2</mi><mn>3</mn></msup></math> will be 2 * (2  * 2)</p>
+
+<p>{% coderay lang:cplusplus linenos:true Power (x, n) http://ideone.com/BpMEJ8 Run Code %}
+#include <stdio.h /></p>
+
+<p>float power(float x, int n)
+{
+    float temp;
+    if( n == 0)
+        return 1;
+    temp = power(x, n/2);
+    if ((n % 2) == 0)
+        return temp<em>temp;
+    else
+    {
+        if(n &gt; 0)
+            return x</em>temp*temp;
+        else
+            return (temp * temp) / x;
+    }
+}</p>
+
+<p>int main()
+{
+    float res = power(2, 4);
+    printf(“Result 2^4 = %f \n”, res);</p>
+
+<pre><code>res = power(2, 3);
+printf("Result 2^3 = %f \n", res);
+
+res = power(2, -2);
+printf("Result 2^-2 = %f \n", res);
+
+res = power(2, -4);
+printf("Result 2^-4 = %f \n", res);
+
+res = power(-2, -3);
+printf("Result 2^4 = %f \n", res);
+
+return 0; } {% endcoderay %}
+</code></pre>
+
 ]]></content>
   </entry>
   
