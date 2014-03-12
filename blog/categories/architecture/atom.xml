@@ -4,7 +4,7 @@
   <title><![CDATA[Category: architecture | Distributed Knowledge]]></title>
   <link href="http://distkeys.com/blog/categories/architecture/atom.xml" rel="self"/>
   <link href="http://distkeys.com/"/>
-  <updated>2014-03-11T23:20:17-07:00</updated>
+  <updated>2014-03-11T23:42:58-07:00</updated>
   <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -38,7 +38,16 @@
 
 <p>This article is about Scalability in Distributed Systems and various engineering organizations approaching the problem of Scalability..</p>
 
-<p>{% wikipedia Scalability %}</p>
+<p><div class="wikipedia">
+  
+  <h2>scalability</h2>
+  <div>
+    <p>In <a href="http://en.wikipedia.org/wiki/Electronics" title="Electronics">electronics</a> (including <a href="http://en.wikipedia.org/wiki/Semiconductor_manufacturing" title="Semiconductor manufacturing" class="mw-redirect">hardware</a>, <a href="http://en.wikipedia.org/wiki/Telecommunications" title="Telecommunications" class="mw-redirect">communication</a> and <a href="http://en.wikipedia.org/wiki/Software_engineering" title="Software engineering">software</a>), <strong>scalability</strong> is the ability of a system, network, or process to handle a growing amount of work in a capable manner or its ability to be enlarged to accommodate that growth.  For example, it can refer to the capability of a system to increase total throughput under an increased load when resources (typically hardware) are added. An analogous meaning is implied when the word is used in an <a href="http://en.wikipedia.org/wiki/Economics" title="Economics">economic</a> context, where scalability of a company implies that the underlying <a href="http://en.wikipedia.org/wiki/Business_model" title="Business model">business model</a> offers the potential for <a href="http://en.wikipedia.org/wiki/Economic_growth" title="Economic growth">economic growth</a> within the company.
+</p>
+  </div>
+  <a href="http://en.wikipedia.org/wiki/Scalability">Read more</a>
+</div>
+</p>
 
 <!-- more -->
 <p><br /></p>

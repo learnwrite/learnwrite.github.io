@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | Distributed Knowledge]]></title>
   <link href="http://distkeys.com/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://distkeys.com/"/>
-  <updated>2014-03-11T23:20:17-07:00</updated>
+  <updated>2014-03-11T23:42:58-07:00</updated>
   <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -109,9 +109,7 @@ line {
 
 <p>New post in Octopress created as .markdown file using</p>
 
-<p>{% blockquote %}
-rake new_post [“D3.js and Octopress”]
-{% endblockquote %}</p>
+<p><blockquote><p>rake new_post [“D3.js and Octopress”]</p></blockquote></p>
 
 <p>This markdown file will now need to have have </p>
 
@@ -128,273 +126,243 @@ rake new_post [“D3.js and Octopress”]
 <p>I have choosen 
 JSON file location to be</p>
 
-<p>{% blockquote %}
-/assets/flare.json
-d3.json(“/assets/flare.json”, function(json) {</p>
-
-<p>Here, assets folder for octopress is 
-&gt; octopress -&gt; /source/assets
-{% endblockquote %}</p>
+<p><blockquote><p>/assets/flare.json<br/>d3.json(“/assets/flare.json”, function(json) {</p></p><p><p>Here, assets folder for octopress is <br/>&gt; octopress -&gt; /source/assets</p></blockquote></p>
 
 <p>JSON file can be found <a href="https://www.dropbox.com/s/j1a52ipdpg755n4/flare.json" target="_blank">here</a></p>
 
 <p>In below code snippet confiure following parameters to customize height and width of tree
-{% blockquote %}
-h = 650 - m[0] - m[2]     (replace 650 with 800 for expanded tree)</p>
+<blockquote><p>h = 650 - m[0] - m[2]     (replace 650 with 800 for expanded tree)</p></p><p><p>// Normalize for fixed-depth.<br/>nodes.forEach(function(d) { d.y = d.depth * 130; });   ===&gt; (Use 180 instead of 130 for wider tree)</p></p><p><p></p></blockquote></p>
 
-<p>// Normalize for fixed-depth.
-nodes.forEach(function(d) { d.y = d.depth * 130; });   ===&gt; (Use 180 instead of 130 for wider tree)</p>
-
-<p>{% endblockquote %}</p>
-
-<p>{% blockquote %}
-// Initialize the display to show a few nodes.
-  root.children.forEach(toggleAll);
-  toggle(root.children[1]);
-  toggle(root.children[1].children[2]);
-  toggle(root.children[5]);                   =====&gt; Here is number of 1st level childs
-  toggle(root.children[5].children[0]);
-{% endblockquote %}</p>
+<p><blockquote><p>// Initialize the display to show a few nodes.<br/>  root.children.forEach(toggleAll);<br/>  toggle(root.children[1]);<br/>  toggle(root.children[1].children[2]);<br/>  toggle(root.children[5]);                   =====&gt; Here is number of 1st level childs<br/>  toggle(root.children[5].children[0]);</p></blockquote></p>
 
 <p>[Update] To make each node a hyperlink comment following code and instead insert below code.<br />
 Make sure JSON file have a field name url<br />
-{% blockquote %}
-//  nodeEnter.append(“svg:text”)
-//      .attr(“x”, function(d) { return d.children || d._children ? -10 : 10; })
-//      .attr(“dy”, “.35em”)
-//      .attr(“text-anchor”, function(d) { return d.children || d._children ? “end” : “start”; 
-//      .text(function(d) { return d.name; })
-//      .style(“fill-opacity”, 1e-6);</p>
-
-<p>nodeEnter.append(“svg:a”).attr(“xlink:href”, function(d) { return d.url; }).attr(“target”, “_blank”)
-       .append(“svg:text”).text(function(d) { return d.name; })
-       .attr(“x”, function(d) { return d.children || d._children ? -10 : 10; })
-       .attr(“dy”, “.35em”)
-       .attr(“text-anchor”, function(d) { return d.children || d._children ? “end” : “start”; })
-       .text(function(d) { return d.name; })
-       .style(“fill-opacity”, 1e-6);
-{% endblockquote %}</p>
+<blockquote><p>//  nodeEnter.append(“svg:text”)<br/>//      .attr(“x”, function(d) { return d.children || d._children ? -10 : 10; })<br/>//      .attr(“dy”, “.35em”)<br/>//      .attr(“text-anchor”, function(d) { return d.children || d._children ? “end” : “start”; <br/>//      .text(function(d) { return d.name; })<br/>//      .style(“fill-opacity”, 1e-6);</p></p><p><p>nodeEnter.append(“svg:a”).attr(“xlink:href”, function(d) { return d.url; }).attr(“target”, “_blank”)<br/>       .append(“svg:text”).text(function(d) { return d.name; })<br/>       .attr(“x”, function(d) { return d.children || d._children ? -10 : 10; })<br/>       .attr(“dy”, “.35em”)<br/>       .attr(“text-anchor”, function(d) { return d.children || d._children ? “end” : “start”; })<br/>       .text(function(d) { return d.name; })<br/>       .style(“fill-opacity”, 1e-6);</p></blockquote></p>
 
 <p>Code for blog post (.markdown file) is as follows</p>
 
-<p>{% coderay lang:c linenos:false D3.js and Octopress.markdown  %}
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<style type="text/css">
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>D3.js and Octopress.markdown  </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre>
+&lt;script src=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://d3js.org/d3.v3.min.js</span><span class="delimiter">&quot;</span></span>&gt;&lt;/script&gt;
+&lt;style type=<span class="string"><span class="delimiter">&quot;</span><span class="content">text/css</span><span class="delimiter">&quot;</span></span>&gt;
 .node circle {
-  cursor: pointer;
-  fill: #fff;
-  stroke: steelblue;
-  stroke-width: 1.5px;
-}</style></p>
+  <span class="label">cursor:</span> pointer;
+  <span class="label">fill:</span> <span class="preprocessor">#fff</span>;
+  <span class="label">stroke:</span> steelblue;
+  stroke-width: <span class="float">1</span><span class="float">.5</span>px;
+}&lt;/style&gt;&lt;/p&gt;
 
-<p>.node text {
-  font-size: 11px;
-}</p>
+&lt;p&gt;.node text {
+  font-size: <span class="integer">11</span>px;
+}&lt;/p&gt;
 
-<p>path.link {
-  fill: none;
-  stroke: #ccc;
-  stroke-width: 1.5px;
-}</p>
+&lt;p&gt;path.link {
+  <span class="label">fill:</span> none;
+  <span class="label">stroke:</span> <span class="preprocessor">#ccc</span>;
+  stroke-width: <span class="float">1</span><span class="float">.5</span>px;
+}&lt;/p&gt;
 
-<p>&lt;/style&gt;</p>
-<style>
+&lt;p&gt;&amp;lt;/style&amp;gt;&lt;/p&gt;
+&lt;style&gt;
 
-#chart, #header, #footer {
+<span class="preprocessor">#chart</span>, <span class="preprocessor">#header</span>, <span class="preprocessor">#footer</span> {
   position: absolute;
-  top: 0;
+  <span class="label">top:</span> <span class="integer">0</span>;
 }
 
-#header.inverted, #footer.inverted {
-  color: #fff;
-  text-shadow: 0 1px 4px #000;
+<span class="preprocessor">#header</span>.inverted, <span class="preprocessor">#footer</span>.inverted {
+  color: <span class="preprocessor">#fff</span>;
+  text-shadow: <span class="integer">0</span> <span class="integer">1</span>px <span class="integer">4</span>px <span class="preprocessor">#000</span>;
 }
 
 
 rect {
-  fill: none;
+  <span class="label">fill:</span> none;
   pointer-events: all;
 }
 
 line {
-  stroke: #000;
-  stroke-width: 1.5px;
+  <span class="label">stroke:</span> <span class="preprocessor">#000</span>;
+  stroke-width: <span class="float">1</span><span class="float">.5</span>px;
 }
 
 .string, .regexp {
-  color: #f39;
+  <span class="label">color:</span> <span class="preprocessor">#f39</span>;
 }
 
 .keyword {
-  color: #00c;
+  <span class="label">color:</span> <span class="preprocessor">#00c</span>;
 }
 
 .comment {
-  color: #777;
+  <span class="label">color:</span> <span class="preprocessor">#777</span>;
   font-style: oblique;
 }
 
 .number {
-  color: #369;
+  <span class="label">color:</span> <span class="preprocessor">#369</span>;
 }
 
 .class, .special {
-  color: #1181B8;
+  <span class="label">color:</span> <span class="preprocessor">#1181B8</span>;
 }
 
-</style>
+&lt;/style&gt;
 
-<body>
-    <div id="body">              
+&lt;body&gt;
+    &lt;div id=<span class="string"><span class="delimiter">&quot;</span><span class="content">body</span><span class="delimiter">&quot;</span></span>&gt;              
         click or option-click to expand or collapse
-    </div>
-    <script type="text/javascript">
+    &lt;/div&gt;
+    &lt;script type=<span class="string"><span class="delimiter">&quot;</span><span class="content">text/javascript</span><span class="delimiter">&quot;</span></span>&gt;
 
-var m = [20, 120, 20, 120],
-    w = 1280 - m[1] - m[3],
-    h = 650 - m[0] - m[2],
-    i = 0,
+var m = [<span class="integer">20</span>, <span class="integer">120</span>, <span class="integer">20</span>, <span class="integer">120</span>],
+    w = <span class="integer">1280</span> - m[<span class="integer">1</span>] - m[<span class="integer">3</span>],
+    h = <span class="integer">650</span> - m[<span class="integer">0</span>] - m[<span class="integer">2</span>],
+    i = <span class="integer">0</span>,
     root;
 
 var tree = d3.layout.tree()
     .size([h, w]);
 
 var diagonal = d3.svg.diagonal()
-    .projection(function(d) { return [d.y, d.x]; });
+    .projection(function(d) { <span class="keyword">return</span> [d.y, d.x]; });
 
-var vis = d3.select("#body").append("svg:svg")
-    .attr("width", w + m[1] + m[3])
-    .attr("height", h + m[0] + m[2])
-  .append("svg:g")
-    .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
+var vis = d3.select(<span class="string"><span class="delimiter">&quot;</span><span class="content">#body</span><span class="delimiter">&quot;</span></span>).append(<span class="string"><span class="delimiter">&quot;</span><span class="content">svg:svg</span><span class="delimiter">&quot;</span></span>)
+    .attr(<span class="string"><span class="delimiter">&quot;</span><span class="content">width</span><span class="delimiter">&quot;</span></span>, w + m[<span class="integer">1</span>] + m[<span class="integer">3</span>])
+    .attr(<span class="string"><span class="delimiter">&quot;</span><span class="content">height</span><span class="delimiter">&quot;</span></span>, h + m[<span class="integer">0</span>] + m[<span class="integer">2</span>])
+  .append(<span class="string"><span class="delimiter">&quot;</span><span class="content">svg:g</span><span class="delimiter">&quot;</span></span>)
+    .attr(<span class="string"><span class="delimiter">&quot;</span><span class="content">transform</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">translate(</span><span class="delimiter">&quot;</span></span> + m[<span class="integer">3</span>] + <span class="string"><span class="delimiter">&quot;</span><span class="content">,</span><span class="delimiter">&quot;</span></span> + m[<span class="integer">0</span>] + <span class="string"><span class="delimiter">&quot;</span><span class="content">)</span><span class="delimiter">&quot;</span></span>);
 
-d3.json("/assets/flare.json", function(json) {
+d3.json(<span class="string"><span class="delimiter">&quot;</span><span class="content">/assets/flare.json</span><span class="delimiter">&quot;</span></span>, function(json) {
   root = json;
-  root.x0 = h / 2;
-  root.y0 = 0;
+  root.x0 = h / <span class="integer">2</span>;
+  root.y0 = <span class="integer">0</span>;
 
   function toggleAll(d) {
-    if (d.children) {
+    <span class="keyword">if</span> (d.children) {
       d.children.forEach(toggleAll);
       toggle(d);
     }
   }
 
-  // Initialize the display to show a few nodes.
+  <span class="comment">// Initialize the display to show a few nodes.</span>
   root.children.forEach(toggleAll);
-  toggle(root.children[1]);
-  toggle(root.children[1].children[2]);
-  toggle(root.children[9]);
-  toggle(root.children[9].children[0]);
+  toggle(root.children[<span class="integer">1</span>]);
+  toggle(root.children[<span class="integer">1</span>].children[<span class="integer">2</span>]);
+  toggle(root.children[<span class="integer">9</span>]);
+  toggle(root.children[<span class="integer">9</span>].children[<span class="integer">0</span>]);
 
   update(root);
 });
 
 function update(source) {
-  var duration = d3.event && d3.event.altKey ? 5000 : 500;
+  var duration = d3.event &amp;&amp; d3.event.altKey ? <span class="integer">5000</span> : <span class="integer">500</span>;
 
-  // Compute the new tree layout.
+  <span class="comment">// Compute the new tree layout.</span>
   var nodes = tree.nodes(root).reverse();
 
-  // Normalize for fixed-depth.
-  nodes.forEach(function(d) { d.y = d.depth * 130; });
+  <span class="comment">// Normalize for fixed-depth.</span>
+  nodes.forEach(function(d) { d.y = d.depth * <span class="integer">130</span>; });
 
-  // Update the nodes…
-  var node = vis.selectAll("g.node")
-      .data(nodes, function(d) { return d.id || (d.id = ++i); });
+  <span class="comment">// Update the nodes…</span>
+  var node = vis.selectAll(<span class="string"><span class="delimiter">&quot;</span><span class="content">g.node</span><span class="delimiter">&quot;</span></span>)
+      .data(nodes, function(d) { <span class="keyword">return</span> d.id || (d.id = ++i); });
 
-  // Enter any new nodes at the parent's previous position.
-  var nodeEnter = node.enter().append("svg:g")
-      .attr("class", "node")
-      .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
-      .on("click", function(d) { toggle(d); update(d); });
+  <span class="comment">// Enter any new nodes at the parent's previous position.</span>
+  var nodeEnter = node.enter().append(<span class="string"><span class="delimiter">&quot;</span><span class="content">svg:g</span><span class="delimiter">&quot;</span></span>)
+      .attr(<span class="string"><span class="delimiter">&quot;</span><span class="content">class</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">node</span><span class="delimiter">&quot;</span></span>)
+      .attr(<span class="string"><span class="delimiter">&quot;</span><span class="content">transform</span><span class="delimiter">&quot;</span></span>, function(d) { <span class="keyword">return</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">translate(</span><span class="delimiter">&quot;</span></span> + source.y0 + <span class="string"><span class="delimiter">&quot;</span><span class="content">,</span><span class="delimiter">&quot;</span></span> + source.x0 + <span class="string"><span class="delimiter">&quot;</span><span class="content">)</span><span class="delimiter">&quot;</span></span>; })
+      .on(<span class="string"><span class="delimiter">&quot;</span><span class="content">click</span><span class="delimiter">&quot;</span></span>, function(d) { toggle(d); update(d); });
 
-  nodeEnter.append("svg:circle")
-      .attr("r", 1e-6)
-      .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+  nodeEnter.append(<span class="string"><span class="delimiter">&quot;</span><span class="content">svg:circle</span><span class="delimiter">&quot;</span></span>)
+      .attr(<span class="string"><span class="delimiter">&quot;</span><span class="content">r</span><span class="delimiter">&quot;</span></span>, <span class="float">1</span>e-<span class="integer">6</span>)
+      .style(<span class="string"><span class="delimiter">&quot;</span><span class="content">fill</span><span class="delimiter">&quot;</span></span>, function(d) { <span class="keyword">return</span> d._children ? <span class="string"><span class="delimiter">&quot;</span><span class="content">lightsteelblue</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">#fff</span><span class="delimiter">&quot;</span></span>; });
 
-  nodeEnter.append("svg:text")
-      .attr("x", function(d) { return d.children || d._children ? -10 : 10; })
-      .attr("dy", ".35em")
-      .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
-      .text(function(d) { return d.name; })
-      .style("fill-opacity", 1e-6);
+  nodeEnter.append(<span class="string"><span class="delimiter">&quot;</span><span class="content">svg:text</span><span class="delimiter">&quot;</span></span>)
+      .attr(<span class="string"><span class="delimiter">&quot;</span><span class="content">x</span><span class="delimiter">&quot;</span></span>, function(d) { <span class="keyword">return</span> d.children || d._children ? -<span class="integer">10</span> : <span class="integer">10</span>; })
+      .attr(<span class="string"><span class="delimiter">&quot;</span><span class="content">dy</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">.35em</span><span class="delimiter">&quot;</span></span>)
+      .attr(<span class="string"><span class="delimiter">&quot;</span><span class="content">text-anchor</span><span class="delimiter">&quot;</span></span>, function(d) { <span class="keyword">return</span> d.children || d._children ? <span class="string"><span class="delimiter">&quot;</span><span class="content">end</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">start</span><span class="delimiter">&quot;</span></span>; })
+      .text(function(d) { <span class="keyword">return</span> d.name; })
+      .style(<span class="string"><span class="delimiter">&quot;</span><span class="content">fill-opacity</span><span class="delimiter">&quot;</span></span>, <span class="float">1</span>e-<span class="integer">6</span>);
 
-  // Transition nodes to their new position.
+  <span class="comment">// Transition nodes to their new position.</span>
   var nodeUpdate = node.transition()
       .duration(duration)
-      .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
+      .attr(<span class="string"><span class="delimiter">&quot;</span><span class="content">transform</span><span class="delimiter">&quot;</span></span>, function(d) { <span class="keyword">return</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">translate(</span><span class="delimiter">&quot;</span></span> + d.y + <span class="string"><span class="delimiter">&quot;</span><span class="content">,</span><span class="delimiter">&quot;</span></span> + d.x + <span class="string"><span class="delimiter">&quot;</span><span class="content">)</span><span class="delimiter">&quot;</span></span>; });
 
-  nodeUpdate.select("circle")
-      .attr("r", 4.5)
-      .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+  nodeUpdate.select(<span class="string"><span class="delimiter">&quot;</span><span class="content">circle</span><span class="delimiter">&quot;</span></span>)
+      .attr(<span class="string"><span class="delimiter">&quot;</span><span class="content">r</span><span class="delimiter">&quot;</span></span>, <span class="float">4</span><span class="float">.5</span>)
+      .style(<span class="string"><span class="delimiter">&quot;</span><span class="content">fill</span><span class="delimiter">&quot;</span></span>, function(d) { <span class="keyword">return</span> d._children ? <span class="string"><span class="delimiter">&quot;</span><span class="content">lightsteelblue</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">#fff</span><span class="delimiter">&quot;</span></span>; });
 
-  nodeUpdate.select("text")
-      .style("fill-opacity", 1);
+  nodeUpdate.select(<span class="string"><span class="delimiter">&quot;</span><span class="content">text</span><span class="delimiter">&quot;</span></span>)
+      .style(<span class="string"><span class="delimiter">&quot;</span><span class="content">fill-opacity</span><span class="delimiter">&quot;</span></span>, <span class="integer">1</span>);
 
-  // Transition exiting nodes to the parent's new position.
+  <span class="comment">// Transition exiting nodes to the parent's new position.</span>
   var nodeExit = node.exit().transition()
       .duration(duration)
-      .attr("transform", function(d) { return "translate(" + source.y + "," + source.x + ")"; })
+      .attr(<span class="string"><span class="delimiter">&quot;</span><span class="content">transform</span><span class="delimiter">&quot;</span></span>, function(d) { <span class="keyword">return</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">translate(</span><span class="delimiter">&quot;</span></span> + source.y + <span class="string"><span class="delimiter">&quot;</span><span class="content">,</span><span class="delimiter">&quot;</span></span> + source.x + <span class="string"><span class="delimiter">&quot;</span><span class="content">)</span><span class="delimiter">&quot;</span></span>; })
       .remove();
 
-  nodeExit.select("circle")
-      .attr("r", 1e-6);
+  nodeExit.select(<span class="string"><span class="delimiter">&quot;</span><span class="content">circle</span><span class="delimiter">&quot;</span></span>)
+      .attr(<span class="string"><span class="delimiter">&quot;</span><span class="content">r</span><span class="delimiter">&quot;</span></span>, <span class="float">1</span>e-<span class="integer">6</span>);
 
-  nodeExit.select("text")
-      .style("fill-opacity", 1e-6);
+  nodeExit.select(<span class="string"><span class="delimiter">&quot;</span><span class="content">text</span><span class="delimiter">&quot;</span></span>)
+      .style(<span class="string"><span class="delimiter">&quot;</span><span class="content">fill-opacity</span><span class="delimiter">&quot;</span></span>, <span class="float">1</span>e-<span class="integer">6</span>);
 
-  // Update the links…
-  var link = vis.selectAll("path.link")
-      .data(tree.links(nodes), function(d) { return d.target.id; });
+  <span class="comment">// Update the links…</span>
+  var link = vis.selectAll(<span class="string"><span class="delimiter">&quot;</span><span class="content">path.link</span><span class="delimiter">&quot;</span></span>)
+      .data(tree.links(nodes), function(d) { <span class="keyword">return</span> d.target.id; });
 
-  // Enter any new links at the parent's previous position.
-  link.enter().insert("svg:path", "g")
-      .attr("class", "link")
-      .attr("d", function(d) {
-        var o = {x: source.x0, y: source.y0};
-        return diagonal({source: o, target: o});
+  <span class="comment">// Enter any new links at the parent's previous position.</span>
+  link.enter().insert(<span class="string"><span class="delimiter">&quot;</span><span class="content">svg:path</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">g</span><span class="delimiter">&quot;</span></span>)
+      .attr(<span class="string"><span class="delimiter">&quot;</span><span class="content">class</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">link</span><span class="delimiter">&quot;</span></span>)
+      .attr(<span class="string"><span class="delimiter">&quot;</span><span class="content">d</span><span class="delimiter">&quot;</span></span>, function(d) {
+        var o = {<span class="label">x:</span> source.x0, y: source.y0};
+        <span class="keyword">return</span> diagonal({<span class="label">source:</span> o, target: o});
       })
     .transition()
       .duration(duration)
-      .attr("d", diagonal);
+      .attr(<span class="string"><span class="delimiter">&quot;</span><span class="content">d</span><span class="delimiter">&quot;</span></span>, diagonal);
 
-  // Transition links to their new position.
+  <span class="comment">// Transition links to their new position.</span>
   link.transition()
       .duration(duration)
-      .attr("d", diagonal);
+      .attr(<span class="string"><span class="delimiter">&quot;</span><span class="content">d</span><span class="delimiter">&quot;</span></span>, diagonal);
 
-  // Transition exiting nodes to the parent's new position.
+  <span class="comment">// Transition exiting nodes to the parent's new position.</span>
   link.exit().transition()
       .duration(duration)
-      .attr("d", function(d) {
-        var o = {x: source.x, y: source.y};
-        return diagonal({source: o, target: o});
+      .attr(<span class="string"><span class="delimiter">&quot;</span><span class="content">d</span><span class="delimiter">&quot;</span></span>, function(d) {
+        var o = {<span class="label">x:</span> source.x, y: source.y};
+        <span class="keyword">return</span> diagonal({<span class="label">source:</span> o, target: o});
       })
       .remove();
 
-  // Stash the old positions for transition.
+  <span class="comment">// Stash the old positions for transition.</span>
   nodes.forEach(function(d) {
     d.x0 = d.x;
     d.y0 = d.y;
   });
 }
 
-// Toggle children.
+<span class="comment">// Toggle children.</span>
 function toggle(d) {
-  if (d.children) {
+  <span class="keyword">if</span> (d.children) {
     d._children = d.children;
     d.children = null;
-  } else {
+  } <span class="keyword">else</span> {
     d.children = d._children;
     d._children = null;
   }
 }
 
-</script>
-</body>
+&lt;/script&gt;
+&lt;/body&gt;
 
-<p>{% endcoderay %}</p>
+&lt;p&gt;</pre></div>
+</div>
+ </figure></notextile></div></p>
 
 <body>
     <div id="body">     
