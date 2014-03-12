@@ -4,7 +4,7 @@
   <title><![CDATA[Distributed Knowledge]]></title>
   <link href="http://distkeys.com/atom.xml" rel="self"/>
   <link href="http://distkeys.com/"/>
-  <updated>2014-03-04T00:07:04-08:00</updated>
+  <updated>2014-03-11T23:19:56-07:00</updated>
   <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -1042,6 +1042,7 @@ the country in order to find a resource in the next room.</p>
 
 <h4 id="finding-the-right-server">Finding the right server</h4>
 
+<p>To be continued…</p>
 ]]></content>
   </entry>
   
@@ -3766,6 +3767,7 @@ The possible ascending path are</p>
       <li><a href="#no-star-in-string">No Star in String</a></li>
       <li><a href="#substring">Substring</a></li>
       <li><a href="#string-permutation-non-repeating">String permutation non repeating</a></li>
+      <li><a href="#power-x-n">Power (x, n)</a></li>
     </ul>
   </li>
 </ul>
@@ -3987,6 +3989,84 @@ ABC, ACB, BAC, BCA, CAB, CBA</p>
 <p>This code will output reapeated string if input string given is say ‘ABA’.<br />
 To avoid that store all the strings generated in array/hash and compare everytime for uniquesness.
 <br /></p>
+
+<h4 id="power-x-n">Power (x, n)</h4>
+
+<p>Write a C program to calculate pow(x, n)</p>
+
+<p>For e.g <br /></p>
+
+<script type="math/tex; mode=display">\begin{align}
+  2^4 = 16
+\end{align}</script>
+
+<script type="math/tex; mode=display">\begin{align}
+2^3 = 8
+\end{align}</script>
+
+<script type="math/tex; mode=display">\begin{align}
+       2^{-2} = 0.25
+\end{align}</script>
+
+<script type="math/tex; mode=display">\begin{align}
+       2^{-4} = 0.0625
+\end{align}</script>
+
+<script type="math/tex; mode=display">\begin{align}
+      -2^{-3} = -0.125
+\end{align}</script>
+
+<p><strong>Solution</strong>
+Idea is that if power is even then multiply evenly i.e. </p>
+
+<p>For <math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>2</mi><mn>4</mn></msup></math> will be (2 * 2) * (2 * 2)</p>
+
+<p>For <math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>2</mi><mn>3</mn></msup></math> will be 2 * (2  * 2)</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Power (x, n)</span>  <a href="http://ideone.com/BpMEJ8" target="_blank">Run Code </a></figcaption> <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="preprocessor">#include</span> <span class="include">&lt;stdio.h&gt;</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span class="predefined-type">float</span> power(<span class="predefined-type">float</span> x, <span class="predefined-type">int</span> n)
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>{
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    <span class="predefined-type">float</span> temp;
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span class="keyword">if</span>( n == <span class="integer">0</span>)
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>        <span class="keyword">return</span> <span class="integer">1</span>;
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    temp = power(x, n/<span class="integer">2</span>);
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>    <span class="keyword">if</span> ((n % <span class="integer">2</span>) == <span class="integer">0</span>)
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>        <span class="keyword">return</span> temp*temp;
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    <span class="keyword">else</span>
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>    {
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>        <span class="keyword">if</span>(n &gt; <span class="integer">0</span>)
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>            <span class="keyword">return</span> x*temp*temp;
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>        <span class="keyword">else</span>
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>            <span class="keyword">return</span> (temp * temp) / x;
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>    }
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>}
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span><span class="predefined-type">int</span> main()
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span>{
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span>    <span class="predefined-type">float</span> res = power(<span class="integer">2</span>, <span class="integer">4</span>);
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span>    printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Result 2^4 = %f </span><span class="char">\n</span><span class="delimiter">&quot;</span></span>, res);
+<span class="line-numbers"><a href="#n25" name="n25">25</a></span>
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span>    res = power(<span class="integer">2</span>, <span class="integer">3</span>);
+<span class="line-numbers"><a href="#n27" name="n27">27</a></span>    printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Result 2^3 = %f </span><span class="char">\n</span><span class="delimiter">&quot;</span></span>, res);
+<span class="line-numbers"><a href="#n28" name="n28">28</a></span>
+<span class="line-numbers"><a href="#n29" name="n29">29</a></span>    res = power(<span class="integer">2</span>, -<span class="integer">2</span>);
+<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>    printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Result 2^-2 = %f </span><span class="char">\n</span><span class="delimiter">&quot;</span></span>, res);
+<span class="line-numbers"><a href="#n31" name="n31">31</a></span>
+<span class="line-numbers"><a href="#n32" name="n32">32</a></span>    res = power(<span class="integer">2</span>, -<span class="integer">4</span>);
+<span class="line-numbers"><a href="#n33" name="n33">33</a></span>    printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Result 2^-4 = %f </span><span class="char">\n</span><span class="delimiter">&quot;</span></span>, res);
+<span class="line-numbers"><a href="#n34" name="n34">34</a></span>
+<span class="line-numbers"><a href="#n35" name="n35">35</a></span>    res = power(-<span class="integer">2</span>, -<span class="integer">3</span>);
+<span class="line-numbers"><a href="#n36" name="n36">36</a></span>    printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Result 2^4 = %f </span><span class="char">\n</span><span class="delimiter">&quot;</span></span>, res);
+<span class="line-numbers"><a href="#n37" name="n37">37</a></span>
+<span class="line-numbers"><a href="#n38" name="n38">38</a></span>    <span class="keyword">return</span> <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n39" name="n39">39</a></span>}
+</pre></div>
+</div>
+ </figure></notextile></div>
+
 ]]></content>
   </entry>
   
