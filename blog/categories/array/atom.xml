@@ -4,7 +4,7 @@
   <title><![CDATA[Category: array | Distributed Knowledge]]></title>
   <link href="http://distkeys.com/blog/categories/array/atom.xml" rel="self"/>
   <link href="http://distkeys.com/"/>
-  <updated>2014-03-11T23:20:17-07:00</updated>
+  <updated>2014-03-11T23:42:58-07:00</updated>
   <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -44,6 +44,7 @@
           <li><a href="#remove-all-consequtive-duplicate-elements">Remove all consequtive duplicate elements*</a></li>
           <li><a href="#rotate-a-string">Rotate a string*</a></li>
           <li><a href="#permutation-of-a-string">Permutation of a string</a></li>
+          <li><a href="#searching-an-element-in-a-rotated-sorted-array">Searching an Element in a Rotated Sorted Array</a></li>
         </ul>
       </li>
     </ul>
@@ -77,37 +78,40 @@ Then the pairs are  [6,4] , [9,1]
 4. If Indx 1 &gt; Indx 2 then halt -&gt; No pairs found<br /></p>
 
 <p>If pair found then keep doing the same to find next pair.
-{% coderay lang:c linenos:true Sorted array http://ideone.com/fmKgvW Run Code %}
-#include <stdio.h /></p>
-
-<p>void printPairs(int arr[], int arr_size, int sum)
-{
-    int front = 0;
-    int back = arr_size - 1;</p>
-
-<pre><code>while (front &lt; back) {
-    if (arr[front] + arr[back] &lt; sum) {
-        front++;
-    } else if (arr[front] + arr[back] &gt; sum) {
-        back--;
-    } else {
-        printf ("Pair with given sum %d is (%d, %d) \n",
-                sum, arr[front], arr[back]);
-        back--;
-    }
-} }
-</code></pre>
-
-<p>/* Driver program to test above function */
-int main()
-{
-    int A[] = {4, 5, 6, 10, 12, 12};
-    int sum = 16;
-    int arr_size = 6;</p>
-
-<pre><code>printPairs(A, arr_size, sum);
-
-return 0; } {% endcoderay %}
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Sorted array</span>  <a href='http://ideone.com/fmKgvW' target='_blank'>Run Code </a></figcaption> <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="preprocessor">#include</span> <span class="include">&lt;stdio.h /&gt;</span>&lt;/p&gt;
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>&lt;p&gt;<span class="directive">void</span> printPairs(<span class="predefined-type">int</span> arr[], <span class="predefined-type">int</span> arr_size, <span class="predefined-type">int</span> sum)
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>{
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    <span class="predefined-type">int</span> front = <span class="integer">0</span>;
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span class="predefined-type">int</span> back = arr_size - <span class="integer">1</span>;&lt;/p&gt;
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>&lt;pre&gt;&lt;code&gt;<span class="keyword">while</span> (front &amp;lt; back) {
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>    <span class="keyword">if</span> (arr[front] + arr[back] &amp;lt; sum) {
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>        front++;
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    } <span class="keyword">else</span> <span class="keyword">if</span> (arr[front] + arr[back] &amp;gt; sum) {
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>        back--;
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>    } <span class="keyword">else</span> {
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>        printf (<span class="string"><span class="delimiter">&quot;</span><span class="content">Pair with given sum %d is (%d, %d) </span><span class="char">\n</span><span class="delimiter">&quot;</span></span>,
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>                sum, arr[front], arr[back]);
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>        back--;
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>    }
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>} }
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>&lt;/code&gt;&lt;/pre&gt;
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span>&lt;p&gt;<span class="comment">/* Driver program to test above function */</span>
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span><span class="predefined-type">int</span> main()
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span>{
+<span class="line-numbers"><a href="#n25" name="n25">25</a></span>    <span class="predefined-type">int</span> A[] = {<span class="integer">4</span>, <span class="integer">5</span>, <span class="integer">6</span>, <span class="integer">10</span>, <span class="integer">12</span>, <span class="integer">12</span>};
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span>    <span class="predefined-type">int</span> sum = <span class="integer">16</span>;
+<span class="line-numbers"><a href="#n27" name="n27">27</a></span>    <span class="predefined-type">int</span> arr_size = <span class="integer">6</span>;&lt;/p&gt;
+<span class="line-numbers"><a href="#n28" name="n28">28</a></span>
+<span class="line-numbers"><a href="#n29" name="n29">29</a></span>&lt;pre&gt;&lt;code&gt;printPairs(A, arr_size, sum);
+<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>
+<span class="line-numbers"><a href="#n31" name="n31">31</a></span><span class="keyword">return</span> <span class="integer">0</span>; } </pre></div>
+</div>
+ </figure></notextile></div>
 </code></pre>
 
 <p><strong>Hashing/Binary Map</strong><br />
@@ -125,38 +129,41 @@ In this approach we not actually using the hash function fundamental idea is to 
   <li>Else record input element in Binary map i.e. binMap[arr[i]] = 1;<br /></li>
 </ol>
 
-<p>{% coderay lang:c linenos:true Binary Map http://ideone.com/S0CNlO Run Code %}
-#include <stdio.h>
-#define MAX 100000</stdio.h></p>
-
-<p>void printPairs(int arr[], int arr_size, int sum)
-{
-    int i = 0;
-    int temp = 0;
-    int binMap[MAX] = {0}; /<em>initialize hash map as 0</em>/</p>
-
-<pre><code>for(i = 0; i &lt; arr_size; i++)
-{
-    temp = sum - arr[i];
-    if(temp &gt;= 0 &amp;&amp; binMap[temp] == 1)
-    {
-        printf("Pair with given sum %d is (%d, %d) \n",
-                sum, arr[i], temp);
-    }
-    binMap[arr[i]] = 1;
-} }
-</code></pre>
-
-<p>/* Driver program to test above function */
-int main()
-{
-    int A[] = {12, 4, 45, 6, 10, 12};
-    int sum = 16;
-    int arr_size = 6;</p>
-
-<pre><code>printPairs(A, arr_size, sum);
-
-return 0; } {% endcoderay %}
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Binary Map</span>  <a href='http://ideone.com/S0CNlO' target='_blank'>Run Code </a></figcaption> <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="preprocessor">#include</span> <span class="include">&lt;stdio.h&gt;</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span class="preprocessor">#define</span> MAX <span class="integer">100000</span>&lt;/stdio.h&gt;&lt;/p&gt;
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>&lt;p&gt;<span class="directive">void</span> printPairs(<span class="predefined-type">int</span> arr[], <span class="predefined-type">int</span> arr_size, <span class="predefined-type">int</span> sum)
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>{
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span class="predefined-type">int</span> i = <span class="integer">0</span>;
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    <span class="predefined-type">int</span> temp = <span class="integer">0</span>;
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    <span class="predefined-type">int</span> binMap[MAX] = {<span class="integer">0</span>}; /&lt;em&gt;initialize hash map as <span class="integer">0</span>&lt;/em&gt;/&lt;/p&gt;
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>&lt;pre&gt;&lt;code&gt;<span class="keyword">for</span>(i = <span class="integer">0</span>; i &amp;lt; arr_size; i++)
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>{
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>    temp = sum - arr[i];
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>    <span class="keyword">if</span>(temp &amp;gt;= <span class="integer">0</span> &amp;amp;&amp;amp; binMap[temp] == <span class="integer">1</span>)
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>    {
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>        printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Pair with given sum %d is (%d, %d) </span><span class="char">\n</span><span class="delimiter">&quot;</span></span>,
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>                sum, arr[i], temp);
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>    }
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>    binMap[arr[i]] = <span class="integer">1</span>;
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>} }
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>&lt;/code&gt;&lt;/pre&gt;
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span>
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span>&lt;p&gt;<span class="comment">/* Driver program to test above function */</span>
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span><span class="predefined-type">int</span> main()
+<span class="line-numbers"><a href="#n25" name="n25">25</a></span>{
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span>    <span class="predefined-type">int</span> A[] = {<span class="integer">12</span>, <span class="integer">4</span>, <span class="integer">45</span>, <span class="integer">6</span>, <span class="integer">10</span>, <span class="integer">12</span>};
+<span class="line-numbers"><a href="#n27" name="n27">27</a></span>    <span class="predefined-type">int</span> sum = <span class="integer">16</span>;
+<span class="line-numbers"><a href="#n28" name="n28">28</a></span>    <span class="predefined-type">int</span> arr_size = <span class="integer">6</span>;&lt;/p&gt;
+<span class="line-numbers"><a href="#n29" name="n29">29</a></span>
+<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>&lt;pre&gt;&lt;code&gt;printPairs(A, arr_size, sum);
+<span class="line-numbers"><a href="#n31" name="n31">31</a></span>
+<span class="line-numbers"><a href="#n32" name="n32">32</a></span><span class="keyword">return</span> <span class="integer">0</span>; } </pre></div>
+</div>
+ </figure></notextile></div>
 </code></pre>
 
 <p><strong>Bit Vector</strong><br /></p>
@@ -167,42 +174,45 @@ return 0; } {% endcoderay %}
   <p>This program works for max for 31 as bit map is <em>int</em> which is 32 bits. For numbers more than 31 more memory could be allocated.</p>
 </blockquote>
 
-<p>{% coderay lang:c linenos:true Bit Vector http://ideone.com/iFDimZ Run Code %}
-#include <stdio.h /></p>
-
-<p>void printPairs(int arr[], int arr_size, int sum)
-{
-    int i = 0;
-    int temp = 0;
-    int bitmap = 0; // all bits are 0
-    int bitmask = 0;</p>
-
-<pre><code>for(i = 0; i &lt; arr_size; i++)
-{
-    temp = sum - arr[i];
-
-    bitmask = 0;
-    bitmask = 1 &lt;&lt; temp;
-
-    if(temp &gt;= 0 &amp;&amp; (bitmap &amp; bitmask))
-    {
-        printf("Pair with given sum %d is (%d, %d) \n",
-               sum, arr[i], temp);
-    }
-    bitmap |= 1 &lt;&lt; arr[i];
-} }
-</code></pre>
-
-<p>/* Driver program to test above function */
-int main()
-{
-    int A[] = {12, 4, 13, 6, 10, 3};
-    int sum = 16;
-    int arr_size = 6;</p>
-
-<pre><code>printPairs(A, arr_size, sum);
-
-return 0; } {% endcoderay %}
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Bit Vector</span>  <a href='http://ideone.com/iFDimZ' target='_blank'>Run Code </a></figcaption> <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="preprocessor">#include</span> <span class="include">&lt;stdio.h /&gt;</span>&lt;/p&gt;
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>&lt;p&gt;<span class="directive">void</span> printPairs(<span class="predefined-type">int</span> arr[], <span class="predefined-type">int</span> arr_size, <span class="predefined-type">int</span> sum)
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>{
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    <span class="predefined-type">int</span> i = <span class="integer">0</span>;
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span class="predefined-type">int</span> temp = <span class="integer">0</span>;
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    <span class="predefined-type">int</span> bitmap = <span class="integer">0</span>; <span class="comment">// all bits are 0</span>
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    <span class="predefined-type">int</span> bitmask = <span class="integer">0</span>;&lt;/p&gt;
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>&lt;pre&gt;&lt;code&gt;<span class="keyword">for</span>(i = <span class="integer">0</span>; i &amp;lt; arr_size; i++)
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>{
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>    temp = sum - arr[i];
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>    bitmask = <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>    bitmask = <span class="integer">1</span> &amp;lt;&amp;lt; temp;
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>    <span class="keyword">if</span>(temp &amp;gt;= <span class="integer">0</span> &amp;amp;&amp;amp; (bitmap &amp;amp; bitmask))
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>    {
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>        printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Pair with given sum %d is (%d, %d) </span><span class="char">\n</span><span class="delimiter">&quot;</span></span>,
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>               sum, arr[i], temp);
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span>    }
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span>    bitmap |= <span class="integer">1</span> &amp;lt;&amp;lt; arr[i];
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span>} }
+<span class="line-numbers"><a href="#n25" name="n25">25</a></span>&lt;/code&gt;&lt;/pre&gt;
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span>
+<span class="line-numbers"><a href="#n27" name="n27">27</a></span>&lt;p&gt;<span class="comment">/* Driver program to test above function */</span>
+<span class="line-numbers"><a href="#n28" name="n28">28</a></span><span class="predefined-type">int</span> main()
+<span class="line-numbers"><a href="#n29" name="n29">29</a></span>{
+<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>    <span class="predefined-type">int</span> A[] = {<span class="integer">12</span>, <span class="integer">4</span>, <span class="integer">13</span>, <span class="integer">6</span>, <span class="integer">10</span>, <span class="integer">3</span>};
+<span class="line-numbers"><a href="#n31" name="n31">31</a></span>    <span class="predefined-type">int</span> sum = <span class="integer">16</span>;
+<span class="line-numbers"><a href="#n32" name="n32">32</a></span>    <span class="predefined-type">int</span> arr_size = <span class="integer">6</span>;&lt;/p&gt;
+<span class="line-numbers"><a href="#n33" name="n33">33</a></span>
+<span class="line-numbers"><a href="#n34" name="n34">34</a></span>&lt;pre&gt;&lt;code&gt;printPairs(A, arr_size, sum);
+<span class="line-numbers"><a href="#n35" name="n35">35</a></span>
+<span class="line-numbers"><a href="#n36" name="n36">36</a></span><span class="keyword">return</span> <span class="integer">0</span>; } </pre></div>
+</div>
+ </figure></notextile></div>
 </code></pre>
 
 <hr style="border-top: 1.5px dotted black" />
@@ -251,104 +261,107 @@ Input array2 [1, 2, 4]</p>
 
 <p>Output [1, 1, 2, 3, 4, 6, 7]</p>
 
-<p>{% coderay lang:c linenos:true Merge Sorted Arrays http://ideone.com/WaTPEt Run Code %}
-#include <stdio.h /></p>
-
-<p>int lSize = 4;
-int rSize = 3;
-int L[4] = {1, 3, 6, 7};
-int R[4] = {1, 2, 4};
-int finalArray[7];</p>
-
-<p>void merge()
-{
-    int lIndx = 0;
-    int rIndx = 0;
-    int i = 0;</p>
-
-<pre><code>for (i = 0; i &lt; (lSize + rSize); i++) {
-    if (L[lIndx] &lt;= R[rIndx]) {
-        finalArray[i] = L[lIndx++];
-        if (lIndx == lSize) {
-            break;
-        }
-    } else {
-        finalArray[i] = R[rIndx++];
-        if (rIndx == rSize) {
-            break;
-        }
-    }
-}
-
-i++;
-if (lIndx != lSize) {
-    while(1) {
-        finalArray[i++] = L[lIndx++];
-
-        if (lIndx == lSize) {
-            return;
-        }
-    }
-}
-if (rIndx != rSize) {
-    while(1) {
-        finalArray[i++] = R[rIndx++];
-
-        if (rIndx == rSize) {
-            return;
-        }
-    }
-} }
-</code></pre>
-
-<p>void display()
-{
-    int i = 0;</p>
-
-<pre><code>printf("\n\nArray1: ");
-for (i = 0; i &lt; lSize; i++) {
-    printf("%d ", L[i]);
-}
-
-printf("\nArray2: ");
-for (i = 0; i &lt; rSize; i++) {
-    printf("%d ", R[i]);
-}
-
-printf("\nMerge array: ");
-for (i = 0; i &lt; lSize+rSize; i++) {
-    printf("%d ", finalArray[i]);
-} }
-</code></pre>
-
-<p>int main()
-{
-    // Test 1
-    merge();
-    display();</p>
-
-<pre><code>// Test 2
-R[0] = 1;
-R[1] = 3;
-R[2] = 6;
-R[3] = 7;
-L[0] = 1;
-L[1] = 2;
-L[2] = 4;
-lSize = 3;
-rSize = 4;
-merge();
-display();
-
-// test 3
-L[0] = 1;
-R[0] = 1;
-lSize = 1;
-rSize = 1;
-merge();
-display();
-
-return 0; } {% endcoderay %}
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Merge Sorted Arrays</span>  <a href='http://ideone.com/WaTPEt' target='_blank'>Run Code </a></figcaption> <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="preprocessor">#include</span> <span class="include">&lt;stdio.h /&gt;</span>&lt;/p&gt;
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>&lt;p&gt;<span class="predefined-type">int</span> lSize = <span class="integer">4</span>;
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span class="predefined-type">int</span> rSize = <span class="integer">3</span>;
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span class="predefined-type">int</span> L[<span class="integer">4</span>] = {<span class="integer">1</span>, <span class="integer">3</span>, <span class="integer">6</span>, <span class="integer">7</span>};
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span><span class="predefined-type">int</span> R[<span class="integer">4</span>] = {<span class="integer">1</span>, <span class="integer">2</span>, <span class="integer">4</span>};
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span class="predefined-type">int</span> finalArray[<span class="integer">7</span>];&lt;/p&gt;
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>&lt;p&gt;<span class="directive">void</span> merge()
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>{
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    <span class="predefined-type">int</span> lIndx = <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>    <span class="predefined-type">int</span> rIndx = <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>    <span class="predefined-type">int</span> i = <span class="integer">0</span>;&lt;/p&gt;
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>&lt;pre&gt;&lt;code&gt;<span class="keyword">for</span> (i = <span class="integer">0</span>; i &amp;lt; (lSize + rSize); i++) {
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>    <span class="keyword">if</span> (L[lIndx] &amp;lt;= R[rIndx]) {
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>        finalArray[i] = L[lIndx++];
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>        <span class="keyword">if</span> (lIndx == lSize) {
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>            <span class="keyword">break</span>;
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>        }
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span>    } <span class="keyword">else</span> {
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span>        finalArray[i] = R[rIndx++];
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span>        <span class="keyword">if</span> (rIndx == rSize) {
+<span class="line-numbers"><a href="#n25" name="n25">25</a></span>            <span class="keyword">break</span>;
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span>        }
+<span class="line-numbers"><a href="#n27" name="n27">27</a></span>    }
+<span class="line-numbers"><a href="#n28" name="n28">28</a></span>}
+<span class="line-numbers"><a href="#n29" name="n29">29</a></span>
+<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>i++;
+<span class="line-numbers"><a href="#n31" name="n31">31</a></span><span class="keyword">if</span> (lIndx != lSize) {
+<span class="line-numbers"><a href="#n32" name="n32">32</a></span>    <span class="keyword">while</span>(<span class="integer">1</span>) {
+<span class="line-numbers"><a href="#n33" name="n33">33</a></span>        finalArray[i++] = L[lIndx++];
+<span class="line-numbers"><a href="#n34" name="n34">34</a></span>
+<span class="line-numbers"><a href="#n35" name="n35">35</a></span>        <span class="keyword">if</span> (lIndx == lSize) {
+<span class="line-numbers"><a href="#n36" name="n36">36</a></span>            <span class="keyword">return</span>;
+<span class="line-numbers"><a href="#n37" name="n37">37</a></span>        }
+<span class="line-numbers"><a href="#n38" name="n38">38</a></span>    }
+<span class="line-numbers"><a href="#n39" name="n39">39</a></span>}
+<span class="line-numbers"><strong><a href="#n40" name="n40">40</a></strong></span><span class="keyword">if</span> (rIndx != rSize) {
+<span class="line-numbers"><a href="#n41" name="n41">41</a></span>    <span class="keyword">while</span>(<span class="integer">1</span>) {
+<span class="line-numbers"><a href="#n42" name="n42">42</a></span>        finalArray[i++] = R[rIndx++];
+<span class="line-numbers"><a href="#n43" name="n43">43</a></span>
+<span class="line-numbers"><a href="#n44" name="n44">44</a></span>        <span class="keyword">if</span> (rIndx == rSize) {
+<span class="line-numbers"><a href="#n45" name="n45">45</a></span>            <span class="keyword">return</span>;
+<span class="line-numbers"><a href="#n46" name="n46">46</a></span>        }
+<span class="line-numbers"><a href="#n47" name="n47">47</a></span>    }
+<span class="line-numbers"><a href="#n48" name="n48">48</a></span>} }
+<span class="line-numbers"><a href="#n49" name="n49">49</a></span>&lt;/code&gt;&lt;/pre&gt;
+<span class="line-numbers"><strong><a href="#n50" name="n50">50</a></strong></span>
+<span class="line-numbers"><a href="#n51" name="n51">51</a></span>&lt;p&gt;<span class="directive">void</span> display()
+<span class="line-numbers"><a href="#n52" name="n52">52</a></span>{
+<span class="line-numbers"><a href="#n53" name="n53">53</a></span>    <span class="predefined-type">int</span> i = <span class="integer">0</span>;&lt;/p&gt;
+<span class="line-numbers"><a href="#n54" name="n54">54</a></span>
+<span class="line-numbers"><a href="#n55" name="n55">55</a></span>&lt;pre&gt;&lt;code&gt;printf(<span class="string"><span class="delimiter">&quot;</span><span class="char">\n</span><span class="char">\n</span><span class="content">Array1: </span><span class="delimiter">&quot;</span></span>);
+<span class="line-numbers"><a href="#n56" name="n56">56</a></span><span class="keyword">for</span> (i = <span class="integer">0</span>; i &amp;lt; lSize; i++) {
+<span class="line-numbers"><a href="#n57" name="n57">57</a></span>    printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d </span><span class="delimiter">&quot;</span></span>, L[i]);
+<span class="line-numbers"><a href="#n58" name="n58">58</a></span>}
+<span class="line-numbers"><a href="#n59" name="n59">59</a></span>
+<span class="line-numbers"><strong><a href="#n60" name="n60">60</a></strong></span>printf(<span class="string"><span class="delimiter">&quot;</span><span class="char">\n</span><span class="content">Array2: </span><span class="delimiter">&quot;</span></span>);
+<span class="line-numbers"><a href="#n61" name="n61">61</a></span><span class="keyword">for</span> (i = <span class="integer">0</span>; i &amp;lt; rSize; i++) {
+<span class="line-numbers"><a href="#n62" name="n62">62</a></span>    printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d </span><span class="delimiter">&quot;</span></span>, R[i]);
+<span class="line-numbers"><a href="#n63" name="n63">63</a></span>}
+<span class="line-numbers"><a href="#n64" name="n64">64</a></span>
+<span class="line-numbers"><a href="#n65" name="n65">65</a></span>printf(<span class="string"><span class="delimiter">&quot;</span><span class="char">\n</span><span class="content">Merge array: </span><span class="delimiter">&quot;</span></span>);
+<span class="line-numbers"><a href="#n66" name="n66">66</a></span><span class="keyword">for</span> (i = <span class="integer">0</span>; i &amp;lt; lSize+rSize; i++) {
+<span class="line-numbers"><a href="#n67" name="n67">67</a></span>    printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d </span><span class="delimiter">&quot;</span></span>, finalArray[i]);
+<span class="line-numbers"><a href="#n68" name="n68">68</a></span>} }
+<span class="line-numbers"><a href="#n69" name="n69">69</a></span>&lt;/code&gt;&lt;/pre&gt;
+<span class="line-numbers"><strong><a href="#n70" name="n70">70</a></strong></span>
+<span class="line-numbers"><a href="#n71" name="n71">71</a></span>&lt;p&gt;<span class="predefined-type">int</span> main()
+<span class="line-numbers"><a href="#n72" name="n72">72</a></span>{
+<span class="line-numbers"><a href="#n73" name="n73">73</a></span>    <span class="comment">// Test 1</span>
+<span class="line-numbers"><a href="#n74" name="n74">74</a></span>    merge();
+<span class="line-numbers"><a href="#n75" name="n75">75</a></span>    display();&lt;/p&gt;
+<span class="line-numbers"><a href="#n76" name="n76">76</a></span>
+<span class="line-numbers"><a href="#n77" name="n77">77</a></span>&lt;pre&gt;&lt;code&gt;<span class="comment">// Test 2</span>
+<span class="line-numbers"><a href="#n78" name="n78">78</a></span>R[<span class="integer">0</span>] = <span class="integer">1</span>;
+<span class="line-numbers"><a href="#n79" name="n79">79</a></span>R[<span class="integer">1</span>] = <span class="integer">3</span>;
+<span class="line-numbers"><strong><a href="#n80" name="n80">80</a></strong></span>R[<span class="integer">2</span>] = <span class="integer">6</span>;
+<span class="line-numbers"><a href="#n81" name="n81">81</a></span>R[<span class="integer">3</span>] = <span class="integer">7</span>;
+<span class="line-numbers"><a href="#n82" name="n82">82</a></span>L[<span class="integer">0</span>] = <span class="integer">1</span>;
+<span class="line-numbers"><a href="#n83" name="n83">83</a></span>L[<span class="integer">1</span>] = <span class="integer">2</span>;
+<span class="line-numbers"><a href="#n84" name="n84">84</a></span>L[<span class="integer">2</span>] = <span class="integer">4</span>;
+<span class="line-numbers"><a href="#n85" name="n85">85</a></span>lSize = <span class="integer">3</span>;
+<span class="line-numbers"><a href="#n86" name="n86">86</a></span>rSize = <span class="integer">4</span>;
+<span class="line-numbers"><a href="#n87" name="n87">87</a></span>merge();
+<span class="line-numbers"><a href="#n88" name="n88">88</a></span>display();
+<span class="line-numbers"><a href="#n89" name="n89">89</a></span>
+<span class="line-numbers"><strong><a href="#n90" name="n90">90</a></strong></span><span class="comment">// test 3</span>
+<span class="line-numbers"><a href="#n91" name="n91">91</a></span>L[<span class="integer">0</span>] = <span class="integer">1</span>;
+<span class="line-numbers"><a href="#n92" name="n92">92</a></span>R[<span class="integer">0</span>] = <span class="integer">1</span>;
+<span class="line-numbers"><a href="#n93" name="n93">93</a></span>lSize = <span class="integer">1</span>;
+<span class="line-numbers"><a href="#n94" name="n94">94</a></span>rSize = <span class="integer">1</span>;
+<span class="line-numbers"><a href="#n95" name="n95">95</a></span>merge();
+<span class="line-numbers"><a href="#n96" name="n96">96</a></span>display();
+<span class="line-numbers"><a href="#n97" name="n97">97</a></span>
+<span class="line-numbers"><a href="#n98" name="n98">98</a></span><span class="keyword">return</span> <span class="integer">0</span>; } </pre></div>
+</div>
+ </figure></notextile></div>
 </code></pre>
 
 <hr style="border-top: 1.5px dotted black" />
@@ -366,58 +379,61 @@ Input array2 [5, 1, 2, 4, 6]</p>
  Output [5, 1, 2, 4, 6, 3, 7] OR <br />
  Output [6, 5, 3, 1, 2, 4, 7] etc…</p>
 
-<p>{% coderay lang:c linenos:true Merge Unsorted Arrays http://ideone.com/IScZ7r Run Code %}
-#include <stdio.h /></p>
-
-<h1 id="define-arr1size-5">define ARR1SIZE 5</h1>
-<p>#define ARR2SIZE 5</p>
-
-<p>int main()
-{
-    int arr1[] = {6, 3, 6, 1, 7};
-    int arr2[] = {5, 1, 2, 4, 6};
-    int arr3[ARR1SIZE + ARR2SIZE];</p>
-
-<pre><code>// Using bit map, All bits are 0
-int bitMap = 0;
-int bitMask = 0;
-int i = 0;
-int k = 0;
-
-for (i = 0; i &lt; ARR1SIZE; i++) {
-    // Check if value already exist
-    bitMask = 0;
-    bitMask = 1 &lt;&lt; arr1[i];
-
-    if (bitMap &amp; bitMask) {
-        continue;
-    }
-    arr3[k++] = arr1[i];
-
-    // Mark bitMap that value exist
-    bitMap |= 1 &lt;&lt; arr1[i];
-}
-
-for (i = 0; i &lt; ARR2SIZE; i++) {
-    // Check if value already exist
-    bitMask = 0;
-    bitMask = 1 &lt;&lt; arr2[i];
-
-    if (bitMap &amp; bitMask) {
-        continue;
-    }
-    arr3[k++] = arr2[i];
-
-    // Mark bitMap that value exist
-    bitMap |= 1 &lt;&lt; arr2[i];
-}
-
-printf("Merged Array\n");
-for (i = 0; i &lt; k; i++) {
-    printf("%d ", arr3[i]);
-}
-
-return 0; } {% endcoderay %}
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Merge Unsorted Arrays</span>  <a href='http://ideone.com/IScZ7r' target='_blank'>Run Code </a></figcaption> <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="preprocessor">#include</span> <span class="include">&lt;stdio.h /&gt;</span>&lt;/p&gt;
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>&lt;h1 id=<span class="string"><span class="delimiter">&quot;</span><span class="content">define-arr1size-5</span><span class="delimiter">&quot;</span></span>&gt;define ARR1SIZE <span class="integer">5</span>&lt;/h1&gt;
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>&lt;p&gt;<span class="preprocessor">#define</span> ARR2SIZE <span class="integer">5</span>&lt;/p&gt;
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>&lt;p&gt;<span class="predefined-type">int</span> main()
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>{
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    <span class="predefined-type">int</span> arr1[] = {<span class="integer">6</span>, <span class="integer">3</span>, <span class="integer">6</span>, <span class="integer">1</span>, <span class="integer">7</span>};
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>    <span class="predefined-type">int</span> arr2[] = {<span class="integer">5</span>, <span class="integer">1</span>, <span class="integer">2</span>, <span class="integer">4</span>, <span class="integer">6</span>};
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>    <span class="predefined-type">int</span> arr3[ARR1SIZE + ARR2SIZE];&lt;/p&gt;
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>&lt;pre&gt;&lt;code&gt;<span class="comment">// Using bit map, All bits are 0</span>
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span><span class="predefined-type">int</span> bitMap = <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span><span class="predefined-type">int</span> bitMask = <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span><span class="predefined-type">int</span> i = <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span><span class="predefined-type">int</span> k = <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span><span class="keyword">for</span> (i = <span class="integer">0</span>; i &amp;lt; ARR1SIZE; i++) {
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>    <span class="comment">// Check if value already exist</span>
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>    bitMask = <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span>    bitMask = <span class="integer">1</span> &amp;lt;&amp;lt; arr1[i];
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span>
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span>    <span class="keyword">if</span> (bitMap &amp;amp; bitMask) {
+<span class="line-numbers"><a href="#n25" name="n25">25</a></span>        <span class="keyword">continue</span>;
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span>    }
+<span class="line-numbers"><a href="#n27" name="n27">27</a></span>    arr3[k++] = arr1[i];
+<span class="line-numbers"><a href="#n28" name="n28">28</a></span>
+<span class="line-numbers"><a href="#n29" name="n29">29</a></span>    <span class="comment">// Mark bitMap that value exist</span>
+<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>    bitMap |= <span class="integer">1</span> &amp;lt;&amp;lt; arr1[i];
+<span class="line-numbers"><a href="#n31" name="n31">31</a></span>}
+<span class="line-numbers"><a href="#n32" name="n32">32</a></span>
+<span class="line-numbers"><a href="#n33" name="n33">33</a></span><span class="keyword">for</span> (i = <span class="integer">0</span>; i &amp;lt; ARR2SIZE; i++) {
+<span class="line-numbers"><a href="#n34" name="n34">34</a></span>    <span class="comment">// Check if value already exist</span>
+<span class="line-numbers"><a href="#n35" name="n35">35</a></span>    bitMask = <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n36" name="n36">36</a></span>    bitMask = <span class="integer">1</span> &amp;lt;&amp;lt; arr2[i];
+<span class="line-numbers"><a href="#n37" name="n37">37</a></span>
+<span class="line-numbers"><a href="#n38" name="n38">38</a></span>    <span class="keyword">if</span> (bitMap &amp;amp; bitMask) {
+<span class="line-numbers"><a href="#n39" name="n39">39</a></span>        <span class="keyword">continue</span>;
+<span class="line-numbers"><strong><a href="#n40" name="n40">40</a></strong></span>    }
+<span class="line-numbers"><a href="#n41" name="n41">41</a></span>    arr3[k++] = arr2[i];
+<span class="line-numbers"><a href="#n42" name="n42">42</a></span>
+<span class="line-numbers"><a href="#n43" name="n43">43</a></span>    <span class="comment">// Mark bitMap that value exist</span>
+<span class="line-numbers"><a href="#n44" name="n44">44</a></span>    bitMap |= <span class="integer">1</span> &amp;lt;&amp;lt; arr2[i];
+<span class="line-numbers"><a href="#n45" name="n45">45</a></span>}
+<span class="line-numbers"><a href="#n46" name="n46">46</a></span>
+<span class="line-numbers"><a href="#n47" name="n47">47</a></span>printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Merged Array</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>);
+<span class="line-numbers"><a href="#n48" name="n48">48</a></span><span class="keyword">for</span> (i = <span class="integer">0</span>; i &amp;lt; k; i++) {
+<span class="line-numbers"><a href="#n49" name="n49">49</a></span>    printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d </span><span class="delimiter">&quot;</span></span>, arr3[i]);
+<span class="line-numbers"><strong><a href="#n50" name="n50">50</a></strong></span>}
+<span class="line-numbers"><a href="#n51" name="n51">51</a></span>
+<span class="line-numbers"><a href="#n52" name="n52">52</a></span><span class="keyword">return</span> <span class="integer">0</span>; } </pre></div>
+</div>
+ </figure></notextile></div>
 </code></pre>
 
 <hr style="border-top: 1.5px dotted black" />
@@ -429,42 +445,45 @@ return 0; } {% endcoderay %}
 
 <p>Sort them as [1, 1, 2, 2, 3, 4]</p>
 
-<p>{% coderay lang:c linenos:true Counting Sort http://ideone.com/0BumWs Run Code %}
-#include <stdio.h /></p>
-
-<h1 id="define-arraysize-6">define ARRAYSIZE 6</h1>
-<p>#define MAX 4</p>
-
-<p>int main()
-{
-    int arr[] = {2, 1, 3, 2, 1, 4};
-    int final[ARRAYSIZE];</p>
-
-<pre><code>// Given we know max element in array
-// This technique is based on counting sort
-int count[MAX + 1] = {0};
-int i = 0;
-int j = 0;
-
-for (i = 0; i &lt; ARRAYSIZE; i++) {
-    count[arr[i]]++;
-}
-
-for (i = 0; i &lt; MAX + 1; i++) {
-    if (count[i] != 0) {
-        while (count[i] != 0) {
-            final[j++] = i;
-            count[i]--;
-        }
-    }
-}
-
-printf("Sorted Array\n");
-for (i = 0; i &lt; ARRAYSIZE; i++) {
-    printf("%d ", final[i]);
-}
-
-return 0; } {% endcoderay %}
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Counting Sort</span>  <a href='http://ideone.com/0BumWs' target='_blank'>Run Code </a></figcaption> <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="preprocessor">#include</span> <span class="include">&lt;stdio.h /&gt;</span>&lt;/p&gt;
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>&lt;h1 id=<span class="string"><span class="delimiter">&quot;</span><span class="content">define-arraysize-6</span><span class="delimiter">&quot;</span></span>&gt;define ARRAYSIZE <span class="integer">6</span>&lt;/h1&gt;
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>&lt;p&gt;<span class="preprocessor">#define</span> MAX <span class="integer">4</span>&lt;/p&gt;
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>&lt;p&gt;<span class="predefined-type">int</span> main()
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>{
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    <span class="predefined-type">int</span> arr[] = {<span class="integer">2</span>, <span class="integer">1</span>, <span class="integer">3</span>, <span class="integer">2</span>, <span class="integer">1</span>, <span class="integer">4</span>};
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>    <span class="predefined-type">int</span> final[ARRAYSIZE];&lt;/p&gt;
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>&lt;pre&gt;&lt;code&gt;<span class="comment">// Given we know max element in array</span>
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span><span class="comment">// This technique is based on counting sort</span>
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span><span class="predefined-type">int</span> count[MAX + <span class="integer">1</span>] = {<span class="integer">0</span>};
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span><span class="predefined-type">int</span> i = <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span><span class="predefined-type">int</span> j = <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span><span class="keyword">for</span> (i = <span class="integer">0</span>; i &amp;lt; ARRAYSIZE; i++) {
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>    count[arr[i]]++;
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>}
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span><span class="keyword">for</span> (i = <span class="integer">0</span>; i &amp;lt; MAX + <span class="integer">1</span>; i++) {
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span>    <span class="keyword">if</span> (count[i] != <span class="integer">0</span>) {
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span>        <span class="keyword">while</span> (count[i] != <span class="integer">0</span>) {
+<span class="line-numbers"><a href="#n25" name="n25">25</a></span>            final[j++] = i;
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span>            count[i]--;
+<span class="line-numbers"><a href="#n27" name="n27">27</a></span>        }
+<span class="line-numbers"><a href="#n28" name="n28">28</a></span>    }
+<span class="line-numbers"><a href="#n29" name="n29">29</a></span>}
+<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>
+<span class="line-numbers"><a href="#n31" name="n31">31</a></span>printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Sorted Array</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>);
+<span class="line-numbers"><a href="#n32" name="n32">32</a></span><span class="keyword">for</span> (i = <span class="integer">0</span>; i &amp;lt; ARRAYSIZE; i++) {
+<span class="line-numbers"><a href="#n33" name="n33">33</a></span>    printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d </span><span class="delimiter">&quot;</span></span>, final[i]);
+<span class="line-numbers"><a href="#n34" name="n34">34</a></span>}
+<span class="line-numbers"><a href="#n35" name="n35">35</a></span>
+<span class="line-numbers"><a href="#n36" name="n36">36</a></span><span class="keyword">return</span> <span class="integer">0</span>; } </pre></div>
+</div>
+ </figure></notextile></div>
 </code></pre>
 
 <hr style="border-top: 1.5px dotted black" />
@@ -474,28 +493,32 @@ return 0; } {% endcoderay %}
 
 <p>Given an array of positive integers. All numbers occur even number of times except one number which occurs odd number of times. Find the number in O(n) time &amp; constant space.</p>
 
-<p>{% coderay lang:c linenos:true Odd occurence  %}
-#include <stdio.h /></p>
-
-<p>int getOddOccurrence(int ar[], int ar_size)
-{
-     int i;
-     int res = 0; 
-     for (i=0; i &lt; ar_size; i++)   <br />
-        res = res ^ ar[i];</p>
-
-<pre><code> return res; }
-</code></pre>
-
-<p>/* Diver function to test above function */
-int main()
-{
-     int ar[] = {2, 3, 5, 4, 5, 2, 4, 3, 5, 2, 4, 4, 2};
-     int n = sizeof(ar)/sizeof(ar[0]);
-     printf(“%d”, getOddOccurrence(ar, n));
-     return 0;
-}
-{% endcoderay %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Odd occurence  </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="preprocessor">#include</span> <span class="include">&lt;stdio.h /&gt;</span>&lt;/p&gt;
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>&lt;p&gt;<span class="predefined-type">int</span> getOddOccurrence(<span class="predefined-type">int</span> ar[], <span class="predefined-type">int</span> ar_size)
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>{
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>     <span class="predefined-type">int</span> i;
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>     <span class="predefined-type">int</span> res = <span class="integer">0</span>; 
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>     <span class="keyword">for</span> (i=<span class="integer">0</span>; i &amp;lt; ar_size; i++)   &lt;br /&gt;
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>        res = res ^ ar[i];&lt;/p&gt;
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>&lt;pre&gt;&lt;code&gt; <span class="keyword">return</span> res; }
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>&lt;/code&gt;&lt;/pre&gt;
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>&lt;p&gt;<span class="comment">/* Diver function to test above function */</span>
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span><span class="predefined-type">int</span> main()
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>{
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>     <span class="predefined-type">int</span> ar[] = {<span class="integer">2</span>, <span class="integer">3</span>, <span class="integer">5</span>, <span class="integer">4</span>, <span class="integer">5</span>, <span class="integer">2</span>, <span class="integer">4</span>, <span class="integer">3</span>, <span class="integer">5</span>, <span class="integer">2</span>, <span class="integer">4</span>, <span class="integer">4</span>, <span class="integer">2</span>};
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>     <span class="predefined-type">int</span> n = <span class="keyword">sizeof</span>(ar)/<span class="keyword">sizeof</span>(ar[<span class="integer">0</span>]);
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>     printf(<span class="error">“</span>%d<span class="error">”</span>, getOddOccurrence(ar, n));
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>     <span class="keyword">return</span> <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>}
+</pre></div>
+</div>
+ </figure></notextile></div></p>
 
 <hr style="border-top: 1.5px dotted black" />
 <p><br /><br /></p>
@@ -515,59 +538,63 @@ Output: 10 and 20</p>
 
 <p><a href="http://www.geeksforgeeks.org/find-the-two-numbers-with-odd-occurences-in-an-unsorted-array/" target="_blank">Solution Explanation</a></p>
 
-<p>{% coderay lang:c linenos:true 2 Odd Num  %}
-// Program to find the two odd occurring elements
-#include<stdio.h /></p>
-
-<p>/* Prints two numbers that occur odd number of times. The
-   function assumes that the array size is at least 2 and
-   there are exactly two numbers occurring odd number of times. <em>/
-void printTwoOdd(int arr[], int size)
-{
-  int xor2 = arr[0]; /</em> Will hold XOR of two odd occurring elements <em>/
-  int set_bit_no;  /</em> Will have only single set bit of xor2 */
-  int i;
-  int n = size - 2;
-  int x = 0, y = 0;</p>
-
-<p>/* Get the xor of all elements in arr[]. The xor will basically
-     be xor of two odd occurring elements */
-  for(i = 1; i &lt; size; i++)
-    xor2 = xor2 ^ arr[i];</p>
-
-<p>/* Get one set bit in the xor2. We get rightmost set bit
-     in the following line as it is easy to get */
-  set_bit_no = xor2 &amp; ~(xor2-1);</p>
-
-<p>/* Now divide elements in two sets: 
-    1) The elements having the corresponding bit as 1. 
-    2) The elements having the corresponding bit as 0.  <em>/
-  for(i = 0; i &lt; size; i++)
-  {
-     /</em> XOR of first set is finally going to hold one odd 
-       occurring number x */
-    if(arr[i] &amp; set_bit_no)
-      x = x ^ arr[i];</p>
-
-<pre><code> /* XOR of second set is finally going to hold the other 
-   odd occurring number y */
-else
-  y = y ^ arr[i];    }
-</code></pre>
-
-<p>printf(“\n The two ODD elements are %d &amp; %d “, x, y);
-}</p>
-
-<p>/* Driver program to test above function */
-int main()
-{
-  int arr[] = {4, 2, 4, 5, 2, 3, 3, 1};
-  int arr_size = sizeof(arr)/sizeof(arr[0]);
-  printTwoOdd(arr, arr_size);</p>
-
-<p>return 0;
-}
-{% endcoderay %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>2 Odd Num  </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="comment">// Program to find the two odd occurring elements</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span class="preprocessor">#include</span><span class="include">&lt;stdio.h /&gt;</span>&lt;/p&gt;
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>&lt;p&gt;<span class="comment">/* Prints two numbers that occur odd number of times. The</span>
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span class="comment">   function assumes that the array size is at least 2 and</span>
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span><span class="comment">   there are exactly two numbers occurring odd number of times. &lt;em&gt;/</span>
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span class="comment">void printTwoOdd(int arr[], int size)</span>
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span><span class="comment">{</span>
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span><span class="comment">  int xor2 = arr[0]; /&lt;/em&gt; Will hold XOR of two odd occurring elements &lt;em&gt;/</span>
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span><span class="comment">  int set_bit_no;  /&lt;/em&gt; Will have only single set bit of xor2 */</span>
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>  <span class="predefined-type">int</span> i;
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>  <span class="predefined-type">int</span> n = size - <span class="integer">2</span>;
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>  <span class="predefined-type">int</span> x = <span class="integer">0</span>, y = <span class="integer">0</span>;&lt;/p&gt;
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>&lt;p&gt;<span class="comment">/* Get the xor of all elements in arr[]. The xor will basically</span>
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span><span class="comment">     be xor of two odd occurring elements */</span>
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>  <span class="keyword">for</span>(i = <span class="integer">1</span>; i &amp;lt; size; i++)
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>    xor2 = xor2 ^ arr[i];&lt;/p&gt;
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>&lt;p&gt;<span class="comment">/* Get one set bit in the xor2. We get rightmost set bit</span>
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span><span class="comment">     in the following line as it is easy to get */</span>
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span>  set_bit_no = xor2 &amp;amp; ~(xor2-<span class="integer">1</span>);&lt;/p&gt;
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span>
+<span class="line-numbers"><a href="#n25" name="n25">25</a></span>&lt;p&gt;<span class="comment">/* Now divide elements in two sets: </span>
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span><span class="comment">    1) The elements having the corresponding bit as 1. </span>
+<span class="line-numbers"><a href="#n27" name="n27">27</a></span><span class="comment">    2) The elements having the corresponding bit as 0.  &lt;em&gt;/</span>
+<span class="line-numbers"><a href="#n28" name="n28">28</a></span><span class="comment">  for(i = 0; i &amp;lt; size; i++)</span>
+<span class="line-numbers"><a href="#n29" name="n29">29</a></span><span class="comment">  {</span>
+<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span><span class="comment">     /&lt;/em&gt; XOR of first set is finally going to hold one odd </span>
+<span class="line-numbers"><a href="#n31" name="n31">31</a></span><span class="comment">       occurring number x */</span>
+<span class="line-numbers"><a href="#n32" name="n32">32</a></span>    <span class="keyword">if</span>(arr[i] &amp;amp; set_bit_no)
+<span class="line-numbers"><a href="#n33" name="n33">33</a></span>      x = x ^ arr[i];&lt;/p&gt;
+<span class="line-numbers"><a href="#n34" name="n34">34</a></span>
+<span class="line-numbers"><a href="#n35" name="n35">35</a></span>&lt;pre&gt;&lt;code&gt; <span class="comment">/* XOR of second set is finally going to hold the other </span>
+<span class="line-numbers"><a href="#n36" name="n36">36</a></span><span class="comment">   odd occurring number y */</span>
+<span class="line-numbers"><a href="#n37" name="n37">37</a></span><span class="keyword">else</span>
+<span class="line-numbers"><a href="#n38" name="n38">38</a></span>  y = y ^ arr[i];    }
+<span class="line-numbers"><a href="#n39" name="n39">39</a></span>&lt;/code&gt;&lt;/pre&gt;
+<span class="line-numbers"><strong><a href="#n40" name="n40">40</a></strong></span>
+<span class="line-numbers"><a href="#n41" name="n41">41</a></span>&lt;p&gt;printf(<span class="error">“</span><span class="error">\</span>n The two ODD elements are %d &amp;amp; %d <span class="error">“</span>, x, y);
+<span class="line-numbers"><a href="#n42" name="n42">42</a></span>}&lt;/p&gt;
+<span class="line-numbers"><a href="#n43" name="n43">43</a></span>
+<span class="line-numbers"><a href="#n44" name="n44">44</a></span>&lt;p&gt;<span class="comment">/* Driver program to test above function */</span>
+<span class="line-numbers"><a href="#n45" name="n45">45</a></span><span class="predefined-type">int</span> main()
+<span class="line-numbers"><a href="#n46" name="n46">46</a></span>{
+<span class="line-numbers"><a href="#n47" name="n47">47</a></span>  <span class="predefined-type">int</span> arr[] = {<span class="integer">4</span>, <span class="integer">2</span>, <span class="integer">4</span>, <span class="integer">5</span>, <span class="integer">2</span>, <span class="integer">3</span>, <span class="integer">3</span>, <span class="integer">1</span>};
+<span class="line-numbers"><a href="#n48" name="n48">48</a></span>  <span class="predefined-type">int</span> arr_size = <span class="keyword">sizeof</span>(arr)/<span class="keyword">sizeof</span>(arr[<span class="integer">0</span>]);
+<span class="line-numbers"><a href="#n49" name="n49">49</a></span>  printTwoOdd(arr, arr_size);&lt;/p&gt;
+<span class="line-numbers"><strong><a href="#n50" name="n50">50</a></strong></span>
+<span class="line-numbers"><a href="#n51" name="n51">51</a></span>&lt;p&gt;<span class="keyword">return</span> <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n52" name="n52">52</a></span>}
+</pre></div>
+</div>
+ </figure></notextile></div></p>
 
 <h3 id="string-problems">String Problems</h3>
 
@@ -575,27 +602,30 @@ int main()
 
 <p>String could be reversed without using extra space using bitwise operator <a href="http://distkeys.com/blog/2013/10/08/world-of-bits-and-bytes/#bitwise-operators" target="_blank">XOR</a></p>
 
-<p>{% coderay lang:c linenos:true String Reverse http://ideone.com/vfTxcr Run Code %}
-#include <stdio.h>
-#include <string.h /></stdio.h></p>
-
-<p>int main(void) {
-    int i = 0;
-    char str[] = “testString”;
-    int len = strlen(str);</p>
-
-<pre><code>for(i = 0; i &lt; len/2; i++){
-	str[len - i - 1] ^= str[i];
-	str[i] ^= str[len - i - 1];
-	str[len - i - 1] ^= str[i];
-}
-
-printf("Reverse String %s \n", str);
- 
-return 0; }
-</code></pre>
-
-<p>{% endcoderay %}
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>String Reverse</span>  <a href='http://ideone.com/vfTxcr' target='_blank'>Run Code </a></figcaption> <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="preprocessor">#include</span> <span class="include">&lt;stdio.h&gt;</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span class="preprocessor">#include</span> <span class="include">&lt;string.h /&gt;</span>&lt;/stdio.h&gt;&lt;/p&gt;
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>&lt;p&gt;<span class="predefined-type">int</span> main(<span class="directive">void</span>) {
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    <span class="predefined-type">int</span> i = <span class="integer">0</span>;
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span class="predefined-type">char</span> str[] = <span class="error">“</span>testString<span class="error">”</span>;
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    <span class="predefined-type">int</span> len = strlen(str);&lt;/p&gt;
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>&lt;pre&gt;&lt;code&gt;<span class="keyword">for</span>(i = <span class="integer">0</span>; i &amp;lt; len/<span class="integer">2</span>; i++){
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>    str[len - i - <span class="integer">1</span>] ^= str[i];
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    str[i] ^= str[len - i - <span class="integer">1</span>];
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>    str[len - i - <span class="integer">1</span>] ^= str[i];
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>}
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Reverse String %s </span><span class="char">\n</span><span class="delimiter">&quot;</span></span>, str);
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span> 
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span><span class="keyword">return</span> <span class="integer">0</span>; }
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>&lt;/code&gt;&lt;/pre&gt;
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>&lt;p&gt;</pre></div>
+</div>
+ </figure></notextile></div>
 <br /></p>
 
 <hr style="border-top: 1.5px dotted black" />
@@ -670,6 +700,14 @@ Rotate 2 times</p>
 
 <hr style="border-top: 1.5px dotted black" />
 <p><br /></p>
+
+<h4 id="searching-an-element-in-a-rotated-sorted-array">Searching an Element in a Rotated Sorted Array</h4>
+
+<p>This <a href="http://leetcode.com/2010/04/searching-element-in-rotated-array.html" target="_blank">article</a> explains the reasoning for searching an element in a rotated sorted array.</p>
+
+<p>It even explains how to find the minimum number i.e. from where rotation started.</p>
+
+<p><br /><br /><br /></p>
 
 ]]></content>
   </entry>
