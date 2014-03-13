@@ -4,7 +4,7 @@
   <title><![CDATA[Category: sorting | Distributed Knowledge]]></title>
   <link href="http://distkeys.com/blog/categories/sorting/atom.xml" rel="self"/>
   <link href="http://distkeys.com/"/>
-  <updated>2014-03-11T23:42:58-07:00</updated>
+  <updated>2014-03-12T00:16:57-07:00</updated>
   <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -39,67 +39,55 @@
 
 <p><br /><br /><br /><br /></p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Merge-Sort </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>MERGE-SORT(A, p, r) <span class="comment">// A is array of numbers</span>
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>{                   <span class="comment">// p is starting index of array</span>
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>                    <span class="comment">// r is last index of array</span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    <span class="keyword">if</span> p &amp;lt; r
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    then q &amp;lt;- <span class="error">⌊</span>(p + r)<span class="error">⌋</span> / <span class="integer">2</span>;&lt;br /&gt;
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>        MERGE-SORT(A, p, q)
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>        MERGE-SORT(A, q + <span class="integer">1</span>, r)
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>        MERGE(A, p, q, r)
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>}
-</pre></div>
-</div>
- </figure></notextile></div>
+<p>{% coderay lang:c linenos:true Merge-Sort %}
+MERGE-SORT(A, p, r) // A is array of numbers
+{                   // p is starting index of array
+                    // r is last index of array
+    if p &lt; r
+    then q &lt;- ⌊(p + r)⌋ / 2;<br />
+        MERGE-SORT(A, p, q)
+        MERGE-SORT(A, q + 1, r)
+        MERGE(A, p, q, r)
+}
+{% endcoderay %}
 <!-- more -->
 <br /></p>
 
 <p>Merge Sort</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Merge-Sort </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>MERGE(A, p, q, r)
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>n1 &amp;lt;- q - p + <span class="integer">1</span>
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>n2 &amp;lt;- r - q
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>create arrays L[<span class="integer">1</span><span class="error">…</span>n1 + <span class="integer">1</span>] and R[<span class="integer">1</span><span class="error">…</span> n2 + <span class="integer">1</span>] <span class="comment">// It took O(n) space&lt;/p&gt;</span>
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>&lt;p&gt;<span class="comment">//Assign elements to new sub arrays</span>
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span class="keyword">for</span> i &amp;lt;- <span class="integer">1</span> to n1
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    <span class="keyword">do</span> L[i] &amp;lt;- A[p + i - <span class="integer">1</span>]&lt;/p&gt;
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>&lt;p&gt;<span class="keyword">for</span> j &amp;lt;- <span class="integer">1</span> to n2
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    <span class="keyword">do</span> R[j] &amp;lt;- A[q + j]&lt;/p&gt;
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span>
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span>&lt;p&gt;<span class="comment">//Mark end of array</span>
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span>L[n1 + <span class="integer">1</span>] &amp;lt;- <span class="error">∞</span>
-<span class="line-numbers"><a href="#n16" name="n16">16</a></span>R[n2 + <span class="integer">1</span>] &amp;lt;- <span class="error">∞</span>
-</pre></div>
-</div>
- </figure></notextile></div>
+<p>{% coderay lang:c linenos:true Merge-Sort %}
+MERGE(A, p, q, r)
+n1 &lt;- q - p + 1
+n2 &lt;- r - q
+create arrays L[1…n1 + 1] and R[1… n2 + 1] // It took O(n) space</p>
+
+<p>//Assign elements to new sub arrays
+for i &lt;- 1 to n1
+    do L[i] &lt;- A[p + i - 1]</p>
+
+<p>for j &lt;- 1 to n2
+    do R[j] &lt;- A[q + j]</p>
+
+<p>//Mark end of array
+L[n1 + 1] &lt;- ∞
+R[n2 + 1] &lt;- ∞
+{% endcoderay %}
 <br /></p>
 
 <p>Merging two arrays L[] and R[]</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Merge step </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>i &amp;lt;- <span class="integer">1</span>
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>j &amp;lt;- <span class="integer">1</span>&lt;/p&gt;
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>&lt;p&gt;<span class="keyword">for</span> k &amp;lt;- p to r {
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    <span class="keyword">do</span> <span class="keyword">if</span> L[i] &amp;lt;= R[j]
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>        then A[k] &amp;lt;- L[i]
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>            i &amp;lt;- i + <span class="integer">1</span>
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>        <span class="keyword">else</span> A[k] &amp;lt;- R[j]
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>            j &amp;lt;- j + <span class="integer">1</span>
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>}
-</pre></div>
-</div>
- </figure></notextile></div>
+<p>{% coderay lang:c linenos:true Merge step %}
+i &lt;- 1
+j &lt;- 1</p>
+
+<p>for k &lt;- p to r {
+    do if L[i] &lt;= R[j]
+        then A[k] &lt;- L[i]
+            i &lt;- i + 1
+        else A[k] &lt;- R[j]
+            j &lt;- j + 1
+}
+{% endcoderay %}
 <br /></p>
 
 <p><strong>Analysis</strong></p>
@@ -167,117 +155,114 @@ Each level contributes to total cost of <code>cn</code></p>
 
 <h3 id="merge-sort-code">Merge sort code</h3>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Merge Sort</span>  <a href='http://ideone.com/BuLW5z' target='_blank'>Run Code </a></figcaption> <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers">  <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers">  <a href="#n2" name="n2">2</a></span><span class="comment">// Merge Sort example</span>
-<span class="line-numbers">  <a href="#n3" name="n3">3</a></span><span class="comment">// For input array</span>
-<span class="line-numbers">  <a href="#n4" name="n4">4</a></span><span class="comment">// 2 8 7 1 3 5 6 4 9 0</span>
-<span class="line-numbers">  <a href="#n5" name="n5">5</a></span><span class="comment">//</span>
-<span class="line-numbers">  <a href="#n6" name="n6">6</a></span><span class="comment">// First partion in L[] and R[] will be</span>
-<span class="line-numbers">  <a href="#n7" name="n7">7</a></span><span class="comment">// L[] = 2 8 7 1 3 ==&amp;gt; L[] = 2 8 7 | R[] = 1 3 ==&amp;gt; L[] = 2 8 | R[] = 7</span>
-<span class="line-numbers">  <a href="#n8" name="n8">8</a></span><span class="comment">// R[] = 5 6 4 9 0</span>
-<span class="line-numbers">  <a href="#n9" name="n9">9</a></span><span class="comment">//</span>
-<span class="line-numbers"> <strong><a href="#n10" name="n10">10</a></strong></span><span class="preprocessor">#include</span> <span class="include">&lt;stdio.h /&gt;</span>&lt;/p&gt;
-<span class="line-numbers"> <a href="#n11" name="n11">11</a></span>
-<span class="line-numbers"> <a href="#n12" name="n12">12</a></span>&lt;h1 id=<span class="string"><span class="delimiter">&quot;</span><span class="content">define-eoa-100000--end-of-array</span><span class="delimiter">&quot;</span></span>&gt;define EOA <span class="integer">100000</span>  <span class="comment">//End of array&lt;/h1&gt;</span>
-<span class="line-numbers"> <a href="#n13" name="n13">13</a></span>
-<span class="line-numbers"> <a href="#n14" name="n14">14</a></span>&lt;p&gt;<span class="comment">// To enable debug messages uncomment #define</span>
-<span class="line-numbers"> <a href="#n15" name="n15">15</a></span><span class="comment">// #define DEBUG 1&lt;/p&gt;</span>
-<span class="line-numbers"> <a href="#n16" name="n16">16</a></span>
-<span class="line-numbers"> <a href="#n17" name="n17">17</a></span>&lt;h1 id=<span class="string"><span class="delimiter">&quot;</span><span class="content">ifdef-debug</span><span class="delimiter">&quot;</span></span>&gt;ifdef DEBUG&lt;/h1&gt;
-<span class="line-numbers"> <a href="#n18" name="n18">18</a></span>&lt;p&gt;<span class="preprocessor">#  define</span> D(x) x
-<span class="line-numbers"> <a href="#n19" name="n19">19</a></span><span class="preprocessor">#else</span>
-<span class="line-numbers"> <strong><a href="#n20" name="n20">20</a></strong></span><span class="preprocessor">#  define</span> D(x)
-<span class="line-numbers"> <a href="#n21" name="n21">21</a></span><span class="preprocessor">#endif</span>&lt;/p&gt;
-<span class="line-numbers"> <a href="#n22" name="n22">22</a></span>
-<span class="line-numbers"> <a href="#n23" name="n23">23</a></span>&lt;p&gt;<span class="directive">void</span> mergesort(<span class="predefined-type">int</span> arr[], <span class="predefined-type">int</span> p, <span class="predefined-type">int</span> r); 
-<span class="line-numbers"> <a href="#n24" name="n24">24</a></span><span class="directive">void</span> merge(<span class="predefined-type">int</span> arr[], <span class="predefined-type">int</span> p, <span class="predefined-type">int</span> q, <span class="predefined-type">int</span> r); &lt;/p&gt;
-<span class="line-numbers"> <a href="#n25" name="n25">25</a></span>
-<span class="line-numbers"> <a href="#n26" name="n26">26</a></span>&lt;p&gt;<span class="predefined-type">int</span> arr[<span class="integer">10</span>] = {<span class="integer">2</span>, <span class="integer">8</span>, <span class="integer">7</span>, <span class="integer">1</span>, <span class="integer">3</span>, <span class="integer">5</span>, <span class="integer">6</span>, <span class="integer">4</span>, <span class="integer">9</span>, <span class="integer">0</span>}; &lt;/p&gt;
-<span class="line-numbers"> <a href="#n27" name="n27">27</a></span>
-<span class="line-numbers"> <a href="#n28" name="n28">28</a></span>&lt;p&gt;<span class="predefined-type">int</span> main()
-<span class="line-numbers"> <a href="#n29" name="n29">29</a></span>{
-<span class="line-numbers"> <strong><a href="#n30" name="n30">30</a></strong></span>    <span class="predefined-type">int</span> i = <span class="integer">0</span>;
-<span class="line-numbers"> <a href="#n31" name="n31">31</a></span>    printf(<span class="error">“</span>Input array<span class="error">\</span>n<span class="error">”</span>);
-<span class="line-numbers"> <a href="#n32" name="n32">32</a></span>    <span class="keyword">for</span> (i = <span class="integer">0</span>; i &amp;lt;= <span class="integer">9</span>; i++) {
-<span class="line-numbers"> <a href="#n33" name="n33">33</a></span>        printf(<span class="error">“</span>%d <span class="error">“</span>, arr[i]);
-<span class="line-numbers"> <a href="#n34" name="n34">34</a></span>    } &lt;br /&gt;
-<span class="line-numbers"> <a href="#n35" name="n35">35</a></span>    printf(<span class="error">“</span><span class="error">\</span>n<span class="error">\</span>n<span class="error">”</span>);&lt;/p&gt;
-<span class="line-numbers"> <a href="#n36" name="n36">36</a></span>
-<span class="line-numbers"> <a href="#n37" name="n37">37</a></span>&lt;pre&gt;&lt;code&gt;mergesort(arr, <span class="integer">0</span>, <span class="integer">9</span>); 
-<span class="line-numbers"> <a href="#n38" name="n38">38</a></span> 
-<span class="line-numbers"> <a href="#n39" name="n39">39</a></span>printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Sorted output</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>);
-<span class="line-numbers"> <strong><a href="#n40" name="n40">40</a></strong></span><span class="keyword">for</span> (i = <span class="integer">0</span>; i &amp;lt;= <span class="integer">9</span>; i++) {
-<span class="line-numbers"> <a href="#n41" name="n41">41</a></span>    printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d </span><span class="delimiter">&quot;</span></span>, arr[i]);
-<span class="line-numbers"> <a href="#n42" name="n42">42</a></span>}   
-<span class="line-numbers"> <a href="#n43" name="n43">43</a></span>printf(<span class="string"><span class="delimiter">&quot;</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>);
-<span class="line-numbers"> <a href="#n44" name="n44">44</a></span> 
-<span class="line-numbers"> <a href="#n45" name="n45">45</a></span><span class="keyword">return</span> <span class="integer">0</span>; }
-<span class="line-numbers"> <a href="#n46" name="n46">46</a></span>&lt;/code&gt;&lt;/pre&gt;
-<span class="line-numbers"> <a href="#n47" name="n47">47</a></span>
-<span class="line-numbers"> <a href="#n48" name="n48">48</a></span>&lt;p&gt;<span class="directive">void</span> mergesort(<span class="predefined-type">int</span> arr[], <span class="predefined-type">int</span> p, <span class="predefined-type">int</span> r)
-<span class="line-numbers"> <a href="#n49" name="n49">49</a></span>{
-<span class="line-numbers"> <strong><a href="#n50" name="n50">50</a></strong></span>    <span class="keyword">if</span> (p &amp;lt; r) {
-<span class="line-numbers"> <a href="#n51" name="n51">51</a></span>        <span class="predefined-type">int</span> q = (p + r) / <span class="integer">2</span>;&lt;/p&gt;
-<span class="line-numbers"> <a href="#n52" name="n52">52</a></span>
-<span class="line-numbers"> <a href="#n53" name="n53">53</a></span>&lt;pre&gt;&lt;code&gt;    mergesort(arr, p, q);
-<span class="line-numbers"> <a href="#n54" name="n54">54</a></span>    mergesort(arr, q+<span class="integer">1</span>, r);
-<span class="line-numbers"> <a href="#n55" name="n55">55</a></span>    merge(arr, p, q, r);
-<span class="line-numbers"> <a href="#n56" name="n56">56</a></span>} }
-<span class="line-numbers"> <a href="#n57" name="n57">57</a></span>&lt;/code&gt;&lt;/pre&gt;
-<span class="line-numbers"> <a href="#n58" name="n58">58</a></span>
-<span class="line-numbers"> <a href="#n59" name="n59">59</a></span>&lt;p&gt;<span class="directive">void</span> merge(<span class="predefined-type">int</span> arr[], <span class="predefined-type">int</span> p, <span class="predefined-type">int</span> q, <span class="predefined-type">int</span> r)
-<span class="line-numbers"> <strong><a href="#n60" name="n60">60</a></strong></span>{
-<span class="line-numbers"> <a href="#n61" name="n61">61</a></span>    <span class="predefined-type">int</span> n1 = q - p + <span class="integer">1</span>;
-<span class="line-numbers"> <a href="#n62" name="n62">62</a></span>    <span class="predefined-type">int</span> n2 = r - q;
-<span class="line-numbers"> <a href="#n63" name="n63">63</a></span>    <span class="predefined-type">int</span> i = <span class="integer">0</span>;
-<span class="line-numbers"> <a href="#n64" name="n64">64</a></span>    <span class="predefined-type">int</span> j = <span class="integer">0</span>;&lt;/p&gt;
-<span class="line-numbers"> <a href="#n65" name="n65">65</a></span>
-<span class="line-numbers"> <a href="#n66" name="n66">66</a></span>&lt;pre&gt;&lt;code&gt;<span class="predefined-type">int</span> L[<span class="integer">15</span>];
-<span class="line-numbers"> <a href="#n67" name="n67">67</a></span><span class="predefined-type">int</span> R[<span class="integer">15</span>];
-<span class="line-numbers"> <a href="#n68" name="n68">68</a></span> 
-<span class="line-numbers"> <a href="#n69" name="n69">69</a></span><span class="comment">//Copy elements from p to n1 in L[]</span>
-<span class="line-numbers"> <strong><a href="#n70" name="n70">70</a></strong></span><span class="keyword">for</span> (i = <span class="integer">0</span>; i &amp;lt; n1; i++) {
-<span class="line-numbers"> <a href="#n71" name="n71">71</a></span>    L[i] = arr[p + i];
-<span class="line-numbers"> <a href="#n72" name="n72">72</a></span>}
-<span class="line-numbers"> <a href="#n73" name="n73">73</a></span>L[i] = EOA;
-<span class="line-numbers"> <a href="#n74" name="n74">74</a></span> 
-<span class="line-numbers"> <a href="#n75" name="n75">75</a></span><span class="keyword">for</span> (j = <span class="integer">0</span>; j &amp;lt; n2; j++) {
-<span class="line-numbers"> <a href="#n76" name="n76">76</a></span>    R[j] = arr[q + j + <span class="integer">1</span>];
-<span class="line-numbers"> <a href="#n77" name="n77">77</a></span>}
-<span class="line-numbers"> <a href="#n78" name="n78">78</a></span>R[j] = EOA;
-<span class="line-numbers"> <a href="#n79" name="n79">79</a></span> 
-<span class="line-numbers"> <strong><a href="#n80" name="n80">80</a></strong></span><span class="predefined-type">int</span> lindx = <span class="integer">0</span>;
-<span class="line-numbers"> <a href="#n81" name="n81">81</a></span><span class="predefined-type">int</span> rindx = <span class="integer">0</span>;
-<span class="line-numbers"> <a href="#n82" name="n82">82</a></span><span class="comment">//Merge array L[] and R[]</span>
-<span class="line-numbers"> <a href="#n83" name="n83">83</a></span><span class="keyword">for</span> (i = p; i &amp;lt;= r; i++) {
-<span class="line-numbers"> <a href="#n84" name="n84">84</a></span>    <span class="keyword">if</span>(L[lindx] &amp;lt;= R[rindx]) {
-<span class="line-numbers"> <a href="#n85" name="n85">85</a></span>        arr[i] = L[lindx++];
-<span class="line-numbers"> <a href="#n86" name="n86">86</a></span>    } <span class="keyword">else</span> {
-<span class="line-numbers"> <a href="#n87" name="n87">87</a></span>        arr[i] = R[rindx++];
-<span class="line-numbers"> <a href="#n88" name="n88">88</a></span>    }
-<span class="line-numbers"> <a href="#n89" name="n89">89</a></span>}
-<span class="line-numbers"> <strong><a href="#n90" name="n90">90</a></strong></span> 
-<span class="line-numbers"> <a href="#n91" name="n91">91</a></span><span class="comment">// Print debug statements</span>
-<span class="line-numbers"> <a href="#n92" name="n92">92</a></span>D(printf(<span class="string"><span class="delimiter">&quot;</span><span class="char">\n</span><span class="content">######################</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>));
-<span class="line-numbers"> <a href="#n93" name="n93">93</a></span>D(printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Left array</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>));
-<span class="line-numbers"> <a href="#n94" name="n94">94</a></span> 
-<span class="line-numbers"> <a href="#n95" name="n95">95</a></span><span class="keyword">for</span> (i = <span class="integer">0</span>; i &amp;lt; n1; i++) {
-<span class="line-numbers"> <a href="#n96" name="n96">96</a></span>    D(printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d </span><span class="delimiter">&quot;</span></span>, L[i]));
-<span class="line-numbers"> <a href="#n97" name="n97">97</a></span>}
-<span class="line-numbers"> <a href="#n98" name="n98">98</a></span> 
-<span class="line-numbers"> <a href="#n99" name="n99">99</a></span>D(printf(<span class="string"><span class="delimiter">&quot;</span><span class="char">\n</span><span class="content">Right array</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>));
-<span class="line-numbers"><strong><a href="#n100" name="n100">100</a></strong></span><span class="keyword">for</span> (i = <span class="integer">0</span>; i &amp;lt; n2; i++) {
-<span class="line-numbers"><a href="#n101" name="n101">101</a></span>    D(printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d </span><span class="delimiter">&quot;</span></span>, R[i]));
-<span class="line-numbers"><a href="#n102" name="n102">102</a></span>}
-<span class="line-numbers"><a href="#n103" name="n103">103</a></span> 
-<span class="line-numbers"><a href="#n104" name="n104">104</a></span>D(printf(<span class="string"><span class="delimiter">&quot;</span><span class="char">\n</span><span class="content">After Merge</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>));
-<span class="line-numbers"><a href="#n105" name="n105">105</a></span><span class="keyword">for</span> (i = p; i &amp;lt;= r; i++) {
-<span class="line-numbers"><a href="#n106" name="n106">106</a></span>    D(printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d </span><span class="delimiter">&quot;</span></span>, arr[i]));
-<span class="line-numbers"><a href="#n107" name="n107">107</a></span>}
-<span class="line-numbers"><a href="#n108" name="n108">108</a></span>D(printf(<span class="string"><span class="delimiter">&quot;</span><span class="char">\n</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>)); } </pre></div>
-</div>
- </figure></notextile></div>
+<p>{% coderay lang:cplusplus linenos:true Merge Sort http://ideone.com/BuLW5z Run Code %}
+// Merge Sort example
+// For input array
+// 2 8 7 1 3 5 6 4 9 0
+//
+// First partion in L[] and R[] will be
+// L[] = 2 8 7 1 3 ==&gt; L[] = 2 8 7 | R[] = 1 3 ==&gt; L[] = 2 8 | R[] = 7
+// R[] = 5 6 4 9 0
+//
+#include <stdio.h /></p>
+
+<h1 id="define-eoa-100000--end-of-array">define EOA 100000  //End of array</h1>
+
+<p>// To enable debug messages uncomment #define
+// #define DEBUG 1</p>
+
+<h1 id="ifdef-debug">ifdef DEBUG</h1>
+<p>#  define D(x) x
+#else
+#  define D(x)
+#endif</p>
+
+<p>void mergesort(int arr[], int p, int r); 
+void merge(int arr[], int p, int q, int r); </p>
+
+<p>int arr[10] = {2, 8, 7, 1, 3, 5, 6, 4, 9, 0}; </p>
+
+<p>int main()
+{
+    int i = 0;
+    printf(“Input array\n”);
+    for (i = 0; i &lt;= 9; i++) {
+        printf(“%d “, arr[i]);
+    } <br />
+    printf(“\n\n”);</p>
+
+<pre><code>mergesort(arr, 0, 9); 
+ 
+printf("Sorted output\n");
+for (i = 0; i &lt;= 9; i++) {
+    printf("%d ", arr[i]);
+}   
+printf("\n");
+ 
+return 0; }
+</code></pre>
+
+<p>void mergesort(int arr[], int p, int r)
+{
+    if (p &lt; r) {
+        int q = (p + r) / 2;</p>
+
+<pre><code>    mergesort(arr, p, q);
+    mergesort(arr, q+1, r);
+    merge(arr, p, q, r);
+} }
+</code></pre>
+
+<p>void merge(int arr[], int p, int q, int r)
+{
+    int n1 = q - p + 1;
+    int n2 = r - q;
+    int i = 0;
+    int j = 0;</p>
+
+<pre><code>int L[15];
+int R[15];
+ 
+//Copy elements from p to n1 in L[]
+for (i = 0; i &lt; n1; i++) {
+    L[i] = arr[p + i];
+}
+L[i] = EOA;
+ 
+for (j = 0; j &lt; n2; j++) {
+    R[j] = arr[q + j + 1];
+}
+R[j] = EOA;
+ 
+int lindx = 0;
+int rindx = 0;
+//Merge array L[] and R[]
+for (i = p; i &lt;= r; i++) {
+    if(L[lindx] &lt;= R[rindx]) {
+        arr[i] = L[lindx++];
+    } else {
+        arr[i] = R[rindx++];
+    }
+}
+ 
+// Print debug statements
+D(printf("\n######################\n"));
+D(printf("Left array\n"));
+ 
+for (i = 0; i &lt; n1; i++) {
+    D(printf("%d ", L[i]));
+}
+ 
+D(printf("\nRight array\n"));
+for (i = 0; i &lt; n2; i++) {
+    D(printf("%d ", R[i]));
+}
+ 
+D(printf("\nAfter Merge\n"));
+for (i = p; i &lt;= r; i++) {
+    D(printf("%d ", arr[i]));
+}
+D(printf("\n\n")); } {% endcoderay %}
 </code></pre>
 
 <p><br /></p>
@@ -285,103 +270,100 @@ Each level contributes to total cost of <code>cn</code></p>
 <h3 id="quick-sort-code">Quick sort code</h3>
 <p><a href="https://www.dropbox.com/s/czbcc6seqfl1eir/Quicksort%20Example.pdf" target="_blank">Quicksort explanation</a></p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Quick Sort</span>  <a href='http://ideone.com/qGqmLR' target='_blank'>Run Code </a></figcaption> <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="comment">// Quick Sort example</span>
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span class="comment">// For input array</span>
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span class="comment">// 2 8 7 1 3 5 6 4</span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span class="comment">//</span>
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span class="preprocessor">#include</span> <span class="include">&lt;stdio.h&gt;</span>
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span><span class="preprocessor">#define</span> IPSIZE <span class="integer">8</span>&lt;/stdio.h&gt;&lt;/p&gt;
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>&lt;p&gt;<span class="comment">// To enable debug messages uncomment #define</span>
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span><span class="comment">// #define DEBUG 1&lt;/p&gt;</span>
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>&lt;h1 id=<span class="string"><span class="delimiter">&quot;</span><span class="content">ifdef-debug-1</span><span class="delimiter">&quot;</span></span>&gt;ifdef DEBUG&lt;/h1&gt;
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span>&lt;p&gt;<span class="preprocessor">#  define</span> D(x) x
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span><span class="preprocessor">#else</span>
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span><span class="preprocessor">#  define</span> D(x)
-<span class="line-numbers"><a href="#n16" name="n16">16</a></span><span class="preprocessor">#endif</span>&lt;/p&gt;
-<span class="line-numbers"><a href="#n17" name="n17">17</a></span>
-<span class="line-numbers"><a href="#n18" name="n18">18</a></span>&lt;p&gt;<span class="directive">void</span> quicksort(<span class="predefined-type">int</span> arr[], <span class="predefined-type">int</span> p, <span class="predefined-type">int</span> r); 
-<span class="line-numbers"><a href="#n19" name="n19">19</a></span><span class="predefined-type">int</span> partition(<span class="predefined-type">int</span> arr[], <span class="predefined-type">int</span> p, <span class="predefined-type">int</span> r); 
-<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span><span class="directive">void</span> swap(<span class="predefined-type">int</span> i, <span class="predefined-type">int</span> j); &lt;/p&gt;
-<span class="line-numbers"><a href="#n21" name="n21">21</a></span>
-<span class="line-numbers"><a href="#n22" name="n22">22</a></span>&lt;p&gt;<span class="predefined-type">int</span> arr[IPSIZE] = {<span class="integer">2</span>, <span class="integer">8</span>, <span class="integer">7</span>, <span class="integer">1</span>, <span class="integer">3</span>, <span class="integer">5</span>, <span class="integer">6</span>, <span class="integer">4</span>}; &lt;/p&gt;
-<span class="line-numbers"><a href="#n23" name="n23">23</a></span>
-<span class="line-numbers"><a href="#n24" name="n24">24</a></span>&lt;p&gt;<span class="predefined-type">int</span> main()
-<span class="line-numbers"><a href="#n25" name="n25">25</a></span>{
-<span class="line-numbers"><a href="#n26" name="n26">26</a></span>    <span class="predefined-type">int</span> i = <span class="integer">0</span>;
-<span class="line-numbers"><a href="#n27" name="n27">27</a></span>    printf(<span class="error">“</span>Input array<span class="error">\</span>n<span class="error">”</span>);
-<span class="line-numbers"><a href="#n28" name="n28">28</a></span>    <span class="keyword">for</span> (i = <span class="integer">0</span>; i &amp;lt;= IPSIZE - <span class="integer">1</span>; i++) {
-<span class="line-numbers"><a href="#n29" name="n29">29</a></span>        printf(<span class="error">“</span>%d <span class="error">“</span>, arr[i]);
-<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>    } &lt;br /&gt;
-<span class="line-numbers"><a href="#n31" name="n31">31</a></span>    printf(<span class="error">“</span><span class="error">\</span>n<span class="error">\</span>n<span class="error">”</span>);&lt;/p&gt;
-<span class="line-numbers"><a href="#n32" name="n32">32</a></span>
-<span class="line-numbers"><a href="#n33" name="n33">33</a></span>&lt;pre&gt;&lt;code&gt;quicksort(arr, <span class="integer">0</span>, IPSIZE - <span class="integer">1</span>); 
-<span class="line-numbers"><a href="#n34" name="n34">34</a></span> 
-<span class="line-numbers"><a href="#n35" name="n35">35</a></span>printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Sorted output</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>);
-<span class="line-numbers"><a href="#n36" name="n36">36</a></span><span class="keyword">for</span> (i = <span class="integer">0</span>; i &amp;lt;= IPSIZE - <span class="integer">1</span>; i++) {
-<span class="line-numbers"><a href="#n37" name="n37">37</a></span>    printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d </span><span class="delimiter">&quot;</span></span>, arr[i]);
-<span class="line-numbers"><a href="#n38" name="n38">38</a></span>}   
-<span class="line-numbers"><a href="#n39" name="n39">39</a></span>printf(<span class="string"><span class="delimiter">&quot;</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>);
-<span class="line-numbers"><strong><a href="#n40" name="n40">40</a></strong></span> 
-<span class="line-numbers"><a href="#n41" name="n41">41</a></span><span class="keyword">return</span> <span class="integer">0</span>; }
-<span class="line-numbers"><a href="#n42" name="n42">42</a></span>&lt;/code&gt;&lt;/pre&gt;
-<span class="line-numbers"><a href="#n43" name="n43">43</a></span>
-<span class="line-numbers"><a href="#n44" name="n44">44</a></span>&lt;p&gt;<span class="directive">void</span> quicksort(<span class="predefined-type">int</span> arr[], <span class="predefined-type">int</span> p, <span class="predefined-type">int</span> r)
-<span class="line-numbers"><a href="#n45" name="n45">45</a></span>{
-<span class="line-numbers"><a href="#n46" name="n46">46</a></span>    <span class="keyword">if</span> (p &amp;lt; r) {
-<span class="line-numbers"><a href="#n47" name="n47">47</a></span>        <span class="predefined-type">int</span> pivotIndx = partition(arr, p, r);&lt;/p&gt;
-<span class="line-numbers"><a href="#n48" name="n48">48</a></span>
-<span class="line-numbers"><a href="#n49" name="n49">49</a></span>&lt;pre&gt;&lt;code&gt;    quicksort(arr, p, pivotIndx - <span class="integer">1</span>);
-<span class="line-numbers"><strong><a href="#n50" name="n50">50</a></strong></span>    quicksort(arr, pivotIndx + <span class="integer">1</span>, r);
-<span class="line-numbers"><a href="#n51" name="n51">51</a></span>} }
-<span class="line-numbers"><a href="#n52" name="n52">52</a></span>&lt;/code&gt;&lt;/pre&gt;
-<span class="line-numbers"><a href="#n53" name="n53">53</a></span>
-<span class="line-numbers"><a href="#n54" name="n54">54</a></span>&lt;p&gt;<span class="predefined-type">int</span> partition(<span class="predefined-type">int</span> arr[], <span class="predefined-type">int</span> p, <span class="predefined-type">int</span> r)
-<span class="line-numbers"><a href="#n55" name="n55">55</a></span>{
-<span class="line-numbers"><a href="#n56" name="n56">56</a></span>    <span class="predefined-type">int</span> pivot = arr[r];
-<span class="line-numbers"><a href="#n57" name="n57">57</a></span>    <span class="predefined-type">int</span> i = p - <span class="integer">1</span>;
-<span class="line-numbers"><a href="#n58" name="n58">58</a></span>    <span class="predefined-type">int</span> j = <span class="integer">0</span>;&lt;/p&gt;
-<span class="line-numbers"><a href="#n59" name="n59">59</a></span>
-<span class="line-numbers"><strong><a href="#n60" name="n60">60</a></strong></span>&lt;pre&gt;&lt;code&gt;<span class="comment">// Debug messages</span>
-<span class="line-numbers"><a href="#n61" name="n61">61</a></span>D(printf(<span class="string"><span class="delimiter">&quot;</span><span class="char">\n</span><span class="content">############</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>));
-<span class="line-numbers"><a href="#n62" name="n62">62</a></span>D(printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Partition</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>));
-<span class="line-numbers"><a href="#n63" name="n63">63</a></span>D(printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">p=%d, r=%d, pivot=%d</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>, p, r, pivot));
-<span class="line-numbers"><a href="#n64" name="n64">64</a></span>D(printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Elements</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>));
-<span class="line-numbers"><a href="#n65" name="n65">65</a></span><span class="keyword">for</span> (j = p; j &amp;lt;= r; j++) {
-<span class="line-numbers"><a href="#n66" name="n66">66</a></span>    D(printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d </span><span class="delimiter">&quot;</span></span>, arr[j]));
-<span class="line-numbers"><a href="#n67" name="n67">67</a></span>}
-<span class="line-numbers"><a href="#n68" name="n68">68</a></span>D(printf(<span class="string"><span class="delimiter">&quot;</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>));
-<span class="line-numbers"><a href="#n69" name="n69">69</a></span> 
-<span class="line-numbers"><strong><a href="#n70" name="n70">70</a></strong></span><span class="keyword">for</span> (j = p; j &amp;lt;= r - <span class="integer">1</span>; j++) {
-<span class="line-numbers"><a href="#n71" name="n71">71</a></span>    <span class="keyword">if</span> (arr[j] &amp;lt;= pivot) {
-<span class="line-numbers"><a href="#n72" name="n72">72</a></span>        i++;
-<span class="line-numbers"><a href="#n73" name="n73">73</a></span>        swap(i, j);
-<span class="line-numbers"><a href="#n74" name="n74">74</a></span>    }
-<span class="line-numbers"><a href="#n75" name="n75">75</a></span>}
-<span class="line-numbers"><a href="#n76" name="n76">76</a></span> 
-<span class="line-numbers"><a href="#n77" name="n77">77</a></span>swap(i + <span class="integer">1</span>, r);
-<span class="line-numbers"><a href="#n78" name="n78">78</a></span> 
-<span class="line-numbers"><a href="#n79" name="n79">79</a></span>D(printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Elements after partition</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>));
-<span class="line-numbers"><strong><a href="#n80" name="n80">80</a></strong></span><span class="keyword">for</span> (j = p; j &amp;lt;= r; j++) {
-<span class="line-numbers"><a href="#n81" name="n81">81</a></span>    D(printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d </span><span class="delimiter">&quot;</span></span>, arr[j]));
-<span class="line-numbers"><a href="#n82" name="n82">82</a></span>}
-<span class="line-numbers"><a href="#n83" name="n83">83</a></span>D(printf(<span class="string"><span class="delimiter">&quot;</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>));
-<span class="line-numbers"><a href="#n84" name="n84">84</a></span> 
-<span class="line-numbers"><a href="#n85" name="n85">85</a></span><span class="keyword">return</span> (i + <span class="integer">1</span>); }
-<span class="line-numbers"><a href="#n86" name="n86">86</a></span>&lt;/code&gt;&lt;/pre&gt;
-<span class="line-numbers"><a href="#n87" name="n87">87</a></span>
-<span class="line-numbers"><a href="#n88" name="n88">88</a></span>&lt;p&gt;<span class="directive">void</span> swap(<span class="predefined-type">int</span> i, <span class="predefined-type">int</span> j)
-<span class="line-numbers"><a href="#n89" name="n89">89</a></span>{
-<span class="line-numbers"><strong><a href="#n90" name="n90">90</a></strong></span>    <span class="predefined-type">int</span> temp = arr[i];
-<span class="line-numbers"><a href="#n91" name="n91">91</a></span>    arr[i] = arr[j];
-<span class="line-numbers"><a href="#n92" name="n92">92</a></span>    arr[j] = temp;
-<span class="line-numbers"><a href="#n93" name="n93">93</a></span>}
-</pre></div>
-</div>
- </figure></notextile></div></p>
+<p>{% coderay lang:cplusplus linenos:true Quick Sort http://ideone.com/qGqmLR Run Code %}
+// Quick Sort example
+// For input array
+// 2 8 7 1 3 5 6 4
+//
+#include <stdio.h>
+#define IPSIZE 8</stdio.h></p>
+
+<p>// To enable debug messages uncomment #define
+// #define DEBUG 1</p>
+
+<h1 id="ifdef-debug-1">ifdef DEBUG</h1>
+<p>#  define D(x) x
+#else
+#  define D(x)
+#endif</p>
+
+<p>void quicksort(int arr[], int p, int r); 
+int partition(int arr[], int p, int r); 
+void swap(int i, int j); </p>
+
+<p>int arr[IPSIZE] = {2, 8, 7, 1, 3, 5, 6, 4}; </p>
+
+<p>int main()
+{
+	int i = 0;
+    printf(“Input array\n”);
+    for (i = 0; i &lt;= IPSIZE - 1; i++) {
+        printf(“%d “, arr[i]);
+    } <br />
+    printf(“\n\n”);</p>
+
+<pre><code>quicksort(arr, 0, IPSIZE - 1); 
+ 
+printf("Sorted output\n");
+for (i = 0; i &lt;= IPSIZE - 1; i++) {
+    printf("%d ", arr[i]);
+}   
+printf("\n");
+ 
+return 0; }
+</code></pre>
+
+<p>void quicksort(int arr[], int p, int r)
+{
+    if (p &lt; r) {
+        int pivotIndx = partition(arr, p, r);</p>
+
+<pre><code>    quicksort(arr, p, pivotIndx - 1);
+    quicksort(arr, pivotIndx + 1, r);
+} }
+</code></pre>
+
+<p>int partition(int arr[], int p, int r)
+{
+    int pivot = arr[r];
+    int i = p - 1;
+    int j = 0;</p>
+
+<pre><code>// Debug messages
+D(printf("\n############\n"));
+D(printf("Partition\n"));
+D(printf("p=%d, r=%d, pivot=%d\n", p, r, pivot));
+D(printf("Elements\n"));
+for (j = p; j &lt;= r; j++) {
+    D(printf("%d ", arr[j]));
+}
+D(printf("\n"));
+ 
+for (j = p; j &lt;= r - 1; j++) {
+    if (arr[j] &lt;= pivot) {
+        i++;
+        swap(i, j);
+    }
+}
+ 
+swap(i + 1, r);
+ 
+D(printf("Elements after partition\n"));
+for (j = p; j &lt;= r; j++) {
+    D(printf("%d ", arr[j]));
+}
+D(printf("\n"));
+ 
+return (i + 1); }
+</code></pre>
+
+<p>void swap(int i, int j)
+{
+    int temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
+}
+{% endcoderay %}</p>
 
 <p><br /></p>
 
@@ -420,18 +402,7 @@ Each level contributes to total cost of <code>cn</code></p>
 
 <p>Let’s start with Wikipedia entry about sorting</p>
 
-<p><div class="wikipedia">
-  
-    <img src="//upload.wikimedia.org/wikipedia/commons/thumb/8/82/Sorting_stability_playing_cards.svg/220px-Sorting_stability_playing_cards.svg.png"/>
-  
-  <h2>sorting algorithm</h2>
-  <div>
-    <p>A <strong>sorting algorithm</strong> is an <a href="http://en.wikipedia.org/wiki/Algorithm" title="Algorithm">algorithm</a> that puts elements of a <a href="http://en.wikipedia.org/wiki/List_(computing)" title="List (computing)" class="mw-redirect">list</a> in a certain <a href="http://en.wikipedia.org/wiki/Total_order" title="Total order">order</a>. The most-used orders are numerical order and <a href="http://en.wikipedia.org/wiki/Lexicographical_order" title="Lexicographical order">lexicographical order</a>. Efficient <a href="http://en.wikipedia.org/wiki/Sorting" title="Sorting">sorting</a> is important for optimizing the use of other algorithms (such as <a href="http://en.wikipedia.org/wiki/Search_algorithm" title="Search algorithm">search</a> and <a href="http://en.wikipedia.org/wiki/Merge_algorithm" title="Merge algorithm">merge</a> algorithms) which require input data to be in sorted lists; it is also often useful for <a href="http://en.wikipedia.org/wiki/Canonicalization" title="Canonicalization">canonicalizing</a> data and for producing human-readable output. More formally, the output must satisfy two conditions:
-</p>
-  </div>
-  <a href="http://en.wikipedia.org/wiki/Sorting_algorithm">Read more</a>
-</div>
-
+<p>{% wikipedia Sorting_algorithm %}
 <!-- more -->
 <br /></p>
 
