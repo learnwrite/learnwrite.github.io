@@ -4,7 +4,7 @@
   <title><![CDATA[Distributed Knowledge]]></title>
   <link href="http://distkeys.com/atom.xml" rel="self"/>
   <link href="http://distkeys.com/"/>
-  <updated>2014-03-12T00:16:35-07:00</updated>
+  <updated>2014-03-12T23:55:03-07:00</updated>
   <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -1570,11 +1570,9 @@ function toggle(d) {
   </li>
   <li><a href="#string-problems">String Problems</a>    <ul>
       <li><a href="#reverse-a-string-without-extra-space">Reverse a string without extra space</a></li>
-      <li><a href="#duplicates-and-count">Duplicates and Count*</a></li>
-      <li><a href="#remove-duplicate-spaces">Remove duplicate spaces*</a></li>
-      <li><a href="#remove-spaces">Remove spaces*</a></li>
-      <li><a href="#remove-all-consequtive-duplicate-elements">Remove all consequtive duplicate elements*</a></li>
-      <li><a href="#rotate-a-string">Rotate a string*</a></li>
+      <li><a href="#duplicates-and-count">Duplicates and Count</a></li>
+      <li><a href="#remove-all-consecutive-duplicate-elements">Remove all consecutive duplicate elements</a></li>
+      <li><a href="#rotate-a-string">Rotate a string</a></li>
       <li><a href="#permutation-of-a-string">Permutation of a string</a></li>
     </ul>
   </li>
@@ -2230,7 +2228,7 @@ Sum 7</p>
 <hr style="border-top: 1.5px dotted black" />
 <p><br /></p>
 
-<h4 id="duplicates-and-count">Duplicates and Count*</h4>
+<h4 id="duplicates-and-count">Duplicates and Count</h4>
 
 <p>Print all duplicate characters and their count</p>
 
@@ -2240,36 +2238,43 @@ Foo Bar</p>
 <p>Output<br />
 a1B1F1o2r1</p>
 
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Duplicate &amp; count</span>  <a href="http://ideone.com/GWxZRK" target="_blank">Run Code </a></figcaption> <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="preprocessor">#include</span> <span class="include">&lt;stdio.h&gt;</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span class="directive">void</span> printDup(<span class="predefined-type">char</span> *str)
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>{
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    <span class="predefined-type">int</span> count[<span class="integer">256</span>] = {<span class="integer">0</span>};
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span class="predefined-type">int</span> i = <span class="integer">0</span>;
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    <span class="keyword">while</span> (*str != <span class="char">'\0'</span>) {
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>        count[*str++]++;
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>    }
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>    <span class="keyword">for</span> (i = <span class="integer">0</span>; i &lt; <span class="integer">256</span>; i++) {
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>        <span class="keyword">if</span> (count[i] &gt; <span class="integer">0</span>) {
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>            printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">%c %d</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>, i, count[i]);
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>        }
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>    }
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>}
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span><span class="predefined-type">int</span> main()
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>{
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span>    <span class="predefined-type">char</span> *str = <span class="string"><span class="delimiter">&quot;</span><span class="content">Foo Bar</span><span class="delimiter">&quot;</span></span>;
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span>
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span>    printDup(str);
+<span class="line-numbers"><a href="#n25" name="n25">25</a></span>
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span>    <span class="keyword">return</span> <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n27" name="n27">27</a></span>}
+</pre></div>
+</div>
+ </figure></notextile></div>
+
 <hr style="border-top: 1.5px dotted black" />
 <p><br /></p>
 
-<h4 id="remove-duplicate-spaces">Remove duplicate spaces*</h4>
-<p>Remove all duplicate spaces from the string</p>
-
-<p>Input string<br />
-Hi^^^There!!!^^Wassup<br />
- ^ - Represents  space</p>
-
-<p>Output<br />
-Hi^There!!!^Wassup</p>
-
-<hr style="border-top: 1.5px dotted black" />
-<p><br /></p>
-
-<h4 id="remove-spaces">Remove spaces*</h4>
-<p>Remove all the spaces from a string</p>
-
-<p>Input string<br />
-Hi there!!! Wassup</p>
-
-<p>Output<br />
-Hithere!!!Wassup</p>
-
-<hr style="border-top: 1.5px dotted black" />
-<p><br /></p>
-
-<h4 id="remove-all-consequtive-duplicate-elements">Remove all consequtive duplicate elements*</h4>
-<p>Remove all consequtive duplicate elements from the string</p>
+<h4 id="remove-all-consecutive-duplicate-elements">Remove all consecutive duplicate elements</h4>
+<p>Remove all consecutive duplicate elements from the string</p>
 
 <p>Input string<br />
 aabbccddd</p>
@@ -2277,18 +2282,97 @@ aabbccddd</p>
 <p>Output <br />
 abcd</p>
 
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Remove dup </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="directive">void</span> removeDup(<span class="predefined-type">char</span> *str)
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>{
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    <span class="predefined-type">int</span> read = <span class="integer">0</span>;
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    <span class="predefined-type">int</span> write = <span class="integer">0</span>;
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span class="keyword">while</span> (str[read] != <span class="char">'\0'</span>) {
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>        <span class="keyword">while</span> (str[read] != <span class="char">'\0'</span> &amp;&amp; str[read] != str[read + <span class="integer">1</span>]) {
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>            str[write++] = str[read++];
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>        }
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>        <span class="keyword">while</span> (str[read] != <span class="char">'\0'</span> &amp;&amp; str[read] == str[read++]);
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>    }
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>}
+</pre></div>
+</div>
+ </figure></notextile></div>
+
 <hr style="border-top: 1.5px dotted black" />
 <p><br /></p>
 
-<h4 id="rotate-a-string">Rotate a string*</h4>
+<h4 id="rotate-a-string">Rotate a string</h4>
 <p>Rotate a string for a ‘n’ times</p>
 
 <p>Input string<br />
 1234567 <br />
+len = 7<br />
 Rotate 2 times</p>
 
 <p>Output <br />
 3456712</p>
+
+<p><strong>Step 1</strong></p>
+
+<p>Break array into 2 parts from index 2 as number of time to rotate is 2</p>
+
+<p>[1 2]  [3 4 5 6 7]</p>
+
+<p><strong>Step 2</strong></p>
+
+<p>Reverse both arrays</p>
+
+<p>[2 1]  [7 6 5 4 3]</p>
+
+<p><strong>Step 3</strong></p>
+
+<p>Reverse all</p>
+
+<p>Result = [3 4 5 6 7 1 2]</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Rotate Array</span>  <a href="http://ideone.com/qsdYO0" target="_blank">Run Code </a></figcaption> <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="preprocessor">#include</span> <span class="include">&lt;stdio.h&gt;</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span class="directive">void</span> reverseArr(<span class="predefined-type">int</span> arr[], <span class="predefined-type">int</span> start, <span class="predefined-type">int</span> end)
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>{
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    <span class="predefined-type">int</span> temp = <span class="integer">0</span>;
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    <span class="keyword">while</span> (start &lt; end) {
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>        temp = arr[start];
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>        arr[start] = arr[end];
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>        arr[end] = temp;
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>        start++;
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>        end--;
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>    }
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>}
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span><span class="predefined-type">int</span> main()
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>{
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>    <span class="predefined-type">int</span> arr[] = {<span class="integer">1</span>, <span class="integer">2</span>, <span class="integer">3</span>, <span class="integer">4</span>, <span class="integer">5</span>, <span class="integer">6</span>, <span class="integer">7</span>};
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span>    <span class="predefined-type">int</span> rotate = <span class="integer">2</span>;
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span>    <span class="predefined-type">int</span> size = <span class="integer">7</span>;
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span>    <span class="predefined-type">int</span> i = <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n25" name="n25">25</a></span>
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span>    reverseArr(arr, <span class="integer">0</span>, rotate - <span class="integer">1</span>);
+<span class="line-numbers"><a href="#n27" name="n27">27</a></span>    reverseArr(arr, rotate, size - <span class="integer">1</span>);
+<span class="line-numbers"><a href="#n28" name="n28">28</a></span>    reverseArr(arr, <span class="integer">0</span>, size - <span class="integer">1</span>);
+<span class="line-numbers"><a href="#n29" name="n29">29</a></span>
+<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>    <span class="keyword">for</span> (i = <span class="integer">0</span>; i &lt; size; i++) {
+<span class="line-numbers"><a href="#n31" name="n31">31</a></span>        printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d </span><span class="delimiter">&quot;</span></span>, arr[i]);
+<span class="line-numbers"><a href="#n32" name="n32">32</a></span>    }
+<span class="line-numbers"><a href="#n33" name="n33">33</a></span>
+<span class="line-numbers"><a href="#n34" name="n34">34</a></span>    <span class="keyword">return</span> <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n35" name="n35">35</a></span>}
+</pre></div>
+</div>
+ </figure></notextile></div>
 
 <hr style="border-top: 1.5px dotted black" />
 <p><br /></p>

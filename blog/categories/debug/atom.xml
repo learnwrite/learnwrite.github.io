@@ -4,7 +4,7 @@
   <title><![CDATA[Category: debug | Distributed Knowledge]]></title>
   <link href="http://distkeys.com/blog/categories/debug/atom.xml" rel="self"/>
   <link href="http://distkeys.com/"/>
-  <updated>2014-03-12T00:16:57-07:00</updated>
+  <updated>2014-03-12T23:55:03-07:00</updated>
   <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -36,38 +36,42 @@ Sometimes char data type is used as a package of 8 bits not as a valid char valu
 
 <h3>Code snippet</h3>
 
-<p>{% coderay lang:cplusplus linenos:true Print bit values %}
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h /></stdlib.h></stdio.h></p>
-
-<p>int main()
-{
-    char <em>*container = (char **)malloc(10 * sizeof(char</em>));
-    char **start = container;
-    char *node;</p>
-
-<pre><code>char name[] = "Vaibhav";
-int i = 0;
-
-if (container == NULL) {
-return 0;
-}
-
-for (i = 0; i &lt;= 2; i++) {
-node = (char *)malloc(10 * sizeof(char));
-memcpy(node, &amp;name, strlen(name) + 1); 
-*container = node;
-container++;
-}
-*container = NULL;
-
-while (*start != NULL) {
-printf("%s\n", *start);
-start++;
-}
-
-return 0; } {% endcoderay %}
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Print bit values </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="preprocessor">#include</span> <span class="include">&lt;stdio.h&gt;</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span class="preprocessor">#include</span> <span class="include">&lt;stdlib.h&gt;</span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span class="preprocessor">#include</span> <span class="include">&lt;string.h /&gt;</span>&lt;/stdlib.h&gt;&lt;/stdio.h&gt;&lt;/p&gt;
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>&lt;p&gt;<span class="predefined-type">int</span> main()
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>{
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    <span class="predefined-type">char</span> &lt;em&gt;*container = (<span class="predefined-type">char</span> **)malloc(<span class="integer">10</span> * <span class="keyword">sizeof</span>(<span class="predefined-type">char</span>&lt;/em&gt;));
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    <span class="predefined-type">char</span> **start = container;
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>    <span class="predefined-type">char</span> *node;&lt;/p&gt;
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>&lt;pre&gt;&lt;code&gt;<span class="predefined-type">char</span> name[] = <span class="string"><span class="delimiter">&quot;</span><span class="content">Vaibhav</span><span class="delimiter">&quot;</span></span>;
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span><span class="predefined-type">int</span> i = <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span><span class="keyword">if</span> (container == <span class="predefined-constant">NULL</span>) {
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span><span class="keyword">return</span> <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>}
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span><span class="keyword">for</span> (i = <span class="integer">0</span>; i &amp;lt;= <span class="integer">2</span>; i++) {
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>node = (<span class="predefined-type">char</span> *)malloc(<span class="integer">10</span> * <span class="keyword">sizeof</span>(<span class="predefined-type">char</span>));
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>memcpy(node, &amp;amp;name, strlen(name) + <span class="integer">1</span>); 
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span>*container = node;
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span>container++;
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span>}
+<span class="line-numbers"><a href="#n25" name="n25">25</a></span>*container = <span class="predefined-constant">NULL</span>;
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span>
+<span class="line-numbers"><a href="#n27" name="n27">27</a></span><span class="keyword">while</span> (*start != <span class="predefined-constant">NULL</span>) {
+<span class="line-numbers"><a href="#n28" name="n28">28</a></span>printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">%s</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>, *start);
+<span class="line-numbers"><a href="#n29" name="n29">29</a></span>start++;
+<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>}
+<span class="line-numbers"><a href="#n31" name="n31">31</a></span>
+<span class="line-numbers"><a href="#n32" name="n32">32</a></span><span class="keyword">return</span> <span class="integer">0</span>; } </pre></div>
+</div>
+ </figure></notextile></div>
 </code></pre>
 
 <p><br />
@@ -87,36 +91,37 @@ Focusing on following code section</p>
 <p><br />In this section, a memory of 10 chars is being allocated, initialized and finally assigned to container array.
 <br />Lets observer, if we have set the right information in each char bit.</p>
 
-<p>{% blockquote %}
-Compile code using for GDB
-gcc -g fileName.c
-{% endblockquote %}</p>
+<p><blockquote><p>Compile code using for GDB<br/>gcc -g fileName.c</p></blockquote></p>
 
 <p><br /></p>
 
-<p>{% coderay lang:cplusplus linenos:true GDB Trace %}
-(gdb) l
-16      }
-17	
-18	    for (i = 0; i &lt; = 2; i++) {
-19	        node = (char *)malloc(10 * sizeof(char));
-20	        memcpy(node, &amp;name, strlen(name) + 1);
-21	        *container = node;
-22	        container++;
-23	    }
-24	    *container = NULL;
-25	
-(gdb) ptype node
-type = char *
-(gdb) p node
-$1 = 0x1001000e0 “Vaibhav”
-(gdb) x/8bb node
-0x1001000e0:	0x56	0x61	0x69	0x62	0x68	0x61	0x76	0x00
-(gdb) x/8ub node
-0x1001000e0:	86	97	105	98	104	97	118	0
-(gdb) x/8tb node
-0x1001000e0:	01010110	01100001	01101001	01100010	01101000	01100001	01110110	00000000
-{% endcoderay %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>GDB Trace </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>(gdb) l
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span class="integer">16</span>      }
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span class="integer">17</span>    
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span class="integer">18</span>        <span class="keyword">for</span> (i = <span class="integer">0</span>; i &amp;lt; = <span class="integer">2</span>; i++) {
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span class="integer">19</span>            node = (<span class="predefined-type">char</span> *)malloc(<span class="integer">10</span> * <span class="keyword">sizeof</span>(<span class="predefined-type">char</span>));
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span><span class="integer">20</span>            memcpy(node, &amp;amp;name, strlen(name) + <span class="integer">1</span>);
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span class="integer">21</span>            *container = node;
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span><span class="integer">22</span>            container++;
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span><span class="integer">23</span>        }
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span><span class="integer">24</span>        *container = <span class="predefined-constant">NULL</span>;
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span><span class="integer">25</span>    
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>(gdb) ptype node
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>type = <span class="predefined-type">char</span> *
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>(gdb) p node
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>$<span class="integer">1</span> = <span class="hex">0x1001000e0</span> <span class="error">“</span>Vaibhav<span class="error">”</span>
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>(gdb) x/<span class="integer">8</span>bb node
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span><span class="hex">0x1001000e0</span>:    <span class="hex">0x56</span>    <span class="hex">0x61</span>    <span class="hex">0x69</span>    <span class="hex">0x62</span>    <span class="hex">0x68</span>    <span class="hex">0x61</span>    <span class="hex">0x76</span>    <span class="hex">0x00</span>
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>(gdb) x/<span class="integer">8</span>ub node
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span><span class="hex">0x1001000e0</span>:    <span class="integer">86</span>    <span class="integer">97</span>    <span class="integer">105</span>    <span class="integer">98</span>    <span class="integer">104</span>    <span class="integer">97</span>    <span class="integer">118</span>    <span class="integer">0</span>
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>(gdb) x/<span class="integer">8</span>tb node
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span><span class="hex">0x1001000e0</span>:    <span class="octal">01010110</span>    <span class="octal">01100001</span>    <span class="octal">01101001</span>    <span class="octal">01100010</span>    <span class="octal">01101000</span>    <span class="octal">01100001</span>    <span class="octal">01110110</span>    <span class="octal">00000000</span>
+</pre></div>
+</div>
+ </figure></notextile></div></p>
 ]]></content>
   </entry>
   
