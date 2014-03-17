@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Naming in Distributed Systems - Distributed Knowledge</title>
+  <title>File System, Scheduling, Communication and Memory Management - Distributed Knowledge</title>
   <meta name="author" content="Vaibhav Gautam">
 
   
-  <meta name="description" content="Introduction Directory Service for WAN – DNS	† Granularity of Names Caching of Names/Placement of Caches Use of Replication Use of Distribution &hellip;">
+  <meta name="description" content="The V Distributed System Mach Xen Denali UNIX References The scope of this document is limited to the study of placement of following services in &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://distkeys.com/blog/2014/02/16/naming-in-distributed-systems/">
+  <link rel="canonical" href="http://distkeys.com/blog/2014/03/16/file-system-scheduling-communication-and-memory-management/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
    <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -111,7 +111,7 @@
   
   <header>
     
-      <h1 class="entry-title">Naming in Distributed Systems</h1>
+      <h1 class="entry-title">File System, Scheduling, Communication and Memory Management</h1>
     
     
       <p class="meta">
@@ -127,7 +127,7 @@
   
 
 
-<time datetime="2014-02-16T22:47:00-08:00" pubdate data-updated="true">Feb 16<span>th</span>, 2014</time>
+<time datetime="2014-03-16T18:26:00-07:00" pubdate data-updated="true">Mar 16<span>th</span>, 2014</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -137,114 +137,121 @@
 
 
 <div class="entry-content"><ul id="markdown-toc">
-  <li><a href="#introduction">Introduction</a></li>
-  <li><a href="#directory-service-for-wan--dns">Directory Service for WAN – DNS	†</a>    <ul>
-      <li><a href="#granularity-of-names">Granularity of Names</a></li>
-      <li><a href="#caching-of-namesplacement-of-caches">Caching of Names/Placement of Caches</a></li>
-      <li><a href="#use-of-replication">Use of Replication</a></li>
-      <li><a href="#use-of-distribution">Use of Distribution</a></li>
-      <li><a href="#consistencysynchronization-requirement">Consistency/Synchronization Requirement</a></li>
-    </ul>
-  </li>
-  <li><a href="#file-systemcontent-management-system-cms">File system/Content management system (CMS)</a>    <ul>
-      <li><a href="#granularity-of-names-1">Granularity of Names</a></li>
-      <li><a href="#caching-of-namesplacement-of-caches-1">Caching of Names/Placement of Caches</a></li>
-      <li><a href="#use-of-replication-1">Use of Replication</a></li>
-      <li><a href="#use-of-distribution-1">Use of Distribution</a></li>
-      <li><a href="#consistencysynchronization-requirement-1">Consistency/Synchronization Requirement</a></li>
-    </ul>
-  </li>
+  <li><a href="#the-v-distributed-system">The V Distributed System</a></li>
+  <li><a href="#mach">Mach</a></li>
+  <li><a href="#xen">Xen</a></li>
+  <li><a href="#denali">Denali</a></li>
+  <li><a href="#unix">UNIX</a></li>
+  <li><a href="#references">References</a></li>
 </ul>
 
-<h3 id="introduction">Introduction</h3>
+<p>The scope of this document is limited to the study of placement of following services in <strong>Mach, V Distributed System, Denali, XEN and UNIX Systems</strong> <br /><br />
+•	File System<br />
+•	Scheduling<br />
+•	Communication<br />
+•	Memory Management<br /></p>
 
-<p>The scope of this post is limited to the study of naming systems for following system<br />
-•	Directory Service for Wide Area<br />
-•	File system or Content manage system for collaborative work<br /></p>
+<!-- more -->
 
-<p>Naming can be categorized into four kinds<br />
-1. Host based naming<br />
-2. Global naming<br />
-3. User/Objet centered naming <br />
-4. Attribute based naming<br />
-<!-- more --></p>
-
-<p>The system we are going post will be falling into one of these category or hybrid of it. On the broad level, naming is associated with <strong>users, hosts, services, files, objects and groups</strong>. The requirements for directory for wide area and for Filesystem/CMS can be broadly categorize into following components:<br />
-•	Scalability<br />
-•	Availability<br />
-•	Consistency<br />
-•	Reliability<br />
-•	Fault isolation<br />
-•	Performance and Efficiency<br /><br /></p>
-
-<h3 id="directory-service-for-wan--dns">Directory Service for WAN – DNS	†</h3>
-
-<p>DNS is the case study of directory service for wide area network. The various requirements of DS†† for WAN††† has been summarized and presented in form of DNS as follows:</p>
-
-<h4 id="granularity-of-names">Granularity of Names</h4>
-
-<p>In DNS, domain names are represented by a <strong>character strings</strong> and machine oriented <strong>binary identifier</strong> is called Internet Address. Domain name changes rarely than the host more down the <strong>hierarchy</strong> so, on the course of granularity the <strong>less</strong> frequent to change lead to <strong>less</strong> number of messages and less number of objects to deal. In DNS mechanism of name to machine address lookup, finer the level of granularity more it is prone to change hence leads to <strong>more</strong> number of messages and query flow in network. So higher the hierarchy is lower the name granularity and lower the hierarchy is higher the name granularity.<br /><br /></p>
-
-<h4 id="caching-of-namesplacement-of-caches">Caching of Names/Placement of Caches</h4>
-
-<p>All names are cached which the name server heard about from other name servers while handling the request of name resolution.<br /></p>
-
-<p>• <strong>Iterative query</strong> – Name query goes to local name server where server matches query to the longest name prefix in its local cache. It caches the request and response for future reference.<br />
-• <strong>Recursive query</strong> – Every level of name server maintains the cache, in other words the multilevel caching, which tries to resolves longest sequence of name query.  In recursive query look up the server caches the query request and as well as query response.<br />
-• <strong>Negative Caching</strong> – Negative caching is used for bad names or absence of a resource record in order to answer future queries as quickly.<br /><br /></p>
-
-<h4 id="use-of-replication">Use of Replication</h4>
-
-<p>To ensure <strong>high availability</strong> and enhance <strong>performance</strong> of name service name servers are replicated and the frequency of <strong>replication</strong> depends upon the frequency of its use and the degree off its <strong>importance</strong> in the network. For example, root name server is highly replicated to ensure its high availability and avoiding frequent name queries.<br /><br /></p>
-
-<h4 id="use-of-distribution">Use of Distribution</h4>
-
-<p>The hierarchical model of DNS distributes the job of managing the handing out of names by <strong>distributing the responsibility</strong> of operating name servers. Distribution is maintained in terms of different domain name servers for different top levels domains, so there is a natural separation in terms of sending particular kind of name queries to one name server and other kind of name queries to other name servers.<br /></p>
-
-<p>More formally, Namespace is delegated at every domain and the whole space is partitioned into number of area called <strong>zones</strong>, which starts a domain and extends till leaf nodes, which is individual computer, or to other domain where other zone starts.<br /><br /></p>
-
-<h4 id="consistencysynchronization-requirement">Consistency/Synchronization Requirement</h4>
-
-<p>DNS cache manager synchronizes the cache records when expired. For consistency caches maintains the <strong>time to live</strong> for every entry. </p>
-
-<p>For any update operation the primary server of a zone is contacted. Each secondary server periodically establishes a communication connection with primary server and gets the update.<br /></p>
-
-<hr style="border-top: 1.5px dotted black" />
 <p><br /></p>
 
-<h3 id="file-systemcontent-management-system-cms">File system/Content management system (CMS)</h3>
+<h3 id="the-v-distributed-system">The V Distributed System</h3>
 
-<p>File System or CMS for collaborative work is smaller environment as compared to directory service for wide area. Hence, the priority of requirement we discussed earlier changes. The scalability for small scale is not the top priority but it remains requirement for future. But, other requirements like Availability, consistency etc remains a major requirements.<br /></p>
+<p>The V operating system is a <strong>microkernel</strong> designed to work for a cluster of computer machines connected by high performance network. The V system was motivated by availability and functionality of high performing computers and networks. The main idea was that kernel is distributed in sense that a separate copy of kernel executes on each particular network node and each copy interacts with each other to provide single system abstraction of process. <br /><br />
+The design of the V system was desired to provide:<br />
+•	High performance communication<br />
+•	Protocol defines the system<br />
+•	Small operating system kernel implementing basic protocols and services<br /></p>
 
-<p>CMS/File System for University can have Global naming, User centric naming system, attribute type naming scheme. <br /></p>
+<p>The V System provides services at process level in machines and in network independent fashion. Following are some services provided by the V system:<br />
+•	<strong>Process Scheduling</strong> – Kernel process server (which is User space as well as Kernel space). Scheduling is <strong>provided by kernel</strong> by only priority based scheduling but second level of scheduling is performed <strong>outside the kernel.</strong><br />
+•	<strong>Communication</strong> – Provided in Kernel Space.<br />
+•	<strong>Memory Management</strong> – Kernel as well as Kernel memory server. Kernel must implement some level of memory support to protect the <strong>integrity.</strong> Kernel serves as <strong>binding, caching</strong> and provides <strong>consistency</strong> mechanism for regions and open files. The <strong>Kernel memory server</strong> supports file-like read and write access to address space using UIO interfaces.<br />
+•	<strong>File System</strong> – File system service is provided by V file server.<br /></p>
 
-<h4 id="granularity-of-names-1">Granularity of Names</h4>
+<p><strong>Kernel Servers:</strong> The V System provides the concept of Kernels server in which above services is implemented by a separate kernel module which are replicated across nodes. Each module is registered by IPC and <strong>invoked from process level.</strong></p>
 
-<p>Granularity of names in CMS systems is large in nature. Since, the system is not huge and not distributed of highest degree, large granularity works. Moreover, in system like this more details can be accommodated in to naming increasing the performance of naming system.<br /></p>
+<hr style="border-top: 1.5px dotted black" />
+<p><br /><br /></p>
 
-<p>For instance, Tilde naming system is a relative naming system based on collection of small, disjoint, hierarchical namespace. The level of will be very less as compared to wide area hence lower the granularity. <br />
-In Prospero File System, Virtual System Model implements the concept of closure, which reduces the granularity.<br /><br /></p>
+<h3 id="mach">Mach</h3>
 
-<h4 id="caching-of-namesplacement-of-caches-1">Caching of Names/Placement of Caches</h4>
+<p>Mach system is <strong>microkernel</strong> operating system with design goals to provide portability, extensibility, security in kernel, support transparent distributed operation and reduce number of features in kernel make it less complex.<br /><br /></p>
 
-<p>In CMS/File Systems environment caching of names provide enormous performance boost because the effect of locality of reference or caching the alias plays a significant role. Cache can be most efficiently used for most frequent access file names, which is limited and manageable in case of small environment like university. Cache can be managed on centralized server or the primary name server based on system naming architecture and boosts the overall availability.<br /><br /></p>
+<p>•	<strong>Process Scheduling</strong> – Kernel space to ensure fairness of system.<br />
+•	<strong>Communication</strong> – Provided in Kernel Space using ports.<br />
+•	<strong>Memory Management</strong> – Kernel as well as User space. Kernel must manage page tables. User level space decides the page replacement algorithm. User level memory manager use system calls to communicate with kernel for memory mapping, page-in, page-out, and page-level locking.<br />
+•	<strong>File System</strong> – File system service is managed outside the Kernel. <br /></p>
 
-<h4 id="use-of-replication-1">Use of Replication</h4>
+<hr style="border-top: 1.5px dotted black" />
+<p><br /><br /></p>
 
-<p>Replication is of required for high availability of naming service.  Replication enhances the performance in University environment when using Global naming system and act as a load balancing to serve request quickly. It provides the fault tolerance by maintaining the replication of progressive collaborative work.<br /><br /></p>
+<h3 id="xen">Xen</h3>
 
-<h4 id="use-of-distribution-1">Use of Distribution</h4>
+<p>Xen is virtual machine monitor for x86 architecture, which allows multiple operating systems to share same hardware with safe and orderly manner without losing any performance. Xen is a hypervisor, which can be argued as a <strong>microkernel</strong>. Although it provides services like microkernel but it is <strong>not a microkernel</strong>. Soon, it is expected to be Xen emerging as a Microkernel.<br /><br /></p>
 
-<p>Distribution in global naming system if designed hierarchy, in the case of Prospero, local name server associated serves each requests. Next component is resolved by directory server in response of local name server. So, the naming service is distributed in the context of processing of user name query in <strong>distributed fashion</strong> rather than query served by dedicated <strong>one name server</strong>. Maintaining a non-distributed global name service irrespective of <strong>distributed file content</strong> can be a <strong>bottleneck</strong> and global name server <strong>performance issue</strong>, when files across the server is moved and renamed frequently.<br /><br /></p>
+<p>Xen is implemented on the concept of Para virtualization which requires changes to be made in guest OS but it does not require any change in application binary interface which gives freedom to guest application from change.<br /><br /></p>
 
-<h4 id="consistencysynchronization-requirement-1">Consistency/Synchronization Requirement</h4>
+<p>Xen provides solution to various challenges for virtualization. Each guest OS assumes that it has the highest privilege in the system. All guest OS are hosted and managed by Xen, Xen has to be in highest privilege in the system. Xen take advantage of x86 architecture and modify the guest OS from Ring 0 to Ring 1 and Xen resides in Ring 0.<br /><br /></p>
 
-<p>Consistency is achieved by synchronization and in collaborative environment like university synchronization is high priority. Stale name values in cache or time to live values in cache can lead to poor performance in dynamic collaborative environment.  Although frequent synchronization leads to degrade the system performance but in order to provide consistency and reliability it can be compromised.</p>
+<p>•	<strong>Scheduling</strong> – Kernel space to ensure fairness of system. Xen uses Borrowed Virtual Time scheduling algorithm.<br />
+•	<strong>Communication</strong> – Service is provided in Xen as well as Guest OS space. Xen provides the abstraction of virtual firewall router where each domain has one or more network interfaces logically connected to VFR. For transmitting packet Guest OS enqueue descriptor and Xen copies the descriptor and to ensure safety copies the packet header and execute any matching filter rules.<br />
+•	<strong>Memory Management</strong> – Guest OS is responsible for allocating and managing hardware page tables. In this case, relative to Xen Guest OS can be called in user space although Guest OS is in Ring 1 and applications run in Ring 3. Xen involvement is to ensure safety and isolation. When Guest OS requires new page table it allocates and initializes from its own memory reservations and register it with Xen.<br />
+•	<strong>File System</strong> – File system service is managed outside the Kernel. <br /></p>
 
-<p><br /><br /><br /><br />
-† Domain name service<br />
-†† Directory Service<br />
-††† Wide Area Network<br /></p>
+<hr style="border-top: 1.5px dotted black" />
+<p><br /><br /></p>
+
+<h3 id="denali">Denali</h3>
+
+<p>Denali <strong>isolation</strong> kernel is a x86 based operating system that isolates untrusted software service in separate protection domain. It is a small kernel operating system architecture targeted at hosting multiple applications with little data sharing. Small kernel sometimes resembles to <strong>microkernel.</strong>  <br /><br />
+Following are the Denali design Principles:
+•	Expose low-level resources rather than high-level abstractions.<br />
+•	Prevent direct sharing by exposing only private, virtualized namespaces.<br />
+•	Scalability<br />
+•	Modify the virtualized architecture for simplicity, scale, and performance.<br /></p>
+
+<p>Denali system focuses on executing service in separate VM, which provides stronger isolation.</p>
+
+<p>•	<strong>Scheduling</strong> – Scheduling is done by kernel in Denali.<br />
+•	<strong>Communication</strong> – Service is provided in Denali as well as Guest OS space. Denali Ethernet has been simplified so that it requires only one PIO to send and receive packet, which improves performance. To get this benefit Guest OS device driver has been modified. <br />
+•	<strong>Memory Management</strong> – Guest OS is responsible for accessing portion of physical address space allowed to Guest OS. Denali involvement is to ensure safety and isolation. The isolation kernel allocates swap region. Upon page fault isolation kernel take care by verifying the faulting VM has not accessed illegal virtual address.<br />
+•	<strong>File System</strong> – File system service is managed outside the Kernel. <br /></p>
+
+<hr style="border-top: 1.5px dotted black" />
+<p><br /><br /></p>
+
+<h3 id="unix">UNIX</h3>
+
+<p>Unix is the <strong>monolithic</strong> kernel operating system, which means all the services, has to be implemented and provided by the OS kernel. Unix philosophy has been described as follows :<br /><br />
+1.	<strong>Rule of Modularity:</strong> Write simple parts connected by clean interfaces.<br />
+2.	<strong>Rule of Clarity:</strong> Clarity is better than cleverness.<br />
+3.	<strong>Rule of Composition:</strong> Design programs to be connected to other programs.<br />
+4.	<strong>Rule of Separation:</strong> Separate policy from mechanism; separate interfaces from engines.<br />
+5.	<strong>Rule of Simplicity:</strong> Design for simplicity; add complexity only where you must.<br />
+6.	<strong>Rule of Parsimony:</strong> Write a big program only when it is clear by demonstration that nothing else will do.<br />
+7.	<strong>Rule of Transparency:</strong> Design for visibility to make inspection and debugging easier.<br />
+8.	<strong>Rule of Robustness:</strong> Robustness is the child of transparency and simplicity.<br />
+9.	<strong>Rule of Representation:</strong> Fold knowledge into data so program logic can be stupid and robust.<br />
+10.	<strong>Rule of Least Surprise:</strong> In interface design, always do the least surprising thing.<br />
+11.	<strong>Rule of Silence:</strong> When a program has nothing surprising to say, it should say nothing.<br />
+12.	<strong>Rule of Repair:</strong> When you must fail, fail noisily and as soon as possible.<br />
+13.	<strong>Rule of Economy:</strong> Programmer time is expensive; conserve it in preference to machine time.<br />
+14.	<strong>Rule of Generation:</strong> Avoid hand hacking; write programs to write programs when you can.<br />
+15.	<strong>Rule of Optimization:</strong> Prototype before polishing. Get it working before you optimize it.<br />
+16.	<strong>Rule of Diversity:</strong> Distrust all claims for “one true way”.<br />
+17.	<strong>Rule of Extensibility:</strong> Design for the future, because it will be here sooner than you think.<br /></p>
+
+<p>•	<strong>Scheduling</strong> – Scheduling is done by kernel in Unix.<br />
+•	<strong>Communication</strong> – Systems calls are be called in user space but the authorization is provided by Kernel.<br />
+•	<strong>Memory Management</strong> – Kernel Space.<br />
+•	<strong>File System</strong> – Kernel Space.<br /></p>
+
+<p><br /><br /><br /></p>
+
+<h3 id="references">References</h3>
+
+<p><a href="http://www.faqs.org/docs/artu/ch01s06.html" target="_blank">Basics of the Unix Philosophy</a></p>
 </div>
 
 
@@ -267,12 +274,12 @@ In Prospero File System, Virtual System Model implements the concept of closure,
   
 
 
-<time datetime="2014-02-16T22:47:00-08:00" pubdate data-updated="true">Feb 16<span>th</span>, 2014</time>
+<time datetime="2014-03-16T18:26:00-07:00" pubdate data-updated="true">Mar 16<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/operating-systems/'>Operating Systems</a>, <a class='category' href='/blog/categories/systems/'>Systems</a>, <a class='category' href='/blog/categories/distributed-systems/'>distributed systems</a>
+    <a class='category' href='/blog/categories/operating-systems/'>Operating Systems</a>, <a class='category' href='/blog/categories/systems/'>Systems</a>, <a class='category' href='/blog/categories/system-design/'>system design</a>
   
 </span>
 
@@ -285,7 +292,7 @@ In Prospero File System, Virtual System Model implements the concept of closure,
    <div class="rdbWrapper" data-show-read="1" data-show-send-to-kindle="1" data-show-print="1" data-show-email="0" data-orientation="0" data-version="1"></div><script type="text/javascript">(function() {var s = document.getElementsByTagName("script")[0],rdb = document.createElement("script"); rdb.type = "text/javascript"; rdb.async = true; rdb.src = document.location.protocol + "//www.readability.com/embed.js"; s.parentNode.insertBefore(rdb, s); })();</script>
   
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://distkeys.com/blog/2014/02/16/naming-in-distributed-systems/" data-via="_vaibhavg" data-counturl="http://distkeys.com/blog/2014/02/16/naming-in-distributed-systems/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://distkeys.com/blog/2014/03/16/file-system-scheduling-communication-and-memory-management/" data-via="_vaibhavg" data-counturl="http://distkeys.com/blog/2014/03/16/file-system-scheduling-communication-and-memory-management/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -298,10 +305,8 @@ In Prospero File System, Virtual System Model implements the concept of closure,
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/02/16/context-switch/" title="Previous Post: Context Switch">&laquo; Context Switch</a>
+        <a class="basic-alignment left" href="/blog/2014/02/27/system-design-problems/" title="Previous Post: System Design Problems">&laquo; System Design Problems</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/02/21/reading-list/" title="Next Post: Reading List">Reading List &raquo;</a>
       
     </p>
   </footer>
@@ -444,8 +449,8 @@ In Prospero File System, Virtual System Model implements the concept of closure,
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://distkeys.com/blog/2014/02/16/naming-in-distributed-systems/';
-        var disqus_url = 'http://distkeys.com/blog/2014/02/16/naming-in-distributed-systems/';
+        var disqus_identifier = 'http://distkeys.com/blog/2014/03/16/file-system-scheduling-communication-and-memory-management/';
+        var disqus_url = 'http://distkeys.com/blog/2014/03/16/file-system-scheduling-communication-and-memory-management/';
         var disqus_script = 'embed.js';
       
     (function () {
