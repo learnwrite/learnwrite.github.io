@@ -9,7 +9,7 @@
   <meta name="author" content="Vaibhav Gautam">
 
   
-  <meta name="description" content="Recusion problems Factorial Total BunnyEars Even/Odd BunnyEars Triangle Sum of Digits Count no 7 Count X in String Count Hi Change XY String Change &hellip;">
+  <meta name="description" content="Trie Problems Trie explanation Trie Code Infix to Postfix Postfix to Infix Evaluate Postfix expression Tree Problems Find BST is balanced or not &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -108,6 +108,80 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/26/trie-and-trees/">Trie and Trees</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-26T23:18:00-08:00" pubdate data-updated="true">Nov 26<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/11/26/trie-and-trees/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#trie-problems">Trie Problems</a></li>
+  <li><a href="#trie-explanation">Trie explanation</a></li>
+  <li><a href="#trie-code">Trie Code</a></li>
+  <li><a href="#infix-to-postfix">Infix to Postfix</a></li>
+  <li><a href="#postfix-to-infix">Postfix to Infix</a>    <ul>
+      <li><a href="#evaluate-postfix-expression">Evaluate Postfix expression</a></li>
+    </ul>
+  </li>
+  <li><a href="#tree-problems">Tree Problems</a>    <ul>
+      <li><a href="#find-bst-is-balanced-or-not">Find BST is balanced or not</a></li>
+      <li><a href="#find-binary-tree-is-bst-or-not">Find Binary Tree is BST or not</a></li>
+      <li><a href="#bst---recursive-inorder-traversal">BST - Recursive Inorder Traversal</a></li>
+      <li><a href="#bst---iterative-inorder-traversal">BST - Iterative Inorder Traversal</a></li>
+      <li><a href="#bst---morris-inorder-traversal">BST - Morris Inorder Traversal</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p>This article is about Trie and Trees data structure.</p>
+
+<div class="wikipedia">
+  
+    <img src="//upload.wikimedia.org/wikipedia/commons/thumb/b/be/Trie_example.svg/250px-Trie_example.svg.png" />
+  
+  <h2>trie</h2>
+  <div>
+    <p>In <a href="http://en.wikipedia.org/wiki/Computer_science" title="Computer science">computer science</a>, a <strong>trie</strong>, also called <strong>digital tree</strong> and sometimes <strong>radix tree</strong> or <strong>prefix tree</strong> (as they can be searched by prefixes), is an <a href="http://en.wikipedia.org/wiki/Ordered_tree_data_structure" title="Ordered tree data structure" class="mw-redirect">ordered tree</a> <a href="http://en.wikipedia.org/wiki/Data_structure" title="Data structure">data structure</a> that is used to store a <a href="http://en.wikipedia.org/wiki/Set_(abstract_data_type)" title="Set (abstract data type)">dynamic set</a> or <a href="http://en.wikipedia.org/wiki/Associative_array" title="Associative array">associative array</a> where the keys are usually <a href="http://en.wikipedia.org/wiki/String_(computer_science)" title="String (computer science)">strings</a>. Unlike a <a href="http://en.wikipedia.org/wiki/Binary_search_tree" title="Binary search tree">binary search tree</a>, no node in the tree stores the key associated with that node; instead, its position in the tree defines the key with which it is associated. All the descendants of a node have a common <a href="http://en.wikipedia.org/wiki/Prefix" title="Prefix">prefix</a> of the string associated with that node, and the root is associated with the <a href="http://en.wikipedia.org/wiki/String_(computer_science)" title="String (computer science)">empty string</a>. Values are normally not associated with every node, only with leaves and some inner nodes that correspond to keys of interest. For the space-optimized presentation of prefix tree, see <a href="http://en.wikipedia.org/wiki/Compact_prefix_tree" title="Compact prefix tree" class="mw-redirect">compact prefix tree</a>.
+</p>
+  </div>
+  <a href="http://en.wikipedia.org/wiki/Trie">Read more</a>
+</div>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/11/26/trie-and-trees/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -697,6 +771,10 @@ Sometimes char data type is used as a package of 8 bits not as a valid char valu
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/03/16/file-system-scheduling-communication-and-memory-management/">File System, Scheduling, Communication and Memory Management</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/02/27/system-design-problems/">System Design Problems</a>
       </li>
     
@@ -712,10 +790,6 @@ Sometimes char data type is used as a package of 8 bits not as a valid char valu
         <a href="/blog/2014/02/16/context-switch/">Context Switch</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/01/05/scale-in-distributed-systems/">Scale in Distributed Systems</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -728,10 +802,10 @@ Sometimes char data type is used as a package of 8 bits not as a valid char valu
 <li class='category'><a href='/blog/categories/linux/'>Linux (1)</a></li>
 <li class='category'><a href='/blog/categories/octopress/'>Octopress (1)</a></li>
 <li class='category'><a href='/blog/categories/operating/'>Operating (1)</a></li>
-<li class='category'><a href='/blog/categories/operating-systems/'>Operating Systems (3)</a></li>
+<li class='category'><a href='/blog/categories/operating-systems/'>Operating Systems (4)</a></li>
 <li class='category'><a href='/blog/categories/reading-list/'>Reading List (1)</a></li>
 <li class='category'><a href='/blog/categories/scale/'>Scale (1)</a></li>
-<li class='category'><a href='/blog/categories/systems/'>Systems (3)</a></li>
+<li class='category'><a href='/blog/categories/systems/'>Systems (4)</a></li>
 <li class='category'><a href='/blog/categories/algorithm/'>algorithm (3)</a></li>
 <li class='category'><a href='/blog/categories/algorithms/'>algorithms (3)</a></li>
 <li class='category'><a href='/blog/categories/architecture/'>architecture (1)</a></li>
@@ -748,7 +822,7 @@ Sometimes char data type is used as a package of 8 bits not as a valid char valu
 <li class='category'><a href='/blog/categories/scale/'>scale (1)</a></li>
 <li class='category'><a href='/blog/categories/sorting/'>sorting (2)</a></li>
 <li class='category'><a href='/blog/categories/strings/'>strings (1)</a></li>
-<li class='category'><a href='/blog/categories/system-design/'>system design (1)</a></li>
+<li class='category'><a href='/blog/categories/system-design/'>system design (2)</a></li>
 <li class='category'><a href='/blog/categories/trees/'>trees (1)</a></li>
 <li class='category'><a href='/blog/categories/tries/'>tries (1)</a></li>
 
