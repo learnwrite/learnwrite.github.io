@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: Scale - Distributed Knowledge</title>
+  <title>Singleton - Design Pattern - Distributed Knowledge</title>
   <meta name="author" content="Vaibhav Gautam">
 
   
-  <meta name="description" content="Category: Scale">
+  <meta name="description" content="Problem Statement Solution First approach Second approach Singleton Problem Statement We create a class, and we know the classes can be instantiated &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://distkeys.comblog/categories/scale/">
+  <link rel="canonical" href="http://distkeys.com/blog/2014/03/25/singleton/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
    <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -107,36 +107,227 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Scale</h1>
+    
+      <h1 class="entry-title">Singleton - Design Pattern</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-25T22:49:00-07:00" pubdate data-updated="true">Mar 25<span>th</span>, 2014</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#problem-statement">Problem Statement</a></li>
+  <li><a href="#solution">Solution</a>    <ul>
+      <li><a href="#first-approach">First approach</a></li>
+      <li><a href="#second-approach">Second approach</a></li>
+      <li><a href="#singleton">Singleton</a></li>
+    </ul>
+  </li>
+</ul>
 
-  
-  <h2>2014</h2>
+<h3 id="problem-statement">Problem Statement</h3>
 
-<article>
-  
-<h1><a href="/blog/2014/01/05/scale-in-distributed-systems/">Scale in Distributed Systems</a></h1>
-<time datetime="2014-01-05T09:41:00-08:00" pubdate><span class='month'>Jan</span> <span class='day'>05</span> <span class='year'>2014</span></time>
+<p>We create a class, and we know the classes can be instantiated once or twice or a thousand times, but what if you only want <strong>one object</strong> of that class.</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/scale/'>Scale</a>, <a class='category' href='/blog/categories/distributed-systems/'>distributed systems</a>, <a class='category' href='/blog/categories/operating-systems/'>operating systems</a></span>
-</footer>
+<h3 id="solution">Solution</h3>
 
+<p>Before we dive into solution lets understand what actually is design pattern.</p>
 
-</article>
+<p>Design Patterns are well-tested solutions to common problems and issues we run into in software development. Think of them as best practices, suggestions for how you might arrange your own classes and objects to accomplish a result.
+<!-- more --></p>
 
+<h4 id="first-approach">First approach</h4>
+
+<p>To achieve <strong>one object</strong> solution might be an <em>Abstract Class</em>, but remember an Abstract Class isn’t allowed to be instantiated at all.
+<br /></p>
+
+<h4 id="second-approach">Second approach</h4>
+
+<p>Second approach might be why don’t we just not create more than one object? <br />
+You could do that but it’s not really enforcing anything, you can’t guarantee that behavior.
+<br /></p>
+
+<h4 id="singleton">Singleton</h4>
+
+<p>In <strong>Singleton Design Pattern</strong>, we don’t want to have to write code to instantiate the Singleton, we want to assume that it always exists, there is always one of them, and we just want to be able to ask for it from any other point of the program and get it.<br /></p>
+
+<blockquote><p>With the Singleton Design Pattern we ensure that a class only has one instance, and we provide just one way to get to it.</p></blockquote>
+
+<p><strong>Step 1</strong><br />
+Mark constructor as <em>Private</em></p>
+
+<p>What this means is nobody can actually instantiate the class from outside, nobody can just say they want to create a new object. This doesn’t really solve our problem that we need there to be one of them. We just can’t create it from the outside. </p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Singleton </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre>
+<span class="directive">public</span> <span class="type">class</span> <span class="class">MySingleton</span> {
+
+        <span class="comment">// private constructor - no object can instantiate</span>
+        <span class="directive">private</span> MySingleton() { }
+        
+        ...
+        ...
+}
+</pre></div>
+</div>
+ </figure></notextile></div>
+
+<p><strong>Step 2</strong><br />
+Create a static variable in this class that holds a placeholder to a singleton object</p>
+
+<p>This just means a variable that can hold a singleton object, and there is nothing in it right now.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Singleton </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre>
+<span class="directive">public</span> <span class="type">class</span> <span class="class">MySingleton</span> {
+        <span class="comment">// placeholder for singleton object</span>
+        <span class="directive">private</span> <span class="directive">static</span> MySingleton _singleObj = <span class="predefined-constant">null</span>;
+
+        <span class="comment">// private constructor - no object can instantiate</span>
+        <span class="directive">private</span> MySingleton() { }
+        
+        ...
+}
+</pre></div>
+</div>
+ </figure></notextile></div>
+
+<p><strong>Step 3</strong><br />
+Create a static method say <em>getInstance()</em>. </p>
+
+<p>Static methods can only access static data members. In this case, we don’t have to have an instance of this class yet. The first thing it asks is do I exist? Is there anything in that _singleObj variable, if it’s null then instantiate a new MySingleton object.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Singleton </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre>
+<span class="directive">public</span> <span class="type">class</span> <span class="class">MySingleton</span> {
+        <span class="comment">// placeholder for singleton object</span>
+        <span class="directive">private</span> <span class="directive">static</span> MySingleton _singleObj = <span class="predefined-constant">null</span>;
+
+        <span class="comment">// private constructor - no object can instantiate</span>
+        <span class="directive">private</span> MySingleton() { }
+        
+        <span class="directive">public</span> <span class="directive">static</span> MySingleton getInstance() {
+            <span class="comment">// Do I exists ?</span>
+            <span class="keyword">if</span> (_singleObj == <span class="predefined-constant">null</span>) {
+                    <span class="comment">// Instantiate object</span>
+                    _singleObj = <span class="keyword">new</span> MySingleton();
+            }
+            <span class="keyword">return</span> _singleObj;            
+        }
+        
+        <span class="comment">// Other member functions</span>
+        ...
+}
+</pre></div>
+</div>
+ </figure></notextile></div>
+
+<p>We’re allowed to do instantiate the object  in <em>getInstance()</em>  from inside this class, because we marked that constructor as <em>private</em>, which means this class is allowed to call it but nobody else is.</p>
+
+<blockquote><p>We are actually using a technique here called Lazy Instantiation, which means that until someone asks for this object it doesn&#8217;t exist. But when they ask for it, we&#8217;ll look for it. If it doesn&#8217;t exist, we create it, we store a reference to it so that when the next person asks it&#8217;s already there.</p></blockquote>
+
+<p>Finally to invoke Singleton</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Singleton </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre>
+MySingleton single = MySingleton.getInstance();
+
+single.otherMemberFunctions();
+</pre></div>
+</div>
+ </figure></notextile></div>
+
+<p><br /><br /></p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Vaibhav Gautam</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-25T22:49:00-07:00" pubdate data-updated="true">Mar 25<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/design-pattern/'>design pattern</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+   <div class="rdbWrapper" data-show-read="1" data-show-send-to-kindle="1" data-show-print="1" data-show-email="0" data-orientation="0" data-version="1"></div><script type="text/javascript">(function() {var s = document.getElementsByTagName("script")[0],rdb = document.createElement("script"); rdb.type = "text/javascript"; rdb.async = true; rdb.src = document.location.protocol + "//www.readability.com/embed.js"; s.parentNode.insertBefore(rdb, s); })();</script>
+  
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://distkeys.com/blog/2014/03/25/singleton/" data-via="_vaibhavg" data-counturl="http://distkeys.com/blog/2014/03/25/singleton/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/03/18/oops/" title="Previous Post: OOPS - Object Oriented">&laquo; OOPS - Object Oriented</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -270,7 +461,10 @@
       var disqus_shortname = 'coolgoose85';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://distkeys.com/blog/2014/03/25/singleton/';
+        var disqus_url = 'http://distkeys.com/blog/2014/03/25/singleton/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

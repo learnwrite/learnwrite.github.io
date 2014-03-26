@@ -5,11 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: Scale - Distributed Knowledge</title>
+  <title>Distributed Knowledge</title>
   <meta name="author" content="Vaibhav Gautam">
 
   
-  <meta name="description" content="Category: Scale">
+  <meta name="description" content="Print bit values in a byte Recently, I have been working on interesting piece of code whose crux is to create a array of pointer addresses.
+Each &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://distkeys.comblog/categories/scale/">
+  <link rel="canonical" href="http://distkeys.com/blog/page/3/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
    <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -106,40 +107,72 @@
 </nav> -->
   <div id="main">
     <div id="content">
-      <div>
-<article role="article">
+      <div class="blog-index">
   
+  
+  
+    <article>
+      
   <header>
-    <h1 class="entry-title">Category: Scale</h1>
+    
+      <h1 class="entry-title"><a href="/blog/2013/10/06/gdb-print-bit-values-of-bytes/">GDB - Print Bit Values of Bytes</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-06T21:06:00-07:00" pubdate data-updated="true">Oct 6<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/10/06/gdb-print-bit-values-of-bytes/#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+  <div class="entry-content">
+<h2>Print bit values in a byte</h2>
 
-  
-  <h2>2014</h2>
+<p>Recently, I have been working on interesting piece of code whose crux is to create a array of pointer addresses.
+Each entry in this array is address pointing to memory location.</p>
 
-<article>
-  
-<h1><a href="/blog/2014/01/05/scale-in-distributed-systems/">Scale in Distributed Systems</a></h1>
-<time datetime="2014-01-05T09:41:00-08:00" pubdate><span class='month'>Jan</span> <span class='day'>05</span> <span class='year'>2014</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/scale/'>Scale</a>, <a class='category' href='/blog/categories/distributed-systems/'>distributed systems</a>, <a class='category' href='/blog/categories/operating-systems/'>operating systems</a></span>
-</footer>
-
-
-</article>
-
+<p>For example<br />
+Container array contains char addresses. Here, 100 is memory address where char value resides.</p>
+<table><td>100</td><td>1000</td><td>2000</td></table>
+<p><br />
+Address 100<br /></p>
+<table><td>v</td><td>a</td><td>i</td><td>b</td><td>h</td><td>a</td><td>v</td><td>\0</td></table>
+<p><br />
+Sometimes char data type is used as a package of 8 bits not as a valid char value.<br />
 </div>
-
   
-</article>
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/10/06/gdb-print-bit-values-of-bytes/">Read on &rarr;</a>
+    </footer>
+  
 
+
+    </article>
+  
+  <div class="pagination">
+    
+    <a href="archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/2/">Newer &rarr;</a>
+    
+  </div>
 </div>
-
 <aside class="sidebar">
   
     <section>
@@ -254,7 +287,6 @@
 
   
 </aside>
-
 
     </div>
   </div>
