@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Systems | Distributed Knowledge]]></title>
   <link href="http://distkeys.com/blog/categories/systems/atom.xml" rel="self"/>
   <link href="http://distkeys.com/"/>
-  <updated>2014-03-16T18:55:58-07:00</updated>
+  <updated>2014-03-18T01:07:21-07:00</updated>
   <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -134,6 +134,7 @@ Following are the Denali design Principles:
 <h3 id="references">References</h3>
 
 <p><a href="http://www.faqs.org/docs/artu/ch01s06.html" target="_blank">Basics of the Unix Philosophy</a></p>
+
 ]]></content>
   </entry>
   

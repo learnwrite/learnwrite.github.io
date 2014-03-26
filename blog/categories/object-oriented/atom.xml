@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: object oriented | Distributed Knowledge]]></title>
+  <link href="http://distkeys.com/blog/categories/object-oriented/atom.xml" rel="self"/>
+  <link href="http://distkeys.com/"/>
+  <updated>2014-03-18T01:07:21-07:00</updated>
+  <id>http://distkeys.com/</id>
+  <author>
+    <name><![CDATA[Vaibhav Gautam]]></name>
+    <email><![CDATA[gautam.usc@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[OOPS - Object Oriented]]></title>
+    <link href="http://distkeys.com/blog/2014/03/18/oops/"/>
+    <updated>2014-03-18T00:54:00-07:00</updated>
+    <id>http://distkeys.com/blog/2014/03/18/oops</id>
+    <content type="html"><![CDATA[<p>Recently I have been trying to learn the approach to design an application in object oriented manner. Coming from C or systems background I was little struggling to think in terms of Oops. So, I stepped back a bit and tried to understand the whole concept with different angle. It’s like unlearn the existing stuff and look it with fresh perspective. Although, I knew the core concepts of Oops but how to apply them was little troubling.</p>
+
+<p>I found this video series and it’s teaching exactly with what I am struggling with. It takes step by step approach and help you design an application based on Oops concepts. </p>
+
+<p>I am loving it!!!</p>
+
+<p><a data-pin-do="embedBoard" href="http://www.pinterest.com/gautamusc/object-oriented-design/" data-pin-scale-width="80" data-pin-scale-height="80" data-pin-board-width="400">Follow Vaibhav Gautam’s board Object Oriented Design on Pinterest.</a>
+<!-- Please call pinit.js only once per page -->
+<script type="text/javascript" async="" src="http://distkeys.com//assets.pinterest.com/js/pinit.js"></script></p>
+
+<p>The whole video series can be watched at youtube</p>
+
+<iframe width="560" height="315" src="http://distkeys.com//www.youtube.com/embed/videoseries?list=PLqlI1RpjIS59ziAx7YBqQ0rtyAcpgdsjm" frameborder="0" allowfullscreen=""></iframe>
+]]></content>
+  </entry>
+  
+</feed>
