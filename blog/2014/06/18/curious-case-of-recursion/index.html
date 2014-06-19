@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Scalability in Distributed Systems - Distributed Knowledge</title>
+  <title>Curious Case Of Recursion - Distributed Knowledge</title>
   <meta name="author" content="Vaibhav Gautam">
 
   
-  <meta name="description" content="Facebook Data Center Search for People Petabytes of Data FB Engineering Notes Spotify CAP Theorem Amazon Amazon Dynamo Twitter References This &hellip;">
+  <meta name="description" content="Recursion has always been imaginative to me. How do I write the recursive function so that it solve the problem, what all cases it would uncover as &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://distkeys.com/blog/2013/11/27/scalability/">
+  <link rel="canonical" href="http://distkeys.com/blog/2014/06/18/curious-case-of-recursion/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
    <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -111,7 +111,7 @@
   
   <header>
     
-      <h1 class="entry-title">Scalability in Distributed Systems</h1>
+      <h1 class="entry-title">Curious Case of Recursion</h1>
     
     
       <p class="meta">
@@ -127,7 +127,7 @@
   
 
 
-<time datetime="2013-11-27T15:06:00-08:00" pubdate data-updated="true">Nov 27<span>th</span>, 2013</time>
+<time datetime="2014-06-18T22:03:00-07:00" pubdate data-updated="true">Jun 18<span>th</span>, 2014</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -136,103 +136,122 @@
   </header>
 
 
-<div class="entry-content"><ul id="markdown-toc">
-  <li><a href="#facebook">Facebook</a>    <ul>
-      <li><a href="#data-center">Data Center</a></li>
-      <li><a href="#search-for-people">Search for People</a></li>
-      <li><a href="#petabytes-of-data">Petabytes of Data</a></li>
-      <li><a href="#fb-engineering-notes">FB Engineering Notes</a></li>
-    </ul>
-  </li>
-  <li><a href="#spotify">Spotify</a></li>
-  <li><a href="#cap-theorem">CAP Theorem</a></li>
-  <li><a href="#amazon">Amazon</a>    <ul>
-      <li><a href="#amazon-dynamo">Amazon Dynamo</a></li>
-    </ul>
-  </li>
-  <li><a href="#twitter">Twitter</a></li>
-  <li><a href="#references">References</a></li>
-</ul>
+<div class="entry-content">
+<p>Recursion has always been imaginative to me. How do I write the recursive function so that it solve the problem, what all cases it would uncover as recursion progress. As input value increases things gets complex and I am lost.</p>
 
-<p>This article is about Scalability in Distributed Systems and various engineering organizations approaching the problem of Scalability..</p>
+<p>To understand it better I was looking around internet and I found very ordinary yet powerful statement.</p>
 
-<div class="wikipedia">
-  
-  <h2>scalability</h2>
-  <div>
-    <p>In <a href="http://en.wikipedia.org/wiki/Electronics" title="Electronics">electronics</a> (including <a href="http://en.wikipedia.org/wiki/Semiconductor_manufacturing" title="Semiconductor manufacturing" class="mw-redirect">hardware</a>, <a href="http://en.wikipedia.org/wiki/Telecommunications" title="Telecommunications" class="mw-redirect">communication</a> and <a href="http://en.wikipedia.org/wiki/Software_engineering" title="Software engineering">software</a>), <strong>scalability</strong> is the ability of a system, network, or process to handle a growing amount of work in a capable manner or its ability to be enlarged to accommodate that growth.  For example, it can refer to the capability of a system to increase total throughput under an increased load when resources (typically hardware) are added. An analogous meaning is implied when the word is used in an <a href="http://en.wikipedia.org/wiki/Economics" title="Economics">economic</a> context, where scalability of a company implies that the underlying <a href="http://en.wikipedia.org/wiki/Business_model" title="Business model">business model</a> offers the potential for <a href="http://en.wikipedia.org/wiki/Economic_growth" title="Economic growth">economic growth</a> within the company.
-</p>
-  </div>
-  <a href="http://en.wikipedia.org/wiki/Scalability">Read more</a>
-</div>
+<blockquote><p>Functions can call other functions &#8211; this is a fact that most programmers know. Recursion is simply a special case where instead of calling another function, a function calls itself.</p></blockquote>
 
 <!-- more -->
-<p><br /></p>
 
-<h3 id="facebook">Facebook</h3>
+<p>This is pretty good insight. This statement helps you to forget imaging the complex cases where you have high input value, what happens behind the scenes and so on.
+<br /><br /></p>
 
-<h4 id="data-center">Data Center</h4>
-<div id="fb-root"></div>
-<script>(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//connect.facebook.net/en_US/all.js#xfbml=1"; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk'));</script>
+<p><strong>Lets take an example</strong></p>
 
-<div class="fb-post" data-href="https://www.facebook.com/notes/facebook-engineering/scaling-out/23844338919" data-width="550"><div class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/notes/facebook-engineering/scaling-out/23844338919">Post</a> by <a href="https://www.facebook.com/Engineering">Facebook Engineering</a>.</div></div>
+<p>Write a function, for a given number, print out all different ways to make this number, by using addition and any number equal to or smaller than this number and greater than zero. </p>
 
-<p><br /></p>
+<p>For example, given a 5, we have the following different ways to make up 5:<br />
+1st 1, 1, 1, 1, 1 <br />
+2nd: 1, 4 <br />
+3rd : 1, 1, 1, 2 <br />
+4th : 1, 1, 3 <br />
+5th : 2, 3 <br />
+6th : 1, 2, 2 <br />
+7th : 5 <br /></p>
 
-<h4 id="search-for-people">Search for People</h4>
+<p>There are two ways of thinking about this problem<br />
+1. 1 + 1 = 2 <br /> 
+2. 2 = 1 + 1</p>
 
-<div id="fb-root"></div>
-<script>(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//connect.facebook.net/en_US/all.js#xfbml=1"; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk'));</script>
+<p>You would be wondering they both look pretty same. They both are same when result matters but they are different in approach.</p>
 
-<div class="fb-post" data-href="https://www.facebook.com/notes/facebook-engineering/the-life-of-a-typeahead-query/389105248919" data-width="550"><div class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/notes/facebook-engineering/the-life-of-a-typeahead-query/389105248919">Post</a> by <a href="https://www.facebook.com/Engineering">Facebook Engineering</a>.</div></div>
+<p><strong>Lets consider input as 3</strong> <br />
+Using approach 1, 3 be written as 1 + 1 + 1<br />
+But, using approach 2, 3 will be written as 3 = 1 + 2 and now how 2 can be written. Yes, 2 = 1 + 1</p>
 
-<p><br /></p>
+<p>Finally, 3 = 1 + 2 = 1 + (1 + 1)<br />
+              4 = 1 + 3 = 1 + (1 + 2) = 1 + (1 + ( 1 + 1))<br />
+              and so on….</p>
 
-<h4 id="petabytes-of-data">Petabytes of Data</h4>
+<p>We can clearly see recursion pattern forming here. In this case now all we need to worry is given input just subtract 1 and call the same function again.</p>
 
-<div id="fb-root"></div>
-<script>(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//connect.facebook.net/en_US/all.js#xfbml=1"; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk'));</script>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Recursion1</span>  <a href="http://ideone.com/v0vZKf" target="_blank">Run Code </a></figcaption> <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span> <span class="preprocessor">#include</span> <span class="include">&lt;iostream&gt;</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span> 
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span> using namespace std;
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span> 
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span> <span class="directive">void</span> printSeq(<span class="predefined-type">int</span> num, <span class="predefined-type">int</span> a[], <span class="predefined-type">int</span> opIndx,<span class="predefined-type">int</span> s){
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>     <span class="keyword">if</span>(num &lt;= <span class="integer">0</span>){
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>         <span class="comment">// Display the result</span>
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>         <span class="keyword">for</span>(<span class="predefined-type">int</span> j=<span class="integer">0</span>;j&lt;opIndx;j++)
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>             cout&lt;&lt;a[j]&lt;&lt;<span class="string"><span class="delimiter">&quot;</span><span class="content">,</span><span class="delimiter">&quot;</span></span>;
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>         cout&lt;&lt;endl;
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>         <span class="keyword">return</span>;
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>     }
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span> 
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>     a[opIndx] = <span class="integer">1</span>;
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>     <span class="comment">// Call the function again, remember 3 = 1 + 2</span>
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>     printSeq(num-<span class="integer">1</span>, a, opIndx+<span class="integer">1</span>, <span class="integer">1</span>);
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span> }
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span> 
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span> <span class="predefined-type">int</span> main(){
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>     <span class="predefined-type">int</span> a[<span class="integer">5</span>];
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span>     printSeq(<span class="integer">5</span>,a,<span class="integer">0</span>,<span class="integer">1</span>);
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span>     <span class="keyword">return</span> <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span> }
+</pre></div>
+</div>
+ </figure></notextile></div>
 
-<div class="fb-post" data-href="https://www.facebook.com/notes/facebook-engineering/presto-interacting-with-petabytes-of-data-at-facebook/10151786197628920" data-width="550"><div class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/notes/facebook-engineering/presto-interacting-with-petabytes-of-data-at-facebook/10151786197628920">Post</a> by <a href="https://www.facebook.com/Engineering">Facebook Engineering</a>.</div></div>
+<p>We just saw case 1 but there are other combinations of 5. Lets consider the next combinations which are<br />
+ 5 = 2 + (3). Later 3 will have its own combinations which don’t need to bother.<br />
+ 5 = 3 + (2)<br />
+ 5 = 4 + (1)<br />
+ 5 = 5 + (0)<br /></p>
 
-<p><br /></p>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Combination</span>  <a href="http://ideone.com/AQrLwO" target="_blank">Run Code </a></figcaption> <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>  <span class="preprocessor">#include</span> <span class="include">&lt;iostream&gt;</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>  
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>  using namespace std;
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>  
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>  <span class="directive">void</span> printSeq(<span class="predefined-type">int</span> num, <span class="predefined-type">int</span> a[], <span class="predefined-type">int</span> opIndx,<span class="predefined-type">int</span> s){
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>      <span class="keyword">if</span>(num &lt;= <span class="integer">0</span>){
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>          <span class="comment">//Display the output</span>
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>          <span class="keyword">for</span>(<span class="predefined-type">int</span> j = <span class="integer">0</span>; j &lt; opIndx; j++)
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>              cout &lt;&lt; a[j] &lt;&lt; <span class="string"><span class="delimiter">&quot;</span><span class="content">,</span><span class="delimiter">&quot;</span></span>;
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>          cout &lt;&lt; endl;
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>          <span class="keyword">return</span>;
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>      }
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>  
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>      <span class="comment">// s starts from 1 and later it will change to</span>
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>      <span class="comment">// 2, 3, 4, 5.</span>
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>      <span class="comment">// It is the case$</span>
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>      <span class="comment">// 5 = 2 + (3)</span>
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>      <span class="comment">// 5 = 3 + (2)</span>
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>      <span class="comment">// 5 = 4 + (1)</span>
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>      <span class="comment">// 5 = 5 + (0)</span>
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span>      <span class="keyword">for</span>(<span class="predefined-type">int</span> i = s; i &lt;= num; i++){
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span>          a[opIndx] = i;
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span>          printSeq(num-i, a, opIndx + <span class="integer">1</span>, i);
+<span class="line-numbers"><a href="#n25" name="n25">25</a></span>      }
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span>  }   
+<span class="line-numbers"><a href="#n27" name="n27">27</a></span>  
+<span class="line-numbers"><a href="#n28" name="n28">28</a></span>  <span class="predefined-type">int</span> main(){
+<span class="line-numbers"><a href="#n29" name="n29">29</a></span>      <span class="predefined-type">int</span> a[<span class="integer">15</span>];
+<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>      printSeq(<span class="integer">5</span>, a, <span class="integer">0</span>, <span class="integer">1</span>);
+<span class="line-numbers"><a href="#n31" name="n31">31</a></span>      <span class="keyword">return</span> <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n32" name="n32">32</a></span>  }
+</pre></div>
+</div>
+ </figure></notextile></div>
 
-<h4 id="fb-engineering-notes">FB Engineering Notes</h4>
-
-<p><a href="https://www.facebook.com/Engineering/notes" target="_blank">FB Engineering</a></p>
-
-<p><br /></p>
-
-<h3 id="spotify">Spotify</h3>
-
-<p><a href="https://www.dropbox.com/s/3wj0adazuwh27ve/spotify-p2p10.pdf" target="_blank"> Spotify P2P</a></p>
-
-<p><br /></p>
-
-<h3 id="cap-theorem">CAP Theorem</h3>
-
-<p><a href="http://henryr.github.io/cap-faq/" target="_blank">CAP FAQ</a></p>
-
-<p><br /></p>
-
-<h3 id="amazon">Amazon</h3>
-
-<h4 id="amazon-dynamo">Amazon Dynamo</h4>
-
-<p><a href="http://www.allthingsdistributed.com/2007/10/amazons_dynamo.html" target="_blank">Dynamo</a></p>
-
-<p><br /></p>
-
-<h3 id="twitter">Twitter</h3>
-
-<p><a href="http://highscalability.com/blog/2013/7/8/the-architecture-twitter-uses-to-deal-with-150m-active-users.html" target="_blank"> Twitter Architecture</a></p>
-
-<h3 id="references">References</h3>
-
-<ul>
-  <li><a href="http://pl.atyp.us/wordpress/index.php/category/tech/cloudfs/" target="_blank">Jeff Darcy</a></li>
-  <li><a href="http://the-paper-trail.org/" target="_blank">Henry Robinson</a></li>
-</ul>
+<p><br /><br /><br /><br />
+<strong>References</strong> <br />
+ <a href="http://www.reddit.com/r/learnprogramming/comments/135rdz/help_me_understand_recursion/">Recursion on reddit</a></p>
 </div>
 
 
@@ -255,12 +274,12 @@
   
 
 
-<time datetime="2013-11-27T15:06:00-08:00" pubdate data-updated="true">Nov 27<span>th</span>, 2013</time>
+<time datetime="2014-06-18T22:03:00-07:00" pubdate data-updated="true">Jun 18<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/architecture/'>architecture</a>, <a class='category' href='/blog/categories/distributed-systems/'>distributed systems</a>, <a class='category' href='/blog/categories/operating-systems/'>operating systems</a>, <a class='category' href='/blog/categories/scale/'>scale</a>
+    <a class='category' href='/blog/categories/recursion/'>recursion</a>
   
 </span>
 
@@ -273,7 +292,7 @@
    <div class="rdbWrapper" data-show-read="1" data-show-send-to-kindle="1" data-show-print="1" data-show-email="0" data-orientation="0" data-version="1"></div><script type="text/javascript">(function() {var s = document.getElementsByTagName("script")[0],rdb = document.createElement("script"); rdb.type = "text/javascript"; rdb.async = true; rdb.src = document.location.protocol + "//www.readability.com/embed.js"; s.parentNode.insertBefore(rdb, s); })();</script>
   
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://distkeys.com/blog/2013/11/27/scalability/" data-via="_vaibhavg" data-counturl="http://distkeys.com/blog/2013/11/27/scalability/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://distkeys.com/blog/2014/06/18/curious-case-of-recursion/" data-via="_vaibhavg" data-counturl="http://distkeys.com/blog/2014/06/18/curious-case-of-recursion/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -286,10 +305,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/11/26/trie-and-trees/" title="Previous Post: Trie and Trees">&laquo; Trie and Trees</a>
+        <a class="basic-alignment left" href="/blog/2014/03/25/singleton/" title="Previous Post: Singleton - Design Pattern">&laquo; Singleton - Design Pattern</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/12/14/graph-algorithms/" title="Next Post: Graph Algorithms">Graph Algorithms &raquo;</a>
       
     </p>
   </footer>
@@ -434,8 +451,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://distkeys.com/blog/2013/11/27/scalability/';
-        var disqus_url = 'http://distkeys.com/blog/2013/11/27/scalability/';
+        var disqus_identifier = 'http://distkeys.com/blog/2014/06/18/curious-case-of-recursion/';
+        var disqus_url = 'http://distkeys.com/blog/2014/06/18/curious-case-of-recursion/';
         var disqus_script = 'embed.js';
       
     (function () {
