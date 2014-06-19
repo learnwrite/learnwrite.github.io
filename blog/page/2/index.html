@@ -9,7 +9,7 @@
   <meta name="author" content="Vaibhav Gautam">
 
   
-  <meta name="description" content="Graph problems Find neighbour in array Find all the ascending paths in graph Graph problems Find neighbour in array Find all the neighbours of a &hellip;">
+  <meta name="description" content="Array Problems Sum of 2 numbers Sum of 2 numbers greater or equal to given sum* Sum of 3 numbers* Find repeating/duplicate numbers* Find the number &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -108,6 +108,87 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/12/30/array-and-strings/">Array and Strings</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-30T01:26:00-08:00" pubdate data-updated="true">Dec 30<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/12/30/array-and-strings/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#array-problems">Array Problems</a>    <ul>
+      <li><a href="#sum-of-2-numbers">Sum of 2 numbers</a></li>
+      <li><a href="#sum-of-2-numbers-greater-or-equal-to-given-sum">Sum of 2 numbers greater or equal to given sum*</a></li>
+      <li><a href="#sum-of-3-numbers">Sum of 3 numbers*</a></li>
+      <li><a href="#find-repeatingduplicate-numbers">Find repeating/duplicate numbers*</a></li>
+      <li><a href="#find-the-number-when-size-of-array-is-unknown">Find the number when size of array is unknown*</a></li>
+      <li><a href="#merge-two-sorted-array">Merge two sorted array</a></li>
+      <li><a href="#merge-2-non-sorted-array-and-remove-duplicates">Merge 2 non sorted array and remove duplicates</a></li>
+      <li><a href="#sort-array-based-on-count">Sort array based on count</a></li>
+      <li><a href="#find-odd-number-of-occurrence">Find odd number of occurrence</a></li>
+      <li><a href="#find-2-numbers-with-odd-occurence">Find 2 numbers with odd occurence</a></li>
+      <li><a href="#searching-an-element-in-a-rotated-sorted-array">Searching an Element in a Rotated Sorted Array</a></li>
+      <li><a href="#largest-sum-contiguous-subarray">Largest Sum Contiguous Subarray</a></li>
+      <li><a href="#permute-numbers">Permute numbers</a></li>
+    </ul>
+  </li>
+  <li><a href="#string-problems">String Problems</a>    <ul>
+      <li><a href="#reverse-a-string-without-extra-space">Reverse a string without extra space</a></li>
+      <li><a href="#duplicates-and-count">Duplicates and Count</a></li>
+      <li><a href="#remove-all-consecutive-duplicate-elements">Remove all consecutive duplicate elements</a></li>
+      <li><a href="#rotate-a-string">Rotate a string</a></li>
+      <li><a href="#permutation-of-a-string">Permutation of a string</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="array-problems">Array Problems</h3>
+
+<h4 id="sum-of-2-numbers">Sum of 2 numbers</h4>
+
+<p>We are given a sorted array A of length n and a value k. We want to find out if there are indices i, j such that A[i] + A[j] == k. <br /><br />
+Give a Θ(n) way of solving this problem. Prove its running time and correctness. <br />Your algorithm should also output one pair of indices i, j such that A[i] + A[j] == k (if at least one pair exists; if multiple exist, you only need to output one of them). </p>
+
+<p><strong>Other variant of the same problem</strong> <br />
+When array is not sorted<br />
+We need to find pair of numbers in an array whose sum is equal to a given value.<br />
+Input [6,4,5,7,9,1,2]<br />
+Sum = 10 <br />
+Then the pairs are  [6,4] , [9,1]
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/12/30/array-and-strings/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -733,68 +814,6 @@ I started realizing that after all it’s not that easy to actually think and wr
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/10/07/process-synchronization-in-os/">Process Synchronization in OS</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-10-07T11:54:00-07:00" pubdate data-updated="true">Oct 7<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/10/07/process-synchronization-in-os/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><ul id="markdown-toc">
-  <li><a href="#what-is-a-process">What is a Process?</a></li>
-  <li><a href="#issues-with-sharing">3 Issues with Sharing</a></li>
-  <li><a href="#carls-jr-restaurant">Carl’s Jr. Restaurant</a></li>
-  <li><a href="#algorithmic-approach">Algorithmic approach</a></li>
-  <li><a href="#software-primitives">Software Primitives</a></li>
-  <li><a href="#semaphores">Semaphores</a></li>
-  <li><a href="#locks">Locks</a></li>
-  <li><a href="#concurrent-programming-construct">Concurrent Programming Construct</a></li>
-  <li><a href="#condition-variables">Condition Variables</a></li>
-  <li><a href="#producer-consumer-problem">Producer-Consumer Problem</a></li>
-  <li><a href="#recommended-reading">Recommended reading</a></li>
-</ul>
-
-<h3 id="what-is-a-process">What is a Process?</h3>
-
-<p>Operating system(OS) <code>objective</code> is to keep as many as of the computer resources as busy as possible. It is used to keep track of all the things an OS must remember about the state of user program.</p>
-
-<p>Process is like a box, a complete entity in itself which does a step by step task written in program. More formally it is called <code class="myyellow">program in execution.</code></p>
-
-<p>Lets consider a very basic operating system with very least complexity. This operating system can run only <code>one process</code> at a time. Since, only one process is working at a time, it may happen that all the resources occupied by process will not be used at the same time. 
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/10/07/process-synchronization-in-os/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -852,6 +871,10 @@ I started realizing that after all it’s not that easy to actually think and wr
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/06/18/curious-case-of-recursion/">Curious Case Of Recursion</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/03/25/singleton/">Singleton - Design Pattern</a>
       </li>
     
@@ -865,10 +888,6 @@ I started realizing that after all it’s not that easy to actually think and wr
     
       <li class="post">
         <a href="/blog/2014/02/27/system-design-problems/">System Design Problems</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/02/21/reading-list/">Reading List</a>
       </li>
     
   </ul>
@@ -901,7 +920,7 @@ I started realizing that after all it’s not that easy to actually think and wr
 <li class='category'><a href='/blog/categories/numbers/'>numbers (1)</a></li>
 <li class='category'><a href='/blog/categories/object-oriented/'>object oriented (1)</a></li>
 <li class='category'><a href='/blog/categories/operating-systems/'>operating systems (2)</a></li>
-<li class='category'><a href='/blog/categories/recursion/'>recursion (2)</a></li>
+<li class='category'><a href='/blog/categories/recursion/'>recursion (3)</a></li>
 <li class='category'><a href='/blog/categories/scale/'>scale (1)</a></li>
 <li class='category'><a href='/blog/categories/sorting/'>sorting (2)</a></li>
 <li class='category'><a href='/blog/categories/strings/'>strings (1)</a></li>

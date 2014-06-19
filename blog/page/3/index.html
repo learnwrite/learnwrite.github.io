@@ -9,8 +9,7 @@
   <meta name="author" content="Vaibhav Gautam">
 
   
-  <meta name="description" content="Print bit values in a byte Recently, I have been working on interesting piece of code whose crux is to create a array of pointer addresses.
-Each &hellip;">
+  <meta name="description" content="What is a Process? 3 Issues with Sharing Carl’s Jr. Restaurant Algorithmic approach Software Primitives Semaphores Locks Concurrent Programming &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,6 +108,68 @@ Each &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/10/07/process-synchronization-in-os/">Process Synchronization in OS</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-07T11:54:00-07:00" pubdate data-updated="true">Oct 7<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/10/07/process-synchronization-in-os/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#what-is-a-process">What is a Process?</a></li>
+  <li><a href="#issues-with-sharing">3 Issues with Sharing</a></li>
+  <li><a href="#carls-jr-restaurant">Carl’s Jr. Restaurant</a></li>
+  <li><a href="#algorithmic-approach">Algorithmic approach</a></li>
+  <li><a href="#software-primitives">Software Primitives</a></li>
+  <li><a href="#semaphores">Semaphores</a></li>
+  <li><a href="#locks">Locks</a></li>
+  <li><a href="#concurrent-programming-construct">Concurrent Programming Construct</a></li>
+  <li><a href="#condition-variables">Condition Variables</a></li>
+  <li><a href="#producer-consumer-problem">Producer-Consumer Problem</a></li>
+  <li><a href="#recommended-reading">Recommended reading</a></li>
+</ul>
+
+<h3 id="what-is-a-process">What is a Process?</h3>
+
+<p>Operating system(OS) <code>objective</code> is to keep as many as of the computer resources as busy as possible. It is used to keep track of all the things an OS must remember about the state of user program.</p>
+
+<p>Process is like a box, a complete entity in itself which does a step by step task written in program. More formally it is called <code class="myyellow">program in execution.</code></p>
+
+<p>Lets consider a very basic operating system with very least complexity. This operating system can run only <code>one process</code> at a time. Since, only one process is working at a time, it may happen that all the resources occupied by process will not be used at the same time. 
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/10/07/process-synchronization-in-os/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -220,6 +281,10 @@ Sometimes char data type is used as a package of 8 bits not as a valid char valu
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/06/18/curious-case-of-recursion/">Curious Case Of Recursion</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/03/25/singleton/">Singleton - Design Pattern</a>
       </li>
     
@@ -233,10 +298,6 @@ Sometimes char data type is used as a package of 8 bits not as a valid char valu
     
       <li class="post">
         <a href="/blog/2014/02/27/system-design-problems/">System Design Problems</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/02/21/reading-list/">Reading List</a>
       </li>
     
   </ul>
@@ -269,7 +330,7 @@ Sometimes char data type is used as a package of 8 bits not as a valid char valu
 <li class='category'><a href='/blog/categories/numbers/'>numbers (1)</a></li>
 <li class='category'><a href='/blog/categories/object-oriented/'>object oriented (1)</a></li>
 <li class='category'><a href='/blog/categories/operating-systems/'>operating systems (2)</a></li>
-<li class='category'><a href='/blog/categories/recursion/'>recursion (2)</a></li>
+<li class='category'><a href='/blog/categories/recursion/'>recursion (3)</a></li>
 <li class='category'><a href='/blog/categories/scale/'>scale (1)</a></li>
 <li class='category'><a href='/blog/categories/sorting/'>sorting (2)</a></li>
 <li class='category'><a href='/blog/categories/strings/'>strings (1)</a></li>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: recursion | Distributed Knowledge]]></title>
   <link href="http://distkeys.com/blog/categories/recursion/atom.xml" rel="self"/>
   <link href="http://distkeys.com/"/>
-  <updated>2014-03-25T23:28:41-07:00</updated>
+  <updated>2014-06-18T23:13:50-07:00</updated>
   <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -12,6 +12,130 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Curious Case Of Recursion]]></title>
+    <link href="http://distkeys.com/blog/2014/06/18/curious-case-of-recursion/"/>
+    <updated>2014-06-18T22:03:00-07:00</updated>
+    <id>http://distkeys.com/blog/2014/06/18/curious-case-of-recursion</id>
+    <content type="html"><![CDATA[
+<p>Recursion has always been imaginative to me. How do I write the recursive function so that it solve the problem, what all cases it would uncover as recursion progress. As input value increases things gets complex and I am lost.</p>
+
+<p>To understand it better I was looking around internet and I found very ordinary yet powerful statement.</p>
+
+<p><blockquote><p>Functions can call other functions – this is a fact that most programmers know. Recursion is simply a special case where instead of calling another function, a function calls itself.</p></blockquote> </p>
+
+<!-- more -->
+
+<p>This is pretty good insight. This statement helps you to forget imaging the complex cases where you have high input value, what happens behind the scenes and so on.
+<br /><br /></p>
+
+<p><strong>Lets take an example</strong></p>
+
+<p>Write a function, for a given number, print out all different ways to make this number, by using addition and any number equal to or smaller than this number and greater than zero. </p>
+
+<p>For example, given a 5, we have the following different ways to make up 5:<br />
+1st 1, 1, 1, 1, 1 <br />
+2nd: 1, 4 <br />
+3rd : 1, 1, 1, 2 <br />
+4th : 1, 1, 3 <br />
+5th : 2, 3 <br />
+6th : 1, 2, 2 <br />
+7th : 5 <br /></p>
+
+<p>There are two ways of thinking about this problem<br />
+1. 1 + 1 = 2 <br /> 
+2. 2 = 1 + 1</p>
+
+<p>You would be wondering they both look pretty same. They both are same when result matters but they are different in approach.</p>
+
+<p><strong>Lets consider input as 3</strong> <br />
+Using approach 1, 3 be written as 1 + 1 + 1<br />
+But, using approach 2, 3 will be written as 3 = 1 + 2 and now how 2 can be written. Yes, 2 = 1 + 1</p>
+
+<p>Finally, 3 = 1 + 2 = 1 + (1 + 1)<br />
+              4 = 1 + 3 = 1 + (1 + 2) = 1 + (1 + ( 1 + 1))<br />
+              and so on….</p>
+
+<p>We can clearly see recursion pattern forming here. In this case now all we need to worry is given input just subtract 1 and call the same function again.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Recursion1</span>  <a href='http://ideone.com/v0vZKf' target='_blank'>Run Code </a></figcaption> <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span> <span class="preprocessor">#include</span> <span class="include">&lt;iostream /&gt;</span>&lt;/p&gt;
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>&lt;p&gt;using namespace std;&lt;/p&gt;
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>&lt;p&gt;<span class="directive">void</span> printSeq(<span class="predefined-type">int</span> num, <span class="predefined-type">int</span> a[], <span class="predefined-type">int</span> opIndx,<span class="predefined-type">int</span> s){
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>     <span class="keyword">if</span>(num &amp;lt;= <span class="integer">0</span>){
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>         <span class="comment">// Display the result</span>
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>         <span class="keyword">for</span>(<span class="predefined-type">int</span> j=<span class="integer">0</span>;j&amp;lt;opIndx;j++)
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>             cout<span class="error">«</span>a[j]<span class="error">«</span><span class="error">”</span>,<span class="error">”</span>;
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>         cout<span class="error">«</span>endl;
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>         <span class="keyword">return</span>;
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>     }&lt;/p&gt;
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>&lt;pre&gt;&lt;code&gt; a[opIndx] = <span class="integer">1</span>;
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span> <span class="comment">// Call the function again, remember 3 = 1 + 2</span>
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span> printSeq(num-<span class="integer">1</span>, a, opIndx+<span class="integer">1</span>, <span class="integer">1</span>);  }
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>&lt;/code&gt;&lt;/pre&gt;
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>&lt;p&gt;<span class="predefined-type">int</span> main(){
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>     <span class="predefined-type">int</span> a[<span class="integer">5</span>];
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span>     printSeq(<span class="integer">5</span>,a,<span class="integer">0</span>,<span class="integer">1</span>);
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span>     <span class="keyword">return</span> <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span> }
+</pre></div>
+</div>
+ </figure></notextile></div></p>
+
+<p>We just saw case 1 but there are other combinations of 5. Lets consider the next combinations which are<br />
+ 5 = 2 + (3). Later 3 will have its own combinations which don’t need to bother.<br />
+ 5 = 3 + (2)<br />
+ 5 = 4 + (1)<br />
+ 5 = 5 + (0)<br /></p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Combination</span>  <a href='http://ideone.com/AQrLwO' target='_blank'>Run Code </a></figcaption> <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>  <span class="preprocessor">#include</span> <span class="include">&lt;iostream /&gt;</span>&lt;/p&gt;
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>&lt;p&gt;using namespace std;&lt;/p&gt;
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>&lt;p&gt;<span class="directive">void</span> printSeq(<span class="predefined-type">int</span> num, <span class="predefined-type">int</span> a[], <span class="predefined-type">int</span> opIndx,<span class="predefined-type">int</span> s){
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>      <span class="keyword">if</span>(num &amp;lt;= <span class="integer">0</span>){
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>          <span class="comment">//Display the output</span>
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>          <span class="keyword">for</span>(<span class="predefined-type">int</span> j = <span class="integer">0</span>; j &amp;lt; opIndx; j++)
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>              cout <span class="error">«</span><span class="error"> </span>a[j] <span class="error">«</span><span class="error"> </span><span class="error">”</span>,<span class="error">”</span>;
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>          cout <span class="error">«</span><span class="error"> </span>endl;
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>          <span class="keyword">return</span>;
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>      }&lt;/p&gt;
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>&lt;pre&gt;&lt;code&gt;  <span class="comment">// s starts from 1 and later it will change to</span>
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>  <span class="comment">// 2, 3, 4, 5.</span>
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>  <span class="comment">// It is the case$</span>
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>  <span class="comment">// 5 = 2 + (3)</span>
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>  <span class="comment">// 5 = 3 + (2)</span>
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>  <span class="comment">// 5 = 4 + (1)</span>
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>  <span class="comment">// 5 = 5 + (0)</span>
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span>  <span class="keyword">for</span>(<span class="predefined-type">int</span> i = s; i &amp;lt;= num; i++){
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span>      a[opIndx] = i;
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span>      printSeq(num-i, a, opIndx + <span class="integer">1</span>, i);
+<span class="line-numbers"><a href="#n25" name="n25">25</a></span>  }   }   
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span>&lt;/code&gt;&lt;/pre&gt;
+<span class="line-numbers"><a href="#n27" name="n27">27</a></span>
+<span class="line-numbers"><a href="#n28" name="n28">28</a></span>&lt;p&gt;<span class="predefined-type">int</span> main(){
+<span class="line-numbers"><a href="#n29" name="n29">29</a></span>      <span class="predefined-type">int</span> a[<span class="integer">15</span>];
+<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>      printSeq(<span class="integer">5</span>, a, <span class="integer">0</span>, <span class="integer">1</span>);
+<span class="line-numbers"><a href="#n31" name="n31">31</a></span>      <span class="keyword">return</span> <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n32" name="n32">32</a></span>  }
+</pre></div>
+</div>
+ </figure></notextile></div></p>
+
+<p><br /><br /><br /><br />
+<strong>References</strong> <br />
+ <a href="http://www.reddit.com/r/learnprogramming/comments/135rdz/help_me_understand_recursion/">Recursion on reddit</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Trie and Trees]]></title>
