@@ -9,7 +9,9 @@
   <meta name="author" content="Vaibhav Gautam">
 
   
-  <meta name="description" content="Array Problems Sum of 2 numbers Sum of 2 numbers greater or equal to given sum* Sum of 3 numbers* Find repeating/duplicate numbers* Find the number &hellip;">
+  <meta name="description" content=".node circle { cursor: pointer; fill: #fff; stroke: steelblue; stroke-width: 1.5px;
+} .node text { font-size: 11px;
+} path.link { fill: none; stroke &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -108,6 +110,124 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/01/04/D3-and-Octopress/">D3.js and Octopress</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-04T11:33:00-08:00" pubdate data-updated="true">Jan 4<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/01/04/D3-and-Octopress/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<style type="text/css">
+.node circle {
+  cursor: pointer;
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.node text {
+  font-size: 11px;
+}
+
+path.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 1.5px;
+}
+
+  </style>
+
+<style>
+
+#chart, #header, #footer {
+  position: absolute;
+  top: 0;
+}
+
+#header.inverted, #footer.inverted {
+  color: #fff;
+  text-shadow: 0 1px 4px #000;
+}
+
+
+rect {
+  fill: none;
+  pointer-events: all;
+}
+
+line {
+  stroke: #000;
+  stroke-width: 1.5px;
+}
+
+.string, .regexp {
+  color: #f39;
+}
+
+.keyword {
+  color: #00c;
+}
+
+.comment {
+  color: #777;
+  font-style: oblique;
+}
+
+.number {
+  color: #369;
+}
+
+.class, .special {
+  color: #1181B8;
+}
+
+</style>
+
+<p>This article is about how to use versatile <a href="http://d3js.org/" target="_blank">D3.js</a> with <a href="http://octopress.org/" target="_blank">Octopress.</a></p>
+
+<p>Recently I was looking for flow chart diagram or tree structure diagram, but I did not want to produce static image diagrams using Microsoft Vizio or similar softwares.</p>
+
+<p>My requirement was to come up with tree structure data representation, which I could change in future unlike static pictures and can not be changed in future.</p>
+
+<p>I found D3.js to be perfect for this scenario. Here, I store data in JSON file and I use D3.js to display that data according to my needs.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/01/04/D3-and-Octopress/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -740,80 +860,6 @@ I started realizing that after all it’s not that easy to actually think and wr
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/10/07/process-synchronization-in-linux-kernel/">Process Synchronization in Linux Kernel</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-10-07T20:56:00-07:00" pubdate data-updated="true">Oct 7<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/10/07/process-synchronization-in-linux-kernel/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><ul id="markdown-toc">
-  <li><a href="#synchronization-primitives">Synchronization Primitives</a></li>
-  <li><a href="#summary-of-synchronization-primitives">Summary of Synchronization Primitives</a></li>
-  <li><a href="#per-cpu-variables">Per-CPU variables</a></li>
-  <li><a href="#atomic-operations">Atomic Operations</a></li>
-  <li><a href="#optimization-barriers--memory-barriers">Optimization Barriers &amp; Memory Barriers</a></li>
-  <li><a href="#semaphores">Semaphores</a></li>
-  <li><a href="#spin-locks">Spin Locks</a>    <ul>
-      <li><a href="#readwrite-spin-locks">Read/Write Spin Locks</a></li>
-    </ul>
-  </li>
-  <li><a href="#seqlocks">SeqLocks</a></li>
-  <li><a href="#read-copy-update-rcu">Read Copy Update (RCU)</a></li>
-</ul>
-
-<p>As we have discussed earlier about process synchronization, lets discuss about process synchronization primitives offered in Linux Kernel.</p>
-
-<p>This blog is summary of this <a href="https://www.dropbox.com/s/xvo7qdl9iwjco5x/UnderstandingtheLinuxKernelThirdEditionChapter5KernelSynchronizat.pdf" target="-blank">article</a></p>
-
-<h3 id="synchronization-primitives">Synchronization Primitives</h3>
-
-<ol>
-  <li>Per-CPU variables</li>
-  <li>Atomic Operation</li>
-  <li>Memory barrier</li>
-  <li>Spin Lock</li>
-  <li>Semaphore</li>
-  <li>SeqLocks</li>
-  <li>Local Interrupt disabling</li>
-  <li>Local softirq disabling</li>
-  <li>Read-Copy-Update</li>
-</ol>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/10/07/process-synchronization-in-linux-kernel/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -871,6 +917,10 @@ I started realizing that after all it’s not that easy to actually think and wr
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/07/08/boot-freebsd/">Boot FreeBSD</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/06/18/curious-case-of-recursion/">Curious Case Of Recursion</a>
       </li>
     
@@ -886,10 +936,6 @@ I started realizing that after all it’s not that easy to actually think and wr
         <a href="/blog/2014/03/16/file-system-scheduling-communication-and-memory-management/">File System, Scheduling, Communication and Memory Management</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/02/27/system-design-problems/">System Design Problems</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -902,7 +948,7 @@ I started realizing that after all it’s not that easy to actually think and wr
 <li class='category'><a href='/blog/categories/linux/'>Linux (1)</a></li>
 <li class='category'><a href='/blog/categories/octopress/'>Octopress (1)</a></li>
 <li class='category'><a href='/blog/categories/operating/'>Operating (1)</a></li>
-<li class='category'><a href='/blog/categories/operating-systems/'>Operating Systems (4)</a></li>
+<li class='category'><a href='/blog/categories/operating-systems/'>Operating Systems (5)</a></li>
 <li class='category'><a href='/blog/categories/reading-list/'>Reading List (1)</a></li>
 <li class='category'><a href='/blog/categories/scale/'>Scale (1)</a></li>
 <li class='category'><a href='/blog/categories/systems/'>Systems (4)</a></li>

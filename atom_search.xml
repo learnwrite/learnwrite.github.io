@@ -4,7 +4,7 @@
   <title><![CDATA[Distributed Knowledge]]></title>
   <link href="http://distkeys.com/atom.xml" rel="self"/>
   <link href="http://distkeys.com/"/>
-  <updated>2014-06-18T23:49:50-07:00</updated>
+  <updated>2014-07-09T00:23:22-07:00</updated>
   <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -12,6 +12,157 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Boot FreeBSD]]></title>
+    <summary><![CDATA[]]></summary>
+    <link href="http://distkeys.com/blog/2014/07/08/boot-freebsd/"/>
+    <updated>2014-07-08T22:30:00-07:00</updated>
+    <id>http://distkeys.com/blog/2014/07/08/boot-freebsd</id>
+    <content type="html"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#bird-eye-view">Bird Eye View</a></li>
+  <li><a href="#detailed-view">Detailed View</a></li>
+  <li><a href="#assembly-language-startup">Assembly language startup</a></li>
+  <li><a href="#kernel-module-loadinitialization">Kernel Module Load/Initialization</a></li>
+  <li><a href="#user-level-initialization">User Level Initialization</a></li>
+</ul>
+
+<p>This post is about the sequence and the amount of work happens under the hood when computer is switched on and the login prompt appears on the screen.</p>
+
+<h3 id="bird-eye-view">Bird Eye View</h3>
+
+<ol>
+  <li>Boot Command starts by initializing<br />
+    <ul>
+      <li>CPU<br /></li>
+      <li>Virtual address translations is turned off<br /></li>
+      <li>Disable hardware interrupts<br /></li>
+    </ul>
+  </li>
+  <li>
+    <p>Boot command loads FreeBSD kernel</p>
+  </li>
+  <li>FreeBSD kernel now goes through different stages of hardware and software initialization<br />
+    <ul>
+      <li>Set up initial stages of CPU<br /></li>
+      <li>Setup run time stack<br /></li>
+      <li>Setup virtual memory<br /></li>
+      <li>Machine dependent initialization<br />
+• Setting up mutexes<br />
+• Setting virtual memory page tables<br />
+• Configure I/O devices<br /></li>
+      <li>Machine independent initialization<br />
+• Mounting root file system<br />
+• Initializing myriad system data structures.<br /></li>
+    </ul>
+  </li>
+  <li>System processes are created and executed<br /></li>
+  <li>User level programs are brought in to execute<br /></li>
+  <li>System is now ready to run normal applications<br /></li>
+</ol>
+
+<!-- more -->
+<p><br /><br /></p>
+
+<h3 id="detailed-view">Detailed View</h3>
+
+<ol>
+  <li>When computer is powered on the first thing gets invoked is BIOS. <br /></li>
+  <li>Startup procedure stored in BIOS, reads a general purpose standalone program in boot disk. <br /></li>
+  <li>This general purpose standalone program executes <em>FreeBSD boot program</em>.<br /></li>
+  <li><em>FreeBSD boot program</em> loads default device and program name to well known memory location.<br /></li>
+  <li><em>FreeBSD boot program</em> blocks all interrupts.<br /></li>
+  <li><em>FreeBSD boot program</em> disables hardware address-translation facility so that all memory references are to physical memory locations.<br /></li>
+  <li>Now FreeBSD kernel is started and it will starts the preparations.<br /></li>
+  <li>FreeBSD kernel initilization process is divided into 3 stages<br />
+    <ul>
+      <li><a href="http://distkeys.com/blog/2014/07/08/boot-freebsd#assembly-language-startup">Assembly language code</a> to set up the hardware<br /></li>
+      <li>Load and <a href="http://distkeys.com/blog/2014/07/08/boot-freebsd#kernel-module-loadinitialization">initialize kernel modules</a><br /></li>
+      <li>Start system resident processes and execute <a href="http://distkeys.com/blog/2014/07/08/boot-freebsd#user-level-initialization">user level startup</a> scripts<br /></li>
+    </ul>
+  </li>
+</ol>
+
+<p><br /><br /></p>
+
+<h3 id="assembly-language-startup">Assembly language startup</h3>
+
+<ol>
+  <li>Machine dependent.<br /></li>
+  <li>Setting up the run-time stack.<br /></li>
+  <li>Identifying the type of CPU on which the system is executing.<br /></li>
+  <li>Calculating the amount of physical memory on the machine.<br /></li>
+  <li>Enabling the virtual-address-translation hardware.<br /></li>
+  <li>Initializing the memory-management hardware.<br /></li>
+  <li>Setting up tables for SMP operation, if necessary.<br /></li>
+  <li>Crafting the hardware context for process 0.<br /></li>
+  <li>Invoking the initial C-based entry point of the system.<br /></li>
+  <li>The kernel is usually loaded into contiguous physical memory, so the translation is simply a constant offset that can be saved in an index register. <br /></li>
+  <li>Identify CPU. For older CPU the kernel must emulate the missing hardware instructions in software.<br /></li>
+</ol>
+
+<p><br /><br /></p>
+
+<h3 id="kernel-module-loadinitialization">Kernel Module Load/Initialization</h3>
+
+<p>After the assembly-language code has completed its work, it calls the first
+kernel routine written in C: the mi_startup() routine. The mi_startup() routine
+first sorts the list of modules that need to be started and then calls the function routine
+of each.</p>
+
+<p>FreeBSD set up following services<br /></p>
+
+<ol>
+  <li>Static mutex and then dynamic mutexes<br /></li>
+  <li>Lock manager <br /></li>
+  <li>Virtual memory system - All memory allocations by the kernel or processes are for virtual addresses that are translated by the memory management hardware into physical addresses. Memory subsystem initialization is to set limits on the resources used by the kernel virtual memory system.<br /></li>
+  <li>Event handler module to register functions to be called by the kernel when an event occurs. <br /></li>
+  <li>Kernel module loader - uses event handler to load dynamic kernel modules into the system at boot or run time.<br /></li>
+  <li>Kernel Thread Initialization<br />
+3 processes are created<br />
+    <ul>
+      <li>Swapper - First process with PID 0.<br /></li>
+      <li>Init - Second process with PID 1.<br /></li>
+      <li>Idle - Created after Init. Halts the CPU when no work for it to do.<br /></li>
+    </ul>
+  </li>
+  <li>Device module initialization<br />
+    <ul>
+      <li>Network interfaces - Setup mbufs i.e. small mbufs and mbufs clusters.<br /></li>
+      <li>Interrupt handler - So far hardware interrupts are disabled now kernel set <br />up interrupt threads to handle interrupts when the system begins to run.</li>
+      <li>Device file system.<br /></li>
+    </ul>
+  </li>
+  <li>Initialize VFS (Virtual file system)<br />
+    <ul>
+      <li>Initialize vnode subsystem.<br /></li>
+      <li>Initialize name cache in VFS.<br /></li>
+      <li>Initialize Pathname translation sub system - maps pathname to inodes.<br /></li>
+      <li>Initialize names pipes as part of the VFS.<br /></li>
+      <li>Initialize clocks.<br /></li>
+    </ul>
+  </li>
+  <li>Start rest of kernel threads<br />
+    <ul>
+      <li>pagezero<br /></li>
+      <li>pagedaemon, bufdaemon, vnlru etc.<br /></li>
+    </ul>
+  </li>
+  <li>Run scheduler to start scheduling kernel threads and user-level processes.<br /></li>
+</ol>
+
+<p><br /><br /></p>
+
+<h3 id="user-level-initialization">User Level Initialization</h3>
+
+<p>After kernel initialization, at user level <strong>init</strong> program is executed. This is not the Init process it is <strong>init</strong> program located in <code>/sbin/init</code>.</p>
+
+<ol>
+  <li>Init calls fsck to check disk consistency if required and other user level scripts/processes are loaded like <code>/etc/rc.conf, cron, getty.</code><br /></li>
+  <li>Getty finally reads a login name and invokes the <code>/usr/bin/login</code> program to complete a login sequence.<br /><br /></li>
+</ol>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Curious Case Of Recursion]]></title>
