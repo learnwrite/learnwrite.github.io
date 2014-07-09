@@ -9,7 +9,7 @@
   <meta name="author" content="Vaibhav Gautam">
 
   
-  <meta name="description" content="Recursion has always been imaginative to me. How do I write the recursive function so that it solve the problem, what all cases it would uncover as &hellip;">
+  <meta name="description" content="Bird Eye View Detailed View Assembly language startup Kernel Module Load/Initialization User Level Initialization This post is about the sequence &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -108,6 +108,89 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/07/08/boot-freebsd/">Boot FreeBSD</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-08T22:30:00-07:00" pubdate data-updated="true">Jul 8<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/07/08/boot-freebsd/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#bird-eye-view">Bird Eye View</a></li>
+  <li><a href="#detailed-view">Detailed View</a></li>
+  <li><a href="#assembly-language-startup">Assembly language startup</a></li>
+  <li><a href="#kernel-module-loadinitialization">Kernel Module Load/Initialization</a></li>
+  <li><a href="#user-level-initialization">User Level Initialization</a></li>
+</ul>
+
+<p>This post is about the sequence and the amount of work happens under the hood when computer is switched on and the login prompt appears on the screen.</p>
+
+<h3 id="bird-eye-view">Bird Eye View</h3>
+
+<ol>
+  <li>Boot Command starts by initializing<br />
+    <ul>
+      <li>CPU<br /></li>
+      <li>Virtual address translations is turned off<br /></li>
+      <li>Disable hardware interrupts<br /></li>
+    </ul>
+  </li>
+  <li>
+    <p>Boot command loads FreeBSD kernel</p>
+  </li>
+  <li>FreeBSD kernel now goes through different stages of hardware and software initialization<br />
+    <ul>
+      <li>Set up initial stages of CPU<br /></li>
+      <li>Setup run time stack<br /></li>
+      <li>Setup virtual memory<br /></li>
+      <li>Machine dependent initialization<br />
+• Setting up mutexes<br />
+• Setting virtual memory page tables<br />
+• Configure I/O devices<br /></li>
+      <li>Machine independent initialization<br />
+• Mounting root file system<br />
+• Initializing myriad system data structures.<br /></li>
+    </ul>
+  </li>
+  <li>System processes are created and executed<br /></li>
+  <li>User level programs are brought in to execute<br /></li>
+  <li>System is now ready to run normal applications<br /></li>
+</ol>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/07/08/boot-freebsd/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -659,124 +742,6 @@ For median sorted sequence is [1, 2, 3, 4]. Median is 2 or 3.
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/01/04/D3-and-Octopress/">D3.js and Octopress</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-01-04T11:33:00-08:00" pubdate data-updated="true">Jan 4<span>th</span>, 2014</time>
-        
-         | <a href="/blog/2014/01/04/D3-and-Octopress/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content">
-<script src="http://d3js.org/d3.v3.min.js"></script>
-
-<style type="text/css">
-.node circle {
-  cursor: pointer;
-  fill: #fff;
-  stroke: steelblue;
-  stroke-width: 1.5px;
-}
-
-.node text {
-  font-size: 11px;
-}
-
-path.link {
-  fill: none;
-  stroke: #ccc;
-  stroke-width: 1.5px;
-}
-
-  </style>
-
-<style>
-
-#chart, #header, #footer {
-  position: absolute;
-  top: 0;
-}
-
-#header.inverted, #footer.inverted {
-  color: #fff;
-  text-shadow: 0 1px 4px #000;
-}
-
-
-rect {
-  fill: none;
-  pointer-events: all;
-}
-
-line {
-  stroke: #000;
-  stroke-width: 1.5px;
-}
-
-.string, .regexp {
-  color: #f39;
-}
-
-.keyword {
-  color: #00c;
-}
-
-.comment {
-  color: #777;
-  font-style: oblique;
-}
-
-.number {
-  color: #369;
-}
-
-.class, .special {
-  color: #1181B8;
-}
-
-</style>
-
-<p>This article is about how to use versatile <a href="http://d3js.org/" target="_blank">D3.js</a> with <a href="http://octopress.org/" target="_blank">Octopress.</a></p>
-
-<p>Recently I was looking for flow chart diagram or tree structure diagram, but I did not want to produce static image diagrams using Microsoft Vizio or similar softwares.</p>
-
-<p>My requirement was to come up with tree structure data representation, which I could change in future unlike static pictures and can not be changed in future.</p>
-
-<p>I found D3.js to be perfect for this scenario. Here, I store data in JSON file and I use D3.js to display that data according to my needs.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/01/04/D3-and-Octopress/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -832,6 +797,10 @@ line {
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/07/08/boot-freebsd/">Boot FreeBSD</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/06/18/curious-case-of-recursion/">Curious Case Of Recursion</a>
       </li>
     
@@ -847,10 +816,6 @@ line {
         <a href="/blog/2014/03/16/file-system-scheduling-communication-and-memory-management/">File System, Scheduling, Communication and Memory Management</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/02/27/system-design-problems/">System Design Problems</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -863,7 +828,7 @@ line {
 <li class='category'><a href='/blog/categories/linux/'>Linux (1)</a></li>
 <li class='category'><a href='/blog/categories/octopress/'>Octopress (1)</a></li>
 <li class='category'><a href='/blog/categories/operating/'>Operating (1)</a></li>
-<li class='category'><a href='/blog/categories/operating-systems/'>Operating Systems (4)</a></li>
+<li class='category'><a href='/blog/categories/operating-systems/'>Operating Systems (5)</a></li>
 <li class='category'><a href='/blog/categories/reading-list/'>Reading List (1)</a></li>
 <li class='category'><a href='/blog/categories/scale/'>Scale (1)</a></li>
 <li class='category'><a href='/blog/categories/systems/'>Systems (4)</a></li>
