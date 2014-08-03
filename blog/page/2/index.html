@@ -9,9 +9,7 @@
   <meta name="author" content="Vaibhav Gautam">
 
   
-  <meta name="description" content=".node circle { cursor: pointer; fill: #fff; stroke: steelblue; stroke-width: 1.5px;
-} .node text { font-size: 11px;
-} path.link { fill: none; stroke &hellip;">
+  <meta name="description" content="Introduction Systems designed to Scale Naming and Directory Services Granularity of Naming Reducing Load Unique Identifier based naming (UID) &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +108,103 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/01/05/scale-in-distributed-systems/">Scale in Distributed Systems</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-05T09:41:00-08:00" pubdate data-updated="true">Jan 5<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/01/05/scale-in-distributed-systems/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#introduction">Introduction</a></li>
+  <li><a href="#systems-designed-to-scale">Systems designed to Scale</a></li>
+  <li><a href="#naming-and-directory-services">Naming and Directory Services</a>    <ul>
+      <li><a href="#granularity-of-naming">Granularity of Naming</a></li>
+      <li><a href="#reducing-load">Reducing Load</a></li>
+      <li><a href="#unique-identifier-based-naming-uid">Unique Identifier based naming (UID)</a></li>
+      <li><a href="#directory-services">Directory services</a></li>
+      <li><a href="#growth-and-reorganization">Growth and reorganization</a></li>
+    </ul>
+  </li>
+  <li><a href="#security-subsystem">Security Subsystem</a>    <ul>
+      <li><a href="#authentication">Authentication</a></li>
+      <li><a href="#authorization">Authorization</a></li>
+      <li><a href="#accounting">Accounting</a></li>
+    </ul>
+  </li>
+  <li><a href="#remote-resources">Remote resources</a>    <ul>
+      <li><a href="#communication">Communication</a></li>
+    </ul>
+  </li>
+  <li><a href="#replication">Replication</a>    <ul>
+      <li><a href="#placement-of-replicas">Placement of replicas</a></li>
+      <li><a href="#replica-consistency">Replica Consistency</a></li>
+    </ul>
+  </li>
+  <li><a href="#distribution">Distribution</a>    <ul>
+      <li><a href="#placement-of-servers">Placement of servers</a></li>
+      <li><a href="#finding-the-right-server">Finding the right server</a></li>
+    </ul>
+  </li>
+  <li><a href="#other-topics-in-distributed-systems">Other topics in distributed systems</a></li>
+</ul>
+
+<h3 id="introduction">Introduction</h3>
+
+<p>This blog is summary of the research paper <a href="https://www.dropbox.com/s/s9smkjhyykasllg/Scale%20in%20distributed%20systems.pdf" target="_blank"> Scale in Distributed Systems.</a></p>
+
+<p>A system is Scalable if it can handle addition of users and resources without suffering a noticeable loss of performance or increase in administrative complexity.
+<br /></p>
+
+<h3 id="systems-designed-to-scale">Systems designed to Scale</h3>
+
+<p>Some historic systems desgined to scale</p>
+
+<ul>
+  <li><a href="http://courses.cs.washington.edu/courses/cse451/07au/lectures/pending/p260-birrell.pdf" target="_blank">Grapevine</a>, <a href="http://dl.acm.org/citation.cfm?id=2081&amp;dl=ACM&amp;coll=DL&amp;CFID=395866995&amp;CFTOKEN=19566412" target="_blank">ACM Paper</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Domain_Name_System" target="_blank">DNS</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Kerberos_(protocol)" target="_blank">Kerberos</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Sprite_(operating_system)" target="_blank">Sprite</a></li>
+  <li><a href="http://research.microsoft.com/en-us/um/people/blampson/36-GlobalNames/WebPage.html" target="_blank">Global name services and authentication services</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/LOCUS_(operating_system)" target="_blank">Locus</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Andrew_File_System" target="_blank">Andrew</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Project_Athena" target="_blank">Project Athena</a></li>
+  <li><a href="http://www.cdf.toronto.edu/~csc469h/fall/handouts/nitzberg91.pdf" target="_blank">Dash</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Amoeba_(operating_system)" target="_blank">Amoeba</a>
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/01/05/scale-in-distributed-systems/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -792,74 +887,6 @@ I started realizing that after all it’s not that easy to actually think and wr
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/10/08/binary-number-operations/">Binary Number Operations</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-10-08T12:47:00-07:00" pubdate data-updated="true">Oct 8<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/10/08/binary-number-operations/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><ul id="markdown-toc">
-  <li><a href="#addition">Addition</a></li>
-  <li><a href="#subtraction">Subtraction</a></li>
-  <li><a href="#multiplication">Multiplication</a></li>
-  <li><a href="#negative-binary-numbers">Negative Binary numbers</a></li>
-  <li><a href="#credits">Credits</a></li>
-</ul>
-
-<h3 id="addition">Addition</h3>
-
-<div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span class="integer">0</span> + <span class="integer">0</span> <span class="error">→</span> <span class="integer">0</span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="integer">0</span> + <span class="integer">1</span> <span class="error">→</span> <span class="integer">1</span>
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span class="integer">1</span> + <span class="integer">0</span> <span class="error">→</span> <span class="integer">1</span>
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span class="integer">1</span> + <span class="integer">1</span> <span class="error">→</span> <span class="integer">0</span>, carry <span class="integer">1</span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span> For e.g
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span>    (carried digits)
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>      <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span>
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>+     <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span>
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>    -------------
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>=   <span class="integer">1</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">0</span> <span class="integer">0</span> = <span class="integer">36</span>
-</pre></div>
-</div>
-</div>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/10/08/binary-number-operations/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -917,6 +944,10 @@ I started realizing that after all it’s not that easy to actually think and wr
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/08/03/inside-freebsd/">Inside FreeBSD - Debug System Call</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/07/08/boot-freebsd/">Boot FreeBSD</a>
       </li>
     
@@ -932,10 +963,6 @@ I started realizing that after all it’s not that easy to actually think and wr
         <a href="/blog/2014/03/18/oops/">OOPS - Object Oriented</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/03/16/file-system-scheduling-communication-and-memory-management/">File System, Scheduling, Communication and Memory Management</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -945,10 +972,10 @@ I started realizing that after all it’s not that easy to actually think and wr
 <h1>Categories</h1>
 <ul id="categories">
 <li class='category'><a href='/blog/categories/d3-js/'>D3.js (1)</a></li>
-<li class='category'><a href='/blog/categories/linux/'>Linux (1)</a></li>
+<li class='category'><a href='/blog/categories/linux/'>Linux (2)</a></li>
 <li class='category'><a href='/blog/categories/octopress/'>Octopress (1)</a></li>
 <li class='category'><a href='/blog/categories/operating/'>Operating (1)</a></li>
-<li class='category'><a href='/blog/categories/operating-systems/'>Operating Systems (5)</a></li>
+<li class='category'><a href='/blog/categories/operating-systems/'>Operating Systems (6)</a></li>
 <li class='category'><a href='/blog/categories/reading-list/'>Reading List (1)</a></li>
 <li class='category'><a href='/blog/categories/scale/'>Scale (1)</a></li>
 <li class='category'><a href='/blog/categories/systems/'>Systems (4)</a></li>
