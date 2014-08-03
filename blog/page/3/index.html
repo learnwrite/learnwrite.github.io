@@ -9,7 +9,7 @@
   <meta name="author" content="Vaibhav Gautam">
 
   
-  <meta name="description" content="Synchronization Primitives Summary of Synchronization Primitives Per-CPU variables Atomic Operations Optimization Barriers &amp; Memory Barriers &hellip;">
+  <meta name="description" content="Addition Subtraction Multiplication Negative Binary numbers Credits Addition 10 + 0 → 0 20 + 1 → 1 31 + 0 → 1 41 + 1 → 0, carry 1 5 6 For e.g 7 8 1 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -108,6 +108,74 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/10/08/binary-number-operations/">Binary Number Operations</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-08T12:47:00-07:00" pubdate data-updated="true">Oct 8<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/10/08/binary-number-operations/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#addition">Addition</a></li>
+  <li><a href="#subtraction">Subtraction</a></li>
+  <li><a href="#multiplication">Multiplication</a></li>
+  <li><a href="#negative-binary-numbers">Negative Binary numbers</a></li>
+  <li><a href="#credits">Credits</a></li>
+</ul>
+
+<h3 id="addition">Addition</h3>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span class="integer">0</span> + <span class="integer">0</span> <span class="error">→</span> <span class="integer">0</span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="integer">0</span> + <span class="integer">1</span> <span class="error">→</span> <span class="integer">1</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span class="integer">1</span> + <span class="integer">0</span> <span class="error">→</span> <span class="integer">1</span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span class="integer">1</span> + <span class="integer">1</span> <span class="error">→</span> <span class="integer">0</span>, carry <span class="integer">1</span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span> For e.g
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span>    (carried digits)
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>      <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span>
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>+     <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span>
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>    -------------
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>=   <span class="integer">1</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">0</span> <span class="integer">0</span> = <span class="integer">36</span>
+</pre></div>
+</div>
+</div>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/10/08/binary-number-operations/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -355,6 +423,10 @@ Sometimes char data type is used as a package of 8 bits not as a valid char valu
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/08/03/inside-freebsd/">Inside FreeBSD - Debug System Call</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/07/08/boot-freebsd/">Boot FreeBSD</a>
       </li>
     
@@ -370,10 +442,6 @@ Sometimes char data type is used as a package of 8 bits not as a valid char valu
         <a href="/blog/2014/03/18/oops/">OOPS - Object Oriented</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/03/16/file-system-scheduling-communication-and-memory-management/">File System, Scheduling, Communication and Memory Management</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -383,10 +451,10 @@ Sometimes char data type is used as a package of 8 bits not as a valid char valu
 <h1>Categories</h1>
 <ul id="categories">
 <li class='category'><a href='/blog/categories/d3-js/'>D3.js (1)</a></li>
-<li class='category'><a href='/blog/categories/linux/'>Linux (1)</a></li>
+<li class='category'><a href='/blog/categories/linux/'>Linux (2)</a></li>
 <li class='category'><a href='/blog/categories/octopress/'>Octopress (1)</a></li>
 <li class='category'><a href='/blog/categories/operating/'>Operating (1)</a></li>
-<li class='category'><a href='/blog/categories/operating-systems/'>Operating Systems (5)</a></li>
+<li class='category'><a href='/blog/categories/operating-systems/'>Operating Systems (6)</a></li>
 <li class='category'><a href='/blog/categories/reading-list/'>Reading List (1)</a></li>
 <li class='category'><a href='/blog/categories/scale/'>Scale (1)</a></li>
 <li class='category'><a href='/blog/categories/systems/'>Systems (4)</a></li>

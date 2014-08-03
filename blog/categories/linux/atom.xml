@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Linux | Distributed Knowledge]]></title>
   <link href="http://distkeys.com/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://distkeys.com/"/>
-  <updated>2014-07-14T21:06:59-07:00</updated>
+  <updated>2014-08-03T11:44:34-07:00</updated>
   <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -12,6 +12,218 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Inside FreeBSD - Debug System Call]]></title>
+    <link href="http://distkeys.com/blog/2014/08/03/inside-freebsd/"/>
+    <updated>2014-08-03T10:36:00-07:00</updated>
+    <id>http://distkeys.com/blog/2014/08/03/inside-freebsd</id>
+    <content type="html"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#system-calls">System Calls</a></li>
+</ul>
+
+<p><div class="wikipedia">
+  
+    <img src="//upload.wikimedia.org/wikipedia/commons/thumb/6/68/Linux_kernel_interfaces.svg/300px-Linux_kernel_interfaces.svg.png"/>
+  
+  <h2>system call</h2>
+  <div>
+    <p>In <a href="http://en.wikipedia.org/wiki/Computing" title="Computing">computing</a>, a <strong>system call</strong> is how a program requests a service from an <a href="http://en.wikipedia.org/wiki/Operating_system" title="Operating system">operating system</a>'s <a href="http://en.wikipedia.org/wiki/Kernel_(computing)" title="Kernel (computing)" class="mw-redirect">kernel</a>. This may include hardware related services (e.g. accessing the hard disk), creating and executing new <a href="http://en.wikipedia.org/wiki/Process_(computing)" title="Process (computing)">processes</a>, and communicating with integral kernel services (like scheduling). System calls provide an essential interface between a process and the operating system.
+</p>
+  </div>
+  <a href="http://en.wikipedia.org/wiki/System_call">Read more</a>
+</div>
+</p>
+
+<!-- more -->
+
+<p><br /><br /></p>
+
+<h3 id="system-calls">System Calls</h3>
+
+<p>Whenever system call is executed from user level a trap is generated and it gets handled at file <a href="https://github.com/coolgoose85/FreeBSD/blob/master/sys/i386/i386/exception.s#L255" target="_blank">Exception.S (i386\i386)</a> </p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>System Call </span>  <a href='https://github.com/coolgoose85/FreeBSD/blob/master/sys/i386/i386/exception.s#L255' target='_blank'>Code </a></figcaption> <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="comment">/* </span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span class="comment"> * Even though the name says ‘int0x80’, this is actually a TGT (trap gate)</span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span class="comment"> * rather then an IGT (interrupt gate).  Thus interrupts are enabled on</span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span class="comment"> * entry just as they are for a normal syscall.</span>
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span class="comment"> &lt;em&gt;/</span>
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span><span class="comment">     SUPERALIGN_TEXT</span>
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span class="comment">IDTVEC(int0x80_syscall)</span>
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span><span class="comment">     pushl     $2               /&lt;/em&gt; sizeof “int 0x80” &lt;em&gt;/</span>
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span><span class="comment">     subl     $4,%esp               /&lt;/em&gt; skip over tf_trapno */</span>
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>     pushal
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>     pushl     %ds
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>     pushl     %es
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>     pushl     %fs
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>     SET_KERNEL_SREGS
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>     FAKE_MCOUNT(TF_EIP(%esp))
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>     pushl     %esp
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>     call     syscall   ==&amp;gt; from here syscall function is called after pushing some prereq
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>     add     $<span class="integer">4</span>, %esp
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>     MEXITCOUNT
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>     jmp     doreti ==&amp;gt; <span class="keyword">do</span> <span class="keyword">return</span> from interrupt 
+</pre></div>
+</div>
+ </figure></notextile></div></p>
+
+<p><br /></p>
+
+<blockquote>
+  <p><em>syscall()</em> is a function in <a href="https://github.com/coolgoose85/FreeBSD/blob/master/sys/i386/i386/trap.c#L977" target="_blank">Trap.c (i386\i386)</a> is a machine dependent code area.<br /></p>
+</blockquote>
+
+<p><code class="myyellow">Function syscall()</code> is called with trap frame which has input values to system call.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>struct trapframe </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre>
+<span class="comment">/*
+ * Exception/Trap Stack Frame
+ */</span>&lt;/p&gt;
+
+&lt;p&gt;<span class="keyword">struct</span> trapframe {
+     <span class="predefined-type">int</span>     tf_fs;
+     <span class="predefined-type">int</span>     tf_es;
+     <span class="predefined-type">int</span>     tf_ds;
+     <span class="predefined-type">int</span>     tf_edi;
+     <span class="predefined-type">int</span>     tf_esi;
+     <span class="predefined-type">int</span>     tf_ebp;
+     <span class="predefined-type">int</span>     tf_isp;
+     <span class="predefined-type">int</span>     tf_ebx;
+     <span class="predefined-type">int</span>     tf_edx;
+     <span class="predefined-type">int</span>     tf_ecx;
+     <span class="predefined-type">int</span>     tf_eax;
+     <span class="predefined-type">int</span>     tf_trapno;
+     <span class="comment">/* below portion defined in 386 hardware &lt;em&gt;/
+     int     tf_err;
+     int     tf_eip;
+     int     tf_cs;
+     int     tf_eflags;
+     /&lt;/em&gt; below only when crossing rings (e.g. user to kernel) */</span>
+     <span class="predefined-type">int</span>     tf_esp;
+     <span class="predefined-type">int</span>     tf_ss;
+};
+</pre></div>
+</div>
+ </figure></notextile></div></p>
+
+<p><br /></p>
+
+<p><code class="myyellow">Function syscall()</code> now gets all the values of system call input and store in kernel so that kernel code can access the values while processing system call.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>syscall() </span>  <a href='https://github.com/coolgoose85/FreeBSD/blob/master/sys/i386/i386/trap.c#L997' target='_blank'>code </a></figcaption> <div class="CodeRay">
+  <div class="code"><pre>
+    params = (caddr_t)frame-&amp;gt;tf_esp + <span class="keyword">sizeof</span>(<span class="predefined-type">int</span>);
+     code = frame-&amp;gt;tf_eax;   <span class="comment">// code is system call code</span>
+     orig_tf_eflags = frame-&amp;gt;tf_eflags;
+</pre></div>
+</div>
+ </figure></notextile></div></p>
+
+<p><br /></p>
+
+<p>Then check we have direct or indirect system call. Indirect system call is one which is like loadable kernel module which loads system call. Once loaded then it can pass the system call number as argument which can be injected in here.</p>
+
+<p><br />
+Then given the system call code we check if we have the code as valid number. If system call code is valid then lookup in system call table which system call is referred else simply store the pointer to indirect system call which is system call 0.
+<br />
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>syscall() </span>  <a href='https://github.com/coolgoose85/FreeBSD/blob/master/sys/i386/i386/trap.c#L1030' target='_blank'>code </a></figcaption> <div class="CodeRay">
+  <div class="code"><pre>
+<span class="keyword">if</span> (code &amp;gt;= p-&amp;gt;p_sysent-&amp;gt;sv_size)
+           callp = &amp;amp;p-&amp;gt;p_sysent-&amp;gt;sv_table[<span class="integer">0</span>];
+       <span class="keyword">else</span>
+           callp = &amp;amp;p-&amp;gt;p_sysent-&amp;gt;sv_table[code]; 
+</pre></div>
+</div>
+ </figure></notextile></div>
+<br />
+where <strong>sv_table</strong> entry will have following values</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>sv_table </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre>
+<span class="keyword">struct</span> sysent {               <span class="comment">/* system call table &lt;em&gt;/
+     int     sy_narg;     /&lt;/em&gt; number of arguments &lt;em&gt;/
+     sy_call_t *sy_call;     /&lt;/em&gt; implementing function &lt;em&gt;/
+     au_event_t sy_auevent;     /&lt;/em&gt; audit event associated with syscall &lt;em&gt;/
+     systrace_args_func_t sy_systrace_args_func;
+                    /&lt;/em&gt; optional argument conversion function. &lt;em&gt;/
+     u_int32_t sy_entry;     /&lt;/em&gt; DTrace entry ID for systrace. &lt;em&gt;/
+     u_int32_t sy_return;     /&lt;/em&gt; DTrace return ID for systrace. */</span>
+};
+</pre></div>
+</div>
+ </figure></notextile></div></p>
+
+<p>Once we know which system it is then we determine how many arguments it have</p>
+
+<blockquote>
+  <p>narg = callp-&gt;sy_narg;</p>
+</blockquote>
+
+<p>Then we copy all the user space arguments into kernel space using function copying which validates the addresses of source and destination etc.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>syscall() </span>  <a href='https://github.com/coolgoose85/FreeBSD/blob/master/sys/i386/i386/trap.c#L1040' target='_blank'>code </a></figcaption> <div class="CodeRay">
+  <div class="code"><pre>
+  <span class="comment">/*
+      * copyin and the ktrsyscall()/ktrsysret() code is MP-aware
+      * copy data from params to args
+      */</span>
+     <span class="keyword">if</span> (params != <span class="predefined-constant">NULL</span> &amp;amp;&amp;amp; narg != <span class="integer">0</span>)
+          error = copyin(params, (caddr_t)args,
+                        (u_int)(narg * <span class="keyword">sizeof</span>(<span class="predefined-type">int</span>)));&lt;/p&gt;
+
+&lt;p&gt;</pre></div>
+</div>
+ </figure></notextile></div></p>
+
+<p>Now, check if we saw any error so far. If we did find the error then we need to return the error but, at this time in kernel it does not know how to return in user space. So, we set the register 0 to be non zero which is the error number and we set another register which is carry bit(eflag). <br /></p>
+
+<p>So, when system call is returned, C lib which issued the system call will check if carry bit(eflag) is set or not. If it is set then it will get the error number from register 0 and map it to human readable error <em>errorno</em> and then override the register 0 with -1. <br />
+So, say if open system call encounters error then its going to get the error value from register 0; translate it to meaningful error and then override the register 0 with -1. So open returned the value -1 which is failure.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>syscall() </span>  <a href='https://github.com/coolgoose85/FreeBSD/blob/master/sys/i386/i386/trap.c#L1056' target='_blank'>code </a></figcaption> <div class="CodeRay">
+  <div class="code"><pre>
+<span class="keyword">if</span> (error == <span class="integer">0</span>) {
+          td-&amp;gt;td_retval[<span class="integer">0</span>] = <span class="integer">0</span>;
+          td-&amp;gt;td_retval[<span class="integer">1</span>] = frame-&amp;gt;tf_edx; <span class="comment">// return another value in register 1 if we have anything to return</span>
+</pre></div>
+</div>
+ </figure></notextile></div></p>
+
+<p>Now we call the actual system call
+&gt; error = (*callp-&gt;sy_call)(td, args);</p>
+
+<p>Here, 
+<em>td</em> is the thread pointer
+<em>args</em> are the arguments we have copied above from user space to kernel space</p>
+
+<p>We check error and if all fine then we return the values back to user space</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>syscall() </span>  <a href='https://github.com/coolgoose85/FreeBSD/blob/master/sys/i386/i386/trap.c#L1094' target='_blank'>code </a></figcaption> <div class="CodeRay">
+  <div class="code"><pre>
+<span class="keyword">switch</span> (error) {
+     <span class="keyword">case</span> <span class="integer">0</span>:
+          frame-&amp;gt;tf_eax = td-&amp;gt;td_retval[<span class="integer">0</span>];
+          frame-&amp;gt;tf_edx = td-&amp;gt;td_retval[<span class="integer">1</span>];
+          frame-&amp;gt;tf_eflags &amp;amp;= ~PSL_C;
+          <span class="keyword">break</span>;&lt;/p&gt;
+
+&lt;p&gt;<span class="keyword">else</span> we handle the error
+          frame-&amp;gt;tf_eax = error;
+          frame-&amp;gt;tf_eflags |= PSL_C;
+</pre></div>
+</div>
+ </figure></notextile></div></p>
+
+<p>Now we fall back to assembly program from where this function was called.</p>
+
+<p><br /><br /><br /><br /></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Process synchronization in Linux Kernel]]></title>

@@ -95,12 +95,16 @@
         <lastmod>2014-07-09T00:27:38-07:00</lastmod>
     </url>
     <url>
+        <loc>http://distkeys.com/blog/2014/08/03/inside-freebsd/</loc>
+        <lastmod>2014-08-03T11:44:03-07:00</lastmod>
+    </url>
+    <url>
         <loc>http://distkeys.com/about/</loc>
         <lastmod>2014-03-01T11:37:28-08:00</lastmod>
     </url>
     <url>
         <loc>http://distkeys.com/archives/</loc>
-        <lastmod>2014-07-14T21:06:33-07:00</lastmod>
+        <lastmod>2014-08-03T11:44:03-07:00</lastmod>
     </url>
     <url>
         <loc>http://distkeys.com/atom_search.xml</loc>
@@ -108,11 +112,11 @@
     </url>
     <url>
         <loc>http://distkeys.com/blog/archives/</loc>
-        <lastmod>2014-07-14T21:06:33-07:00</lastmod>
+        <lastmod>2014-08-03T11:44:03-07:00</lastmod>
     </url>
     <url>
         <loc>http://distkeys.com/</loc>
-        <lastmod>2014-07-14T21:06:33-07:00</lastmod>
+        <lastmod>2014-08-03T11:44:03-07:00</lastmod>
     </url>
     <url>
         <loc>http://distkeys.com/robots.txt</loc>
