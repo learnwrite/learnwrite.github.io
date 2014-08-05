@@ -4,7 +4,7 @@
   <title><![CDATA[Distributed Knowledge]]></title>
   <link href="http://distkeys.com/atom.xml" rel="self"/>
   <link href="http://distkeys.com/"/>
-  <updated>2014-08-04T22:37:39-07:00</updated>
+  <updated>2014-08-04T22:41:23-07:00</updated>
   <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -517,6 +517,10 @@ So, say if open system call encounters error then its going to get the error val
  </figure></notextile></div>
 
 <p>Now we fall back to assembly program from where this function was called.</p>
+
+<p><br /><br /><br /><br /></p>
+
+<p><a href="http://distkeys.com/blog/2014/08/04/debug-freebsd-open/" target="_blank">Continue to Open System Call</a></p>
 
 <p><br /><br /><br /><br /></p>
 ]]></content>
