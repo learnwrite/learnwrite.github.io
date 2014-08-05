@@ -1,0 +1,61 @@
+{"name": "kern_openat", "url": "https://github.com/coolgoose85/FreeBSD/blob/master/sys/kern/vfs_syscalls.c#L1048", "children": [
+  {"name": "falloc", "url": "https://github.com/coolgoose85/FreeBSD/blob/master/sys/kern/kern_descrip.c#L1080", "children": [
+    {"name": "uma_zalloc", "url": "https://github.com/coolgoose85/FreeBSD/blob/master/sys/vm/uma.h#L1420", "children": [
+      {"name": "uma_zalloc_arg", "url": "https://github.com/coolgoose85/FreeBSD/blob/master/sys/vm/uma_core.c#L305", "children": [        
+        {"name": "uma_dbg_alloc", "url": "https://github.com/coolgoose85/FreeBSD/blob/master/sys/vm/uma_dbg.c#L1991", "children": [
+          {"name": "uma_dbg_getslab", "url": "https://github.com/coolgoose85/FreeBSD/blob/master/sys/vm/uma_dbg.c#L228"},
+          {"name": "panic", "url": "https://github.com/coolgoose85/FreeBSD/blob/master/sys/boot/sparc64/boot1/boot1.c#L230"},
+          {"name": "panic", "url": "https://github.com/coolgoose85/FreeBSD/blob/master/sys/kern/kern_shutdown.c#L230"},
+          {"name": "panic", "url": "https://github.com/coolgoose85/FreeBSD/blob/master/sys/boot/powerpc/boot1.chrp/boot1.c#L230"},
+          {"name": "panic", "url": "https://github.com/coolgoose85/FreeBSD/blob/master/sys/kern/subr_blist.c#L230"}
+        ]},
+        {"name": "zone_free_item", "url": "https://github.com/coolgoose85/FreeBSD/blob/master/sys/vm/uma_core.c#L1997", "children": [
+          {"name": "zone_first_keg", "url": "https://github.com/coolgoose85/FreeBSD/blob/master/sys/vm/uma_core.c#L2712"},
+          {"name": "hash_sfind", "url": "https://github.com/coolgoose85/FreeBSD/blob/master/sys/vm/uma_int.h#L2714"},
+          {"name": "vtoslab", "url": "https://github.com/coolgoose85/FreeBSD/blob/master/sys/vm/uma_int.h#L2724"},
+          {"name": "keg_relock", "url": "https://github.com/coolgoose85/FreeBSD/blob/master/sys/vm/uma_core.c#L2726"},
+          {"name": "uma_dbg_free", "url": "https://github.com/coolgoose85/FreeBSD/blob/master/sys/vm/uma_dbg.c#L2745"},
+          {"name": "wakeup", "url": "https://github.com/coolgoose85/FreeBSD/blob/master/sys/kern/kern_synch.c#L2773"},
+          {"name": "zone_relock", "url": "https://github.com/coolgoose85/FreeBSD/blob/master/sys/vm/uma_core.c#L2776"}
+        ]},        
+        {"name": "zone_alloc_bucket", "url": "https://github.com/coolgoose85/FreeBSD/blob/master/sys/vm/uma_core.c#L2087", "children": [
+          {"name": "bucket_alloc", "url": "https://github.com/coolgoose85/FreeBSD/blob/master/sys/vm/uma_core.c#L2354"},
+          {"name": "slab_alloc_item", "url": "https://github.com/coolgoose85/FreeBSD/blob/master/sys/vm/uma_core.c#L2384"},
+          {"name": "zone_relock", "url": "https://github.com/coolgoose85/FreeBSD/blob/master/sys/vm/uma_core.c#L2391"},
+          {"name": "zone_free_item", "url": "https://github.com/coolgoose85/FreeBSD/blob/master/sys/vm/uma_core.c#L2416"},
+          {"name": "bucket_free", "url": "https://github.com/coolgoose85/FreeBSD/blob/master/sys/vm/uma_core.c#L2436"}
+        ]}        
+      ]}
+    ]},    
+    {"name": "refcount_init", "url": "https://github.com/coolgoose85/FreeBSD/blob/master/sys/sys/refcount.h#L1438"},
+    {"name": "crhold", "url": "https://github.com/coolgoose85/FreeBSD/blob/master/sys/kern/kern_prot.c#L1441", "children": [
+      {"name": "refcount_acquire", "url": "https://github.com/coolgoose85/FreeBSD/blob/master/sys/sys/refcount.h#L1799"}
+    ]},
+    {"name": "fdalloc", "url": "https://github.com/coolgoose85/FreeBSD/blob/master/sys/kern/kern_descrip.c#L1446", "children": [
+      {"name": "min", "url": "https://github.com/coolgoose85/FreeBSD/blob/master/sys/sys/libkern.h#L1343"},
+      {"name": "lim_cur", "url": "https://github.com/coolgoose85/FreeBSD/blob/master/sys/kern/kern_resource.c#L1343", "children": [
+        {"name": "lim_rlimit", "url": "https://github.com/coolgoose85/FreeBSD/blob/master/sys/kern/kern_resource.c#L1136"}
+      ]},
+      {"name": "fd_first_free", "url": "https://github.com/coolgoose85/FreeBSD/blob/master/sys/kern/kern_descrip.c#L1353", "children": [
+        {"name": "ffsl", "url": "https://github.com/coolgoose85/FreeBSD/blob/master/sys/libkern/ffsl.c#L170"},
+        {"name": "ffsl", "url": "https://github.com/coolgoose85/FreeBSD/blob/master/sys/amd64/include/cpufunc.h#L170", "children": [
+          {"name": "bsfq", "url": "https://github.com/coolgoose85/FreeBSD/blob/master/sys/amd64/include/cpufunc.h#L140"}
+        ]}
+      ]},
+      {"name": "fdgrowtable", "url": "https://github.com/coolgoose85/FreeBSD/blob/master/sys/kern/kern_descrip.c#L1358", "children": [
+        {"name": "malloc", "url": "https://github.com/coolgoose85/FreeBSD/blob/master/sys/contrib/ia64/libuwx/src/uwx_scoreboard.c#L1290"},
+        {"name": "malloc", "url": "https://github.com/coolgoose85/FreeBSD/blob/master/sys/boot/i386/zfsboot/zfsboot.c#L1290", "children": [
+          {"name": "printf", "url": "https://github.com/coolgoose85/FreeBSD/blob/master/sys/boot/arm/at91/libat91/printf.c#L250"},
+          {"name": "printf", "url": "https://github.com/coolgoose85/FreeBSD/blob/master/sys/boot/pc98/boot2/io.c#L250"},
+          {"name": "printf", "url": "https://github.com/coolgoose85/FreeBSD/blob/master/sys/kern/subr_prf.c#L250"},
+          {"name": "printf", "url": "https://github.com/coolgoose85/FreeBSD/blob/master/sys/boot/sparc64/boot1/boot1.c#L250"},
+          {"name": "printf", "url": "https://github.com/coolgoose85/FreeBSD/blob/master/sys/boot/powerpc/boot1.chrp/boot1.c#L250"},
+          {"name": "printf", "url": "https://github.com/coolgoose85/FreeBSD/blob/master/sys/boot/i386/boot2/boot2.c#L250"},
+          {"name": "printf", "url": "https://github.com/coolgoose85/FreeBSD/blob/master/sys/boot/i386/gptboot/gptboot.c#L250"},
+          {"name": "printf", "url": "https://github.com/coolgoose85/FreeBSD/blob/master/sys/boot/i386/zfsboot/zfsboot.c#L250"}
+        ]}
+      ]}      
+    ]}
+  ]}]
+}  
+ 
