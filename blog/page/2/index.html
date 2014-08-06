@@ -9,7 +9,7 @@
   <meta name="author" content="Vaibhav Gautam">
 
   
-  <meta name="description" content="Introduction Systems designed to Scale Naming and Directory Services Granularity of Naming Reducing Load Unique Identifier based naming (UID) &hellip;">
+  <meta name="description" content="Message Passing Remote Procedure Calls (RPC) Lightweight Remote Procedure Call Distributed Shared Memory – IVY Further reading The scope of this &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -108,6 +108,62 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/02/16/context-switch/">Context Switch</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-16T14:53:00-08:00" pubdate data-updated="true">Feb 16<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/02/16/context-switch/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#message-passing">Message Passing</a></li>
+  <li><a href="#remote-procedure-calls-rpc">Remote Procedure Calls (RPC)</a></li>
+  <li><a href="#lightweight-remote-procedure-call">Lightweight Remote Procedure Call</a></li>
+  <li><a href="#distributed-shared-memory--ivy">Distributed Shared Memory – IVY</a></li>
+  <li><a href="#further-reading">Further reading</a></li>
+</ul>
+
+<p>The scope of this post is limited to the study of context switches in various communication and synchronization primitives in distributed systems mainly focus on following:</p>
+
+<p>•	Message Passing<br />
+•	Remote Procedure Calls (RPC) <br />
+•	Light weight Procedure Calls (LRPC)<br />
+•	Distributed Shared Memory (DSM)<br /></p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/02/16/context-switch/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -828,65 +884,6 @@ Then the pairs are  [6,4] , [9,1]
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/10/08/world-of-bits-and-bytes/">World of Bits and Bytes</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-10-08T13:17:00-07:00" pubdate data-updated="true">Oct 8<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/10/08/world-of-bits-and-bytes/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><ul id="markdown-toc">
-  <li><a href="#basics">Basics</a></li>
-  <li><a href="#bitwise-operators">Bitwise Operators</a></li>
-  <li><a href="#bit-fields">Bit Fields</a></li>
-  <li><a href="#problems">Problems</a>    <ul>
-      <li><a href="#how-set-a-single-bit-in-a-byte">How set a single bit in a byte?</a></li>
-      <li><a href="#how-to-unset-single-bit-in-a-byte">How to unset single bit in a byte?</a></li>
-      <li><a href="#one-function-to-set-and-unset">One function to set and unset</a></li>
-      <li><a href="#unset-range-of-bits">Unset range of bits</a></li>
-      <li><a href="#set-range-of-bits">Set range of bits</a></li>
-    </ul>
-  </li>
-  <li><a href="#recomended-readings">Recomended readings</a></li>
-</ul>
-
-<p>Recently, I have realized that no matter how much C, C++ or other high level languages you know it all comes down to bit and bytes view of program.<br />
-I started realizing that after all it’s not that easy to actually think and write in bit/byte manipulation. This is my attempt to learn and be more comfortable about thinking in bit/bytes.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/10/08/world-of-bits-and-bytes/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -944,6 +941,10 @@ I started realizing that after all it’s not that easy to actually think and wr
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/08/04/debug-freebsd-open/">Debug FreeBSD - Open</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/08/03/inside-freebsd/">Inside FreeBSD - Debug System Call</a>
       </li>
     
@@ -959,10 +960,6 @@ I started realizing that after all it’s not that easy to actually think and wr
         <a href="/blog/2014/03/25/singleton/">Singleton - Design Pattern</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/03/18/oops/">OOPS - Object Oriented</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -972,10 +969,11 @@ I started realizing that after all it’s not that easy to actually think and wr
 <h1>Categories</h1>
 <ul id="categories">
 <li class='category'><a href='/blog/categories/d3-js/'>D3.js (1)</a></li>
-<li class='category'><a href='/blog/categories/linux/'>Linux (2)</a></li>
+<li class='category'><a href='/blog/categories/freebsd/'>FreeBSD (2)</a></li>
+<li class='category'><a href='/blog/categories/linux/'>Linux (1)</a></li>
 <li class='category'><a href='/blog/categories/octopress/'>Octopress (1)</a></li>
 <li class='category'><a href='/blog/categories/operating/'>Operating (1)</a></li>
-<li class='category'><a href='/blog/categories/operating-systems/'>Operating Systems (6)</a></li>
+<li class='category'><a href='/blog/categories/operating-systems/'>Operating Systems (7)</a></li>
 <li class='category'><a href='/blog/categories/reading-list/'>Reading List (1)</a></li>
 <li class='category'><a href='/blog/categories/scale/'>Scale (1)</a></li>
 <li class='category'><a href='/blog/categories/systems/'>Systems (4)</a></li>
