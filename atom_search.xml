@@ -4,7 +4,7 @@
   <title><![CDATA[Distributed Knowledge]]></title>
   <link href="http://distkeys.com/atom.xml" rel="self"/>
   <link href="http://distkeys.com/"/>
-  <updated>2014-08-04T22:41:23-07:00</updated>
+  <updated>2014-08-05T21:10:00-07:00</updated>
   <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -201,6 +201,8 @@ p-&gt;p_fd-&gt;fd_ofiles[i] = fp;
  </figure></notextile></div>
 
 <h2 id="call-tree">Call Tree</h2>
+
+<p><img src="http://distkeys.com/images/CallsGraph-open.png" title="[CallsGraph-open.png]" /></p>
 
 <p><br /><br /></p>
 
