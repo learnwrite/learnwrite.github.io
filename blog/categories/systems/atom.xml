@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Systems | Distributed Knowledge]]></title>
   <link href="http://distkeys.com/blog/categories/systems/atom.xml" rel="self"/>
   <link href="http://distkeys.com/"/>
-  <updated>2014-08-05T21:13:02-07:00</updated>
+  <updated>2014-09-07T15:28:24-07:00</updated>
   <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -323,10 +323,10 @@ In <code class="myyellow">write broadcast</code> approach fault handler updates 
 
 <ol>
   <li>Message Passing</li>
-  <li>Distributed Shared Memory in <a href="https://www.dropbox.com/s/ukj7np5c78161at/shared%20virtual%20memory%20system.pdf" target="_blank">Ivy</a> (Integrated shared Virtual memory at
+  <li>Distributed Shared Memory in <a href="https://www.dropbox.com/s/ukj7np5c78161at/shared%20virtual%20memory%20system.pdf?dl=0" target="_blank">Ivy</a> (Integrated shared Virtual memory at
 Yale) </li>
-  <li><a href="https://www.dropbox.com/s/1ktdgouptq41fve/2.ImplementingRPC.pdf" target="_blank">Birrel and Nelson Remote Procedure Call</a></li>
-  <li><a href="https://www.dropbox.com/s/7i4kvjg741r5idz/LRPC.pdf" target="_blank">Lightweight Remote Procedure Call</a></li>
+  <li><a href="https://www.dropbox.com/s/1ktdgouptq41fve/2.ImplementingRPC.pdf?dl=0" target="_blank">Birrel and Nelson Remote Procedure Call</a></li>
+  <li><a href="https://www.dropbox.com/s/7i4kvjg741r5idz/LRPC.pdf?dl=0" target="_blank">Lightweight Remote Procedure Call</a></li>
 </ol>
 ]]></content>
   </entry>
