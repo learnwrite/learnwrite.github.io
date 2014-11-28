@@ -9,7 +9,7 @@
   <meta name="author" content="Vaibhav Gautam">
 
   
-  <meta name="description" content="Message Passing Remote Procedure Calls (RPC) Lightweight Remote Procedure Call Distributed Shared Memory – IVY Further reading The scope of this &hellip;">
+  <meta name="description" content="Introduction Directory Service for WAN – DNS	† Granularity of Names Caching of Names/Placement of Caches Use of Replication Use of Distribution &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -108,6 +108,78 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/02/16/naming-in-distributed-systems/">Naming in Distributed Systems</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-16T22:47:00-08:00" pubdate data-updated="true">Feb 16<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/02/16/naming-in-distributed-systems/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#introduction">Introduction</a></li>
+  <li><a href="#directory-service-for-wan--dns">Directory Service for WAN – DNS	†</a>    <ul>
+      <li><a href="#granularity-of-names">Granularity of Names</a></li>
+      <li><a href="#caching-of-namesplacement-of-caches">Caching of Names/Placement of Caches</a></li>
+      <li><a href="#use-of-replication">Use of Replication</a></li>
+      <li><a href="#use-of-distribution">Use of Distribution</a></li>
+      <li><a href="#consistencysynchronization-requirement">Consistency/Synchronization Requirement</a></li>
+    </ul>
+  </li>
+  <li><a href="#file-systemcontent-management-system-cms">File system/Content management system (CMS)</a>    <ul>
+      <li><a href="#granularity-of-names-1">Granularity of Names</a></li>
+      <li><a href="#caching-of-namesplacement-of-caches-1">Caching of Names/Placement of Caches</a></li>
+      <li><a href="#use-of-replication-1">Use of Replication</a></li>
+      <li><a href="#use-of-distribution-1">Use of Distribution</a></li>
+      <li><a href="#consistencysynchronization-requirement-1">Consistency/Synchronization Requirement</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="introduction">Introduction</h3>
+
+<p>The scope of this post is limited to the study of naming systems for following system<br />
+•	Directory Service for Wide Area<br />
+•	File system or Content manage system for collaborative work<br /></p>
+
+<p>Naming can be categorized into four kinds<br />
+1. Host based naming<br />
+2. Global naming<br />
+3. User/Objet centered naming <br />
+4. Attribute based naming<br />
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/02/16/naming-in-distributed-systems/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -816,74 +888,6 @@ Then the pairs are  [6,4] , [9,1]
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/10/12/sorting/">Sorting</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-10-12T13:08:00-07:00" pubdate data-updated="true">Oct 12<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/10/12/sorting/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><ul id="markdown-toc">
-  <li><a href="#dictionary-of-algorithms">Dictionary of algorithms</a></li>
-  <li><a href="#sorting-visualization">Sorting Visualization</a></li>
-  <li><a href="#sorting-wiki-summary">Sorting Wiki Summary</a></li>
-  <li><a href="#sorting-algorithms">Sorting algorithms</a></li>
-  <li><a href="#comparisons-based-sorting">Comparisons based sorting</a></li>
-  <li><a href="#online-sorts">Online sorts</a></li>
-  <li><a href="#stable-sorts">Stable sorts</a></li>
-  <li><a href="#time-complexity-chart">Time complexity chart</a></li>
-</ul>
-
-<p>This article talks about Sorting, Sorting techniques/algorithms in computer science</p>
-
-<p>Let’s start with Wikipedia entry about sorting</p>
-
-<div class="wikipedia">
-  
-    <img src="//upload.wikimedia.org/wikipedia/commons/thumb/8/82/Sorting_stability_playing_cards.svg/220px-Sorting_stability_playing_cards.svg.png" />
-  
-  <h2>sorting algorithm</h2>
-  <div>
-    <p>A <strong>sorting algorithm</strong> is an <a href="http://en.wikipedia.org/wiki/Algorithm" title="Algorithm">algorithm</a> that puts elements of a <a href="http://en.wikipedia.org/wiki/List_(computing)" title="List (computing)" class="mw-redirect">list</a> in a certain <a href="http://en.wikipedia.org/wiki/Total_order" title="Total order">order</a>. The most-used orders are numerical order and <a href="http://en.wikipedia.org/wiki/Lexicographical_order" title="Lexicographical order">lexicographical order</a>. Efficient <a href="http://en.wikipedia.org/wiki/Sorting" title="Sorting">sorting</a> is important for optimizing the use of other algorithms (such as <a href="http://en.wikipedia.org/wiki/Search_algorithm" title="Search algorithm">search</a> and <a href="http://en.wikipedia.org/wiki/Merge_algorithm" title="Merge algorithm">merge</a> algorithms) which require input data to be in sorted lists; it is also often useful for <a href="http://en.wikipedia.org/wiki/Canonicalization" title="Canonicalization">canonicalizing</a> data and for producing human-readable output. More formally, the output must satisfy two conditions:
-</p>
-  </div>
-  <a href="http://en.wikipedia.org/wiki/Sorting_algorithm">Read more</a>
-</div>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/10/12/sorting/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -941,6 +945,10 @@ Then the pairs are  [6,4] , [9,1]
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/11/27/dynamic-programming/">Dynamic Programming</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/08/04/debug-freebsd-open/">Debug FreeBSD - Open</a>
       </li>
     
@@ -954,10 +962,6 @@ Then the pairs are  [6,4] , [9,1]
     
       <li class="post">
         <a href="/blog/2014/06/18/curious-case-of-recursion/">Curious Case Of Recursion</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/03/25/singleton/">Singleton - Design Pattern</a>
       </li>
     
   </ul>
@@ -978,7 +982,7 @@ Then the pairs are  [6,4] , [9,1]
 <li class='category'><a href='/blog/categories/scale/'>Scale (1)</a></li>
 <li class='category'><a href='/blog/categories/systems/'>Systems (4)</a></li>
 <li class='category'><a href='/blog/categories/algorithm/'>algorithm (3)</a></li>
-<li class='category'><a href='/blog/categories/algorithms/'>algorithms (3)</a></li>
+<li class='category'><a href='/blog/categories/algorithms/'>algorithms (4)</a></li>
 <li class='category'><a href='/blog/categories/architecture/'>architecture (1)</a></li>
 <li class='category'><a href='/blog/categories/array/'>array (1)</a></li>
 <li class='category'><a href='/blog/categories/binary/'>binary (1)</a></li>
@@ -991,7 +995,7 @@ Then the pairs are  [6,4] , [9,1]
 <li class='category'><a href='/blog/categories/numbers/'>numbers (1)</a></li>
 <li class='category'><a href='/blog/categories/object-oriented/'>object oriented (1)</a></li>
 <li class='category'><a href='/blog/categories/operating-systems/'>operating systems (2)</a></li>
-<li class='category'><a href='/blog/categories/recursion/'>recursion (3)</a></li>
+<li class='category'><a href='/blog/categories/recursion/'>recursion (4)</a></li>
 <li class='category'><a href='/blog/categories/scale/'>scale (1)</a></li>
 <li class='category'><a href='/blog/categories/sorting/'>sorting (2)</a></li>
 <li class='category'><a href='/blog/categories/strings/'>strings (1)</a></li>

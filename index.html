@@ -9,7 +9,7 @@
   <meta name="author" content="Vaibhav Gautam">
 
   
-  <meta name="description" content="Bird Eye View Map - Open File Structure &amp; File Descriptor File Structure Allocation File Descriptor How file descriptor is allocated (fdalloc) &hellip;">
+  <meta name="description" content="Combinational Search and Dynamic Programming Combinational Search and Optimization I Combinational Search and Optimization II Dynamic Programming &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -108,6 +108,72 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/11/27/dynamic-programming/">Dynamic Programming</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-27T18:32:00-08:00" pubdate data-updated="true">Nov 27<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/11/27/dynamic-programming/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#combinational-search-and-dynamic-programming">Combinational Search and Dynamic Programming</a>    <ul>
+      <li><a href="#combinational-search-and-optimization-i">Combinational Search and Optimization I</a></li>
+      <li><a href="#combinational-search-and-optimization-ii">Combinational Search and Optimization II</a></li>
+      <li><a href="#dynamic-programming">Dynamic Programming</a></li>
+    </ul>
+  </li>
+  <li><a href="#problems">Problems</a>    <ul>
+      <li><a href="#coin-changing-problem---total-ways">Coin changing problem - Total ways</a></li>
+    </ul>
+  </li>
+</ul>
+
+<div class="wikipedia">
+  
+    <img src="//upload.wikimedia.org/wikipedia/commons/thumb/0/03/Shortest_path_optimal_substructure.svg/200px-Shortest_path_optimal_substructure.svg.png" />
+  
+  <h2>dynamic programming</h2>
+  <div>
+    <p>In <a href="http://en.wikipedia.org/wiki/Mathematics" title="Mathematics">mathematics</a>, <a href="http://en.wikipedia.org/wiki/Computer_science" title="Computer science">computer science</a>, <a href="http://en.wikipedia.org/wiki/Economics" title="Economics">economics</a>, and <a href="http://en.wikipedia.org/wiki/Bioinformatics" title="Bioinformatics">bioinformatics</a>, <strong>dynamic programming</strong> is a method for solving complex problems by breaking them down into simpler subproblems. It is applicable to problems exhibiting the properties of <a href="http://en.wikipedia.org/wiki/Overlapping_subproblem" title="Overlapping subproblem" class="mw-redirect">overlapping subproblems</a>  and <a href="http://en.wikipedia.org/wiki/Optimal_substructure" title="Optimal substructure">optimal substructure</a> (described below).  When applicable, the method takes far less time than naive methods that don&#8217;t take advantage of the subproblem overlap (like <a href="http://en.wikipedia.org/wiki/Depth-first_search" title="Depth-first search">depth-first search</a>).
+</p>
+  </div>
+  <a href="http://en.wikipedia.org/wiki/Dynamic_programming">Read more</a>
+</div>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/11/27/dynamic-programming/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -637,78 +703,6 @@ For median sorted sequence is [1, 2, 3, 4]. Median is 2 or 3.
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/02/16/naming-in-distributed-systems/">Naming in Distributed Systems</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-02-16T22:47:00-08:00" pubdate data-updated="true">Feb 16<span>th</span>, 2014</time>
-        
-         | <a href="/blog/2014/02/16/naming-in-distributed-systems/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><ul id="markdown-toc">
-  <li><a href="#introduction">Introduction</a></li>
-  <li><a href="#directory-service-for-wan--dns">Directory Service for WAN – DNS	†</a>    <ul>
-      <li><a href="#granularity-of-names">Granularity of Names</a></li>
-      <li><a href="#caching-of-namesplacement-of-caches">Caching of Names/Placement of Caches</a></li>
-      <li><a href="#use-of-replication">Use of Replication</a></li>
-      <li><a href="#use-of-distribution">Use of Distribution</a></li>
-      <li><a href="#consistencysynchronization-requirement">Consistency/Synchronization Requirement</a></li>
-    </ul>
-  </li>
-  <li><a href="#file-systemcontent-management-system-cms">File system/Content management system (CMS)</a>    <ul>
-      <li><a href="#granularity-of-names-1">Granularity of Names</a></li>
-      <li><a href="#caching-of-namesplacement-of-caches-1">Caching of Names/Placement of Caches</a></li>
-      <li><a href="#use-of-replication-1">Use of Replication</a></li>
-      <li><a href="#use-of-distribution-1">Use of Distribution</a></li>
-      <li><a href="#consistencysynchronization-requirement-1">Consistency/Synchronization Requirement</a></li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="introduction">Introduction</h3>
-
-<p>The scope of this post is limited to the study of naming systems for following system<br />
-•	Directory Service for Wide Area<br />
-•	File system or Content manage system for collaborative work<br /></p>
-
-<p>Naming can be categorized into four kinds<br />
-1. Host based naming<br />
-2. Global naming<br />
-3. User/Objet centered naming <br />
-4. Attribute based naming<br />
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/02/16/naming-in-distributed-systems/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -764,6 +758,10 @@ For median sorted sequence is [1, 2, 3, 4]. Median is 2 or 3.
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/11/27/dynamic-programming/">Dynamic Programming</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/08/04/debug-freebsd-open/">Debug FreeBSD - Open</a>
       </li>
     
@@ -777,10 +775,6 @@ For median sorted sequence is [1, 2, 3, 4]. Median is 2 or 3.
     
       <li class="post">
         <a href="/blog/2014/06/18/curious-case-of-recursion/">Curious Case Of Recursion</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/03/25/singleton/">Singleton - Design Pattern</a>
       </li>
     
   </ul>
@@ -801,7 +795,7 @@ For median sorted sequence is [1, 2, 3, 4]. Median is 2 or 3.
 <li class='category'><a href='/blog/categories/scale/'>Scale (1)</a></li>
 <li class='category'><a href='/blog/categories/systems/'>Systems (4)</a></li>
 <li class='category'><a href='/blog/categories/algorithm/'>algorithm (3)</a></li>
-<li class='category'><a href='/blog/categories/algorithms/'>algorithms (3)</a></li>
+<li class='category'><a href='/blog/categories/algorithms/'>algorithms (4)</a></li>
 <li class='category'><a href='/blog/categories/architecture/'>architecture (1)</a></li>
 <li class='category'><a href='/blog/categories/array/'>array (1)</a></li>
 <li class='category'><a href='/blog/categories/binary/'>binary (1)</a></li>
@@ -814,7 +808,7 @@ For median sorted sequence is [1, 2, 3, 4]. Median is 2 or 3.
 <li class='category'><a href='/blog/categories/numbers/'>numbers (1)</a></li>
 <li class='category'><a href='/blog/categories/object-oriented/'>object oriented (1)</a></li>
 <li class='category'><a href='/blog/categories/operating-systems/'>operating systems (2)</a></li>
-<li class='category'><a href='/blog/categories/recursion/'>recursion (3)</a></li>
+<li class='category'><a href='/blog/categories/recursion/'>recursion (4)</a></li>
 <li class='category'><a href='/blog/categories/scale/'>scale (1)</a></li>
 <li class='category'><a href='/blog/categories/sorting/'>sorting (2)</a></li>
 <li class='category'><a href='/blog/categories/strings/'>strings (1)</a></li>

@@ -4,7 +4,7 @@
   <title><![CDATA[Distributed Knowledge]]></title>
   <link href="http://distkeys.com/atom.xml" rel="self"/>
   <link href="http://distkeys.com/"/>
-  <updated>2014-09-07T15:28:24-07:00</updated>
+  <updated>2014-11-27T20:21:44-08:00</updated>
   <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -12,6 +12,230 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Dynamic Programming]]></title>
+    <link href="http://distkeys.com/blog/2014/11/27/dynamic-programming/"/>
+    <updated>2014-11-27T18:32:00-08:00</updated>
+    <id>http://distkeys.com/blog/2014/11/27/dynamic-programming</id>
+    <content type="html"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#combinational-search-and-dynamic-programming">Combinational Search and Dynamic Programming</a>    <ul>
+      <li><a href="#combinational-search-and-optimization-i">Combinational Search and Optimization I</a></li>
+      <li><a href="#combinational-search-and-optimization-ii">Combinational Search and Optimization II</a></li>
+      <li><a href="#dynamic-programming">Dynamic Programming</a></li>
+    </ul>
+  </li>
+  <li><a href="#problems">Problems</a>    <ul>
+      <li><a href="#coin-changing-problem---total-ways">Coin changing problem - Total ways</a></li>
+    </ul>
+  </li>
+</ul>
+
+<div class="wikipedia">
+  
+    <img src="http://distkeys.com//upload.wikimedia.org/wikipedia/commons/thumb/0/03/Shortest_path_optimal_substructure.svg/200px-Shortest_path_optimal_substructure.svg.png" />
+  
+  <h2>dynamic programming</h2>
+  <div>
+    <p>In <a href="http://en.wikipedia.org/wiki/Mathematics" title="Mathematics">mathematics</a>, <a href="http://en.wikipedia.org/wiki/Computer_science" title="Computer science">computer science</a>, <a href="http://en.wikipedia.org/wiki/Economics" title="Economics">economics</a>, and <a href="http://en.wikipedia.org/wiki/Bioinformatics" title="Bioinformatics">bioinformatics</a>, <strong>dynamic programming</strong> is a method for solving complex problems by breaking them down into simpler subproblems. It is applicable to problems exhibiting the properties of <a href="http://en.wikipedia.org/wiki/Overlapping_subproblem" title="Overlapping subproblem" class="mw-redirect">overlapping subproblems</a>  and <a href="http://en.wikipedia.org/wiki/Optimal_substructure" title="Optimal substructure">optimal substructure</a> (described below).  When applicable, the method takes far less time than naive methods that don&#8217;t take advantage of the subproblem overlap (like <a href="http://en.wikipedia.org/wiki/Depth-first_search" title="Depth-first search">depth-first search</a>).
+</p>
+  </div>
+  <a href="http://en.wikipedia.org/wiki/Dynamic_programming">Read more</a>
+</div>
+
+<!-- more -->
+
+<p><br /></p>
+
+<h2 id="combinational-search-and-dynamic-programming">Combinational Search and Dynamic Programming</h2>
+
+<p>Recently, I came across these three videos about the <em>Combinational Search and Dynamic Programming</em> and I think these videos explains the complexity in great simplicity. I highly recommend for one who is beginner and want to learn the fundamentals.</p>
+
+<p><br /> <br /></p>
+
+<h3 id="combinational-search-and-optimization-i">Combinational Search and Optimization I</h3>
+
+<iframe width="560" height="315" src="http://distkeys.com//www.youtube.com/embed/nSPBb71RS4c?list=PL233EC0961AB3369C" frameborder="0" allowfullscreen=""></iframe>
+
+<p><br /> <br /></p>
+
+<h3 id="combinational-search-and-optimization-ii">Combinational Search and Optimization II</h3>
+
+<iframe width="560" height="315" src="http://distkeys.com//www.youtube.com/embed/PPFl2I6YVUo?list=PL233EC0961AB3369C" frameborder="0" allowfullscreen=""></iframe>
+
+<p><br /> <br /></p>
+
+<h3 id="dynamic-programming">Dynamic Programming</h3>
+
+<iframe width="560" height="315" src="http://distkeys.com//www.youtube.com/embed/6h6Fi6AQiRM?list=PL233EC0961AB3369C" frameborder="0" allowfullscreen=""></iframe>
+
+<p><br /> <br /></p>
+
+<h2 id="problems">Problems</h2>
+
+<h3 id="coin-changing-problem---total-ways">Coin changing problem - Total ways</h3>
+
+<p>Given a value N, if we want to make change for N cents, and we have infinite supply of each of S = { S1, S2, .. , Sm} valued coins, how many ways can we make the change? The order of coins doesn’t matter.
+For example, for N = 4 and S = {1,2,3}, there are four solutions: {1,1,1,1},{1,1,2},{2,2},{1,3}. So output should be 4. For N = 10 and S = {2, 5, 3, 6}, there are five solutions: {2,2,2,2,2}, {2,2,3,3}, {2,2,6}, {2,3,5} and {5,5}. So the output should be 5.</p>
+
+<p><br />
+The first step is to come up with the simple recursive solution which solves this problem. Once that done we can map that problem to the dynamic problem(DP) solution.</p>
+
+<blockquote>
+  <p>For DP solution there are two ways top-down (with recursive called memoization technique) or bottom up (with iteration). </p>
+</blockquote>
+
+<p>This <a href="http://qr.ae/lAQbS" title="Dynamic programming approaches">article</a> explains about above quote in detail.</p>
+
+<p>The recursive solution of this problem would look like this. If one have watched above videos, you would understand the logic or it is explained <a href="http://www.geeksforgeeks.org/dynamic-programming-set-7-coin-change/" title="recursive code">here</a>. Till now, it is all same like any other source or web pages across internet for solution of this problem. But, soon it’s going to differ. </p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Coin change recursion</span>  <a href="http://ideone.com/XN6v0F" target="_blank">Run Code </a></figcaption> <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="comment">// Returns the count of ways we can sum  S[0...m-1] coins to get sum n</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span class="predefined-type">int</span> count( <span class="predefined-type">int</span> S[], <span class="predefined-type">int</span> m, <span class="predefined-type">int</span> n )
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>{
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    <span class="comment">// If n is 0 then there is 1 solution (do not include any coin)</span>
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    <span class="keyword">if</span> (n == <span class="integer">0</span>)
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span class="keyword">return</span> <span class="integer">1</span>;
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    <span class="comment">// If n is less than 0 then no solution exists</span>
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>    <span class="keyword">if</span> (n &lt; <span class="integer">0</span>)
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>    <span class="keyword">return</span> <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>    <span class="comment">// If there are no coins and n is greater than 0, then no solution exist</span>
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>    <span class="keyword">if</span> (m &lt;=<span class="integer">0</span> &amp;&amp; n &gt;= <span class="integer">1</span>)
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>    <span class="keyword">return</span> <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>    <span class="comment">// count is sum of solutions (i) including S[m-1] (ii) excluding S[m-1]</span>
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>    <span class="keyword">return</span> count( S, m - <span class="integer">1</span>, n ) + count( S, m, n-S[m-<span class="integer">1</span>] );
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>}
+</pre></div>
+</div>
+ </figure></notextile></div>
+
+<p><br /></p>
+
+<p><a href="http://amzn.com/098478280X%20" title="cracking the coding interview">Cracking the coding interview</a> book also have same problem with below recursive solution. In this code S = {25, 10, 5, 1}</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Coin change recursion</span>  <a href="http://ideone.com/XN6v0F" target="_blank">Run Code </a></figcaption> <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="predefined-type">int</span> getchange(<span class="predefined-type">int</span> n, <span class="predefined-type">int</span> denom)
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>{
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    <span class="predefined-type">int</span> next_denom = <span class="integer">0</span>;
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    <span class="keyword">switch</span>(denom) {
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span class="keyword">case</span> <span class="integer">25</span>:
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>        next_denom = <span class="integer">10</span>;
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>        <span class="keyword">break</span>;
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>    <span class="keyword">case</span> <span class="integer">10</span>:
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>        next_denom = <span class="integer">5</span>;
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>        <span class="keyword">break</span>;
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>    <span class="keyword">case</span> <span class="integer">5</span>:
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>        next_denom = <span class="integer">1</span>;
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>        <span class="keyword">break</span>;
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>    <span class="keyword">case</span> <span class="integer">1</span>:
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>        <span class="keyword">return</span> <span class="integer">1</span>;
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>    }
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span>
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span>    <span class="predefined-type">int</span> ways = <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span>
+<span class="line-numbers"><a href="#n25" name="n25">25</a></span>    <span class="keyword">for</span> (<span class="predefined-type">int</span> i = <span class="integer">0</span>; i*denom &lt;= n; i++) {
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span>    ways += getchange(n - i*denom, next_denom);
+<span class="line-numbers"><a href="#n27" name="n27">27</a></span>    }
+<span class="line-numbers"><a href="#n28" name="n28">28</a></span>
+<span class="line-numbers"><a href="#n29" name="n29">29</a></span>    <span class="keyword">return</span> ways;
+<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>}
+</pre></div>
+</div>
+ </figure></notextile></div>
+
+<p><br /></p>
+
+<p>As explained in <a href="www.distkeys.com/blog/2014/11/27/dynamic-programming/#dynamic-programming" title="DP video">dynamic programming video</a> above, lets convert this program into dynamic programming program. This is a top down approach.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Coin change recursion</span>  <a href="http://ideone.com/XN6v0F" target="_blank">Run Code </a></figcaption> <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>define N <span class="integer">50</span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>define CHANGESIZE <span class="integer">4</span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span class="predefined-type">int</span> changeSize;
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span class="comment">// Sum upto 50</span>
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span><span class="predefined-type">int</span> table[N + <span class="integer">1</span>][CHANGESIZE + <span class="integer">1</span>];
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span><span class="comment">// Converted top down DP version of count()</span>
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span><span class="predefined-type">int</span> countDP(<span class="predefined-type">int</span> S[], <span class="predefined-type">int</span> m, <span class="predefined-type">int</span> n)
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>{
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>    <span class="keyword">if</span> (n == <span class="integer">0</span>) {
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>    table[n][m] = <span class="integer">1</span>;
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>    <span class="keyword">return</span> table[n][m];
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>    }
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>    <span class="keyword">if</span> (n &lt; <span class="integer">0</span>) {
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>    <span class="keyword">return</span> <span class="integer">0</span>;
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>    }
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span>    <span class="keyword">if</span> (m &lt;=<span class="integer">0</span> &amp;&amp; n &gt;= <span class="integer">1</span>)
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span>    <span class="keyword">return</span> <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span>
+<span class="line-numbers"><a href="#n25" name="n25">25</a></span>    <span class="keyword">if</span> (n-S[m-<span class="integer">1</span>] &lt; <span class="integer">0</span>) {
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span>    <span class="keyword">return</span> <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n27" name="n27">27</a></span>    }
+<span class="line-numbers"><a href="#n28" name="n28">28</a></span>
+<span class="line-numbers"><a href="#n29" name="n29">29</a></span>    <span class="keyword">if</span> (table[n][m-<span class="integer">1</span>] == <span class="integer">0</span>) {
+<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>    table[n][m-<span class="integer">1</span>] = countDP(S, m-<span class="integer">1</span>, n);
+<span class="line-numbers"><a href="#n31" name="n31">31</a></span>    }
+<span class="line-numbers"><a href="#n32" name="n32">32</a></span>
+<span class="line-numbers"><a href="#n33" name="n33">33</a></span>    <span class="keyword">if</span> (table[n-S[m-<span class="integer">1</span>]][m] == <span class="integer">0</span>) {
+<span class="line-numbers"><a href="#n34" name="n34">34</a></span>    table[n-S[m-<span class="integer">1</span>]][m] = countDP(S, m, n-S[m-<span class="integer">1</span>]);
+<span class="line-numbers"><a href="#n35" name="n35">35</a></span>    }
+<span class="line-numbers"><a href="#n36" name="n36">36</a></span>
+<span class="line-numbers"><a href="#n37" name="n37">37</a></span>    <span class="keyword">return</span> (table[n][m-<span class="integer">1</span>] + table[n-S[m-<span class="integer">1</span>]][m]);
+<span class="line-numbers"><a href="#n38" name="n38">38</a></span>}
+<span class="line-numbers"><a href="#n39" name="n39">39</a></span>
+<span class="line-numbers"><strong><a href="#n40" name="n40">40</a></strong></span><span class="directive">void</span> inittable()
+<span class="line-numbers"><a href="#n41" name="n41">41</a></span>{
+<span class="line-numbers"><a href="#n42" name="n42">42</a></span>    <span class="keyword">for</span> (<span class="predefined-type">int</span> i = <span class="integer">0</span>; i &lt; N + <span class="integer">1</span> ; i++) {
+<span class="line-numbers"><a href="#n43" name="n43">43</a></span>    <span class="keyword">for</span> (<span class="predefined-type">int</span> j = <span class="integer">0</span>; j &lt; changeSize + <span class="integer">1</span>; j++) {
+<span class="line-numbers"><a href="#n44" name="n44">44</a></span>        table[i][j] = <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n45" name="n45">45</a></span>    }
+<span class="line-numbers"><a href="#n46" name="n46">46</a></span>    }
+<span class="line-numbers"><a href="#n47" name="n47">47</a></span>
+<span class="line-numbers"><a href="#n48" name="n48">48</a></span>    <span class="keyword">return</span>;
+<span class="line-numbers"><a href="#n49" name="n49">49</a></span>}
+<span class="line-numbers"><strong><a href="#n50" name="n50">50</a></strong></span>
+<span class="line-numbers"><a href="#n51" name="n51">51</a></span><span class="predefined-type">int</span> main()
+<span class="line-numbers"><a href="#n52" name="n52">52</a></span>{
+<span class="line-numbers"><a href="#n53" name="n53">53</a></span>    <span class="predefined-type">int</span> ways = <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n54" name="n54">54</a></span>    <span class="predefined-type">int</span> change[<span class="integer">4</span>] = {<span class="integer">25</span>, <span class="integer">10</span>, <span class="integer">5</span>, <span class="integer">1</span>};
+<span class="line-numbers"><a href="#n55" name="n55">55</a></span>    changeSize = <span class="keyword">sizeof</span>(change)/<span class="keyword">sizeof</span>(change[<span class="integer">0</span>]);
+<span class="line-numbers"><a href="#n56" name="n56">56</a></span>
+<span class="line-numbers"><a href="#n57" name="n57">57</a></span>    <span class="keyword">for</span> (<span class="predefined-type">int</span> sum = <span class="integer">1</span>; sum &lt; <span class="integer">50</span>; sum++) {
+<span class="line-numbers"><a href="#n58" name="n58">58</a></span>    printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Sum %d</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>, sum);        
+<span class="line-numbers"><a href="#n59" name="n59">59</a></span>    ways = countDP(change, changeSize, sum);
+<span class="line-numbers"><strong><a href="#n60" name="n60">60</a></strong></span>    printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">CountDP = %d</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>, ways);
+<span class="line-numbers"><a href="#n61" name="n61">61</a></span>    printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">============</span><span class="char">\n</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>);
+<span class="line-numbers"><a href="#n62" name="n62">62</a></span>
+<span class="line-numbers"><a href="#n63" name="n63">63</a></span>    inittable();
+<span class="line-numbers"><a href="#n64" name="n64">64</a></span>    }
+<span class="line-numbers"><a href="#n65" name="n65">65</a></span>
+<span class="line-numbers"><a href="#n66" name="n66">66</a></span>    <span class="keyword">return</span> <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n67" name="n67">67</a></span>}
+<span class="line-numbers"><a href="#n68" name="n68">68</a></span>
+</pre></div>
+</div>
+ </figure></notextile></div>
+
+<p><br /></p>
+
+<hr style="border-top: 1.5px dotted black" />
+<p><br /></p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Debug FreeBSD - Open]]></title>
@@ -5761,752 +5985,6 @@ Each level contributes to total cost of <code>cn</code></p>
     <p><a href="http://faculty.simpson.edu/lydia.sinapova/www/cmsc250/LN250_Tremblay/L06-QuickSortEX.htm" target="_blank">Median of 3 quicksort</a></p>
   </li>
 </ul>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[sorting]]></title>
-    <link href="http://distkeys.com/blog/2013/10/12/sorting/"/>
-    <updated>2013-10-12T13:08:00-07:00</updated>
-    <id>http://distkeys.com/blog/2013/10/12/sorting</id>
-    <content type="html"><![CDATA[<ul id="markdown-toc">
-  <li><a href="#dictionary-of-algorithms">Dictionary of algorithms</a></li>
-  <li><a href="#sorting-visualization">Sorting Visualization</a></li>
-  <li><a href="#sorting-wiki-summary">Sorting Wiki Summary</a></li>
-  <li><a href="#sorting-algorithms">Sorting algorithms</a></li>
-  <li><a href="#comparisons-based-sorting">Comparisons based sorting</a></li>
-  <li><a href="#online-sorts">Online sorts</a></li>
-  <li><a href="#stable-sorts">Stable sorts</a></li>
-  <li><a href="#time-complexity-chart">Time complexity chart</a></li>
-</ul>
-
-<p>This article talks about Sorting, Sorting techniques/algorithms in computer science</p>
-
-<p>Let’s start with Wikipedia entry about sorting</p>
-
-<div class="wikipedia">
-  
-    <img src="http://distkeys.com//upload.wikimedia.org/wikipedia/commons/thumb/8/82/Sorting_stability_playing_cards.svg/220px-Sorting_stability_playing_cards.svg.png" />
-  
-  <h2>sorting algorithm</h2>
-  <div>
-    <p>A <strong>sorting algorithm</strong> is an <a href="http://en.wikipedia.org/wiki/Algorithm" title="Algorithm">algorithm</a> that puts elements of a <a href="http://en.wikipedia.org/wiki/List_(computing)" title="List (computing)" class="mw-redirect">list</a> in a certain <a href="http://en.wikipedia.org/wiki/Total_order" title="Total order">order</a>. The most-used orders are numerical order and <a href="http://en.wikipedia.org/wiki/Lexicographical_order" title="Lexicographical order">lexicographical order</a>. Efficient <a href="http://en.wikipedia.org/wiki/Sorting" title="Sorting">sorting</a> is important for optimizing the use of other algorithms (such as <a href="http://en.wikipedia.org/wiki/Search_algorithm" title="Search algorithm">search</a> and <a href="http://en.wikipedia.org/wiki/Merge_algorithm" title="Merge algorithm">merge</a> algorithms) which require input data to be in sorted lists; it is also often useful for <a href="http://en.wikipedia.org/wiki/Canonicalization" title="Canonicalization">canonicalizing</a> data and for producing human-readable output. More formally, the output must satisfy two conditions:
-</p>
-  </div>
-  <a href="http://en.wikipedia.org/wiki/Sorting_algorithm">Read more</a>
-</div>
-
-<!-- more -->
-<p><br /></p>
-
-<h3 id="dictionary-of-algorithms">Dictionary of algorithms</h3>
-
-<p><a href="http://xlinux.nist.gov/dads//" target="_blank">Dictionary of algorithms</a></p>
-
-<p><br /></p>
-
-<h3 id="sorting-visualization">Sorting Visualization</h3>
-
-<p><a href="http://corte.si/posts/code/visualisingsorting/index.html" target="_blank">Sorting Visualization</a></p>
-
-<p><br /></p>
-
-<h3 id="sorting-wiki-summary">Sorting Wiki Summary</h3>
-
-<p><a href="http://en.wikipedia.org/wiki/Sorting_algorithm" target="_blank">Sorting Wiki Summary</a></p>
-
-<p><br /></p>
-
-<p>Sorting algorithms can be divided into categories</p>
-
-<h3 id="sorting-algorithms">Sorting algorithms</h3>
-<ol>
-  <li><strong><em>Comparisons based sorts</em></strong> - 24 algorithms in this category</li>
-  <li><strong><em>Online sorts</em></strong>            - 5 algorithms in this category</li>
-  <li><strong><em>Stable sorts</em></strong>            - 14 algorithms in this category</li>
-</ol>
-
-<p>Donald Knuth pioneer in algorithms and field of Computer Science have divided sorting into</p>
-
-<ol>
-  <li><strong><em>Internal sorting</em></strong> - by insertion, by exchange, by selection, by merging, by distribution<br /></li>
-  <li><strong><em>Optimum sorting</em></strong>  - min-comparison sorting, min-comparison merging, min-comparison selection<br /></li>
-  <li><strong><em>External sorting</em></strong> <br /></li>
-</ol>
-
-<h3 id="comparisons-based-sorting">Comparisons based sorting</h3>
-<p>It is particular type of sorting algorithm which read the list elements through comparison operator that determines which of two elements should occur first int he final sorted list.</p>
-
-<p><strong><em>Algorithms</em></strong></p>
-
-<ul>
-  <li><a href="http://en.wikipedia.org/wiki/Adaptive_heap_sort" target="_blank">Adaptive heap sort</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Bogosort" target="_blank">Bogosort</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Bubble_sort" target="_blank">Bubble sort</a>                       - (S)</li>
-  <li><a href="http://en.wikipedia.org/wiki/Cascade_merge_sort" target="_blank">Cascade merge sort</a>         - (S)</li>
-  <li><a href="http://en.wikipedia.org/wiki/Cocktail_sort" target="_blank">Cocktail sort</a>                   - (S)</li>
-  <li><a href="http://en.wikipedia.org/wiki/Comb_sort" target="_blank">Comb sort</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Cycle_sort" target="_blank">Cycle sort</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Gnome_sort" target="_blank">Gnome sort</a>                         - (S)</li>
-  <li><a href="http://en.wikipedia.org/wiki/Heapsort" target="_blank">Heapsort</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Insertion_sort" target="_blank">Insertion sort</a>                 - (S)</li>
-  <li><a href="http://en.wikipedia.org/wiki/Introsort" target="_blank">Introsort</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Library_sort" target="_blank">Library sort</a>                     - (S)</li>
-  <li><a href="http://en.wikipedia.org/wiki/Merge_sort" target="_blank">Merge sort</a>                         - (S)</li>
-  <li><a href="http://en.wikipedia.org/wiki/Odd–even_sort" target="_blank">Odd–even sort</a>                   - (S)</li>
-  <li><a href="http://en.wikipedia.org/wiki/Oscillating_merge_sort" target="_blank">Oscillating merge sort</a> - (S)</li>
-  <li><a href="http://en.wikipedia.org/wiki/Patience_sorting" target="_blank">Patience sorting</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Polyphase_merge_sort" target="_blank">Polyphase merge sort</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Quicksort" target="_blank">Quicksort</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Selection_sort" target="_blank">Selection sort</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Shellsort" target="_blank">Shellsort</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Smoothsort" target="_blank">Smoothsort</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Stooge_sort" target="_blank">Stooge sort</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Strand_sort" target="_blank">Strand sort</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Timsort" target="_blank">Timsort</a></li>
-</ul>
-
-<p>*(S) - Stable sorts
-<br /></p>
-
-<h3 id="online-sorts">Online sorts</h3>
-
-<p>These sorts can start sorting their input without having received all of it. It can process its input piece-by-piece in a serial fashion, i.e., in the order that the input is fed to the algorithm, without having the entire input available from the start.</p>
-
-<p><strong><em>Algorithms</em></strong></p>
-
-<ul>
-  <li><a href="http://en.wikipedia.org/wiki/Cycle_sort" target="_blank">Cycle sort</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Insertion_sort" target="_blank">Insertion sort</a>                 - (S)</li>
-  <li><a href="http://en.wikipedia.org/wiki/Library_sort" target="_blank">Library sort</a>                     - (S)</li>
-  <li><a href="http://en.wikipedia.org/wiki/Merge_sort" target="_blank">Merge sort</a>                         - (S)</li>
-  <li><a href="http://en.wikipedia.org/wiki/Polyphase_merge_sort" target="_blank">Polyphase merge sort</a></li>
-</ul>
-
-<p>*(S) - Stable sorts
-<br /></p>
-
-<h3 id="stable-sorts">Stable sorts</h3>
-
-<p>A sorting algorithm is stable if whenever there are two records R and S with the <code>same key</code> and with R appearing before S in the original list, <code>R will appear before S</code> in the sorted list.</p>
-
-<p><strong><em>Algorithms</em></strong></p>
-
-<ul>
-  <li><a href="http://en.wikipedia.org/wiki/Bubble_sort" target="_blank">Bubble sort</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Bucket_sort" target="_blank">Bucket sort</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Cascade_merge_sort" target="_blank">Cascade merge sort</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Cocktail_sort" target="_blank">Cocktail sort</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Counting_sort" target="_blank">Counting sort</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Gnome_sort" target="_blank">Gnome sort</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Insertion_sort" target="_blank">Insertion sort</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Library_sort" target="_blank">Library sort</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Merge_sort" target="_blank">Merge sort</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Odd–even_sort" target="_blank">Odd–even sort</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Oscillating_merge_sort" target="_blank">Oscillating merge sort</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Pigeonhole_sort" target="_blank">Pigeonhole sort</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Proxmap_sort" target="_blank">Proxmap sort</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/Radix_sort" target="_blank">Radix sort</a></li>
-</ul>
-
-<h3 id="time-complexity-chart">Time complexity chart</h3>
-
-<table>
-<thead>
-<tr>
-    <th><code class="mygreen">Good</code></th><th><code class="myyellow">Fair</code></th><th><code class="myred">Poor</code></th>
-</tr>
-</thead>
-</table>
-
-<p><br /></p>
-
-<p><sup>*</sup>(V/D) - Variant or derived from</p>
-
-<p><br /></p>
-<table>
-<thead>
-<tr>
-    <th>Algorithm</th><th colspan="3">Time complexity</th><th>Space complexity</th><th>Notes</th>
-</tr>
-<tr>
-    <th /><th>Best</th><th>Average</th><th>Worst</th><th /><th />
-</tr>
-</thead>
-<tbody>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Adaptive_heap_sort" target="_blank">Adaptive heap sort</a></td>
-    <td />
-    <td />
-    <td />
-    <td />
-    <td />
-</tr>
-<tr>
-    <td><code class="myred"><a href="http://en.wikipedia.org/wiki/Bogosort" target="_blank">Bogosort</a></code></td>
-    <td><code class="myyellow">Ω(n)</code></td>
-    <td>O(n × n!)</td>
-    <td><code class="myred">Unbounded</code></td>
-    <td>O(n)</td>
-    <td />
-</tr>
-<tr>
-    <td><code class="myred"><a href="http://en.wikipedia.org/wiki/Bubble_sort" target="_blank">Bubble sort</a></code></td>
-    <td>O(n)</td>
-    <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
-    <td><code class="myred">O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</code></td>
-    <td>O(1)</td>
-    <td />
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Cascade_merge_sort" target="_blank">Cascade merge sort</a></td>
-    <td />
-    <td />
-    <td />
-    <td />
-    <td />
-</tr>
-<tr>
-    <td><code class="myred"><a href="http://en.wikipedia.org/wiki/Cocktail_sort" target="_blank">Cocktail sort</a></code></td>
-    <td>O(n)</td>
-    <td><code class="myred">O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</code></td>
-    <td><code class="myred">O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</code></td>
-    <td>O(1)</td>
-    <td>(V/D) - Bubble Sort</td>
-</tr>
-<tr>
-    <td><code class="myred"><a href="http://en.wikipedia.org/wiki/Comb_sort" target="_blank">Comb sort</a></code></td>
-    <td>O(n)</td>
-    <td>Ω(<math xmlns="http://www.w3.org/1998/Math/MathML"><mfrac><mrow><msup><mi>n</mi><mn>2</mn></msup></mrow><mrow><msup><mi>2</mi><mn>p</mn></msup></mrow></mfrac></math>)</td>
-    <td>Ω(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
-    <td>O(1)</td>
-    <td>(V/D) - Bubble Sort</td>
-</tr>
-<tr>
-    <td><code class="myyellow"><a href="http://en.wikipedia.org/wiki/Cycle_sort" target="_blank">Cycle sort</a></code></td>
-    <td>Θ(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
-    <td>Θ(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
-    <td>Θ(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
-    <td>Θ(n)</td>
-    <td><code class="mygreen">Write efficient</code></td>
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Gnome_sort" target="_blank">Gnome sort</a></td>
-    <td>O(n)</td>
-    <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
-    <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
-    <td>O(1)</td>
-    <td>Bubble + Insertion sort</td>
-</tr>
-<tr>
-    <td><code class="mygreen"><a href="http://en.wikipedia.org/wiki/Heapsort" target="_blank">Heapsort</a></code></td>
-    <td>Ω(n), O(nlogn)</td>
-    <td>O(nlogn)</td>
-    <td>O(nlogn)</td>
-    <td><code class="mygreen">O(1)</code></td>
-    <td><a href="http://distkeys.com/blog/2013/10/13/comparison-based-sorting/#table-based-comparison" target="_blank">Detailed notes</a></td>
-</tr>
-<tr>
-    <td><code class="myyellow"><a href="http://en.wikipedia.org/wiki/Insertion_sort" target="_blank">Insertion sort</a></code></td>
-    <td>O(n)</td>
-    <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
-    <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
-    <td>O(n)</td>
-    <td />
-</tr>
-<tr>
-    <td><code class="mygreen"><a href="http://en.wikipedia.org/wiki/Introsort" target="_blank">Introsort</a></code></td>
-    <td>O(nlogn)</td>
-    <td>O(nlogn)</td>
-    <td>O(nlogn)</td>
-    <td />
-    <td>Quick sort + Heap sort<br /><a href="https://www.dropbox.com/s/21q1ymf2y86kqcz/introsort.pdf" target="_blank"> IntroSort Paper</a></td>
-</tr>
-<tr>
-    <td><code class="myyellow"><a href="http://en.wikipedia.org/wiki/Library_sort" target="_blank">Library sort</a></code></td>
-    <td>O(n)</td>
-    <td>O(nlogn)</td>
-    <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
-    <td><code class="myred">O(n)</code></td>
-    <td>(V/D) - Insertion sort</td>
-</tr>
-<tr>
-    <td><code class="mygreen"><a href="http://en.wikipedia.org/wiki/Merge_sort" target="_blank">Merge sort</a></code></td>
-    <td>O(n), O(nlogn)</td>
-    <td>O(nlogn)</td>
-    <td>O(nlogn)</td>
-    <td><code class="myred">O(n)</code></td>
-    <td><a href="http://distkeys.com/blog/2013/10/13/comparison-based-sorting/#table-based-comparison" target="_blank">Detailed notes</a></td>
-</tr>
-<tr>
-    <td><code class="myred"><a href="http://en.wikipedia.org/wiki/Odd–even_sort" target="_blank">Odd–even sort</a></code></td>
-    <td>O(n)</td>
-    <td />
-    <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
-    <td>O(1)</td>
-    <td>*(V/D) - Bubble sort</td>
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Oscillating_merge_sort" target="_blank">Oscillating merge sort</a></td>
-    <td />
-    <td />
-    <td />
-    <td />
-    <td />
-</tr>
-<tr>
-    <td><code class="mygreen"><a href="http://en.wikipedia.org/wiki/Patience_sorting" target="_blank">Patience sorting</a></code></td>
-    <td />
-    <td />
-    <td>O(nlogn)</td>
-    <td>O(n)</td>
-    <td><a href="http://wordaligned.org/articles/patience-sort" target="_blank">Longest common sequence</a></td>
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Polyphase_merge_sort" target="_blank">Polyphase merge sort</a></td>
-    <td />
-    <td />
-    <td />
-    <td />
-    <td />
-</tr>
-<tr>
-    <td><code class="mygreen"><a href="http://en.wikipedia.org/wiki/Quicksort" target="_blank">Quicksort</a></code></td>
-    <td>O(nlogn)</td>
-    <td>O(nlogn)</td>
-    <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
-    <td>O(n)</td>
-    <td />
-</tr>
-<tr>
-    <td><code class="myred"><a href="http://en.wikipedia.org/wiki/Selection_sort" target="_blank">Selection sort</a></code></td>
-    <td><code class="myred">O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</code></td>
-    <td><code class="myred">O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</code></td>
-    <td><code class="myred">O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</code></td>
-    <td>O(n)</td>
-    <td />
-</tr>
-<tr>
-    <td><code class="myyellow"><a href="http://en.wikipedia.org/wiki/Shellsort" target="_blank">Shellsort</a></code></td>
-    <td>Depends on gap seq</td>
-    <td>Depends on gap seq</td>
-    <td>Depends on gap seq</td>
-    <td>O(n)</td>
-    <td>Faster on partial sorted list</td>
-</tr>
-<tr>
-    <td><code class="mygreen"><a href="http://en.wikipedia.org/wiki/Smoothsort" target="_blank">Smoothsort</a></code></td>
-    <td>O(n)</td>
-    <td>O(nlogn)</td>
-    <td>O(nlogn)</td>
-    <td>O(n)</td>
-    <td>*(V/D) - Heap sort</td>
-</tr>
-<tr>
-    <td><code class="myred"><a href="http://en.wikipedia.org/wiki/Stooge_sort" target="_blank">Stooge sort</a></code></td>
-    <td />
-    <td />
-    <td />
-    <td>O(n)</td>
-    <td>Slower than bubble sort</td>
-</tr>
-<tr>
-    <td><code class="myred"><a href="http://en.wikipedia.org/wiki/Strand_sort" target="_blank">Strand sort</a></code></td>
-    <td>O(n)</td>
-    <td><code class="myred">O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</code></td>
-    <td><code class="myred">O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</code></td>
-    <td>O(1)</td>
-    <td />
-</tr>
-<tr>
-    <td><code class="mygreen"><a href="http://en.wikipedia.org/wiki/Timsort" target="_blank">Timsort</a></code></td>
-    <td>O(n)</td>
-    <td>O(nlogn)</td>
-    <td>O(nlogn)</td>
-    <td>O(n)</td>
-    <td>Merge + Insertion sort</td>
-</tr>
-<tr>
-    <td />
-    <td />
-    <td />
-    <td />
-    <td />
-    <td />
-</tr>
-<tr>
-    <th>Online sorting</th>
-    <th />
-    <th />
-    <th />
-    <th />
-    <td />
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Cycle_sort" target="_blank">Cycle sort</a></td>
-    <td>Θ(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
-    <td>Θ(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
-    <td>Θ(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
-    <td>Θ(n)</td>
-    <td />
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Insertion_sort" target="_blank">Insertion sort</a></td>
-    <td>O(n)</td>
-    <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
-    <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
-    <td>O(n)</td>
-    <td />
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Library_sort" target="_blank">Library sort</a></td>
-    <td>O(n)</td>
-    <td>O(nlogn)</td>
-    <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
-    <td>O(n)</td>
-    <td />
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Merge_sort" target="_blank">Merge sort</a></td>
-    <td>O(nlogn)</td>
-    <td>O(nlogn)</td>
-    <td>O(nlogn)</td>
-    <td>O(n)</td>
-    <td />
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Polyphase_merge_sort" target="_blank">Polyphase merge sort</a></td>
-    <td />
-    <td />
-    <td />
-    <td />
-    <td />
-</tr>
-<tr>
-    <td />
-    <td />
-    <td />
-    <td />
-    <td />
-    <td />
-</tr>
-<tr>
-    <th>Stable sorting</th>
-    <th />
-    <th />
-    <th />
-    <th />
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Bubble_sort" target="_blank">Bubble sort</a></td>
-    <td>O(n)</td>
-    <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
-    <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
-    <td>O(1)</td>
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Bucket_sort" target="_blank">Bucket sort</a></td>
-    <td />
-    <td>O(n + k)</td>
-    <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
-    <td>O(n.k)</td>
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Cascade_merge_sort" target="_blank">Cascade merge sort</a></td>
-    <td />
-    <td />
-    <td />
-    <td />
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Cocktail_sort" target="_blank">Cocktail sort</a></td>
-    <td>O(n)</td>
-    <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
-    <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
-    <td>O(1)</td>
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Counting_sort" target="_blank">Counting sort</a></td>
-    <td />
-    <td />
-    <td />
-    <td />
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Gnome_sort" target="_blank">Gnome sort</a></td>
-    <td>O(n)</td>
-    <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
-    <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
-    <td>O(1)</td>
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Insertion_sort" target="_blank">Insertion sort</a></td>
-    <td>O(n)</td>
-    <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
-    <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
-    <td>O(n)</td>
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Library_sort" target="_blank">Library sort</a></td>
-    <td>O(n)</td>
-    <td>O(nlogn)</td>
-    <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
-    <td>O(n)</td>
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Merge_sort" target="_blank">Merge sort</a></td>
-    <td>O(nlogn)</td>
-    <td>O(nlogn)</td>
-    <td>O(nlogn)</td>
-    <td>O(n)</td>
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Odd–even_sort" target="_blank">Odd–even sort</a></td>
-    <td />
-    <td />
-    <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
-    <td />
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Oscillating_merge_sort" target="_blank">Oscillating merge sort</a></td>
-    <td />
-    <td />
-    <td />
-    <td />
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Pigeonhole_sort" target="_blank">Pigeonhole sort</a></td>
-    <td />
-    <td />
-    <td>O(N + n)</td>
-    <td>O(N + n)</td>
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Proxmap_sort" target="_blank">Proxmap sort</a></td>
-    <td>O(n)</td>
-    <td />
-    <td>O(<math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>n</mi><mn>2</mn></msup></math>)</td>
-    <td>O(n)</td>
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Radix_sort" target="_blank">Radix sort</a></td>
-    <td />
-    <td />
-    <td>O(kN)</td>
-    <td>O(k + N)</td>
-</tr>
-<tr>
-    <td />
-    <td />
-    <td />
-    <td />
-    <td />
-</tr>
-<tr>
-    <th>Non-category Sorts</th>
-    <th />
-    <th />
-    <th />
-    <th />
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Adaptive_sort" target="_blank">Adaptive sort</a></td>
-    <td />
-    <td />
-    <td />
-    <td />
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/American_flag_sort" target="_blank">American flag sort</a></td>
-    <td />
-    <td />
-    <td />
-    <td />
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Bead_sort" target="_blank">Bead sort</a></td>
-    <td />
-    <td />
-    <td />
-    <td />
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Burstsort" target="_blank">Burstsort</a></td>
-    <td />
-    <td />
-    <td />
-    <td />
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Cartesian_tree" target="_blank">Cartesian tree</a></td>
-    <td />
-    <td />
-    <td />
-    <td />
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Comparison_sort" target="_blank">Comparison sort</a></td>
-    <td />
-    <td />
-    <td />
-    <td />
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Dutch_national_flag_problem" target="_blank">Dutch national flag problem</a></td>
-    <td />
-    <td />
-    <td />
-    <td />
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Elevator_algorithm" target="_blank">Elevator algorithm</a></td>
-    <td />
-    <td />
-    <td />
-    <td />
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/External_sorting" target="_blank">External sorting</a></td>
-    <td />
-    <td />
-    <td />
-    <td />
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Flashsort" target="_blank">Flashsort</a></td>
-    <td />
-    <td />
-    <td />
-    <td />
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Integer_sorting" target="_blank">Integer sorting</a></td>
-    <td />
-    <td />
-    <td />
-    <td />
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Internal_sort" target="_blank">Internal sort</a></td>
-    <td />
-    <td />
-    <td />
-    <td />
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/J_sort" target="_blank">J sort</a></td>
-    <td />
-    <td />
-    <td />
-    <td />
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Median_cut" target="_blank">Median cut</a></td>
-    <td />
-    <td />
-    <td />
-    <td />
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Ordicate" target="_blank">Ordicate</a></td>
-    <td />
-    <td />
-    <td />
-    <td />
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Pairwise_sorting_network" target="_blank">Pairwise sorting network</a></td>
-    <td />
-    <td />
-    <td />
-    <td />
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Pancake_sorting" target="_blank">Pancake sorting</a></td>
-    <td />
-    <td />
-    <td />
-    <td />
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Partial_sorting" target="_blank">Partial sorting</a></td>
-    <td />
-    <td />
-    <td />
-    <td />
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Proxmap_sort" target="_blank">Proxmap sort</a></td>
-    <td />
-    <td />
-    <td />
-    <td />
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Quantum_sort" target="_blank">Quantum sort</a></td>
-    <td />
-    <td />
-    <td />
-    <td />
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Samplesort" target="_blank">Samplesort</a></td>
-    <td />
-    <td />
-    <td />
-    <td />
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Sorting_network" target="_blank">Sorting network</a></td>
-    <td />
-    <td />
-    <td />
-    <td />
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Spaghetti_sort" target="_blank">Spaghetti sort</a></td>
-    <td />
-    <td />
-    <td />
-    <td />
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Spreadsort" target="_blank">Spreadsort</a></td>
-    <td />
-    <td />
-    <td />
-    <td />
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Topological_sorting" target="_blank">Topological sorting</a></td>
-    <td />
-    <td />
-    <td />
-    <td />
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Tournament_sort" target="_blank">Tournament sort</a></td>
-    <td />
-    <td />
-    <td />
-    <td />
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/Tree_sort" target="_blank">Tree sort</a></td>
-    <td />
-    <td />
-    <td />
-    <td />
-</tr>
-<tr>
-    <td><a href="http://en.wikipedia.org/wiki/UnShuffle_sort" target="_blank">UnShuffle sort</a></td>
-    <td />
-    <td />
-    <td />
-    <td />
-</tr>
-</tbody>
-</table>
 ]]></content>
   </entry>
   
