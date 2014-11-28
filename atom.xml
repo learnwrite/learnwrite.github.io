@@ -4,7 +4,7 @@
   <title><![CDATA[Distributed Knowledge]]></title>
   <link href="http://distkeys.com/atom.xml" rel="self"/>
   <link href="http://distkeys.com/"/>
-  <updated>2014-11-27T20:21:44-08:00</updated>
+  <updated>2014-11-27T20:23:40-08:00</updated>
   <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -154,7 +154,7 @@ The first step is to come up with the simple recursive solution which solves thi
 
 <p><br /></p>
 
-<p>As explained in <a href="www.distkeys.com/blog/2014/11/27/dynamic-programming/#dynamic-programming" title="DP video">dynamic programming video</a> above, lets convert this program into dynamic programming program. This is a top down approach.</p>
+<p>As explained in <a href="http://distkeys.com/blog/2014/11/27/dynamic-programming/#dynamic-programming" title="DP video">dynamic programming video</a> above, lets convert this program into dynamic programming program. This is a top down approach.</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Coin change recursion</span>  <a href="http://ideone.com/XN6v0F" target="_blank">Run Code </a></figcaption> <div class="CodeRay">
   <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
