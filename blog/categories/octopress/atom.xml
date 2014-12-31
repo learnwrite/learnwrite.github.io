@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | Distributed Knowledge]]></title>
   <link href="http://distkeys.com/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://distkeys.com/"/>
-  <updated>2014-12-31T12:55:31-08:00</updated>
+  <updated>2014-12-31T13:46:17-08:00</updated>
   <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -109,9 +109,7 @@ line {
 
 <p>New post in Octopress created as .markdown file using</p>
 
-<p>{% blockquote %}
-rake new_post [“D3.js and Octopress”]
-{% endblockquote %}</p>
+<p><blockquote><p>rake new_post [“D3.js and Octopress”]</p></blockquote></p>
 
 <p>This markdown file will now need to have have </p>
 
@@ -128,273 +126,243 @@ rake new_post [“D3.js and Octopress”]
 <p>I have choosen 
 JSON file location to be</p>
 
-<p>{% blockquote %}
-/assets/flare.json
-d3.json(“/assets/flare.json”, function(json) {</p>
-
-<p>Here, assets folder for octopress is 
-&gt; octopress -&gt; /source/assets
-{% endblockquote %}</p>
+<p><blockquote><p>/assets/flare.json<br/>d3.json(“/assets/flare.json”, function(json) {</p></p><p><p>Here, assets folder for octopress is <br/>&gt; octopress -&gt; /source/assets</p></blockquote></p>
 
 <p>JSON file can be found <a href="https://www.dropbox.com/s/j1a52ipdpg755n4/flare.json" target="_blank">here</a></p>
 
 <p>In below code snippet confiure following parameters to customize height and width of tree
-{% blockquote %}
-h = 650 - m[0] - m[2]     (replace 650 with 800 for expanded tree)</p>
+<blockquote><p>h = 650 - m[0] - m[2]     (replace 650 with 800 for expanded tree)</p></p><p><p>// Normalize for fixed-depth.<br/>nodes.forEach(function(d) { d.y = d.depth * 130; });   ===&gt; (Use 180 instead of 130 for wider tree)</p></p><p><p></p></blockquote></p>
 
-<p>// Normalize for fixed-depth.
-nodes.forEach(function(d) { d.y = d.depth * 130; });   ===&gt; (Use 180 instead of 130 for wider tree)</p>
-
-<p>{% endblockquote %}</p>
-
-<p>{% blockquote %}
-// Initialize the display to show a few nodes.
-  root.children.forEach(toggleAll);
-  toggle(root.children[1]);
-  toggle(root.children[1].children[2]);
-  toggle(root.children[5]);                   =====&gt; Here is number of 1st level childs
-  toggle(root.children[5].children[0]);
-{% endblockquote %}</p>
+<p><blockquote><p>// Initialize the display to show a few nodes.<br/>  root.children.forEach(toggleAll);<br/>  toggle(root.children[1]);<br/>  toggle(root.children[1].children[2]);<br/>  toggle(root.children[5]);                   =====&gt; Here is number of 1st level childs<br/>  toggle(root.children[5].children[0]);</p></blockquote></p>
 
 <p>[Update] To make each node a hyperlink comment following code and instead insert below code.<br />
 Make sure JSON file have a field name url<br />
-{% blockquote %}
-//  nodeEnter.append(“svg:text”)
-//      .attr(“x”, function(d) { return d.children || d._children ? -10 : 10; })
-//      .attr(“dy”, “.35em”)
-//      .attr(“text-anchor”, function(d) { return d.children || d._children ? “end” : “start”; 
-//      .text(function(d) { return d.name; })
-//      .style(“fill-opacity”, 1e-6);</p>
-
-<p>nodeEnter.append(“svg:a”).attr(“xlink:href”, function(d) { return d.url; }).attr(“target”, “_blank”)
-       .append(“svg:text”).text(function(d) { return d.name; })
-       .attr(“x”, function(d) { return d.children || d._children ? -10 : 10; })
-       .attr(“dy”, “.35em”)
-       .attr(“text-anchor”, function(d) { return d.children || d._children ? “end” : “start”; })
-       .text(function(d) { return d.name; })
-       .style(“fill-opacity”, 1e-6);
-{% endblockquote %}</p>
+<blockquote><p>//  nodeEnter.append(“svg:text”)<br/>//      .attr(“x”, function(d) { return d.children || d._children ? -10 : 10; })<br/>//      .attr(“dy”, “.35em”)<br/>//      .attr(“text-anchor”, function(d) { return d.children || d._children ? “end” : “start”; <br/>//      .text(function(d) { return d.name; })<br/>//      .style(“fill-opacity”, 1e-6);</p></p><p><p>nodeEnter.append(“svg:a”).attr(“xlink:href”, function(d) { return d.url; }).attr(“target”, “_blank”)<br/>       .append(“svg:text”).text(function(d) { return d.name; })<br/>       .attr(“x”, function(d) { return d.children || d._children ? -10 : 10; })<br/>       .attr(“dy”, “.35em”)<br/>       .attr(“text-anchor”, function(d) { return d.children || d._children ? “end” : “start”; })<br/>       .text(function(d) { return d.name; })<br/>       .style(“fill-opacity”, 1e-6);</p></blockquote></p>
 
 <p>Code for blog post (.markdown file) is as follows</p>
 
-<p>{% coderay lang:c linenos:false D3.js and Octopress.markdown  %}
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<style type="text/css">
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>D3.js and Octopress.markdown  </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre>
+&lt;script src=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">http://d3js.org/d3.v3.min.js</span><span style="color:#710">&quot;</span></span>&gt;&lt;/script&gt;
+&lt;style type=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">text/css</span><span style="color:#710">&quot;</span></span>&gt;
 .node circle {
-  cursor: pointer;
-  fill: #fff;
-  stroke: steelblue;
-  stroke-width: 1.5px;
-}</style></p>
+  <span style="color:#970;font-weight:bold">cursor:</span> pointer;
+  <span style="color:#970;font-weight:bold">fill:</span> <span style="color:#579">#fff</span>;
+  <span style="color:#970;font-weight:bold">stroke:</span> steelblue;
+  stroke-width: <span style="color:#60E">1</span><span style="color:#60E">.5</span>px;
+}&lt;/style&gt;&lt;/p&gt;
 
-<p>.node text {
-  font-size: 11px;
-}</p>
+&lt;p&gt;.node text {
+  font-size: <span style="color:#00D">11</span>px;
+}&lt;/p&gt;
 
-<p>path.link {
-  fill: none;
-  stroke: #ccc;
-  stroke-width: 1.5px;
-}</p>
+&lt;p&gt;path.link {
+  <span style="color:#970;font-weight:bold">fill:</span> none;
+  <span style="color:#970;font-weight:bold">stroke:</span> <span style="color:#579">#ccc</span>;
+  stroke-width: <span style="color:#60E">1</span><span style="color:#60E">.5</span>px;
+}&lt;/p&gt;
 
-<p>&lt;/style&gt;</p>
-<style>
+&lt;p&gt;&amp;lt;/style&amp;gt;&lt;/p&gt;
+&lt;style&gt;
 
-#chart, #header, #footer {
+<span style="color:#579">#chart</span>, <span style="color:#579">#header</span>, <span style="color:#579">#footer</span> {
   position: absolute;
-  top: 0;
+  <span style="color:#970;font-weight:bold">top:</span> <span style="color:#00D">0</span>;
 }
 
-#header.inverted, #footer.inverted {
-  color: #fff;
-  text-shadow: 0 1px 4px #000;
+<span style="color:#579">#header</span>.inverted, <span style="color:#579">#footer</span>.inverted {
+  color: <span style="color:#579">#fff</span>;
+  text-shadow: <span style="color:#00D">0</span> <span style="color:#00D">1</span>px <span style="color:#00D">4</span>px <span style="color:#579">#000</span>;
 }
 
 
 rect {
-  fill: none;
+  <span style="color:#970;font-weight:bold">fill:</span> none;
   pointer-events: all;
 }
 
 line {
-  stroke: #000;
-  stroke-width: 1.5px;
+  <span style="color:#970;font-weight:bold">stroke:</span> <span style="color:#579">#000</span>;
+  stroke-width: <span style="color:#60E">1</span><span style="color:#60E">.5</span>px;
 }
 
 .string, .regexp {
-  color: #f39;
+  <span style="color:#970;font-weight:bold">color:</span> <span style="color:#579">#f39</span>;
 }
 
 .keyword {
-  color: #00c;
+  <span style="color:#970;font-weight:bold">color:</span> <span style="color:#579">#00c</span>;
 }
 
 .comment {
-  color: #777;
+  <span style="color:#970;font-weight:bold">color:</span> <span style="color:#579">#777</span>;
   font-style: oblique;
 }
 
 .number {
-  color: #369;
+  <span style="color:#970;font-weight:bold">color:</span> <span style="color:#579">#369</span>;
 }
 
 .class, .special {
-  color: #1181B8;
+  <span style="color:#970;font-weight:bold">color:</span> <span style="color:#579">#1181B8</span>;
 }
 
-</style>
+&lt;/style&gt;
 
-<body>
-    <div id="body">              
+&lt;body&gt;
+    &lt;div id=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">body</span><span style="color:#710">&quot;</span></span>&gt;              
         click or option-click to expand or collapse
-    </div>
-    <script type="text/javascript">
+    &lt;/div&gt;
+    &lt;script type=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">text/javascript</span><span style="color:#710">&quot;</span></span>&gt;
 
-var m = [20, 120, 20, 120],
-    w = 1280 - m[1] - m[3],
-    h = 650 - m[0] - m[2],
-    i = 0,
+var m = [<span style="color:#00D">20</span>, <span style="color:#00D">120</span>, <span style="color:#00D">20</span>, <span style="color:#00D">120</span>],
+    w = <span style="color:#00D">1280</span> - m[<span style="color:#00D">1</span>] - m[<span style="color:#00D">3</span>],
+    h = <span style="color:#00D">650</span> - m[<span style="color:#00D">0</span>] - m[<span style="color:#00D">2</span>],
+    i = <span style="color:#00D">0</span>,
     root;
 
 var tree = d3.layout.tree()
     .size([h, w]);
 
 var diagonal = d3.svg.diagonal()
-    .projection(function(d) { return [d.y, d.x]; });
+    .projection(function(d) { <span style="color:#080;font-weight:bold">return</span> [d.y, d.x]; });
 
-var vis = d3.select("#body").append("svg:svg")
-    .attr("width", w + m[1] + m[3])
-    .attr("height", h + m[0] + m[2])
-  .append("svg:g")
-    .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
+var vis = d3.select(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">#body</span><span style="color:#710">&quot;</span></span>).append(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">svg:svg</span><span style="color:#710">&quot;</span></span>)
+    .attr(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">width</span><span style="color:#710">&quot;</span></span>, w + m[<span style="color:#00D">1</span>] + m[<span style="color:#00D">3</span>])
+    .attr(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">height</span><span style="color:#710">&quot;</span></span>, h + m[<span style="color:#00D">0</span>] + m[<span style="color:#00D">2</span>])
+  .append(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">svg:g</span><span style="color:#710">&quot;</span></span>)
+    .attr(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">transform</span><span style="color:#710">&quot;</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">translate(</span><span style="color:#710">&quot;</span></span> + m[<span style="color:#00D">3</span>] + <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">,</span><span style="color:#710">&quot;</span></span> + m[<span style="color:#00D">0</span>] + <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">)</span><span style="color:#710">&quot;</span></span>);
 
-d3.json("/assets/flare.json", function(json) {
+d3.json(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">/assets/flare.json</span><span style="color:#710">&quot;</span></span>, function(json) {
   root = json;
-  root.x0 = h / 2;
-  root.y0 = 0;
+  root.x0 = h / <span style="color:#00D">2</span>;
+  root.y0 = <span style="color:#00D">0</span>;
 
   function toggleAll(d) {
-    if (d.children) {
+    <span style="color:#080;font-weight:bold">if</span> (d.children) {
       d.children.forEach(toggleAll);
       toggle(d);
     }
   }
 
-  // Initialize the display to show a few nodes.
+  <span style="color:#777">// Initialize the display to show a few nodes.</span>
   root.children.forEach(toggleAll);
-  toggle(root.children[1]);
-  toggle(root.children[1].children[2]);
-  toggle(root.children[9]);
-  toggle(root.children[9].children[0]);
+  toggle(root.children[<span style="color:#00D">1</span>]);
+  toggle(root.children[<span style="color:#00D">1</span>].children[<span style="color:#00D">2</span>]);
+  toggle(root.children[<span style="color:#00D">9</span>]);
+  toggle(root.children[<span style="color:#00D">9</span>].children[<span style="color:#00D">0</span>]);
 
   update(root);
 });
 
 function update(source) {
-  var duration = d3.event && d3.event.altKey ? 5000 : 500;
+  var duration = d3.event &amp;&amp; d3.event.altKey ? <span style="color:#00D">5000</span> : <span style="color:#00D">500</span>;
 
-  // Compute the new tree layout.
+  <span style="color:#777">// Compute the new tree layout.</span>
   var nodes = tree.nodes(root).reverse();
 
-  // Normalize for fixed-depth.
-  nodes.forEach(function(d) { d.y = d.depth * 130; });
+  <span style="color:#777">// Normalize for fixed-depth.</span>
+  nodes.forEach(function(d) { d.y = d.depth * <span style="color:#00D">130</span>; });
 
-  // Update the nodes…
-  var node = vis.selectAll("g.node")
-      .data(nodes, function(d) { return d.id || (d.id = ++i); });
+  <span style="color:#777">// Update the nodes…</span>
+  var node = vis.selectAll(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">g.node</span><span style="color:#710">&quot;</span></span>)
+      .data(nodes, function(d) { <span style="color:#080;font-weight:bold">return</span> d.id || (d.id = ++i); });
 
-  // Enter any new nodes at the parent's previous position.
-  var nodeEnter = node.enter().append("svg:g")
-      .attr("class", "node")
-      .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
-      .on("click", function(d) { toggle(d); update(d); });
+  <span style="color:#777">// Enter any new nodes at the parent's previous position.</span>
+  var nodeEnter = node.enter().append(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">svg:g</span><span style="color:#710">&quot;</span></span>)
+      .attr(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">class</span><span style="color:#710">&quot;</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">node</span><span style="color:#710">&quot;</span></span>)
+      .attr(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">transform</span><span style="color:#710">&quot;</span></span>, function(d) { <span style="color:#080;font-weight:bold">return</span> <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">translate(</span><span style="color:#710">&quot;</span></span> + source.y0 + <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">,</span><span style="color:#710">&quot;</span></span> + source.x0 + <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">)</span><span style="color:#710">&quot;</span></span>; })
+      .on(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">click</span><span style="color:#710">&quot;</span></span>, function(d) { toggle(d); update(d); });
 
-  nodeEnter.append("svg:circle")
-      .attr("r", 1e-6)
-      .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+  nodeEnter.append(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">svg:circle</span><span style="color:#710">&quot;</span></span>)
+      .attr(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">r</span><span style="color:#710">&quot;</span></span>, <span style="color:#60E">1</span>e-<span style="color:#00D">6</span>)
+      .style(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">fill</span><span style="color:#710">&quot;</span></span>, function(d) { <span style="color:#080;font-weight:bold">return</span> d._children ? <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">lightsteelblue</span><span style="color:#710">&quot;</span></span> : <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">#fff</span><span style="color:#710">&quot;</span></span>; });
 
-  nodeEnter.append("svg:text")
-      .attr("x", function(d) { return d.children || d._children ? -10 : 10; })
-      .attr("dy", ".35em")
-      .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
-      .text(function(d) { return d.name; })
-      .style("fill-opacity", 1e-6);
+  nodeEnter.append(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">svg:text</span><span style="color:#710">&quot;</span></span>)
+      .attr(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">x</span><span style="color:#710">&quot;</span></span>, function(d) { <span style="color:#080;font-weight:bold">return</span> d.children || d._children ? -<span style="color:#00D">10</span> : <span style="color:#00D">10</span>; })
+      .attr(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">dy</span><span style="color:#710">&quot;</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">.35em</span><span style="color:#710">&quot;</span></span>)
+      .attr(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">text-anchor</span><span style="color:#710">&quot;</span></span>, function(d) { <span style="color:#080;font-weight:bold">return</span> d.children || d._children ? <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">end</span><span style="color:#710">&quot;</span></span> : <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">start</span><span style="color:#710">&quot;</span></span>; })
+      .text(function(d) { <span style="color:#080;font-weight:bold">return</span> d.name; })
+      .style(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">fill-opacity</span><span style="color:#710">&quot;</span></span>, <span style="color:#60E">1</span>e-<span style="color:#00D">6</span>);
 
-  // Transition nodes to their new position.
+  <span style="color:#777">// Transition nodes to their new position.</span>
   var nodeUpdate = node.transition()
       .duration(duration)
-      .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
+      .attr(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">transform</span><span style="color:#710">&quot;</span></span>, function(d) { <span style="color:#080;font-weight:bold">return</span> <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">translate(</span><span style="color:#710">&quot;</span></span> + d.y + <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">,</span><span style="color:#710">&quot;</span></span> + d.x + <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">)</span><span style="color:#710">&quot;</span></span>; });
 
-  nodeUpdate.select("circle")
-      .attr("r", 4.5)
-      .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+  nodeUpdate.select(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">circle</span><span style="color:#710">&quot;</span></span>)
+      .attr(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">r</span><span style="color:#710">&quot;</span></span>, <span style="color:#60E">4</span><span style="color:#60E">.5</span>)
+      .style(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">fill</span><span style="color:#710">&quot;</span></span>, function(d) { <span style="color:#080;font-weight:bold">return</span> d._children ? <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">lightsteelblue</span><span style="color:#710">&quot;</span></span> : <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">#fff</span><span style="color:#710">&quot;</span></span>; });
 
-  nodeUpdate.select("text")
-      .style("fill-opacity", 1);
+  nodeUpdate.select(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">text</span><span style="color:#710">&quot;</span></span>)
+      .style(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">fill-opacity</span><span style="color:#710">&quot;</span></span>, <span style="color:#00D">1</span>);
 
-  // Transition exiting nodes to the parent's new position.
+  <span style="color:#777">// Transition exiting nodes to the parent's new position.</span>
   var nodeExit = node.exit().transition()
       .duration(duration)
-      .attr("transform", function(d) { return "translate(" + source.y + "," + source.x + ")"; })
+      .attr(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">transform</span><span style="color:#710">&quot;</span></span>, function(d) { <span style="color:#080;font-weight:bold">return</span> <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">translate(</span><span style="color:#710">&quot;</span></span> + source.y + <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">,</span><span style="color:#710">&quot;</span></span> + source.x + <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">)</span><span style="color:#710">&quot;</span></span>; })
       .remove();
 
-  nodeExit.select("circle")
-      .attr("r", 1e-6);
+  nodeExit.select(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">circle</span><span style="color:#710">&quot;</span></span>)
+      .attr(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">r</span><span style="color:#710">&quot;</span></span>, <span style="color:#60E">1</span>e-<span style="color:#00D">6</span>);
 
-  nodeExit.select("text")
-      .style("fill-opacity", 1e-6);
+  nodeExit.select(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">text</span><span style="color:#710">&quot;</span></span>)
+      .style(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">fill-opacity</span><span style="color:#710">&quot;</span></span>, <span style="color:#60E">1</span>e-<span style="color:#00D">6</span>);
 
-  // Update the links…
-  var link = vis.selectAll("path.link")
-      .data(tree.links(nodes), function(d) { return d.target.id; });
+  <span style="color:#777">// Update the links…</span>
+  var link = vis.selectAll(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">path.link</span><span style="color:#710">&quot;</span></span>)
+      .data(tree.links(nodes), function(d) { <span style="color:#080;font-weight:bold">return</span> d.target.id; });
 
-  // Enter any new links at the parent's previous position.
-  link.enter().insert("svg:path", "g")
-      .attr("class", "link")
-      .attr("d", function(d) {
-        var o = {x: source.x0, y: source.y0};
-        return diagonal({source: o, target: o});
+  <span style="color:#777">// Enter any new links at the parent's previous position.</span>
+  link.enter().insert(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">svg:path</span><span style="color:#710">&quot;</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">g</span><span style="color:#710">&quot;</span></span>)
+      .attr(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">class</span><span style="color:#710">&quot;</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">link</span><span style="color:#710">&quot;</span></span>)
+      .attr(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">d</span><span style="color:#710">&quot;</span></span>, function(d) {
+        var o = {<span style="color:#970;font-weight:bold">x:</span> source.x0, y: source.y0};
+        <span style="color:#080;font-weight:bold">return</span> diagonal({<span style="color:#970;font-weight:bold">source:</span> o, target: o});
       })
     .transition()
       .duration(duration)
-      .attr("d", diagonal);
+      .attr(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">d</span><span style="color:#710">&quot;</span></span>, diagonal);
 
-  // Transition links to their new position.
+  <span style="color:#777">// Transition links to their new position.</span>
   link.transition()
       .duration(duration)
-      .attr("d", diagonal);
+      .attr(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">d</span><span style="color:#710">&quot;</span></span>, diagonal);
 
-  // Transition exiting nodes to the parent's new position.
+  <span style="color:#777">// Transition exiting nodes to the parent's new position.</span>
   link.exit().transition()
       .duration(duration)
-      .attr("d", function(d) {
-        var o = {x: source.x, y: source.y};
-        return diagonal({source: o, target: o});
+      .attr(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">d</span><span style="color:#710">&quot;</span></span>, function(d) {
+        var o = {<span style="color:#970;font-weight:bold">x:</span> source.x, y: source.y};
+        <span style="color:#080;font-weight:bold">return</span> diagonal({<span style="color:#970;font-weight:bold">source:</span> o, target: o});
       })
       .remove();
 
-  // Stash the old positions for transition.
+  <span style="color:#777">// Stash the old positions for transition.</span>
   nodes.forEach(function(d) {
     d.x0 = d.x;
     d.y0 = d.y;
   });
 }
 
-// Toggle children.
+<span style="color:#777">// Toggle children.</span>
 function toggle(d) {
-  if (d.children) {
+  <span style="color:#080;font-weight:bold">if</span> (d.children) {
     d._children = d.children;
     d.children = null;
-  } else {
+  } <span style="color:#080;font-weight:bold">else</span> {
     d.children = d._children;
     d._children = null;
   }
 }
 
-</script>
-</body>
+&lt;/script&gt;
+&lt;/body&gt;
 
-<p>{% endcoderay %}</p>
+&lt;p&gt;</pre></div>
+</div>
+ </figure></notextile></div></p>
 
 <body>
     <div id="body">     
