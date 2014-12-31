@@ -4,7 +4,7 @@
   <title><![CDATA[Category: system design | Distributed Knowledge]]></title>
   <link href="http://distkeys.com/blog/categories/system-design/atom.xml" rel="self"/>
   <link href="http://distkeys.com/"/>
-  <updated>2014-12-31T12:55:31-08:00</updated>
+  <updated>2014-12-31T13:46:17-08:00</updated>
   <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -202,29 +202,27 @@ Multiple parameters can be provided for the requirement. For details of these pa
 
 <p>In C program, we use <em>fopen()</em> rather than <em>open()</em> and this is the difference between Library function and System Call. Library function <em>fopen()</em> will internally call <em>open()</em> and configure parameter based on input provided to <em>fopen()</em></p>
 
-<p>{% coderay lang:cplusplus linenos:false fopen() %}
-#include <stdio.h /></p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>fopen() </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre>
+<span style="color:#579">#include</span> <span style="color:#B44;font-weight:bold">&lt;stdio.h /&gt;</span>&lt;/p&gt;
 
-<p>int main()
+&lt;p&gt;<span style="color:#0a8;font-weight:bold">int</span> main()
 {
-   FILE *fp;</p>
+   FILE *fp;&lt;/p&gt;
 
-<pre><code>//Open file test.txt in read mode    fp = fopen("/tmp/test.txt", "r");    fclose(fp);
-</code></pre>
+&lt;pre&gt;&lt;code&gt;<span style="color:#777">//Open file test.txt in read mode    fp = fopen(&quot;/tmp/test.txt&quot;, &quot;r&quot;);    fclose(fp);</span>
+&lt;/code&gt;&lt;/pre&gt;
 
-<p>return 0;
+&lt;p&gt;<span style="color:#080;font-weight:bold">return</span> <span style="color:#00D">0</span>;
 }
-{% endcoderay%}</p>
+</pre></div>
+</div>
+ </figure></notextile></div></p>
 
 <p>Executing this code under <em>dtruss</em></p>
 
-<p>{% blockquote %}
- $ sudo dtruss ./file 2&gt;&amp;1 | grep open
-open_nocancel(“/tmp/test.txt\0”, 0x0, 0x1B6)		 = -1 Err#2
-open(“/dev/dtracehelper\0”, 0x2, 0x7FFF5CE62180)		 = 3 0
-open(“.\0”, 0x0, 0x1)		 = 3 0
-open(“/usr/lib/dtrace/libdtrace_dyld.dylib\0”, 0x0, 0x0)		 = 3 0
-{% endblockquote %}</p>
+<p><blockquote><p>$ sudo dtruss ./file 2&gt;&amp;1 | grep open<br/>open_nocancel(“/tmp/test.txt\0”, 0x0, 0x1B6)		 = -1 Err#2<br/>open(“/dev/dtracehelper\0”, 0x2, 0x7FFF5CE62180)		 = 3 0<br/>open(“.\0”, 0x0, 0x1)		 = 3 0<br/>open(“/usr/lib/dtrace/libdtrace_dyld.dylib\0”, 0x0, 0x0)		 = 3 0</p></blockquote></p>
 
 <p>Lets deep dive now into the File descriptor. In above C code we created a FILE* which is <em>file pointer or *file descriptor</em> at Library function level. In reality library function <em>fopen()</em> will call system call <em>open()</em> which will get the <em>file descriptor</em> information from filesystem. </p>
 
@@ -236,19 +234,21 @@ open(“/usr/lib/dtrace/libdtrace_dyld.dylib\0”, 0x0, 0x0)		 = 3 0
 
 <p>In MAC OS its as follows</p>
 
-<p>{% coderay lang:cplusplus linenos:false FILE - stdio.h %}
- /*
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>FILE - stdio.h </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre>
+ <span style="color:#777">/*
   * stdio state variables.
   *
   * The following always hold:
   *
-  *        if (_flags&amp;(__SLBF|__SWR)) == (__SLBF|__SWR),
+  *        if (_flags&amp;amp;(__SLBF|__SWR)) == (__SLBF|__SWR),
   *                _lbfsize is -_bf._size, else _lbfsize is 0
-  *        if _flags&amp;__SRD, _w is 0
-  *        if _flags&amp;__SWR, _r is 0
+  *        if _flags&amp;amp;__SRD, _w is 0
+  *        if _flags&amp;amp;__SWR, _r is 0
   *
   * This ensures that the getc and putc macros (or inline functions) never
-  * try to write or read from a file that is in <code>read' or </code>write’ mode.
+  * try to write or read from a file that is in &lt;code&gt;read' or &lt;/code&gt;write’ mode.
   * (Moreover, they can, and do, automatically switch from read mode to
   * write mode, and back, on “r+” and “w+” files.)
   *
@@ -262,55 +262,61 @@ open(“/usr/lib/dtrace/libdtrace_dyld.dylib\0”, 0x0, 0x0)		 = 3 0
   * _ub._base!=NULL) and _up and _ur save the current values of _p and _r.
   *
   * NB: see WARNING above before changing the layout of this structure!
-  */</p>
+  */</span>&lt;/p&gt;
 
-<p>typedef struct __sFILE {
-         unsigned char <em>_p;        /</em> current position in (some) buffer <em>/
-         int     _r;               /</em> read space left for getc() <em>/
-         int     _w;               /</em> write space left for putc() <em>/
-         short   _flags;           /</em> flags, below; this FILE is free if 0 <em>/
-         short   _file;            /</em> fileno, if Unix descriptor, else -1 <em>/
-         struct  __sbuf _bf;       /</em> the buffer (at least 1 byte, if !NULL) <em>/
-         int     _lbfsize;         /</em> 0 or -_bf._size, for inline putc */</p>
+&lt;p&gt;<span style="color:#080;font-weight:bold">typedef</span> <span style="color:#080;font-weight:bold">struct</span> __sFILE {
+         <span style="color:#0a8;font-weight:bold">unsigned</span> <span style="color:#0a8;font-weight:bold">char</span> &lt;em&gt;_p;        /&lt;/em&gt; current position in (some) buffer &lt;em&gt;/
+         <span style="color:#0a8;font-weight:bold">int</span>     _r;               /&lt;/em&gt; read space left <span style="color:#080;font-weight:bold">for</span> getc() &lt;em&gt;/
+         <span style="color:#0a8;font-weight:bold">int</span>     _w;               /&lt;/em&gt; write space left <span style="color:#080;font-weight:bold">for</span> putc() &lt;em&gt;/
+         <span style="color:#0a8;font-weight:bold">short</span>   _flags;           /&lt;/em&gt; flags, below; <span style="color:#950">this</span> FILE is free <span style="color:#080;font-weight:bold">if</span> <span style="color:#00D">0</span> &lt;em&gt;/
+         <span style="color:#0a8;font-weight:bold">short</span>   _file;            /&lt;/em&gt; fileno, <span style="color:#080;font-weight:bold">if</span> Unix descriptor, <span style="color:#080;font-weight:bold">else</span> -<span style="color:#00D">1</span> &lt;em&gt;/
+         <span style="color:#080;font-weight:bold">struct</span>  __sbuf _bf;       /&lt;/em&gt; the buffer (at least <span style="color:#00D">1</span> byte, <span style="color:#080;font-weight:bold">if</span> !<span style="color:#069">NULL</span>) &lt;em&gt;/
+         <span style="color:#0a8;font-weight:bold">int</span>     _lbfsize;         /&lt;/em&gt; <span style="color:#00D">0</span> <span style="color:#080;font-weight:bold">or</span> -_bf._size, <span style="color:#080;font-weight:bold">for</span> <span style="color:#088;font-weight:bold">inline</span> putc */&lt;/p&gt;
 
-<pre><code>     /* operations */
-     void    *_cookie;        /* cookie passed to io functions */
-     int     (*_close)(void *);
-     int     (*_read) (void *, char *, int);
-     fpos_t  (*_seek) (void *, fpos_t, int);
-     int     (*_write)(void *, const char *, int);
+&lt;pre&gt;&lt;code&gt;     <span style="color:#777">/* operations */</span>
+     <span style="color:#088;font-weight:bold">void</span>    *_cookie;        <span style="color:#777">/* cookie passed to io functions */</span>
+     <span style="color:#0a8;font-weight:bold">int</span>     (*_close)(<span style="color:#088;font-weight:bold">void</span> *);
+     <span style="color:#0a8;font-weight:bold">int</span>     (*_read) (<span style="color:#088;font-weight:bold">void</span> *, <span style="color:#0a8;font-weight:bold">char</span> *, <span style="color:#0a8;font-weight:bold">int</span>);
+     fpos_t  (*_seek) (<span style="color:#088;font-weight:bold">void</span> *, fpos_t, <span style="color:#0a8;font-weight:bold">int</span>);
+     <span style="color:#0a8;font-weight:bold">int</span>     (*_write)(<span style="color:#088;font-weight:bold">void</span> *, <span style="color:#088;font-weight:bold">const</span> <span style="color:#0a8;font-weight:bold">char</span> *, <span style="color:#0a8;font-weight:bold">int</span>);
  
-     /* separate buffer for long sequences of ungetc() */
-     struct  __sbuf _ub;     /* ungetc buffer */
-     struct __sFILEX *_extra; /* additions to FILE to not break ABI */
-     int     _ur;            /* saved _r when _r is counting ungetc data */
+     <span style="color:#777">/* separate buffer for long sequences of ungetc() */</span>
+     <span style="color:#080;font-weight:bold">struct</span>  __sbuf _ub;     <span style="color:#777">/* ungetc buffer */</span>
+     <span style="color:#080;font-weight:bold">struct</span> __sFILEX *_extra; <span style="color:#777">/* additions to FILE to not break ABI */</span>
+     <span style="color:#0a8;font-weight:bold">int</span>     _ur;            <span style="color:#777">/* saved _r when _r is counting ungetc data */</span>
  
-     /* tricks to meet minimum requirements even when malloc() fails */
-     unsigned char _ubuf[3]; /* guarantee an ungetc() buffer */
-     unsigned char _nbuf[1]; /* guarantee a getc() buffer */
+     <span style="color:#777">/* tricks to meet minimum requirements even when malloc() fails */</span>
+     <span style="color:#0a8;font-weight:bold">unsigned</span> <span style="color:#0a8;font-weight:bold">char</span> _ubuf[<span style="color:#00D">3</span>]; <span style="color:#777">/* guarantee an ungetc() buffer */</span>
+     <span style="color:#0a8;font-weight:bold">unsigned</span> <span style="color:#0a8;font-weight:bold">char</span> _nbuf[<span style="color:#00D">1</span>]; <span style="color:#777">/* guarantee a getc() buffer */</span>
  
-     /* separate buffer for fgetln() when line crosses buffer boundary */
-     struct  __sbuf _lb;     /* buffer for fgetln() */
+     <span style="color:#777">/* separate buffer for fgetln() when line crosses buffer boundary */</span>
+     <span style="color:#080;font-weight:bold">struct</span>  __sbuf _lb;     <span style="color:#777">/* buffer for fgetln() */</span>
  
-     /* Unix stdio files get aligned to block boundaries on fseek() */
-     int     _blksize;        /* stat.st_blksize (may be != _bf._size) */
-     fpos_t  _offset;        /* current lseek offset (see WARNING) */  } FILE; {% endcoderay%}
+     <span style="color:#777">/* Unix stdio files get aligned to block boundaries on fseek() */</span>
+     <span style="color:#0a8;font-weight:bold">int</span>     _blksize;        <span style="color:#777">/* stat.st_blksize (may be != _bf._size) */</span>
+     fpos_t  _offset;        <span style="color:#777">/* current lseek offset (see WARNING) */</span>  } FILE; </pre></div>
+</div>
+ </figure></notextile></div>
 </code></pre>
 
 <p>In above snippet
-{% coderay lang:cplusplus linenos:false FILE - stdio.h %}
-  <code>// File descriptor from open()</code>
-  short   _file;            /* fileno, if Unix descriptor, else -1 */</p>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>FILE - stdio.h </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre>
+  &lt;code&gt;<span style="color:#777">// File descriptor from open()&lt;/code&gt;</span>
+  <span style="color:#0a8;font-weight:bold">short</span>   _file;            <span style="color:#777">/* fileno, if Unix descriptor, else -1 */</span>&lt;/p&gt;
 
-<p>// The buffer through which the data will pass to system calls.
-  struct  __sbuf _bf;       /* the buffer (at least 1 byte, if !NULL) <em>/
-  int     _lbfsize;         /</em> 0 or -_bf._size, for inline putc */</p>
+&lt;p&gt;<span style="color:#777">// The buffer through which the data will pass to system calls.</span>
+  <span style="color:#080;font-weight:bold">struct</span>  __sbuf _bf;       <span style="color:#777">/* the buffer (at least 1 byte, if !NULL) &lt;em&gt;/
+  int     _lbfsize;         /&lt;/em&gt; 0 or -_bf._size, for inline putc */</span>&lt;/p&gt;
 
-<p>unsigned char _ubuf[3]; /* guarantee an ungetc() buffer <em>/
-  unsigned char _nbuf[1]; /</em> guarantee a getc() buffer */
-{% endcoderay%}</p>
+&lt;p&gt;<span style="color:#0a8;font-weight:bold">unsigned</span> <span style="color:#0a8;font-weight:bold">char</span> _ubuf[<span style="color:#00D">3</span>]; <span style="color:#777">/* guarantee an ungetc() buffer &lt;em&gt;/
+  unsigned char _nbuf[1]; /&lt;/em&gt; guarantee a getc() buffer */</span>
+</pre></div>
+</div>
+ </figure></notextile></div></p>
 
-<p>{% img /assets/fopen.png [fopen.png] %}</p>
+<p><img src="/assets/fopen.png" title="[fopen.png]" ></p>
 
 <p>To be continued…</p>
 

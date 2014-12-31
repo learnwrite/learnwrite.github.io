@@ -9,7 +9,7 @@
   <meta name="author" content="Vaibhav Gautam">
 
   
-  <meta name="description" content="In computing, particularly in the context of the Unix operating system and its workalikes, fork is an operation whereby a process creates a copy of &hellip;">
+  <meta name="description" content="Kill System Call Post Signal Signal Delivery Signals are a limited form of inter-process communication used in Unix, Unix-like, and other POSIX- &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -108,6 +108,57 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/12/31/signal-code-in-freebsd/">Signal Code in FreeBSD</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-12-31T13:00:00-08:00" pubdate data-updated="true">Dec 31<span>st</span>, 2014</time>
+        
+         | <a href="/blog/2014/12/31/signal-code-in-freebsd/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#kill-system-call">Kill System Call</a></li>
+  <li><a href="#post-signal">Post Signal</a></li>
+  <li><a href="#signal-delivery">Signal Delivery</a></li>
+</ul>
+
+<p>Signals are a limited form of inter-process communication used in Unix, Unix-like, and other POSIX-compliant operating systems. A signal is an asynchronous notification sent to a process or to a specific thread within the same process in order to notify it of an event that occurred. Signals have been around since the 1970s Bell Labs Unix and have been more recently specified in the POSIX standard.</p>
+
+<p><a href="http://en.wikipedia.org/wiki/Unix_signal">Read More</a></p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/12/31/signal-code-in-freebsd/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -637,71 +688,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/02/27/system-design-problems/">System Design Problems</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-02-27T22:51:00-08:00" pubdate data-updated="true">Feb 27<span>th</span>, 2014</time>
-        
-         | <a href="/blog/2014/02/27/system-design-problems/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><ul id="markdown-toc">
-  <li><a href="#unique-user-id">Unique User ID</a></li>
-  <li><a href="#mean-and-median">Mean and Median</a></li>
-  <li><a href="#how-ls-works">How ls works?</a></li>
-  <li><a href="#file-descriptor">File descriptor</a></li>
-</ul>
-
-<h3 id="unique-user-id">Unique User ID</h3>
-
-<p>Design a system to generate unique id for 1 billion user in distributed system
-<br /><br /></p>
-
-<h3 id="mean-and-median">Mean and Median</h3>
-
-<p>You are given say 20 nodes in a distributed system and each node have 1 billion numbers. Find mean and median. You can have some other nodes for co-ordination.</p>
-
-<p>Mean = (sum of all the numbers) / total numbers<br />
-Median = Mid element in sorted sequence</p>
-
-<p>For example<br />
-Input = [2, 3, 4, 1]<br /></p>
-
-<p>Mean = (2+3+4+1) / 4 =2.5<br />
-For median sorted sequence is [1, 2, 3, 4]. Median is 2 or 3.
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/02/27/system-design-problems/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -757,6 +743,10 @@ For median sorted sequence is [1, 2, 3, 4]. Median is 2 or 3.
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/12/31/signal-code-in-freebsd/">Signal code in FreeBSD</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/12/31/fork-in-freebsd/">Fork code in FreeBSD</a>
       </li>
     
@@ -772,10 +762,6 @@ For median sorted sequence is [1, 2, 3, 4]. Median is 2 or 3.
         <a href="/blog/2014/08/03/inside-freebsd/">Inside FreeBSD - Debug System Call</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/07/08/boot-freebsd/">Boot FreeBSD</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -785,11 +771,11 @@ For median sorted sequence is [1, 2, 3, 4]. Median is 2 or 3.
 <h1>Categories</h1>
 <ul id="categories">
 <li class='category'><a href='/blog/categories/d3-js/'>D3.js (1)</a></li>
-<li class='category'><a href='/blog/categories/freebsd/'>FreeBSD (3)</a></li>
+<li class='category'><a href='/blog/categories/freebsd/'>FreeBSD (4)</a></li>
 <li class='category'><a href='/blog/categories/linux/'>Linux (1)</a></li>
 <li class='category'><a href='/blog/categories/octopress/'>Octopress (1)</a></li>
 <li class='category'><a href='/blog/categories/operating/'>Operating (1)</a></li>
-<li class='category'><a href='/blog/categories/operating-systems/'>Operating Systems (8)</a></li>
+<li class='category'><a href='/blog/categories/operating-systems/'>Operating Systems (9)</a></li>
 <li class='category'><a href='/blog/categories/reading-list/'>Reading List (1)</a></li>
 <li class='category'><a href='/blog/categories/scale/'>Scale (1)</a></li>
 <li class='category'><a href='/blog/categories/systems/'>Systems (4)</a></li>

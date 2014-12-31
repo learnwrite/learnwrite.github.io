@@ -1,0 +1,889 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Signal code in FreeBSD - Distributed Knowledge</title>
+  <meta name="author" content="Vaibhav Gautam">
+
+  
+  <meta name="description" content="Kill System Call Post Signal Signal Delivery Signals are a limited form of inter-process communication used in Unix, Unix-like, and other POSIX- &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://distkeys.com/blog/2014/12/31/signal-code-in-freebsd/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Distributed Knowledge" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=Gafata' rel='stylesheet' type='text/css'>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$$','$$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript"
+   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-44705857-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+</hgroup>
+
+</header>
+  <!-- <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="gautam.usc@gmail.com" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:distkeys.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav> -->
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Signal Code in FreeBSD</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-12-31T13:00:00-08:00" pubdate data-updated="true">Dec 31<span>st</span>, 2014</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#kill-system-call">Kill System Call</a></li>
+  <li><a href="#post-signal">Post Signal</a></li>
+  <li><a href="#signal-delivery">Signal Delivery</a></li>
+</ul>
+
+<p>Signals are a limited form of inter-process communication used in Unix, Unix-like, and other POSIX-compliant operating systems. A signal is an asynchronous notification sent to a process or to a specific thread within the same process in order to notify it of an event that occurred. Signals have been around since the 1970s Bell Labs Unix and have been more recently specified in the POSIX standard.</p>
+
+<p><a href="http://en.wikipedia.org/wiki/Unix_signal">Read More</a></p>
+
+<!-- more -->
+<p><br /></p>
+
+<h2 id="kill-system-call">Kill System Call</h2>
+<p>kill - send signal to a process </p>
+
+<blockquote>
+  <p>int kill(pid_t pid, int sig);</p>
+</blockquote>
+
+<p>The kill() system call can be used to send any signal to any process group or process. </p>
+
+<p><strong>If pid is greater than zero:</strong> <br />
+ The sig signal is sent to the process whose ID is equal to pid.</p>
+
+<p><strong>If pid is zero:</strong>  <br />
+ The sig signal is sent to all processes whose group ID is equal
+ to the process group ID of the sender, and for which the process
+ has permission; this is a variant of killpg(2).</p>
+
+<p><strong>If pid is -1:</strong>  <br />
+ If the user has super-user privileges, the signal is sent to all
+ processes excluding system processes (with P_SYSTEM flag set),
+ process with ID 1 (usually init(8)), and the process sending the
+ signal.  If the user is not the super user, the signal is sent to
+ all processes with the same uid as the user excluding the process
+ sending the signal.  No error is returned if any process could be
+ signaled.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Function Kill() </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre>
+Argument to Kill system call (kern_sig.c)
+<span style="color:#080;font-weight:bold">struct</span> kill_args {
+     <span style="color:#0a8;font-weight:bold">int</span> pid;
+     <span style="color:#0a8;font-weight:bold">int</span> signum;
+};
+
+If process id is greater than <span style="color:#00D">0</span> then signal has to be send to that particular process <span style="color:#080;font-weight:bold">else</span> it is either broadcast
+signal or own process group etc.
+
+<span style="color:#777">// If process id  &gt; 0</span>
+<span style="color:#080;font-weight:bold">if</span> (uap-&gt;pid &gt; <span style="color:#00D">0</span>) {
+     Find the process
+     <span style="color:#080;font-weight:bold">if</span> ((p = pfind(uap-&gt;pid)) == <span style="color:#069">NULL</span>) {
+          If its a zombie process
+          <span style="color:#080;font-weight:bold">if</span> ((p = zpfind(uap-&gt;pid)) == <span style="color:#069">NULL</span>) {
+               <span style="color:#080;font-weight:bold">return</span> (ESRCH);
+          }
+     }
+}
+
+Determine <span style="color:#080;font-weight:bold">if</span> we can send the signal to process 
+
+error = p_cansignal(td, p, uap-&gt;signum);
+
+In Function p_cansignal(). This function will determine <span style="color:#080;font-weight:bold">if</span> thread can send signal to processes
+cr_cansignal(<span style="color:#080;font-weight:bold">struct</span> ucred *cred, <span style="color:#080;font-weight:bold">struct</span> proc *proc, <span style="color:#0a8;font-weight:bold">int</span> signum)
+{
+     Check <span style="color:#080;font-weight:bold">if</span> process to whom signal is to be send is in Jail semantics
+
+     Check the creds i.e. otherUids, otherGids
+
+     Allow only following signals, <span style="color:#080;font-weight:bold">for</span> other signals needs special privs
+          <span style="color:#080;font-weight:bold">case</span> <span style="color:#00D">0</span>:
+          <span style="color:#080;font-weight:bold">case</span> SIGKILL:
+          <span style="color:#080;font-weight:bold">case</span> SIGINT:
+          <span style="color:#080;font-weight:bold">case</span> SIGTERM:
+          <span style="color:#080;font-weight:bold">case</span> SIGALRM:
+          <span style="color:#080;font-weight:bold">case</span> SIGSTOP:
+          <span style="color:#080;font-weight:bold">case</span> SIGTTIN:
+          <span style="color:#080;font-weight:bold">case</span> SIGTTOU:
+          <span style="color:#080;font-weight:bold">case</span> SIGTSTP:
+          <span style="color:#080;font-weight:bold">case</span> SIGHUP:
+          <span style="color:#080;font-weight:bold">case</span> SIGUSR1:
+          <span style="color:#080;font-weight:bold">case</span> SIGUSR2:
+               <span style="color:#080;font-weight:bold">break</span>;
+          <span style="color:#080;font-weight:bold">default</span>:
+               Need priv
+
+     More priv checks
+
+     Finally yes you can send signal
+}   
+</pre></div>
+</div>
+ </figure></notextile></div>
+
+<p><br /></p>
+
+<p><img src="/images/kill1.png" title="[kill1.png]" />
+<br /><br /></p>
+
+<h1 id="post-signal">Post Signal</h1>
+<p>If we are allowed to send signal to other process then send the signal</p>
+
+<p>Now, it can happen that in multiprocessor env other process may be running or may not. So, we post the signal and when the process come to life it will receive the signal and act appropriately.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Function Post Signal </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre>
+<span style="color:#777">//Post signal</span>
+psignal(p, uap-&gt;signum);
+Function tdsignal(<span style="color:#080;font-weight:bold">struct</span> proc *p, <span style="color:#080;font-weight:bold">struct</span> thread *td, <span style="color:#0a8;font-weight:bold">int</span> sig, ksiginfo_t *ksi)
+{
+     Determine the property of signal
+     <span style="color:#777">//Signal property table is in kern_sig.c </span>
+     <span style="color:#777">// #define     SA_KILL          0x01          /* terminates process by default */</span>
+     <span style="color:#777">// #define     SA_CORE          0x02          /* ditto and coredumps */</span>
+     <span style="color:#777">// #define     SA_STOP          0x04          /* suspend process */</span>
+     <span style="color:#777">// #define     SA_TTYSTOP     0x08          /* ditto, from tty */</span>
+     <span style="color:#777">// #define     SA_IGNORE     0x10          /* ignore by default */</span>
+     <span style="color:#777">// #define     SA_CONT          0x20          /* continue if suspended */</span>
+     <span style="color:#777">// #define     SA_CANTMASK     0x40          /* non-maskable, catchable */</span>
+     <span style="color:#777">// #define     SA_PROC          0x80          /* deliverable to any thread */</span>
+     <span style="color:#777">//static int sigproptbl[NSIG]</span>
+
+     Post Signal to thread in a process
+     td = sigtd(p, sig, prop);    
+     Function sigtd(<span style="color:#080;font-weight:bold">struct</span> proc *p, <span style="color:#0a8;font-weight:bold">int</span> sig, <span style="color:#0a8;font-weight:bold">int</span> prop) {
+          Check <span style="color:#080;font-weight:bold">if</span> we are current process
+          For each thread in process check <span style="color:#080;font-weight:bold">if</span> thread is registered <span style="color:#080;font-weight:bold">for</span> signal handling
+
+          If we can<span style="color:#F00;background-color:#FAA">’</span>t find any thread to post signal then just pick the first thread in process
+          <span style="color:#080;font-weight:bold">return</span> the thread pointer
+     }
+
+     So far, we have signal to post and the thread pointer where to post
+     There is a signal queue. So get the pointer to signal queue. 
+     There are <span style="color:#00D">2</span> signal queues 
+          <span style="color:#60E">1</span>. Signal queue <span style="color:#080;font-weight:bold">for</span> process
+          <span style="color:#60E">2</span>. Signal queue <span style="color:#080;font-weight:bold">for</span> thread
+
+     <span style="color:#080;font-weight:bold">if</span> (SIGISMEMBER(td-&gt;td_sigmask, sig))
+               sigqueue = &amp;p-&gt;p_sigqueue;
+     <span style="color:#080;font-weight:bold">else</span>
+               sigqueue = &amp;td-&gt;td_sigqueue;
+
+     Check <span style="color:#080;font-weight:bold">if</span> the signal we will be sending is in our ignore list. If it is in our ignore list then <span style="color:#080;font-weight:bold">do</span> not
+     process further and drop it
+
+     We will now check the preferences/flags marked in the target thread regarding signals
+     It can happen that thread have masked all the signals right now i.e. thread may be processing some signal
+     and want all other signals to hold until it finishes processing
+     <span style="color:#080;font-weight:bold">if</span> (SIGISMEMBER(td-&gt;td_sigmask, sig))
+          action = SIG_HOLD;   
+
+     If signal is <span style="color:#088;font-weight:bold">register</span> to be catch
+     <span style="color:#080;font-weight:bold">else</span> <span style="color:#080;font-weight:bold">if</span> (SIGISMEMBER(ps-&gt;ps_sigcatch, sig))
+         action = SIG_CATCH;
+
+     Check the property of Signal
+     If property of signal is to <span style="color:#080;font-weight:bold">continue</span> then go through signal queue and delete the signal which will stop
+     the execution
+     <span style="color:#080;font-weight:bold">if</span> (prop &amp; SA_CONT)
+          sigqueue_delete_stopmask_proc(p);
+     <span style="color:#080;font-weight:bold">else</span> <span style="color:#080;font-weight:bold">if</span> (prop &amp; SA_STOP) {
+          <span style="color:#777">// Stop running the process</span>
+
+     Finally, Add the signal to the signal queue
+     ret = sigqueue_add(sigqueue, sig, ksi);
+     
+     Notify thread that Signal has been posted
+     signotify(td);
+     In function signotify() we check that what are all the pending signals <span style="color:#080;font-weight:bold">for</span> the thread and <span style="color:#080;font-weight:bold">for</span> which
+     signal handler have not masked that means target thread signal handler wants to accept that signal.
+     Then we enable the flags so that the target thread can to running state <span style="color:#080;font-weight:bold">if</span> suspended and when awake
+     knows that some signal is posted <span style="color:#080;font-weight:bold">for</span> the thread
+     td-&gt;td_flags |= TDF_NEEDSIGCHK | TDF_ASTPENDING;
+
+     ...
+     
+     If target process is in sleep state or sleep interruptible state then wake it up
+     tdsigwakeup(td, sig, action, intrval);
+               Function tdsigwakeup()     
+               {
+                    bump up the thread priority
+                    sched_prio(td, PUSER);
+
+                    If thread is in the sleep queue and interruptible
+                    then wakeup the thread
+                    wakeup_swapper = sleepq_abort(td, intrval);
+                                  Function sleepq_abort(<span style="color:#080;font-weight:bold">struct</span> thread *td, <span style="color:#0a8;font-weight:bold">int</span> intrval) {
+                                         ...
+                                         ...
+                                        Enable thread flags
+                                        td-&gt;td_intrval = intrval;
+                                        td-&gt;td_flags |= TDF_SLEEPABORT; 
+                                        ...
+                                        get the thread wait channel
+                                        wchan = td-&gt;td_wchan;
+
+                                        Sleep queue of wait channel where thread resides currently when sleeping
+                                        sq = sleepq_lookup(wchan);
+
+                                        <span style="color:#777">//Wake up the thread </span>
+                                        <span style="color:#080;font-weight:bold">return</span> (sleepq_resume_thread(sq, td, <span style="color:#00D">0</span>));
+                                                             Whole idea is that there is a hash of all the wait channel
+We have already <span style="color:#080;font-weight:bold">for</span> the wait channel and now there are all the processes
+waiting on this wait channel
+
+<span style="color:#777">//Removes a thread from a sleep queue and makes it runnable</span>
+Function sleepq_resume_thread(<span style="color:#080;font-weight:bold">struct</span> sleepqueue *sq, <span style="color:#080;font-weight:bold">struct</span> thread *td, <span style="color:#0a8;font-weight:bold">int</span> pri) {
+     ...
+     ...
+     Remove process/thread from wait channel
+     TAILQ_REMOVE(&amp;sq-&gt;sq_blocked[td-&gt;td_sqqueue], td, td_slpq);
+     ...
+     ...
+
+     Clear the sleeping flag and set it runnable
+     <span style="color:#080;font-weight:bold">if</span> (TD_IS_SLEEPING(td)) {
+          TD_CLR_SLEEPING(td);
+          <span style="color:#080;font-weight:bold">return</span> (setrunnable(td));
+                              Function setrunnable(<span style="color:#080;font-weight:bold">struct</span> thread *td)
+          {
+              
+               ...
+               ...
+         
+               sched_wakeup(td);
+                    Function sched_wakeup(<span style="color:#080;font-weight:bold">struct</span> thread *td) {    ====&gt; sched_ule.c
+                         This function let schedular know that thread needs to resume
+                         ...
+                         ...
+                         sched_add()
+                    }
+          } <span style="color:#777">// end setrunnable</span>
+     } <span style="color:#777">// end sleepq_resume_thread</span>
+
+} <span style="color:#777">// end sleepq_resume_thread</span>
+
+                                   } <span style="color:#777">// end sleepq_abort</span>
+               } <span style="color:#777">//end tdsigwakeup()</span>
+} <span style="color:#777">// end tdsignal</span>
+</pre></div>
+</div>
+ </figure></notextile></div>
+
+<p><br /></p>
+
+<p><img src="/images/kill2.png" title="[kill2.png]" /></p>
+
+<p><br /></p>
+
+<hr style="border-top: 1.5px dotted black" />
+
+<p><br /></p>
+
+<h1 id="signal-delivery">Signal Delivery</h1>
+
+<p>So far, in above processing we have loaded the target process to to the run queue and eventually our process run time slice will over and now another process will run.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Signal Delivery </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre>
+The <span style="color:#080;font-weight:bold">switch</span> of process will happen at 
+Function mi_switch
+<span style="color:#777">// The machine independent parts of context switching.</span>
+
+Function mi_switch(<span style="color:#0a8;font-weight:bold">int</span> flags, <span style="color:#080;font-weight:bold">struct</span> thread *newtd)
+{
+     ...
+     ...
+     <span style="color:#777">// Schedular come into the picture to switch the thread</span>
+     sched_switch(td, newtd, flags);
+               Function sched_switch(<span style="color:#080;font-weight:bold">struct</span> thread *td, <span style="color:#080;font-weight:bold">struct</span> thread *newtd, <span style="color:#0a8;font-weight:bold">int</span> flags)
+               {
+                    Save information related to thread before context switching
+                    cpuid = PCPU_GET(cpuid);
+                    tdq = TDQ_CPU(cpuid);
+                    ts = td-&gt;td_sched;
+                    mtx = td-&gt;td_lock;
+                    ts-&gt;ts_rltick = ticks;
+                    td-&gt;td_lastcpu = td-&gt;td_oncpu;
+                    td-&gt;td_oncpu = NOCPU;
+                    td-&gt;td_flags &amp;= ~TDF_NEEDRESCHED;
+                    td-&gt;td_owepreempt = <span style="color:#00D">0</span>;
+                    tdq-&gt;tdq_switchcnt++;
+                    ...
+                    ...
+
+                    choose new thread to run
+                    newtd = choosethread();
+                         Function choosethread() {
+                              ...
+                              td = sched_choose();
+                                   Function sched_choose() {
+                                        Choose next high priority thread to run from the same CPU
+                                        tdq = TDQ_SELF();
+                                        td = tdq_choose(tdq);
+                                             Function tdq_choose(<span style="color:#080;font-weight:bold">struct</span> tdq *tdq) {
+                                                  Pick the thread from realtime thread queue
+                                                  td = runq_choose(&amp;tdq-&gt;tdq_realtime);
+
+                                                  If its <span style="color:#069">NULL</span>, then pick from Timshare queue
+                                                  td = runq_choose_from(&amp;tdq-&gt;tdq_timeshare, tdq-&gt;tdq_ridx);
+
+                                                  If its <span style="color:#069">NULL</span>, then pick from Idle queue
+                                                  td = runq_choose(&amp;tdq-&gt;tdq_idle);
+                                                            In function runq_choose we simply go to queue and get the
+                                                            first item from the queue
+
+                                             } <span style="color:#777">//end tdq_choose</span>
+
+                                        ...
+                                        <span style="color:#080;font-weight:bold">return</span> the thread    
+
+                                   } <span style="color:#777">//end sched_choose</span>
+                         } <span style="color:#777">//end choosethread</span>
+
+                    So, newtd is the newthread we choose to run
+                    This function will <span style="color:#080;font-weight:bold">switch</span> the threads and newtd will be running after this function call
+                    This function is a assembly level code
+                    cpu_switch(td, newtd, mtx);    
+
+               } <span style="color:#777">//end sched_switch</span>
+} <span style="color:#777">//end mi_switch</span>
+
+Now we have target thread running.
+When we were posting the signal we enabled the flag TDF_ASTPENDING in function
+     signotify(td);
+     In function signotify() we check that what are all the pending signals <span style="color:#080;font-weight:bold">for</span> the thread and <span style="color:#080;font-weight:bold">for</span> which signal
+     handler have not masked that means target thread signal handler wants to accept that signal.
+     Then we enable the flags so that the target thread can to running state <span style="color:#080;font-weight:bold">if</span> suspended and when awake
+     knows that some signal is posted <span style="color:#080;font-weight:bold">for</span> the thread
+
+     td-&gt;td_flags |= TDF_NEEDSIGCHK | TDF_ASTPENDING;
+
+Since, this flag is enable when the target process comes into like it will check this flag and <span style="color:#080;font-weight:bold">if</span> it is enable
+then it will call function AST (Asynchronous software trap)
+</pre></div>
+</div>
+ </figure></notextile></div>
+
+<p><br /></p>
+
+<p><img src="/images/ast.png" title="[ast.png]" /></p>
+
+<p><br /></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Function ast() </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre>
+Function ast(<span style="color:#080;font-weight:bold">struct</span> trapframe *framep)
+{
+     ...
+     ...
+     ...
+     Check <span style="color:#080;font-weight:bold">if</span> any signals are posted
+     <span style="color:#080;font-weight:bold">if</span> (flags &amp; TDF_NEEDSIGCHK) {
+          PROC_LOCK(p);
+          mtx_lock(&amp;p-&gt;p_sigacts-&gt;ps_mtx);
+
+          This function will get the signal posted and which is unmasked
+          We will process all the pending signals one-by-one
+          <span style="color:#080;font-weight:bold">while</span> ((sig = cursig(td)) != <span style="color:#00D">0</span>)
+               postsig(sig);
+               mtx_unlock(&amp;p-&gt;p_sigacts-&gt;ps_mtx);
+               PROC_UNLOCK(p);
+
+                    Function cursig(<span style="color:#080;font-weight:bold">struct</span> thread *td) {
+                         ...
+
+                         Return <span style="color:#080;font-weight:bold">if</span> there is signal to process or <span style="color:#00D">0</span> when nothing to process
+                         <span style="color:#080;font-weight:bold">return</span> (SIGPENDING(td) ? issignal(td) : <span style="color:#00D">0</span>);
+                                   Function issignal(td) {
+                                        Find any pending signal
+                                        sigpending = td-&gt;td_sigqueue.sq_signals;
+
+                                        Get first pending signal
+                                        sig = sig_ffs(&amp;sigpending);
+
+                                        Handle special cases of SIGSTOP or SIGCONT
+
+                                        Get properties of signal
+                                        prop = sigprop(sig);
+
+                                        Handle other cases i.e. Default Signal, Ignore Signal etc
+
+                                        <span style="color:#080;font-weight:bold">return</span> signal
+                                   } <span style="color:#777">//end of issignal(td)                                  </span>
+                    } <span style="color:#777">//end of cursig(struct thread *td)</span>
+
+
+                    <span style="color:#777">// This function take action for specified signal</span>
+                    Function postsig(sig) {
+                         <span style="color:#088;font-weight:bold">register</span> <span style="color:#080;font-weight:bold">struct</span> proc *p = td-&gt;td_proc;
+                         ...
+                         ...
+                         Get signal action
+                         action = ps-&gt;ps_sigact[_SIG_IDX(sig)];
+
+                         Now we will check action and process accordingly
+                         <span style="color:#777">//Default action which is kill the process</span>
+                         <span style="color:#080;font-weight:bold">if</span> (action == SIG_DFL) {
+                              sigexit(td, sig);
+
+                                   Function sigexit(td, sig) {
+                                        ...
+                                        exit1(td, W_EXITCODE(<span style="color:#00D">0</span>, sig));
+                                   }
+                         } <span style="color:#080;font-weight:bold">else</span> {
+                              ...
+                              get signal mask
+                              returnmask = td-&gt;td_sigmask;
+                              ...
+                              <span style="color:#777">// Send signal to signal handler</span>
+                              <span style="color:#777">// In process structure</span>
+                              <span style="color:#777">// struct sysentvec *p_sysent;     /* (b) Syscall dispatch info. */</span>
+                              (*p-&gt;p_sysent-&gt;sv_sendsig)(action, &amp;ksi, &amp;returnmask);
+
+                                        <span style="color:#777">// i386/machdep.c</span>
+                                        Function sendsig(sig_t catcher, ksiginfo_t *ksi, sigset_t *mask) {
+                                             <span style="color:#080;font-weight:bold">struct</span> sigframe sf;
+                                             ...
+                                             When stack is context switched it will save the stack frame,
+                         <span style="color:#088;font-weight:bold">register</span> contents etc
+                                             Get the stack frame pointer of thread
+                                             regs = td-&gt;td_frame;
+                                             ...
+
+                                             Make a copy of stack frame because we will be changing the
+                         frame to handle the signal.
+                                             Once the signal is handled and the processing is done this
+                         stack frame will be brought back.
+                                             bcopy(regs, &amp;sf.sf_uc.uc_mcontext.mc_fs, <span style="color:#080;font-weight:bold">sizeof</span>(*regs));
+
+                                             Allocate space <span style="color:#080;font-weight:bold">for</span> signal handler context and put that in stack frame
+                                             sp = (<span style="color:#0a8;font-weight:bold">char</span> *)regs-&gt;tf_esp - <span style="color:#080;font-weight:bold">sizeof</span>(<span style="color:#080;font-weight:bold">struct</span> sigframe);
+                                             ...
+
+                                             Build argument list <span style="color:#080;font-weight:bold">for</span> signal handler
+                                             sf.sf_signum = sig;
+
+                                             Pointer to signal context
+                                             sf.sf_ucontext = (register_t)&amp;sfp-&gt;sf_uc;
+
+                                             We are in kernel space currently, we will be going to user space soon
+                                             and we want the signal catcher code to be executed in user space
+                                             We are assigning the address of catcher function to be called from user space
+                                             sf.sf_ahu.sf_action = (__siginfohandler_t *)catcher;
+                                             ...
+                                             ...
+
+                                             Copy the signal frame to user<span style="color:#D20">'s</span> stack
+                                             <span style="color:#080;font-weight:bold">if</span> (copyout(&amp;sf, sfp, <span style="color:#080;font-weight:bold">sizeof</span>(*sfp)) != <span style="color:#00D">0</span>) {
+                                                  sigexit(td, SIGILL);
+                                             }
+
+                                             Stack frame pointer we got above <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">regs</span><span style="color:#710">&quot;</span></span> will copy sigtramp() to
+                         instruction pointer. So, after returning from here we think
+                         we will <span style="color:#080;font-weight:bold">return</span> from ast() and go to user code back but
+                                             instead now we will be going to trampoline code.
+
+                                             regs-&gt;tf_eip = PS_STRINGS - szfreebsd4_sigcode;
+                                        } <span style="color:#777">// end sendsig</span>
+                         }
+                    } <span style="color:#777">//end postsig()</span>
+     }
+} <span style="color:#777">//end of ast()</span>
+
+In i386/locore.s code <span style="color:#080;font-weight:bold">for</span> signal trampoline in user space
+NON_GPROF_ENTRY(sigcode)
+     calll     *SIGF_HANDLER(%esp)
+     leal     SIGF_UC(%esp),%eax     <span style="color:#777">/* get ucontext */</span>
+     pushl     %eax
+...
+...
+     movl $SYS_sigreturn,%eax
+
+Function sigreturn()
+Function sigreturn(td, uap)
+{
+     regs = td-&gt;td_frame;
+     ...
+     ...
+     lot of snaity checking
+     ...
+     ...
+     bcopy(&amp;ucp-&gt;uc_mcontext.mc_fs, regs, <span style="color:#080;font-weight:bold">sizeof</span>(*regs));
+     ...
+    
+}
+</pre></div>
+</div>
+ </figure></notextile></div>
+
+<p><br /><br /><br /></p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Vaibhav Gautam</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-12-31T13:00:00-08:00" pubdate data-updated="true">Dec 31<span>st</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/freebsd/'>FreeBSD</a>, <a class='category' href='/blog/categories/operating-systems/'>Operating Systems</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+   <div class="rdbWrapper" data-show-read="1" data-show-send-to-kindle="1" data-show-print="1" data-show-email="0" data-orientation="0" data-version="1"></div><script type="text/javascript">(function() {var s = document.getElementsByTagName("script")[0],rdb = document.createElement("script"); rdb.type = "text/javascript"; rdb.async = true; rdb.src = document.location.protocol + "//www.readability.com/embed.js"; s.parentNode.insertBefore(rdb, s); })();</script>
+  
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://distkeys.com/blog/2014/12/31/signal-code-in-freebsd/" data-via="_vaibhavg" data-counturl="http://distkeys.com/blog/2014/12/31/signal-code-in-freebsd/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/12/31/fork-in-freebsd/" title="Previous Post: Fork code in FreeBSD">&laquo; Fork code in FreeBSD</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <ul id="recent_posts">
+      <li class="post">
+      <a href="http://distkeys.com" alt="Home"><img src="/images/Home.png"></a>
+      <a href="http://distkeys.com/archives/" alt="Archives"><img src="/images/Calendar.png"></a>
+      
+      <a href="mailto:gautam.usc@gmail.com" alt="E-Mail"><img src="/images/mail_big.png"></a>
+      
+      <a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS"><img src="/images/rss.png"></a>
+      </li>
+  </ul>
+
+  <script>
+  (function() {
+   var cx = '004567732420113844713:vbwvfm07l2y';
+   var gcse = document.createElement('script');
+   gcse.type = 'text/javascript';
+   gcse.async = true;
+   gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+   '//www.google.com/cse/cse.js?cx=' + cx;
+   var s = document.getElementsByTagName('script')[0];
+   s.parentNode.insertBefore(gcse, s);
+   })();
+</script>
+<gcse:search></gcse:search>
+
+</section>
+<section>
+  <h1>About Me</h1>
+  <p><a href="http://www.linkedin.com/pub/vaibhav-gautam/11/663/163" target="_blank"><img src="/images/linked-in.png"></a>
+  <a href="https://twitter.com/_vaibhavg" target="_blank"><img src="/images/twitter.png"></a>
+  <a href="https://github.com/learnwrite" target="_blank"><img src="/images/github.png"></a>
+  <a href="https://www.facebook.com/mailtovaibhav" target="_blank"><img src="/images/facebook.png"></a>
+  <a href="http://www.vaibhavgautam.com" target="_blank"><img src="/images/flickr.png"></a>
+  <a href="mailto:gautam.usc@gmail.com" target="_blank"><img src="/images/mail.png"></a>
+  <a href="http://distkeys.com/blog/2014/02/21/reading-list/"><img src="/images/readinglist.png"></a>
+  <a href="http://www.pinterest.com/gautamusc/" target="_blank"><img src="/images/pinterest.png"></a>
+  <a href="http://www.quora.com/Vaibhav-Gautam" target="_blank"><img src="/images/quora.png"></a>
+  </p>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/12/31/signal-code-in-freebsd/">Signal code in FreeBSD</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/12/31/fork-in-freebsd/">Fork code in FreeBSD</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/11/27/dynamic-programming/">Dynamic Programming</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/08/04/debug-freebsd-open/">Debug FreeBSD - Open</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/08/03/inside-freebsd/">Inside FreeBSD - Debug System Call</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+<section>
+<h1>Categories</h1>
+<ul id="categories">
+<li class='category'><a href='/blog/categories/d3-js/'>D3.js (1)</a></li>
+<li class='category'><a href='/blog/categories/freebsd/'>FreeBSD (4)</a></li>
+<li class='category'><a href='/blog/categories/linux/'>Linux (1)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>Octopress (1)</a></li>
+<li class='category'><a href='/blog/categories/operating/'>Operating (1)</a></li>
+<li class='category'><a href='/blog/categories/operating-systems/'>Operating Systems (9)</a></li>
+<li class='category'><a href='/blog/categories/reading-list/'>Reading List (1)</a></li>
+<li class='category'><a href='/blog/categories/scale/'>Scale (1)</a></li>
+<li class='category'><a href='/blog/categories/systems/'>Systems (4)</a></li>
+<li class='category'><a href='/blog/categories/algorithm/'>algorithm (3)</a></li>
+<li class='category'><a href='/blog/categories/algorithms/'>algorithms (4)</a></li>
+<li class='category'><a href='/blog/categories/architecture/'>architecture (1)</a></li>
+<li class='category'><a href='/blog/categories/array/'>array (1)</a></li>
+<li class='category'><a href='/blog/categories/binary/'>binary (1)</a></li>
+<li class='category'><a href='/blog/categories/binary-numbers/'>binary numbers (1)</a></li>
+<li class='category'><a href='/blog/categories/debug/'>debug (1)</a></li>
+<li class='category'><a href='/blog/categories/design-pattern/'>design pattern (1)</a></li>
+<li class='category'><a href='/blog/categories/distributed-systems/'>distributed systems (4)</a></li>
+<li class='category'><a href='/blog/categories/graph/'>graph (1)</a></li>
+<li class='category'><a href='/blog/categories/interview/'>interview (1)</a></li>
+<li class='category'><a href='/blog/categories/numbers/'>numbers (1)</a></li>
+<li class='category'><a href='/blog/categories/object-oriented/'>object oriented (1)</a></li>
+<li class='category'><a href='/blog/categories/operating-systems/'>operating systems (2)</a></li>
+<li class='category'><a href='/blog/categories/recursion/'>recursion (4)</a></li>
+<li class='category'><a href='/blog/categories/scale/'>scale (1)</a></li>
+<li class='category'><a href='/blog/categories/sorting/'>sorting (2)</a></li>
+<li class='category'><a href='/blog/categories/strings/'>strings (1)</a></li>
+<li class='category'><a href='/blog/categories/system-design/'>system design (2)</a></li>
+<li class='category'><a href='/blog/categories/trees/'>trees (1)</a></li>
+<li class='category'><a href='/blog/categories/tries/'>tries (1)</a></li>
+
+</ul>
+</section>
+<section>
+<h1>Twitter</h1>
+<a class="twitter-timeline" href="https://twitter.com/_vaibhavg" data-widget-id="386954016019587072">Tweets by @_vaibhavg</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - <a href="http://www.linkedin.com/pub/vaibhav-gautam/11/663/163">Vaibhav Gautam</a> -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'coolgoose85';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://distkeys.com/blog/2014/12/31/signal-code-in-freebsd/';
+        var disqus_url = 'http://distkeys.com/blog/2014/12/31/signal-code-in-freebsd/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
