@@ -193,36 +193,36 @@ Then the pairs are  [6,4] , [9,1]
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Sorted array</span>  <a href="http://ideone.com/fmKgvW" target="_blank">Run Code </a></figcaption> <div class="CodeRay">
   <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="preprocessor">#include</span> <span class="include">&lt;stdio.h&gt;</span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span style="color:#579">#include</span> <span style="color:#B44;font-weight:bold">&lt;stdio.h&gt;</span>
 <span class="line-numbers"> <a href="#n3" name="n3">3</a></span>
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span class="directive">void</span> printPairs(<span class="predefined-type">int</span> arr[], <span class="predefined-type">int</span> arr_size, <span class="predefined-type">int</span> sum)
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span style="color:#088;font-weight:bold">void</span> printPairs(<span style="color:#0a8;font-weight:bold">int</span> arr[], <span style="color:#0a8;font-weight:bold">int</span> arr_size, <span style="color:#0a8;font-weight:bold">int</span> sum)
 <span class="line-numbers"> <a href="#n5" name="n5">5</a></span>{
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    <span class="predefined-type">int</span> front = <span class="integer">0</span>;
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span class="predefined-type">int</span> back = arr_size - <span class="integer">1</span>;
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    <span style="color:#0a8;font-weight:bold">int</span> front = <span style="color:#00D">0</span>;
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span style="color:#0a8;font-weight:bold">int</span> back = arr_size - <span style="color:#00D">1</span>;
 <span class="line-numbers"> <a href="#n8" name="n8">8</a></span>
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    <span class="keyword">while</span> (front &lt; back) {
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>        <span class="keyword">if</span> (arr[front] + arr[back] &lt; sum) {
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    <span style="color:#080;font-weight:bold">while</span> (front &lt; back) {
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>        <span style="color:#080;font-weight:bold">if</span> (arr[front] + arr[back] &lt; sum) {
 <span class="line-numbers"><a href="#n11" name="n11">11</a></span>            front++;
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>        } <span class="keyword">else</span> <span class="keyword">if</span> (arr[front] + arr[back] &gt; sum) {
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>        } <span style="color:#080;font-weight:bold">else</span> <span style="color:#080;font-weight:bold">if</span> (arr[front] + arr[back] &gt; sum) {
 <span class="line-numbers"><a href="#n13" name="n13">13</a></span>            back--;
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span>        } <span class="keyword">else</span> {
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span>            printf (<span class="string"><span class="delimiter">&quot;</span><span class="content">Pair with given sum %d is (%d, %d) </span><span class="char">\n</span><span class="delimiter">&quot;</span></span>,
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>        } <span style="color:#080;font-weight:bold">else</span> {
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>            printf (<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Pair with given sum %d is (%d, %d) </span><span style="color:#b0b">\n</span><span style="color:#710">&quot;</span></span>,
 <span class="line-numbers"><a href="#n16" name="n16">16</a></span>                    sum, arr[front], arr[back]);
 <span class="line-numbers"><a href="#n17" name="n17">17</a></span>            back--;
 <span class="line-numbers"><a href="#n18" name="n18">18</a></span>        }
 <span class="line-numbers"><a href="#n19" name="n19">19</a></span>    }
 <span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>}
 <span class="line-numbers"><a href="#n21" name="n21">21</a></span>
-<span class="line-numbers"><a href="#n22" name="n22">22</a></span><span class="comment">/* Driver program to test above function */</span>
-<span class="line-numbers"><a href="#n23" name="n23">23</a></span><span class="predefined-type">int</span> main()
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span><span style="color:#777">/* Driver program to test above function */</span>
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span><span style="color:#0a8;font-weight:bold">int</span> main()
 <span class="line-numbers"><a href="#n24" name="n24">24</a></span>{
-<span class="line-numbers"><a href="#n25" name="n25">25</a></span>    <span class="predefined-type">int</span> A[] = {<span class="integer">4</span>, <span class="integer">5</span>, <span class="integer">6</span>, <span class="integer">10</span>, <span class="integer">12</span>, <span class="integer">12</span>};
-<span class="line-numbers"><a href="#n26" name="n26">26</a></span>    <span class="predefined-type">int</span> sum = <span class="integer">16</span>;
-<span class="line-numbers"><a href="#n27" name="n27">27</a></span>    <span class="predefined-type">int</span> arr_size = <span class="integer">6</span>;
+<span class="line-numbers"><a href="#n25" name="n25">25</a></span>    <span style="color:#0a8;font-weight:bold">int</span> A[] = {<span style="color:#00D">4</span>, <span style="color:#00D">5</span>, <span style="color:#00D">6</span>, <span style="color:#00D">10</span>, <span style="color:#00D">12</span>, <span style="color:#00D">12</span>};
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span>    <span style="color:#0a8;font-weight:bold">int</span> sum = <span style="color:#00D">16</span>;
+<span class="line-numbers"><a href="#n27" name="n27">27</a></span>    <span style="color:#0a8;font-weight:bold">int</span> arr_size = <span style="color:#00D">6</span>;
 <span class="line-numbers"><a href="#n28" name="n28">28</a></span>
 <span class="line-numbers"><a href="#n29" name="n29">29</a></span>    printPairs(A, arr_size, sum);
 <span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>
-<span class="line-numbers"><a href="#n31" name="n31">31</a></span>    <span class="keyword">return</span> <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n31" name="n31">31</a></span>    <span style="color:#080;font-weight:bold">return</span> <span style="color:#00D">0</span>;
 <span class="line-numbers"><a href="#n32" name="n32">32</a></span>}
 </pre></div>
 </div>
@@ -245,37 +245,37 @@ In this approach we not actually using the hash function fundamental idea is to 
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Binary Map</span>  <a href="http://ideone.com/S0CNlO" target="_blank">Run Code </a></figcaption> <div class="CodeRay">
   <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="preprocessor">#include</span> <span class="include">&lt;stdio.h&gt;</span>
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span class="preprocessor">#define</span> MAX <span class="integer">100000</span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span style="color:#579">#include</span> <span style="color:#B44;font-weight:bold">&lt;stdio.h&gt;</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span style="color:#579">#define</span> MAX <span style="color:#00D">100000</span>
 <span class="line-numbers"> <a href="#n4" name="n4">4</a></span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span class="directive">void</span> printPairs(<span class="predefined-type">int</span> arr[], <span class="predefined-type">int</span> arr_size, <span class="predefined-type">int</span> sum)
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span style="color:#088;font-weight:bold">void</span> printPairs(<span style="color:#0a8;font-weight:bold">int</span> arr[], <span style="color:#0a8;font-weight:bold">int</span> arr_size, <span style="color:#0a8;font-weight:bold">int</span> sum)
 <span class="line-numbers"> <a href="#n6" name="n6">6</a></span>{
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span class="predefined-type">int</span> i = <span class="integer">0</span>;
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    <span class="predefined-type">int</span> temp = <span class="integer">0</span>;
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    <span class="predefined-type">int</span> binMap[MAX] = {<span class="integer">0</span>}; <span class="comment">/*initialize hash map as 0*/</span>
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span style="color:#0a8;font-weight:bold">int</span> i = <span style="color:#00D">0</span>;
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    <span style="color:#0a8;font-weight:bold">int</span> temp = <span style="color:#00D">0</span>;
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    <span style="color:#0a8;font-weight:bold">int</span> binMap[MAX] = {<span style="color:#00D">0</span>}; <span style="color:#777">/*initialize hash map as 0*/</span>
 <span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>    <span class="keyword">for</span>(i = <span class="integer">0</span>; i &lt; arr_size; i++)
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>    <span style="color:#080;font-weight:bold">for</span>(i = <span style="color:#00D">0</span>; i &lt; arr_size; i++)
 <span class="line-numbers"><a href="#n12" name="n12">12</a></span>    {
 <span class="line-numbers"><a href="#n13" name="n13">13</a></span>        temp = sum - arr[i];
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span>        <span class="keyword">if</span>(temp &gt;= <span class="integer">0</span> &amp;&amp; binMap[temp] == <span class="integer">1</span>)
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>        <span style="color:#080;font-weight:bold">if</span>(temp &gt;= <span style="color:#00D">0</span> &amp;&amp; binMap[temp] == <span style="color:#00D">1</span>)
 <span class="line-numbers"><a href="#n15" name="n15">15</a></span>        {
-<span class="line-numbers"><a href="#n16" name="n16">16</a></span>            printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Pair with given sum %d is (%d, %d) </span><span class="char">\n</span><span class="delimiter">&quot;</span></span>,
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>            printf(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Pair with given sum %d is (%d, %d) </span><span style="color:#b0b">\n</span><span style="color:#710">&quot;</span></span>,
 <span class="line-numbers"><a href="#n17" name="n17">17</a></span>                    sum, arr[i], temp);
 <span class="line-numbers"><a href="#n18" name="n18">18</a></span>        }
-<span class="line-numbers"><a href="#n19" name="n19">19</a></span>        binMap[arr[i]] = <span class="integer">1</span>;
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>        binMap[arr[i]] = <span style="color:#00D">1</span>;
 <span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>    }
 <span class="line-numbers"><a href="#n21" name="n21">21</a></span>}
 <span class="line-numbers"><a href="#n22" name="n22">22</a></span>
-<span class="line-numbers"><a href="#n23" name="n23">23</a></span><span class="comment">/* Driver program to test above function */</span>
-<span class="line-numbers"><a href="#n24" name="n24">24</a></span><span class="predefined-type">int</span> main()
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span><span style="color:#777">/* Driver program to test above function */</span>
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span><span style="color:#0a8;font-weight:bold">int</span> main()
 <span class="line-numbers"><a href="#n25" name="n25">25</a></span>{
-<span class="line-numbers"><a href="#n26" name="n26">26</a></span>    <span class="predefined-type">int</span> A[] = {<span class="integer">12</span>, <span class="integer">4</span>, <span class="integer">45</span>, <span class="integer">6</span>, <span class="integer">10</span>, <span class="integer">12</span>};
-<span class="line-numbers"><a href="#n27" name="n27">27</a></span>    <span class="predefined-type">int</span> sum = <span class="integer">16</span>;
-<span class="line-numbers"><a href="#n28" name="n28">28</a></span>    <span class="predefined-type">int</span> arr_size = <span class="integer">6</span>;
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span>    <span style="color:#0a8;font-weight:bold">int</span> A[] = {<span style="color:#00D">12</span>, <span style="color:#00D">4</span>, <span style="color:#00D">45</span>, <span style="color:#00D">6</span>, <span style="color:#00D">10</span>, <span style="color:#00D">12</span>};
+<span class="line-numbers"><a href="#n27" name="n27">27</a></span>    <span style="color:#0a8;font-weight:bold">int</span> sum = <span style="color:#00D">16</span>;
+<span class="line-numbers"><a href="#n28" name="n28">28</a></span>    <span style="color:#0a8;font-weight:bold">int</span> arr_size = <span style="color:#00D">6</span>;
 <span class="line-numbers"><a href="#n29" name="n29">29</a></span>
 <span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>    printPairs(A, arr_size, sum);
 <span class="line-numbers"><a href="#n31" name="n31">31</a></span>
-<span class="line-numbers"><a href="#n32" name="n32">32</a></span>    <span class="keyword">return</span> <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n32" name="n32">32</a></span>    <span style="color:#080;font-weight:bold">return</span> <span style="color:#00D">0</span>;
 <span class="line-numbers"><a href="#n33" name="n33">33</a></span>}
 </pre></div>
 </div>
@@ -291,41 +291,41 @@ In this approach we not actually using the hash function fundamental idea is to 
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Bit Vector</span>  <a href="http://ideone.com/iFDimZ" target="_blank">Run Code </a></figcaption> <div class="CodeRay">
   <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="preprocessor">#include</span> <span class="include">&lt;stdio.h&gt;</span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span style="color:#579">#include</span> <span style="color:#B44;font-weight:bold">&lt;stdio.h&gt;</span>
 <span class="line-numbers"> <a href="#n3" name="n3">3</a></span>
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span class="directive">void</span> printPairs(<span class="predefined-type">int</span> arr[], <span class="predefined-type">int</span> arr_size, <span class="predefined-type">int</span> sum)
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span style="color:#088;font-weight:bold">void</span> printPairs(<span style="color:#0a8;font-weight:bold">int</span> arr[], <span style="color:#0a8;font-weight:bold">int</span> arr_size, <span style="color:#0a8;font-weight:bold">int</span> sum)
 <span class="line-numbers"> <a href="#n5" name="n5">5</a></span>{
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    <span class="predefined-type">int</span> i = <span class="integer">0</span>;
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span class="predefined-type">int</span> temp = <span class="integer">0</span>;
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    <span class="predefined-type">int</span> bitmap = <span class="integer">0</span>; <span class="comment">// all bits are 0</span>
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    <span class="predefined-type">int</span> bitmask = <span class="integer">0</span>;
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    <span style="color:#0a8;font-weight:bold">int</span> i = <span style="color:#00D">0</span>;
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span style="color:#0a8;font-weight:bold">int</span> temp = <span style="color:#00D">0</span>;
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    <span style="color:#0a8;font-weight:bold">int</span> bitmap = <span style="color:#00D">0</span>; <span style="color:#777">// all bits are 0</span>
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    <span style="color:#0a8;font-weight:bold">int</span> bitmask = <span style="color:#00D">0</span>;
 <span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>    <span class="keyword">for</span>(i = <span class="integer">0</span>; i &lt; arr_size; i++)
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>    <span style="color:#080;font-weight:bold">for</span>(i = <span style="color:#00D">0</span>; i &lt; arr_size; i++)
 <span class="line-numbers"><a href="#n12" name="n12">12</a></span>    {
 <span class="line-numbers"><a href="#n13" name="n13">13</a></span>        temp = sum - arr[i];
 <span class="line-numbers"><a href="#n14" name="n14">14</a></span>
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span>        bitmask = <span class="integer">0</span>;
-<span class="line-numbers"><a href="#n16" name="n16">16</a></span>        bitmask = <span class="integer">1</span> &lt;&lt; temp;
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>        bitmask = <span style="color:#00D">0</span>;
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>        bitmask = <span style="color:#00D">1</span> &lt;&lt; temp;
 <span class="line-numbers"><a href="#n17" name="n17">17</a></span>
-<span class="line-numbers"><a href="#n18" name="n18">18</a></span>        <span class="keyword">if</span>(temp &gt;= <span class="integer">0</span> &amp;&amp; (bitmap &amp; bitmask))
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>        <span style="color:#080;font-weight:bold">if</span>(temp &gt;= <span style="color:#00D">0</span> &amp;&amp; (bitmap &amp; bitmask))
 <span class="line-numbers"><a href="#n19" name="n19">19</a></span>        {
-<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>            printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Pair with given sum %d is (%d, %d) </span><span class="char">\n</span><span class="delimiter">&quot;</span></span>,
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>            printf(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Pair with given sum %d is (%d, %d) </span><span style="color:#b0b">\n</span><span style="color:#710">&quot;</span></span>,
 <span class="line-numbers"><a href="#n21" name="n21">21</a></span>                   sum, arr[i], temp);
 <span class="line-numbers"><a href="#n22" name="n22">22</a></span>        }
-<span class="line-numbers"><a href="#n23" name="n23">23</a></span>        bitmap |= <span class="integer">1</span> &lt;&lt; arr[i];
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span>        bitmap |= <span style="color:#00D">1</span> &lt;&lt; arr[i];
 <span class="line-numbers"><a href="#n24" name="n24">24</a></span>    }
 <span class="line-numbers"><a href="#n25" name="n25">25</a></span>}
 <span class="line-numbers"><a href="#n26" name="n26">26</a></span>
-<span class="line-numbers"><a href="#n27" name="n27">27</a></span><span class="comment">/* Driver program to test above function */</span>
-<span class="line-numbers"><a href="#n28" name="n28">28</a></span><span class="predefined-type">int</span> main()
+<span class="line-numbers"><a href="#n27" name="n27">27</a></span><span style="color:#777">/* Driver program to test above function */</span>
+<span class="line-numbers"><a href="#n28" name="n28">28</a></span><span style="color:#0a8;font-weight:bold">int</span> main()
 <span class="line-numbers"><a href="#n29" name="n29">29</a></span>{
-<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>    <span class="predefined-type">int</span> A[] = {<span class="integer">12</span>, <span class="integer">4</span>, <span class="integer">13</span>, <span class="integer">6</span>, <span class="integer">10</span>, <span class="integer">3</span>};
-<span class="line-numbers"><a href="#n31" name="n31">31</a></span>    <span class="predefined-type">int</span> sum = <span class="integer">16</span>;
-<span class="line-numbers"><a href="#n32" name="n32">32</a></span>    <span class="predefined-type">int</span> arr_size = <span class="integer">6</span>;
+<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>    <span style="color:#0a8;font-weight:bold">int</span> A[] = {<span style="color:#00D">12</span>, <span style="color:#00D">4</span>, <span style="color:#00D">13</span>, <span style="color:#00D">6</span>, <span style="color:#00D">10</span>, <span style="color:#00D">3</span>};
+<span class="line-numbers"><a href="#n31" name="n31">31</a></span>    <span style="color:#0a8;font-weight:bold">int</span> sum = <span style="color:#00D">16</span>;
+<span class="line-numbers"><a href="#n32" name="n32">32</a></span>    <span style="color:#0a8;font-weight:bold">int</span> arr_size = <span style="color:#00D">6</span>;
 <span class="line-numbers"><a href="#n33" name="n33">33</a></span>
 <span class="line-numbers"><a href="#n34" name="n34">34</a></span>    printPairs(A, arr_size, sum);
 <span class="line-numbers"><a href="#n35" name="n35">35</a></span>
-<span class="line-numbers"><a href="#n36" name="n36">36</a></span>    <span class="keyword">return</span> <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n36" name="n36">36</a></span>    <span style="color:#080;font-weight:bold">return</span> <span style="color:#00D">0</span>;
 <span class="line-numbers"><a href="#n37" name="n37">37</a></span>}
 </pre></div>
 </div>
@@ -379,103 +379,103 @@ Input array2 [1, 2, 4]</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Merge Sorted Arrays</span>  <a href="http://ideone.com/WaTPEt" target="_blank">Run Code </a></figcaption> <div class="CodeRay">
   <div class="code"><pre><span class="line-numbers">  <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers">  <a href="#n2" name="n2">2</a></span><span class="preprocessor">#include</span> <span class="include">&lt;stdio.h&gt;</span>
+<span class="line-numbers">  <a href="#n2" name="n2">2</a></span><span style="color:#579">#include</span> <span style="color:#B44;font-weight:bold">&lt;stdio.h&gt;</span>
 <span class="line-numbers">  <a href="#n3" name="n3">3</a></span>
-<span class="line-numbers">  <a href="#n4" name="n4">4</a></span><span class="predefined-type">int</span> lSize = <span class="integer">4</span>;
-<span class="line-numbers">  <a href="#n5" name="n5">5</a></span><span class="predefined-type">int</span> rSize = <span class="integer">3</span>;
-<span class="line-numbers">  <a href="#n6" name="n6">6</a></span><span class="predefined-type">int</span> L[<span class="integer">4</span>] = {<span class="integer">1</span>, <span class="integer">3</span>, <span class="integer">6</span>, <span class="integer">7</span>};
-<span class="line-numbers">  <a href="#n7" name="n7">7</a></span><span class="predefined-type">int</span> R[<span class="integer">4</span>] = {<span class="integer">1</span>, <span class="integer">2</span>, <span class="integer">4</span>};
-<span class="line-numbers">  <a href="#n8" name="n8">8</a></span><span class="predefined-type">int</span> finalArray[<span class="integer">7</span>];
+<span class="line-numbers">  <a href="#n4" name="n4">4</a></span><span style="color:#0a8;font-weight:bold">int</span> lSize = <span style="color:#00D">4</span>;
+<span class="line-numbers">  <a href="#n5" name="n5">5</a></span><span style="color:#0a8;font-weight:bold">int</span> rSize = <span style="color:#00D">3</span>;
+<span class="line-numbers">  <a href="#n6" name="n6">6</a></span><span style="color:#0a8;font-weight:bold">int</span> L[<span style="color:#00D">4</span>] = {<span style="color:#00D">1</span>, <span style="color:#00D">3</span>, <span style="color:#00D">6</span>, <span style="color:#00D">7</span>};
+<span class="line-numbers">  <a href="#n7" name="n7">7</a></span><span style="color:#0a8;font-weight:bold">int</span> R[<span style="color:#00D">4</span>] = {<span style="color:#00D">1</span>, <span style="color:#00D">2</span>, <span style="color:#00D">4</span>};
+<span class="line-numbers">  <a href="#n8" name="n8">8</a></span><span style="color:#0a8;font-weight:bold">int</span> finalArray[<span style="color:#00D">7</span>];
 <span class="line-numbers">  <a href="#n9" name="n9">9</a></span>
-<span class="line-numbers"> <strong><a href="#n10" name="n10">10</a></strong></span><span class="directive">void</span> merge()
+<span class="line-numbers"> <strong><a href="#n10" name="n10">10</a></strong></span><span style="color:#088;font-weight:bold">void</span> merge()
 <span class="line-numbers"> <a href="#n11" name="n11">11</a></span>{
-<span class="line-numbers"> <a href="#n12" name="n12">12</a></span>    <span class="predefined-type">int</span> lIndx = <span class="integer">0</span>;
-<span class="line-numbers"> <a href="#n13" name="n13">13</a></span>    <span class="predefined-type">int</span> rIndx = <span class="integer">0</span>;
-<span class="line-numbers"> <a href="#n14" name="n14">14</a></span>    <span class="predefined-type">int</span> i = <span class="integer">0</span>;
+<span class="line-numbers"> <a href="#n12" name="n12">12</a></span>    <span style="color:#0a8;font-weight:bold">int</span> lIndx = <span style="color:#00D">0</span>;
+<span class="line-numbers"> <a href="#n13" name="n13">13</a></span>    <span style="color:#0a8;font-weight:bold">int</span> rIndx = <span style="color:#00D">0</span>;
+<span class="line-numbers"> <a href="#n14" name="n14">14</a></span>    <span style="color:#0a8;font-weight:bold">int</span> i = <span style="color:#00D">0</span>;
 <span class="line-numbers"> <a href="#n15" name="n15">15</a></span>
-<span class="line-numbers"> <a href="#n16" name="n16">16</a></span>    <span class="keyword">for</span> (i = <span class="integer">0</span>; i &lt; (lSize + rSize); i++) {
-<span class="line-numbers"> <a href="#n17" name="n17">17</a></span>        <span class="keyword">if</span> (L[lIndx] &lt;= R[rIndx]) {
+<span class="line-numbers"> <a href="#n16" name="n16">16</a></span>    <span style="color:#080;font-weight:bold">for</span> (i = <span style="color:#00D">0</span>; i &lt; (lSize + rSize); i++) {
+<span class="line-numbers"> <a href="#n17" name="n17">17</a></span>        <span style="color:#080;font-weight:bold">if</span> (L[lIndx] &lt;= R[rIndx]) {
 <span class="line-numbers"> <a href="#n18" name="n18">18</a></span>            finalArray[i] = L[lIndx++];
-<span class="line-numbers"> <a href="#n19" name="n19">19</a></span>            <span class="keyword">if</span> (lIndx == lSize) {
-<span class="line-numbers"> <strong><a href="#n20" name="n20">20</a></strong></span>                <span class="keyword">break</span>;
+<span class="line-numbers"> <a href="#n19" name="n19">19</a></span>            <span style="color:#080;font-weight:bold">if</span> (lIndx == lSize) {
+<span class="line-numbers"> <strong><a href="#n20" name="n20">20</a></strong></span>                <span style="color:#080;font-weight:bold">break</span>;
 <span class="line-numbers"> <a href="#n21" name="n21">21</a></span>            }
-<span class="line-numbers"> <a href="#n22" name="n22">22</a></span>        } <span class="keyword">else</span> {
+<span class="line-numbers"> <a href="#n22" name="n22">22</a></span>        } <span style="color:#080;font-weight:bold">else</span> {
 <span class="line-numbers"> <a href="#n23" name="n23">23</a></span>            finalArray[i] = R[rIndx++];
-<span class="line-numbers"> <a href="#n24" name="n24">24</a></span>            <span class="keyword">if</span> (rIndx == rSize) {
-<span class="line-numbers"> <a href="#n25" name="n25">25</a></span>                <span class="keyword">break</span>;
+<span class="line-numbers"> <a href="#n24" name="n24">24</a></span>            <span style="color:#080;font-weight:bold">if</span> (rIndx == rSize) {
+<span class="line-numbers"> <a href="#n25" name="n25">25</a></span>                <span style="color:#080;font-weight:bold">break</span>;
 <span class="line-numbers"> <a href="#n26" name="n26">26</a></span>            }
 <span class="line-numbers"> <a href="#n27" name="n27">27</a></span>        }
 <span class="line-numbers"> <a href="#n28" name="n28">28</a></span>    }
 <span class="line-numbers"> <a href="#n29" name="n29">29</a></span>
 <span class="line-numbers"> <strong><a href="#n30" name="n30">30</a></strong></span>    i++;
-<span class="line-numbers"> <a href="#n31" name="n31">31</a></span>    <span class="keyword">if</span> (lIndx != lSize) {
-<span class="line-numbers"> <a href="#n32" name="n32">32</a></span>        <span class="keyword">while</span>(<span class="integer">1</span>) {
+<span class="line-numbers"> <a href="#n31" name="n31">31</a></span>    <span style="color:#080;font-weight:bold">if</span> (lIndx != lSize) {
+<span class="line-numbers"> <a href="#n32" name="n32">32</a></span>        <span style="color:#080;font-weight:bold">while</span>(<span style="color:#00D">1</span>) {
 <span class="line-numbers"> <a href="#n33" name="n33">33</a></span>            finalArray[i++] = L[lIndx++];
 <span class="line-numbers"> <a href="#n34" name="n34">34</a></span>
-<span class="line-numbers"> <a href="#n35" name="n35">35</a></span>            <span class="keyword">if</span> (lIndx == lSize) {
-<span class="line-numbers"> <a href="#n36" name="n36">36</a></span>                <span class="keyword">return</span>;
+<span class="line-numbers"> <a href="#n35" name="n35">35</a></span>            <span style="color:#080;font-weight:bold">if</span> (lIndx == lSize) {
+<span class="line-numbers"> <a href="#n36" name="n36">36</a></span>                <span style="color:#080;font-weight:bold">return</span>;
 <span class="line-numbers"> <a href="#n37" name="n37">37</a></span>            }
 <span class="line-numbers"> <a href="#n38" name="n38">38</a></span>        }
 <span class="line-numbers"> <a href="#n39" name="n39">39</a></span>    }
-<span class="line-numbers"> <strong><a href="#n40" name="n40">40</a></strong></span>    <span class="keyword">if</span> (rIndx != rSize) {
-<span class="line-numbers"> <a href="#n41" name="n41">41</a></span>        <span class="keyword">while</span>(<span class="integer">1</span>) {
+<span class="line-numbers"> <strong><a href="#n40" name="n40">40</a></strong></span>    <span style="color:#080;font-weight:bold">if</span> (rIndx != rSize) {
+<span class="line-numbers"> <a href="#n41" name="n41">41</a></span>        <span style="color:#080;font-weight:bold">while</span>(<span style="color:#00D">1</span>) {
 <span class="line-numbers"> <a href="#n42" name="n42">42</a></span>            finalArray[i++] = R[rIndx++];
 <span class="line-numbers"> <a href="#n43" name="n43">43</a></span>
-<span class="line-numbers"> <a href="#n44" name="n44">44</a></span>            <span class="keyword">if</span> (rIndx == rSize) {
-<span class="line-numbers"> <a href="#n45" name="n45">45</a></span>                <span class="keyword">return</span>;
+<span class="line-numbers"> <a href="#n44" name="n44">44</a></span>            <span style="color:#080;font-weight:bold">if</span> (rIndx == rSize) {
+<span class="line-numbers"> <a href="#n45" name="n45">45</a></span>                <span style="color:#080;font-weight:bold">return</span>;
 <span class="line-numbers"> <a href="#n46" name="n46">46</a></span>            }
 <span class="line-numbers"> <a href="#n47" name="n47">47</a></span>        }
 <span class="line-numbers"> <a href="#n48" name="n48">48</a></span>    }
 <span class="line-numbers"> <a href="#n49" name="n49">49</a></span>}
 <span class="line-numbers"> <strong><a href="#n50" name="n50">50</a></strong></span>
-<span class="line-numbers"> <a href="#n51" name="n51">51</a></span><span class="directive">void</span> display()
+<span class="line-numbers"> <a href="#n51" name="n51">51</a></span><span style="color:#088;font-weight:bold">void</span> display()
 <span class="line-numbers"> <a href="#n52" name="n52">52</a></span>{
-<span class="line-numbers"> <a href="#n53" name="n53">53</a></span>    <span class="predefined-type">int</span> i = <span class="integer">0</span>;
+<span class="line-numbers"> <a href="#n53" name="n53">53</a></span>    <span style="color:#0a8;font-weight:bold">int</span> i = <span style="color:#00D">0</span>;
 <span class="line-numbers"> <a href="#n54" name="n54">54</a></span>
-<span class="line-numbers"> <a href="#n55" name="n55">55</a></span>    printf(<span class="string"><span class="delimiter">&quot;</span><span class="char">\n</span><span class="char">\n</span><span class="content">Array1: </span><span class="delimiter">&quot;</span></span>);
-<span class="line-numbers"> <a href="#n56" name="n56">56</a></span>    <span class="keyword">for</span> (i = <span class="integer">0</span>; i &lt; lSize; i++) {
-<span class="line-numbers"> <a href="#n57" name="n57">57</a></span>        printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d </span><span class="delimiter">&quot;</span></span>, L[i]);
+<span class="line-numbers"> <a href="#n55" name="n55">55</a></span>    printf(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#b0b">\n</span><span style="color:#b0b">\n</span><span style="color:#D20">Array1: </span><span style="color:#710">&quot;</span></span>);
+<span class="line-numbers"> <a href="#n56" name="n56">56</a></span>    <span style="color:#080;font-weight:bold">for</span> (i = <span style="color:#00D">0</span>; i &lt; lSize; i++) {
+<span class="line-numbers"> <a href="#n57" name="n57">57</a></span>        printf(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">%d </span><span style="color:#710">&quot;</span></span>, L[i]);
 <span class="line-numbers"> <a href="#n58" name="n58">58</a></span>    }
 <span class="line-numbers"> <a href="#n59" name="n59">59</a></span>
-<span class="line-numbers"> <strong><a href="#n60" name="n60">60</a></strong></span>    printf(<span class="string"><span class="delimiter">&quot;</span><span class="char">\n</span><span class="content">Array2: </span><span class="delimiter">&quot;</span></span>);
-<span class="line-numbers"> <a href="#n61" name="n61">61</a></span>    <span class="keyword">for</span> (i = <span class="integer">0</span>; i &lt; rSize; i++) {
-<span class="line-numbers"> <a href="#n62" name="n62">62</a></span>        printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d </span><span class="delimiter">&quot;</span></span>, R[i]);
+<span class="line-numbers"> <strong><a href="#n60" name="n60">60</a></strong></span>    printf(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#b0b">\n</span><span style="color:#D20">Array2: </span><span style="color:#710">&quot;</span></span>);
+<span class="line-numbers"> <a href="#n61" name="n61">61</a></span>    <span style="color:#080;font-weight:bold">for</span> (i = <span style="color:#00D">0</span>; i &lt; rSize; i++) {
+<span class="line-numbers"> <a href="#n62" name="n62">62</a></span>        printf(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">%d </span><span style="color:#710">&quot;</span></span>, R[i]);
 <span class="line-numbers"> <a href="#n63" name="n63">63</a></span>    }
 <span class="line-numbers"> <a href="#n64" name="n64">64</a></span>
-<span class="line-numbers"> <a href="#n65" name="n65">65</a></span>    printf(<span class="string"><span class="delimiter">&quot;</span><span class="char">\n</span><span class="content">Merge array: </span><span class="delimiter">&quot;</span></span>);
-<span class="line-numbers"> <a href="#n66" name="n66">66</a></span>    <span class="keyword">for</span> (i = <span class="integer">0</span>; i &lt; lSize+rSize; i++) {
-<span class="line-numbers"> <a href="#n67" name="n67">67</a></span>        printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d </span><span class="delimiter">&quot;</span></span>, finalArray[i]);
+<span class="line-numbers"> <a href="#n65" name="n65">65</a></span>    printf(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#b0b">\n</span><span style="color:#D20">Merge array: </span><span style="color:#710">&quot;</span></span>);
+<span class="line-numbers"> <a href="#n66" name="n66">66</a></span>    <span style="color:#080;font-weight:bold">for</span> (i = <span style="color:#00D">0</span>; i &lt; lSize+rSize; i++) {
+<span class="line-numbers"> <a href="#n67" name="n67">67</a></span>        printf(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">%d </span><span style="color:#710">&quot;</span></span>, finalArray[i]);
 <span class="line-numbers"> <a href="#n68" name="n68">68</a></span>    }
 <span class="line-numbers"> <a href="#n69" name="n69">69</a></span>}
 <span class="line-numbers"> <strong><a href="#n70" name="n70">70</a></strong></span>
-<span class="line-numbers"> <a href="#n71" name="n71">71</a></span><span class="predefined-type">int</span> main()
+<span class="line-numbers"> <a href="#n71" name="n71">71</a></span><span style="color:#0a8;font-weight:bold">int</span> main()
 <span class="line-numbers"> <a href="#n72" name="n72">72</a></span>{
-<span class="line-numbers"> <a href="#n73" name="n73">73</a></span>    <span class="comment">// Test 1</span>
+<span class="line-numbers"> <a href="#n73" name="n73">73</a></span>    <span style="color:#777">// Test 1</span>
 <span class="line-numbers"> <a href="#n74" name="n74">74</a></span>    merge();
 <span class="line-numbers"> <a href="#n75" name="n75">75</a></span>    display();
 <span class="line-numbers"> <a href="#n76" name="n76">76</a></span>
-<span class="line-numbers"> <a href="#n77" name="n77">77</a></span>    <span class="comment">// Test 2</span>
-<span class="line-numbers"> <a href="#n78" name="n78">78</a></span>    R[<span class="integer">0</span>] = <span class="integer">1</span>;
-<span class="line-numbers"> <a href="#n79" name="n79">79</a></span>    R[<span class="integer">1</span>] = <span class="integer">3</span>;
-<span class="line-numbers"> <strong><a href="#n80" name="n80">80</a></strong></span>    R[<span class="integer">2</span>] = <span class="integer">6</span>;
-<span class="line-numbers"> <a href="#n81" name="n81">81</a></span>    R[<span class="integer">3</span>] = <span class="integer">7</span>;
-<span class="line-numbers"> <a href="#n82" name="n82">82</a></span>    L[<span class="integer">0</span>] = <span class="integer">1</span>;
-<span class="line-numbers"> <a href="#n83" name="n83">83</a></span>    L[<span class="integer">1</span>] = <span class="integer">2</span>;
-<span class="line-numbers"> <a href="#n84" name="n84">84</a></span>    L[<span class="integer">2</span>] = <span class="integer">4</span>;
-<span class="line-numbers"> <a href="#n85" name="n85">85</a></span>    lSize = <span class="integer">3</span>;
-<span class="line-numbers"> <a href="#n86" name="n86">86</a></span>    rSize = <span class="integer">4</span>;
+<span class="line-numbers"> <a href="#n77" name="n77">77</a></span>    <span style="color:#777">// Test 2</span>
+<span class="line-numbers"> <a href="#n78" name="n78">78</a></span>    R[<span style="color:#00D">0</span>] = <span style="color:#00D">1</span>;
+<span class="line-numbers"> <a href="#n79" name="n79">79</a></span>    R[<span style="color:#00D">1</span>] = <span style="color:#00D">3</span>;
+<span class="line-numbers"> <strong><a href="#n80" name="n80">80</a></strong></span>    R[<span style="color:#00D">2</span>] = <span style="color:#00D">6</span>;
+<span class="line-numbers"> <a href="#n81" name="n81">81</a></span>    R[<span style="color:#00D">3</span>] = <span style="color:#00D">7</span>;
+<span class="line-numbers"> <a href="#n82" name="n82">82</a></span>    L[<span style="color:#00D">0</span>] = <span style="color:#00D">1</span>;
+<span class="line-numbers"> <a href="#n83" name="n83">83</a></span>    L[<span style="color:#00D">1</span>] = <span style="color:#00D">2</span>;
+<span class="line-numbers"> <a href="#n84" name="n84">84</a></span>    L[<span style="color:#00D">2</span>] = <span style="color:#00D">4</span>;
+<span class="line-numbers"> <a href="#n85" name="n85">85</a></span>    lSize = <span style="color:#00D">3</span>;
+<span class="line-numbers"> <a href="#n86" name="n86">86</a></span>    rSize = <span style="color:#00D">4</span>;
 <span class="line-numbers"> <a href="#n87" name="n87">87</a></span>    merge();
 <span class="line-numbers"> <a href="#n88" name="n88">88</a></span>    display();
 <span class="line-numbers"> <a href="#n89" name="n89">89</a></span>
-<span class="line-numbers"> <strong><a href="#n90" name="n90">90</a></strong></span>    <span class="comment">// test 3</span>
-<span class="line-numbers"> <a href="#n91" name="n91">91</a></span>    L[<span class="integer">0</span>] = <span class="integer">1</span>;
-<span class="line-numbers"> <a href="#n92" name="n92">92</a></span>    R[<span class="integer">0</span>] = <span class="integer">1</span>;
-<span class="line-numbers"> <a href="#n93" name="n93">93</a></span>    lSize = <span class="integer">1</span>;
-<span class="line-numbers"> <a href="#n94" name="n94">94</a></span>    rSize = <span class="integer">1</span>;
+<span class="line-numbers"> <strong><a href="#n90" name="n90">90</a></strong></span>    <span style="color:#777">// test 3</span>
+<span class="line-numbers"> <a href="#n91" name="n91">91</a></span>    L[<span style="color:#00D">0</span>] = <span style="color:#00D">1</span>;
+<span class="line-numbers"> <a href="#n92" name="n92">92</a></span>    R[<span style="color:#00D">0</span>] = <span style="color:#00D">1</span>;
+<span class="line-numbers"> <a href="#n93" name="n93">93</a></span>    lSize = <span style="color:#00D">1</span>;
+<span class="line-numbers"> <a href="#n94" name="n94">94</a></span>    rSize = <span style="color:#00D">1</span>;
 <span class="line-numbers"> <a href="#n95" name="n95">95</a></span>    merge();
 <span class="line-numbers"> <a href="#n96" name="n96">96</a></span>    display();
 <span class="line-numbers"> <a href="#n97" name="n97">97</a></span>
-<span class="line-numbers"> <a href="#n98" name="n98">98</a></span>    <span class="keyword">return</span> <span class="integer">0</span>;
+<span class="line-numbers"> <a href="#n98" name="n98">98</a></span>    <span style="color:#080;font-weight:bold">return</span> <span style="color:#00D">0</span>;
 <span class="line-numbers"> <a href="#n99" name="n99">99</a></span>}
 </pre></div>
 </div>
@@ -498,57 +498,57 @@ Input array2 [5, 1, 2, 4, 6]</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Merge Unsorted Arrays</span>  <a href="http://ideone.com/IScZ7r" target="_blank">Run Code </a></figcaption> <div class="CodeRay">
   <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="preprocessor">#include</span> <span class="include">&lt;stdio.h&gt;</span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span style="color:#579">#include</span> <span style="color:#B44;font-weight:bold">&lt;stdio.h&gt;</span>
 <span class="line-numbers"> <a href="#n3" name="n3">3</a></span>
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span class="preprocessor">#define</span> ARR1SIZE <span class="integer">5</span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span class="preprocessor">#define</span> ARR2SIZE <span class="integer">5</span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span style="color:#579">#define</span> ARR1SIZE <span style="color:#00D">5</span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span style="color:#579">#define</span> ARR2SIZE <span style="color:#00D">5</span>
 <span class="line-numbers"> <a href="#n6" name="n6">6</a></span>
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span><span class="predefined-type">int</span> main()
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span><span style="color:#0a8;font-weight:bold">int</span> main()
 <span class="line-numbers"> <a href="#n8" name="n8">8</a></span>{
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    <span class="predefined-type">int</span> arr1[] = {<span class="integer">6</span>, <span class="integer">3</span>, <span class="integer">6</span>, <span class="integer">1</span>, <span class="integer">7</span>};
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>    <span class="predefined-type">int</span> arr2[] = {<span class="integer">5</span>, <span class="integer">1</span>, <span class="integer">2</span>, <span class="integer">4</span>, <span class="integer">6</span>};
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>    <span class="predefined-type">int</span> arr3[ARR1SIZE + ARR2SIZE];
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    <span style="color:#0a8;font-weight:bold">int</span> arr1[] = {<span style="color:#00D">6</span>, <span style="color:#00D">3</span>, <span style="color:#00D">6</span>, <span style="color:#00D">1</span>, <span style="color:#00D">7</span>};
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>    <span style="color:#0a8;font-weight:bold">int</span> arr2[] = {<span style="color:#00D">5</span>, <span style="color:#00D">1</span>, <span style="color:#00D">2</span>, <span style="color:#00D">4</span>, <span style="color:#00D">6</span>};
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>    <span style="color:#0a8;font-weight:bold">int</span> arr3[ARR1SIZE + ARR2SIZE];
 <span class="line-numbers"><a href="#n12" name="n12">12</a></span>
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span>    <span class="comment">// Using bit map, All bits are 0</span>
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span>    <span class="predefined-type">int</span> bitMap = <span class="integer">0</span>;
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span>    <span class="predefined-type">int</span> bitMask = <span class="integer">0</span>;
-<span class="line-numbers"><a href="#n16" name="n16">16</a></span>    <span class="predefined-type">int</span> i = <span class="integer">0</span>;
-<span class="line-numbers"><a href="#n17" name="n17">17</a></span>    <span class="predefined-type">int</span> k = <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>    <span style="color:#777">// Using bit map, All bits are 0</span>
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>    <span style="color:#0a8;font-weight:bold">int</span> bitMap = <span style="color:#00D">0</span>;
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>    <span style="color:#0a8;font-weight:bold">int</span> bitMask = <span style="color:#00D">0</span>;
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>    <span style="color:#0a8;font-weight:bold">int</span> i = <span style="color:#00D">0</span>;
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>    <span style="color:#0a8;font-weight:bold">int</span> k = <span style="color:#00D">0</span>;
 <span class="line-numbers"><a href="#n18" name="n18">18</a></span>
-<span class="line-numbers"><a href="#n19" name="n19">19</a></span>    <span class="keyword">for</span> (i = <span class="integer">0</span>; i &lt; ARR1SIZE; i++) {
-<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>        <span class="comment">// Check if value already exist</span>
-<span class="line-numbers"><a href="#n21" name="n21">21</a></span>        bitMask = <span class="integer">0</span>;
-<span class="line-numbers"><a href="#n22" name="n22">22</a></span>        bitMask = <span class="integer">1</span> &lt;&lt; arr1[i];
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>    <span style="color:#080;font-weight:bold">for</span> (i = <span style="color:#00D">0</span>; i &lt; ARR1SIZE; i++) {
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>        <span style="color:#777">// Check if value already exist</span>
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>        bitMask = <span style="color:#00D">0</span>;
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span>        bitMask = <span style="color:#00D">1</span> &lt;&lt; arr1[i];
 <span class="line-numbers"><a href="#n23" name="n23">23</a></span>
-<span class="line-numbers"><a href="#n24" name="n24">24</a></span>        <span class="keyword">if</span> (bitMap &amp; bitMask) {
-<span class="line-numbers"><a href="#n25" name="n25">25</a></span>            <span class="keyword">continue</span>;
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span>        <span style="color:#080;font-weight:bold">if</span> (bitMap &amp; bitMask) {
+<span class="line-numbers"><a href="#n25" name="n25">25</a></span>            <span style="color:#080;font-weight:bold">continue</span>;
 <span class="line-numbers"><a href="#n26" name="n26">26</a></span>        }
 <span class="line-numbers"><a href="#n27" name="n27">27</a></span>        arr3[k++] = arr1[i];
 <span class="line-numbers"><a href="#n28" name="n28">28</a></span>
-<span class="line-numbers"><a href="#n29" name="n29">29</a></span>        <span class="comment">// Mark bitMap that value exist</span>
-<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>        bitMap |= <span class="integer">1</span> &lt;&lt; arr1[i];
+<span class="line-numbers"><a href="#n29" name="n29">29</a></span>        <span style="color:#777">// Mark bitMap that value exist</span>
+<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>        bitMap |= <span style="color:#00D">1</span> &lt;&lt; arr1[i];
 <span class="line-numbers"><a href="#n31" name="n31">31</a></span>    }
 <span class="line-numbers"><a href="#n32" name="n32">32</a></span>
-<span class="line-numbers"><a href="#n33" name="n33">33</a></span>    <span class="keyword">for</span> (i = <span class="integer">0</span>; i &lt; ARR2SIZE; i++) {
-<span class="line-numbers"><a href="#n34" name="n34">34</a></span>        <span class="comment">// Check if value already exist</span>
-<span class="line-numbers"><a href="#n35" name="n35">35</a></span>        bitMask = <span class="integer">0</span>;
-<span class="line-numbers"><a href="#n36" name="n36">36</a></span>        bitMask = <span class="integer">1</span> &lt;&lt; arr2[i];
+<span class="line-numbers"><a href="#n33" name="n33">33</a></span>    <span style="color:#080;font-weight:bold">for</span> (i = <span style="color:#00D">0</span>; i &lt; ARR2SIZE; i++) {
+<span class="line-numbers"><a href="#n34" name="n34">34</a></span>        <span style="color:#777">// Check if value already exist</span>
+<span class="line-numbers"><a href="#n35" name="n35">35</a></span>        bitMask = <span style="color:#00D">0</span>;
+<span class="line-numbers"><a href="#n36" name="n36">36</a></span>        bitMask = <span style="color:#00D">1</span> &lt;&lt; arr2[i];
 <span class="line-numbers"><a href="#n37" name="n37">37</a></span>
-<span class="line-numbers"><a href="#n38" name="n38">38</a></span>        <span class="keyword">if</span> (bitMap &amp; bitMask) {
-<span class="line-numbers"><a href="#n39" name="n39">39</a></span>            <span class="keyword">continue</span>;
+<span class="line-numbers"><a href="#n38" name="n38">38</a></span>        <span style="color:#080;font-weight:bold">if</span> (bitMap &amp; bitMask) {
+<span class="line-numbers"><a href="#n39" name="n39">39</a></span>            <span style="color:#080;font-weight:bold">continue</span>;
 <span class="line-numbers"><strong><a href="#n40" name="n40">40</a></strong></span>        }
 <span class="line-numbers"><a href="#n41" name="n41">41</a></span>        arr3[k++] = arr2[i];
 <span class="line-numbers"><a href="#n42" name="n42">42</a></span>
-<span class="line-numbers"><a href="#n43" name="n43">43</a></span>        <span class="comment">// Mark bitMap that value exist</span>
-<span class="line-numbers"><a href="#n44" name="n44">44</a></span>        bitMap |= <span class="integer">1</span> &lt;&lt; arr2[i];
+<span class="line-numbers"><a href="#n43" name="n43">43</a></span>        <span style="color:#777">// Mark bitMap that value exist</span>
+<span class="line-numbers"><a href="#n44" name="n44">44</a></span>        bitMap |= <span style="color:#00D">1</span> &lt;&lt; arr2[i];
 <span class="line-numbers"><a href="#n45" name="n45">45</a></span>    }
 <span class="line-numbers"><a href="#n46" name="n46">46</a></span>
-<span class="line-numbers"><a href="#n47" name="n47">47</a></span>    printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Merged Array</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>);
-<span class="line-numbers"><a href="#n48" name="n48">48</a></span>    <span class="keyword">for</span> (i = <span class="integer">0</span>; i &lt; k; i++) {
-<span class="line-numbers"><a href="#n49" name="n49">49</a></span>        printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d </span><span class="delimiter">&quot;</span></span>, arr3[i]);
+<span class="line-numbers"><a href="#n47" name="n47">47</a></span>    printf(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Merged Array</span><span style="color:#b0b">\n</span><span style="color:#710">&quot;</span></span>);
+<span class="line-numbers"><a href="#n48" name="n48">48</a></span>    <span style="color:#080;font-weight:bold">for</span> (i = <span style="color:#00D">0</span>; i &lt; k; i++) {
+<span class="line-numbers"><a href="#n49" name="n49">49</a></span>        printf(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">%d </span><span style="color:#710">&quot;</span></span>, arr3[i]);
 <span class="line-numbers"><strong><a href="#n50" name="n50">50</a></strong></span>    }
 <span class="line-numbers"><a href="#n51" name="n51">51</a></span>
-<span class="line-numbers"><a href="#n52" name="n52">52</a></span>    <span class="keyword">return</span> <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n52" name="n52">52</a></span>    <span style="color:#080;font-weight:bold">return</span> <span style="color:#00D">0</span>;
 <span class="line-numbers"><a href="#n53" name="n53">53</a></span>}
 </pre></div>
 </div>
@@ -565,41 +565,41 @@ Input array2 [5, 1, 2, 4, 6]</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Counting Sort</span>  <a href="http://ideone.com/0BumWs" target="_blank">Run Code </a></figcaption> <div class="CodeRay">
   <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="preprocessor">#include</span> <span class="include">&lt;stdio.h&gt;</span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span style="color:#579">#include</span> <span style="color:#B44;font-weight:bold">&lt;stdio.h&gt;</span>
 <span class="line-numbers"> <a href="#n3" name="n3">3</a></span>
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span class="preprocessor">#define</span> ARRAYSIZE <span class="integer">6</span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span class="preprocessor">#define</span> MAX <span class="integer">4</span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span style="color:#579">#define</span> ARRAYSIZE <span style="color:#00D">6</span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span style="color:#579">#define</span> MAX <span style="color:#00D">4</span>
 <span class="line-numbers"> <a href="#n6" name="n6">6</a></span>
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span><span class="predefined-type">int</span> main()
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span><span style="color:#0a8;font-weight:bold">int</span> main()
 <span class="line-numbers"> <a href="#n8" name="n8">8</a></span>{
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    <span class="predefined-type">int</span> arr[] = {<span class="integer">2</span>, <span class="integer">1</span>, <span class="integer">3</span>, <span class="integer">2</span>, <span class="integer">1</span>, <span class="integer">4</span>};
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>    <span class="predefined-type">int</span> final[ARRAYSIZE];
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    <span style="color:#0a8;font-weight:bold">int</span> arr[] = {<span style="color:#00D">2</span>, <span style="color:#00D">1</span>, <span style="color:#00D">3</span>, <span style="color:#00D">2</span>, <span style="color:#00D">1</span>, <span style="color:#00D">4</span>};
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>    <span style="color:#0a8;font-weight:bold">int</span> final[ARRAYSIZE];
 <span class="line-numbers"><a href="#n11" name="n11">11</a></span>
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    <span class="comment">// Given we know max element in array</span>
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span>    <span class="comment">// This technique is based on counting sort</span>
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span>    <span class="predefined-type">int</span> count[MAX + <span class="integer">1</span>] = {<span class="integer">0</span>};
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span>    <span class="predefined-type">int</span> i = <span class="integer">0</span>;
-<span class="line-numbers"><a href="#n16" name="n16">16</a></span>    <span class="predefined-type">int</span> j = <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    <span style="color:#777">// Given we know max element in array</span>
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>    <span style="color:#777">// This technique is based on counting sort</span>
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>    <span style="color:#0a8;font-weight:bold">int</span> count[MAX + <span style="color:#00D">1</span>] = {<span style="color:#00D">0</span>};
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>    <span style="color:#0a8;font-weight:bold">int</span> i = <span style="color:#00D">0</span>;
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>    <span style="color:#0a8;font-weight:bold">int</span> j = <span style="color:#00D">0</span>;
 <span class="line-numbers"><a href="#n17" name="n17">17</a></span>
-<span class="line-numbers"><a href="#n18" name="n18">18</a></span>    <span class="keyword">for</span> (i = <span class="integer">0</span>; i &lt; ARRAYSIZE; i++) {
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>    <span style="color:#080;font-weight:bold">for</span> (i = <span style="color:#00D">0</span>; i &lt; ARRAYSIZE; i++) {
 <span class="line-numbers"><a href="#n19" name="n19">19</a></span>        count[arr[i]]++;
 <span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>    }
 <span class="line-numbers"><a href="#n21" name="n21">21</a></span>
-<span class="line-numbers"><a href="#n22" name="n22">22</a></span>    <span class="keyword">for</span> (i = <span class="integer">0</span>; i &lt; MAX + <span class="integer">1</span>; i++) {
-<span class="line-numbers"><a href="#n23" name="n23">23</a></span>        <span class="keyword">if</span> (count[i] != <span class="integer">0</span>) {
-<span class="line-numbers"><a href="#n24" name="n24">24</a></span>            <span class="keyword">while</span> (count[i] != <span class="integer">0</span>) {
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span>    <span style="color:#080;font-weight:bold">for</span> (i = <span style="color:#00D">0</span>; i &lt; MAX + <span style="color:#00D">1</span>; i++) {
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span>        <span style="color:#080;font-weight:bold">if</span> (count[i] != <span style="color:#00D">0</span>) {
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span>            <span style="color:#080;font-weight:bold">while</span> (count[i] != <span style="color:#00D">0</span>) {
 <span class="line-numbers"><a href="#n25" name="n25">25</a></span>                final[j++] = i;
 <span class="line-numbers"><a href="#n26" name="n26">26</a></span>                count[i]--;
 <span class="line-numbers"><a href="#n27" name="n27">27</a></span>            }
 <span class="line-numbers"><a href="#n28" name="n28">28</a></span>        }
 <span class="line-numbers"><a href="#n29" name="n29">29</a></span>    }
 <span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>
-<span class="line-numbers"><a href="#n31" name="n31">31</a></span>    printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Sorted Array</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>);
-<span class="line-numbers"><a href="#n32" name="n32">32</a></span>    <span class="keyword">for</span> (i = <span class="integer">0</span>; i &lt; ARRAYSIZE; i++) {
-<span class="line-numbers"><a href="#n33" name="n33">33</a></span>        printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d </span><span class="delimiter">&quot;</span></span>, final[i]);
+<span class="line-numbers"><a href="#n31" name="n31">31</a></span>    printf(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Sorted Array</span><span style="color:#b0b">\n</span><span style="color:#710">&quot;</span></span>);
+<span class="line-numbers"><a href="#n32" name="n32">32</a></span>    <span style="color:#080;font-weight:bold">for</span> (i = <span style="color:#00D">0</span>; i &lt; ARRAYSIZE; i++) {
+<span class="line-numbers"><a href="#n33" name="n33">33</a></span>        printf(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">%d </span><span style="color:#710">&quot;</span></span>, final[i]);
 <span class="line-numbers"><a href="#n34" name="n34">34</a></span>    }
 <span class="line-numbers"><a href="#n35" name="n35">35</a></span>
-<span class="line-numbers"><a href="#n36" name="n36">36</a></span>    <span class="keyword">return</span> <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n36" name="n36">36</a></span>    <span style="color:#080;font-weight:bold">return</span> <span style="color:#00D">0</span>;
 <span class="line-numbers"><a href="#n37" name="n37">37</a></span>}
 </pre></div>
 </div>
@@ -615,25 +615,25 @@ Input array2 [5, 1, 2, 4, 6]</p>
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Odd occurence  </span></figcaption>
  <div class="CodeRay">
   <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="preprocessor">#include</span> <span class="include">&lt;stdio.h&gt;</span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span style="color:#579">#include</span> <span style="color:#B44;font-weight:bold">&lt;stdio.h&gt;</span>
 <span class="line-numbers"> <a href="#n3" name="n3">3</a></span> 
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span class="predefined-type">int</span> getOddOccurrence(<span class="predefined-type">int</span> ar[], <span class="predefined-type">int</span> ar_size)
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span style="color:#0a8;font-weight:bold">int</span> getOddOccurrence(<span style="color:#0a8;font-weight:bold">int</span> ar[], <span style="color:#0a8;font-weight:bold">int</span> ar_size)
 <span class="line-numbers"> <a href="#n5" name="n5">5</a></span>{
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>     <span class="predefined-type">int</span> i;
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>     <span class="predefined-type">int</span> res = <span class="integer">0</span>; 
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>     <span class="keyword">for</span> (i=<span class="integer">0</span>; i &lt; ar_size; i++)     
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>     <span style="color:#0a8;font-weight:bold">int</span> i;
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>     <span style="color:#0a8;font-weight:bold">int</span> res = <span style="color:#00D">0</span>; 
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>     <span style="color:#080;font-weight:bold">for</span> (i=<span style="color:#00D">0</span>; i &lt; ar_size; i++)     
 <span class="line-numbers"> <a href="#n9" name="n9">9</a></span>        res = res ^ ar[i];
 <span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>      
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>     <span class="keyword">return</span> res;
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>     <span style="color:#080;font-weight:bold">return</span> res;
 <span class="line-numbers"><a href="#n12" name="n12">12</a></span>}
 <span class="line-numbers"><a href="#n13" name="n13">13</a></span> 
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span><span class="comment">/* Diver function to test above function */</span>
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span><span class="predefined-type">int</span> main()
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span><span style="color:#777">/* Diver function to test above function */</span>
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span><span style="color:#0a8;font-weight:bold">int</span> main()
 <span class="line-numbers"><a href="#n16" name="n16">16</a></span>{
-<span class="line-numbers"><a href="#n17" name="n17">17</a></span>     <span class="predefined-type">int</span> ar[] = {<span class="integer">2</span>, <span class="integer">3</span>, <span class="integer">5</span>, <span class="integer">4</span>, <span class="integer">5</span>, <span class="integer">2</span>, <span class="integer">4</span>, <span class="integer">3</span>, <span class="integer">5</span>, <span class="integer">2</span>, <span class="integer">4</span>, <span class="integer">4</span>, <span class="integer">2</span>};
-<span class="line-numbers"><a href="#n18" name="n18">18</a></span>     <span class="predefined-type">int</span> n = <span class="keyword">sizeof</span>(ar)/<span class="keyword">sizeof</span>(ar[<span class="integer">0</span>]);
-<span class="line-numbers"><a href="#n19" name="n19">19</a></span>     printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d</span><span class="delimiter">&quot;</span></span>, getOddOccurrence(ar, n));
-<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>     <span class="keyword">return</span> <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>     <span style="color:#0a8;font-weight:bold">int</span> ar[] = {<span style="color:#00D">2</span>, <span style="color:#00D">3</span>, <span style="color:#00D">5</span>, <span style="color:#00D">4</span>, <span style="color:#00D">5</span>, <span style="color:#00D">2</span>, <span style="color:#00D">4</span>, <span style="color:#00D">3</span>, <span style="color:#00D">5</span>, <span style="color:#00D">2</span>, <span style="color:#00D">4</span>, <span style="color:#00D">4</span>, <span style="color:#00D">2</span>};
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>     <span style="color:#0a8;font-weight:bold">int</span> n = <span style="color:#080;font-weight:bold">sizeof</span>(ar)/<span style="color:#080;font-weight:bold">sizeof</span>(ar[<span style="color:#00D">0</span>]);
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>     printf(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">%d</span><span style="color:#710">&quot;</span></span>, getOddOccurrence(ar, n));
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>     <span style="color:#080;font-weight:bold">return</span> <span style="color:#00D">0</span>;
 <span class="line-numbers"><a href="#n21" name="n21">21</a></span>}
 </pre></div>
 </div>
@@ -660,56 +660,56 @@ Output: 10 and 20</p>
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>2 Odd Num  </span></figcaption>
  <div class="CodeRay">
   <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="comment">// Program to find the two odd occurring elements</span>
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span class="preprocessor">#include</span><span class="include">&lt;stdio.h&gt;</span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span style="color:#777">// Program to find the two odd occurring elements</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span style="color:#579">#include</span><span style="color:#B44;font-weight:bold">&lt;stdio.h&gt;</span>
 <span class="line-numbers"> <a href="#n4" name="n4">4</a></span> 
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span class="comment">/* Prints two numbers that occur odd number of times. The</span>
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span class="comment">   function assumes that the array size is at least 2 and</span>
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span><span class="comment">   there are exactly two numbers occurring odd number of times. */</span>
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span class="directive">void</span> printTwoOdd(<span class="predefined-type">int</span> arr[], <span class="predefined-type">int</span> size)
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span style="color:#777">/* Prints two numbers that occur odd number of times. The</span>
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span style="color:#777">   function assumes that the array size is at least 2 and</span>
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span><span style="color:#777">   there are exactly two numbers occurring odd number of times. */</span>
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span style="color:#088;font-weight:bold">void</span> printTwoOdd(<span style="color:#0a8;font-weight:bold">int</span> arr[], <span style="color:#0a8;font-weight:bold">int</span> size)
 <span class="line-numbers"> <a href="#n9" name="n9">9</a></span>{
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>  <span class="predefined-type">int</span> xor2 = arr[<span class="integer">0</span>]; <span class="comment">/* Will hold XOR of two odd occurring elements */</span>
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>  <span class="predefined-type">int</span> set_bit_no;  <span class="comment">/* Will have only single set bit of xor2 */</span>
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>  <span class="predefined-type">int</span> i;
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span>  <span class="predefined-type">int</span> n = size - <span class="integer">2</span>;
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span>  <span class="predefined-type">int</span> x = <span class="integer">0</span>, y = <span class="integer">0</span>;
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>  <span style="color:#0a8;font-weight:bold">int</span> xor2 = arr[<span style="color:#00D">0</span>]; <span style="color:#777">/* Will hold XOR of two odd occurring elements */</span>
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>  <span style="color:#0a8;font-weight:bold">int</span> set_bit_no;  <span style="color:#777">/* Will have only single set bit of xor2 */</span>
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>  <span style="color:#0a8;font-weight:bold">int</span> i;
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>  <span style="color:#0a8;font-weight:bold">int</span> n = size - <span style="color:#00D">2</span>;
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>  <span style="color:#0a8;font-weight:bold">int</span> x = <span style="color:#00D">0</span>, y = <span style="color:#00D">0</span>;
 <span class="line-numbers"><a href="#n15" name="n15">15</a></span> 
-<span class="line-numbers"><a href="#n16" name="n16">16</a></span>  <span class="comment">/* Get the xor of all elements in arr[]. The xor will basically</span>
-<span class="line-numbers"><a href="#n17" name="n17">17</a></span><span class="comment">     be xor of two odd occurring elements */</span>
-<span class="line-numbers"><a href="#n18" name="n18">18</a></span>  <span class="keyword">for</span>(i = <span class="integer">1</span>; i &lt; size; i++)
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>  <span style="color:#777">/* Get the xor of all elements in arr[]. The xor will basically</span>
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span><span style="color:#777">     be xor of two odd occurring elements */</span>
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>  <span style="color:#080;font-weight:bold">for</span>(i = <span style="color:#00D">1</span>; i &lt; size; i++)
 <span class="line-numbers"><a href="#n19" name="n19">19</a></span>    xor2 = xor2 ^ arr[i];
 <span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span> 
-<span class="line-numbers"><a href="#n21" name="n21">21</a></span>  <span class="comment">/* Get one set bit in the xor2. We get rightmost set bit</span>
-<span class="line-numbers"><a href="#n22" name="n22">22</a></span><span class="comment">     in the following line as it is easy to get */</span>
-<span class="line-numbers"><a href="#n23" name="n23">23</a></span>  set_bit_no = xor2 &amp; ~(xor2-<span class="integer">1</span>);
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>  <span style="color:#777">/* Get one set bit in the xor2. We get rightmost set bit</span>
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span><span style="color:#777">     in the following line as it is easy to get */</span>
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span>  set_bit_no = xor2 &amp; ~(xor2-<span style="color:#00D">1</span>);
 <span class="line-numbers"><a href="#n24" name="n24">24</a></span> 
-<span class="line-numbers"><a href="#n25" name="n25">25</a></span>  <span class="comment">/* Now divide elements in two sets: </span>
-<span class="line-numbers"><a href="#n26" name="n26">26</a></span><span class="comment">    1) The elements having the corresponding bit as 1. </span>
-<span class="line-numbers"><a href="#n27" name="n27">27</a></span><span class="comment">    2) The elements having the corresponding bit as 0.  */</span>
-<span class="line-numbers"><a href="#n28" name="n28">28</a></span>  <span class="keyword">for</span>(i = <span class="integer">0</span>; i &lt; size; i++)
+<span class="line-numbers"><a href="#n25" name="n25">25</a></span>  <span style="color:#777">/* Now divide elements in two sets: </span>
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span><span style="color:#777">    1) The elements having the corresponding bit as 1. </span>
+<span class="line-numbers"><a href="#n27" name="n27">27</a></span><span style="color:#777">    2) The elements having the corresponding bit as 0.  */</span>
+<span class="line-numbers"><a href="#n28" name="n28">28</a></span>  <span style="color:#080;font-weight:bold">for</span>(i = <span style="color:#00D">0</span>; i &lt; size; i++)
 <span class="line-numbers"><a href="#n29" name="n29">29</a></span>  {
-<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>     <span class="comment">/* XOR of first set is finally going to hold one odd </span>
-<span class="line-numbers"><a href="#n31" name="n31">31</a></span><span class="comment">       occurring number x */</span>
-<span class="line-numbers"><a href="#n32" name="n32">32</a></span>    <span class="keyword">if</span>(arr[i] &amp; set_bit_no)
+<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>     <span style="color:#777">/* XOR of first set is finally going to hold one odd </span>
+<span class="line-numbers"><a href="#n31" name="n31">31</a></span><span style="color:#777">       occurring number x */</span>
+<span class="line-numbers"><a href="#n32" name="n32">32</a></span>    <span style="color:#080;font-weight:bold">if</span>(arr[i] &amp; set_bit_no)
 <span class="line-numbers"><a href="#n33" name="n33">33</a></span>      x = x ^ arr[i];
 <span class="line-numbers"><a href="#n34" name="n34">34</a></span> 
-<span class="line-numbers"><a href="#n35" name="n35">35</a></span>     <span class="comment">/* XOR of second set is finally going to hold the other </span>
-<span class="line-numbers"><a href="#n36" name="n36">36</a></span><span class="comment">       odd occurring number y */</span>
-<span class="line-numbers"><a href="#n37" name="n37">37</a></span>    <span class="keyword">else</span>
+<span class="line-numbers"><a href="#n35" name="n35">35</a></span>     <span style="color:#777">/* XOR of second set is finally going to hold the other </span>
+<span class="line-numbers"><a href="#n36" name="n36">36</a></span><span style="color:#777">       odd occurring number y */</span>
+<span class="line-numbers"><a href="#n37" name="n37">37</a></span>    <span style="color:#080;font-weight:bold">else</span>
 <span class="line-numbers"><a href="#n38" name="n38">38</a></span>      y = y ^ arr[i]; 
 <span class="line-numbers"><a href="#n39" name="n39">39</a></span>  }
 <span class="line-numbers"><strong><a href="#n40" name="n40">40</a></strong></span> 
-<span class="line-numbers"><a href="#n41" name="n41">41</a></span>  printf(<span class="string"><span class="delimiter">&quot;</span><span class="char">\n</span><span class="content"> The two ODD elements are %d &amp; %d </span><span class="delimiter">&quot;</span></span>, x, y);
+<span class="line-numbers"><a href="#n41" name="n41">41</a></span>  printf(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#b0b">\n</span><span style="color:#D20"> The two ODD elements are %d &amp; %d </span><span style="color:#710">&quot;</span></span>, x, y);
 <span class="line-numbers"><a href="#n42" name="n42">42</a></span>}
 <span class="line-numbers"><a href="#n43" name="n43">43</a></span>
-<span class="line-numbers"><a href="#n44" name="n44">44</a></span><span class="comment">/* Driver program to test above function */</span>
-<span class="line-numbers"><a href="#n45" name="n45">45</a></span><span class="predefined-type">int</span> main()
+<span class="line-numbers"><a href="#n44" name="n44">44</a></span><span style="color:#777">/* Driver program to test above function */</span>
+<span class="line-numbers"><a href="#n45" name="n45">45</a></span><span style="color:#0a8;font-weight:bold">int</span> main()
 <span class="line-numbers"><a href="#n46" name="n46">46</a></span>{
-<span class="line-numbers"><a href="#n47" name="n47">47</a></span>  <span class="predefined-type">int</span> arr[] = {<span class="integer">4</span>, <span class="integer">2</span>, <span class="integer">4</span>, <span class="integer">5</span>, <span class="integer">2</span>, <span class="integer">3</span>, <span class="integer">3</span>, <span class="integer">1</span>};
-<span class="line-numbers"><a href="#n48" name="n48">48</a></span>  <span class="predefined-type">int</span> arr_size = <span class="keyword">sizeof</span>(arr)/<span class="keyword">sizeof</span>(arr[<span class="integer">0</span>]);
+<span class="line-numbers"><a href="#n47" name="n47">47</a></span>  <span style="color:#0a8;font-weight:bold">int</span> arr[] = {<span style="color:#00D">4</span>, <span style="color:#00D">2</span>, <span style="color:#00D">4</span>, <span style="color:#00D">5</span>, <span style="color:#00D">2</span>, <span style="color:#00D">3</span>, <span style="color:#00D">3</span>, <span style="color:#00D">1</span>};
+<span class="line-numbers"><a href="#n48" name="n48">48</a></span>  <span style="color:#0a8;font-weight:bold">int</span> arr_size = <span style="color:#080;font-weight:bold">sizeof</span>(arr)/<span style="color:#080;font-weight:bold">sizeof</span>(arr[<span style="color:#00D">0</span>]);
 <span class="line-numbers"><a href="#n49" name="n49">49</a></span>  printTwoOdd(arr, arr_size);
 <span class="line-numbers"><strong><a href="#n50" name="n50">50</a></strong></span>
-<span class="line-numbers"><a href="#n51" name="n51">51</a></span>  <span class="keyword">return</span> <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n51" name="n51">51</a></span>  <span style="color:#080;font-weight:bold">return</span> <span style="color:#00D">0</span>;
 <span class="line-numbers"><a href="#n52" name="n52">52</a></span>}
 </pre></div>
 </div>
@@ -736,38 +736,38 @@ Sum 7</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Largest Sum</span>  <a href="http://ideone.com/cVpfgF" target="_blank">Run Code </a></figcaption> <div class="CodeRay">
   <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="preprocessor">#include</span> <span class="include">&lt;stdio.h&gt;</span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span style="color:#579">#include</span> <span style="color:#B44;font-weight:bold">&lt;stdio.h&gt;</span>
 <span class="line-numbers"> <a href="#n3" name="n3">3</a></span>
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span class="predefined-type">int</span> main()
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span style="color:#0a8;font-weight:bold">int</span> main()
 <span class="line-numbers"> <a href="#n5" name="n5">5</a></span>{
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    <span class="predefined-type">int</span> arr[] = {-<span class="integer">2</span>, -<span class="integer">3</span>, <span class="integer">4</span>, -<span class="integer">1</span>, -<span class="integer">2</span>, <span class="integer">1</span>, <span class="integer">5</span>, -<span class="integer">3</span>};
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    <span style="color:#0a8;font-weight:bold">int</span> arr[] = {-<span style="color:#00D">2</span>, -<span style="color:#00D">3</span>, <span style="color:#00D">4</span>, -<span style="color:#00D">1</span>, -<span style="color:#00D">2</span>, <span style="color:#00D">1</span>, <span style="color:#00D">5</span>, -<span style="color:#00D">3</span>};
 <span class="line-numbers"> <a href="#n7" name="n7">7</a></span>
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    <span class="predefined-type">int</span> best = -<span class="integer">1110</span>;
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    <span class="predefined-type">int</span> sum = <span class="integer">0</span>;
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>    <span class="predefined-type">int</span> indx = <span class="integer">0</span>;
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>    <span class="predefined-type">int</span> i = <span class="integer">0</span>;
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    <span class="predefined-type">int</span> x = <span class="integer">0</span>; <span class="comment">// start of max sub array</span>
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span>    <span class="predefined-type">int</span> y = <span class="integer">0</span>; <span class="comment">// end of max sub array</span>
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span>    <span class="predefined-type">int</span> n = <span class="integer">8</span>; <span class="comment">// size of array</span>
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    <span style="color:#0a8;font-weight:bold">int</span> best = -<span style="color:#00D">1110</span>;
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    <span style="color:#0a8;font-weight:bold">int</span> sum = <span style="color:#00D">0</span>;
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>    <span style="color:#0a8;font-weight:bold">int</span> indx = <span style="color:#00D">0</span>;
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>    <span style="color:#0a8;font-weight:bold">int</span> i = <span style="color:#00D">0</span>;
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    <span style="color:#0a8;font-weight:bold">int</span> x = <span style="color:#00D">0</span>; <span style="color:#777">// start of max sub array</span>
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>    <span style="color:#0a8;font-weight:bold">int</span> y = <span style="color:#00D">0</span>; <span style="color:#777">// end of max sub array</span>
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>    <span style="color:#0a8;font-weight:bold">int</span> n = <span style="color:#00D">8</span>; <span style="color:#777">// size of array</span>
 <span class="line-numbers"><a href="#n15" name="n15">15</a></span>
-<span class="line-numbers"><a href="#n16" name="n16">16</a></span>    <span class="keyword">for</span> (i = <span class="integer">0</span>; i &lt; n; i++) {
-<span class="line-numbers"><a href="#n17" name="n17">17</a></span>        <span class="keyword">if</span> (sum &lt;= <span class="integer">0</span>) {
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>    <span style="color:#080;font-weight:bold">for</span> (i = <span style="color:#00D">0</span>; i &lt; n; i++) {
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>        <span style="color:#080;font-weight:bold">if</span> (sum &lt;= <span style="color:#00D">0</span>) {
 <span class="line-numbers"><a href="#n18" name="n18">18</a></span>            sum = arr[i];
 <span class="line-numbers"><a href="#n19" name="n19">19</a></span>            indx = i;
-<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>        } <span class="keyword">else</span> {
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>        } <span style="color:#080;font-weight:bold">else</span> {
 <span class="line-numbers"><a href="#n21" name="n21">21</a></span>            sum += arr[i];
 <span class="line-numbers"><a href="#n22" name="n22">22</a></span>        }
 <span class="line-numbers"><a href="#n23" name="n23">23</a></span>
-<span class="line-numbers"><a href="#n24" name="n24">24</a></span>        <span class="keyword">if</span> (best &lt; sum) {
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span>        <span style="color:#080;font-weight:bold">if</span> (best &lt; sum) {
 <span class="line-numbers"><a href="#n25" name="n25">25</a></span>            best = sum;
 <span class="line-numbers"><a href="#n26" name="n26">26</a></span>            x = indx;
 <span class="line-numbers"><a href="#n27" name="n27">27</a></span>            y = i;
 <span class="line-numbers"><a href="#n28" name="n28">28</a></span>        }
 <span class="line-numbers"><a href="#n29" name="n29">29</a></span>    }
 <span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>
-<span class="line-numbers"><a href="#n31" name="n31">31</a></span>    printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Max sum %d, start index %d, end index %d</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>, best, x, y);
+<span class="line-numbers"><a href="#n31" name="n31">31</a></span>    printf(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Max sum %d, start index %d, end index %d</span><span style="color:#b0b">\n</span><span style="color:#710">&quot;</span></span>, best, x, y);
 <span class="line-numbers"><a href="#n32" name="n32">32</a></span>
-<span class="line-numbers"><a href="#n33" name="n33">33</a></span>    <span class="keyword">return</span> <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n33" name="n33">33</a></span>    <span style="color:#080;font-weight:bold">return</span> <span style="color:#00D">0</span>;
 <span class="line-numbers"><a href="#n34" name="n34">34</a></span>}
 </pre></div>
 </div>
@@ -790,64 +790,64 @@ Output <br />
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Permute Numbers</span>  <a href="http://ideone.com/10YdsI" target="_blank">Run Code </a></figcaption> <div class="CodeRay">
   <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="preprocessor">#include</span> <span class="include">&lt;stdio.h&gt;</span>
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span class="preprocessor">#include</span> <span class="include">&lt;string.h&gt;</span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span style="color:#579">#include</span> <span style="color:#B44;font-weight:bold">&lt;stdio.h&gt;</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span style="color:#579">#include</span> <span style="color:#B44;font-weight:bold">&lt;string.h&gt;</span>
 <span class="line-numbers"> <a href="#n4" name="n4">4</a></span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span class="preprocessor">#define</span> TEST <span class="integer">1</span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span style="color:#579">#define</span> TEST <span style="color:#00D">1</span>
 <span class="line-numbers"> <a href="#n6" name="n6">6</a></span>
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span><span class="directive">void</span> permute(<span class="predefined-type">int</span> *s, <span class="predefined-type">int</span> start, <span class="predefined-type">int</span> end);
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span class="directive">void</span> swap(<span class="predefined-type">int</span> *s, <span class="predefined-type">int</span> start, <span class="predefined-type">int</span> end);
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span><span class="directive">void</span> startTesting();
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span><span style="color:#088;font-weight:bold">void</span> permute(<span style="color:#0a8;font-weight:bold">int</span> *s, <span style="color:#0a8;font-weight:bold">int</span> start, <span style="color:#0a8;font-weight:bold">int</span> end);
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span style="color:#088;font-weight:bold">void</span> swap(<span style="color:#0a8;font-weight:bold">int</span> *s, <span style="color:#0a8;font-weight:bold">int</span> start, <span style="color:#0a8;font-weight:bold">int</span> end);
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span><span style="color:#088;font-weight:bold">void</span> startTesting();
 <span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span><span class="predefined-type">int</span> main(<span class="directive">void</span>) {
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span><span class="preprocessor">#ifdef</span> TEST
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span><span style="color:#0a8;font-weight:bold">int</span> main(<span style="color:#088;font-weight:bold">void</span>) {
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span><span style="color:#579">#ifdef</span> TEST
 <span class="line-numbers"><a href="#n13" name="n13">13</a></span>    startTesting();
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span><span class="preprocessor">#endif</span>
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span><span style="color:#579">#endif</span>
 <span class="line-numbers"><a href="#n15" name="n15">15</a></span>
-<span class="line-numbers"><a href="#n16" name="n16">16</a></span>    <span class="keyword">return</span> <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>    <span style="color:#080;font-weight:bold">return</span> <span style="color:#00D">0</span>;
 <span class="line-numbers"><a href="#n17" name="n17">17</a></span>}
 <span class="line-numbers"><a href="#n18" name="n18">18</a></span>
-<span class="line-numbers"><a href="#n19" name="n19">19</a></span><span class="directive">void</span> swap(<span class="predefined-type">int</span> *s, <span class="predefined-type">int</span> start, <span class="predefined-type">int</span> end) {
-<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>    <span class="predefined-type">int</span> temp = s[start];
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span><span style="color:#088;font-weight:bold">void</span> swap(<span style="color:#0a8;font-weight:bold">int</span> *s, <span style="color:#0a8;font-weight:bold">int</span> start, <span style="color:#0a8;font-weight:bold">int</span> end) {
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>    <span style="color:#0a8;font-weight:bold">int</span> temp = s[start];
 <span class="line-numbers"><a href="#n21" name="n21">21</a></span>    s[start] = s[end];
 <span class="line-numbers"><a href="#n22" name="n22">22</a></span>    s[end] = temp;
 <span class="line-numbers"><a href="#n23" name="n23">23</a></span>}
 <span class="line-numbers"><a href="#n24" name="n24">24</a></span>
-<span class="line-numbers"><a href="#n25" name="n25">25</a></span><span class="directive">void</span> permute(<span class="predefined-type">int</span> *s, <span class="predefined-type">int</span> start, <span class="predefined-type">int</span> end)
+<span class="line-numbers"><a href="#n25" name="n25">25</a></span><span style="color:#088;font-weight:bold">void</span> permute(<span style="color:#0a8;font-weight:bold">int</span> *s, <span style="color:#0a8;font-weight:bold">int</span> start, <span style="color:#0a8;font-weight:bold">int</span> end)
 <span class="line-numbers"><a href="#n26" name="n26">26</a></span>{
-<span class="line-numbers"><a href="#n27" name="n27">27</a></span>    <span class="predefined-type">int</span> i = <span class="integer">0</span>;
-<span class="line-numbers"><a href="#n28" name="n28">28</a></span>    <span class="predefined-type">int</span> j = <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n27" name="n27">27</a></span>    <span style="color:#0a8;font-weight:bold">int</span> i = <span style="color:#00D">0</span>;
+<span class="line-numbers"><a href="#n28" name="n28">28</a></span>    <span style="color:#0a8;font-weight:bold">int</span> j = <span style="color:#00D">0</span>;
 <span class="line-numbers"><a href="#n29" name="n29">29</a></span>
-<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>    <span class="keyword">if</span> (start == end) {
-<span class="line-numbers"><a href="#n31" name="n31">31</a></span>        <span class="keyword">for</span> (i = <span class="integer">0</span>; i &lt; <span class="integer">4</span>; i++) {
-<span class="line-numbers"><a href="#n32" name="n32">32</a></span>            printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d </span><span class="delimiter">&quot;</span></span>, s[i]);
+<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>    <span style="color:#080;font-weight:bold">if</span> (start == end) {
+<span class="line-numbers"><a href="#n31" name="n31">31</a></span>        <span style="color:#080;font-weight:bold">for</span> (i = <span style="color:#00D">0</span>; i &lt; <span style="color:#00D">4</span>; i++) {
+<span class="line-numbers"><a href="#n32" name="n32">32</a></span>            printf(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">%d </span><span style="color:#710">&quot;</span></span>, s[i]);
 <span class="line-numbers"><a href="#n33" name="n33">33</a></span>        }
-<span class="line-numbers"><a href="#n34" name="n34">34</a></span>        printf(<span class="string"><span class="delimiter">&quot;</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>);
-<span class="line-numbers"><a href="#n35" name="n35">35</a></span>    } <span class="keyword">else</span> {
-<span class="line-numbers"><a href="#n36" name="n36">36</a></span>        <span class="keyword">for</span> (j = start; j &lt;= end; j++) {
+<span class="line-numbers"><a href="#n34" name="n34">34</a></span>        printf(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#b0b">\n</span><span style="color:#710">&quot;</span></span>);
+<span class="line-numbers"><a href="#n35" name="n35">35</a></span>    } <span style="color:#080;font-weight:bold">else</span> {
+<span class="line-numbers"><a href="#n36" name="n36">36</a></span>        <span style="color:#080;font-weight:bold">for</span> (j = start; j &lt;= end; j++) {
 <span class="line-numbers"><a href="#n37" name="n37">37</a></span>            swap(s, start, j);
-<span class="line-numbers"><a href="#n38" name="n38">38</a></span>            permute(s, start + <span class="integer">1</span>, end);
+<span class="line-numbers"><a href="#n38" name="n38">38</a></span>            permute(s, start + <span style="color:#00D">1</span>, end);
 <span class="line-numbers"><a href="#n39" name="n39">39</a></span>            swap(s, start, j);
 <span class="line-numbers"><strong><a href="#n40" name="n40">40</a></strong></span>        }
 <span class="line-numbers"><a href="#n41" name="n41">41</a></span>    }
 <span class="line-numbers"><a href="#n42" name="n42">42</a></span>}
 <span class="line-numbers"><a href="#n43" name="n43">43</a></span>
-<span class="line-numbers"><a href="#n44" name="n44">44</a></span><span class="directive">void</span> test1()
+<span class="line-numbers"><a href="#n44" name="n44">44</a></span><span style="color:#088;font-weight:bold">void</span> test1()
 <span class="line-numbers"><a href="#n45" name="n45">45</a></span>{
-<span class="line-numbers"><a href="#n46" name="n46">46</a></span>    <span class="predefined-type">int</span> s[] = {<span class="integer">1</span>, <span class="integer">2</span>, <span class="integer">3</span>, <span class="integer">4</span>};
-<span class="line-numbers"><a href="#n47" name="n47">47</a></span>    <span class="predefined-type">int</span> i = <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n46" name="n46">46</a></span>    <span style="color:#0a8;font-weight:bold">int</span> s[] = {<span style="color:#00D">1</span>, <span style="color:#00D">2</span>, <span style="color:#00D">3</span>, <span style="color:#00D">4</span>};
+<span class="line-numbers"><a href="#n47" name="n47">47</a></span>    <span style="color:#0a8;font-weight:bold">int</span> i = <span style="color:#00D">0</span>;
 <span class="line-numbers"><a href="#n48" name="n48">48</a></span>
-<span class="line-numbers"><a href="#n49" name="n49">49</a></span>    printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">permute </span><span class="char">\n</span><span class="delimiter">&quot;</span></span>);
-<span class="line-numbers"><strong><a href="#n50" name="n50">50</a></strong></span>    <span class="keyword">for</span> (i = <span class="integer">0</span>; i &lt; <span class="integer">4</span>; i++) {
-<span class="line-numbers"><a href="#n51" name="n51">51</a></span>        printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d </span><span class="delimiter">&quot;</span></span>, s[i]);
+<span class="line-numbers"><a href="#n49" name="n49">49</a></span>    printf(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">permute </span><span style="color:#b0b">\n</span><span style="color:#710">&quot;</span></span>);
+<span class="line-numbers"><strong><a href="#n50" name="n50">50</a></strong></span>    <span style="color:#080;font-weight:bold">for</span> (i = <span style="color:#00D">0</span>; i &lt; <span style="color:#00D">4</span>; i++) {
+<span class="line-numbers"><a href="#n51" name="n51">51</a></span>        printf(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">%d </span><span style="color:#710">&quot;</span></span>, s[i]);
 <span class="line-numbers"><a href="#n52" name="n52">52</a></span>    }
-<span class="line-numbers"><a href="#n53" name="n53">53</a></span>    printf(<span class="string"><span class="delimiter">&quot;</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>);
+<span class="line-numbers"><a href="#n53" name="n53">53</a></span>    printf(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#b0b">\n</span><span style="color:#710">&quot;</span></span>);
 <span class="line-numbers"><a href="#n54" name="n54">54</a></span>
-<span class="line-numbers"><a href="#n55" name="n55">55</a></span>    permute(s, <span class="integer">0</span>, <span class="integer">3</span>);
-<span class="line-numbers"><a href="#n56" name="n56">56</a></span>    printf(<span class="string"><span class="delimiter">&quot;</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>);
+<span class="line-numbers"><a href="#n55" name="n55">55</a></span>    permute(s, <span style="color:#00D">0</span>, <span style="color:#00D">3</span>);
+<span class="line-numbers"><a href="#n56" name="n56">56</a></span>    printf(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#b0b">\n</span><span style="color:#710">&quot;</span></span>);
 <span class="line-numbers"><a href="#n57" name="n57">57</a></span>}
 <span class="line-numbers"><a href="#n58" name="n58">58</a></span>
-<span class="line-numbers"><a href="#n59" name="n59">59</a></span><span class="directive">void</span> startTesting()
+<span class="line-numbers"><a href="#n59" name="n59">59</a></span><span style="color:#088;font-weight:bold">void</span> startTesting()
 <span class="line-numbers"><strong><a href="#n60" name="n60">60</a></strong></span>{
 <span class="line-numbers"><a href="#n61" name="n61">61</a></span>    test1();
 <span class="line-numbers"><a href="#n62" name="n62">62</a></span>}
@@ -866,24 +866,24 @@ Output <br />
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>String Reverse</span>  <a href="http://ideone.com/vfTxcr" target="_blank">Run Code </a></figcaption> <div class="CodeRay">
   <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="preprocessor">#include</span> <span class="include">&lt;stdio.h&gt;</span>
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span class="preprocessor">#include</span> <span class="include">&lt;string.h&gt;</span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span style="color:#579">#include</span> <span style="color:#B44;font-weight:bold">&lt;stdio.h&gt;</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span style="color:#579">#include</span> <span style="color:#B44;font-weight:bold">&lt;string.h&gt;</span>
 <span class="line-numbers"> <a href="#n4" name="n4">4</a></span> 
 <span class="line-numbers"> <a href="#n5" name="n5">5</a></span> 
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span class="predefined-type">int</span> main(<span class="directive">void</span>) {
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span class="predefined-type">int</span> i = <span class="integer">0</span>;
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    <span class="predefined-type">char</span> str[] = <span class="string"><span class="delimiter">&quot;</span><span class="content">testString</span><span class="delimiter">&quot;</span></span>;
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    <span class="predefined-type">int</span> len = strlen(str);
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span style="color:#0a8;font-weight:bold">int</span> main(<span style="color:#088;font-weight:bold">void</span>) {
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span style="color:#0a8;font-weight:bold">int</span> i = <span style="color:#00D">0</span>;
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    <span style="color:#0a8;font-weight:bold">char</span> str[] = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">testString</span><span style="color:#710">&quot;</span></span>;
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    <span style="color:#0a8;font-weight:bold">int</span> len = strlen(str);
 <span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span> 
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>    <span class="keyword">for</span>(i = <span class="integer">0</span>; i &lt; len/<span class="integer">2</span>; i++){
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>        str[len - i - <span class="integer">1</span>] ^= str[i];
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span>        str[i] ^= str[len - i - <span class="integer">1</span>];
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span>        str[len - i - <span class="integer">1</span>] ^= str[i];
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>    <span style="color:#080;font-weight:bold">for</span>(i = <span style="color:#00D">0</span>; i &lt; len/<span style="color:#00D">2</span>; i++){
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>        str[len - i - <span style="color:#00D">1</span>] ^= str[i];
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>        str[i] ^= str[len - i - <span style="color:#00D">1</span>];
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>        str[len - i - <span style="color:#00D">1</span>] ^= str[i];
 <span class="line-numbers"><a href="#n15" name="n15">15</a></span>    }
 <span class="line-numbers"><a href="#n16" name="n16">16</a></span>
-<span class="line-numbers"><a href="#n17" name="n17">17</a></span>    printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Reverse String %s </span><span class="char">\n</span><span class="delimiter">&quot;</span></span>, str);
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>    printf(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Reverse String %s </span><span style="color:#b0b">\n</span><span style="color:#710">&quot;</span></span>, str);
 <span class="line-numbers"><a href="#n18" name="n18">18</a></span> 
-<span class="line-numbers"><a href="#n19" name="n19">19</a></span>    <span class="keyword">return</span> <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>    <span style="color:#080;font-weight:bold">return</span> <span style="color:#00D">0</span>;
 <span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>}
 <span class="line-numbers"><a href="#n21" name="n21">21</a></span>
 </pre></div>
@@ -907,31 +907,31 @@ a1B1F1o2r1</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Duplicate &amp; count</span>  <a href="http://ideone.com/GWxZRK" target="_blank">Run Code </a></figcaption> <div class="CodeRay">
   <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="preprocessor">#include</span> <span class="include">&lt;stdio.h&gt;</span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span style="color:#579">#include</span> <span style="color:#B44;font-weight:bold">&lt;stdio.h&gt;</span>
 <span class="line-numbers"> <a href="#n3" name="n3">3</a></span>
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span class="directive">void</span> printDup(<span class="predefined-type">char</span> *str)
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span style="color:#088;font-weight:bold">void</span> printDup(<span style="color:#0a8;font-weight:bold">char</span> *str)
 <span class="line-numbers"> <a href="#n5" name="n5">5</a></span>{
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    <span class="predefined-type">int</span> count[<span class="integer">256</span>] = {<span class="integer">0</span>};
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span class="predefined-type">int</span> i = <span class="integer">0</span>;
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    <span style="color:#0a8;font-weight:bold">int</span> count[<span style="color:#00D">256</span>] = {<span style="color:#00D">0</span>};
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span style="color:#0a8;font-weight:bold">int</span> i = <span style="color:#00D">0</span>;
 <span class="line-numbers"> <a href="#n8" name="n8">8</a></span>
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    <span class="keyword">while</span> (*str != <span class="char">'\0'</span>) {
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    <span style="color:#080;font-weight:bold">while</span> (*str != <span style="color:#D20">'\0'</span>) {
 <span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>        count[*str++]++;
 <span class="line-numbers"><a href="#n11" name="n11">11</a></span>    }
 <span class="line-numbers"><a href="#n12" name="n12">12</a></span>
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span>    <span class="keyword">for</span> (i = <span class="integer">0</span>; i &lt; <span class="integer">256</span>; i++) {
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span>        <span class="keyword">if</span> (count[i] &gt; <span class="integer">0</span>) {
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span>            printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">%c %d</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>, i, count[i]);
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>    <span style="color:#080;font-weight:bold">for</span> (i = <span style="color:#00D">0</span>; i &lt; <span style="color:#00D">256</span>; i++) {
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>        <span style="color:#080;font-weight:bold">if</span> (count[i] &gt; <span style="color:#00D">0</span>) {
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>            printf(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">%c %d</span><span style="color:#b0b">\n</span><span style="color:#710">&quot;</span></span>, i, count[i]);
 <span class="line-numbers"><a href="#n16" name="n16">16</a></span>        }
 <span class="line-numbers"><a href="#n17" name="n17">17</a></span>    }
 <span class="line-numbers"><a href="#n18" name="n18">18</a></span>}
 <span class="line-numbers"><a href="#n19" name="n19">19</a></span>
-<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span><span class="predefined-type">int</span> main()
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span><span style="color:#0a8;font-weight:bold">int</span> main()
 <span class="line-numbers"><a href="#n21" name="n21">21</a></span>{
-<span class="line-numbers"><a href="#n22" name="n22">22</a></span>    <span class="predefined-type">char</span> *str = <span class="string"><span class="delimiter">&quot;</span><span class="content">Foo Bar</span><span class="delimiter">&quot;</span></span>;
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span>    <span style="color:#0a8;font-weight:bold">char</span> *str = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Foo Bar</span><span style="color:#710">&quot;</span></span>;
 <span class="line-numbers"><a href="#n23" name="n23">23</a></span>
 <span class="line-numbers"><a href="#n24" name="n24">24</a></span>    printDup(str);
 <span class="line-numbers"><a href="#n25" name="n25">25</a></span>
-<span class="line-numbers"><a href="#n26" name="n26">26</a></span>    <span class="keyword">return</span> <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span>    <span style="color:#080;font-weight:bold">return</span> <span style="color:#00D">0</span>;
 <span class="line-numbers"><a href="#n27" name="n27">27</a></span>}
 </pre></div>
 </div>
@@ -952,17 +952,17 @@ abcd</p>
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Remove dup </span></figcaption>
  <div class="CodeRay">
   <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="directive">void</span> removeDup(<span class="predefined-type">char</span> *str)
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span style="color:#088;font-weight:bold">void</span> removeDup(<span style="color:#0a8;font-weight:bold">char</span> *str)
 <span class="line-numbers"> <a href="#n3" name="n3">3</a></span>{
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    <span class="predefined-type">int</span> read = <span class="integer">0</span>;
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    <span class="predefined-type">int</span> write = <span class="integer">0</span>;
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    <span style="color:#0a8;font-weight:bold">int</span> read = <span style="color:#00D">0</span>;
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    <span style="color:#0a8;font-weight:bold">int</span> write = <span style="color:#00D">0</span>;
 <span class="line-numbers"> <a href="#n6" name="n6">6</a></span>
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span class="keyword">while</span> (str[read] != <span class="char">'\0'</span>) {
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>        <span class="keyword">while</span> (str[read] != <span class="char">'\0'</span> &amp;&amp; str[read] != str[read + <span class="integer">1</span>]) {
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span style="color:#080;font-weight:bold">while</span> (str[read] != <span style="color:#D20">'\0'</span>) {
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>        <span style="color:#080;font-weight:bold">while</span> (str[read] != <span style="color:#D20">'\0'</span> &amp;&amp; str[read] != str[read + <span style="color:#00D">1</span>]) {
 <span class="line-numbers"> <a href="#n9" name="n9">9</a></span>            str[write++] = str[read++];
 <span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>        }
 <span class="line-numbers"><a href="#n11" name="n11">11</a></span>
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>        <span class="keyword">while</span> (str[read] != <span class="char">'\0'</span> &amp;&amp; str[read] == str[read++]);
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>        <span style="color:#080;font-weight:bold">while</span> (str[read] != <span style="color:#D20">'\0'</span> &amp;&amp; str[read] == str[read++]);
 <span class="line-numbers"><a href="#n13" name="n13">13</a></span>    }
 <span class="line-numbers"><a href="#n14" name="n14">14</a></span>}
 </pre></div>
@@ -1003,13 +1003,13 @@ Rotate 2 times</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Rotate Array</span>  <a href="http://ideone.com/qsdYO0" target="_blank">Run Code </a></figcaption> <div class="CodeRay">
   <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="preprocessor">#include</span> <span class="include">&lt;stdio.h&gt;</span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span style="color:#579">#include</span> <span style="color:#B44;font-weight:bold">&lt;stdio.h&gt;</span>
 <span class="line-numbers"> <a href="#n3" name="n3">3</a></span>
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span class="directive">void</span> reverseArr(<span class="predefined-type">int</span> arr[], <span class="predefined-type">int</span> start, <span class="predefined-type">int</span> end)
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span style="color:#088;font-weight:bold">void</span> reverseArr(<span style="color:#0a8;font-weight:bold">int</span> arr[], <span style="color:#0a8;font-weight:bold">int</span> start, <span style="color:#0a8;font-weight:bold">int</span> end)
 <span class="line-numbers"> <a href="#n5" name="n5">5</a></span>{
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    <span class="predefined-type">int</span> temp = <span class="integer">0</span>;
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    <span style="color:#0a8;font-weight:bold">int</span> temp = <span style="color:#00D">0</span>;
 <span class="line-numbers"> <a href="#n7" name="n7">7</a></span>
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    <span class="keyword">while</span> (start &lt; end) {
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    <span style="color:#080;font-weight:bold">while</span> (start &lt; end) {
 <span class="line-numbers"> <a href="#n9" name="n9">9</a></span>        temp = arr[start];
 <span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>        arr[start] = arr[end];
 <span class="line-numbers"><a href="#n11" name="n11">11</a></span>        arr[end] = temp;
@@ -1020,22 +1020,22 @@ Rotate 2 times</p>
 <span class="line-numbers"><a href="#n16" name="n16">16</a></span>
 <span class="line-numbers"><a href="#n17" name="n17">17</a></span>}
 <span class="line-numbers"><a href="#n18" name="n18">18</a></span>
-<span class="line-numbers"><a href="#n19" name="n19">19</a></span><span class="predefined-type">int</span> main()
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span><span style="color:#0a8;font-weight:bold">int</span> main()
 <span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>{
-<span class="line-numbers"><a href="#n21" name="n21">21</a></span>    <span class="predefined-type">int</span> arr[] = {<span class="integer">1</span>, <span class="integer">2</span>, <span class="integer">3</span>, <span class="integer">4</span>, <span class="integer">5</span>, <span class="integer">6</span>, <span class="integer">7</span>};
-<span class="line-numbers"><a href="#n22" name="n22">22</a></span>    <span class="predefined-type">int</span> rotate = <span class="integer">2</span>;
-<span class="line-numbers"><a href="#n23" name="n23">23</a></span>    <span class="predefined-type">int</span> size = <span class="integer">7</span>;
-<span class="line-numbers"><a href="#n24" name="n24">24</a></span>    <span class="predefined-type">int</span> i = <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>    <span style="color:#0a8;font-weight:bold">int</span> arr[] = {<span style="color:#00D">1</span>, <span style="color:#00D">2</span>, <span style="color:#00D">3</span>, <span style="color:#00D">4</span>, <span style="color:#00D">5</span>, <span style="color:#00D">6</span>, <span style="color:#00D">7</span>};
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span>    <span style="color:#0a8;font-weight:bold">int</span> rotate = <span style="color:#00D">2</span>;
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span>    <span style="color:#0a8;font-weight:bold">int</span> size = <span style="color:#00D">7</span>;
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span>    <span style="color:#0a8;font-weight:bold">int</span> i = <span style="color:#00D">0</span>;
 <span class="line-numbers"><a href="#n25" name="n25">25</a></span>
-<span class="line-numbers"><a href="#n26" name="n26">26</a></span>    reverseArr(arr, <span class="integer">0</span>, rotate - <span class="integer">1</span>);
-<span class="line-numbers"><a href="#n27" name="n27">27</a></span>    reverseArr(arr, rotate, size - <span class="integer">1</span>);
-<span class="line-numbers"><a href="#n28" name="n28">28</a></span>    reverseArr(arr, <span class="integer">0</span>, size - <span class="integer">1</span>);
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span>    reverseArr(arr, <span style="color:#00D">0</span>, rotate - <span style="color:#00D">1</span>);
+<span class="line-numbers"><a href="#n27" name="n27">27</a></span>    reverseArr(arr, rotate, size - <span style="color:#00D">1</span>);
+<span class="line-numbers"><a href="#n28" name="n28">28</a></span>    reverseArr(arr, <span style="color:#00D">0</span>, size - <span style="color:#00D">1</span>);
 <span class="line-numbers"><a href="#n29" name="n29">29</a></span>
-<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>    <span class="keyword">for</span> (i = <span class="integer">0</span>; i &lt; size; i++) {
-<span class="line-numbers"><a href="#n31" name="n31">31</a></span>        printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">%d </span><span class="delimiter">&quot;</span></span>, arr[i]);
+<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>    <span style="color:#080;font-weight:bold">for</span> (i = <span style="color:#00D">0</span>; i &lt; size; i++) {
+<span class="line-numbers"><a href="#n31" name="n31">31</a></span>        printf(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">%d </span><span style="color:#710">&quot;</span></span>, arr[i]);
 <span class="line-numbers"><a href="#n32" name="n32">32</a></span>    }
 <span class="line-numbers"><a href="#n33" name="n33">33</a></span>
-<span class="line-numbers"><a href="#n34" name="n34">34</a></span>    <span class="keyword">return</span> <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n34" name="n34">34</a></span>    <span style="color:#080;font-weight:bold">return</span> <span style="color:#00D">0</span>;
 <span class="line-numbers"><a href="#n35" name="n35">35</a></span>}
 </pre></div>
 </div>
@@ -1170,6 +1170,10 @@ Rotate 2 times</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/12/31/fork-in-freebsd/">Fork code in FreeBSD</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/11/27/dynamic-programming/">Dynamic Programming</a>
       </li>
     
@@ -1185,10 +1189,6 @@ Rotate 2 times</p>
         <a href="/blog/2014/07/08/boot-freebsd/">Boot FreeBSD</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/06/18/curious-case-of-recursion/">Curious Case Of Recursion</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -1198,11 +1198,11 @@ Rotate 2 times</p>
 <h1>Categories</h1>
 <ul id="categories">
 <li class='category'><a href='/blog/categories/d3-js/'>D3.js (1)</a></li>
-<li class='category'><a href='/blog/categories/freebsd/'>FreeBSD (2)</a></li>
+<li class='category'><a href='/blog/categories/freebsd/'>FreeBSD (3)</a></li>
 <li class='category'><a href='/blog/categories/linux/'>Linux (1)</a></li>
 <li class='category'><a href='/blog/categories/octopress/'>Octopress (1)</a></li>
 <li class='category'><a href='/blog/categories/operating/'>Operating (1)</a></li>
-<li class='category'><a href='/blog/categories/operating-systems/'>Operating Systems (7)</a></li>
+<li class='category'><a href='/blog/categories/operating-systems/'>Operating Systems (8)</a></li>
 <li class='category'><a href='/blog/categories/reading-list/'>Reading List (1)</a></li>
 <li class='category'><a href='/blog/categories/scale/'>Scale (1)</a></li>
 <li class='category'><a href='/blog/categories/systems/'>Systems (4)</a></li>

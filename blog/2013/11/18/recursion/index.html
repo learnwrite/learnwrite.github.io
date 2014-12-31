@@ -410,43 +410,43 @@ Idea is that if power is even then multiply evenly i.e. </p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Power (x, n)</span>  <a href="http://ideone.com/BpMEJ8" target="_blank">Run Code </a></figcaption> <div class="CodeRay">
   <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="preprocessor">#include</span> <span class="include">&lt;stdio.h&gt;</span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span style="color:#579">#include</span> <span style="color:#B44;font-weight:bold">&lt;stdio.h&gt;</span>
 <span class="line-numbers"> <a href="#n3" name="n3">3</a></span>
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span class="predefined-type">float</span> power(<span class="predefined-type">float</span> x, <span class="predefined-type">int</span> n)
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span style="color:#0a8;font-weight:bold">float</span> power(<span style="color:#0a8;font-weight:bold">float</span> x, <span style="color:#0a8;font-weight:bold">int</span> n)
 <span class="line-numbers"> <a href="#n5" name="n5">5</a></span>{
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    <span class="predefined-type">float</span> temp;
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span class="keyword">if</span>( n == <span class="integer">0</span>)
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>        <span class="keyword">return</span> <span class="integer">1</span>;
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    temp = power(x, n/<span class="integer">2</span>);
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>    <span class="keyword">if</span> ((n % <span class="integer">2</span>) == <span class="integer">0</span>)
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>        <span class="keyword">return</span> temp*temp;
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    <span class="keyword">else</span>
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    <span style="color:#0a8;font-weight:bold">float</span> temp;
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span style="color:#080;font-weight:bold">if</span>( n == <span style="color:#00D">0</span>)
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>        <span style="color:#080;font-weight:bold">return</span> <span style="color:#00D">1</span>;
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    temp = power(x, n/<span style="color:#00D">2</span>);
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>    <span style="color:#080;font-weight:bold">if</span> ((n % <span style="color:#00D">2</span>) == <span style="color:#00D">0</span>)
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>        <span style="color:#080;font-weight:bold">return</span> temp*temp;
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    <span style="color:#080;font-weight:bold">else</span>
 <span class="line-numbers"><a href="#n13" name="n13">13</a></span>    {
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span>        <span class="keyword">if</span>(n &gt; <span class="integer">0</span>)
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span>            <span class="keyword">return</span> x*temp*temp;
-<span class="line-numbers"><a href="#n16" name="n16">16</a></span>        <span class="keyword">else</span>
-<span class="line-numbers"><a href="#n17" name="n17">17</a></span>            <span class="keyword">return</span> (temp * temp) / x;
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>        <span style="color:#080;font-weight:bold">if</span>(n &gt; <span style="color:#00D">0</span>)
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>            <span style="color:#080;font-weight:bold">return</span> x*temp*temp;
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>        <span style="color:#080;font-weight:bold">else</span>
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>            <span style="color:#080;font-weight:bold">return</span> (temp * temp) / x;
 <span class="line-numbers"><a href="#n18" name="n18">18</a></span>    }
 <span class="line-numbers"><a href="#n19" name="n19">19</a></span>}
 <span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>
-<span class="line-numbers"><a href="#n21" name="n21">21</a></span><span class="predefined-type">int</span> main()
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span><span style="color:#0a8;font-weight:bold">int</span> main()
 <span class="line-numbers"><a href="#n22" name="n22">22</a></span>{
-<span class="line-numbers"><a href="#n23" name="n23">23</a></span>    <span class="predefined-type">float</span> res = power(<span class="integer">2</span>, <span class="integer">4</span>);
-<span class="line-numbers"><a href="#n24" name="n24">24</a></span>    printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Result 2^4 = %f </span><span class="char">\n</span><span class="delimiter">&quot;</span></span>, res);
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span>    <span style="color:#0a8;font-weight:bold">float</span> res = power(<span style="color:#00D">2</span>, <span style="color:#00D">4</span>);
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span>    printf(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Result 2^4 = %f </span><span style="color:#b0b">\n</span><span style="color:#710">&quot;</span></span>, res);
 <span class="line-numbers"><a href="#n25" name="n25">25</a></span>
-<span class="line-numbers"><a href="#n26" name="n26">26</a></span>    res = power(<span class="integer">2</span>, <span class="integer">3</span>);
-<span class="line-numbers"><a href="#n27" name="n27">27</a></span>    printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Result 2^3 = %f </span><span class="char">\n</span><span class="delimiter">&quot;</span></span>, res);
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span>    res = power(<span style="color:#00D">2</span>, <span style="color:#00D">3</span>);
+<span class="line-numbers"><a href="#n27" name="n27">27</a></span>    printf(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Result 2^3 = %f </span><span style="color:#b0b">\n</span><span style="color:#710">&quot;</span></span>, res);
 <span class="line-numbers"><a href="#n28" name="n28">28</a></span>
-<span class="line-numbers"><a href="#n29" name="n29">29</a></span>    res = power(<span class="integer">2</span>, -<span class="integer">2</span>);
-<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>    printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Result 2^-2 = %f </span><span class="char">\n</span><span class="delimiter">&quot;</span></span>, res);
+<span class="line-numbers"><a href="#n29" name="n29">29</a></span>    res = power(<span style="color:#00D">2</span>, -<span style="color:#00D">2</span>);
+<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>    printf(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Result 2^-2 = %f </span><span style="color:#b0b">\n</span><span style="color:#710">&quot;</span></span>, res);
 <span class="line-numbers"><a href="#n31" name="n31">31</a></span>
-<span class="line-numbers"><a href="#n32" name="n32">32</a></span>    res = power(<span class="integer">2</span>, -<span class="integer">4</span>);
-<span class="line-numbers"><a href="#n33" name="n33">33</a></span>    printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Result 2^-4 = %f </span><span class="char">\n</span><span class="delimiter">&quot;</span></span>, res);
+<span class="line-numbers"><a href="#n32" name="n32">32</a></span>    res = power(<span style="color:#00D">2</span>, -<span style="color:#00D">4</span>);
+<span class="line-numbers"><a href="#n33" name="n33">33</a></span>    printf(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Result 2^-4 = %f </span><span style="color:#b0b">\n</span><span style="color:#710">&quot;</span></span>, res);
 <span class="line-numbers"><a href="#n34" name="n34">34</a></span>
-<span class="line-numbers"><a href="#n35" name="n35">35</a></span>    res = power(-<span class="integer">2</span>, -<span class="integer">3</span>);
-<span class="line-numbers"><a href="#n36" name="n36">36</a></span>    printf(<span class="string"><span class="delimiter">&quot;</span><span class="content">Result 2^4 = %f </span><span class="char">\n</span><span class="delimiter">&quot;</span></span>, res);
+<span class="line-numbers"><a href="#n35" name="n35">35</a></span>    res = power(-<span style="color:#00D">2</span>, -<span style="color:#00D">3</span>);
+<span class="line-numbers"><a href="#n36" name="n36">36</a></span>    printf(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Result 2^4 = %f </span><span style="color:#b0b">\n</span><span style="color:#710">&quot;</span></span>, res);
 <span class="line-numbers"><a href="#n37" name="n37">37</a></span>
-<span class="line-numbers"><a href="#n38" name="n38">38</a></span>    <span class="keyword">return</span> <span class="integer">0</span>;
+<span class="line-numbers"><a href="#n38" name="n38">38</a></span>    <span style="color:#080;font-weight:bold">return</span> <span style="color:#00D">0</span>;
 <span class="line-numbers"><a href="#n39" name="n39">39</a></span>}
 </pre></div>
 </div>
@@ -569,6 +569,10 @@ Idea is that if power is even then multiply evenly i.e. </p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/12/31/fork-in-freebsd/">Fork code in FreeBSD</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/11/27/dynamic-programming/">Dynamic Programming</a>
       </li>
     
@@ -584,10 +588,6 @@ Idea is that if power is even then multiply evenly i.e. </p>
         <a href="/blog/2014/07/08/boot-freebsd/">Boot FreeBSD</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/06/18/curious-case-of-recursion/">Curious Case Of Recursion</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -597,11 +597,11 @@ Idea is that if power is even then multiply evenly i.e. </p>
 <h1>Categories</h1>
 <ul id="categories">
 <li class='category'><a href='/blog/categories/d3-js/'>D3.js (1)</a></li>
-<li class='category'><a href='/blog/categories/freebsd/'>FreeBSD (2)</a></li>
+<li class='category'><a href='/blog/categories/freebsd/'>FreeBSD (3)</a></li>
 <li class='category'><a href='/blog/categories/linux/'>Linux (1)</a></li>
 <li class='category'><a href='/blog/categories/octopress/'>Octopress (1)</a></li>
 <li class='category'><a href='/blog/categories/operating/'>Operating (1)</a></li>
-<li class='category'><a href='/blog/categories/operating-systems/'>Operating Systems (7)</a></li>
+<li class='category'><a href='/blog/categories/operating-systems/'>Operating Systems (8)</a></li>
 <li class='category'><a href='/blog/categories/reading-list/'>Reading List (1)</a></li>
 <li class='category'><a href='/blog/categories/scale/'>Scale (1)</a></li>
 <li class='category'><a href='/blog/categories/systems/'>Systems (4)</a></li>

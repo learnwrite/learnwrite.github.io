@@ -4,7 +4,7 @@
   <title><![CDATA[Category: design pattern | Distributed Knowledge]]></title>
   <link href="http://distkeys.com/blog/categories/design-pattern/atom.xml" rel="self"/>
   <link href="http://distkeys.com/"/>
-  <updated>2014-12-31T00:56:58-08:00</updated>
+  <updated>2014-12-31T12:55:31-08:00</updated>
   <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -54,25 +54,23 @@ You could do that but it’s not really enforcing anything, you can’t guarante
 
 <p>In <strong>Singleton Design Pattern</strong>, we don’t want to have to write code to instantiate the Singleton, we want to assume that it always exists, there is always one of them, and we just want to be able to ask for it from any other point of the program and get it.<br /></p>
 
-<p><blockquote><p>With the Singleton Design Pattern we ensure that a class only has one instance, and we provide just one way to get to it.</p></blockquote></p>
+<p>{% blockquote %}
+With the Singleton Design Pattern we ensure that a class only has one instance, and we provide just one way to get to it.
+{% endblockquote %}</p>
 
 <p><strong>Step 1</strong><br />
 Mark constructor as <em>Private</em></p>
 
 <p>What this means is nobody can actually instantiate the class from outside, nobody can just say they want to create a new object. This doesn’t really solve our problem that we need there to be one of them. We just can’t create it from the outside. </p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Singleton </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre>
-<span class="directive">public</span> <span class="type">class</span> <span class="class">MySingleton</span> {&lt;/p&gt;
+<p>{% coderay lang:java linenos:false Singleton %}
+public class MySingleton {</p>
 
-&lt;pre&gt;&lt;code&gt;    <span class="comment">// private constructor - no object can instantiate</span>
-    <span class="directive">private</span> MySingleton() { }
-    
-    ...
-    ... } </pre></div>
-</div>
- </figure></notextile></div>
+<pre><code>	// private constructor - no object can instantiate
+	private MySingleton() { }
+	
+	...
+	... } {% endcoderay %}
 </code></pre>
 
 <p><strong>Step 2</strong><br />
@@ -80,19 +78,15 @@ Create a static variable in this class that holds a placeholder to a singleton o
 
 <p>This just means a variable that can hold a singleton object, and there is nothing in it right now.</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Singleton </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre>
-<span class="directive">public</span> <span class="type">class</span> <span class="class">MySingleton</span> {
-        <span class="comment">// placeholder for singleton object</span>
-        <span class="directive">private</span> <span class="directive">static</span> MySingleton _singleObj = <span class="predefined-constant">null</span>;&lt;/p&gt;
+<p>{% coderay lang:java linenos:false Singleton %}
+public class MySingleton {
+		// placeholder for singleton object
+		private static MySingleton _singleObj = null;</p>
 
-&lt;pre&gt;&lt;code&gt;    <span class="comment">// private constructor - no object can instantiate</span>
-    <span class="directive">private</span> MySingleton() { }
-    
-    ... } </pre></div>
-</div>
- </figure></notextile></div>
+<pre><code>	// private constructor - no object can instantiate
+	private MySingleton() { }
+	
+	... } {% endcoderay %}
 </code></pre>
 
 <p><strong>Step 3</strong><br />
@@ -100,46 +94,40 @@ Create a static method say <em>getInstance()</em>. </p>
 
 <p>Static methods can only access static data members. In this case, we don’t have to have an instance of this class yet. The first thing it asks is do I exist? Is there anything in that _singleObj variable, if it’s null then instantiate a new MySingleton object.</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Singleton </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre>
-<span class="directive">public</span> <span class="type">class</span> <span class="class">MySingleton</span> {
-        <span class="comment">// placeholder for singleton object</span>
-        <span class="directive">private</span> <span class="directive">static</span> MySingleton _singleObj = <span class="predefined-constant">null</span>;&lt;/p&gt;
+<p>{% coderay lang:java linenos:false Singleton %}
+public class MySingleton {
+		// placeholder for singleton object
+		private static MySingleton _singleObj = null;</p>
 
-&lt;pre&gt;&lt;code&gt;    <span class="comment">// private constructor - no object can instantiate</span>
-    <span class="directive">private</span> MySingleton() { }
-    
-    <span class="directive">public</span> <span class="directive">static</span> MySingleton getInstance() {
-        <span class="comment">// Do I exists ?</span>
-        <span class="keyword">if</span> (_singleObj == <span class="predefined-constant">null</span>) {
-                <span class="comment">// Instantiate object</span>
-                _singleObj = <span class="keyword">new</span> MySingleton();
-        }
-        <span class="keyword">return</span> _singleObj;            
-    }
-    
-    <span class="comment">// Other member functions</span>
-    ... } </pre></div>
-</div>
- </figure></notextile></div>
+<pre><code>	// private constructor - no object can instantiate
+	private MySingleton() { }
+	
+	public static MySingleton getInstance() {
+		// Do I exists ?
+		if (_singleObj == null) {
+				// Instantiate object
+				_singleObj = new MySingleton();
+		}
+		return _singleObj;			
+	}
+	
+	// Other member functions
+	... } {% endcoderay %}
 </code></pre>
 
 <p>We’re allowed to do instantiate the object  in <em>getInstance()</em>  from inside this class, because we marked that constructor as <em>private</em>, which means this class is allowed to call it but nobody else is.</p>
 
-<p><blockquote><p>We are actually using a technique here called Lazy Instantiation, which means that until someone asks for this object it doesn’t exist. But when they ask for it, we’ll look for it. If it doesn’t exist, we create it, we store a reference to it so that when the next person asks it’s already there.</p></blockquote></p>
+<p>{% blockquote %}
+We are actually using a technique here called Lazy Instantiation, which means that until someone asks for this object it doesn’t exist. But when they ask for it, we’ll look for it. If it doesn’t exist, we create it, we store a reference to it so that when the next person asks it’s already there.
+{% endblockquote %}</p>
 
 <p>Finally to invoke Singleton</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Singleton </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre>
-MySingleton single = MySingleton.getInstance();&lt;/p&gt;
+<p>{% coderay lang:java linenos:false Singleton %}
+MySingleton single = MySingleton.getInstance();</p>
 
-&lt;p&gt;single.otherMemberFunctions();
-</pre></div>
-</div>
- </figure></notextile></div></p>
+<p>single.otherMemberFunctions();
+{% endcoderay %}</p>
 
 <p><br /><br /></p>
 ]]></content>

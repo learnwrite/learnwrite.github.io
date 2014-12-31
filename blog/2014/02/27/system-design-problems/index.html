@@ -198,17 +198,17 @@ Multiple parameters can be provided for the requirement. For details of these pa
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>fopen() </span></figcaption>
  <div class="CodeRay">
   <div class="code"><pre>
-<span class="preprocessor">#include</span> <span class="include">&lt;stdio.h&gt;</span>
+<span style="color:#579">#include</span> <span style="color:#B44;font-weight:bold">&lt;stdio.h&gt;</span>
 
-<span class="predefined-type">int</span> main()
+<span style="color:#0a8;font-weight:bold">int</span> main()
 {
    FILE *fp;
 
-    <span class="comment">//Open file test.txt in read mode</span>
-   fp = fopen(<span class="string"><span class="delimiter">&quot;</span><span class="content">/tmp/test.txt</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">r</span><span class="delimiter">&quot;</span></span>);
+    <span style="color:#777">//Open file test.txt in read mode</span>
+   fp = fopen(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">/tmp/test.txt</span><span style="color:#710">&quot;</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">r</span><span style="color:#710">&quot;</span></span>);
    fclose(fp);
 
-   <span class="keyword">return</span> <span class="integer">0</span>;
+   <span style="color:#080;font-weight:bold">return</span> <span style="color:#00D">0</span>;
 }
 </pre></div>
 </div>
@@ -231,7 +231,7 @@ Multiple parameters can be provided for the requirement. For details of these pa
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>FILE - stdio.h </span></figcaption>
  <div class="CodeRay">
   <div class="code"><pre>
- <span class="comment">/*
+ <span style="color:#777">/*
   * stdio state variables.
   *
   * The following always hold:
@@ -258,37 +258,37 @@ Multiple parameters can be provided for the requirement. For details of these pa
   * NB: see WARNING above before changing the layout of this structure!
   */</span>
 
- <span class="keyword">typedef</span> <span class="keyword">struct</span> __sFILE {
-         <span class="predefined-type">unsigned</span> <span class="predefined-type">char</span> *_p;        <span class="comment">/* current position in (some) buffer */</span>
-         <span class="predefined-type">int</span>     _r;               <span class="comment">/* read space left for getc() */</span>
-         <span class="predefined-type">int</span>     _w;               <span class="comment">/* write space left for putc() */</span>
-         <span class="predefined-type">short</span>   _flags;           <span class="comment">/* flags, below; this FILE is free if 0 */</span>
-         <span class="predefined-type">short</span>   _file;            <span class="comment">/* fileno, if Unix descriptor, else -1 */</span>
-         <span class="keyword">struct</span>  __sbuf _bf;       <span class="comment">/* the buffer (at least 1 byte, if !NULL) */</span>
-         <span class="predefined-type">int</span>     _lbfsize;         <span class="comment">/* 0 or -_bf._size, for inline putc */</span>
+ <span style="color:#080;font-weight:bold">typedef</span> <span style="color:#080;font-weight:bold">struct</span> __sFILE {
+         <span style="color:#0a8;font-weight:bold">unsigned</span> <span style="color:#0a8;font-weight:bold">char</span> *_p;        <span style="color:#777">/* current position in (some) buffer */</span>
+         <span style="color:#0a8;font-weight:bold">int</span>     _r;               <span style="color:#777">/* read space left for getc() */</span>
+         <span style="color:#0a8;font-weight:bold">int</span>     _w;               <span style="color:#777">/* write space left for putc() */</span>
+         <span style="color:#0a8;font-weight:bold">short</span>   _flags;           <span style="color:#777">/* flags, below; this FILE is free if 0 */</span>
+         <span style="color:#0a8;font-weight:bold">short</span>   _file;            <span style="color:#777">/* fileno, if Unix descriptor, else -1 */</span>
+         <span style="color:#080;font-weight:bold">struct</span>  __sbuf _bf;       <span style="color:#777">/* the buffer (at least 1 byte, if !NULL) */</span>
+         <span style="color:#0a8;font-weight:bold">int</span>     _lbfsize;         <span style="color:#777">/* 0 or -_bf._size, for inline putc */</span>
  
-         <span class="comment">/* operations */</span>
-         <span class="directive">void</span>    *_cookie;        <span class="comment">/* cookie passed to io functions */</span>
-         <span class="predefined-type">int</span>     (*_close)(<span class="directive">void</span> *);
-         <span class="predefined-type">int</span>     (*_read) (<span class="directive">void</span> *, <span class="predefined-type">char</span> *, <span class="predefined-type">int</span>);
-         fpos_t  (*_seek) (<span class="directive">void</span> *, fpos_t, <span class="predefined-type">int</span>);
-         <span class="predefined-type">int</span>     (*_write)(<span class="directive">void</span> *, <span class="directive">const</span> <span class="predefined-type">char</span> *, <span class="predefined-type">int</span>);
+         <span style="color:#777">/* operations */</span>
+         <span style="color:#088;font-weight:bold">void</span>    *_cookie;        <span style="color:#777">/* cookie passed to io functions */</span>
+         <span style="color:#0a8;font-weight:bold">int</span>     (*_close)(<span style="color:#088;font-weight:bold">void</span> *);
+         <span style="color:#0a8;font-weight:bold">int</span>     (*_read) (<span style="color:#088;font-weight:bold">void</span> *, <span style="color:#0a8;font-weight:bold">char</span> *, <span style="color:#0a8;font-weight:bold">int</span>);
+         fpos_t  (*_seek) (<span style="color:#088;font-weight:bold">void</span> *, fpos_t, <span style="color:#0a8;font-weight:bold">int</span>);
+         <span style="color:#0a8;font-weight:bold">int</span>     (*_write)(<span style="color:#088;font-weight:bold">void</span> *, <span style="color:#088;font-weight:bold">const</span> <span style="color:#0a8;font-weight:bold">char</span> *, <span style="color:#0a8;font-weight:bold">int</span>);
  
-         <span class="comment">/* separate buffer for long sequences of ungetc() */</span>
-         <span class="keyword">struct</span>  __sbuf _ub;     <span class="comment">/* ungetc buffer */</span>
-         <span class="keyword">struct</span> __sFILEX *_extra; <span class="comment">/* additions to FILE to not break ABI */</span>
-         <span class="predefined-type">int</span>     _ur;            <span class="comment">/* saved _r when _r is counting ungetc data */</span>
+         <span style="color:#777">/* separate buffer for long sequences of ungetc() */</span>
+         <span style="color:#080;font-weight:bold">struct</span>  __sbuf _ub;     <span style="color:#777">/* ungetc buffer */</span>
+         <span style="color:#080;font-weight:bold">struct</span> __sFILEX *_extra; <span style="color:#777">/* additions to FILE to not break ABI */</span>
+         <span style="color:#0a8;font-weight:bold">int</span>     _ur;            <span style="color:#777">/* saved _r when _r is counting ungetc data */</span>
  
-         <span class="comment">/* tricks to meet minimum requirements even when malloc() fails */</span>
-         <span class="predefined-type">unsigned</span> <span class="predefined-type">char</span> _ubuf[<span class="integer">3</span>]; <span class="comment">/* guarantee an ungetc() buffer */</span>
-         <span class="predefined-type">unsigned</span> <span class="predefined-type">char</span> _nbuf[<span class="integer">1</span>]; <span class="comment">/* guarantee a getc() buffer */</span>
+         <span style="color:#777">/* tricks to meet minimum requirements even when malloc() fails */</span>
+         <span style="color:#0a8;font-weight:bold">unsigned</span> <span style="color:#0a8;font-weight:bold">char</span> _ubuf[<span style="color:#00D">3</span>]; <span style="color:#777">/* guarantee an ungetc() buffer */</span>
+         <span style="color:#0a8;font-weight:bold">unsigned</span> <span style="color:#0a8;font-weight:bold">char</span> _nbuf[<span style="color:#00D">1</span>]; <span style="color:#777">/* guarantee a getc() buffer */</span>
  
-         <span class="comment">/* separate buffer for fgetln() when line crosses buffer boundary */</span>
-         <span class="keyword">struct</span>  __sbuf _lb;     <span class="comment">/* buffer for fgetln() */</span>
+         <span style="color:#777">/* separate buffer for fgetln() when line crosses buffer boundary */</span>
+         <span style="color:#080;font-weight:bold">struct</span>  __sbuf _lb;     <span style="color:#777">/* buffer for fgetln() */</span>
  
-         <span class="comment">/* Unix stdio files get aligned to block boundaries on fseek() */</span>
-         <span class="predefined-type">int</span>     _blksize;        <span class="comment">/* stat.st_blksize (may be != _bf._size) */</span>
-         fpos_t  _offset;        <span class="comment">/* current lseek offset (see WARNING) */</span>
+         <span style="color:#777">/* Unix stdio files get aligned to block boundaries on fseek() */</span>
+         <span style="color:#0a8;font-weight:bold">int</span>     _blksize;        <span style="color:#777">/* stat.st_blksize (may be != _bf._size) */</span>
+         fpos_t  _offset;        <span style="color:#777">/* current lseek offset (see WARNING) */</span>
  } FILE;
 </pre></div>
 </div>
@@ -299,15 +299,15 @@ Multiple parameters can be provided for the requirement. For details of these pa
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>FILE - stdio.h </span></figcaption>
  <div class="CodeRay">
   <div class="code"><pre>
-  &lt;code&gt;<span class="comment">// File descriptor from open()&lt;/code&gt;</span>
-  <span class="predefined-type">short</span>   _file;            <span class="comment">/* fileno, if Unix descriptor, else -1 */</span>
+  &lt;code&gt;<span style="color:#777">// File descriptor from open()&lt;/code&gt;</span>
+  <span style="color:#0a8;font-weight:bold">short</span>   _file;            <span style="color:#777">/* fileno, if Unix descriptor, else -1 */</span>
   
-  <span class="comment">// The buffer through which the data will pass to system calls.</span>
-  <span class="keyword">struct</span>  __sbuf _bf;       <span class="comment">/* the buffer (at least 1 byte, if !NULL) */</span>
-  <span class="predefined-type">int</span>     _lbfsize;         <span class="comment">/* 0 or -_bf._size, for inline putc */</span>
+  <span style="color:#777">// The buffer through which the data will pass to system calls.</span>
+  <span style="color:#080;font-weight:bold">struct</span>  __sbuf _bf;       <span style="color:#777">/* the buffer (at least 1 byte, if !NULL) */</span>
+  <span style="color:#0a8;font-weight:bold">int</span>     _lbfsize;         <span style="color:#777">/* 0 or -_bf._size, for inline putc */</span>
 
-  <span class="predefined-type">unsigned</span> <span class="predefined-type">char</span> _ubuf[<span class="integer">3</span>]; <span class="comment">/* guarantee an ungetc() buffer */</span>
-  <span class="predefined-type">unsigned</span> <span class="predefined-type">char</span> _nbuf[<span class="integer">1</span>]; <span class="comment">/* guarantee a getc() buffer */</span>
+  <span style="color:#0a8;font-weight:bold">unsigned</span> <span style="color:#0a8;font-weight:bold">char</span> _ubuf[<span style="color:#00D">3</span>]; <span style="color:#777">/* guarantee an ungetc() buffer */</span>
+  <span style="color:#0a8;font-weight:bold">unsigned</span> <span style="color:#0a8;font-weight:bold">char</span> _nbuf[<span style="color:#00D">1</span>]; <span style="color:#777">/* guarantee a getc() buffer */</span>
 </pre></div>
 </div>
  </figure></notextile></div>
@@ -434,6 +434,10 @@ Multiple parameters can be provided for the requirement. For details of these pa
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/12/31/fork-in-freebsd/">Fork code in FreeBSD</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/11/27/dynamic-programming/">Dynamic Programming</a>
       </li>
     
@@ -449,10 +453,6 @@ Multiple parameters can be provided for the requirement. For details of these pa
         <a href="/blog/2014/07/08/boot-freebsd/">Boot FreeBSD</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/06/18/curious-case-of-recursion/">Curious Case Of Recursion</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -462,11 +462,11 @@ Multiple parameters can be provided for the requirement. For details of these pa
 <h1>Categories</h1>
 <ul id="categories">
 <li class='category'><a href='/blog/categories/d3-js/'>D3.js (1)</a></li>
-<li class='category'><a href='/blog/categories/freebsd/'>FreeBSD (2)</a></li>
+<li class='category'><a href='/blog/categories/freebsd/'>FreeBSD (3)</a></li>
 <li class='category'><a href='/blog/categories/linux/'>Linux (1)</a></li>
 <li class='category'><a href='/blog/categories/octopress/'>Octopress (1)</a></li>
 <li class='category'><a href='/blog/categories/operating/'>Operating (1)</a></li>
-<li class='category'><a href='/blog/categories/operating-systems/'>Operating Systems (7)</a></li>
+<li class='category'><a href='/blog/categories/operating-systems/'>Operating Systems (8)</a></li>
 <li class='category'><a href='/blog/categories/reading-list/'>Reading List (1)</a></li>
 <li class='category'><a href='/blog/categories/scale/'>Scale (1)</a></li>
 <li class='category'><a href='/blog/categories/systems/'>Systems (4)</a></li>

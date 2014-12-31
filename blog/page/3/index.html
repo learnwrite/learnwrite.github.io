@@ -9,7 +9,7 @@
   <meta name="author" content="Vaibhav Gautam">
 
   
-  <meta name="description" content="Dictionary of algorithms Sorting Visualization Sorting Wiki Summary Sorting algorithms Comparisons based sorting Online sorts Stable sorts Time &hellip;">
+  <meta name="description" content="Merge Sort Table based comparison Merge sort code Quick sort code References Merge Sort Merge sort follows divide-and-conquer approach. Merge-Sort 1 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -108,6 +108,77 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/10/13/comparison-based-sorting/">Comparison Based Sorting</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-13T01:43:00-07:00" pubdate data-updated="true">Oct 13<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/10/13/comparison-based-sorting/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#merge-sort">Merge Sort</a></li>
+  <li><a href="#table-based-comparison">Table based comparison</a></li>
+  <li><a href="#merge-sort-code">Merge sort code</a></li>
+  <li><a href="#quick-sort-code">Quick sort code</a></li>
+  <li><a href="#references">References</a></li>
+</ul>
+
+<h3 id="merge-sort">Merge Sort</h3>
+
+<p>Merge sort follows <code>divide-and-conquer</code> approach.</p>
+
+<p><br /><br /><br /><br /></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Merge-Sort </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>MERGE-SORT(A, p, r) <span style="color:#777">// A is array of numbers</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>{                   <span style="color:#777">// p is starting index of array</span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>                    <span style="color:#777">// r is last index of array</span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    <span style="color:#080;font-weight:bold">if</span> p &lt; r
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    then q &lt;- <span style="color:#F00;background-color:#FAA">⌊</span>(p + r)<span style="color:#F00;background-color:#FAA">⌋</span> / <span style="color:#00D">2</span>;  
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>        MERGE-SORT(A, p, q)
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>        MERGE-SORT(A, q + <span style="color:#00D">1</span>, r)
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>        MERGE(A, p, q, r)
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>}
+</pre></div>
+</div>
+ </figure></notextile></div>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/10/13/comparison-based-sorting/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -277,18 +348,18 @@ I started realizing that after all it’s not that easy to actually think and wr
 <h3 id="addition">Addition</h3>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span class="integer">0</span> + <span class="integer">0</span> <span class="error">→</span> <span class="integer">0</span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="integer">0</span> + <span class="integer">1</span> <span class="error">→</span> <span class="integer">1</span>
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span class="integer">1</span> + <span class="integer">0</span> <span class="error">→</span> <span class="integer">1</span>
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span class="integer">1</span> + <span class="integer">1</span> <span class="error">→</span> <span class="integer">0</span>, carry <span class="integer">1</span>
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="color:#00D">0</span> + <span style="color:#00D">0</span> <span style="color:#F00;background-color:#FAA">→</span> <span style="color:#00D">0</span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span style="color:#00D">0</span> + <span style="color:#00D">1</span> <span style="color:#F00;background-color:#FAA">→</span> <span style="color:#00D">1</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span style="color:#00D">1</span> + <span style="color:#00D">0</span> <span style="color:#F00;background-color:#FAA">→</span> <span style="color:#00D">1</span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span style="color:#00D">1</span> + <span style="color:#00D">1</span> <span style="color:#F00;background-color:#FAA">→</span> <span style="color:#00D">0</span>, carry <span style="color:#00D">1</span>
 <span class="line-numbers"> <a href="#n5" name="n5">5</a></span>
 <span class="line-numbers"> <a href="#n6" name="n6">6</a></span> For e.g
 <span class="line-numbers"> <a href="#n7" name="n7">7</a></span>
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span>    (carried digits)
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>      <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span>
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>+     <span class="integer">1</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">1</span> <span class="integer">1</span>
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span>    (carried digits)
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>      <span style="color:#00D">0</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span>
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>+     <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span> <span style="color:#00D">1</span>
 <span class="line-numbers"><a href="#n11" name="n11">11</a></span>    -------------
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>=   <span class="integer">1</span> <span class="integer">0</span> <span class="integer">0</span> <span class="integer">1</span> <span class="integer">0</span> <span class="integer">0</span> = <span class="integer">36</span>
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>=   <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> <span style="color:#00D">1</span> <span style="color:#00D">0</span> <span style="color:#00D">0</span> = <span style="color:#00D">36</span>
 </pre></div>
 </div>
 </div>
@@ -550,6 +621,10 @@ Sometimes char data type is used as a package of 8 bits not as a valid char valu
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/12/31/fork-in-freebsd/">Fork code in FreeBSD</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/11/27/dynamic-programming/">Dynamic Programming</a>
       </li>
     
@@ -565,10 +640,6 @@ Sometimes char data type is used as a package of 8 bits not as a valid char valu
         <a href="/blog/2014/07/08/boot-freebsd/">Boot FreeBSD</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/06/18/curious-case-of-recursion/">Curious Case Of Recursion</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -578,11 +649,11 @@ Sometimes char data type is used as a package of 8 bits not as a valid char valu
 <h1>Categories</h1>
 <ul id="categories">
 <li class='category'><a href='/blog/categories/d3-js/'>D3.js (1)</a></li>
-<li class='category'><a href='/blog/categories/freebsd/'>FreeBSD (2)</a></li>
+<li class='category'><a href='/blog/categories/freebsd/'>FreeBSD (3)</a></li>
 <li class='category'><a href='/blog/categories/linux/'>Linux (1)</a></li>
 <li class='category'><a href='/blog/categories/octopress/'>Octopress (1)</a></li>
 <li class='category'><a href='/blog/categories/operating/'>Operating (1)</a></li>
-<li class='category'><a href='/blog/categories/operating-systems/'>Operating Systems (7)</a></li>
+<li class='category'><a href='/blog/categories/operating-systems/'>Operating Systems (8)</a></li>
 <li class='category'><a href='/blog/categories/reading-list/'>Reading List (1)</a></li>
 <li class='category'><a href='/blog/categories/scale/'>Scale (1)</a></li>
 <li class='category'><a href='/blog/categories/systems/'>Systems (4)</a></li>
