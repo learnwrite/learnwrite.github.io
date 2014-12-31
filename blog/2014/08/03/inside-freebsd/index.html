@@ -162,15 +162,15 @@
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>System Call </span>  <a href="https://github.com/coolgoose85/FreeBSD/blob/master/sys/i386/i386/exception.s#L255" target="_blank">Code </a></figcaption> <div class="CodeRay">
   <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="comment">/* </span>
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span class="comment"> * Even though the name says 'int0x80', this is actually a TGT (trap gate)</span>
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span class="comment"> * rather then an IGT (interrupt gate).  Thus interrupts are enabled on</span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span class="comment"> * entry just as they are for a normal syscall.</span>
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span class="comment"> */</span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span style="color:#777">/* </span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span style="color:#777"> * Even though the name says 'int0x80', this is actually a TGT (trap gate)</span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span style="color:#777"> * rather then an IGT (interrupt gate).  Thus interrupts are enabled on</span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span style="color:#777"> * entry just as they are for a normal syscall.</span>
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span style="color:#777"> */</span>
 <span class="line-numbers"> <a href="#n7" name="n7">7</a></span>     SUPERALIGN_TEXT
 <span class="line-numbers"> <a href="#n8" name="n8">8</a></span>IDTVEC(int0x80_syscall)
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>     pushl     $<span class="integer">2</span>               <span class="comment">/* sizeof &quot;int 0x80&quot; */</span>
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>     subl     $<span class="integer">4</span>,%esp               <span class="comment">/* skip over tf_trapno */</span>
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>     pushl     $<span style="color:#00D">2</span>               <span style="color:#777">/* sizeof &quot;int 0x80&quot; */</span>
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>     subl     $<span style="color:#00D">4</span>,%esp               <span style="color:#777">/* skip over tf_trapno */</span>
 <span class="line-numbers"><a href="#n11" name="n11">11</a></span>     pushal
 <span class="line-numbers"><a href="#n12" name="n12">12</a></span>     pushl     %ds
 <span class="line-numbers"><a href="#n13" name="n13">13</a></span>     pushl     %es
@@ -179,9 +179,9 @@
 <span class="line-numbers"><a href="#n16" name="n16">16</a></span>     FAKE_MCOUNT(TF_EIP(%esp))
 <span class="line-numbers"><a href="#n17" name="n17">17</a></span>     pushl     %esp
 <span class="line-numbers"><a href="#n18" name="n18">18</a></span>     call     syscall   ==&gt; from here syscall function is called after pushing some prereq
-<span class="line-numbers"><a href="#n19" name="n19">19</a></span>     add     $<span class="integer">4</span>, %esp
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>     add     $<span style="color:#00D">4</span>, %esp
 <span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>     MEXITCOUNT
-<span class="line-numbers"><a href="#n21" name="n21">21</a></span>     jmp     doreti ==&gt; <span class="keyword">do</span> <span class="keyword">return</span> from interrupt 
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>     jmp     doreti ==&gt; <span style="color:#080;font-weight:bold">do</span> <span style="color:#080;font-weight:bold">return</span> from interrupt 
 </pre></div>
 </div>
  </figure></notextile></div>
@@ -197,31 +197,31 @@
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>struct trapframe </span></figcaption>
  <div class="CodeRay">
   <div class="code"><pre>
-<span class="comment">/*
+<span style="color:#777">/*
  * Exception/Trap Stack Frame
  */</span>
 
-<span class="keyword">struct</span> trapframe {
-     <span class="predefined-type">int</span>     tf_fs;
-     <span class="predefined-type">int</span>     tf_es;
-     <span class="predefined-type">int</span>     tf_ds;
-     <span class="predefined-type">int</span>     tf_edi;
-     <span class="predefined-type">int</span>     tf_esi;
-     <span class="predefined-type">int</span>     tf_ebp;
-     <span class="predefined-type">int</span>     tf_isp;
-     <span class="predefined-type">int</span>     tf_ebx;
-     <span class="predefined-type">int</span>     tf_edx;
-     <span class="predefined-type">int</span>     tf_ecx;
-     <span class="predefined-type">int</span>     tf_eax;
-     <span class="predefined-type">int</span>     tf_trapno;
-     <span class="comment">/* below portion defined in 386 hardware */</span>
-     <span class="predefined-type">int</span>     tf_err;
-     <span class="predefined-type">int</span>     tf_eip;
-     <span class="predefined-type">int</span>     tf_cs;
-     <span class="predefined-type">int</span>     tf_eflags;
-     <span class="comment">/* below only when crossing rings (e.g. user to kernel) */</span>
-     <span class="predefined-type">int</span>     tf_esp;
-     <span class="predefined-type">int</span>     tf_ss;
+<span style="color:#080;font-weight:bold">struct</span> trapframe {
+     <span style="color:#0a8;font-weight:bold">int</span>     tf_fs;
+     <span style="color:#0a8;font-weight:bold">int</span>     tf_es;
+     <span style="color:#0a8;font-weight:bold">int</span>     tf_ds;
+     <span style="color:#0a8;font-weight:bold">int</span>     tf_edi;
+     <span style="color:#0a8;font-weight:bold">int</span>     tf_esi;
+     <span style="color:#0a8;font-weight:bold">int</span>     tf_ebp;
+     <span style="color:#0a8;font-weight:bold">int</span>     tf_isp;
+     <span style="color:#0a8;font-weight:bold">int</span>     tf_ebx;
+     <span style="color:#0a8;font-weight:bold">int</span>     tf_edx;
+     <span style="color:#0a8;font-weight:bold">int</span>     tf_ecx;
+     <span style="color:#0a8;font-weight:bold">int</span>     tf_eax;
+     <span style="color:#0a8;font-weight:bold">int</span>     tf_trapno;
+     <span style="color:#777">/* below portion defined in 386 hardware */</span>
+     <span style="color:#0a8;font-weight:bold">int</span>     tf_err;
+     <span style="color:#0a8;font-weight:bold">int</span>     tf_eip;
+     <span style="color:#0a8;font-weight:bold">int</span>     tf_cs;
+     <span style="color:#0a8;font-weight:bold">int</span>     tf_eflags;
+     <span style="color:#777">/* below only when crossing rings (e.g. user to kernel) */</span>
+     <span style="color:#0a8;font-weight:bold">int</span>     tf_esp;
+     <span style="color:#0a8;font-weight:bold">int</span>     tf_ss;
 };
 </pre></div>
 </div>
@@ -233,8 +233,8 @@
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>syscall() </span>  <a href="https://github.com/coolgoose85/FreeBSD/blob/master/sys/i386/i386/trap.c#L997" target="_blank">code </a></figcaption> <div class="CodeRay">
   <div class="code"><pre>
-    params = (caddr_t)frame-&gt;tf_esp + <span class="keyword">sizeof</span>(<span class="predefined-type">int</span>);
-     code = frame-&gt;tf_eax;   <span class="comment">// code is system call code</span>
+    params = (caddr_t)frame-&gt;tf_esp + <span style="color:#080;font-weight:bold">sizeof</span>(<span style="color:#0a8;font-weight:bold">int</span>);
+     code = frame-&gt;tf_eax;   <span style="color:#777">// code is system call code</span>
      orig_tf_eflags = frame-&gt;tf_eflags;
 </pre></div>
 </div>
@@ -250,9 +250,9 @@ Then given the system call code we check if we have the code as valid number. If
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>syscall() </span>  <a href="https://github.com/coolgoose85/FreeBSD/blob/master/sys/i386/i386/trap.c#L1030" target="_blank">code </a></figcaption> <div class="CodeRay">
   <div class="code"><pre>
-<span class="keyword">if</span> (code &gt;= p-&gt;p_sysent-&gt;sv_size)
-           callp = &amp;p-&gt;p_sysent-&gt;sv_table[<span class="integer">0</span>];
-       <span class="keyword">else</span>
+<span style="color:#080;font-weight:bold">if</span> (code &gt;= p-&gt;p_sysent-&gt;sv_size)
+           callp = &amp;p-&gt;p_sysent-&gt;sv_table[<span style="color:#00D">0</span>];
+       <span style="color:#080;font-weight:bold">else</span>
            callp = &amp;p-&gt;p_sysent-&gt;sv_table[code]; 
 </pre></div>
 </div>
@@ -264,14 +264,14 @@ where <strong>sv_table</strong> entry will have following values</p>
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>sv_table </span></figcaption>
  <div class="CodeRay">
   <div class="code"><pre>
-<span class="keyword">struct</span> sysent {               <span class="comment">/* system call table */</span>
-     <span class="predefined-type">int</span>     sy_narg;     <span class="comment">/* number of arguments */</span>
-     sy_call_t *sy_call;     <span class="comment">/* implementing function */</span>
-     au_event_t sy_auevent;     <span class="comment">/* audit event associated with syscall */</span>
+<span style="color:#080;font-weight:bold">struct</span> sysent {               <span style="color:#777">/* system call table */</span>
+     <span style="color:#0a8;font-weight:bold">int</span>     sy_narg;     <span style="color:#777">/* number of arguments */</span>
+     sy_call_t *sy_call;     <span style="color:#777">/* implementing function */</span>
+     au_event_t sy_auevent;     <span style="color:#777">/* audit event associated with syscall */</span>
      systrace_args_func_t sy_systrace_args_func;
-                    <span class="comment">/* optional argument conversion function. */</span>
-     u_int32_t sy_entry;     <span class="comment">/* DTrace entry ID for systrace. */</span>
-     u_int32_t sy_return;     <span class="comment">/* DTrace return ID for systrace. */</span>
+                    <span style="color:#777">/* optional argument conversion function. */</span>
+     u_int32_t sy_entry;     <span style="color:#777">/* DTrace entry ID for systrace. */</span>
+     u_int32_t sy_return;     <span style="color:#777">/* DTrace return ID for systrace. */</span>
 };
 </pre></div>
 </div>
@@ -287,13 +287,13 @@ where <strong>sv_table</strong> entry will have following values</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>syscall() </span>  <a href="https://github.com/coolgoose85/FreeBSD/blob/master/sys/i386/i386/trap.c#L1040" target="_blank">code </a></figcaption> <div class="CodeRay">
   <div class="code"><pre>
-  <span class="comment">/*
+  <span style="color:#777">/*
       * copyin and the ktrsyscall()/ktrsysret() code is MP-aware
       * copy data from params to args
       */</span>
-     <span class="keyword">if</span> (params != <span class="predefined-constant">NULL</span> &amp;&amp; narg != <span class="integer">0</span>)
+     <span style="color:#080;font-weight:bold">if</span> (params != <span style="color:#069">NULL</span> &amp;&amp; narg != <span style="color:#00D">0</span>)
           error = copyin(params, (caddr_t)args,
-                        (u_int)(narg * <span class="keyword">sizeof</span>(<span class="predefined-type">int</span>)));
+                        (u_int)(narg * <span style="color:#080;font-weight:bold">sizeof</span>(<span style="color:#0a8;font-weight:bold">int</span>)));
 
 </pre></div>
 </div>
@@ -306,9 +306,9 @@ So, say if open system call encounters error then its going to get the error val
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>syscall() </span>  <a href="https://github.com/coolgoose85/FreeBSD/blob/master/sys/i386/i386/trap.c#L1056" target="_blank">code </a></figcaption> <div class="CodeRay">
   <div class="code"><pre>
-<span class="keyword">if</span> (error == <span class="integer">0</span>) {
-          td-&gt;td_retval[<span class="integer">0</span>] = <span class="integer">0</span>;
-          td-&gt;td_retval[<span class="integer">1</span>] = frame-&gt;tf_edx; <span class="comment">// return another value in register 1 if we have anything to return</span>
+<span style="color:#080;font-weight:bold">if</span> (error == <span style="color:#00D">0</span>) {
+          td-&gt;td_retval[<span style="color:#00D">0</span>] = <span style="color:#00D">0</span>;
+          td-&gt;td_retval[<span style="color:#00D">1</span>] = frame-&gt;tf_edx; <span style="color:#777">// return another value in register 1 if we have anything to return</span>
 </pre></div>
 </div>
  </figure></notextile></div>
@@ -324,14 +324,14 @@ So, say if open system call encounters error then its going to get the error val
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>syscall() </span>  <a href="https://github.com/coolgoose85/FreeBSD/blob/master/sys/i386/i386/trap.c#L1094" target="_blank">code </a></figcaption> <div class="CodeRay">
   <div class="code"><pre>
-<span class="keyword">switch</span> (error) {
-     <span class="keyword">case</span> <span class="integer">0</span>:
-          frame-&gt;tf_eax = td-&gt;td_retval[<span class="integer">0</span>];
-          frame-&gt;tf_edx = td-&gt;td_retval[<span class="integer">1</span>];
+<span style="color:#080;font-weight:bold">switch</span> (error) {
+     <span style="color:#080;font-weight:bold">case</span> <span style="color:#00D">0</span>:
+          frame-&gt;tf_eax = td-&gt;td_retval[<span style="color:#00D">0</span>];
+          frame-&gt;tf_edx = td-&gt;td_retval[<span style="color:#00D">1</span>];
           frame-&gt;tf_eflags &amp;= ~PSL_C;
-          <span class="keyword">break</span>;
+          <span style="color:#080;font-weight:bold">break</span>;
 
-<span class="keyword">else</span> we handle the error
+<span style="color:#080;font-weight:bold">else</span> we handle the error
           frame-&gt;tf_eax = error;
           frame-&gt;tf_eflags |= PSL_C;
 </pre></div>
@@ -462,6 +462,10 @@ So, say if open system call encounters error then its going to get the error val
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/12/31/fork-in-freebsd/">Fork code in FreeBSD</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/11/27/dynamic-programming/">Dynamic Programming</a>
       </li>
     
@@ -477,10 +481,6 @@ So, say if open system call encounters error then its going to get the error val
         <a href="/blog/2014/07/08/boot-freebsd/">Boot FreeBSD</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/06/18/curious-case-of-recursion/">Curious Case Of Recursion</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -490,11 +490,11 @@ So, say if open system call encounters error then its going to get the error val
 <h1>Categories</h1>
 <ul id="categories">
 <li class='category'><a href='/blog/categories/d3-js/'>D3.js (1)</a></li>
-<li class='category'><a href='/blog/categories/freebsd/'>FreeBSD (2)</a></li>
+<li class='category'><a href='/blog/categories/freebsd/'>FreeBSD (3)</a></li>
 <li class='category'><a href='/blog/categories/linux/'>Linux (1)</a></li>
 <li class='category'><a href='/blog/categories/octopress/'>Octopress (1)</a></li>
 <li class='category'><a href='/blog/categories/operating/'>Operating (1)</a></li>
-<li class='category'><a href='/blog/categories/operating-systems/'>Operating Systems (7)</a></li>
+<li class='category'><a href='/blog/categories/operating-systems/'>Operating Systems (8)</a></li>
 <li class='category'><a href='/blog/categories/reading-list/'>Reading List (1)</a></li>
 <li class='category'><a href='/blog/categories/scale/'>Scale (1)</a></li>
 <li class='category'><a href='/blog/categories/systems/'>Systems (4)</a></li>

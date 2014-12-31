@@ -4,7 +4,7 @@
   <title><![CDATA[Category: FreeBSD | Distributed Knowledge]]></title>
   <link href="http://distkeys.com/blog/categories/freebsd/atom.xml" rel="self"/>
   <link href="http://distkeys.com/"/>
-  <updated>2014-12-31T00:56:58-08:00</updated>
+  <updated>2014-12-31T12:55:31-08:00</updated>
   <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -12,6 +12,305 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Fork code in FreeBSD]]></title>
+    <link href="http://distkeys.com/blog/2014/12/31/fork-in-freebsd/"/>
+    <updated>2014-12-31T11:51:00-08:00</updated>
+    <id>http://distkeys.com/blog/2014/12/31/fork-in-freebsd</id>
+    <content type="html"><![CDATA[<p>In computing, particularly in the context of the Unix operating system and its workalikes, fork is an operation whereby a process creates a copy of itself. It is usually a system call, implemented in the kernel. Fork is the primary (and historically, only) method of process creation on Unix-like operating systems.</p>
+
+<p><a href="http://en.wikipedia.org/wiki/Fork_(system_call)">Read More</a></p>
+
+<!-- more -->
+<p><br /></p>
+
+<blockquote>
+  <p>fork() creates a new process by duplicating the calling process. The new process, referred to as the child, is an exact duplicate of the calling process.</p>
+</blockquote>
+
+<p><a href="https://github.com/coolgoose85/FreeBSD/tree/master/sys">FreeBSD source code</a></p>
+
+<p>{% coderay lang:C  Function Fork() %}
+Function fork(td, uap)
+{
+    …
+     error = fork1(td, RFFDG | RFPROC, 0, &amp;p2);</p>
+
+<pre><code> Return pid of child
+ td-&gt;td_retval[0] = p2-&gt;p_pid; } {% endcoderay %} 
+</code></pre>
+
+<p><br /></p>
+
+<p>{% coderay lang:c  Function Fork1() %}
+Function fork1(td, flags, pages, procp)
+{
+     struct proc *p1, *p2, *pptr; //p1 = parent process, p2 = child process</p>
+
+<pre><code> Parent process
+ p1 = td-&gt;td_proc;
+
+ ...
+ ...
+ Allocate a new process
+ newproc = uma_zalloc(proc_zone, M_WAITOK);
+
+ To run a process we need to have atleast one thread,
+ so allocate a new thread
+ td2 = thread_alloc();
+
+ Linkup thread to process
+ proc_linkup(newproc, td2);
+ ...
+ ...
+
+ Now we have to gro through the process address space and copy each section for new process
+ Sections of process address space are
+ 1. Text area (read only)
+ 2. Initialized area
+ 3. Uninitiaized area
+ 4. Stack/Heap area
+
+ vm2 = vmspace_fork(p1-&gt;p_vmspace);
+
+      Function vmspace_fork(p1-&gt;p_vmspace) {
+                Process virtual address space is as follows
+                /*
+                * struct vmspace {
+                *      struct vm_map vm_map;     /* VM address map */
+                *      struct shmmap_state *vm_shm;     /* SYS5 shared memory private data XXX */
+                *      segsz_t vm_swrss;     /* resident set size before last swap */
+                *      segsz_t vm_tsize;     /* text size (pages) XXX */
+                *      segsz_t vm_dsize;     /* data size (pages) XXX */
+                *      segsz_t vm_ssize;     /* stack size (pages) */
+                *      caddr_t vm_taddr;     /* (c) user virtual address of text */
+                *      caddr_t vm_daddr;     /* (c) user virtual address of data */
+                *      caddr_t vm_maxsaddr;     /* user VA at max stack growth */
+                *      int     vm_refcnt;     /* number of references */
+                *      /*
+                *       * Keep the PMAP last, so that CPU-specific variations of that
+                *       * structure on a single architecture don't result in offset
+                *       * variations of the machine-independent fields in the vmspace.
+                *       */
+                *      struct pmap vm_pmap;     /* private physical map */
+                * };
+                */
+
+           We allocate the process address space
+           struct vmspace *vm2;
+           ...
+           vm2 = vmspace_alloc(old_map-&gt;min_offset, old_map-&gt;max_offset);    
+           ...
+           ...
+
+           Now we have to go through each vm map entries one at a time and allocate each for new process
+           while (old_entry != &amp;old_map-&gt;header) {
+                case VM_INHERIT_NONE:
+                     ...
+
+                case VM_INHERIT_SHARE:
+                     ...
+
+                case VM_INHERIT_COPY:
+                     This is our case where we have to clone the entries and link into the map
+                     new_entry = vm_map_entry_create(new_map);
+                     ..
+                     vm_map_entry_link(new_map, new_map-&gt;header.prev, new_entry);
+                     vmspace_map_entry_forked(vm1, vm2, new_entry);
+                     vm_map_copy_entry(old_map, new_map, old_entry,         
+           }
+      } // end vmspace_fork()
+
+
+ We will be now locking the process tree as we need to give new process process id
+ Process of allocating a new Pid is system will scan the existing pids and try to come
+ up with a range of free pids. Once a range of free pids found system will use that range
+ for next lets say "k" forks. Once the range is exhausted then system on next fork will
+ again find the range and so on.
+
+ sx_slock(&amp;proctree_lock);
+
+ Determine if we are exceeding process createlimit
+ Check privledge to increase the limit
+
+ //Try to allocate the pids
+ trypid = lastpid + 1;
+
+ ...
+
+ Check if we have hit the end of the range
+ if (trypid &gt;= pidchecked) {
+      We have exhausted the range so find a new range
+      Scan the active and Zombie procs to check whether pid is in use
+      ...
+      ...
+ }
+ sx_sunlock(&amp;proctree_lock);
+
+ If we are within range then
+ lastpid = trypid;
+
+ p2 = newproc;
+ p2-&gt;p_state = PRS_NEW;          /* protect against others */
+ p2-&gt;p_pid = trypid;
+
+
+ sched_fork(td, td2);
+           Function sched_fork(struct thread *td, struct thread *child) {
+                sched_fork_thread(td, child);
+                          Function sched_fork_thread(td, child) {
+                               Initialize schedule related values from parent to child
+                               Assign CPU estimate info and priority
+                               ...
+                          }
+           } // end sched_fork()
+     
+ Insert new process to process list
+ LIST_INSERT_HEAD(&amp;allproc, p2, p_list);
+
+ Insert into PID HASH
+ LIST_INSERT_HEAD(PIDHASH(p2-&gt;p_pid), p2, p_hash);
+
+
+ Lock P1
+ Lock P2
+ Relase Lock for All proc since we took all proc lock to allocate new pid
+ sx_xunlock(&amp;allproc_lock);
+
+ copy the blocks
+ bcopy(&amp;p1-&gt;p_startcopy, &amp;p2-&gt;p_startcopy,
+     __rangeof(struct proc, p_startcopy, p_endcopy));
+
+ Zero out the blocks
+ bzero(&amp;p2-&gt;p_startzero,
+     __rangeof(struct proc, p_startzero, p_endzero));
+
+ ...
+ Allocate new signals
+
+ Copy File descriptors of all the open files by parent to child
+ fd = fdcopy(p1-&gt;p_fd);
+
+
+ In a new process, we created a thread now copy the blocks for this new thread
+ bzero(&amp;td2-&gt;td_startzero,
+     __rangeof(struct thread, td_startzero, td_endzero));
+
+ bcopy(&amp;td-&gt;td_startcopy, &amp;td2-&gt;td_startcopy,
+     __rangeof(struct thread, td_startcopy, td_endcopy));
+
+ bcopy(&amp;p2-&gt;p_comm, &amp;td2-&gt;td_name, sizeof(td2-&gt;td_name));
+
+ ...
+ ...
+
+ Copy the vnode pointer of text from parent to child
+ p2-&gt;p_textvp = p1-&gt;p_textvp;   // Vnode of executable. and increase the ref count
+ vref(p2-&gt;p_textvp);
+
+ ...
+
+
+ Processing related to process group, child and parent will belong to same process group
+ Insert process into process group list
+
+
+ Associate child with Parent
+ pptr = p1;
+ p2-&gt;p_pptr = pptr;
+
+ Insert child process into sibling list
+ LIST_INSERT_HEAD(&amp;pptr-&gt;p_children, p2, p_sibling);
+
+ vm_forkproc(td, p2, td2, vm2, flags);
+           Function vm_forkproc(td, p2, td2, vm2, flags) {
+                ...
+                ...
+
+                cpu_fork(td, p2, td2, flags);
+                          Function cpu_fork(struct thread *td1, struct proc *p2, struct thread *td2, int flags)
+                          {
+                               Copy PCB and the stack
+                               pcb1 = td1-&gt;td_pcb;
+
+                               Allocate PCB for child process
+                               pcb2 = (struct pcb *)(td2-&gt;td_kstack +
+                               td2-&gt;td_kstack_pages * PAGE_SIZE) - 1;
+                               td2-&gt;td_pcb = pcb2;
+
+                               Copy PCB1 to PCB2 (PCB struct is in pcb.h)
+                               bcopy(td1-&gt;td_pcb, pcb2, sizeof(*pcb2));
+
+                               Create a new stack for a new process
+                               td2-&gt;td_frame = (struct trapframe *)((caddr_t)td2-&gt;td_pcb - 16) - 1;
+                               bcopy(td1-&gt;td_frame, td2-&gt;td_frame, sizeof(struct trapframe));
+                               ...
+                               td2-&gt;td_frame-&gt;tf_eax = 0;          /* Child returns zero */
+                               ...
+                               ...
+
+                               In instruction pointer of child process we will set the address of trampoline code
+                               pcb2-&gt;pcb_eip = (int)fork_trampoline;
+
+                               //Fork_trampoline code will call fork_return
+                               pcb2-&gt;pcb_esi = (int)fork_return;     /* fork_trampoline argument */
+                               pcb2-&gt;pcb_ebx = (int)td2;          /* fork_trampoline argument */
+
+                                         Looking into fork_trampoline in i386/exception.s
+                                              ENTRY(fork_trampoline)
+                                                        pushl     %esp               /* trapframe pointer */
+                                                        pushl     %ebx               /* arg1 */
+                                                        pushl     %esi               /* function */
+                                                        call     fork_exit
+                                              So, from fork_trampoline we are going to call fork_exit and its argument
+                                              will be above we mentioned.
+
+                                                   //Handle the return of a child process from fork1()
+                                                   Function fork_exit(callout, arg, frame)         
+                                                   {
+                                                        ...
+                                                        callout(arg, frame); // Here callout is fork_return, as we passed it
+                                                                                      as a argument to fork_exit
+
+                                                             Function fork_return() {                                            
+                                                                  userret(td, frame);
+                                                             }
+                                                   }
+
+                                              Once we return from fork_exit we will go to doreti
+                                              which will load our frame and we have will go back to
+                                              fork system call as a child. But the chils process will
+                                              not execute right now because we have not scheduled it
+                                              to run. This is the setup we are preparing and once
+                                              all the setup is done we will schedule the child process
+                                              and it will do as described above
+                                              jmp     doreti    
+
+                          } // end of cpu_fork()
+           } //end of vm_forkproc
+
+
+ Put child process on run queue
+ sched_add(td2, SRQ_BORING);
+
+ ...
+ ...
+</code></pre>
+
+<p>} //end fork1()
+{% endcoderay %} </p>
+
+<p><br /></p>
+
+<h2 id="call-tree">Call Tree</h2>
+
+<p>{% img /images/fork1.png [fork1.png] %}</p>
+
+<p><br /><br /></p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Debug FreeBSD - Open]]></title>
@@ -99,47 +398,41 @@
 
 <p>Allocate space for <code class="myyellow">file structure</code> in kernel either by malloc or we use zalloc here because memory is assigned from file zone. There are multiple zones like file_zone, proc_zone or thread_zone. So, we ask memory from file zone and we pass the parameter is space in this zone is not available then are we willing to wait. Its a synchronous call. If memory is not available then thread will go to sleep if M_WAITOK is set.</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>falloc() </span>  <a href='https://github.com/coolgoose85/FreeBSD/blob/master/sys/kern/kern_descrip.c#L1420' target='_blank'>code </a></figcaption> <div class="CodeRay">
-  <div class="code"><pre>
+<p>{% coderay lang:c  falloc()  https://github.com/coolgoose85/FreeBSD/blob/master/sys/kern/kern_descrip.c#L1420 code %}
      fp = uma_zalloc(file_zone, M_WAITOK | M_ZERO);
-</pre></div>
-</div>
- </figure></notextile></div></p>
+{% endcoderay %}</p>
 
 <p>We get back pointer to file entry.
 Zone limits are set during boot up time and whenever allocation or free happens it happens from that limit allocated.</p>
 
 <p><em>File structure</em> looks as follows
-<div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>file structure</span>  <a href='https://github.com/coolgoose85/FreeBSD/blob/master/sys/sys/file.h#L116' target='_blank'>code </a></figcaption> <div class="CodeRay">
-  <div class="code"><pre>&lt;/p&gt;
+{% coderay lang:c  file structure https://github.com/coolgoose85/FreeBSD/blob/master/sys/sys/file.h#L116 code %}</p>
 
-&lt;p&gt;<span class="keyword">struct</span> file {
-     <span class="directive">void</span>              &lt;em&gt;f_data;     /&lt;/em&gt; file descriptor specific data &lt;em&gt;/
-     <span class="keyword">struct</span> fileops     *f_ops;          /&lt;/em&gt; File operations &lt;em&gt;/
-     <span class="keyword">struct</span> ucred       *f_cred;     /&lt;/em&gt; associated credentials. &lt;em&gt;/
-     <span class="keyword">struct</span> vnode      *f_vnode;     /&lt;/em&gt; <span class="predefined-constant">NULL</span> or applicable vnode &lt;em&gt;/
-     <span class="predefined-type">short</span>          f_type;          /&lt;/em&gt; descriptor type &lt;em&gt;/
-     <span class="predefined-type">short</span>          f_vnread_flags; /&lt;/em&gt; (f) Sleep lock <span class="keyword">for</span> f_offset &lt;em&gt;/
-     <span class="directive">volatile</span> u_int     f_flag;          /&lt;/em&gt; see fcntl.h &lt;em&gt;/
-     <span class="directive">volatile</span> u_int      f_count;     /&lt;/em&gt; reference count &lt;em&gt;/
-     /&lt;/em&gt;
+<p>struct file {
+     void              <em>f_data;     /</em> file descriptor specific data <em>/
+     struct fileops     *f_ops;          /</em> File operations <em>/
+     struct ucred       *f_cred;     /</em> associated credentials. <em>/
+     struct vnode      *f_vnode;     /</em> NULL or applicable vnode <em>/
+     short          f_type;          /</em> descriptor type <em>/
+     short          f_vnread_flags; /</em> (f) Sleep lock for f_offset <em>/
+     volatile u_int     f_flag;          /</em> see fcntl.h <em>/
+     volatile u_int      f_count;     /</em> reference count <em>/
+     /</em>
       *  DTYPE_VNODE specific fields.
-      &lt;em&gt;/
-     <span class="predefined-type">int</span>          f_seqcount;     /&lt;/em&gt; Count of sequential accesses. &lt;em&gt;/
-     off_t          f_nextoff;     /&lt;/em&gt; next expected read/write offset. &lt;em&gt;/
-     <span class="keyword">struct</span> cdev_privdata *f_cdevpriv; /&lt;/em&gt; (d) Private data <span class="keyword">for</span> the cdev. &lt;em&gt;/
-     /&lt;/em&gt;
+      <em>/
+     int          f_seqcount;     /</em> Count of sequential accesses. <em>/
+     off_t          f_nextoff;     /</em> next expected read/write offset. <em>/
+     struct cdev_privdata *f_cdevpriv; /</em> (d) Private data for the cdev. <em>/
+     /</em>
       *  DFLAG_SEEKABLE specific fields
-      &lt;em&gt;/
+      <em>/
      off_t          f_offset;
-     /&lt;/em&gt;
+     /</em>
       * Mandatory Access control information.
-      &lt;em&gt;/
-     <span class="directive">void</span>          *f_label;     /&lt;/em&gt; Place-holder <span class="keyword">for</span> MAC label. */
+      <em>/
+     void          *f_label;     /</em> Place-holder for MAC label. */
      };
-</pre></div>
-</div>
- </figure></notextile></div>     </p>
+{% endcoderay %}     </p>
 
 <p>We have created a <code class="myyellow">file structure</code> now we have to initialize it. So we, </p>
 
@@ -156,21 +449,15 @@ Zone limits are set during boot up time and whenever allocation or free happens 
 
 <p>Now, allocate the file descriptor. For that get lock and call <a href="https://github.com/coolgoose85/FreeBSD/blob/master/sys/kern/kern_descrip.c#L1446" target="_blank">fdalloc()</a> to allocate fd.</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>fdalloc() </span>  <a href='https://github.com/coolgoose85/FreeBSD/blob/master/sys/kern/kern_descrip.c#L1446' target='_blank'>code </a></figcaption> <div class="CodeRay">
-  <div class="code"><pre>
-<span class="keyword">if</span> ((error = fdalloc(td, <span class="integer">0</span>, &amp;amp;i))) {
-</pre></div>
-</div>
- </figure></notextile></div>
+<p>{% coderay lang:c  fdalloc()  https://github.com/coolgoose85/FreeBSD/blob/master/sys/kern/kern_descrip.c#L1446 code %}
+if ((error = fdalloc(td, 0, &amp;i))) {
+{% endcoderay %}
 Here ‘i’ is the file descriptor to be returned.</p>
 
 <p>Once we get file descriptor from function fdalloc() we associate the file descriptor to file structure we allocated above.
-<div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>fdalloc() </span>  <a href='https://github.com/coolgoose85/FreeBSD/blob/master/sys/kern/kern_descrip.c#L1453' target='_blank'>code </a></figcaption> <div class="CodeRay">
-  <div class="code"><pre>
-p-&amp;gt;p_fd-&amp;gt;fd_ofiles[i] = fp;
-</pre></div>
-</div>
- </figure></notextile></div>
+{% coderay lang:c  fdalloc()  https://github.com/coolgoose85/FreeBSD/blob/master/sys/kern/kern_descrip.c#L1453 code %}
+p-&gt;p_fd-&gt;fd_ofiles[i] = fp;
+{% endcoderay %}
 Here p is the process structure where it maintains all the files opened.</p>
 
 <p>Return the fd and file structure pointer from function <a href="https://github.com/coolgoose85/FreeBSD/blob/master/sys/kern/kern_descrip.c#L1411" target="_blank">falloc()</a> to function <a href="https://github.com/coolgoose85/FreeBSD/blob/master/sys/kern/vfs_syscalls.c#L1049" target="_blank">kern_openat()</a></p>
@@ -181,23 +468,20 @@ Here p is the process structure where it maintains all the files opened.</p>
 
 <p>In function <a href="https://github.com/coolgoose85/FreeBSD/blob/master/sys/kern/kern_descrip.c#L1331" target="_blank">fdalloc()</a>, we search the bitmap for a free descriptor. If we can’t find then grow the file table until limit is hit.</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>fdalloc()</span>  <a href='https://github.com/coolgoose85/FreeBSD/blob/master/sys/kern/kern_descrip.c#L1352' target='_blank'>code </a></figcaption> <div class="CodeRay">
-  <div class="code"><pre>
-<span class="keyword">for</span> (;;) {
-          fd = fd_first_free(fdp, minfd, fdp-&amp;gt;fd_nfiles);
-          <span class="keyword">if</span> (fd &amp;gt;= maxfd)
-               <span class="keyword">return</span> (EMFILE);
-          <span class="keyword">if</span> (fd &amp;lt; fdp-&amp;gt;fd_nfiles)
-               <span class="keyword">break</span>;
-          fdgrowtable(fdp, min(fdp-&amp;gt;fd_nfiles * <span class="integer">2</span>, maxfd));
+<p>{% coderay lang:c  fdalloc() https://github.com/coolgoose85/FreeBSD/blob/master/sys/kern/kern_descrip.c#L1352 code %}
+for (;;) {
+          fd = fd_first_free(fdp, minfd, fdp-&gt;fd_nfiles);
+          if (fd &gt;= maxfd)
+               return (EMFILE);
+          if (fd &lt; fdp-&gt;fd_nfiles)
+               break;
+          fdgrowtable(fdp, min(fdp-&gt;fd_nfiles * 2, maxfd));
           }
-</pre></div>
-</div>
- </figure></notextile></div></p>
+{% endcoderay %}</p>
 
 <h2 id="call-tree">Call Tree</h2>
 
-<p><img src="/images/CallsGraph-open.png" title="[CallsGraph-open.png]" ></p>
+<p>{% img /images/CallsGraph-open.png [CallsGraph-open.png] %}</p>
 
 <p><br /><br /></p>
 
@@ -207,12 +491,9 @@ Here p is the process structure where it maintains all the files opened.</p>
 
 <p>Now we call <a href="https://github.com/coolgoose85/FreeBSD/blob/master/sys/kern/vfs_vnops.c#L89" target="_blank">vn_open()</a> function and pass the input information.</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>vn_open()</span>  <a href='https://github.com/coolgoose85/FreeBSD/blob/master/sys/kern/vfs_vnops.c#L89' target='_blank'>code </a></figcaption> <div class="CodeRay">
-  <div class="code"><pre>
-error = vn_open(&amp;amp;nd, &amp;amp;flags, cmode, fp); 
-</pre></div>
-</div>
- </figure></notextile></div></p>
+<p>{% coderay lang:c  vn_open() https://github.com/coolgoose85/FreeBSD/blob/master/sys/kern/vfs_vnops.c#L89  code %}
+error = vn_open(&amp;nd, &amp;flags, cmode, fp); 
+{% endcoderay %}</p>
 
 <p>Here, struct nameidata nd;<br />
 If we don’t hit any error then we will get node related information in nd and all we do is extract the information and tie up with the fp file structure pointer.</p>
@@ -223,29 +504,23 @@ If we don’t hit any error then we will get node related information in nd and 
 
 <p>If we don’t hit any error from vn_open() then we will get node related information in nd and all we do is extract the information and tie up with the <em>fp</em> file structure pointer.</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Assign vnode</span>  <a href='https://github.com/coolgoose85/FreeBSD/blob/master/sys/kern/vfs_syscalls.c#L1131' target='_blank'>code </a></figcaption> <div class="CodeRay">
-  <div class="code"><pre>
-error = vn_open(&amp;amp;nd, &amp;amp;flags, cmode, fp); 
-<span class="error">…</span>
-<span class="error">…</span>
+<p>{% coderay lang:c  Assign vnode https://github.com/coolgoose85/FreeBSD/blob/master/sys/kern/vfs_syscalls.c#L1131 code %}
+error = vn_open(&amp;nd, &amp;flags, cmode, fp); 
+…
+…
 vp = nd.ni_vp;
-fp-&amp;gt;f_vnode = vp;
-</pre></div>
-</div>
- </figure></notextile></div></p>
+fp-&gt;f_vnode = vp;
+{% endcoderay %}</p>
 
 <p>By this time if file operation is not set i.e. if it is still <em>badfileops</em> then we initialize it.</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>badfileops</span>  <a href='https://github.com/coolgoose85/FreeBSD/blob/master/sys/kern/vfs_syscalls.c#L1138' target='_blank'>code </a></figcaption> <div class="CodeRay">
-  <div class="code"><pre>
-<span class="keyword">if</span> (fp-&amp;gt;f_ops == &amp;amp;badfileops) {
-          KASSERT(vp-&amp;gt;v_type != VFIFO, (<span class="error">“</span>Unexpected fifo.<span class="error">”</span>));
-          fp-&amp;gt;f_seqcount = <span class="integer">1</span>;
-          finit(fp, flags &amp;amp; FMASK, DTYPE_VNODE, vp, &amp;amp;vnops);
+<p>{% coderay lang:c  badfileops https://github.com/coolgoose85/FreeBSD/blob/master/sys/kern/vfs_syscalls.c#L1138 code %}
+if (fp-&gt;f_ops == &amp;badfileops) {
+          KASSERT(vp-&gt;v_type != VFIFO, (“Unexpected fifo.”));
+          fp-&gt;f_seqcount = 1;
+          finit(fp, flags &amp; FMASK, DTYPE_VNODE, vp, &amp;vnops);
  }
-</pre></div>
-</div>
- </figure></notextile></div></p>
+{% endcoderay %}</p>
 
 <p>So far, we have done all the book keeping operations. Once its done we need to write data to the file.
 Now, we do the locking of a file. Based on what kind of locking is requested i.e.</p>
@@ -260,32 +535,29 @@ Now, we do the locking of a file. Based on what kind of locking is requested i.e
 
 <p>So, we do the locking of file. Write to the file and file set the attributes to the file.</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>file locking</span>  <a href='https://github.com/coolgoose85/FreeBSD/blob/master/sys/kern/vfs_syscalls.c#L1145' target='_blank'>code </a></figcaption> <div class="CodeRay">
-  <div class="code"><pre>&lt;/p&gt;
+<p>{% coderay lang:c  file locking https://github.com/coolgoose85/FreeBSD/blob/master/sys/kern/vfs_syscalls.c#L1145 code %}</p>
 
-&lt;p&gt;<span class="keyword">if</span> (flags &amp;amp; (O_EXLOCK | O_SHLOCK)) {
-     <span class="error">…</span>
-     <span class="error">…</span>
-          <span class="keyword">if</span> ((error = VOP_ADVLOCK(vp, (caddr_t)fp, F_SETLK, &amp;amp;lf,type)) != <span class="integer">0</span>) {
-               <span class="error">…</span>
+<p>if (flags &amp; (O_EXLOCK | O_SHLOCK)) {
+     …
+     …
+          if ((error = VOP_ADVLOCK(vp, (caddr_t)fp, F_SETLK, &amp;lf,type)) != 0) {
+               …
           }
-     <span class="error">…</span>
- }&lt;/p&gt;
+     …
+ }</p>
 
-&lt;p&gt;<span class="keyword">if</span> (flags &amp;amp; O_TRUNC) {
-          <span class="keyword">if</span> ((error = vn_start_write(vp, &amp;amp;mp, V_WAIT | PCATCH)) != <span class="integer">0</span>)
-               <span class="keyword">goto</span> bad;
-          VOP_LEASE(vp, td, td-&amp;gt;td_ucred, LEASE_WRITE);
-          <span class="error">…</span>
-          <span class="error">…</span>
-          vat.va_size = <span class="integer">0</span>;
-          <span class="error">…</span>
-          error = VOP_SETATTR(vp, &amp;amp;vat, td-&amp;gt;td_ucred);
-          <span class="error">…</span>
+<p>if (flags &amp; O_TRUNC) {
+          if ((error = vn_start_write(vp, &amp;mp, V_WAIT | PCATCH)) != 0)
+               goto bad;
+          VOP_LEASE(vp, td, td-&gt;td_ucred, LEASE_WRITE);
+          …
+          …
+          vat.va_size = 0;
+          …
+          error = VOP_SETATTR(vp, &amp;vat, td-&gt;td_ucred);
+          …
 }
-</pre></div>
-</div>
- </figure></notextile></div></p>
+{% endcoderay %}</p>
 
 <p><br /><br /></p>
 
@@ -293,13 +565,10 @@ Now, we do the locking of a file. Based on what kind of locking is requested i.e
 
 <p>Finally we return fd (indx) and 0 which is success from function kern_openat()</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>Return fd</span>  <a href='https://github.com/coolgoose85/FreeBSD/blob/master/sys/kern/vfs_syscalls.c#L1184' target='_blank'>code </a></figcaption> <div class="CodeRay">
-  <div class="code"><pre>
-     td-&amp;gt;td_retval[<span class="integer">0</span>] = indx;
-    <span class="keyword">return</span> (<span class="integer">0</span>);
- </pre></div>
-</div>
- </figure></notextile></div></p>
+<p>{% coderay lang:c  Return fd https://github.com/coolgoose85/FreeBSD/blob/master/sys/kern/vfs_syscalls.c#L1184 code %}
+ 	td-&gt;td_retval[0] = indx;
+	return (0);
+ {% endcoderay %}</p>
 
 <p><br /> <br /> <br /> <br /> <br /></p>
 ]]></content>
@@ -314,18 +583,7 @@ Now, we do the locking of a file. Based on what kind of locking is requested i.e
   <li><a href="#system-calls">System Calls</a></li>
 </ul>
 
-<p><div class="wikipedia">
-  
-    <img src="//upload.wikimedia.org/wikipedia/commons/thumb/6/68/Linux_kernel_interfaces.svg/300px-Linux_kernel_interfaces.svg.png"/>
-  
-  <h2>system call</h2>
-  <div>
-    <p>In <a href="http://en.wikipedia.org/wiki/Computing" title="Computing">computing</a>, a <strong>system call</strong> is how a program requests a service from an <a href="http://en.wikipedia.org/wiki/Operating_system" title="Operating system">operating system</a>'s <a href="http://en.wikipedia.org/wiki/Kernel_(computing)" title="Kernel (computing)" class="mw-redirect">kernel</a>. This may include hardware related services (e.g. accessing the hard disk), creating and executing new <a href="http://en.wikipedia.org/wiki/Process_(computing)" title="Process (computing)">processes</a>, and communicating with integral kernel services (like scheduling). System calls provide an essential interface between a process and the operating system.
-</p>
-  </div>
-  <a href="http://en.wikipedia.org/wiki/System_call">Read more</a>
-</div>
-</p>
+<p>{% wikipedia System_call %}</p>
 
 <!-- more -->
 
@@ -335,31 +593,28 @@ Now, we do the locking of a file. Based on what kind of locking is requested i.e
 
 <p>Whenever system call is executed from user level a trap is generated and it gets handled at file <a href="https://github.com/coolgoose85/FreeBSD/blob/master/sys/i386/i386/exception.s#L255" target="_blank">Exception.S (i386\i386)</a> </p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>System Call </span>  <a href='https://github.com/coolgoose85/FreeBSD/blob/master/sys/i386/i386/exception.s#L255' target='_blank'>Code </a></figcaption> <div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="comment">/* </span>
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span class="comment"> * Even though the name says ‘int0x80’, this is actually a TGT (trap gate)</span>
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span class="comment"> * rather then an IGT (interrupt gate).  Thus interrupts are enabled on</span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span class="comment"> * entry just as they are for a normal syscall.</span>
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span class="comment"> &lt;em&gt;/</span>
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span><span class="comment">     SUPERALIGN_TEXT</span>
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span class="comment">IDTVEC(int0x80_syscall)</span>
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span><span class="comment">     pushl     $2               /&lt;/em&gt; sizeof “int 0x80” &lt;em&gt;/</span>
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span><span class="comment">     subl     $4,%esp               /&lt;/em&gt; skip over tf_trapno */</span>
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>     pushal
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>     pushl     %ds
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span>     pushl     %es
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span>     pushl     %fs
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span>     SET_KERNEL_SREGS
-<span class="line-numbers"><a href="#n16" name="n16">16</a></span>     FAKE_MCOUNT(TF_EIP(%esp))
-<span class="line-numbers"><a href="#n17" name="n17">17</a></span>     pushl     %esp
-<span class="line-numbers"><a href="#n18" name="n18">18</a></span>     call     syscall   ==&amp;gt; from here syscall function is called after pushing some prereq
-<span class="line-numbers"><a href="#n19" name="n19">19</a></span>     add     $<span class="integer">4</span>, %esp
-<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>     MEXITCOUNT
-<span class="line-numbers"><a href="#n21" name="n21">21</a></span>     jmp     doreti ==&amp;gt; <span class="keyword">do</span> <span class="keyword">return</span> from interrupt 
-</pre></div>
-</div>
- </figure></notextile></div></p>
+<p>{% coderay lang:c linenos:true System Call  https://github.com/coolgoose85/FreeBSD/blob/master/sys/i386/i386/exception.s#L255 Code %}
+/* 
+ * Even though the name says ‘int0x80’, this is actually a TGT (trap gate)
+ * rather then an IGT (interrupt gate).  Thus interrupts are enabled on
+ * entry just as they are for a normal syscall.
+ <em>/
+     SUPERALIGN_TEXT
+IDTVEC(int0x80_syscall)
+     pushl     $2               /</em> sizeof “int 0x80” <em>/
+     subl     $4,%esp               /</em> skip over tf_trapno */
+     pushal
+     pushl     %ds
+     pushl     %es
+     pushl     %fs
+     SET_KERNEL_SREGS
+     FAKE_MCOUNT(TF_EIP(%esp))
+     pushl     %esp
+     call     syscall   ==&gt; from here syscall function is called after pushing some prereq
+     add     $4, %esp
+     MEXITCOUNT
+     jmp     doreti ==&gt; do return from interrupt 
+{% endcoderay %}</p>
 
 <p><br /></p>
 
@@ -369,51 +624,44 @@ Now, we do the locking of a file. Based on what kind of locking is requested i.e
 
 <p><code class="myyellow">Function syscall()</code> is called with trap frame which has input values to system call.</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>struct trapframe </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre>
-<span class="comment">/*
+<p>{% coderay lang:c  struct trapframe %}
+/*
  * Exception/Trap Stack Frame
- */</span>&lt;/p&gt;
+ */</p>
 
-&lt;p&gt;<span class="keyword">struct</span> trapframe {
-     <span class="predefined-type">int</span>     tf_fs;
-     <span class="predefined-type">int</span>     tf_es;
-     <span class="predefined-type">int</span>     tf_ds;
-     <span class="predefined-type">int</span>     tf_edi;
-     <span class="predefined-type">int</span>     tf_esi;
-     <span class="predefined-type">int</span>     tf_ebp;
-     <span class="predefined-type">int</span>     tf_isp;
-     <span class="predefined-type">int</span>     tf_ebx;
-     <span class="predefined-type">int</span>     tf_edx;
-     <span class="predefined-type">int</span>     tf_ecx;
-     <span class="predefined-type">int</span>     tf_eax;
-     <span class="predefined-type">int</span>     tf_trapno;
-     <span class="comment">/* below portion defined in 386 hardware &lt;em&gt;/
+<p>struct trapframe {
+     int     tf_fs;
+     int     tf_es;
+     int     tf_ds;
+     int     tf_edi;
+     int     tf_esi;
+     int     tf_ebp;
+     int     tf_isp;
+     int     tf_ebx;
+     int     tf_edx;
+     int     tf_ecx;
+     int     tf_eax;
+     int     tf_trapno;
+     /* below portion defined in 386 hardware <em>/
      int     tf_err;
      int     tf_eip;
      int     tf_cs;
      int     tf_eflags;
-     /&lt;/em&gt; below only when crossing rings (e.g. user to kernel) */</span>
-     <span class="predefined-type">int</span>     tf_esp;
-     <span class="predefined-type">int</span>     tf_ss;
+     /</em> below only when crossing rings (e.g. user to kernel) */
+     int     tf_esp;
+     int     tf_ss;
 };
-</pre></div>
-</div>
- </figure></notextile></div></p>
+{% endcoderay %}</p>
 
 <p><br /></p>
 
 <p><code class="myyellow">Function syscall()</code> now gets all the values of system call input and store in kernel so that kernel code can access the values while processing system call.</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>syscall() </span>  <a href='https://github.com/coolgoose85/FreeBSD/blob/master/sys/i386/i386/trap.c#L997' target='_blank'>code </a></figcaption> <div class="CodeRay">
-  <div class="code"><pre>
-    params = (caddr_t)frame-&amp;gt;tf_esp + <span class="keyword">sizeof</span>(<span class="predefined-type">int</span>);
-     code = frame-&amp;gt;tf_eax;   <span class="comment">// code is system call code</span>
-     orig_tf_eflags = frame-&amp;gt;tf_eflags;
-</pre></div>
-</div>
- </figure></notextile></div></p>
+<p>{% coderay lang:c  syscall()  https://github.com/coolgoose85/FreeBSD/blob/master/sys/i386/i386/trap.c#L997 code %}
+	params = (caddr_t)frame-&gt;tf_esp + sizeof(int);
+     code = frame-&gt;tf_eax;   // code is system call code
+     orig_tf_eflags = frame-&gt;tf_eflags;
+{% endcoderay %}</p>
 
 <p><br /></p>
 
@@ -422,33 +670,26 @@ Now, we do the locking of a file. Based on what kind of locking is requested i.e
 <p><br />
 Then given the system call code we check if we have the code as valid number. If system call code is valid then lookup in system call table which system call is referred else simply store the pointer to indirect system call which is system call 0.
 <br />
-<div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>syscall() </span>  <a href='https://github.com/coolgoose85/FreeBSD/blob/master/sys/i386/i386/trap.c#L1030' target='_blank'>code </a></figcaption> <div class="CodeRay">
-  <div class="code"><pre>
-<span class="keyword">if</span> (code &amp;gt;= p-&amp;gt;p_sysent-&amp;gt;sv_size)
-           callp = &amp;amp;p-&amp;gt;p_sysent-&amp;gt;sv_table[<span class="integer">0</span>];
-       <span class="keyword">else</span>
-           callp = &amp;amp;p-&amp;gt;p_sysent-&amp;gt;sv_table[code]; 
-</pre></div>
-</div>
- </figure></notextile></div>
+{% coderay lang:c  syscall()  https://github.com/coolgoose85/FreeBSD/blob/master/sys/i386/i386/trap.c#L1030 code %}
+if (code &gt;= p-&gt;p_sysent-&gt;sv_size)
+           callp = &amp;p-&gt;p_sysent-&gt;sv_table[0];
+       else
+           callp = &amp;p-&gt;p_sysent-&gt;sv_table[code]; 
+{% endcoderay %}
 <br />
 where <strong>sv_table</strong> entry will have following values</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>sv_table </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre>
-<span class="keyword">struct</span> sysent {               <span class="comment">/* system call table &lt;em&gt;/
-     int     sy_narg;     /&lt;/em&gt; number of arguments &lt;em&gt;/
-     sy_call_t *sy_call;     /&lt;/em&gt; implementing function &lt;em&gt;/
-     au_event_t sy_auevent;     /&lt;/em&gt; audit event associated with syscall &lt;em&gt;/
+<p>{% coderay lang:c  sv_table %}
+struct sysent {               /* system call table <em>/
+     int     sy_narg;     /</em> number of arguments <em>/
+     sy_call_t *sy_call;     /</em> implementing function <em>/
+     au_event_t sy_auevent;     /</em> audit event associated with syscall <em>/
      systrace_args_func_t sy_systrace_args_func;
-                    /&lt;/em&gt; optional argument conversion function. &lt;em&gt;/
-     u_int32_t sy_entry;     /&lt;/em&gt; DTrace entry ID for systrace. &lt;em&gt;/
-     u_int32_t sy_return;     /&lt;/em&gt; DTrace return ID for systrace. */</span>
+                    /</em> optional argument conversion function. <em>/
+     u_int32_t sy_entry;     /</em> DTrace entry ID for systrace. <em>/
+     u_int32_t sy_return;     /</em> DTrace return ID for systrace. */
 };
-</pre></div>
-</div>
- </figure></notextile></div></p>
+{% endcoderay %}</p>
 
 <p>Once we know which system it is then we determine how many arguments it have</p>
 
@@ -458,33 +699,27 @@ where <strong>sv_table</strong> entry will have following values</p>
 
 <p>Then we copy all the user space arguments into kernel space using function copying which validates the addresses of source and destination etc.</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>syscall() </span>  <a href='https://github.com/coolgoose85/FreeBSD/blob/master/sys/i386/i386/trap.c#L1040' target='_blank'>code </a></figcaption> <div class="CodeRay">
-  <div class="code"><pre>
-  <span class="comment">/*
+<p>{% coderay lang:c  syscall()  https://github.com/coolgoose85/FreeBSD/blob/master/sys/i386/i386/trap.c#L1040 code %}
+  /*
       * copyin and the ktrsyscall()/ktrsysret() code is MP-aware
       * copy data from params to args
-      */</span>
-     <span class="keyword">if</span> (params != <span class="predefined-constant">NULL</span> &amp;amp;&amp;amp; narg != <span class="integer">0</span>)
+      */
+     if (params != NULL &amp;&amp; narg != 0)
           error = copyin(params, (caddr_t)args,
-                        (u_int)(narg * <span class="keyword">sizeof</span>(<span class="predefined-type">int</span>)));&lt;/p&gt;
+                        (u_int)(narg * sizeof(int)));</p>
 
-&lt;p&gt;</pre></div>
-</div>
- </figure></notextile></div></p>
+<p>{% endcoderay %}</p>
 
 <p>Now, check if we saw any error so far. If we did find the error then we need to return the error but, at this time in kernel it does not know how to return in user space. So, we set the register 0 to be non zero which is the error number and we set another register which is carry bit(eflag). <br /></p>
 
 <p>So, when system call is returned, C lib which issued the system call will check if carry bit(eflag) is set or not. If it is set then it will get the error number from register 0 and map it to human readable error <em>errorno</em> and then override the register 0 with -1. <br />
 So, say if open system call encounters error then its going to get the error value from register 0; translate it to meaningful error and then override the register 0 with -1. So open returned the value -1 which is failure.</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>syscall() </span>  <a href='https://github.com/coolgoose85/FreeBSD/blob/master/sys/i386/i386/trap.c#L1056' target='_blank'>code </a></figcaption> <div class="CodeRay">
-  <div class="code"><pre>
-<span class="keyword">if</span> (error == <span class="integer">0</span>) {
-          td-&amp;gt;td_retval[<span class="integer">0</span>] = <span class="integer">0</span>;
-          td-&amp;gt;td_retval[<span class="integer">1</span>] = frame-&amp;gt;tf_edx; <span class="comment">// return another value in register 1 if we have anything to return</span>
-</pre></div>
-</div>
- </figure></notextile></div></p>
+<p>{% coderay lang:c  syscall()  https://github.com/coolgoose85/FreeBSD/blob/master/sys/i386/i386/trap.c#L1056 code %}
+if (error == 0) {
+          td-&gt;td_retval[0] = 0;
+          td-&gt;td_retval[1] = frame-&gt;tf_edx; // return another value in register 1 if we have anything to return
+{% endcoderay %}</p>
 
 <p>Now we call the actual system call
 &gt; error = (*callp-&gt;sy_call)(td, args);</p>
@@ -495,21 +730,18 @@ So, say if open system call encounters error then its going to get the error val
 
 <p>We check error and if all fine then we return the values back to user space</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header'><span>syscall() </span>  <a href='https://github.com/coolgoose85/FreeBSD/blob/master/sys/i386/i386/trap.c#L1094' target='_blank'>code </a></figcaption> <div class="CodeRay">
-  <div class="code"><pre>
-<span class="keyword">switch</span> (error) {
-     <span class="keyword">case</span> <span class="integer">0</span>:
-          frame-&amp;gt;tf_eax = td-&amp;gt;td_retval[<span class="integer">0</span>];
-          frame-&amp;gt;tf_edx = td-&amp;gt;td_retval[<span class="integer">1</span>];
-          frame-&amp;gt;tf_eflags &amp;amp;= ~PSL_C;
-          <span class="keyword">break</span>;&lt;/p&gt;
+<p>{% coderay lang:c  syscall()  https://github.com/coolgoose85/FreeBSD/blob/master/sys/i386/i386/trap.c#L1094 code %}
+switch (error) {
+     case 0:
+          frame-&gt;tf_eax = td-&gt;td_retval[0];
+          frame-&gt;tf_edx = td-&gt;td_retval[1];
+          frame-&gt;tf_eflags &amp;= ~PSL_C;
+          break;</p>
 
-&lt;p&gt;<span class="keyword">else</span> we handle the error
-          frame-&amp;gt;tf_eax = error;
-          frame-&amp;gt;tf_eflags |= PSL_C;
-</pre></div>
-</div>
- </figure></notextile></div></p>
+<p>else we handle the error
+          frame-&gt;tf_eax = error;
+          frame-&gt;tf_eflags |= PSL_C;
+{% endcoderay %}</p>
 
 <p>Now we fall back to assembly program from where this function was called.</p>
 

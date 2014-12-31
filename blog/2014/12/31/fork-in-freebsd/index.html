@@ -1,0 +1,688 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Fork code in FreeBSD - Distributed Knowledge</title>
+  <meta name="author" content="Vaibhav Gautam">
+
+  
+  <meta name="description" content="In computing, particularly in the context of the Unix operating system and its workalikes, fork is an operation whereby a process creates a copy of &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://distkeys.com/blog/2014/12/31/fork-in-freebsd/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Distributed Knowledge" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=Gafata' rel='stylesheet' type='text/css'>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$$','$$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript"
+   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-44705857-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+</hgroup>
+
+</header>
+  <!-- <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="gautam.usc@gmail.com" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:distkeys.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav> -->
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Fork Code in FreeBSD</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-12-31T11:51:00-08:00" pubdate data-updated="true">Dec 31<span>st</span>, 2014</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>In computing, particularly in the context of the Unix operating system and its workalikes, fork is an operation whereby a process creates a copy of itself. It is usually a system call, implemented in the kernel. Fork is the primary (and historically, only) method of process creation on Unix-like operating systems.</p>
+
+<p><a href="http://en.wikipedia.org/wiki/Fork_(system_call)">Read More</a></p>
+
+<!-- more -->
+<p><br /></p>
+
+<blockquote>
+  <p>fork() creates a new process by duplicating the calling process. The new process, referred to as the child, is an exact duplicate of the calling process.</p>
+</blockquote>
+
+<p><a href="https://github.com/coolgoose85/FreeBSD/tree/master/sys">FreeBSD source code</a></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Function Fork() </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre>
+Function fork(td, uap)
+{
+    ...
+     error = fork1(td, RFFDG | RFPROC, <span style="color:#00D">0</span>, &amp;p2);
+
+     Return pid of child
+     td-&gt;td_retval[<span style="color:#00D">0</span>] = p2-&gt;p_pid;
+}
+</pre></div>
+</div>
+ </figure></notextile></div>
+
+<p><br /></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Function Fork1() </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre>
+Function fork1(td, flags, pages, procp)
+{
+     <span style="color:#080;font-weight:bold">struct</span> proc *p1, *p2, *pptr; <span style="color:#777">//p1 = parent process, p2 = child process</span>
+
+     Parent process
+     p1 = td-&gt;td_proc;
+
+     ...
+     ...
+     Allocate a new process
+     newproc = uma_zalloc(proc_zone, M_WAITOK);
+
+     To run a process we need to have atleast one thread,
+     so allocate a new thread
+     td2 = thread_alloc();
+
+     Linkup thread to process
+     proc_linkup(newproc, td2);
+     ...
+     ...
+    
+     Now we have to gro through the process address space and copy each section <span style="color:#080;font-weight:bold">for</span> new process
+     Sections of process address space are
+     <span style="color:#60E">1</span>. Text area (read only)
+     <span style="color:#60E">2</span>. Initialized area
+     <span style="color:#60E">3</span>. Uninitiaized area
+     <span style="color:#60E">4</span>. Stack/Heap area
+
+     vm2 = vmspace_fork(p1-&gt;p_vmspace);
+
+          Function vmspace_fork(p1-&gt;p_vmspace) {
+                    Process virtual address space is as follows
+                    <span style="color:#777">/*
+                    * struct vmspace {
+                    *      struct vm_map vm_map;     /* VM address map */</span>
+                    *      <span style="color:#080;font-weight:bold">struct</span> shmmap_state *vm_shm;     <span style="color:#777">/* SYS5 shared memory private data XXX */</span>
+                    *      segsz_t vm_swrss;     <span style="color:#777">/* resident set size before last swap */</span>
+                    *      segsz_t vm_tsize;     <span style="color:#777">/* text size (pages) XXX */</span>
+                    *      segsz_t vm_dsize;     <span style="color:#777">/* data size (pages) XXX */</span>
+                    *      segsz_t vm_ssize;     <span style="color:#777">/* stack size (pages) */</span>
+                    *      caddr_t vm_taddr;     <span style="color:#777">/* (c) user virtual address of text */</span>
+                    *      caddr_t vm_daddr;     <span style="color:#777">/* (c) user virtual address of data */</span>
+                    *      caddr_t vm_maxsaddr;     <span style="color:#777">/* user VA at max stack growth */</span>
+                    *      <span style="color:#0a8;font-weight:bold">int</span>     vm_refcnt;     <span style="color:#777">/* number of references */</span>
+                    *      <span style="color:#777">/*
+                    *       * Keep the PMAP last, so that CPU-specific variations of that
+                    *       * structure on a single architecture don't result in offset
+                    *       * variations of the machine-independent fields in the vmspace.
+                    *       */</span>
+                    *      <span style="color:#080;font-weight:bold">struct</span> pmap vm_pmap;     <span style="color:#777">/* private physical map */</span>
+                    * };
+                    */
+
+               We allocate the process address space
+               <span style="color:#080;font-weight:bold">struct</span> vmspace *vm2;
+               ...
+               vm2 = vmspace_alloc(old_map-&gt;min_offset, old_map-&gt;max_offset);    
+               ...
+               ...
+
+               Now we have to go through each vm map entries one at a time and allocate each <span style="color:#080;font-weight:bold">for</span> new process
+               <span style="color:#080;font-weight:bold">while</span> (old_entry != &amp;old_map-&gt;header) {
+                    <span style="color:#080;font-weight:bold">case</span> VM_INHERIT_NONE:
+                         ...
+
+                    <span style="color:#080;font-weight:bold">case</span> VM_INHERIT_SHARE:
+                         ...
+
+                    <span style="color:#080;font-weight:bold">case</span> VM_INHERIT_COPY:
+                         This is our <span style="color:#080;font-weight:bold">case</span> where we have to clone the entries and link into the map
+                         new_entry = vm_map_entry_create(new_map);
+                         ..
+                         vm_map_entry_link(new_map, new_map-&gt;header.prev, new_entry);
+                         vmspace_map_entry_forked(vm1, vm2, new_entry);
+                         vm_map_copy_entry(old_map, new_map, old_entry,         
+               }
+          } <span style="color:#777">// end vmspace_fork()</span>
+
+
+     We will be now locking the process tree as we need to give new process process id
+     Process of allocating a new Pid is system will scan the existing pids and try to come
+     up with a range of free pids. Once a range of free pids found system will use that range
+     <span style="color:#080;font-weight:bold">for</span> next lets say <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">k</span><span style="color:#710">&quot;</span></span> forks. Once the range is exhausted then system on next fork will
+     again find the range and so on.
+    
+     sx_slock(&amp;proctree_lock);
+
+     Determine <span style="color:#080;font-weight:bold">if</span> we are exceeding process createlimit
+     Check privledge to increase the limit
+
+     <span style="color:#777">//Try to allocate the pids</span>
+     trypid = lastpid + <span style="color:#00D">1</span>;
+
+     ...
+
+     Check <span style="color:#080;font-weight:bold">if</span> we have hit the end of the range
+     <span style="color:#080;font-weight:bold">if</span> (trypid &gt;= pidchecked) {
+          We have exhausted the range so find a new range
+          Scan the active and Zombie procs to check whether pid is in use
+          ...
+          ...
+     }
+     sx_sunlock(&amp;proctree_lock);
+
+     If we are within range then
+     lastpid = trypid;
+
+     p2 = newproc;
+     p2-&gt;p_state = PRS_NEW;          <span style="color:#777">/* protect against others */</span>
+     p2-&gt;p_pid = trypid;
+
+
+     sched_fork(td, td2);
+               Function sched_fork(<span style="color:#080;font-weight:bold">struct</span> thread *td, <span style="color:#080;font-weight:bold">struct</span> thread *child) {
+                    sched_fork_thread(td, child);
+                              Function sched_fork_thread(td, child) {
+                                   Initialize schedule related values from parent to child
+                                   Assign CPU estimate info and priority
+                                   ...
+                              }
+               } <span style="color:#777">// end sched_fork()</span>
+         
+     Insert new process to process list
+     LIST_INSERT_HEAD(&amp;allproc, p2, p_list);
+
+     Insert into PID HASH
+     LIST_INSERT_HEAD(PIDHASH(p2-&gt;p_pid), p2, p_hash);
+
+
+     Lock P1
+     Lock P2
+     Relase Lock <span style="color:#080;font-weight:bold">for</span> All proc since we took all proc lock to allocate new pid
+     sx_xunlock(&amp;allproc_lock);
+
+     copy the blocks
+     bcopy(&amp;p1-&gt;p_startcopy, &amp;p2-&gt;p_startcopy,
+         __rangeof(<span style="color:#080;font-weight:bold">struct</span> proc, p_startcopy, p_endcopy));
+
+     Zero out the blocks
+     bzero(&amp;p2-&gt;p_startzero,
+         __rangeof(<span style="color:#080;font-weight:bold">struct</span> proc, p_startzero, p_endzero));
+
+     ...
+     Allocate new signals
+
+     Copy File descriptors of all the open files by parent to child
+     fd = fdcopy(p1-&gt;p_fd);
+
+
+     In a new process, we created a thread now copy the blocks <span style="color:#080;font-weight:bold">for</span> this new thread
+     bzero(&amp;td2-&gt;td_startzero,
+         __rangeof(<span style="color:#080;font-weight:bold">struct</span> thread, td_startzero, td_endzero));
+
+     bcopy(&amp;td-&gt;td_startcopy, &amp;td2-&gt;td_startcopy,
+         __rangeof(<span style="color:#080;font-weight:bold">struct</span> thread, td_startcopy, td_endcopy));
+
+     bcopy(&amp;p2-&gt;p_comm, &amp;td2-&gt;td_name, <span style="color:#080;font-weight:bold">sizeof</span>(td2-&gt;td_name));
+
+     ...
+     ...
+
+     Copy the vnode pointer of text from parent to child
+     p2-&gt;p_textvp = p1-&gt;p_textvp;   <span style="color:#777">// Vnode of executable. and increase the ref count</span>
+     vref(p2-&gt;p_textvp);
+
+     ...
+
+
+     Processing related to process group, child and parent will belong to same process group
+     Insert process into process group list
+
+
+     Associate child with Parent
+     pptr = p1;
+     p2-&gt;p_pptr = pptr;
+
+     Insert child process into sibling list
+     LIST_INSERT_HEAD(&amp;pptr-&gt;p_children, p2, p_sibling);
+
+     vm_forkproc(td, p2, td2, vm2, flags);
+               Function vm_forkproc(td, p2, td2, vm2, flags) {
+                    ...
+                    ...
+
+                    cpu_fork(td, p2, td2, flags);
+                              Function cpu_fork(<span style="color:#080;font-weight:bold">struct</span> thread *td1, <span style="color:#080;font-weight:bold">struct</span> proc *p2, <span style="color:#080;font-weight:bold">struct</span> thread *td2, <span style="color:#0a8;font-weight:bold">int</span> flags)
+                              {
+                                   Copy PCB and the stack
+                                   pcb1 = td1-&gt;td_pcb;
+
+                                   Allocate PCB <span style="color:#080;font-weight:bold">for</span> child process
+                                   pcb2 = (<span style="color:#080;font-weight:bold">struct</span> pcb *)(td2-&gt;td_kstack +
+                                   td2-&gt;td_kstack_pages * PAGE_SIZE) - <span style="color:#00D">1</span>;
+                                   td2-&gt;td_pcb = pcb2;
+
+                                   Copy PCB1 to PCB2 (PCB <span style="color:#080;font-weight:bold">struct</span> is in pcb.h)
+                                   bcopy(td1-&gt;td_pcb, pcb2, <span style="color:#080;font-weight:bold">sizeof</span>(*pcb2));
+
+                                   Create a new stack <span style="color:#080;font-weight:bold">for</span> a new process
+                                   td2-&gt;td_frame = (<span style="color:#080;font-weight:bold">struct</span> trapframe *)((caddr_t)td2-&gt;td_pcb - <span style="color:#00D">16</span>) - <span style="color:#00D">1</span>;
+                                   bcopy(td1-&gt;td_frame, td2-&gt;td_frame, <span style="color:#080;font-weight:bold">sizeof</span>(<span style="color:#080;font-weight:bold">struct</span> trapframe));
+                                   ...
+                                   td2-&gt;td_frame-&gt;tf_eax = <span style="color:#00D">0</span>;          <span style="color:#777">/* Child returns zero */</span>
+                                   ...
+                                   ...
+
+                                   In instruction pointer of child process we will set the address of trampoline code
+                                   pcb2-&gt;pcb_eip = (<span style="color:#0a8;font-weight:bold">int</span>)fork_trampoline;
+
+                                   <span style="color:#777">//Fork_trampoline code will call fork_return</span>
+                                   pcb2-&gt;pcb_esi = (<span style="color:#0a8;font-weight:bold">int</span>)fork_return;     <span style="color:#777">/* fork_trampoline argument */</span>
+                                   pcb2-&gt;pcb_ebx = (<span style="color:#0a8;font-weight:bold">int</span>)td2;          <span style="color:#777">/* fork_trampoline argument */</span>
+
+                                             Looking into fork_trampoline in i386/exception.s
+                                                  ENTRY(fork_trampoline)
+                                                            pushl     %esp               <span style="color:#777">/* trapframe pointer */</span>
+                                                            pushl     %ebx               <span style="color:#777">/* arg1 */</span>
+                                                            pushl     %esi               <span style="color:#777">/* function */</span>
+                                                            call     fork_exit
+                                                  So, from fork_trampoline we are going to call fork_exit and its argument
+                                                  will be above we mentioned.
+
+                                                       <span style="color:#777">//Handle the return of a child process from fork1()</span>
+                                                       Function fork_exit(callout, arg, frame)         
+                                                       {
+                                                            ...
+                                                            callout(arg, frame); <span style="color:#777">// Here callout is fork_return, as we passed it</span>
+                                                                                          as a argument to fork_exit
+
+                                                                 Function fork_return() {                                            
+                                                                      userret(td, frame);
+                                                                 }
+                                                       }
+
+                                                  Once we <span style="color:#080;font-weight:bold">return</span> from fork_exit we will go to doreti
+                                                  which will load our frame and we have will go back to
+                                                  fork system call as a child. But the chils process will
+                                                  not execute right now because we have not scheduled it
+                                                  to run. This is the setup we are preparing and once
+                                                  all the setup is done we will schedule the child process
+                                                  and it will <span style="color:#080;font-weight:bold">do</span> as described above
+                                                  jmp     doreti    
+
+                              } <span style="color:#777">// end of cpu_fork()</span>
+               } <span style="color:#777">//end of vm_forkproc</span>
+
+
+     Put child process on run queue
+     sched_add(td2, SRQ_BORING);
+
+     ...
+     ...
+    
+} <span style="color:#777">//end fork1()</span>
+</pre></div>
+</div>
+ </figure></notextile></div>
+
+<p><br /></p>
+
+<h2 id="call-tree">Call Tree</h2>
+
+<p><img src="/images/fork1.png" title="[fork1.png]" /></p>
+
+<p><br /><br /></p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Vaibhav Gautam</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-12-31T11:51:00-08:00" pubdate data-updated="true">Dec 31<span>st</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/freebsd/'>FreeBSD</a>, <a class='category' href='/blog/categories/operating-systems/'>Operating Systems</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+   <div class="rdbWrapper" data-show-read="1" data-show-send-to-kindle="1" data-show-print="1" data-show-email="0" data-orientation="0" data-version="1"></div><script type="text/javascript">(function() {var s = document.getElementsByTagName("script")[0],rdb = document.createElement("script"); rdb.type = "text/javascript"; rdb.async = true; rdb.src = document.location.protocol + "//www.readability.com/embed.js"; s.parentNode.insertBefore(rdb, s); })();</script>
+  
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://distkeys.com/blog/2014/12/31/fork-in-freebsd/" data-via="_vaibhavg" data-counturl="http://distkeys.com/blog/2014/12/31/fork-in-freebsd/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/11/27/dynamic-programming/" title="Previous Post: Dynamic Programming">&laquo; Dynamic Programming</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <ul id="recent_posts">
+      <li class="post">
+      <a href="http://distkeys.com" alt="Home"><img src="/images/Home.png"></a>
+      <a href="http://distkeys.com/archives/" alt="Archives"><img src="/images/Calendar.png"></a>
+      
+      <a href="mailto:gautam.usc@gmail.com" alt="E-Mail"><img src="/images/mail_big.png"></a>
+      
+      <a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS"><img src="/images/rss.png"></a>
+      </li>
+  </ul>
+
+  <script>
+  (function() {
+   var cx = '004567732420113844713:vbwvfm07l2y';
+   var gcse = document.createElement('script');
+   gcse.type = 'text/javascript';
+   gcse.async = true;
+   gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+   '//www.google.com/cse/cse.js?cx=' + cx;
+   var s = document.getElementsByTagName('script')[0];
+   s.parentNode.insertBefore(gcse, s);
+   })();
+</script>
+<gcse:search></gcse:search>
+
+</section>
+<section>
+  <h1>About Me</h1>
+  <p><a href="http://www.linkedin.com/pub/vaibhav-gautam/11/663/163" target="_blank"><img src="/images/linked-in.png"></a>
+  <a href="https://twitter.com/_vaibhavg" target="_blank"><img src="/images/twitter.png"></a>
+  <a href="https://github.com/learnwrite" target="_blank"><img src="/images/github.png"></a>
+  <a href="https://www.facebook.com/mailtovaibhav" target="_blank"><img src="/images/facebook.png"></a>
+  <a href="http://www.vaibhavgautam.com" target="_blank"><img src="/images/flickr.png"></a>
+  <a href="mailto:gautam.usc@gmail.com" target="_blank"><img src="/images/mail.png"></a>
+  <a href="http://distkeys.com/blog/2014/02/21/reading-list/"><img src="/images/readinglist.png"></a>
+  <a href="http://www.pinterest.com/gautamusc/" target="_blank"><img src="/images/pinterest.png"></a>
+  <a href="http://www.quora.com/Vaibhav-Gautam" target="_blank"><img src="/images/quora.png"></a>
+  </p>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/12/31/fork-in-freebsd/">Fork code in FreeBSD</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/11/27/dynamic-programming/">Dynamic Programming</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/08/04/debug-freebsd-open/">Debug FreeBSD - Open</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/08/03/inside-freebsd/">Inside FreeBSD - Debug System Call</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/07/08/boot-freebsd/">Boot FreeBSD</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+<section>
+<h1>Categories</h1>
+<ul id="categories">
+<li class='category'><a href='/blog/categories/d3-js/'>D3.js (1)</a></li>
+<li class='category'><a href='/blog/categories/freebsd/'>FreeBSD (3)</a></li>
+<li class='category'><a href='/blog/categories/linux/'>Linux (1)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>Octopress (1)</a></li>
+<li class='category'><a href='/blog/categories/operating/'>Operating (1)</a></li>
+<li class='category'><a href='/blog/categories/operating-systems/'>Operating Systems (8)</a></li>
+<li class='category'><a href='/blog/categories/reading-list/'>Reading List (1)</a></li>
+<li class='category'><a href='/blog/categories/scale/'>Scale (1)</a></li>
+<li class='category'><a href='/blog/categories/systems/'>Systems (4)</a></li>
+<li class='category'><a href='/blog/categories/algorithm/'>algorithm (3)</a></li>
+<li class='category'><a href='/blog/categories/algorithms/'>algorithms (4)</a></li>
+<li class='category'><a href='/blog/categories/architecture/'>architecture (1)</a></li>
+<li class='category'><a href='/blog/categories/array/'>array (1)</a></li>
+<li class='category'><a href='/blog/categories/binary/'>binary (1)</a></li>
+<li class='category'><a href='/blog/categories/binary-numbers/'>binary numbers (1)</a></li>
+<li class='category'><a href='/blog/categories/debug/'>debug (1)</a></li>
+<li class='category'><a href='/blog/categories/design-pattern/'>design pattern (1)</a></li>
+<li class='category'><a href='/blog/categories/distributed-systems/'>distributed systems (4)</a></li>
+<li class='category'><a href='/blog/categories/graph/'>graph (1)</a></li>
+<li class='category'><a href='/blog/categories/interview/'>interview (1)</a></li>
+<li class='category'><a href='/blog/categories/numbers/'>numbers (1)</a></li>
+<li class='category'><a href='/blog/categories/object-oriented/'>object oriented (1)</a></li>
+<li class='category'><a href='/blog/categories/operating-systems/'>operating systems (2)</a></li>
+<li class='category'><a href='/blog/categories/recursion/'>recursion (4)</a></li>
+<li class='category'><a href='/blog/categories/scale/'>scale (1)</a></li>
+<li class='category'><a href='/blog/categories/sorting/'>sorting (2)</a></li>
+<li class='category'><a href='/blog/categories/strings/'>strings (1)</a></li>
+<li class='category'><a href='/blog/categories/system-design/'>system design (2)</a></li>
+<li class='category'><a href='/blog/categories/trees/'>trees (1)</a></li>
+<li class='category'><a href='/blog/categories/tries/'>tries (1)</a></li>
+
+</ul>
+</section>
+<section>
+<h1>Twitter</h1>
+<a class="twitter-timeline" href="https://twitter.com/_vaibhavg" data-widget-id="386954016019587072">Tweets by @_vaibhavg</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - <a href="http://www.linkedin.com/pub/vaibhav-gautam/11/663/163">Vaibhav Gautam</a> -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'coolgoose85';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://distkeys.com/blog/2014/12/31/fork-in-freebsd/';
+        var disqus_url = 'http://distkeys.com/blog/2014/12/31/fork-in-freebsd/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
