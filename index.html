@@ -9,7 +9,7 @@
   <meta name="author" content="Vaibhav Gautam">
 
   
-  <meta name="description" content="Kill System Call Post Signal Signal Delivery Signals are a limited form of inter-process communication used in Unix, Unix-like, and other POSIX- &hellip;">
+  <meta name="description" content="Components of Process Address Space Code walk Header files vm_map vm_map_entry VM object types vnode/object vm_page (Least active use algorithm) &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -108,6 +108,74 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/01/02/virtual-memory1/">Virtual Memory in FreeBSD - Part 1</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-01-02T20:25:00-08:00" pubdate data-updated="true">Jan 2<span>nd</span>, 2015</time>
+        
+         | <a href="/blog/2015/01/02/virtual-memory1/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#components-of-process-address-space">Components of Process Address Space</a></li>
+  <li><a href="#code-walk">Code walk</a>    <ul>
+      <li><a href="#header-files">Header files</a>        <ul>
+          <li><a href="#vmmap">vm_map</a></li>
+          <li><a href="#vmmapentry">vm_map_entry</a></li>
+          <li><a href="#vm-object-types">VM object types</a></li>
+          <li><a href="#vnodeobject">vnode/object</a></li>
+          <li><a href="#vmpage-least-active-use-algorithm">vm_page (Least active use algorithm)</a></li>
+          <li><a href="#page-fault-reasons">Page fault reasons</a></li>
+          <li><a href="#memory-allocators">Memory Allocators</a></li>
+          <li><a href="#call-graph-mmap">Call graph mmap</a></li>
+          <li><a href="#mmap-system-call">mmap system call</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>In computing, virtual memory is a memory management technique that is implemented using both hardware and software. It maps memory addresses used by a program, called virtual addresses, into physical addresses in computer memory but it lacks code details.</p>
+
+<p><a href="http://en.wikipedia.org/wiki/Virtual_memory">Read More</a></p>
+
+<p>Recently, I have come across a very good <a href="http://duartes.org/gustavo/blog/post/anatomy-of-a-program-in-memory/">blog post</a> about virtual memory which explains in theory what is virtual memory and talk a bit about code</p>
+
+<p><a href="http://www.amazon.com/gp/product/0321968972/ref=pd_lpo_sbs_dp_ss_1?pf_rd_p=1944687722&amp;pf_rd_s=lpo-top-stripe-1&amp;pf_rd_t=201&amp;pf_rd_i=0201702452&amp;pf_rd_m=ATVPDKIKX0DER&amp;pf_rd_r=08NPEVW6K146C5A7TE6P">The Design and Implementation of the FreeBSD Operating System</a> is an excellent book and this is the book I am reading, following and learning.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2015/01/02/virtual-memory1/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -632,62 +700,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/03/16/file-system-scheduling-communication-and-memory-management/">File System, Scheduling, Communication and Memory Management</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-03-16T18:26:00-07:00" pubdate data-updated="true">Mar 16<span>th</span>, 2014</time>
-        
-         | <a href="/blog/2014/03/16/file-system-scheduling-communication-and-memory-management/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><ul id="markdown-toc">
-  <li><a href="#the-v-distributed-system">The V Distributed System</a></li>
-  <li><a href="#mach">Mach</a></li>
-  <li><a href="#xen">Xen</a></li>
-  <li><a href="#denali">Denali</a></li>
-  <li><a href="#unix">UNIX</a></li>
-  <li><a href="#references">References</a></li>
-</ul>
-
-<p>The scope of this document is limited to the study of placement of following services in <strong>Mach, V Distributed System, Denali, XEN and UNIX Systems</strong> <br /><br />
-•	File System<br />
-•	Scheduling<br />
-•	Communication<br />
-•	Memory Management<br /></p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/03/16/file-system-scheduling-communication-and-memory-management/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -743,6 +755,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/01/02/virtual-memory1/">Virtual Memory in FreeBSD - Part 1</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/12/31/signal-code-in-freebsd/">Signal code in FreeBSD</a>
       </li>
     
@@ -758,10 +774,6 @@
         <a href="/blog/2014/08/04/debug-freebsd-open/">Debug FreeBSD - Open</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/08/03/inside-freebsd/">Inside FreeBSD - Debug System Call</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -771,11 +783,11 @@
 <h1>Categories</h1>
 <ul id="categories">
 <li class='category'><a href='/blog/categories/d3-js/'>D3.js (1)</a></li>
-<li class='category'><a href='/blog/categories/freebsd/'>FreeBSD (4)</a></li>
+<li class='category'><a href='/blog/categories/freebsd/'>FreeBSD (5)</a></li>
 <li class='category'><a href='/blog/categories/linux/'>Linux (1)</a></li>
 <li class='category'><a href='/blog/categories/octopress/'>Octopress (1)</a></li>
 <li class='category'><a href='/blog/categories/operating/'>Operating (1)</a></li>
-<li class='category'><a href='/blog/categories/operating-systems/'>Operating Systems (9)</a></li>
+<li class='category'><a href='/blog/categories/operating-systems/'>Operating Systems (10)</a></li>
 <li class='category'><a href='/blog/categories/reading-list/'>Reading List (1)</a></li>
 <li class='category'><a href='/blog/categories/scale/'>Scale (1)</a></li>
 <li class='category'><a href='/blog/categories/systems/'>Systems (4)</a></li>
@@ -815,7 +827,7 @@
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2014 - <a href="http://www.linkedin.com/pub/vaibhav-gautam/11/663/163">Vaibhav Gautam</a> -
+  Copyright &copy; 2015 - <a href="http://www.linkedin.com/pub/vaibhav-gautam/11/663/163">Vaibhav Gautam</a> -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
