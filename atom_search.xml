@@ -4,7 +4,7 @@
   <title><![CDATA[Distributed Knowledge]]></title>
   <link href="http://distkeys.com/atom.xml" rel="self"/>
   <link href="http://distkeys.com/"/>
-  <updated>2015-01-02T21:34:19-08:00</updated>
+  <updated>2015-01-02T21:39:51-08:00</updated>
   <id>http://distkeys.com/</id>
   <author>
     <name><![CDATA[Vaibhav Gautam]]></name>
@@ -23,6 +23,7 @@
   <li><a href="#components-of-process-address-space">Components of Process Address Space</a></li>
   <li><a href="#code-walk">Code walk</a>    <ul>
       <li><a href="#header-files">Header files</a>        <ul>
+          <li><a href="#vmspace">vmspace</a></li>
           <li><a href="#vmmap">vm_map</a></li>
           <li><a href="#vmmapentry">vm_map_entry</a></li>
           <li><a href="#vm-object-types">VM object types</a></li>
@@ -131,8 +132,9 @@ Each <em>vm_page</em> structure reference to each physical page in the machine. 
      #define     VM_PROT_EXECUTE          ((vm_prot_t) 0x04)
      #define     VM_PROT_OVERRIDE_WRITE     ((vm_prot_t) 0x08)     /* copy-on-write */</p>
 
-<p><br />
-### vmspace</p>
+<p><br /></p>
+
+<h3 id="vmspace">vmspace</h3>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>vmspace  </span></figcaption>
  <div class="CodeRay">
