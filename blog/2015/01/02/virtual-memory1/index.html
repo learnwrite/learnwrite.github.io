@@ -1,0 +1,1084 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Virtual Memory in FreeBSD - Part 1 - Distributed Knowledge</title>
+  <meta name="author" content="Vaibhav Gautam">
+
+  
+  <meta name="description" content="Components of Process Address Space Code walk Header files vm_map vm_map_entry VM object types vnode/object vm_page (Least active use algorithm) &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://distkeys.com/blog/2015/01/02/virtual-memory1/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Distributed Knowledge" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=Gafata' rel='stylesheet' type='text/css'>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$$','$$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript"
+   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-44705857-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+</hgroup>
+
+</header>
+  <!-- <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="gautam.usc@gmail.com" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:distkeys.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav> -->
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Virtual Memory in FreeBSD - Part 1</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-01-02T20:25:00-08:00" pubdate data-updated="true">Jan 2<span>nd</span>, 2015</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#components-of-process-address-space">Components of Process Address Space</a></li>
+  <li><a href="#code-walk">Code walk</a>    <ul>
+      <li><a href="#header-files">Header files</a>        <ul>
+          <li><a href="#vmmap">vm_map</a></li>
+          <li><a href="#vmmapentry">vm_map_entry</a></li>
+          <li><a href="#vm-object-types">VM object types</a></li>
+          <li><a href="#vnodeobject">vnode/object</a></li>
+          <li><a href="#vmpage-least-active-use-algorithm">vm_page (Least active use algorithm)</a></li>
+          <li><a href="#page-fault-reasons">Page fault reasons</a></li>
+          <li><a href="#memory-allocators">Memory Allocators</a></li>
+          <li><a href="#call-graph-mmap">Call graph mmap</a></li>
+          <li><a href="#mmap-system-call">mmap system call</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>In computing, virtual memory is a memory management technique that is implemented using both hardware and software. It maps memory addresses used by a program, called virtual addresses, into physical addresses in computer memory but it lacks code details.</p>
+
+<p><a href="http://en.wikipedia.org/wiki/Virtual_memory">Read More</a></p>
+
+<p>Recently, I have come across a very good <a href="http://duartes.org/gustavo/blog/post/anatomy-of-a-program-in-memory/">blog post</a> about virtual memory which explains in theory what is virtual memory and talk a bit about code</p>
+
+<p><a href="http://www.amazon.com/gp/product/0321968972/ref=pd_lpo_sbs_dp_ss_1?pf_rd_p=1944687722&amp;pf_rd_s=lpo-top-stripe-1&amp;pf_rd_t=201&amp;pf_rd_i=0201702452&amp;pf_rd_m=ATVPDKIKX0DER&amp;pf_rd_r=08NPEVW6K146C5A7TE6P">The Design and Implementation of the FreeBSD Operating System</a> is an excellent book and this is the book I am reading, following and learning.</p>
+
+<!-- more -->
+<p><br /></p>
+
+<p>This post is about the code level details of virtual memory explaining how the process address space is mapped and managed.</p>
+
+<p>In this post, I will only be talking about user process address not about the kernel process address space. Both anyway uses same data structures.</p>
+
+<p><br /></p>
+
+<h1 id="components-of-process-address-space">Components of Process Address Space</h1>
+
+<ol>
+  <li>vm_map - Head of list of vm_map_entry <br /></li>
+  <li>vm_pmap - Machine dependent stuff resides<br /></li>
+  <li>stats - Paging Stats<br /></li>
+  <li>vm_map_entry<br /></li>
+  <li>vnode/object<br /></li>
+  <li>vm_page<br /></li>
+</ol>
+
+<p><img src="/images/processAddressSpace.png" title="[processAddressSpace.png]" /></p>
+
+<p><br /></p>
+
+<p><strong><em>vm_map_entry</em></strong> has a peice of address space it has start and end of virtual addresses.</p>
+
+<p><em>vm_map_entry</em> has pointer to vnode or object which could be a file, executable or swap object if it is mapping anon memory, it could be device if it mapping a frame buffer.</p>
+
+<p><strong><em>obj offset</em></strong> - Object offset is the value which says where in vnode/object we should start referencing. Lets say if vnode/object is executable file then we will skip the header part and start with where text begins. </p>
+
+<p><strong><em>The second vm_map_entry</em></strong> 
+<br />
+This block is for <strong><em>Initialized area</em></strong>. This map will refer to the same vode/object(executable file) but at different place(offset) where initialized data resides in executable file. So first vm_map_entry block and second vm_map_entry block refers to the same vnode/object(executable) but at different section(offset) in the same file.
+If two processes are sharing memory then two process can refer to same offset. So, if one process changes something other can see the changes.</p>
+
+<p><strong><em>Third vm_map_entry</em></strong>
+<br />
+For anon objects like uninitialized data, stack it will point to vnode/object which is swap object. Initially, when system comes up we don’t allocate any space for swap object and lazy approach is followed. When the vnode/object (swap object) is touched first time zero base page is created and we write into it but when we start getting crunch in memory then the paging demon comes and find the space for swap object in hard disk and performs the paging.</p>
+
+<p><strong><em>vm_page</em></strong>
+<br />
+Each <em>vm_page</em> structure reference to each physical page in the machine. So if there is page of size 4K then there will be lot of pages in the system. For every 4K page there will be one vm_page structure so lets say if there are 100 pages in the system there will be 100 <em>vm_page</em> structure. It could consume lot of memory, so we try to keep structure <em>vm_page</em> as small as possible.</p>
+
+<p>Every <em>vm_pages</em> is referenced by only one PART(not the whole vnode/object) of vnode/object. So looking at vm_page and it will say I am logical block number 100(or something) of this executable(vnode/object).</p>
+
+<p>Pages are logical containers for process. So, when one process goes out and other comes in the same pages will be used by that process references section in vnode/object. So, vm_page can be referenced by multiple processes.</p>
+
+<p>Now, in intialized area lets say we want to change some values in that case we will modifying the page but now same page can be referenced by multiple pages so, we create a copy of page called shadow object and we modify that page.</p>
+
+<p>For vm_page there is a data structure called pvEntry. For each page pvEntry will map to physical address in <em>vm_pmap</em> area(machine dependent area).</p>
+
+<p>We also maintain another data structure which maps all pvEntries associated with vnode/objects.</p>
+
+<p>vnode/pbject -&gt; vm_page1 -&gt;pvEntry1<br />
+                			-&gt; vm_page2 -&gt;pvEntry2<br />
+			                …<br />
+            			    …<br />
+			                -&gt; vm_pageN -&gt;pvEntryN<br /></p>
+
+<p>vnode/object -&gt; pvEntry1<br />
+            			    …<br />
+			                …<br />
+            			    -&gt; pvEntryN<br /></p>
+
+<p>Zero filled memory/Uninitialized object/Swap objects = Third vm_map_entry’s vnode/object</p>
+
+<p><br /><br /></p>
+
+<h1 id="code-walk">Code walk</h1>
+
+<h2 id="header-files">Header files</h2>
+
+<ul>
+  <li>vm header file - vm_param.h <br /></li>
+  <li>vm header file - vm.h <br /></li>
+  <li>vm header file - vm_map.h <br /></li>
+</ul>
+
+<p><strong>VM protections</strong><br />
+     #define     VM_PROT_NONE          ((vm_prot_t) 0x00)
+     #define     VM_PROT_READ          ((vm_prot_t) 0x01)
+     #define     VM_PROT_WRITE          ((vm_prot_t) 0x02)
+     #define     VM_PROT_EXECUTE          ((vm_prot_t) 0x04)
+     #define     VM_PROT_OVERRIDE_WRITE     ((vm_prot_t) 0x08)     /* copy-on-write */</p>
+
+<p><br />
+### vmspace</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>vmspace  </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre>
+<span style="color:#080;font-weight:bold">struct</span> vmspace {
+     <span style="color:#080;font-weight:bold">struct</span> vm_map vm_map;     <span style="color:#777">/* VM address map */</span>
+     <span style="color:#080;font-weight:bold">struct</span> shmmap_state *vm_shm;     <span style="color:#777">/* SYS5 shared memory private data XXX */</span>
+     segsz_t vm_swrss;     <span style="color:#777">/* resident set size before last swap */</span>
+     segsz_t vm_tsize;     <span style="color:#777">/* text size (pages) XXX */</span>
+     segsz_t vm_dsize;     <span style="color:#777">/* data size (pages) XXX */</span>
+     segsz_t vm_ssize;     <span style="color:#777">/* stack size (pages) */</span>
+     caddr_t vm_taddr;     <span style="color:#777">/* (c) user virtual address of text */</span>
+     caddr_t vm_daddr;     <span style="color:#777">/* (c) user virtual address of data */</span>
+     caddr_t vm_maxsaddr;     <span style="color:#777">/* user VA at max stack growth */</span>
+     <span style="color:#0a8;font-weight:bold">int</span>     vm_refcnt;     <span style="color:#777">/* number of references */</span>
+     <span style="color:#777">/*
+      * Keep the PMAP last, so that CPU-specific variations of that
+      * structure on a single architecture don't result in offset
+      * variations of the machine-independent fields in the vmspace.
+      */</span>
+     <span style="color:#080;font-weight:bold">struct</span> pmap vm_pmap;     <span style="color:#777">/* private physical map */</span>
+};
+</pre></div>
+</div>
+ </figure></notextile></div>
+
+<p><br /></p>
+
+<h3 id="vmmap">vm_map</h3>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>vm_map  </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre>
+<span style="color:#080;font-weight:bold">struct</span> vm_map {
+     <span style="color:#080;font-weight:bold">struct</span> vm_map_entry header;     <span style="color:#777">/* List of entries */</span>
+     <span style="color:#080;font-weight:bold">struct</span> sx lock;               <span style="color:#777">/* Lock for map data */</span>
+     <span style="color:#080;font-weight:bold">struct</span> mtx system_mtx;
+     <span style="color:#0a8;font-weight:bold">int</span> nentries;               <span style="color:#777">/* Number of entries */</span>
+     vm_size_t size;               <span style="color:#777">/* virtual size */</span>
+     u_int timestamp;          <span style="color:#777">/* Version number */</span>
+     u_char needs_wakeup;
+     u_char system_map;          <span style="color:#777">/* (c) Am I a system map? */</span>
+     vm_flags_t flags;          <span style="color:#777">/* flags for this vm_map */</span>
+     vm_map_entry_t root;          <span style="color:#777">/* Root of a binary search tree */</span>
+     pmap_t pmap;               <span style="color:#777">/* (c) Physical map */</span>
+     vm_map_entry_t deferred_freelist;
+<span style="color:#579">#define</span>     min_offset     header.start     <span style="color:#777">/* (c) */</span>
+<span style="color:#579">#define</span>     max_offset     header.end     <span style="color:#777">/* (c) */</span>
+};
+</pre></div>
+</div>
+ </figure></notextile></div>
+
+<p><br /></p>
+
+<h3 id="vmmapentry">vm_map_entry</h3>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>vm_map_entry  </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre>
+<span style="color:#080;font-weight:bold">struct</span> vm_map_entry {
+     Store the vm_map_entry node in LL as well in the form of tree
+     <span style="color:#080;font-weight:bold">struct</span> vm_map_entry *prev;     <span style="color:#777">/* previous entry */</span>
+     <span style="color:#080;font-weight:bold">struct</span> vm_map_entry *next;     <span style="color:#777">/* next entry */</span>
+     <span style="color:#080;font-weight:bold">struct</span> vm_map_entry *left;     <span style="color:#777">/* left child in binary search tree */</span>
+     <span style="color:#080;font-weight:bold">struct</span> vm_map_entry *right;     <span style="color:#777">/* right child in binary search tree */</span>
+
+     vm_offset_t start;          <span style="color:#777">/* start address */</span>
+     vm_offset_t end;          <span style="color:#777">/* end address */</span>
+     vm_offset_t avail_ssize;     <span style="color:#777">/* amt can grow if this is a stack */</span>
+
+     vm_size_t adj_free;          <span style="color:#777">/* amount of adjacent free space */</span>
+     vm_size_t max_free;          <span style="color:#777">/* max free space in subtree */</span>
+
+     <span style="color:#080;font-weight:bold">union</span> vm_map_object object;     <span style="color:#777">/* object I point to */</span>
+     vm_ooffset_t offset;          <span style="color:#777">/* offset into object */</span>
+
+     vm_eflags_t eflags;          <span style="color:#777">/* map entry flags */</span>
+
+     <span style="color:#777">//Read, write, execute etc...</span>
+     vm_prot_t protection;          <span style="color:#777">/* protection code */</span>
+     vm_prot_t max_protection;     <span style="color:#777">/* maximum protection */</span>
+     vm_inherit_t inheritance;     <span style="color:#777">/* inheritance */</span>
+     <span style="color:#0a8;font-weight:bold">int</span> wired_count;          <span style="color:#777">/* can be paged if = 0 */</span>
+     vm_pindex_t lastr;          <span style="color:#777">/* last read */</span>
+};
+</pre></div>
+</div>
+ </figure></notextile></div>
+
+<p><br /></p>
+
+<h3 id="vm-object-types">VM object types</h3>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>VM objects  </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre>
+     <span style="color:#080;font-weight:bold">enum</span> obj_type { OBJT_DEFAULT, OBJT_SWAP, OBJT_VNODE, OBJT_DEVICE, OBJT_PHYS,
+                                OBJT_DEAD };
+</pre></div>
+</div>
+ </figure></notextile></div>
+
+<p><br /></p>
+
+<h3 id="vnodeobject">vnode/object</h3>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>vnode  </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre>
+<span style="color:#080;font-weight:bold">struct</span> vm_object {
+     <span style="color:#080;font-weight:bold">struct</span> mtx mtx;
+     TAILQ_ENTRY(vm_object) object_list; <span style="color:#777">/* list of all objects */</span>
+     LIST_HEAD(, vm_object) shadow_head; <span style="color:#777">/* objects that this is a shadow for */</span>
+     LIST_ENTRY(vm_object) shadow_list; <span style="color:#777">/* chain of shadow objects */</span>
+     TAILQ_HEAD(, vm_page) memq;     <span style="color:#777">/* list of resident pages */</span>
+     vm_page_t root;               <span style="color:#777">/* root of the resident page splay tree */</span>
+     vm_pindex_t size;          <span style="color:#777">/* Object size */</span>
+     <span style="color:#0a8;font-weight:bold">int</span> generation;               <span style="color:#777">/* generation ID */</span>
+     <span style="color:#0a8;font-weight:bold">int</span> ref_count;               <span style="color:#777">/* How many refs?? */</span>
+     <span style="color:#0a8;font-weight:bold">int</span> shadow_count;          <span style="color:#777">/* how many objects that this is a shadow for */</span>
+
+     objtype_t type;               <span style="color:#777">/* type of pager */</span>
+     u_short flags;               <span style="color:#777">/* see below */</span>
+     u_short pg_color;          <span style="color:#777">/* (c) color of first page in obj i.e. suerppage etc. */</span>
+     u_short paging_in_progress;     <span style="color:#777">/* Paging (in or out) so don't collapse or destroy */</span>
+     <span style="color:#0a8;font-weight:bold">int</span> resident_page_count;     <span style="color:#777">/* number of resident pages */</span>
+     <span style="color:#080;font-weight:bold">struct</span> vm_object *backing_object; <span style="color:#777">/* object that I'm a shadow of */</span>
+     vm_ooffset_t backing_object_offset;<span style="color:#777">/* Offset in backing object */</span>
+
+     TAILQ_ENTRY(vm_object) pager_object_list; <span style="color:#777">/* list of all objects of this pager type */</span>
+     LIST_HEAD(, vm_reserv) rvq;     <span style="color:#777">/* list of reservations */</span>
+     vm_page_t cache;          <span style="color:#777">/* root of the cache page splay tree */</span>
+     <span style="color:#088;font-weight:bold">void</span> *handle;
+     <span style="color:#080;font-weight:bold">union</span> {
+          <span style="color:#777">/*
+           * VNode pager
+           *
+           *     vnp_size - current size of file
+           */</span>
+          <span style="color:#080;font-weight:bold">struct</span> {
+               off_t vnp_size;
+          } vnp;
+
+          <span style="color:#777">/*
+           * Device pager
+           *
+           *     devp_pglist - list of allocated pages
+           */</span>
+          <span style="color:#080;font-weight:bold">struct</span> {
+               TAILQ_HEAD(, vm_page) devp_pglist;
+          } devp;
+
+          <span style="color:#777">/*
+           * Swap pager
+           *
+           *     swp_bcount - number of swap 'swblock' metablocks, each
+           *               contains up to 16 swapblk assignments.
+           *               see vm/swap_pager.h
+           */</span>
+          <span style="color:#080;font-weight:bold">struct</span> {
+               <span style="color:#0a8;font-weight:bold">int</span> swp_bcount;
+          } swp;
+     } un_pager;
+};
+</pre></div>
+</div>
+ </figure></notextile></div>
+
+<p><br /></p>
+
+<h3 id="vmpage-least-active-use-algorithm">vm_page (Least active use algorithm)</h3>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>vm_page  </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre>
+<span style="color:#080;font-weight:bold">struct</span> vm_page {
+     TAILQ_ENTRY(vm_page) pageq;     <span style="color:#777">/* queue info for FIFO queue or free list (P) */</span>
+     TAILQ_ENTRY(vm_page) listq;     <span style="color:#777">/* pages in same object (O)      */</span>
+     <span style="color:#080;font-weight:bold">struct</span> vm_page *left;          <span style="color:#777">/* splay tree link (O)          */</span>
+     <span style="color:#080;font-weight:bold">struct</span> vm_page *right;          <span style="color:#777">/* splay tree link (O)          */</span>
+
+     vm_object_t object;          <span style="color:#777">/* which object am I in (O,P)*/</span>
+     vm_pindex_t pindex;          <span style="color:#777">/* offset into object (O,P) */</span>
+     vm_paddr_t phys_addr;          <span style="color:#777">/* physical address of page */</span>
+     <span style="color:#080;font-weight:bold">struct</span> md_page md;          <span style="color:#777">/* machine dependant stuff */</span>
+     uint8_t     queue;               <span style="color:#777">/* page queue index */</span>
+     int8_t segind;
+     u_short     flags;               <span style="color:#777">/* see below */</span>
+     uint8_t     order;               <span style="color:#777">/* index of the buddy queue */</span>
+     uint8_t pool;
+     u_short cow;               <span style="color:#777">/* page cow mapping count */</span>
+     u_int wire_count;          <span style="color:#777">/* wired down maps refs (P) */</span>
+     <span style="color:#0a8;font-weight:bold">short</span> hold_count;          <span style="color:#777">/* page hold count */</span>
+     u_short oflags;               <span style="color:#777">/* page flags (O) */</span>
+     u_char     act_count;          <span style="color:#777">/* page usage count, Page active count */</span>
+     u_char     busy;               <span style="color:#777">/* page busy count (O) */</span>
+     <span style="color:#777">/* NOTE that these must support one bit per DEV_BSIZE in a page!!! */</span>
+     <span style="color:#777">/* so, on normal X86 kernels, they must be at least 8 bits wide */</span>
+<span style="color:#579">#if</span> PAGE_SIZE == <span style="color:#00D">4096</span>
+     u_char     valid;               <span style="color:#777">/* map of valid DEV_BSIZE chunks (O) */</span>
+     u_char     dirty;               <span style="color:#777">/* map of dirty DEV_BSIZE chunks */</span>
+<span style="color:#579">#elif</span> PAGE_SIZE == <span style="color:#00D">8192</span>
+     u_short     valid;               <span style="color:#777">/* map of valid DEV_BSIZE chunks (O) */</span>
+     u_short     dirty;               <span style="color:#777">/* map of dirty DEV_BSIZE chunks */</span>
+<span style="color:#579">#elif</span> PAGE_SIZE == <span style="color:#00D">16384</span>
+     u_int valid;               <span style="color:#777">/* map of valid DEV_BSIZE chunks (O) */</span>
+     u_int dirty;               <span style="color:#777">/* map of dirty DEV_BSIZE chunks */</span>
+<span style="color:#579">#elif</span> PAGE_SIZE == <span style="color:#00D">32768</span>
+     u_long valid;               <span style="color:#777">/* map of valid DEV_BSIZE chunks (O) */</span>
+     u_long dirty;               <span style="color:#777">/* map of dirty DEV_BSIZE chunks */</span>
+<span style="color:#579">#endif</span>
+};
+</pre></div>
+</div>
+ </figure></notextile></div>
+
+<p><br /></p>
+
+<h3 id="page-fault-reasons">Page fault reasons</h3>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>Page fault reasons  </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre>
+<span style="color:#579">#define</span> PGEX_P          <span style="color:#02b">0x01</span>     <span style="color:#777">/* Protection violation vs. not present */</span>
+<span style="color:#579">#define</span> PGEX_W          <span style="color:#02b">0x02</span>     <span style="color:#777">/* during a Write cycle */</span>
+<span style="color:#579">#define</span> PGEX_U          <span style="color:#02b">0x04</span>     <span style="color:#777">/* access from User mode (UPL) */</span>
+<span style="color:#579">#define</span> PGEX_RSV     <span style="color:#02b">0x08</span>     <span style="color:#777">/* reserved PTE field is non-zero */</span>
+<span style="color:#579">#define</span> PGEX_I          <span style="color:#02b">0x10</span>     <span style="color:#777">/* during an instruction fetch */</span>
+</pre></div>
+</div>
+ </figure></notextile></div>
+
+<p><br /></p>
+
+<h3 id="memory-allocators">Memory Allocators</h3>
+
+<p>uma.h - Universal memory allocator</p>
+
+<p><br /></p>
+
+<h3 id="call-graph-mmap">Call graph mmap</h3>
+
+<p><img src="/images/mmap.png" title="[mmap.png]" /></p>
+
+<p><br /></p>
+
+<h3 id="mmap-system-call">mmap system call</h3>
+
+<p>Maps files or devices into memory<br />
+<em>mmap()</em> creates a new mapping in the virtual address space of the calling process.  The starting address for the new mapping is specified in addr.  The length argument specifies the length of the mapping.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>mmap  </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre>
+<span style="color:#080;font-weight:bold">struct</span> mmap_args {
+     <span style="color:#088;font-weight:bold">void</span> *addr; ===&gt; File segment address needs to be placed in address space
+     size_t len;
+     <span style="color:#0a8;font-weight:bold">int</span> prot; <span style="color:#777">// Protection</span>
+     <span style="color:#0a8;font-weight:bold">int</span> flags;
+     <span style="color:#0a8;font-weight:bold">int</span> fd;
+     <span style="color:#0a8;font-weight:bold">long</span> pad;
+     off_t pos;   <span style="color:#777">// We can map some part of file into memory</span>
+};
+
+Function mmap(td, uap)
+     <span style="color:#080;font-weight:bold">struct</span> thread *td;
+     <span style="color:#080;font-weight:bold">struct</span> mmap_args *uap;
+{
+
+     addr = (vm_offset_t) uap-&gt;addr;
+     size = uap-&gt;len;
+     prot = uap-&gt;prot &amp; VM_PROT_ALL;
+     flags = uap-&gt;flags;
+     pos = uap-&gt;pos;
+
+     ...
+     Sanity checking of inputs
+     ...
+
+     If we are mapping in uninitialized area
+     ...
+
+     If we are mapping in swap area
+     ...
+
+     If we are mapping file area
+     get file pointer
+     <span style="color:#080;font-weight:bold">if</span> ((error = fget(td, uap-&gt;fd, &amp;fp)) != <span style="color:#00D">0</span>) {
+          ...
+     }
+
+     ...
+     ...
+
+     Vode associated with file pointer
+     vp = fp-&gt;f_vnode;
+
+     Assign memory protection i.e. read, write, execute etc.
+     <span style="color:#080;font-weight:bold">if</span> (vp-&gt;v_mount != <span style="color:#069">NULL</span> &amp;&amp; vp-&gt;v_mount-&gt;mnt_flag &amp; MNT_NOEXEC)
+               maxprot = VM_PROT_NONE;
+          <span style="color:#080;font-weight:bold">else</span>
+               maxprot = VM_PROT_EXECUTE;
+          <span style="color:#080;font-weight:bold">if</span> (fp-&gt;f_flag &amp; FREAD) {
+               maxprot |= VM_PROT_READ;
+          } <span style="color:#080;font-weight:bold">else</span> <span style="color:#080;font-weight:bold">if</span> (prot &amp; PROT_READ) {
+               error = EACCES;
+               <span style="color:#080;font-weight:bold">goto</span> done;
+     }
+
+     For shared memory, protection should be write
+     <span style="color:#080;font-weight:bold">if</span> ((flags &amp; MAP_SHARED) != <span style="color:#00D">0</span>) {
+               <span style="color:#080;font-weight:bold">if</span> ((fp-&gt;f_flag &amp; FWRITE) != <span style="color:#00D">0</span>) {
+                    maxprot |= VM_PROT_WRITE;
+                    ...
+               }
+          ...
+     }
+
+     handle = (<span style="color:#088;font-weight:bold">void</span> *)vp;
+     handle_type = OBJT_VNODE;
+     td-&gt;td_fpop = fp;
+
+     error = vm_mmap(&amp;vms-&gt;vm_map, &amp;addr, size, prot, maxprot,
+                        flags, handle_type, handle, pos);
+
+     ...
+     td-&gt;td_retval[<span style="color:#00D">0</span>] = (register_t) (addr + pageoff);
+     ...                       
+
+}
+</pre></div>
+</div>
+ </figure></notextile></div>
+
+<p><br /></p>
+
+<p>mmap is just a wrapper around vm_mmap()</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>vm_mmap  </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre>
+Function vm_mmap()
+{
+     ...
+     Sanity Checking
+     ...
+     ...
+
+     <span style="color:#080;font-weight:bold">switch</span> (handle_type) {
+          <span style="color:#080;font-weight:bold">case</span> OBJT_DEVICE:
+               ...
+               ...
+          <span style="color:#080;font-weight:bold">case</span> OBJT_VNODE:
+               error = vm_mmap_vnode(td, size, prot, &amp;maxprot, &amp;flags,
+                                          handle, foff, &amp;object);
+               <span style="color:#080;font-weight:bold">break</span>;
+          <span style="color:#080;font-weight:bold">case</span> OBJT_SWAP:
+               error = vm_mmap_shm(td, size, prot, &amp;maxprot, &amp;flags,
+                                        handle, foff, &amp;object);
+    
+               ....
+     }
+
+          Our <span style="color:#080;font-weight:bold">case</span> is OBJT_VNODE, vp = handle
+          Function vm_mmap_vnode() {
+               ...
+               ...
+               Get a ref on vnode
+               vfslocked = VFS_LOCK_GIANT(mp);
+               <span style="color:#080;font-weight:bold">if</span> ((error = vget(vp, LK_SHARED, td)) != <span style="color:#00D">0</span>) {
+                    ..
+               }
+
+               obj = vp-&gt;v_object;
+               type = OBJT_VNODE;
+               handle = vp;
+               ...
+               ...
+
+               Getattr <span style="color:#080;font-weight:bold">for</span> vnode
+               error = VOP_GETATTR(vp, &amp;va, cred)
+               ...
+               ...
+               obj = vm_pager_allocate(type, handle, objsize, prot, foff);
+                         Function vm_pager_allocate() {
+                              This function allocates the instance of a pager of given type
+                              ...
+                              ...
+                              ops = pagertab[type];
+                              <span style="color:#777">/*
+                                   struct pagerops *pagertab[] = {
+                                        ...
+                                        &amp;vnodepagerops,          /* OBJT_VNODE */</span>
+                                        ...
+                                   }
+
+                                   <span style="color:#080;font-weight:bold">struct</span> pagerops vnodepagerops = {
+                                        .pgo_alloc =     vnode_pager_alloc,
+                                        ...
+                                        ...
+                                   }
+                              */
+
+                              <span style="color:#080;font-weight:bold">if</span> (ops)
+                                   ret = (*ops-&gt;pgo_alloc) (handle, size, prot, off);
+
+                                   <span style="color:#777">//So we are going to call vnode_pager_alloc()</span>
+                                        Function vnode_pager_alloc()
+                                        {
+                                             <span style="color:#777">//Allocates pager for a vnode</span>
+                                             vp = (<span style="color:#080;font-weight:bold">struct</span> vnode *) handle;
+
+                                             ...
+
+                                             object = vm_object_allocate(OBJT_VNODE, OFF_TO_IDX(round_page(size)));
+                                             ...
+                                             vref(vp);
+                                        } <span style="color:#777">//end of vnode_pager_alloc()</span>
+                              }
+                         } <span style="color:#777">// end of vm_pager_allocate()</span>
+
+               vput(vp);
+               VFS_UNLOCK_GIANT(vfslocked);
+
+          } <span style="color:#777">//end vm_mmap_vnode()</span>
+
+
+     So far we have allocated vm_page, vnode. Now, we need to allocate vm_map_entry and put it in
+     appropriate data structure
+     <span style="color:#080;font-weight:bold">if</span> (flags &amp; MAP_STACK)
+          rv = vm_map_stack(map, *addr, size, prot, maxprot,
+              docow | MAP_STACK_GROWS_DOWN);
+     <span style="color:#080;font-weight:bold">else</span> <span style="color:#080;font-weight:bold">if</span> (fitit)
+          <span style="color:#777">// Try to find it above tje addr</span>
+          rv = vm_map_find(map, object, foff, addr, size,
+              object != <span style="color:#069">NULL</span> &amp;&amp; object-&gt;type == OBJT_DEVICE ?
+              VMFS_ALIGNED_SPACE : VMFS_ANY_SPACE, prot, maxprot, docow);
+     <span style="color:#080;font-weight:bold">else</span>
+          rv = vm_map_fixed(map, object, foff, *addr, size,
+                     prot, maxprot, docow);
+
+     ...
+     ...
+     ...
+}
+</pre></div>
+</div>
+ </figure></notextile></div>
+
+<p><br /></p>
+
+<p>vm_map_find finds an unallocated region in the target address
+map with the given length.  The search is defined to be
+first-fit from the specified address; the region found is
+returned in the same parameter.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header"><span>vm_map_find  </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre>
+Function vm_map_find(vm_map_t map, vm_object_t object, vm_ooffset_t offset,
+                          vm_offset_t *addr,     <span style="color:#777">/* IN/OUT */</span>
+                          vm_size_t length, <span style="color:#0a8;font-weight:bold">int</span> find_space, vm_prot_t prot,
+                          vm_prot_t max, <span style="color:#0a8;font-weight:bold">int</span> cow)
+{
+     Find space in a vm_map
+
+     start = *addr;
+
+     vm_map_findspace(map, start, length, addr)
+
+               Find the first <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">fit</span><span style="color:#710">&quot;</span></span> (lowest VM address) <span style="color:#080;font-weight:bold">for</span> <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">length</span><span style="color:#710">&quot;</span></span> free bytes
+               beginning at address &gt;= start in the given map. This function returns
+               the address (addr). This addr is not associated with vm_map entry.
+              
+               Function vm_map_findspace(vm_map_t map, vm_offset_t start, vm_size_t length,
+                                               vm_offset_t *addr)
+               {
+                    We have min/max of VM addresses, request must be within that range
+
+                    For the very first time when process boots up,
+                    there are no blocks in VM address space <span style="color:#080;font-weight:bold">for</span> process
+                    <span style="color:#080;font-weight:bold">if</span> (map-&gt;root == <span style="color:#069">NULL</span>) {
+                         *addr = start;
+                         <span style="color:#080;font-weight:bold">goto</span> found;
+                    }
+
+                    ...
+                    ...
+                    Find the entry into tree where we can fit our entry into vm_entry_map
+                         <span style="color:#080;font-weight:bold">while</span> (entry != <span style="color:#069">NULL</span>) {
+                              <span style="color:#080;font-weight:bold">if</span> (entry-&gt;left != <span style="color:#069">NULL</span> &amp;&amp; entry-&gt;left-&gt;max_free &gt;= length)
+                                   entry = entry-&gt;left;
+                              <span style="color:#080;font-weight:bold">else</span> <span style="color:#080;font-weight:bold">if</span> (entry-&gt;adj_free &gt;= length) {
+                                   *addr = entry-&gt;end;
+                                   <span style="color:#080;font-weight:bold">goto</span> found;
+                              } <span style="color:#080;font-weight:bold">else</span>
+                                   entry = entry-&gt;right;
+                         }
+                         ...
+                         ...
+               } <span style="color:#777">// end of vm_map_findspace()</span>
+     ...
+     ...
+
+     Insert into vm_map (vm_map.c)
+     result = vm_map_insert(map, object, offset, start, start +
+                                length, prot, max, cow);
+
+     So, we have pager, address in the vm_map list where we can we can insert vm_map_entry
+     but we have not yet created allocated vm_map_entry. So, function vm_map_insert()
+     will create the vm_map_entry and insert into vm_map
+
+          <span style="color:#777">// Here start will have the addr value</span>
+          Function vm_map_insert(vm_map_t map, vm_object_t object, vm_ooffset_t offset,
+           vm_offset_t start, vm_offset_t end, vm_prot_t prot, vm_prot_t max,
+           <span style="color:#0a8;font-weight:bold">int</span> cow)
+         {
+              ...
+              Sanity Checking
+              ...
+
+              Lookup entry in the tree. Since, we already have address in the tree all we are doing
+              here is given the address find where we are in that respect. Are we ahead or behind?
+             
+              vm_map_lookup_entry(map, start, &amp;temp_entry)
+
+              ...
+              ...
+
+              If we have request of extending the object/vnode. Lets say <span style="color:#080;font-weight:bold">if</span> we malloc then we need to
+              extend the initialized area. Function vm_object_coalesce() will try to grow the object
+              <span style="color:#080;font-weight:bold">if</span> (.... || vm_object_coalesce(...)) {
+                   ...
+              }
+
+              <span style="color:#777">//Create a new vm_map_entry</span>
+              new_entry = vm_map_entry_create(map);
+
+              Initialize the new_entry
+              new_entry-&gt;start = start;
+               new_entry-&gt;end = end;
+
+               new_entry-&gt;eflags = protoeflags;
+               new_entry-&gt;object.vm_object = object;
+               new_entry-&gt;offset = offset;
+
+               <span style="color:#777">//Since its not a stack so size is 0</span>
+               new_entry-&gt;avail_ssize = <span style="color:#00D">0</span>;
+
+               new_entry-&gt;inheritance = VM_INHERIT_DEFAULT;
+               new_entry-&gt;protection = prot;
+               new_entry-&gt;max_protection = max;
+               new_entry-&gt;wired_count = <span style="color:#00D">0</span>;
+
+               <span style="color:#777">//Inser new vm_map_entry into list</span>
+               vm_map_entry_link(map, prev_entry, new_entry);
+
+               <span style="color:#777">//Enter the vm_map_entry in pmap which is machine dependent part</span>
+               vm_map_pmap_enter(map, start, prot,object, OFF_TO_IDX(offset), end - start,
+                                     cow &amp; MAP_PREFAULT_PARTIAL);
+
+         } <span style="color:#777">//end vm_map_insert()</span>
+
+} <span style="color:#777">//end vm_map_find</span>
+</pre></div>
+</div>
+ </figure></notextile></div>
+
+<p><br /></p>
+
+<p>One lock for active &amp; inactive list<br />
+Active list<br />
+Inactive list<br /></p>
+
+<p>One lock for cache and free list<br />
+Cache list - Pages moves from Inactive list to cache list<br />
+Free list - Pages moves from Cache list to free list<br /></p>
+
+<p><br /><br /><br /><br /></p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Vaibhav Gautam</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-01-02T20:25:00-08:00" pubdate data-updated="true">Jan 2<span>nd</span>, 2015</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/freebsd/'>FreeBSD</a>, <a class='category' href='/blog/categories/operating-systems/'>Operating Systems</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+   <div class="rdbWrapper" data-show-read="1" data-show-send-to-kindle="1" data-show-print="1" data-show-email="0" data-orientation="0" data-version="1"></div><script type="text/javascript">(function() {var s = document.getElementsByTagName("script")[0],rdb = document.createElement("script"); rdb.type = "text/javascript"; rdb.async = true; rdb.src = document.location.protocol + "//www.readability.com/embed.js"; s.parentNode.insertBefore(rdb, s); })();</script>
+  
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://distkeys.com/blog/2015/01/02/virtual-memory1/" data-via="_vaibhavg" data-counturl="http://distkeys.com/blog/2015/01/02/virtual-memory1/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/12/31/signal-code-in-freebsd/" title="Previous Post: Signal code in FreeBSD">&laquo; Signal code in FreeBSD</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <ul id="recent_posts">
+      <li class="post">
+      <a href="http://distkeys.com" alt="Home"><img src="/images/Home.png"></a>
+      <a href="http://distkeys.com/archives/" alt="Archives"><img src="/images/Calendar.png"></a>
+      
+      <a href="mailto:gautam.usc@gmail.com" alt="E-Mail"><img src="/images/mail_big.png"></a>
+      
+      <a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS"><img src="/images/rss.png"></a>
+      </li>
+  </ul>
+
+  <script>
+  (function() {
+   var cx = '004567732420113844713:vbwvfm07l2y';
+   var gcse = document.createElement('script');
+   gcse.type = 'text/javascript';
+   gcse.async = true;
+   gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+   '//www.google.com/cse/cse.js?cx=' + cx;
+   var s = document.getElementsByTagName('script')[0];
+   s.parentNode.insertBefore(gcse, s);
+   })();
+</script>
+<gcse:search></gcse:search>
+
+</section>
+<section>
+  <h1>About Me</h1>
+  <p><a href="http://www.linkedin.com/pub/vaibhav-gautam/11/663/163" target="_blank"><img src="/images/linked-in.png"></a>
+  <a href="https://twitter.com/_vaibhavg" target="_blank"><img src="/images/twitter.png"></a>
+  <a href="https://github.com/learnwrite" target="_blank"><img src="/images/github.png"></a>
+  <a href="https://www.facebook.com/mailtovaibhav" target="_blank"><img src="/images/facebook.png"></a>
+  <a href="http://www.vaibhavgautam.com" target="_blank"><img src="/images/flickr.png"></a>
+  <a href="mailto:gautam.usc@gmail.com" target="_blank"><img src="/images/mail.png"></a>
+  <a href="http://distkeys.com/blog/2014/02/21/reading-list/"><img src="/images/readinglist.png"></a>
+  <a href="http://www.pinterest.com/gautamusc/" target="_blank"><img src="/images/pinterest.png"></a>
+  <a href="http://www.quora.com/Vaibhav-Gautam" target="_blank"><img src="/images/quora.png"></a>
+  </p>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/01/02/virtual-memory1/">Virtual Memory in FreeBSD - Part 1</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/12/31/signal-code-in-freebsd/">Signal code in FreeBSD</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/12/31/fork-in-freebsd/">Fork code in FreeBSD</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/11/27/dynamic-programming/">Dynamic Programming</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/08/04/debug-freebsd-open/">Debug FreeBSD - Open</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+<section>
+<h1>Categories</h1>
+<ul id="categories">
+<li class='category'><a href='/blog/categories/d3-js/'>D3.js (1)</a></li>
+<li class='category'><a href='/blog/categories/freebsd/'>FreeBSD (5)</a></li>
+<li class='category'><a href='/blog/categories/linux/'>Linux (1)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>Octopress (1)</a></li>
+<li class='category'><a href='/blog/categories/operating/'>Operating (1)</a></li>
+<li class='category'><a href='/blog/categories/operating-systems/'>Operating Systems (10)</a></li>
+<li class='category'><a href='/blog/categories/reading-list/'>Reading List (1)</a></li>
+<li class='category'><a href='/blog/categories/scale/'>Scale (1)</a></li>
+<li class='category'><a href='/blog/categories/systems/'>Systems (4)</a></li>
+<li class='category'><a href='/blog/categories/algorithm/'>algorithm (3)</a></li>
+<li class='category'><a href='/blog/categories/algorithms/'>algorithms (4)</a></li>
+<li class='category'><a href='/blog/categories/architecture/'>architecture (1)</a></li>
+<li class='category'><a href='/blog/categories/array/'>array (1)</a></li>
+<li class='category'><a href='/blog/categories/binary/'>binary (1)</a></li>
+<li class='category'><a href='/blog/categories/binary-numbers/'>binary numbers (1)</a></li>
+<li class='category'><a href='/blog/categories/debug/'>debug (1)</a></li>
+<li class='category'><a href='/blog/categories/design-pattern/'>design pattern (1)</a></li>
+<li class='category'><a href='/blog/categories/distributed-systems/'>distributed systems (4)</a></li>
+<li class='category'><a href='/blog/categories/graph/'>graph (1)</a></li>
+<li class='category'><a href='/blog/categories/interview/'>interview (1)</a></li>
+<li class='category'><a href='/blog/categories/numbers/'>numbers (1)</a></li>
+<li class='category'><a href='/blog/categories/object-oriented/'>object oriented (1)</a></li>
+<li class='category'><a href='/blog/categories/operating-systems/'>operating systems (2)</a></li>
+<li class='category'><a href='/blog/categories/recursion/'>recursion (4)</a></li>
+<li class='category'><a href='/blog/categories/scale/'>scale (1)</a></li>
+<li class='category'><a href='/blog/categories/sorting/'>sorting (2)</a></li>
+<li class='category'><a href='/blog/categories/strings/'>strings (1)</a></li>
+<li class='category'><a href='/blog/categories/system-design/'>system design (2)</a></li>
+<li class='category'><a href='/blog/categories/trees/'>trees (1)</a></li>
+<li class='category'><a href='/blog/categories/tries/'>tries (1)</a></li>
+
+</ul>
+</section>
+<section>
+<h1>Twitter</h1>
+<a class="twitter-timeline" href="https://twitter.com/_vaibhavg" data-widget-id="386954016019587072">Tweets by @_vaibhavg</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - <a href="http://www.linkedin.com/pub/vaibhav-gautam/11/663/163">Vaibhav Gautam</a> -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'coolgoose85';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://distkeys.com/blog/2015/01/02/virtual-memory1/';
+        var disqus_url = 'http://distkeys.com/blog/2015/01/02/virtual-memory1/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
